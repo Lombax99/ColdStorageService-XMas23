@@ -6,7 +6,7 @@ A company intends to build a ==ColdStorageService==, composed of a set of eleme
     - a ==ColdRoom container==, devoted to store food, upto **MAXW** kg .
     The ColdRoom is positioned within the service area, as shown in the following picture:
 
-![image](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/_images/ColdStorageServiceRoomAnnoted.PNG)
+![[ColdStorageServiceRoomAnnoted.png]]
 
 2. a ==DDR robot== working as a ==transport trolley==, that is intially situated in its ==HOME location==. The transport trolley has the form of a square of side length **RD**.
     The transport trolley is used to perform a deposit action that consists in the following phases:
