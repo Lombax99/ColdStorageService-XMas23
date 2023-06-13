@@ -146,8 +146,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f1275d5a3f96d671",
+  "active": "2f4b0ace96e80799",
   "lastOpenFiles": [
+    "Sprint1/Doc/ColdStorageServiceRoomAnnoted.png",
+    "Sprint1/Doc/Cold Storage Service - Natali.md",
     "Sprint1/sprint1.txt",
     "Sprint4/Doc",
     "Sprint3/Doc",
@@ -156,7 +158,6 @@
     "Sprint3",
     "Sprint2",
     "Sprint1/Doc",
-    "Sprint1",
-    "Sprint1/Doc/Cold Storage Service - Natali.md"
+    "Sprint1"
   ]
 }
