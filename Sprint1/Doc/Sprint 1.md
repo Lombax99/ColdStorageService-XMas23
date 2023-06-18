@@ -18,7 +18,7 @@ A company intends to build a ==ColdStorageService==, composed of a set of eleme
 Definizioni:
 - Service Area: Area rettangolare piana all'interno del quale il transport trolley è libero di muoversi. Ha dimensione Lato-Lungo * lato-corto (L * l).
 - INDOOR port: Luogo della Service Area in cui un camion si presenta per far scaricare la merce al transport trolley. Si trova nell'angolo in basso a sinistra della Service Area.
-- ColdRoom Container: Elemento fisico presente all'in
+- ColdRoom Container: Elemento fisico presente all'interno della Service Area in una posizione fissa (posizione attraverso la quale il robot non pu)
 - DDR robot:
 - transport trolley:
 - HOME location:
