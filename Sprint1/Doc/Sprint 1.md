@@ -25,7 +25,7 @@ Definizioni:
 	- movimento avanti e indietro
 	- rotazione sul posto a 360°
 	- raccolta e scarica del cibo
-   Come primo prototipo utilizzeremo il seguente robot fisico: 
+   Come primo prototipo utilizzeremo il seguente robot fisico: https://github.com/XANA-Hub/ProgettoTT.git
 	`NOTA: il lato del robot dovrà essere più lungo dell'effettiva dimensione del robot fisico per permetterne la rotazione a 360°`
 - ==HOME location==: Zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste. Corrisponde all'angolo in alto a sinistra della Service Area.
 - ==food-load==:
