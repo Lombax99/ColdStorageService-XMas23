@@ -36,9 +36,9 @@ Domande:
 - Chi segnala l'arrivo del Firdge Truck?
 
 ### Analisi del Problema
-- Chi manda i segnali al robot?
-	Introduciamo in nuovo attore "Controller" che si occupi di mandare i comandi al robot e gestire la logica applicativa. Il controller saprà magicamente quando arriva un camion.
-- Quali comandi capisce il robot?
+- Chi manda i segnali al Transport Trolley?
+	Introduciamo in nuovo attore "Controller" che si occupi di mandare i comandi al Transport Trolley e gestire la logica applicativa. In questo primo sprint diamo per scontato che l'arrivo di un Fridge Truck sia magicamente imparato dal controller al momento opportuno (di conseguenza il processo partirà da un segnale generato dal controller)
+- Quali comandi capisce il de?
 	L'unico comando mandato dal controller è "doYourFuckingJob"
 - Come parliamo con il robottino? Cosa ci può dare il committente a proposito?
 	Il robot riceve segnali da socket tcp [Link al protocollo del robot](https://github.com/XANA-Hub/ProgettoTT/blob/main/Sprint%201.md)
