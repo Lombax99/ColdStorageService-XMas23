@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint1/Doc/Sprint 1.md",
+                "file": "Cold Storage Service - Natali.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1/Doc/Sprint 1.md",
+                "file": "Cold Storage Service - Natali.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1/Doc/Sprint 1.md",
+                "file": "Cold Storage Service - Natali.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1/Doc/Sprint 1.md"
+                "file": "Cold Storage Service - Natali.md"
               }
             }
           }
@@ -149,12 +149,13 @@
   "active": "2f4b0ace96e80799",
   "lastOpenFiles": [
     "Sprint1/Doc/Sprint 1.md",
+    "Cold Storage Service - Natali.md",
+    "PrimaArchitettura.pdf",
     "Sprint1/Doc/ArchitetturaLogica_Sprint1.vsdx",
     "Other",
     "Sprint4/Doc/Sprint 4.md",
     "Sprint3/Doc/Sprint 3.md",
     "Sprint2/Doc/Sprint 2.md",
-    "Cold Storage Service - Natali.md",
     "Other/ColdStorageServiceRoomAnnoted.png",
     "Sprint1/sprint1.txt",
     "Sprint4/Doc",
@@ -162,7 +163,6 @@
     "Sprint2/Doc",
     "Sprint4",
     "Sprint3",
-    "Sprint2",
-    "Sprint1/Doc"
+    "Sprint2"
   ]
 }

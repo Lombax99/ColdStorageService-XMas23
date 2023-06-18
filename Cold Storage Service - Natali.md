@@ -50,6 +50,8 @@ The story of the ColdStorageService can be summarized as follows:
 
 ### Divisione in Sprint
 1) Basic Robot + Controller e Cold Storage [[Sprint 1]]
-2) Gestione dei ticket: Fake SerAccGui + Cold Storage Service
-3) Led e Sonar
-4) Service Status Gui e grafica bellina
+2) Gestione dei ticket: Fake SerAccGui + Cold Storage Service [[Sprint 2]]
+3) Led e Sonar [[Sprint 3]]
+4) Service Status Gui e grafica bellina [[Sprint 4]]
+
+
