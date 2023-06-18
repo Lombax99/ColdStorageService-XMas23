@@ -28,7 +28,7 @@ Definizioni:
    Come primo prototipo utilizzeremo il seguente robot fisico: https://github.com/XANA-Hub/ProgettoTT.git.
 	`NOTA: nel caso del robot fisico RD dovrà essere più lungo dell'effettiva lunghezza del robot per permetterne la rotazione a 360°`
 - ==HOME location==: Zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste. Corrisponde all'angolo in alto a sinistra della Service Area.
-- ==food-load==: quantità di cibo di peso (in kg) variabile che il robot dovrà scaricare dal robot e mettere in ColdRoom.
+- ==food-load==: quantità di cibo di peso (in kg) variabile che il robot dovrà scaricare dal Fridge Truck e mettere in ColdRoom Container.
 
 
 Domande:
