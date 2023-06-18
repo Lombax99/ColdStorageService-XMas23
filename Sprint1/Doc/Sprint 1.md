@@ -15,7 +15,10 @@ A company intends to build a ==ColdStorageService==, composed of a set of eleme
     3. deposit the food-load in the ColdRoom
 
 ### Analisi dei Requisiti
-
+Definizioni:
+- Service Area:
+- INDOOR port:
+- 
 
 Domande:
 - Gestione degli ostacoli? NO
