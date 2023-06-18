@@ -18,7 +18,12 @@ A company intends to build a ==ColdStorageService==, composed of a set of eleme
 Definizioni:
 - Service Area:
 - INDOOR port:
-- 
+- ColdRoom Container:
+- DDR robot:
+- transport trolley:
+- HOME location:
+- food-load:
+- PORT of the ColdRoom:
 
 Domande:
 - Gestione degli ostacoli? NO
