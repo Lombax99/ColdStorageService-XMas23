@@ -21,8 +21,10 @@ Definizioni:
 - ==ColdRoom Container==: Elemento fisico presente all'interno della Service Area in una posizione fissa (posizione attraverso la quale il robot non può muoversi). In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg.
 - ==PORT of the ColdRoom==: Lato del ColdRoom Container dal quale è possibile depositare il cibo. Corrisponde al lato rivolto verso il basso della Service Area.
 - ==DDR robot==: *Differential Drive Robot*, see [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ)
-- ==transport trolley==:
-	`NOTA: il lato del robot dovrà essere più lungo dell'effettiva dimensione del robot fisico per permetterne la rotazione a 360°`
+- ==transport trolley==: DDR in grado di compiere le seguenti mosse: 
+	- movimento avanti e indietro
+	- rotazione sul posto a 360°
+	- `NOTA: il lato del robot dovrà essere più lungo dell'effettiva dimensione del robot fisico per permetterne la rotazione a 360°`
 - ==HOME location==: Zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste. Corrisponde all'angolo in alto a sinistra della Service Area.
 - ==food-load==:
 
