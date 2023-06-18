@@ -17,7 +17,7 @@ A company intends to build a ==ColdStorageService==, composed of a set of eleme
 ### Analisi dei Requisiti
 Definizioni:
 - Service Area: Area rettangolare piana all'interno del quale il transport trolley è libero di muoversi. Ha dimensione Lato-Lungo * lato-corto (L * l).
-- INDOOR port:
+- INDOOR port: Luogo della Service Area in cui un camion si presenta per far scaricar
 - ColdRoom Container:
 - DDR robot:
 - transport trolley:
