@@ -20,13 +20,13 @@ Definizioni:
 - ==INDOOR port==: Luogo della Service Area in cui un camion si presenta per far scaricare la merce al transport trolley. Si trova nell'angolo in basso a sinistra della Service Area.
 - ==ColdRoom Container==: Elemento fisico presente all'interno della Service Area in una posizione fissa (posizione attraverso la quale il robot non può muoversi). In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg.
 - ==PORT of the ColdRoom==: Lato del ColdRoom Container dal quale è possibile depositare il cibo. Corrisponde al lato rivolto verso il basso della Service Area.
-- ==DDR robot==: *Differential Drive Robot*, see [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ)
-- ==transport trolley==: DDR in grado di compiere le seguenti mosse: 
+- ==DDR robot==: *Differential Drive Robot*, see [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
+- ==transport trolley==: DDR quadrato di lunghezza RD in grado di compiere le seguenti mosse: 
 	- movimento avanti e indietro
 	- rotazione sul posto a 360°
 	- raccolta e scarica del cibo
-   Come primo prototipo utilizzeremo il seguente robot fisico: https://github.com/XANA-Hub/ProgettoTT.git
-	`NOTA: il lato del robot dovrà essere più lungo dell'effettiva dimensione del robot fisico per permetterne la rotazione a 360°`
+   Come primo prototipo utilizzeremo il seguente robot fisico: https://github.com/XANA-Hub/ProgettoTT.git.
+	`NOTA: nel caso del robot fisico RD dovrà essere più lungo dell'effettiva lunghezza del robot per permetterne la rotazione a 360°`
 - ==HOME location==: Zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste. Corrisponde all'angolo in alto a sinistra della Service Area.
 - ==food-load==:
 
