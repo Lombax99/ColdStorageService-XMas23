@@ -42,7 +42,7 @@ Domande:
 - Quali comandi capisce il robot?
 	L'unico comando mandato dal controller è "doYourFuckingJob"
 - Come parliamo con il robottino? Cosa ci può dare il committente a proposito?
-	Il robot riceve segnali da socket tcp [[Link al protocollo del robot]]
+	Il robot riceve segnali da socket tcp [Link al protocollo del robot](https://github.com/XANA-Hub/ProgettoTT)
 - Chi traduce "doYourFuckingJob" in una serie di comandi comprendibili al Robot?
 	Attore TransportTrolley
 - Che tipo di segnali mando? Dispatch o Req-Resp?
