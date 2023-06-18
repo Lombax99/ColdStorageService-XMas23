@@ -37,15 +37,16 @@ Domande:
 
 ### Analisi del Problema
 - Chi manda i segnali al Transport Trolley?
-	Introduciamo in nuovo attore "Controller" che si occupi di mandare i comandi al Transport Trolley e gestire la logica applicativa. In questo primo sprint diamo per scontato che l'arrivo di un Fridge Truck sia magicamente imparato dal controller al momento opportuno (di conseguenza il processo partirà da un segnale generato dal controller)
+	Introduciamo in nuovo attore "Controller" che si occupi di mandare i comandi al Transport Trolley e gestire la logica applicativa. In questo primo sprint diamo per scontato che l'arrivo di un Fridge Truck sia magicamente imparato dal controller al momento opportuno (di conseguenza il processo partirà da un segnale generato dal controller).
 - Quali comandi capisce il deve inviare il controller a Transport Trolley?
-	L'unico comando mandato dal controller è "doJob"
+	L'unico comando mandato dal controller è "doJob".
 - Come parliamo con il DDR robot? Cosa ci può dare il committente a proposito?
-	Il robot riceve segnali da socket tcp [Link al protocollo del robot](https://github.com/XANA-Hub/ProgettoTT/blob/main/Sprint%201.md)
+	Il robot riceve segnali da socket tcp [Link al protocollo del robot](https://github.com/XANA-Hub/ProgettoTT/blob/main/Sprint%201.md).
 - Chi traduce "doJob" in una serie di comandi comprendibili al DDR robot?
-	Introdu TransportTrolley
+	Introduciamo l'attore TransportTrolley per svolgere questo compito.
 - Che tipo di segnali mando? Dispatch o Req-Resp?
 	Controller manda un segnale di dispatch.
+- Vogliamo sapere se il comando è andato a buon fine? S
 - Come comunicano basic robot e coldroom?
 	Non lo fanno, ci pensa il controller.
 - Quando viene aggiornato il peso della ColdRoom (e da chi)?
