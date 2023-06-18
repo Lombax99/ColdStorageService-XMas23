@@ -51,7 +51,7 @@ Domande:
 	Non lo fanno, ci pensa il controller.
 - Quando viene aggiornato il peso della ColdRoom (e da chi)?
 	Viene aggiornato dal controller quando questo invia il dispatch al robot con un altro dispatch.
-- 
+- In caso di fallimento del robot a portare a termine un comando cosa deve succedere? Riusciamo a tornare al peso precedente? Se il controller ha ricevuto 3 richieste, le ha girate tutte al 
 - Come fa il robottino a sapere dov'è e dove deve andare?
 	Dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del robot). Le coordinate del robot indicheranno il quadrato in cui si trova. L'origine (0, 0) sarà la posizione di home. Coordinate crescenti.
 - Quando viene fatta la mappatura della stanza?
