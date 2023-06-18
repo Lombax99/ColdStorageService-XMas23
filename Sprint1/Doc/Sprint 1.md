@@ -1,5 +1,5 @@
 ### Requisiti
-A company intends to build a ==ColdStorageService==, composed of a set of elements:
+A company intends to build a ColdStorageService, composed of a set of elements:
 
 1. a ==service area== (rectangular, flat) that includes:
     - an ==INDOOR port==, to enter food (fruits, vegetables, etc. )
@@ -57,7 +57,7 @@ Domande:
 - Quando viene fatta la mappatura della stanza?
 	Appena viene avviato il DDR robot prima di leggere qualsiasi richiesta dal controller.
 - ==Coordinate? Come le generiamo? Che unità di misura?==
-- Quando controlla il robottino se ci sono altre richieste?
+- Quando controlla il TransportTrolley se ci sono altre richieste?
 	Appena scarica, prima di tornare in home, come da requisiti (o se è in home)
 
-NOTA: cambiare il nome di Robot in Transport Trolley.
+
