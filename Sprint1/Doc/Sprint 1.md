@@ -22,6 +22,7 @@ Definizioni:
 - ==PORT of the ColdRoom==: Lato del ColdRoom Container dal quale è possibile depositare il cibo. Corrisponde al lato rivolto verso il basso della Service Area.
 - ==DDR robot==: *Differential Drive Robot*, see [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ)
 - ==transport trolley==:
+	`NOTA: i`
 - ==HOME location==: Zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste. Corrisponde all'angolo in alto a sinistra della Service Area.
 - ==food-load==:
 
