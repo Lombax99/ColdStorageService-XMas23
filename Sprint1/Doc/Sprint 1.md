@@ -53,10 +53,10 @@ Domande:
 	Viene aggiornato dal controller quando questo invia il dispatch al robot con un altro dispatch.
 - ==In caso di fallimento del robot a portare a termine un comando cosa deve succedere? Riusciamo a tornare al peso precedente? Se il controller ha ricevuto 3 richieste, le ha girate tutte al robot e a Cold Room e poi si accorge che (solo o non solo) la prima non è andata a buon fine come correggo il peso di Cold Room?==
 - Come fa il robottino a sapere dov'è e dove deve andare?
-	Dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del robot). Le coordinate del robot indicheranno il quadrato in cui si trova. L'origine (0, 0) sarà la posizione di home. Coordinate crescenti.
+	Dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del robot). Le coordinate del robot indicheranno il quadrato in cui si trova. L'origine (0, 0) sarà la posizione di home. Coordinate crescenti verso il basso e verso destra.
 - Quando viene fatta la mappatura della stanza?
 	Appena viene avviato il robot prima di leggere qualsiasi richiesta dal controller.
-- Coordinate? Come le generiamo? Che unità di misura?
+- ==Coordinate? Come le generiamo? Che unità di misura?==
 - Quando controlla il robottino se ci sono altre richieste?
 	Appena scarica, prima di tornare in home, come da requisiti (o se è in home)
 
