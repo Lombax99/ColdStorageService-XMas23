@@ -15,9 +15,11 @@ A company intends to build a ==ColdStorageService==, composed of a set of eleme
     3. deposit the food-load in the ColdRoom
 
 ### Analisi dei Requisiti
+
+
 Domande:
 - Gestione degli ostacoli? NO
-- In questo primo sprint diamo per scontato che l'arrivo di un camion sia magicamente imparato dal controller al momento opportuno (aka il processo partirà da un segnale generato dal controller)
+- In questo primo sprint diamo per scontato che l'arrivo di un camion sia magicamente imparato dal controller al momento opportuno (di conseguenza il processo partirà da un segnale generato dal controller)
 - DDR robot: il mio robottino fisico
 
 ### Analisi del Problema
