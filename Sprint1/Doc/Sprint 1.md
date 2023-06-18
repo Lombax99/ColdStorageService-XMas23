@@ -19,10 +19,10 @@ Definizioni:
 - ==Service Area==: Area rettangolare piana all'interno del quale il transport trolley è libero di muoversi. Ha dimensione Lato-Lungo * lato-corto (L * l).
 - ==INDOOR port==: Luogo della Service Area in cui un camion si presenta per far scaricare la merce al transport trolley. Si trova nell'angolo in basso a sinistra della Service Area.
 - ==ColdRoom Container==: Elemento fisico presente all'interno della Service Area in una posizione fissa (posizione attraverso la quale il robot non può muoversi). In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg.
-- ==PORT of the ColdRoom==: Lato del ColdRoom Container dal quale è possibile depositare il cibo. Corrisponde al lato rivolto verso il basso 
+- ==PORT of the ColdRoom==: Lato del ColdRoom Container dal quale è possibile depositare il cibo. Corrisponde al lato rivolto verso il basso della Service Area.
 - ==DDR robot==:
 - ==transport trolley==:
-- ==HOME location==:
+- ==HOME location==: Zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste. C
 - ==food-load==:
 
 
