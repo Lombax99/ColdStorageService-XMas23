@@ -33,8 +33,7 @@ Definizioni:
 
 Domande:
 - ==Gestione degli ostacoli?== NO
-- In questo primo sprint diamo per scontato che l'arrivo di un Fridge Truck sia magicamente imparato dal controller al momento opportuno (di conseguenza il processo partirà da un segnale generato dal controller)
-- DDR robot: il mio robottino fisico
+- Chi segnala l'arrivo del Firdge Truck?
 
 ### Analisi del Problema
 - Chi manda i segnali al robot?
