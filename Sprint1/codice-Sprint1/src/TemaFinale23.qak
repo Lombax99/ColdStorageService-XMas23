@@ -16,7 +16,7 @@ Context ctxColdStorageArea ip [host="127.0.0.1" port=8080]
 QActor controller context ctxColdStorageArea {
 	State s0 initial {
 		printCurrentMessage
-	} Goto mockRequest
+	} //Goto mockRequest
 /*	
 	State mockRequest {
 		[#
