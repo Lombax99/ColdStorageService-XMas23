@@ -37,7 +37,7 @@ QActor transport_trolley context ctxcoldstoragearea {
 	
 	State s0 initial {
 		printCurrentMessage
-	} Goto work//Transition startWork whenMsg doJob -> work
+	} Transition startWork whenMsg doJob -> work
 	
 	State work {
 		printCurrentMessage color black
@@ -46,7 +46,7 @@ QActor transport_trolley context ctxcoldstoragearea {
 				print(peso)
 				#
 			]
-		}		 
+		}		
 	} Goto endWork
 	
 	State endWork {
