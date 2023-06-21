@@ -8,11 +8,11 @@ Event robotDead : robotDead( NO_PARAM )
 
 //-----------------------------------------------------------------------
 
-Context ctxColdStorageArea ip [host="localhost" port=8095]
+Context ctxcoldstoragearea ip [host="localhost" port=9090]
 
 //-----------------------------------------------------------------------
 
-QActor controller context ctxColdStorageArea {
+QActor controller context ctxcoldstoragearea {
 	State s0 initial { 	    
 		printCurrentMessage color black
 		discardMsg Off
@@ -30,8 +30,8 @@ QActor controller context ctxColdStorageArea {
 	} Transition repeat whenTime 2000 -> mockRequest
  }
 
-/*
-QActor controller context ctxColdStorageArea {
+
+QActor controller context ctxcoldstoragearea {
 	State s0 initial {
 		printCurrentMessage
 	} Goto mockRequest
@@ -45,7 +45,7 @@ QActor controller context ctxColdStorageArea {
 	} Transition repeat whenTime 2000 -> mockRequest
 }
 
-QActor transport_trolley context ctxColdStorageArea {
+QActor transport_trolley context ctxcoldstoragearea {
 	[#
 		var peso = 0
 	#]
@@ -66,7 +66,7 @@ QActor transport_trolley context ctxColdStorageArea {
 	}
 } 
 
-QActor cold_room context ctxColdStorageArea {
+QActor cold_room context ctxcoldstoragearea {
 	[#
 		var pesoCorrente = 0
 	#]
@@ -84,5 +84,3 @@ QActor cold_room context ctxColdStorageArea {
 		println("nuovo peso: $pesoCorrente")
 	} Transition update whenMsg updateWeight -> updateWeight
 }
-
-*/
