@@ -9,7 +9,7 @@ Event robotDead : robotDead(NO_PARAM)
 
 //-----------------------------------------------------------------------
 
-Context ctxColdStorageArea ip [host="localhost" port=8080]
+Context ctxColdStorageArea ip [host="127.0.0.1" port=8080]
 
 //-----------------------------------------------------------------------
 
