@@ -50,7 +50,7 @@ Domande:
 	NO
 - Vogliamo sapere quando il robot si rompe?
 	Sarebbe utile...
-- Come cazzo lo facciamo?
+- Come ~~cazzo~~ lo facciamo?
 	
 - Come comunicano TransportTrolley e ColdRoom?
 	Non lo fanno, ci pensa il controller.
