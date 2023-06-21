@@ -1,0 +1,77 @@
+System temafinale23
+
+//-----------------------------------------------------------------------
+
+Dispatch doJob : doJob(KG)
+Dispatch updateWeight : updateWeight(PESO)
+
+Event robotDead : robotDead(NO_PARAM)
+
+//-----------------------------------------------------------------------
+
+Context ctxcoldstoragearea ip [host="localhost" port=8080]
+
+//-----------------------------------------------------------------------
+
+QActor controller context ctxcoldstoragearea {
+	
+	State s0 initial {
+		printCurrentMessage
+		}
+	Goto mockRequest
+	
+	State mockRequest {
+		[#
+			var KG = 10			
+		#]
+		printCurrentMessage
+		forward transport_trolley -m doJob : doJob($KG)
+	} Transition repeat whenTime 2000 -> mockRequest
+}
+
+
+QActor transport_trolley context ctxcoldstoragearea {
+	[#
+		var Peso = 0
+	#]
+	
+	State s0 initial {
+		printCurrentMessage
+	} Transition startWork whenMsg doJob -> work
+	
+	State work {
+		onMsg(doJob : doJob(KG)) {
+			[# Peso = payloadArg(0).toInt() 
+				#]
+		}		
+	} Goto endWork
+	
+	State endWork {
+		printCurrentMessage
+		println("$Peso")
+		forward cold_room -m updateWeight : updateWeight($Peso)
+	} Transition returnWork whenMsg doJob -> work
+} 
+
+
+QActor cold_room context ctxcoldstoragearea {
+	[#
+		var PesoCorrente = 0
+	#]
+	
+	State s0 initial {
+		printCurrentMessage
+	} Transition update whenMsg updateWeight -> updateWeight
+	
+	State updateWeight {
+		printCurrentMessage
+		onMsg ( updateWeight : updateWeight(PESO) ) {
+			[# PesoCorrente += payloadArg(0).toInt() 
+				#]
+		}
+		println("peso aggiornato")
+		println("nuovo peso: $PesoCorrente")
+	} Transition update whenMsg updateWeight -> updateWeight
+}
+
+
