@@ -61,4 +61,7 @@ Domande:
 - Quando controlla il TransportTrolley se ci sono altre richieste?
 	Appena scarica, prima di tornare in home, come da requisiti (o se è in home)
 
+NOTA: definiamo due pesi diversi:
+1) Un peso ipotetico saputo dal controller che indica il peso ottenuto completate tutte le richieste
+2) Il peso effettivo in col
 
