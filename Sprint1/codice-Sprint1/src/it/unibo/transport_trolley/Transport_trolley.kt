@@ -58,6 +58,7 @@ class Transport_trolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
+					 transition(edgeName="startWork2",targetState="work",cond=whenDispatch("doJob"))
 				}	 
 			}
 		}

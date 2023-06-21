@@ -1,1 +1,2 @@
 {"actor":"transport_trolley", "msgType":"dispatch", "curstate":"s0", "nextstate":"work", "msgId":"doJob"}
+{"actor":"transport_trolley", "msgType":"dispatch", "curstate":"endWork", "nextstate":"work", "msgId":"doJob"}

@@ -97,3 +97,5 @@
 {"actor":"basicrobot", "msgType":"request", "sender":"appl", "msgId":"moverobot"}
 {"actor":"basicrobot", "msgType":"dispatch", "sender":"appl", "msgId":"disengage"}
 {"actor":"transport_trolley", "msgType":"dispatch", "sender":"controller", "msgId":"doJob"}
+{"actor":"transport_trolley", "msgType":"dispatch", "sender":"controller", "msgId":"doJob"}
+{"actor":"transport_trolley", "msgType":"dispatch", "sender":"controller", "msgId":"doJob"}
