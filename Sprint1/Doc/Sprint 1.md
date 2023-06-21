@@ -53,6 +53,7 @@ Domande:
 - Quando viene aggiornato il peso della ColdRoom (e da chi)?
 	Viene aggiornato dal controller quando questo invia il dispatch a TransportTrolley con un altro dispatch.
 - ==In caso di fallimento del DDR robot a portare a termine un comando cosa deve succedere? Riusciamo a tornare al peso precedente? Se il controller ha ricevuto 3 richieste, le ha girate tutte al DDR robot e a Cold Room e poi si accorge che (solo o non solo) la prima non è andata a buon fine come correggo il peso di Cold Room?==
+	In caso di fallimento il peso effettivo non 
 - Come fa il Transport Trolley a sapere dov'è e dove deve andare?
 	Dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del DDR robot). Le coordinate del Transport Trolley indicheranno il quadrato in cui si trova. L'origine (0, 0) sarà la posizione di home. Coordinate crescenti verso il basso e verso destra.
 - Quando viene fatta la mappatura della stanza?
@@ -62,6 +63,6 @@ Domande:
 	Appena scarica, prima di tornare in home, come da requisiti (o se è in home)
 
 NOTA: definiamo due pesi diversi:
-1) Un peso ipotetico saputo dal controller che indica il peso ottenuto completate tutte le richieste
-2) Il peso effettivo in col
+1) Un peso ipotetico saputo dal controller che indica il peso ottenuto completate tutte le richieste.
+2) Il peso effettivo in coldRoom aggiornato solo dopo che il robot ha scaricato fisicamente un carico.
 
