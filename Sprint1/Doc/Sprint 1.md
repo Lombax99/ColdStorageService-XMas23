@@ -47,6 +47,10 @@ Domande:
 - Che tipo di segnali mando? Dispatch o Req-Resp?
 	Controller manda un segnale di dispatch.
 - ==Vogliamo sapere se il comando è andato a buon fine? Se si che tipo di segnale è la risposta?==
+	NO
+- Vogliamo sapere quando il robot si rompe?
+	Sarebbe utile...
+- Come cazzo lo facciamo?
 	
 - Come comunicano TransportTrolley e ColdRoom?
 	Non lo fanno, ci pensa il controller.
