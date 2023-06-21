@@ -71,3 +71,5 @@ NOTA: definiamo due pesi diversi:
 2) Il peso effettivo in coldRoom aggiornato solo dopo che il robot ha scaricato fisicamente un carico.
 Questi due pesi si troveranno entrambi in coldStorageRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune)
 Peso previsto per lo sprint 1 non esiste perchè Controller fa partire richieste valide. Poi lo aggiungeremo nello sprint 2.
+
+Nota: engager rimosso dal basic robot
