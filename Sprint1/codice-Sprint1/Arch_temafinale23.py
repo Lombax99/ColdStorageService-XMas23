@@ -22,4 +22,5 @@ with Diagram('temafinale23Arch', show=False, outformat='png', graph_attr=graphat
      with Cluster('ctxcoldstoragearea', graph_attr=nodeattr):
           controller=Custom('controller','./qakicons/symActorSmall.png')
           transport_trolley=Custom('transport_trolley','./qakicons/symActorSmall.png')
+     controller >> Edge(color='blue', style='solid', xlabel='doJob', fontcolor='blue') >> transport_trolley
 diag

@@ -38,6 +38,7 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
 						 	   
 						CommUtils.outgreen("controller sending current weight: $KG")
+						forward("doJob", "doJob(KG)" ,"transport_trolley" ) 
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002

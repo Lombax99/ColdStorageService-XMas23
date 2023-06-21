@@ -38,7 +38,8 @@ class Transport_trolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm
 						 	   
 						if( checkMsgContent( Term.createTerm("doJob(PESO)"), Term.createTerm("doJob(PESO)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
-								 peso = payloadArg(0).toInt() 
+								 
+												peso = payloadArg(0).toInt() 
 												print(peso)
 						}
 						//genTimer( actor, state )
