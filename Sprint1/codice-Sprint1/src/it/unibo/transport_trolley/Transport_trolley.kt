@@ -53,12 +53,13 @@ class Transport_trolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm
 					action { //it:State
 						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
 						 	   
+						forward("updateWeight", "updateWeight($Peso)" ,"cold_room" ) 
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="startWork2",targetState="work",cond=whenDispatch("doJob"))
+					 transition(edgeName="restartWork2",targetState="work",cond=whenDispatch("doJob"))
 				}	 
 			}
 		}
