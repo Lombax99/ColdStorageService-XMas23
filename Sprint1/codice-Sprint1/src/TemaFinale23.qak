@@ -8,11 +8,11 @@ Event robotDead : robotDead( NO_PARAM )
 
 //-----------------------------------------------------------------------
 
-Context ctxColdStorageArea ip [host="localhost" port=8095]
+Context ctxcoldstoragearea ip [host="localhost" port=9090]
 
 //-----------------------------------------------------------------------
 
-QActor demo0 context ctxColdStorageArea {
+QActor controller context ctxcoldstoragearea {
 	State s0 initial { 	    
 		printCurrentMessage color black
 		discardMsg Off
@@ -25,29 +25,14 @@ QActor demo0 context ctxColdStorageArea {
 			var KG = 10			
 		#]
 		printCurrentMessage
-		println("current weight: $KG")
-		//forward transport_trolley -m doJob : doJob(KG)
+		println("controller sending current weight: $KG") color green
+		forward transport_trolley -m doJob : doJob($KG)
 	} Transition repeat whenTime 2000 -> mockRequest
  }
 
-/*
-QActor controller context ctxColdStorageArea {
-	State s0 initial {
-		printCurrentMessage
-	} Goto mockRequest
-
-	State mockRequest {
-		[#
-			var KG = 10			
-		#]
-		printCurrentMessage
-		forward transport_trolley -m doJob : doJob(KG)
-	} Transition repeat whenTime 2000 -> mockRequest
-}
-
-QActor transport_trolley context ctxColdStorageArea {
+QActor transport_trolley context ctxcoldstoragearea {
 	[#
-		var peso = 0
+		var Peso = 0
 	#]
 	
 	State s0 initial {
@@ -55,18 +40,22 @@ QActor transport_trolley context ctxColdStorageArea {
 	} Transition startWork whenMsg doJob -> work
 	
 	State work {
-		printCurrentMessage
+		printCurrentMessage color black
 		onMsg ( doJob : doJob(PESO) ) {
-			[# peso = payloadArg(0).toInt() #]
+			[# 
+				Peso = payloadArg(0).toInt()
+			#]
 		}		
 	} Goto endWork
 	
 	State endWork {
-		forward cold_room -m updateWeight : updateWeight(peso)
-	}
+		printCurrentMessage
+		forward cold_room -m updateWeight : updateWeight($Peso)
+	} Transition restartWork whenMsg doJob -> work
 } 
 
-QActor cold_room context ctxColdStorageArea {
+
+QActor cold_room context ctxcoldstoragearea {
 	[#
 		var pesoCorrente = 0
 	#]
@@ -78,11 +67,9 @@ QActor cold_room context ctxColdStorageArea {
 	State updateWeight {
 		printCurrentMessage
 		onMsg ( updateWeight : updateWeight(PESO) ) {
-			[# pesoCorrente = payloadArg(0).toInt() #]
+			[# pesoCorrente += payloadArg(0).toInt() #]
 		}
 		println("peso aggiornato")
 		println("nuovo peso: $pesoCorrente")
 	} Transition update whenMsg updateWeight -> updateWeight
 }
-
-*/
