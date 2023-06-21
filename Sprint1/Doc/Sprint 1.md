@@ -51,7 +51,7 @@ Domande:
 - Vogliamo sapere quando il robot si rompe?
 	Sarebbe utile... ma NO :(
 - Come ~~cazzo~~ lo facciamo?
-	
+	Transport Trolley potrebbe emettere l'evento "robot rotto" dopo x tempo che sono n
 - Come comunicano TransportTrolley e ColdRoom?
 	Non lo fanno, ci pensa il controller.
 - Quando viene aggiornato il peso della ColdRoom (e da chi)?
