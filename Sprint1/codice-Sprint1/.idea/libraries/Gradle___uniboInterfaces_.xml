@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: :uniboInterfaces:">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../unibolibs/uniboInterfaces.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
