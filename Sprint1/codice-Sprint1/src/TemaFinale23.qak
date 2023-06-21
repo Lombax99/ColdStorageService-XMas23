@@ -51,8 +51,8 @@ QActor transport_trolley context ctxcoldstoragearea {
 	
 	State endWork {
 		printCurrentMessage
-		//forward cold_room -m updateWeight : updateWeight(peso)
-	} Transition startWork whenMsg doJob -> work
+		forward cold_room -m updateWeight : updateWeight($Peso)
+	} Transition restartWork whenMsg doJob -> work
 } 
 
 /*
