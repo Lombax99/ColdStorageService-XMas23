@@ -12,7 +12,7 @@ Context ctxColdStorageArea ip [host="localhost" port=8095]
 
 //-----------------------------------------------------------------------
 
-QActor demo0 context ctxColdStorageArea {
+QActor controller context ctxColdStorageArea {
 	State s0 initial { 	    
 		printCurrentMessage color black
 		discardMsg Off

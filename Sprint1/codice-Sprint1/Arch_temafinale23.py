@@ -20,5 +20,5 @@ with Diagram('temafinale23Arch', show=False, outformat='png', graph_attr=graphat
   with Cluster('env'):
      sys = Custom('','./qakicons/system.png')
      with Cluster('ctxColdStorageArea', graph_attr=nodeattr):
-          demo0=Custom('demo0','./qakicons/symActorSmall.png')
+          controller=Custom('controller','./qakicons/symActorSmall.png')
 diag
