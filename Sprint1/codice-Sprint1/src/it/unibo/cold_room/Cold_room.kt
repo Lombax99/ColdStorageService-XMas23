@@ -19,7 +19,7 @@ class Cold_room ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, 
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
 		
-				var pesoCorrente = 0
+				var PesoCorrente = 0
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
@@ -41,7 +41,7 @@ class Cold_room ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, 
 								 pesoCorrente += payloadArg(0).toInt()  
 						}
 						CommUtils.outblack("peso aggiornato")
-						CommUtils.outblack("nuovo peso: $pesoCorrente")
+						CommUtils.outblack("nuovo peso: $PesoCorrente")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
