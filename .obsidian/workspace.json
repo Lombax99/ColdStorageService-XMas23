@@ -148,6 +148,7 @@
   },
   "active": "2f4b0ace96e80799",
   "lastOpenFiles": [
+    "Sprint1/codice-Sprint1/build.gradle",
     "Sprint1/codice-Sprint1/Api_temafinale23.txt",
     "Sprint1/codice-Sprint1/Arch_temafinale23.py",
     "Sprint1/codice-Sprint1/build2022.gradle",
@@ -158,7 +159,6 @@
     "Sprint1/codice-Sprint1/src/it/unibo/controller",
     "Sprint1/codice-Sprint1/src/it/unibo/transport_trolley",
     "Sprint1/codice-Sprint1/src/it/unibo/ctxColdStorageArea",
-    "Sprint1/codice-Sprint1/src/it/unibo/cold_room",
     "README.md",
     "Cold Storage Service - Natali.md",
     "Sprint1/Doc/Sprint 1.md",
