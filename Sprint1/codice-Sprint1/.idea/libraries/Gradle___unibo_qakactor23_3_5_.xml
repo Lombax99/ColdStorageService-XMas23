@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: :unibo.qakactor23-3.5:">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../unibolibs/unibo.qakactor23-3.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,4 @@
+{"actor":"transport_trolley", "msgType":"dispatch", "curstate":"s0", "nextstate":"work", "msgId":"doJob"}
+{"actor":"transport_trolley", "msgType":"dispatch", "curstate":"endWork", "nextstate":"work", "msgId":"doJob"}
+{"actor":"cold_room", "msgType":"dispatch", "curstate":"s0", "nextstate":"updateWeight", "msgId":"updateWeight"}
+{"actor":"cold_room", "msgType":"dispatch", "curstate":"updateWeight", "nextstate":"updateWeight", "msgId":"updateWeight"}
