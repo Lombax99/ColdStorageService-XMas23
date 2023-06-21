@@ -49,7 +49,8 @@ class Transport_trolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm
 				}	 
 				state("endWork") { //this:State
 					action { //it:State
-						forward("updateWeight", "updateWeight(peso)" ,"cold_room" ) 
+						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
+						 	   
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002

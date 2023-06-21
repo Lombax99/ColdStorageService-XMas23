@@ -36,7 +36,7 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 									var KG = 10			
 						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
 						 	   
-						forward("doJob", "doJob(KG)" ,"transport_trolley" ) 
+						forward("doJob", "doJob($KG)" ,"transport_trolley" ) 
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002

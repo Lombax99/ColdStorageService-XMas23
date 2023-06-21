@@ -25,7 +25,7 @@ QActor controller context ctxcoldstoragearea {
 			var KG = 10			
 		#]
 		printCurrentMessage
-		println("current weight: $KG")
+		println("controller sending current weight: $KG")
 		//forward transport_trolley -m doJob : doJob(KG)
 	} Transition repeat whenTime 2000 -> mockRequest
  }
@@ -62,7 +62,8 @@ QActor transport_trolley context ctxcoldstoragearea {
 	} Goto endWork
 	
 	State endWork {
-		forward cold_room -m updateWeight : updateWeight(peso)
+		printCurrentMessage
+		//forward cold_room -m updateWeight : updateWeight(peso)
 	}
 } 
 

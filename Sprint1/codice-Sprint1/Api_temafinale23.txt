@@ -86,3 +86,6 @@
 {"actor":"sys", "msgType":"event", "sender":"sender", "msgId":"alarm"}
 {"actor":"transport_trolley", "msgType":"dispatch", "sender":"controller", "msgId":"doJob"}
 {"actor":"cold_room", "msgType":"dispatch", "sender":"transport_trolley", "msgId":"updateWeight"}
+{"actor":"transport_trolley", "msgType":"dispatch", "sender":"controller", "msgId":"doJob"}
+{"actor":"cold_room", "msgType":"dispatch", "sender":"transport_trolley", "msgId":"updateWeight"}
+{"actor":"transport_trolley", "msgType":"dispatch", "sender":"controller", "msgId":"doJob"}
