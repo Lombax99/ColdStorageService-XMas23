@@ -2,17 +2,17 @@ System temafinale23
 
 //-----------------------------------------------------------------------
 
-Dispatch doJob : doJob(PESO)
-Dispatch updateWeight : updateWeight(PESO)
-
-Event robotDead : robotDead(NO_PARAM)
-
-//-----------------------------------------------------------------------
-
-Context ctxColdStorageArea ip [host="127.0.0.1" port=8080]
+Dispatch doJob : doJob(PESO) 
+Dispatch updateWeight : updateWeight(PESO) 
+Event robotDead : robotDead( NO_PARAM )   
 
 //-----------------------------------------------------------------------
 
+Context ctxColdStorageArea ip [host="localhost" port=8095]
+
+//-----------------------------------------------------------------------
+
+/*
 QActor controller context ctxColdStorageArea {
 	State s0 initial {
 		printCurrentMessage
@@ -67,4 +67,4 @@ QActor cold_room context ctxColdStorageArea {
 	} Transition update whenMsg updateWeight -> updateWeight
 }
 
-
+*/
