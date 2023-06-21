@@ -38,7 +38,7 @@ class Cold_room ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, 
 						 	   
 						if( checkMsgContent( Term.createTerm("updateWeight(PESO)"), Term.createTerm("updateWeight(PESO)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
-								 pesoCorrente = payloadArg(0)  
+								 pesoCorrente = payloadArg(0).toInt()  
 						}
 						CommUtils.outblack("peso aggiornato")
 						CommUtils.outblack("nuovo peso: $pesoCorrente")
