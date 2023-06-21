@@ -12,6 +12,24 @@ Context ctxColdStorageArea ip [host="localhost" port=8095]
 
 //-----------------------------------------------------------------------
 
+QActor demo0 context ctxColdStorageArea {
+	State s0 initial { 	    
+		printCurrentMessage color black
+		discardMsg Off
+		//[# sysUtil.logMsgs=true #]
+ 	}     
+ 	Goto mockRequest
+ 	
+ 	State mockRequest {
+		[#
+			var KG = 10			
+		#]
+		printCurrentMessage
+		println("current weight: $KG")
+		//forward transport_trolley -m doJob : doJob(KG)
+	} Transition repeat whenTime 2000 -> mockRequest
+ }
+
 /*
 QActor controller context ctxColdStorageArea {
 	State s0 initial {

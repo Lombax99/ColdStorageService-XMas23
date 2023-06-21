@@ -19,4 +19,6 @@ eventedgeattr = {
 with Diagram('temafinale23Arch', show=False, outformat='png', graph_attr=graphattr) as diag:
   with Cluster('env'):
      sys = Custom('','./qakicons/system.png')
+     with Cluster('ctxColdStorageArea', graph_attr=nodeattr):
+          demo0=Custom('demo0','./qakicons/symActorSmall.png')
 diag
