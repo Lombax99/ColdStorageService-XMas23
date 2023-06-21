@@ -49,7 +49,7 @@ Domande:
 - ==Vogliamo sapere se il comando è andato a buon fine? Se si che tipo di segnale è la risposta?==
 	NO
 - Vogliamo sapere quando il robot si rompe?
-	Sarebbe utile...
+	Sarebbe utile... ma NO :(
 - Come ~~cazzo~~ lo facciamo?
 	
 - Come comunicano TransportTrolley e ColdRoom?
