@@ -19,7 +19,7 @@ class Transport_trolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
 		
-				var peso = 0
+				var Peso = 0
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
@@ -39,8 +39,7 @@ class Transport_trolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm
 						if( checkMsgContent( Term.createTerm("doJob(PESO)"), Term.createTerm("doJob(PESO)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								 
-												peso = payloadArg(0).toInt() 
-												print(peso)
+												Peso = payloadArg(0).toInt()
 						}
 						//genTimer( actor, state )
 					}

@@ -32,7 +32,7 @@ QActor controller context ctxcoldstoragearea {
 
 QActor transport_trolley context ctxcoldstoragearea {
 	[#
-		var peso = 0
+		var Peso = 0
 	#]
 	
 	State s0 initial {
@@ -43,8 +43,7 @@ QActor transport_trolley context ctxcoldstoragearea {
 		printCurrentMessage color black
 		onMsg ( doJob : doJob(PESO) ) {
 			[# 
-				peso = payloadArg(0).toInt() 
-				print(peso)
+				Peso = payloadArg(0).toInt()
 			#]
 		}		
 	} Goto endWork
