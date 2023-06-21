@@ -65,4 +65,4 @@ Domande:
 NOTA: definiamo due pesi diversi:
 1) Un peso ipotetico saputo dal controller che indica il peso ottenuto completate tutte le richieste. (in futuro sarà gestito dal ticket granting service)
 2) Il peso effettivo in coldRoom aggiornato solo dopo che il robot ha scaricato fisicamente un carico.
-
+Questi due pesi si troveranno entrambi in coldStorageRoom (se un giorno ci saranno due punti di accesso )
