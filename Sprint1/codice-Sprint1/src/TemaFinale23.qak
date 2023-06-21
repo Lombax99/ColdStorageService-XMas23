@@ -75,4 +75,3 @@ QActor cold_room context ctxcoldstoragearea {
 	} Transition update whenMsg updateWeight -> updateWeight
 }
 */
-*/
