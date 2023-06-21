@@ -17,7 +17,7 @@ QActor controller context ctxColdStorageArea {
 	State s0 initial {
 		printCurrentMessage
 	} Goto mockRequest
-	
+/*	
 	State mockRequest {
 		[#
 			var KG = 10			
@@ -66,5 +66,5 @@ QActor cold_room context ctxColdStorageArea {
 		println("nuovo peso: $pesoCorrente")
 	} Transition update whenMsg updateWeight -> updateWeight
 }
-
+*/
 
