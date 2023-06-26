@@ -49,14 +49,15 @@ class Basicrobot ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 						)
 						discardMessages = false
 						CommUtils.outmagenta("basicrobot  | waiting ")
+						forward("robotready", "robotready(TRUE)" ,"transporttrolley" ) 
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t05",targetState="doStep",cond=whenRequest("step"))
-					transition(edgeName="t06",targetState="execcmd",cond=whenDispatch("cmd"))
-					transition(edgeName="t07",targetState="endwork",cond=whenDispatch("end"))
+					 transition(edgeName="t06",targetState="doStep",cond=whenRequest("step"))
+					transition(edgeName="t07",targetState="execcmd",cond=whenDispatch("cmd"))
+					transition(edgeName="t08",targetState="endwork",cond=whenDispatch("end"))
 				}	 
 				state("execcmd") { //this:State
 					action { //it:State

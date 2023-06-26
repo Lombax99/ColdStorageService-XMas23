@@ -29,6 +29,7 @@ with Diagram('basicrobot23Arch', show=False, outformat='png', graph_attr=graphat
      transporttrolley >> Edge(color='blue', style='solid', xlabel='setrobotstate', fontcolor='blue') >> robotpos
      transporttrolley >> Edge(color='magenta', style='solid', xlabel='moverobot', fontcolor='magenta') >> robotpos
      transporttrolley >> Edge(color='blue', style='solid', xlabel='setdirection', fontcolor='blue') >> robotpos
+     basicrobot >> Edge(color='blue', style='solid', xlabel='robotready', fontcolor='blue') >> transporttrolley
      sys >> Edge(color='red', style='dashed', xlabel='alarm', fontcolor='red') >> planexec
      planexec >> Edge(color='blue', style='solid', xlabel='nextmove', fontcolor='blue') >> planexec
      planexec >> Edge(color='blue', style='solid', xlabel='nomoremove', fontcolor='blue') >> planexec

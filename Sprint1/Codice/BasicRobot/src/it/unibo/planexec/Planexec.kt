@@ -41,7 +41,7 @@ class Planexec ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t08",targetState="execplan",cond=whenRequest("doplan"))
+					 transition(edgeName="t09",targetState="execplan",cond=whenRequest("doplan"))
 				}	 
 				state("execplan") { //this:State
 					action { //it:State
@@ -59,8 +59,8 @@ class Planexec ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 				 	 		stateTimer = TimerActor("timer_execplan", 
 				 	 					  scope, context!!, "local_tout_planexec_execplan", 100.toLong() )
 					}	 	 
-					 transition(edgeName="t09",targetState="nextMove",cond=whenTimeout("local_tout_planexec_execplan"))   
-					transition(edgeName="t010",targetState="planinterruptedalarm",cond=whenEvent("alarm"))
+					 transition(edgeName="t010",targetState="nextMove",cond=whenTimeout("local_tout_planexec_execplan"))   
+					transition(edgeName="t011",targetState="planinterruptedalarm",cond=whenEvent("alarm"))
 				}	 
 				state("nextMove") { //this:State
 					action { //it:State
@@ -75,8 +75,8 @@ class Planexec ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t011",targetState="planinterruptedalarm",cond=whenEvent("alarm"))
-					transition(edgeName="t012",targetState="doMove",cond=whenDispatch("nextmove"))
+					 transition(edgeName="t012",targetState="planinterruptedalarm",cond=whenEvent("alarm"))
+					transition(edgeName="t013",targetState="doMove",cond=whenDispatch("nextmove"))
 				}	 
 				state("doMove") { //this:State
 					action { //it:State
@@ -98,11 +98,11 @@ class Planexec ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t013",targetState="planinterruptedalarm",cond=whenEvent("alarm"))
-					transition(edgeName="t014",targetState="planend",cond=whenDispatch("nomoremove"))
-					transition(edgeName="t015",targetState="nextMove",cond=whenDispatch("nextmove"))
-					transition(edgeName="t016",targetState="nextMove",cond=whenReply("stepdone"))
-					transition(edgeName="t017",targetState="planinterruptedobstacle",cond=whenReply("stepfailed"))
+					 transition(edgeName="t014",targetState="planinterruptedalarm",cond=whenEvent("alarm"))
+					transition(edgeName="t015",targetState="planend",cond=whenDispatch("nomoremove"))
+					transition(edgeName="t016",targetState="nextMove",cond=whenDispatch("nextmove"))
+					transition(edgeName="t017",targetState="nextMove",cond=whenReply("stepdone"))
+					transition(edgeName="t018",targetState="planinterruptedobstacle",cond=whenReply("stepfailed"))
 				}	 
 				state("planend") { //this:State
 					action { //it:State

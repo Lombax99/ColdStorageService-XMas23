@@ -30,7 +30,7 @@ QActor controller context ctxcoldstoragearea {
 		#]
 		printCurrentMessage
 		forward transporttrolley -m doJob : doJob($KG)
-	} Transition repeat whenTime 2000 -> mockRequest
+	} Transition repeat whenTime 20000 -> mockRequest
 }
 
 

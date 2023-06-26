@@ -1,3 +1,4 @@
+{"actor":"transporttrolley", "msgType":"dispatch", "curstate":"s0", "nextstate":"work", "msgId":"robotready"}
 {"actor":"transporttrolley", "msgType":"dispatch", "curstate":"work", "nextstate":"arrival", "msgId":"doJob"}
 {"actor":"transporttrolley", "msgType":"dispatch", "curstate":"scarica", "nextstate":"arrival", "msgId":"doJob"}
 {"actor":"basicrobot", "msgType":"dispatch", "curstate":"work", "nextstate":"execcmd", "msgId":"cmd"}

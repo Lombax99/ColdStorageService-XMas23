@@ -22,6 +22,8 @@ Event alarm           : alarm(X)
 Dispatch nextmove     : nextmove(M)
 Dispatch nomoremove   : nomoremove(M)
 
+Dispatch robotready : robotready(BOOL)
+
 
 /*robotpos */
 
@@ -49,27 +51,31 @@ QActor transporttrolley context ctxbasicrobot{
 		#]
 	State s0 initial{
 		forward robotpos -m setrobotstate : setpos(0,0,down)//home
-	}
-	Goto work
+	}Transition ready whenMsg robotready -> work
 	
 	
 	
 	State work{
-		println("robot ! waiting")
+		println("robot ! waiting") color green
 	}Transition startworking whenMsg doJob -> arrival
+	//Goto arrival
 	
 	
 	State arrival{
+		println("arrival") color green
+		
 		onMsg(doJob : doJob(KG)) {
 			[# Peso = payloadArg(0).toInt() 
 				#]
+			println("peso ricevuto: $Peso") color green
 			request robotpos -m moverobot : moverobot(0,4) //arrival
 		}	
-			
+		//request robotpos -m moverobot : moverobot(0,4) //arrival
+		
 	} Transition gofetch whenReply moverobotdone -> raccogli
 	
 	State raccogli{
-		println("peso caricato $Peso")
+		println("peso caricato $Peso") color green
 	}Goto coldroom
 	
 	State coldroom{
@@ -81,13 +87,17 @@ QActor transporttrolley context ctxbasicrobot{
 		
 		[#  Peso = 0
 				#]
-		println("scaricato")
+		println("scaricato") color green
 	} Transition gofetchagain 
-			whenTime 1000 -> gohome
+			whenTime 3000 -> gohome
 			whenMsg doJob -> arrival
 			
+			
+			
+			
+			
 	State gohome{
-		println("voglio andare a casaaaaa")
+		println("voglio andare a casaaaaa") color green
 		request robotpos -m moverobot : moverobot(0,0)		//home
 		forward robotpos -m setdirection : dir(down)
 	}	Goto work
@@ -152,7 +162,8 @@ QActor basicrobot context ctxbasicrobot{
 		//printCurrentMessage   
         updateResource [# "basicrobot(started)" #]
 		discardMsg Off 
-		println("basicrobot  | waiting ")  color magenta 
+		println("basicrobot  | waiting ")  color magenta
+		forward transporttrolley -m robotready : robotready(TRUE) 
 	} 
 	Transition t0   whenRequest  step      -> doStep		
 					whenMsg     cmd        -> execcmd

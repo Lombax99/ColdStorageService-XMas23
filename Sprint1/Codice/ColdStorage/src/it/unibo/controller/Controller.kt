@@ -42,7 +42,7 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 					//After Lenzi Aug2002
 					sysaction { //it:State
 				 	 		stateTimer = TimerActor("timer_mockRequest", 
-				 	 					  scope, context!!, "local_tout_controller_mockRequest", 2000.toLong() )
+				 	 					  scope, context!!, "local_tout_controller_mockRequest", 20000.toLong() )
 					}	 	 
 					 transition(edgeName="repeat0",targetState="mockRequest",cond=whenTimeout("local_tout_controller_mockRequest"))   
 				}	 
