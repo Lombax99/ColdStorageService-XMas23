@@ -1,7 +1,8 @@
 %====================================================================================
 % temafinale23 description   
 %====================================================================================
-context(ctxcoldstoragearea, "localhost",  "TCP", "8080").
- qactor( controller, ctxcoldstoragearea, "it.unibo.controller.Controller").
-  qactor( transport_trolley, ctxcoldstoragearea, "it.unibo.transport_trolley.Transport_trolley").
+context(ctxcoldstoragearea, "localhost",  "TCP", "8040").
+context(ctxbasicrobot, "127.0.0.1",  "TCP", "8020").
+ qactor( transporttrolley, ctxbasicrobot, "external").
+  qactor( controller, ctxcoldstoragearea, "it.unibo.controller.Controller").
   qactor( cold_room, ctxcoldstoragearea, "it.unibo.cold_room.Cold_room").

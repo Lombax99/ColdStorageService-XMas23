@@ -22,7 +22,7 @@ class Robotpos ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 			    //val MapName = "mapEmpty23"
 			    val MapName = "mapCompleteWithObst23ok"
 			    val MyName    = name //upcase var
-			    var StepTime  = "100"
+			    var StepTime  = "300"
 				var Plan      = ""	
 				var TargetX   = ""
 				var TargetY   = ""

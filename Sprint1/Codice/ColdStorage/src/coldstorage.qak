@@ -9,9 +9,13 @@ Event robotDead : robotDead(NO_PARAM)
 
 //-----------------------------------------------------------------------
 
-Context ctxcoldstoragearea ip [host="localhost" port=8080]
+Context ctxcoldstoragearea ip [host="localhost" port=8040]
 
 //-----------------------------------------------------------------------
+
+Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
+
+ExternalQActor transporttrolley context ctxbasicrobot
 
 QActor controller context ctxcoldstoragearea {
 	
@@ -25,33 +29,9 @@ QActor controller context ctxcoldstoragearea {
 			var KG = 10			
 		#]
 		printCurrentMessage
-		forward transport_trolley -m doJob : doJob($KG)
+		forward transporttrolley -m doJob : doJob($KG)
 	} Transition repeat whenTime 2000 -> mockRequest
 }
-
-
-QActor transport_trolley context ctxcoldstoragearea {
-	[#
-		var Peso = 0
-	#]
-	
-	State s0 initial {
-		printCurrentMessage
-	} Transition startWork whenMsg doJob -> work
-	
-	State work {
-		onMsg(doJob : doJob(KG)) {
-			[# Peso = payloadArg(0).toInt() 
-				#]
-		}		
-	} Goto endWork
-	
-	State endWork {
-		printCurrentMessage
-		println("$Peso")
-		forward cold_room -m updateWeight : updateWeight($Peso)
-	} Transition returnWork whenMsg doJob -> work
-} 
 
 
 QActor cold_room context ctxcoldstoragearea {

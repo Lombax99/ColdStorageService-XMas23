@@ -30,7 +30,7 @@ class Cold_room ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="update3",targetState="updateWeight",cond=whenDispatch("updateWeight"))
+					 transition(edgeName="update1",targetState="updateWeight",cond=whenDispatch("updateWeight"))
 				}	 
 				state("updateWeight") { //this:State
 					action { //it:State
@@ -47,7 +47,7 @@ class Cold_room ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="update4",targetState="updateWeight",cond=whenDispatch("updateWeight"))
+					 transition(edgeName="update2",targetState="updateWeight",cond=whenDispatch("updateWeight"))
 				}	 
 			}
 		}

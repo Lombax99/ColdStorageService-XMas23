@@ -2,7 +2,7 @@ System /* -trace -msglog  */ basicrobot23
 
 
 Dispatch doJob : doJob(KG)
-
+Dispatch updateWeight : updateWeight(PESO)
 
 
 /*basic robot */
@@ -37,111 +37,82 @@ Reply robotstate      : robotstate(POS,DIR)
 Dispatch setrobotstate: setpos(X,Y,D)
 
 
+Context ctxbasicrobot ip [host="localhost" port=8020] 
+ 
+Context ctxcoldstoragearea ip [host="127.0.0.1" port=8040]
 
 
-Context ctxbasicrobot ip [host="localhost" port=8020]  
+ExternalQActor cold_room context ctxcoldstoragearea
 
-
-
-QActor controller context ctxbasicrobot{
-	
-	State s0 initial{
-		
-	}
-	Goto work
-	
-	State work{
-		[#
-			var KG = 10			
+QActor transporttrolley context ctxbasicrobot{
+	[#	var Peso = 0
 		#]
-		printCurrentMessage
-		forward mymain -m doJob : doJob($KG)
-		forward mymain -m doJob : doJob($KG)
-		forward mymain -m doJob : doJob($KG)
-		
-		
-	} //Transition t0 whenTime 10023 -> work
-}
-
-
-QActor mymain context ctxbasicrobot{
 	State s0 initial{
 		forward robotpos -m setrobotstate : setpos(0,0,down)//home
 	}
 	Goto work
 	
+	
+	
 	State work{
 		println("robot ! waiting")
-	}Transition t0 whenMsg doJob -> arrival
+	}Transition startworking whenMsg doJob -> arrival
 	
 	
 	State arrival{
-			request robotpos -m moverobot : moverobot(0,8) //arrival
+		onMsg(doJob : doJob(KG)) {
+			[# Peso = payloadArg(0).toInt() 
+				#]
+			request robotpos -m moverobot : moverobot(0,4) //arrival
+		}	
+			
 	} Transition gofetch whenReply moverobotdone -> raccogli
 	
 	State raccogli{
-		println("peso caricato:}")
+		println("peso caricato $Peso")
 	}Goto coldroom
 	
 	State coldroom{
-		request robotpos -m moverobot : moverobot(8,4)  //coldroom
+		request robotpos -m moverobot : moverobot(5,3)  //coldroom
 	} Transition godrop whenReply moverobotdone -> scarica
 	
 	State scarica {
+		//forward cold_room -m updateWeight : updateWeight($Peso)
+		
+		[#  Peso = 0
+				#]
 		println("scaricato")
 	} Transition gofetchagain 
-			whenTime 100 -> gohome
+			whenTime 1000 -> gohome
 			whenMsg doJob -> arrival
 			
 	State gohome{
+		println("voglio andare a casaaaaa")
 		request robotpos -m moverobot : moverobot(0,0)		//home
 		forward robotpos -m setdirection : dir(down)
 	}	Goto work
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	State arrivalfromcoldroom{
-		request robotpos -m moverobot : moverobot(4,5)		
-		request robotpos -m moverobot : moverobot(0,5)
-		//in arrival
-	}
 	
 	
 
 	State workprova{
 		//request basicrobot -m doplan : doplan(wwwwwwwwwwwww,200)
 		
-		
-		request robotpos -m moverobot : moverobot(0,5) //arrival
-		
-		request robotpos -m moverobot : moverobot(4,3) //cold room
-		
-		request robotpos -m moverobot : moverobot(4,5)		
-		request robotpos -m moverobot : moverobot(0,5)		//arrival
-		
-		
-		request robotpos -m moverobot : moverobot(0,0)		//home
-		forward robotpos -m setdirection : dir(down)
-		
-	} Goto arrival
-	
-	
-	
-	State coldroomandata {
-				//cold room
+
+		//request robotpos -m moverobot : moverobot(0,4) //arrival
+		//request robotpos -m moverobot : moverobot(0,0)		//home
+		//forward robotpos -m setdirection : dir(down)
 	}
+	
 	
 }
 
 
-
-
+/*
+ * ------------------------------
+ * basicrobot
+ * ------------------------------
+ */
+ 
 QActor basicrobot context ctxbasicrobot{
 [#  
   var StepTime      = 0L
@@ -266,7 +237,7 @@ QActor planexec context ctxbasicrobot{
 	[#  var Plan          = ""
 		var PlanOrig      = ""
 		var CurMoveTodo   = ""		
-		var StepTime      = "100"
+		var StepTime      = "300"
    	#]
    	
 	State s0 initial{
@@ -367,14 +338,18 @@ QActor planexec context ctxbasicrobot{
  	Goto work 
 }
 
-
+/*
+ * ------------------------------
+ * robotpos
+ * ------------------------------
+ */
 
 QActor robotpos context ctxbasicrobot{
 	[# val planner = unibo.planner23.Planner23Util()
 	    //val MapName = "mapEmpty23"
 	    val MapName = "mapCompleteWithObst23ok"
 	    val MyName    = name //upcase var
-	    var StepTime  = "100"
+	    var StepTime  = "300"
 		var Plan      = ""	
 		var TargetX   = ""
 		var TargetY   = ""
@@ -506,5 +481,4 @@ QActor robotpos context ctxbasicrobot{
 	Goto waitclientrequest
 	
 }
-
 
