@@ -21,6 +21,7 @@ class Mymain ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, sco
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
+						forward("setrobotstate", "setpos(0,0,down)" ,"robotpos" ) 
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
@@ -30,13 +31,95 @@ class Mymain ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, sco
 				}	 
 				state("work") { //this:State
 					action { //it:State
-						forward("setrobotstate", "setpos(0,0,down)" ,"robotpos" ) 
+						CommUtils.outblack("robot ! waiting")
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition(edgeName="t00",targetState="arrival",cond=whenDispatch("doJob"))
+				}	 
+				state("arrival") { //this:State
+					action { //it:State
+						request("moverobot", "moverobot(0,8)" ,"robotpos" )  
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition(edgeName="gofetch1",targetState="raccogli",cond=whenReply("moverobotdone"))
+				}	 
+				state("raccogli") { //this:State
+					action { //it:State
+						CommUtils.outblack("peso caricato:}")
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition( edgeName="goto",targetState="coldroom", cond=doswitch() )
+				}	 
+				state("coldroom") { //this:State
+					action { //it:State
+						request("moverobot", "moverobot(8,4)" ,"robotpos" )  
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition(edgeName="godrop2",targetState="scarica",cond=whenReply("moverobotdone"))
+				}	 
+				state("scarica") { //this:State
+					action { //it:State
+						CommUtils.outblack("scaricato")
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+				 	 		stateTimer = TimerActor("timer_scarica", 
+				 	 					  scope, context!!, "local_tout_mymain_scarica", 100.toLong() )
+					}	 	 
+					 transition(edgeName="gofetchagain3",targetState="gohome",cond=whenTimeout("local_tout_mymain_scarica"))   
+					transition(edgeName="gofetchagain4",targetState="arrival",cond=whenDispatch("doJob"))
+				}	 
+				state("gohome") { //this:State
+					action { //it:State
+						request("moverobot", "moverobot(0,0)" ,"robotpos" )  
+						forward("setdirection", "dir(down)" ,"robotpos" ) 
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition( edgeName="goto",targetState="work", cond=doswitch() )
+				}	 
+				state("arrivalfromcoldroom") { //this:State
+					action { //it:State
+						request("moverobot", "moverobot(4,5)" ,"robotpos" )  
+						request("moverobot", "moverobot(0,5)" ,"robotpos" )  
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+				}	 
+				state("workprova") { //this:State
+					action { //it:State
 						request("moverobot", "moverobot(0,5)" ,"robotpos" )  
 						request("moverobot", "moverobot(4,3)" ,"robotpos" )  
 						request("moverobot", "moverobot(4,5)" ,"robotpos" )  
 						request("moverobot", "moverobot(0,5)" ,"robotpos" )  
 						request("moverobot", "moverobot(0,0)" ,"robotpos" )  
 						forward("setdirection", "dir(down)" ,"robotpos" ) 
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition( edgeName="goto",targetState="arrival", cond=doswitch() )
+				}	 
+				state("coldroomandata") { //this:State
+					action { //it:State
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002

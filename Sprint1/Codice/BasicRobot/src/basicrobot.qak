@@ -1,6 +1,10 @@
 System /* -trace -msglog  */ basicrobot23  
 
 
+Dispatch doJob : doJob(KG)
+
+
+
 /*basic robot */
 Dispatch cmd       	: cmd(MOVE)      
 Dispatch end       	: end(ARG)   
@@ -37,18 +41,86 @@ Dispatch setrobotstate: setpos(X,Y,D)
 
 Context ctxbasicrobot ip [host="localhost" port=8020]  
 
-QActor mymain context ctxbasicrobot{
+
+
+QActor controller context ctxbasicrobot{
+	
 	State s0 initial{
+		
 	}
 	Goto work
-
+	
 	State work{
+		[#
+			var KG = 10			
+		#]
+		printCurrentMessage
+		forward mymain -m doJob : doJob($KG)
+		forward mymain -m doJob : doJob($KG)
+		forward mymain -m doJob : doJob($KG)
+		
+		
+	} //Transition t0 whenTime 10023 -> work
+}
+
+
+QActor mymain context ctxbasicrobot{
+	State s0 initial{
+		forward robotpos -m setrobotstate : setpos(0,0,down)//home
+	}
+	Goto work
+	
+	State work{
+		println("robot ! waiting")
+	}Transition t0 whenMsg doJob -> arrival
+	
+	
+	State arrival{
+			request robotpos -m moverobot : moverobot(0,8) //arrival
+	} Transition gofetch whenReply moverobotdone -> raccogli
+	
+	State raccogli{
+		println("peso caricato:}")
+	}Goto coldroom
+	
+	State coldroom{
+		request robotpos -m moverobot : moverobot(8,4)  //coldroom
+	} Transition godrop whenReply moverobotdone -> scarica
+	
+	State scarica {
+		println("scaricato")
+	} Transition gofetchagain 
+			whenTime 100 -> gohome
+			whenMsg doJob -> arrival
+			
+	State gohome{
+		request robotpos -m moverobot : moverobot(0,0)		//home
+		forward robotpos -m setdirection : dir(down)
+	}	Goto work
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	State arrivalfromcoldroom{
+		request robotpos -m moverobot : moverobot(4,5)		
+		request robotpos -m moverobot : moverobot(0,5)
+		//in arrival
+	}
+	
+	
+
+	State workprova{
 		//request basicrobot -m doplan : doplan(wwwwwwwwwwwww,200)
 		
-		forward robotpos -m setrobotstate : setpos(0,0,down)//home
-		request robotpos -m moverobot : moverobot(0,5)		//arrival
 		
-		request robotpos -m moverobot : moverobot(4,3)		//cold room
+		request robotpos -m moverobot : moverobot(0,5) //arrival
+		
+		request robotpos -m moverobot : moverobot(4,3) //cold room
 		
 		request robotpos -m moverobot : moverobot(4,5)		
 		request robotpos -m moverobot : moverobot(0,5)		//arrival
@@ -57,7 +129,14 @@ QActor mymain context ctxbasicrobot{
 		request robotpos -m moverobot : moverobot(0,0)		//home
 		forward robotpos -m setdirection : dir(down)
 		
+	} Goto arrival
+	
+	
+	
+	State coldroomandata {
+				//cold room
 	}
+	
 }
 
 
@@ -132,7 +211,6 @@ QActor basicrobot context ctxbasicrobot{
 	    [# StepSynchRes = uniborobots.robotSupport.dostep( StepTime )
 	    	 
 	    	#]          
-  
 	}  	
 	Goto stepok if [# StepSynchRes #] else stepKo 
  
@@ -188,7 +266,7 @@ QActor planexec context ctxbasicrobot{
 	[#  var Plan          = ""
 		var PlanOrig      = ""
 		var CurMoveTodo   = ""		
-		var StepTime      = "200"
+		var StepTime      = "100"
    	#]
    	
 	State s0 initial{
@@ -296,7 +374,7 @@ QActor robotpos context ctxbasicrobot{
 	    //val MapName = "mapEmpty23"
 	    val MapName = "mapCompleteWithObst23ok"
 	    val MyName    = name //upcase var
-	    var StepTime  = "330"
+	    var StepTime  = "100"
 		var Plan      = ""	
 		var TargetX   = ""
 		var TargetY   = ""
@@ -392,7 +470,6 @@ QActor robotpos context ctxbasicrobot{
 		   println("planTheRobotmoves $Plan")
 		   Plan = planner.planCompacted(Plan) 
 		   if( Plan.isEmpty()) Plan="''"
-		   //CommUtils.outblue("$name | Plan to reach pos: $Plan")
 		#]
 		println("$name | Plan to reach pos: $Plan")  color blue
 		//chiedo al basicrobot di eseguire  Plan
@@ -420,7 +497,7 @@ QActor robotpos context ctxbasicrobot{
 				 else planner.doPathOnMap(PathDone)
 			#]
 			updateResource [# planner.robotOnMap() #]
-			//println("uuu ${PathDone}") 
+			//println(" ${PathDone}") 
 			//[# planner.doPathOnMap(PathDone) #]
 			[# planner.showCurrentRobotState(); #]
 			replyTo moverobot with moverobotfailed : moverobotfailed($PathDone,$PathTodo)

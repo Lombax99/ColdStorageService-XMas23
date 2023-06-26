@@ -22,7 +22,7 @@ class Robotpos ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 			    //val MapName = "mapEmpty23"
 			    val MapName = "mapCompleteWithObst23ok"
 			    val MyName    = name //upcase var
-			    var StepTime  = "330"
+			    var StepTime  = "100"
 				var Plan      = ""	
 				var TargetX   = ""
 				var TargetY   = ""
@@ -51,10 +51,10 @@ class Robotpos ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t013",targetState="getRobotState",cond=whenRequest("getrobotstate"))
-					transition(edgeName="t014",targetState="planTheRobotmoves",cond=whenRequest("moverobot"))
-					transition(edgeName="t015",targetState="setTheRobotState",cond=whenDispatch("setrobotstate"))
-					transition(edgeName="t016",targetState="setTheDirection",cond=whenDispatch("setdirection"))
+					 transition(edgeName="t018",targetState="getRobotState",cond=whenRequest("getrobotstate"))
+					transition(edgeName="t019",targetState="planTheRobotmoves",cond=whenRequest("moverobot"))
+					transition(edgeName="t020",targetState="setTheRobotState",cond=whenDispatch("setrobotstate"))
+					transition(edgeName="t021",targetState="setTheDirection",cond=whenDispatch("setdirection"))
 				}	 
 				state("getRobotState") { //this:State
 					action { //it:State
@@ -82,8 +82,8 @@ class Robotpos ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t017",targetState="planfordirok",cond=whenReply("doplandone"))
-					transition(edgeName="t018",targetState="fatalerror",cond=whenReply("doplanfailed"))
+					 transition(edgeName="t022",targetState="planfordirok",cond=whenReply("doplandone"))
+					transition(edgeName="t023",targetState="fatalerror",cond=whenReply("doplanfailed"))
 				}	 
 				state("planfordirok") { //this:State
 					action { //it:State
@@ -140,7 +140,6 @@ class Robotpos ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 								   println("planTheRobotmoves $Plan")
 								   Plan = planner.planCompacted(Plan) 
 								   if( Plan.isEmpty()) Plan="''"
-								   //CommUtils.outblue("$name | Plan to reach pos: $Plan")
 						CommUtils.outblue("$name | Plan to reach pos: $Plan")
 						request("doplan", "doplan($Plan,$StepTime)" ,"planexec" )  
 						//genTimer( actor, state )
@@ -148,8 +147,8 @@ class Robotpos ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t019",targetState="endok",cond=whenReply("doplandone"))
-					transition(edgeName="t020",targetState="endko",cond=whenReply("doplanfailed"))
+					 transition(edgeName="t024",targetState="endok",cond=whenReply("doplandone"))
+					transition(edgeName="t025",targetState="endko",cond=whenReply("doplanfailed"))
 				}	 
 				state("endok") { //this:State
 					action { //it:State

@@ -54,9 +54,9 @@ class Basicrobot ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t00",targetState="doStep",cond=whenRequest("step"))
-					transition(edgeName="t01",targetState="execcmd",cond=whenDispatch("cmd"))
-					transition(edgeName="t02",targetState="endwork",cond=whenDispatch("end"))
+					 transition(edgeName="t05",targetState="doStep",cond=whenRequest("step"))
+					transition(edgeName="t06",targetState="execcmd",cond=whenDispatch("cmd"))
+					transition(edgeName="t07",targetState="endwork",cond=whenDispatch("end"))
 				}	 
 				state("execcmd") { //this:State
 					action { //it:State
