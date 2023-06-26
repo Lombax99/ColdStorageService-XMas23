@@ -21,7 +21,7 @@ with Diagram('temafinale23Arch', show=False, outformat='png', graph_attr=graphat
      sys = Custom('','./qakicons/system.png')
      with Cluster('ctxcoldstoragearea', graph_attr=nodeattr):
           controller=Custom('controller','./qakicons/symActorSmall.png')
-          cold_room=Custom('cold_room','./qakicons/symActorSmall.png')
+          coldroom=Custom('coldroom','./qakicons/symActorSmall.png')
      with Cluster('ctxbasicrobot', graph_attr=nodeattr):
           transporttrolley=Custom('transporttrolley(ext)','./qakicons/externalQActor.png')
      controller >> Edge(color='blue', style='solid', xlabel='doJob', fontcolor='blue') >> transporttrolley

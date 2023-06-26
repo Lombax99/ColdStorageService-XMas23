@@ -34,7 +34,7 @@ QActor controller context ctxcoldstoragearea {
 }
 
 
-QActor cold_room context ctxcoldstoragearea {
+QActor coldroom context ctxcoldstoragearea {
 	[#
 		var PesoCorrente = 0
 	#]

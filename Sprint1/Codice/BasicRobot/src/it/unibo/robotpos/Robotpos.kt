@@ -19,9 +19,8 @@ class Robotpos ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
 		 val planner = unibo.planner23.Planner23Util()
-			    //val MapName = "mapEmpty23"
 			    val MapName = "mapCompleteWithObst23ok"
-			    val MyName    = name //upcase var
+			    val MyName    = name 
 			    var StepTime  = "315"
 				var Plan      = ""	
 				var TargetX   = ""

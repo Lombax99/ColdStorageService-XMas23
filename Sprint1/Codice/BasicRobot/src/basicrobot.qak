@@ -44,7 +44,7 @@ Context ctxbasicrobot ip [host="localhost" port=8020]
 Context ctxcoldstoragearea ip [host="127.0.0.1" port=8040]
 
 
-ExternalQActor cold_room context ctxcoldstoragearea
+ExternalQActor coldroom context ctxcoldstoragearea
 
 QActor transporttrolley context ctxbasicrobot{
 	[#	var Peso = 0
@@ -70,7 +70,6 @@ QActor transporttrolley context ctxbasicrobot{
 			println("peso ricevuto: $Peso") color green
 			request robotpos -m moverobot : moverobot(0,4) //arrival
 		}	
-		//request robotpos -m moverobot : moverobot(0,4) //arrival
 		
 	} Transition gofetch whenReply moverobotdone -> raccogli
 	
@@ -83,7 +82,7 @@ QActor transporttrolley context ctxbasicrobot{
 	} Transition godrop whenReply moverobotdone -> scarica
 	
 	State scarica {
-		//forward cold_room -m updateWeight : updateWeight($Peso)
+		forward coldroom -m updateWeight : updateWeight($Peso)
 		
 		[#  Peso = 0
 				#]
@@ -97,7 +96,7 @@ QActor transporttrolley context ctxbasicrobot{
 			
 			
 	State gohome{
-		println("voglio andare a casaaaaa") color green
+		println("going home") color green
 		request robotpos -m moverobot : moverobot(0,0)		//home
 		forward robotpos -m setdirection : dir(down)
 	}	Goto work
@@ -138,12 +137,12 @@ QActor basicrobot context ctxbasicrobot{
  		
  		
  		delegate "doplan" to planexec
- 		/*
+ 		
  		delegate "getrobotstate" to robotpos
  		delegate "setrobotstate" to robotpos
  		delegate "moverobot" to robotpos
  		delegate "setdirection" to robotpos
- 		*/
+ 		
  		
  		qrun uniborobots.robotSupport.create(myself,"basicrobotConfig.json")	
  		[# RobotType = uniborobots.robotSupport.robotKind #]  
@@ -151,8 +150,8 @@ QActor basicrobot context ctxbasicrobot{
  		delay 3000
  		
  		println("basicrobot | STARTING ... ") color magenta	
-  		run uniborobots.robotSupport.move( "a" )    //synch
- 		run uniborobots.robotSupport.move( "d" )	//synch
+  		//run uniborobots.robotSupport.move( "a" )    //synch
+ 		//run uniborobots.robotSupport.move( "d" )	//synch
   		
  	}  
  	Goto work
@@ -248,7 +247,7 @@ QActor planexec context ctxbasicrobot{
 	[#  var Plan          = ""
 		var PlanOrig      = ""
 		var CurMoveTodo   = ""		
-		var StepTime      = "300"
+		var StepTime      = "315"
    	#]
    	
 	State s0 initial{
@@ -357,10 +356,9 @@ QActor planexec context ctxbasicrobot{
 
 QActor robotpos context ctxbasicrobot{
 	[# val planner = unibo.planner23.Planner23Util()
-	    //val MapName = "mapEmpty23"
 	    val MapName = "mapCompleteWithObst23ok"
-	    val MyName    = name //upcase var
-	    var StepTime  = "300"
+	    val MyName    = name 
+	    var StepTime  = "315"
 		var Plan      = ""	
 		var TargetX   = ""
 		var TargetY   = ""

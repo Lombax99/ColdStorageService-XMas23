@@ -30,12 +30,14 @@ class Basicrobot ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 					action { //it:State
 						discardMessages = true
 						delegate("doplan", "planexec") 
+						delegate("getrobotstate", "robotpos") 
+						delegate("setrobotstate", "robotpos") 
+						delegate("moverobot", "robotpos") 
+						delegate("setdirection", "robotpos") 
 						uniborobots.robotSupport.create(myself ,"basicrobotConfig.json" )
 						 RobotType = uniborobots.robotSupport.robotKind  
 						delay(3000) 
 						CommUtils.outmagenta("basicrobot | STARTING ... ")
-						uniborobots.robotSupport.move( "a"  )
-						uniborobots.robotSupport.move( "d"  )
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002

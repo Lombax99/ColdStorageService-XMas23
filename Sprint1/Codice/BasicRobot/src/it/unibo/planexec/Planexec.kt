@@ -21,7 +21,7 @@ class Planexec ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 		  var Plan          = ""
 				var PlanOrig      = ""
 				var CurMoveTodo   = ""		
-				var StepTime      = "300"
+				var StepTime      = "315"
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State

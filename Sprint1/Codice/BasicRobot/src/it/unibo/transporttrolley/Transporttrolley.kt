@@ -78,6 +78,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 				}	 
 				state("scarica") { //this:State
 					action { //it:State
+						forward("updateWeight", "updateWeight($Peso)" ,"coldroom" ) 
 						  Peso = 0
 						CommUtils.outgreen("scaricato")
 						//genTimer( actor, state )
@@ -92,7 +93,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 				}	 
 				state("gohome") { //this:State
 					action { //it:State
-						CommUtils.outgreen("voglio andare a casaaaaa")
+						CommUtils.outgreen("going home")
 						request("moverobot", "moverobot(0,0)" ,"robotpos" )  
 						forward("setdirection", "dir(down)" ,"robotpos" ) 
 						//genTimer( actor, state )
