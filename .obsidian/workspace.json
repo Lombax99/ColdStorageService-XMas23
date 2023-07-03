@@ -146,8 +146,12 @@
       "command-palette:Apri riquadro comandi": false
     }
   },
-  "active": "2f4b0ace96e80799",
+  "active": "f1275d5a3f96d671",
   "lastOpenFiles": [
+    "Sprint1/Doc/~$$ArchitetturaLogica_Sprint1.~vsdx",
+    "Other/ColdStorageServiceRoomAnnoted.png",
+    "Sprint2/Doc/Sprint 2.md",
+    "Sprint1/Doc/Sprint 1.md",
     "Sprint1/Codice/ColdStorage/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt",
     "Sprint1/Codice/ColdStorage/src/it/unibo/ctxbasicrobot",
     "Sprint1/Codice/ColdStorage/src/it/unibo/coldroom/Coldroom.kt",
@@ -158,13 +162,9 @@
     "Sprint1/Codice/BasicRobot/src/it/unibo/ctxcoldstoragearea",
     "Sprint1/Codice/bin/uniborobots/WsServer.class",
     "Sprint1/Codice/bin/robotVirtual/VrobotMsgs.class",
-    "Sprint1/Codice/bin/robotVirtual/VrobotHLMovesActors23.class",
     "README.md",
     "Cold Storage Service - Natali.md",
-    "Sprint1/Doc/Sprint 1.md",
     "Sprint4/Doc/Sprint 4.md",
-    "Sprint3/Doc/Sprint 3.md",
-    "Sprint2/Doc/Sprint 2.md",
-    "Other/ColdStorageServiceRoomAnnoted.png"
+    "Sprint3/Doc/Sprint 3.md"
   ]
 }
