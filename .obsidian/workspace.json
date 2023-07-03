@@ -13,24 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint1/Doc/Sprint 1.md",
+                "file": "Sprint2/Doc/Sprint 2.md",
                 "mode": "source",
                 "source": false
               }
             }
-          },
-          {
-            "id": "0de322e4ec70feaf",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "PrimaArchitettura.pdf"
-              }
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -96,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PrimaArchitettura.pdf",
+                "file": "Sprint2/Doc/Sprint 2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PrimaArchitettura.pdf",
+                "file": "Sprint2/Doc/Sprint 2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -136,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PrimaArchitettura.pdf"
+                "file": "Sprint2/Doc/Sprint 2.md"
               }
             }
           }
@@ -157,10 +146,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "0de322e4ec70feaf",
+  "active": "2f4b0ace96e80799",
   "lastOpenFiles": [
+    "Sprint1/Doc/ArchitetturaLogica_Sprint1.pdf",
     "Sprint2/Doc/Sprint 2.md",
+    "Sprint1/Doc/Sprint 1.md",
     "PrimaArchitettura.pdf",
+    "Cold Storage Service - Natali.md",
     "Sprint1/codice-Sprint1",
     "Sprint1/Doc/~$$ArchitetturaLogica_Sprint1.~vsdx",
     "Sprint1/Codice/bin/unibolibs/unibonoawtsupports.jar",
@@ -169,9 +161,6 @@
     "Sprint1/Codice/bin/unibolibs/unibo.planner23-1.0.jar",
     "Sprint1/Codice/bin/unibolibs/unibo.basicomm23-1.0.jar",
     "Sprint1/Codice/bin/unibolibs/actors23-1.0.jar",
-    "Sprint1/Codice/bin/unibolibs/2p301.jar",
-    "Sprint1/Doc/Sprint 1.md",
-    "Cold Storage Service - Natali.md",
     "Other/ColdStorageServiceRoomAnnoted.png",
     "README.md",
     "Sprint4/Doc/Sprint 4.md",

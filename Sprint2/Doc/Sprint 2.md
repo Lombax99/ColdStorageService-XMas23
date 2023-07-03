@@ -14,7 +14,7 @@ A company intends to build a ColdStorageService, composed of a set of elements:
     2. go from the INDOOR to the ==PORT of the ColdRoom==
     3. deposit the food-load in the ColdRoom
 
-3. a ==ServiceAcessGUI== that allows an human being to see the current weigth of the material stored in the ColdRoom and to send to the ==ColdStorageService== a request to store new **FW** kg of food. If the request is accepted, the services return a ==ticket== that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
+3. a ==ServiceAcessGUI== that allows an human being to see the ==current weigth== of the material stored in the ColdRoom and to send to the ==ColdStorageService== a request to store new **FW** kg of food. If the request is accepted, the services return a ==ticket== that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
 
 ### Analisi dei Requisiti
 Definizioni:
@@ -33,6 +33,7 @@ Definizioni:
 - ==ServiceAcessGUI==:
 - ==ColdStorageService==:
 - ==ticket==: 
+- ==current weigth==: Quantità di cibo contenuto in ColdRoom definito in base al peso.
 
 ### Analisi del Problema
 - Protocollo di richiesta del ticket:
@@ -49,18 +50,22 @@ Definizioni:
 	- Dobbiamo assicurarci che chi richiede il ticket sia l'unico a poterlo usare.
 	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy
 	- Fare in modo che un ticket non sia riutilizzabile? possibile DoS, usiamo ticket sequenziali?
-- Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom
-	Restituiamo il peso ipotetico altrimenti l'utente crede di essere scemo quando la richiesta viene rifiutata ma il peso sembra starci...
 - Cosa succede se viene fatta una richiesta mentre le prime non sono ancora state scaricate?
-	potrebbe venire accettata anche se dovrebbe essere rifiutata, per risolvere il problema definiamo due pesi diversi:  
-	1) Un peso ipotetico saputo dal controller che indica il peso ottenuto completate tutte le richieste. (in futuro sarà gestito dal ticket granting service)  
-	2) Il peso effettivo in coldRoom aggiornato solo dopo che il robot ha scaricato fisicamente un carico.  
-	Questi due pesi si troveranno entrambi in coldStorageRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune)  
-	Peso previsto per lo sprint 1 non esiste perchè Controller fa partire richieste valide. Poi lo aggiungeremo nello sprint 2.
+	potrebbe venire accettata anche se dovrebbe essere rifiutata, per risolvere il problema definiamo due pesi diversi: 
+	1) Un peso ipotetico che indica il peso ottenuto completate tutte le richieste.
+	2) Il peso effettivo in coldRoom aggiornato solo dopo che il controller riceve il ticket.
+	Questi due pesi si troveranno entrambi in coldStorageRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune)
 - Se scade un ticket e non viene scaricato il peso, in ColdRoom comunque rimane segnato il peso ipotetico:
 	Diciamo che ColdStorageService si occupa di mantenere in memoria i ticket emessi con il relativo momento, quando viene fatta una richiesta ma lo spazio ipotetico in ColdRoom è pieno CSS controlla che non ci siano ticket scaduti che non hanno mai scaricato e, se presenti, aggiorna coldRoom di conseguenza (rimuove il peso del ticket scaduto e se possibile aggiorna col nuovo ticket). Diventa necessario che Controller faccia sapere a CSS quando viene accattato un ticket (sempre tramite dispatch). NOTA: se il dispatch fallisce? Va tutto a puttane ma non ce ne preoccupiamo perchè non ne vale la pena.
 - Contesti:
 	- CSS gira sullo stesso contesto di Controller
 	- TransportTrolley, ColdRoom e ServiceAccessGui avranno un contesto a parte per ciascuno
+- SAG deve dare la possibilità di vedere il peso in ColdRoom all'utente, lo facciamo come Req/Resp o come osservatore costantemente aggiornato?
+	La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable. In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom.
+	In entrambi i casi usiamo il peso ipotetico altrimenti l'utente crede di essere scemo quando la richiesta viene rifiutata ma il peso sembra starci...
+
+- [ ] facciamo uno schemino che fa per bene tutti i passaggi nello scambio dei messaggi 
+
+
 
 
