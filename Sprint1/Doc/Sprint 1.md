@@ -34,42 +34,29 @@ Da requisiti non è richiesta la presenza di alcun ostacolo da gestire.
 
 ### Analisi del Problema
 - Chi manda i segnali al Transport Trolley?
-	Introduciamo in nuovo attore "Controller" che si occupi di mandare i comandi al Transport Trolley e gestire la logica applicativa. In questo primo sprint diamo per scontato che l'arrivo di un Fridge Truck sia magicamente imparato dal controller al momento opportuno (di conseguenza il processo partirà da un segnale generato dal controller).
-- Quali comandi capisce il deve inviare il controller a Transport Trolley?
-	L'unico comando mandato dal controller è "doJob".
+	Introduciamo un nuovo attore "Controller" che si occupi di mandare i comandi al Transport Trolley e gestire la logica applicativa. 
+	In questo primo sprint supponiamo che il controller sia a conoscenza dell'istante di arrivo dei Fridge Truck (di conseguenza il processo partirà da un segnale generato dal controller).
+- Quali comandi (inviati dal Controller) è in grado di comprendere il Transport Trolley?
+	L'unico comando mandato dal controller è "move", nell'istante in cui arriva un Fridge Truck.
 - Come parliamo con il DDR robot? Cosa ci può dare il committente a proposito?
 	Il robot riceve segnali da socket tcp [Link al protocollo del robot](https://github.com/XANA-Hub/ProgettoTT/blob/main/Sprint%201.md).
-- Chi traduce "doJob" in una serie di comandi comprendibili al DDR robot?
-	Introduciamo l'attore TransportTrolley per svolgere questo compito.
+- Chi traduce "move" in una serie di comandi comprendibili al DDR robot?
+	Introduciamo l'attore TransportTrolley per svolgere questo compito. Si occupa di ricevere i comandi dal controller, interpretare quest'ultimi e comunicare con il robot fisico.
 - Che tipo di segnali mando? Dispatch o Req-Resp?
-	Controller manda un segnale di dispatch.
-- ==Vogliamo sapere se il comando è andato a buon fine? Se si che tipo di segnale è la risposta?==
-	NO
-- Vogliamo sapere quando il robot si rompe?
-	Sarebbe utile... ma NO :( ... maybe? YES :)
-- Come ~~cazzo~~ lo facciamo?
-	Transport Trolley potrebbe emettere l'evento "robot rotto" dopo x tempo che sono nello stato di scaricamento
+	Controller manda un segnale di dispatch, dal momento in cui il controller non è interessato a ricevere una risposta dal robot.
+- Vogliamo sapere se il comando è andato a buon fine? Se si che tipo di segnale è la risposta?
+	No, non siamo interessati a ricevere alcun tipo di risposta da parte del Transport Trolley.
+- Potrebbe essere utile sapere se il robot interrompe il suo corretto andamento?
+	Sì, il Trasport Trolley emette l'evento "robot rotto" dopo un tempo definito x che è nello stato di scaricamento.
 - Come comunicano TransportTrolley e ColdRoom?
-	Non lo fanno, ci pensa il controller.
+	Transport Trolley e ColdRoom non comunicano direttamente ma solo tramite Controller.
 - Quando viene aggiornato il peso della ColdRoom (e da chi)?
-	Viene aggiornato dal controller quando questo invia il dispatch a TransportTrolley con un altro dispatch.
-- ==In caso di fallimento del DDR robot a portare a termine un comando cosa deve succedere? Riusciamo a tornare al peso precedente? Se il controller ha ricevuto 3 richieste, le ha girate tutte al DDR robot e a Cold Room e poi si accorge che (solo o non solo) la prima non è andata a buon fine come correggo il peso di Cold Room?==
-	In caso di fallimento il peso effettivo non è stato aggiornato e può essere recuperato.
+	Viene aggiornato dal Controller quando questo invia il dispatch a TransportTrolley con un altro dispatch.
 - Come fa il Transport Trolley a sapere dov'è e dove deve andare?
-	Dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del DDR robot). Le coordinate del Transport Trolley indicheranno il quadrato in cui si trova. L'origine (0, 0) sarà la posizione di home. Coordinate crescenti verso il basso e verso destra.
+	Dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del DDR robot, in realtà per utilizzare il robot fisico sarà necessario prendere in considerazione una griglia di quadrati di lato poco più grande di RD, in modo tale da permettere al robot di girarsi). 
+	Le coordinate del Transport Trolley indicheranno il quadrato in cui si trova. L'origine (0, 0) sarà la posizione di Home. Coordinate crescenti verso il basso e verso destra.
 - Quando viene fatta la mappatura della stanza?
-	Appena viene avviato il DDR robot prima di leggere qualsiasi richiesta dal controller.
-- ==Coordinate? Come le generiamo? Che unità di misura?==
+	La mappatura della stanza viene fatta al momento dell'avviamento del DDR robot, prima di leggere qualsiasi richiesta dal controller.
 - Quando controlla il TransportTrolley se ci sono altre richieste?
 	Appena scarica, prima di tornare in home, come da requisiti (o se è in home)
 
-NOTA: definiamo due pesi diversi:
-1) Un peso ipotetico saputo dal controller che indica il peso ottenuto completate tutte le richieste. (in futuro sarà gestito dal ticket granting service)
-2) Il peso effettivo in coldRoom aggiornato solo dopo che il robot ha scaricato fisicamente un carico.
-Questi due pesi si troveranno entrambi in coldStorageRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune)
-Peso previsto per lo sprint 1 non esiste perchè Controller fa partire richieste valide. Poi lo aggiungeremo nello sprint 2.
-
-Nota: engager rimosso dal basic robot
-
-
-==link di amichetti: [https://github.com/iss2022-BCR/WasteService/tree/main](https://github.com/iss2022-BCR/WasteService/tree/main "https://github.com/iss2022-BCR/WasteService/tree/main")==

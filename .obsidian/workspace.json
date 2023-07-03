@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "0cbe7cb15f361292",
@@ -148,17 +149,17 @@
   },
   "active": "2f4b0ace96e80799",
   "lastOpenFiles": [
+    "Sprint1/Doc/~$$ArchitetturaLogica_Sprint1.~vsdx",
+    "Sprint1/Codice/BasicRobot/src/it/unibo/transporttrolley/Transporttrolley.kt",
+    "Sprint1/Codice/BasicRobot/src/it/unibo/transporttrolley",
+    "Sprint1/Codice/BasicRobot/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt",
+    "Sprint1/Codice/BasicRobot/src/it/unibo/ctxcoldstoragearea",
+    "Sprint1/Codice/ColdStorage/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt",
+    "Sprint1/Codice/ColdStorage/src/it/unibo/ctxbasicrobot",
+    "Sprint1/Codice/ColdStorage/src/it/unibo/coldroom/Coldroom.kt",
+    "Sprint1/Codice/ColdStorage/src/it/unibo/coldroom",
     "Sprint1/Codice/BasicRobot/sysRules.pl",
     "Sprint1/Codice/BasicRobot/src/it/unibo/robotpos/Robotpos.kt",
-    "Sprint1/Codice/BasicRobot/src/it/unibo/planexec/Planexec.kt",
-    "Sprint1/Codice/BasicRobot/src/it/unibo/mymain/Mymain.kt",
-    "Sprint1/Codice/BasicRobot/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt",
-    "Sprint1/Codice/BasicRobot/src/it/unibo/basicrobot/Basicrobot.kt",
-    "Sprint1/Codice/BasicRobot/src/it/unibo/robotpos",
-    "Sprint1/Codice/BasicRobot/src/it/unibo/planexec",
-    "Sprint1/Codice/BasicRobot/src/it/unibo/mymain",
-    "Sprint1/Codice/BasicRobot/src/it/unibo/ctxbasicrobot",
-    "Sprint1/Codice/BasicRobot/src/it/unibo/basicrobot",
     "README.md",
     "Cold Storage Service - Natali.md",
     "Sprint1/Doc/Sprint 1.md",
