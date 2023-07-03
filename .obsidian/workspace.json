@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint1/Doc/Sprint 1.md",
+                "file": "Cold Storage Service - Natali.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1/Doc/Sprint 1.md",
+                "file": "Cold Storage Service - Natali.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1/Doc/Sprint 1.md",
+                "file": "Cold Storage Service - Natali.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1/Doc/Sprint 1.md"
+                "file": "Cold Storage Service - Natali.md"
               }
             }
           }
@@ -146,12 +146,14 @@
       "command-palette:Apri riquadro comandi": false
     }
   },
-  "active": "f1275d5a3f96d671",
+  "active": "2f4b0ace96e80799",
   "lastOpenFiles": [
+    "PrimaArchitettura.pdf",
+    "Cold Storage Service - Natali.md",
+    "Sprint1/Doc/Sprint 1.md",
     "Sprint1/Doc/~$$ArchitetturaLogica_Sprint1.~vsdx",
     "Other/ColdStorageServiceRoomAnnoted.png",
     "Sprint2/Doc/Sprint 2.md",
-    "Sprint1/Doc/Sprint 1.md",
     "Sprint1/Codice/ColdStorage/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt",
     "Sprint1/Codice/ColdStorage/src/it/unibo/ctxbasicrobot",
     "Sprint1/Codice/ColdStorage/src/it/unibo/coldroom/Coldroom.kt",
@@ -161,9 +163,7 @@
     "Sprint1/Codice/BasicRobot/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt",
     "Sprint1/Codice/BasicRobot/src/it/unibo/ctxcoldstoragearea",
     "Sprint1/Codice/bin/uniborobots/WsServer.class",
-    "Sprint1/Codice/bin/robotVirtual/VrobotMsgs.class",
     "README.md",
-    "Cold Storage Service - Natali.md",
     "Sprint4/Doc/Sprint 4.md",
     "Sprint3/Doc/Sprint 3.md"
   ]
