@@ -54,17 +54,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="gofetch2",targetState="raccogli",cond=whenReply("moverobotdone"))
-				}	 
-				state("raccogli") { //this:State
-					action { //it:State
-						CommUtils.outgreen("peso caricato $Peso")
-						//genTimer( actor, state )
-					}
-					//After Lenzi Aug2002
-					sysaction { //it:State
-					}	 	 
-					 transition( edgeName="goto",targetState="coldroom", cond=doswitch() )
+					 transition(edgeName="gofetch2",targetState="coldroom",cond=whenReply("moverobotdone"))
 				}	 
 				state("coldroom") { //this:State
 					action { //it:State
@@ -74,21 +64,19 @@ class Transporttrolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="godrop3",targetState="scarica",cond=whenReply("moverobotdone"))
+					 transition(edgeName="godrop3",targetState="waitforjob",cond=whenReply("moverobotdone"))
 				}	 
-				state("scarica") { //this:State
+				state("waitforjob") { //this:State
 					action { //it:State
-						forward("updateWeight", "updateWeight($Peso)" ,"coldroom" ) 
-						  Peso = 0
-						CommUtils.outgreen("scaricato")
+						CommUtils.outgreen("transporttrolley ! aspetto")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
-				 	 		stateTimer = TimerActor("timer_scarica", 
-				 	 					  scope, context!!, "local_tout_transporttrolley_scarica", 3000.toLong() )
+				 	 		stateTimer = TimerActor("timer_waitforjob", 
+				 	 					  scope, context!!, "local_tout_transporttrolley_waitforjob", 3000.toLong() )
 					}	 	 
-					 transition(edgeName="gofetchagain4",targetState="gohome",cond=whenTimeout("local_tout_transporttrolley_scarica"))   
+					 transition(edgeName="gofetchagain4",targetState="gohome",cond=whenTimeout("local_tout_transporttrolley_waitforjob"))   
 					transition(edgeName="gofetchagain5",targetState="arrival",cond=whenDispatch("doJob"))
 				}	 
 				state("gohome") { //this:State

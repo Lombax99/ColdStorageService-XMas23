@@ -1,5 +1,0 @@
-{"actor":"planexec", "msgType":"eventtransition", "sender":"sys", "msgId":"alarm"}
-{"actor":"planexec", "msgType":"dispatch", "sender":"planexec", "msgId":"nextmove"}
-{"actor":"planexec", "msgType":"dispatch", "sender":"planexec", "msgId":"nomoremove"}
-{"actor":"basicrobot", "msgType":"request", "sender":"planexec", "msgId":"step"}
-{"actor":"planexec", "msgType":"request", "sender":"robotpos", "msgId":"doplan"}

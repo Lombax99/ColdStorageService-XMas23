@@ -1,4 +1,4 @@
-System temafinale23
+System coldstorage
 
 //-----------------------------------------------------------------------
 
@@ -33,6 +33,7 @@ QActor controller context ctxcoldstoragearea {
 		#]
 		printCurrentMessage
 		forward transporttrolley -m doJob : doJob($KG)
+		forward coldroom -m updateWeight : updateWeight($KG)
 	} Transition repeat whenTime 15000 -> mockRequest
 }
 

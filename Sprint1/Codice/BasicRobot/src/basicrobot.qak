@@ -1,4 +1,4 @@
-System /* -trace -msglog  */ basicrobot23  
+System /* -trace -msglog  */ basicrobot23
 
 
 Dispatch doJob : doJob(KG)
@@ -71,28 +71,17 @@ QActor transporttrolley context ctxbasicrobot{
 			request robotpos -m moverobot : moverobot(0,4) //arrival
 		}	
 		
-	} Transition gofetch whenReply moverobotdone -> raccogli
-	
-	State raccogli{
-		println("peso caricato $Peso") color green
-	}Goto coldroom
+	} Transition gofetch whenReply moverobotdone -> coldroom
 	
 	State coldroom{
 		request robotpos -m moverobot : moverobot(5,3)  //coldroom
-	} Transition godrop whenReply moverobotdone -> scarica
+	} Transition godrop whenReply moverobotdone -> waitforjob
 	
-	State scarica {
-		forward coldroom -m updateWeight : updateWeight($Peso)
-		
-		[#  Peso = 0
-				#]
-		println("scaricato") color green
+	State waitforjob {
+		println("transporttrolley ! aspetto") color green
 	} Transition gofetchagain 
 			whenTime 3000 -> gohome
 			whenMsg doJob -> arrival
-			
-			
-			
 			
 			
 	State gohome{
