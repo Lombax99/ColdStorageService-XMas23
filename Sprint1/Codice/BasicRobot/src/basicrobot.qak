@@ -235,7 +235,7 @@ QActor planexec context ctxbasicrobot{
 	[#  var Plan          = ""
 		var PlanOrig      = ""
 		var CurMoveTodo   = ""		
-		var StepTime      = "400"
+		var StepTime      = "315"
    	#]
    	
 	State s0 initial{
@@ -346,7 +346,7 @@ QActor robotpos context ctxbasicrobot{
 	[# val planner = unibo.planner23.Planner23Util()
 	    val MapName = "mapCompleteWithObst23ok"
 	    val MyName    = name 
-	    var StepTime  = "400"
+	    var StepTime  = "315"
 		var Plan      = ""	
 		var TargetX   = ""
 		var TargetY   = ""
