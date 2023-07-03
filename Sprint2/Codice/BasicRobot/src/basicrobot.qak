@@ -1,0 +1,492 @@
+System /* -trace -msglog  */ basicrobot23  
+
+
+Dispatch doJob : doJob(KG)
+Dispatch updateWeight : updateWeight(PESO)
+
+
+/*basic robot */
+Dispatch cmd       	: cmd(MOVE)      
+Dispatch end       	: end(ARG)   
+
+Request step       : step(TIME)	
+Reply stepdone     : stepdone(V)  
+Reply stepfailed   : stepfailed(DURATION, CAUSE)	
+
+/*planexec */
+Request  doplan     : doplan( PATH, STEPTIME )
+Reply doplandone    : doplandone( ARG ) 
+Reply doplanfailed  : doplanfailed( ARG )
+
+Event alarm           : alarm(X)
+Dispatch nextmove     : nextmove(M)
+Dispatch nomoremove   : nomoremove(M)
+
+Dispatch robotready : robotready(BOOL)
+
+
+/*robotpos */
+
+Dispatch setdirection : dir( D )  //D =up|down!left|right
+
+Request moverobot    :  moverobot(TARGETX, TARGETY)  
+Reply moverobotdone  :  moverobotok(ARG)
+Reply moverobotfailed:  moverobotfailed(PLANDONE, PLANTODO)
+
+Request getrobotstate : getrobotstate(ARG)
+Reply robotstate      : robotstate(POS,DIR)
+
+Dispatch setrobotstate: setpos(X,Y,D)
+
+
+Context ctxbasicrobot ip [host="localhost" port=8020] 
+ 
+Context ctxcoldstoragearea ip [host="127.0.0.1" port=8040]
+
+
+ExternalQActor coldroom context ctxcoldstoragearea
+
+QActor transporttrolley context ctxbasicrobot{
+	[#	var Peso = 0
+		#]
+	State s0 initial{
+		forward robotpos -m setrobotstate : setpos(0,0,down)//home
+	}Transition ready whenMsg robotready -> work
+	
+	
+	
+	State work{
+		println("robot ! waiting") color green
+	}Transition startworking whenMsg doJob -> arrival
+	//Goto arrival
+	
+	
+	State arrival{
+		println("arrival") color green
+		
+		onMsg(doJob : doJob(KG)) {
+			[# Peso = payloadArg(0).toInt() 
+				#]
+			println("peso ricevuto: $Peso") color green
+			request robotpos -m moverobot : moverobot(0,4) //arrival
+		}	
+		
+	} Transition gofetch whenReply moverobotdone -> raccogli
+	
+	State raccogli{
+		println("peso caricato $Peso") color green
+	}Goto coldroom
+	
+	State coldroom{
+		request robotpos -m moverobot : moverobot(5,3)  //coldroom
+	} Transition godrop whenReply moverobotdone -> scarica
+	
+	State scarica {
+		forward coldroom -m updateWeight : updateWeight($Peso)
+		
+		[#  Peso = 0
+				#]
+		println("scaricato") color green
+	} Transition gofetchagain 
+			whenTime 3000 -> gohome
+			whenMsg doJob -> arrival
+			
+			
+			
+			
+			
+	State gohome{
+		println("going home") color green
+		request robotpos -m moverobot : moverobot(0,0)		//home
+		forward robotpos -m setdirection : dir(down)
+	}	Goto work
+	
+	
+
+	State workprova{
+		//request basicrobot -m doplan : doplan(wwwwwwwwwwwww,200)
+		
+
+		//request robotpos -m moverobot : moverobot(0,4) //arrival
+		//request robotpos -m moverobot : moverobot(0,0)		//home
+		//forward robotpos -m setdirection : dir(down)
+	}
+	
+	
+}
+
+
+/*
+ * ------------------------------
+ * basicrobot
+ * ------------------------------
+ */
+ 
+QActor basicrobot context ctxbasicrobot{
+[#  
+  var StepTime      = 0L
+  var StartTime     = 0L     
+  var Duration      = 0L   
+  var RobotType     = "" 
+  var CurrentMove   = "unkknown"
+  var StepSynchRes  = false
+#]      
+ 	State ss0 initial { 	
+ 		//printCurrentMessage       
+ 		discardMsg On  //In the intial phase ...
+ 		
+ 		
+ 		delegate "doplan" to planexec
+ 		
+ 		delegate "getrobotstate" to robotpos
+ 		delegate "setrobotstate" to robotpos
+ 		delegate "moverobot" to robotpos
+ 		delegate "setdirection" to robotpos
+ 		
+ 		
+ 		qrun uniborobots.robotSupport.create(myself,"basicrobotConfig.json")	
+ 		[# RobotType = uniborobots.robotSupport.robotKind #]  
+ 		
+ 		delay 3000
+ 		
+ 		println("basicrobot | STARTING ... ") color magenta	
+  		//run uniborobots.robotSupport.move( "a" )    //synch
+ 		//run uniborobots.robotSupport.move( "d" )	//synch
+  		
+ 	}  
+ 	Goto work
+ 
+  	
+	State work{ 
+		//printCurrentMessage   
+        updateResource [# "basicrobot(started)" #]
+		discardMsg Off 
+		println("basicrobot  | waiting ")  color magenta
+		forward transporttrolley -m robotready : robotready(TRUE) 
+	} 
+	Transition t0   whenRequest  step      -> doStep		
+					whenMsg     cmd        -> execcmd
+				  	whenMsg     end        -> endwork			  
+	                
+	
+	State execcmd{ 
+		printCurrentMessage
+		
+		onMsg( cmd : cmd(MOVE) ){  
+	  	  	[# CurrentMove = payloadArg(0) #] 
+			run uniborobots.robotSupport.move( payloadArg(0 ) )
+			updateResource [# "moveactivated(${payloadArg(0)})" #]
+		}
+		
+	}
+	Goto work   
+	
+   	State doStep{ 
+		onMsg( step : step( T ) ){  
+			
+			[#	StepTime     = payloadArg(0).toLong()  	
+				#]    
+			updateResource [# "step(${StepTime})" #]
+	  	}  
+	    memoCurrentTime StartTime  
+	    [# StepSynchRes = uniborobots.robotSupport.dostep( StepTime )
+	    	#]          
+	}  	
+	Goto stepok if [# StepSynchRes #] else stepKo 
+ 
+     	 
+	State stepok{   
+		[# StepSynchRes = false #]
+ 		run uniborobots.robotSupport.move( "h" )  //stop the (real) robot 
+		updateResource [# "stepDone($StepTime)" #]
+   		//emit info : info( stepdone($StepTime) )
+   		replyTo step with stepdone : stepdone($StepTime)
+		//println("basicrobot | stepDone reply done")
+  	}
+	Goto work  
+ 
+	State stepKo{  
+		
+		setDuration Duration from StartTime
+		
+		run uniborobots.robotSupport.move( "h" )  //stop the (real) robot
+		[# var TunedDuration   = StepTime - ((Duration * 0.80)).toLong()   #]
+		println("basicrobot | stepKo $StepTime  duration=$Duration  TunedDuration=$TunedDuration") color magenta
+		/* 			
+		if [# TunedDuration > 30 #]{ 
+			
+			//torna indietro
+			run uniborobots.robotSupport.move( "s" )
+			delayVar TunedDuration 
+			run uniborobots.robotSupport.move( "h" ) 
+		 	updateResource [# "stepFail($Duration)" #] 
+	 		delay 300
+		}*/
+		replyTo step with stepfailed : stepfailed($Duration, obst)
+	 	
+    } 
+	Goto work 
+
+					
+	State endwork{ 
+		//printCurrentMessage
+		updateResource [# "basicrobot(end)" #]	 		
+ 		//terminate 1
+	}   
+   
+} 
+  
+/*
+ * ------------------------------
+ * planexec
+ * ------------------------------
+ */
+
+QActor planexec context ctxbasicrobot{
+	[#  var Plan          = ""
+		var PlanOrig      = ""
+		var CurMoveTodo   = ""		
+		var StepTime      = "400"
+   	#]
+   	
+	State s0 initial{
+		printCurrentMessage
+	}
+	Goto work
+
+	State work{
+		//println("planexec | waiting ...")  
+	}
+	Transition t0 whenRequest doplan -> execplan
+    
+	State execplan{
+		onMsg( doplan : doplan(PLAN, STEPTIME)){
+    		[# Plan       = payloadArg(0).replace("[","").replace("]","").replace(",","").replace(" ","")
+			   PlanOrig   = Plan
+			   StepTime   = payloadArg(1) 
+    		#]
+    		println("plan ${Plan}")
+    	}
+	} Transition t0 
+		whenTime 100    -> nextMove
+		whenEvent alarm -> planinterruptedalarm
+	  
+	
+	State nextMove{ 
+		[# 
+		   if( Plan.length > 0  ){
+		   	CurMoveTodo =  Plan.elementAt(0).toString() 
+		   	Plan        =  Plan.removePrefix(CurMoveTodo)
+		   }else CurMoveTodo = ""		   
+		#]
+		//println("$name | CurMoveTodo= $CurMoveTodo remain:$Plan" ) 
+		forward planexec -m nextmove : nextmove($CurMoveTodo)
+	} 	 
+	Transition t0  whenEvent alarm   -> planinterruptedalarm
+		           whenMsg nextmove  -> doMove
+	
+	
+	
+	State doMove{
+		//println("$name | domove $CurMoveTodo")  
+ 		if [# CurMoveTodo == "" #] { 
+ 			forward planexec -m nomoremove : nomoremove(end)
+ 		}
+		else{ if [# CurMoveTodo == "w" #] {
+	 			delay 300  //avoid too fast ...
+	 			request basicrobot -m step : step($StepTime)	//mentre fa doplan ...		
+			}else{
+				//println("$name | doMoveTurn $CurMoveTodo")  
+				run uniborobots.robotSupport.move(  CurMoveTodo )
+				forward planexec -m nextmove : nextmove(goon)
+			}
+		}
+ 	}
+	Transition t0  whenEvent alarm     -> planinterruptedalarm
+	               whenMsg nomoremove  -> planend
+	               whenMsg nextmove    -> nextMove 
+	               whenReply stepdone   -> nextMove 
+	               whenReply stepfailed -> planinterruptedobstacle
+
+ 	
+	State planend{ 
+		//printCurrentMessage color red
+		if [# currentMsg.msgContent() == "alarm(disengaged)" #]{}
+		else{ 
+			if [# currentMsg.msgId() == "alarm" #]{
+		 		println("$name |  planend alarm $Plan $CurMoveTodo")	 
+		 		[# val Plantodo = CurMoveTodo + Plan #]
+		 		replyTo doplan with doplanfailed : doplanfailed( $Plantodo )			
+			}else{ 
+				println("$name | planend ok plan=$PlanOrig ") color blue
+				replyTo doplan with doplandone : doplandone($PlanOrig)
+				updateResource [# "plandone($PlanOrig)" #] 
+			}
+		}
+	}
+	Goto work
+	
+	State planinterruptedobstacle{  
+		//printCurrentMessage
+ 		println("$name |  planinterruptedobstacle $CurMoveTodo ")	color magenta
+ 		[# var Plantodo =  CurMoveTodo + Plan
+ 		#]
+ 		updateResource [# "planfailed($Plan,$Plantodo )" #] 
+ 		replyTo doplan with doplanfailed : doplanfailed( $Plantodo )
+ 	}	
+ 	Goto work 
+ 	
+ 	State planinterruptedalarm{  
+		//printCurrentMessage
+ 		println("$name |  planinterruptedalarm $CurMoveTodo ")	color magenta
+ 		[# var Plantodo = CurMoveTodo + Plan
+ 		#]
+ 		updateResource [# "planfailed($PlanOrig,$Plantodo )" #] 
+ 		replyTo doplan with doplanfailed : doplanfailed( $Plantodo )
+ 	}	
+ 	Goto work 
+}
+
+/*
+ * ------------------------------
+ * robotpos
+ * ------------------------------
+ */
+
+QActor robotpos context ctxbasicrobot{
+	[# val planner = unibo.planner23.Planner23Util()
+	    val MapName = "mapCompleteWithObst23ok"
+	    val MyName    = name 
+	    var StepTime  = "400"
+		var Plan      = ""	
+		var TargetX   = ""
+		var TargetY   = ""
+		var X         = ""
+		var Y         = ""
+		var D         = ""
+	#]
+	
+	State s0 initial{
+        println("$name STARTS loading $MapName") 
+		[# planner.initAI()  
+		   planner.loadRoomMap(MapName) 
+		   planner.showMap()
+		#]
+	}
+	Goto waitclientrequest
+ 	
+             
+	State waitclientrequest{
+		println("$name | waiting the client request...")
+	}              
+	Transition t0 whenRequest getrobotstate -> getRobotState
+				  whenRequest moverobot -> planTheRobotmoves //elabClientRequest
+				  whenMsg setrobotstate -> setTheRobotState  //setTheRobotState
+				  whenMsg setdirection  -> setTheDirection  //setTheRobotState
+
+
+
+    State getRobotState{
+    	[# val PX   = planner.getPosX() 
+    		val PY  = planner.getPosY()
+    		val DIR = ""+planner.getDir()
+    	#]
+    	replyTo getrobotstate with robotstate : robotstate(pos($PX,$PY),$DIR)
+    }
+    Goto waitclientrequest
+    
+    
+    State setTheDirection{
+ 		onMsg(setdirection : dir( D )){
+			[# D       = payloadArg(0)
+				#]						 
+		}
+    	
+    	[# Plan = planner.setTheDirection(D) #]  
+    	request planexec -m doplan : doplan( $Plan, $StepTime )
+    }
+ 	Transition t0 whenReply doplandone   -> planfordirok
+	              whenReply doplanfailed -> fatalerror
+    
+    State planfordirok{
+		[# planner.doPathOnMap(Plan) #]
+		[# planner.showCurrentRobotState(); #]
+		updateResource [# planner.robotOnMap() #] 
+	}
+	Goto waitclientrequest
+    
+    State fatalerror{
+    	println("fatalerror ") color red
+    }
+    Goto waitclientrequest
+    
+    
+	
+    State setTheRobotState	{
+		onMsg(setrobotstate : setpos(X,Y,D)){
+			[# X = payloadArg(0)
+			   Y = payloadArg(1)
+			   D = payloadArg(2)
+			#]			 
+		}
+		
+		[# planner.setRobotState(X,Y,D) #]
+		//println("setTheRobotState ($X, $Y, $D) ") color magenta
+		[# planner.showCurrentRobotState(); #]	 
+		delay 300 
+		//println("update resource for setTheRobotState") color magenta  
+		updateResource [# planner.robotOnMap() #] 
+	} 
+	Goto waitclientrequest
+	
+	
+	
+    State planTheRobotmoves{
+		onMsg( moverobot : moverobot(X,Y)){
+			[# TargetX = payloadArg(0)
+			   TargetY = payloadArg(1)
+		    #]
+		}
+		
+		[#  
+		   Plan = planner.planForGoal(""+TargetX,""+TargetY).toString()
+		   println("planTheRobotmoves $Plan")
+		   Plan = planner.planCompacted(Plan) 
+		   if( Plan.isEmpty()) Plan="''"
+		#]
+		println("$name | Plan to reach pos: $Plan")  color blue
+		//chiedo al basicrobot di eseguire  Plan
+		request planexec -m doplan : doplan($Plan,  $StepTime)
+	}
+	Transition t0 whenReply doplandone   -> endok
+	              whenReply doplanfailed -> endko
+	  
+	State endok{
+		//println("pos reached") 
+		//Aggiorno il path sulla mappa
+		[# planner.doPathOnMap(Plan) #]
+		[# planner.showCurrentRobotState(); #]
+		updateResource [# planner.robotOnMap() #] 
+		replyTo moverobot with moverobotdone : moverobotdone(ok)
+	}
+	Goto waitclientrequest
+	
+	State endko{
+		onMsg( doplanfailed : doplanfailed(ARG) ){
+			[# val PathTodo = payloadArg(0) #]
+			println("pos NOT reached - PathTodo = ${PathTodo} vs. $Plan") color red			 
+			[#   var PathDone = Plan.substring(0, Plan.lastIndexOf(PathTodo)+1)
+				 if( PathDone == "" ) PathDone ="n"				 
+				 else planner.doPathOnMap(PathDone)
+			#]
+			updateResource [# planner.robotOnMap() #]
+			//println(" ${PathDone}") 
+			//[# planner.doPathOnMap(PathDone) #]
+			[# planner.showCurrentRobotState(); #]
+			replyTo moverobot with moverobotfailed : moverobotfailed($PathDone,$PathTodo)
+		}
+	}
+	Goto waitclientrequest
+	
+}
+

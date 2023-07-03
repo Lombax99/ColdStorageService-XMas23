@@ -1,0 +1,2 @@
+{"actor":"coldroom", "msgType":"dispatch", "curstate":"s0", "nextstate":"updateWeight", "msgId":"updateWeight"}
+{"actor":"coldroom", "msgType":"dispatch", "curstate":"updateWeight", "nextstate":"updateWeight", "msgId":"updateWeight"}
