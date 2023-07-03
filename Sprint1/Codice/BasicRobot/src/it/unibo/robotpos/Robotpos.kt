@@ -169,7 +169,7 @@ class Robotpos ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								 val PathTodo = payloadArg(0)  
 								CommUtils.outred("pos NOT reached - PathTodo = ${PathTodo} vs. $Plan")
-								   var PathDone = Plan.substring(0, Plan.lastIndexOf(PathTodo))
+								   var PathDone = Plan.substring(0, Plan.lastIndexOf(PathTodo)+1)
 												 if( PathDone == "" ) PathDone ="n"				 
 												 else planner.doPathOnMap(PathDone)
 								updateResourceRep( planner.robotOnMap()  

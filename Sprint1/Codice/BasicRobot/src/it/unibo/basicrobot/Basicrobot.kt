@@ -89,7 +89,6 @@ class Basicrobot ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 						}
 						StartTime = getCurrentTime()
 						 StepSynchRes = uniborobots.robotSupport.dostep( StepTime )
-							    	 
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
@@ -119,14 +118,7 @@ class Basicrobot ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 						Duration = getDuration(StartTime)
 						uniborobots.robotSupport.move( "h"  )
 						 var TunedDuration   = StepTime - ((Duration * 0.80)).toLong()    
-						if(  TunedDuration > 30  
-						 ){uniborobots.robotSupport.move( "s"  )
-						delay(TunedDuration)
-						uniborobots.robotSupport.move( "h"  )
-						updateResourceRep( "stepFail($Duration)"  
-						)
-						delay(300) 
-						}
+						CommUtils.outmagenta("basicrobot | stepKo $StepTime  duration=$Duration  TunedDuration=$TunedDuration")
 						answer("step", "stepfailed", "stepfailed($Duration,obst)"   )  
 						//genTimer( actor, state )
 					}

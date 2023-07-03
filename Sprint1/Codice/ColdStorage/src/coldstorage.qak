@@ -19,6 +19,7 @@ ExternalQActor transporttrolley context ctxbasicrobot
 
 
 QActor controller context ctxcoldstoragearea {
+
 	
 	State s0 initial {
 		printCurrentMessage
@@ -27,11 +28,12 @@ QActor controller context ctxcoldstoragearea {
 	
 	State mockRequest {
 		[#
-			var KG = 10			
+			var KG = 10	
+			
 		#]
 		printCurrentMessage
 		forward transporttrolley -m doJob : doJob($KG)
-	} Transition repeat whenTime 20000 -> mockRequest
+	} Transition repeat whenTime 15000 -> mockRequest
 }
 
 

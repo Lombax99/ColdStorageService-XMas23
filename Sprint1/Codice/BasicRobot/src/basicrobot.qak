@@ -190,7 +190,6 @@ QActor basicrobot context ctxbasicrobot{
 	  	}  
 	    memoCurrentTime StartTime  
 	    [# StepSynchRes = uniborobots.robotSupport.dostep( StepTime )
-	    	 
 	    	#]          
 	}  	
 	Goto stepok if [# StepSynchRes #] else stepKo 
@@ -212,8 +211,8 @@ QActor basicrobot context ctxbasicrobot{
 		
 		run uniborobots.robotSupport.move( "h" )  //stop the (real) robot
 		[# var TunedDuration   = StepTime - ((Duration * 0.80)).toLong()   #]
-		//println("basicrobot | stepKo $StepTime  duration=$Duration  TunedDuration=$TunedDuration") color magenta
-					
+		println("basicrobot | stepKo $StepTime  duration=$Duration  TunedDuration=$TunedDuration") color magenta
+		/* 			
 		if [# TunedDuration > 30 #]{ 
 			
 			//torna indietro
@@ -222,7 +221,7 @@ QActor basicrobot context ctxbasicrobot{
 			run uniborobots.robotSupport.move( "h" ) 
 		 	updateResource [# "stepFail($Duration)" #] 
 	 		delay 300
-		}
+		}*/
 		replyTo step with stepfailed : stepfailed($Duration, obst)
 	 	
     } 
@@ -476,7 +475,7 @@ QActor robotpos context ctxbasicrobot{
 		onMsg( doplanfailed : doplanfailed(ARG) ){
 			[# val PathTodo = payloadArg(0) #]
 			println("pos NOT reached - PathTodo = ${PathTodo} vs. $Plan") color red			 
-			[#   var PathDone = Plan.substring(0, Plan.lastIndexOf(PathTodo))
+			[#   var PathDone = Plan.substring(0, Plan.lastIndexOf(PathTodo)+1)
 				 if( PathDone == "" ) PathDone ="n"				 
 				 else planner.doPathOnMap(PathDone)
 			#]
