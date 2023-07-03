@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Cold Storage Service - Natali.md",
+                "file": "Sprint2/Doc/Sprint 2.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Cold Storage Service - Natali.md",
+                "file": "Sprint2/Doc/Sprint 2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Cold Storage Service - Natali.md",
+                "file": "Sprint2/Doc/Sprint 2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Cold Storage Service - Natali.md"
+                "file": "Sprint2/Doc/Sprint 2.md"
               }
             }
           }
@@ -148,8 +148,8 @@
   },
   "active": "2f4b0ace96e80799",
   "lastOpenFiles": [
-    "PrimaArchitettura.pdf",
     "Cold Storage Service - Natali.md",
+    "PrimaArchitettura.pdf",
     "Sprint1/Doc/Sprint 1.md",
     "Sprint1/Doc/~$$ArchitetturaLogica_Sprint1.~vsdx",
     "Other/ColdStorageServiceRoomAnnoted.png",
@@ -162,7 +162,6 @@
     "Sprint1/Codice/BasicRobot/src/it/unibo/transporttrolley",
     "Sprint1/Codice/BasicRobot/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt",
     "Sprint1/Codice/BasicRobot/src/it/unibo/ctxcoldstoragearea",
-    "Sprint1/Codice/bin/uniborobots/WsServer.class",
     "README.md",
     "Sprint4/Doc/Sprint 4.md",
     "Sprint3/Doc/Sprint 3.md"
