@@ -13,9 +13,25 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Cold Storage Service - Natali.md",
                 "mode": "source",
                 "source": false
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "92931977afcd2bc9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "472f64af5b0cd72d",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "Sprint1/Doc/ArchitetturaLogica_Sprint1.pdf"
               }
             }
           }
@@ -85,7 +101,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Cold Storage Service - Natali.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Cold Storage Service - Natali.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +141,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md"
+                "file": "Cold Storage Service - Natali.md"
               }
             }
           }
@@ -148,11 +164,11 @@
   },
   "active": "2f4b0ace96e80799",
   "lastOpenFiles": [
+    "Sprint1/Doc/Sprint 1.md",
+    "Cold Storage Service - Natali.md",
+    "PrimaArchitettura.pdf",
     "Sprint1/Doc/ArchitetturaLogica_Sprint1.pdf",
     "Sprint2/Doc/Sprint 2.md",
-    "Sprint1/Doc/Sprint 1.md",
-    "PrimaArchitettura.pdf",
-    "Cold Storage Service - Natali.md",
     "Sprint1/codice-Sprint1",
     "Sprint1/Doc/~$$ArchitetturaLogica_Sprint1.~vsdx",
     "Sprint1/Codice/bin/unibolibs/unibonoawtsupports.jar",

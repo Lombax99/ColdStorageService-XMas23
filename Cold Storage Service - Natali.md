@@ -36,7 +36,7 @@ The story of the ColdStorageService can be summarized as follows:
     
 2. When the truck is at the INDOOR of the service, the driver uses the _ServiceAcessGUI_ to enter the ticket number and waits until the message **charge taken** (sent by the ColdStorageService) appears on the _ServiceAcessGUI_. At this point, the truck should leave the INDOOR.
     
-3. When the service accepts a ticket, the transport trolley reaches the INDOOR, picks up the food, sends the **charge taken** message and then goes to the ColdRoom to store the food.
+3. ==When the service accepts a ticket, the transport trolley reaches the INDOOR, picks up the food, sends the **charge taken** message and then goes to the ColdRoom to store the food.==
     
 4. When the deposit action is terminated, the transport trolley accepts another ticket (if any) or returns to HOME.
     
@@ -54,4 +54,7 @@ The story of the ColdStorageService can be summarized as follows:
 3) Led e Sonar [[Sprint 3]]
 4) Service Status Gui e grafica bellina [[Sprint 4]]
 
-
+- [ ] Primo schema logico dei soli requisiti
+- [ ] Scriviamo il motivo della divisione in sprint
+- [ ] e una valutazione dei tempi
+- [ ] divisione dei compiti, strategia e motivazioni
