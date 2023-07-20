@@ -50,6 +50,7 @@ Definizioni:
 	- Dobbiamo assicurarci che chi richiede il ticket sia l'unico a poterlo usare.
 	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy
 	- Fare in modo che un ticket non sia riutilizzabile? possibile DoS, usiamo ticket sequenziali?
+	- Fare in modo che la risposta ad una richiesta arrivi al camionista che l'ha mandata e solo a lui anche se la richiesta arriva da un dispositivo alieno.
 - Cosa succede se viene fatta una richiesta mentre le prime non sono ancora state scaricate?
 	potrebbe venire accettata anche se dovrebbe essere rifiutata, per risolvere il problema definiamo due pesi diversi: 
 	1) Un peso ipotetico che indica il peso ottenuto completate tutte le richieste.
@@ -66,6 +67,21 @@ Definizioni:
 
 - [ ] facciamo uno schemino che fa per bene tutti i passaggi nello scambio dei messaggi 
 
-
-
-
+NEW:
+Dobbiamo decidere chi si occupa di controllare se il ticket è scaduto:
+- opz1: controller --> perchè?
+- opz2: gestoreTicket (chi ha emesso il ticket) --> perchè?
+	- principio di singola responsabilità
+	- problemi di sicurezza
+	- problemi di parallelismo
+- ciclo di vita dei messaggi al camionista?
+	- emetto il ticket
+	- arrivo --> ticket valido
+	- send "load done" (request/responce mi garantisce di rispondere alla persona giusta)
+	- recive "charge taken"
+	- poi il robot lavora
+	- il camion se ne và quando ricceve charge taken o quando riceve job done?
+NOTE: ha senso che il camionista se ne vada quando riceve "charge taken", non è compito del camionista gestire il caso in cui il robottino ha avuto dei problemi.
+Altra domanda: chi manda al camionista il messaggio "charge taken"?
+Quando mando la doJob al Robot da parte del controller, poichè sto lavorando con request/responce posso anche mandare al camionista la "charge taken", di conseguenza può essere il controller a mandare il messaggio (e posso anche gestire un minimo di sicurezza... da ragionare meglio su questo aspetto)
+==chiediamo  natali per conferma==

@@ -54,7 +54,9 @@ The story of the ColdStorageService can be summarized as follows:
 3) Led e Sonar [[Sprint 3]]
 4) Service Status Gui e grafica bellina [[Sprint 4]]
 
-- [ ] Primo schema logico dei soli requisiti
-- [ ] Scriviamo il motivo della divisione in sprint
-- [ ] e una valutazione dei tempi
+- [ ] Primo schema logico dei soli requisiti (non con le modifiche mandate per email)
+- [ ] Scriviamo il motivo della divisione in sprint 
+- [ ] e una valutazione dei tempi 
 - [ ] divisione dei compiti, strategia e motivazioni
+
+

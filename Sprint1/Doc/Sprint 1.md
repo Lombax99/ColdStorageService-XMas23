@@ -64,3 +64,11 @@ Definizioni:
 - Quando controlla il TransportTrolley se ci sono altre richieste?
 	Appena scarica, prima di tornare in home, come da requisiti (o se è in home)
 
+News:
+- Far sapere al controller cosa sta facendo il robottino
+	- Ho sbattuto mi sono perso help me please
+	- Megachad finto di fare il mio lavoro correttamente e pronto per continuare
+- Dobbiamo fare in modo che il robot possa fare più giri
+	- è il robot a sapere quanto peso può trasportare e quindi ha senso dire che deve essere il robot a decidere quanti giri fare in base al peso che deve essere scaricato
+- Driver Distratto?
+	- problema del peso ipotetico: dato che comunque ad ogni nuova richiesta cicliamo per vedere se ci sono ticket scaduti, tanto vale usare solo il peso effettivo e aggiungere la somma dello spazio promesso nei ticket ancora non riscattati.

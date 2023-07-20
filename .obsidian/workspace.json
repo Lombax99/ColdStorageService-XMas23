@@ -13,13 +13,38 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "Sprint1/Doc/Sprint 1.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "7a20fb0533d05f9f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "Cold Storage Service - Natali.md",
                 "mode": "source",
                 "source": false
               }
             }
+          },
+          {
+            "id": "9e55734c700d1b66",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Sprint2/Doc/Sprint 2.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "92931977afcd2bc9",
@@ -34,8 +59,19 @@
                 "file": "Sprint1/Doc/ArchitetturaLogica_Sprint1.pdf"
               }
             }
+          },
+          {
+            "id": "1b4dbe0ef40311c0",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "PrimaArchitettura.pdf"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +121,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "0cbe7cb15f361292",
@@ -162,13 +199,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2f4b0ace96e80799",
+  "active": "7a20fb0533d05f9f",
   "lastOpenFiles": [
-    "Sprint1/Doc/Sprint 1.md",
-    "Cold Storage Service - Natali.md",
     "PrimaArchitettura.pdf",
-    "Sprint1/Doc/ArchitetturaLogica_Sprint1.pdf",
+    "Cold Storage Service - Natali.md",
+    "Sprint1/Doc/Sprint 1.md",
     "Sprint2/Doc/Sprint 2.md",
+    "Sprint1/Doc/ArchitetturaLogica_Sprint1.pdf",
     "Sprint1/codice-Sprint1",
     "Sprint1/Doc/~$$ArchitetturaLogica_Sprint1.~vsdx",
     "Sprint1/Codice/bin/unibolibs/unibonoawtsupports.jar",
