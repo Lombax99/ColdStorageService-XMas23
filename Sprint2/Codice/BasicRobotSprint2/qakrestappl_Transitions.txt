@@ -1,6 +1,4 @@
 {"actor":"transporttrolley", "msgType":"dispatch", "curstate":"s0", "nextstate":"work", "msgId":"robotready"}
-{"actor":"transporttrolley", "msgType":"dispatch", "curstate":"work", "nextstate":"arrival", "msgId":"doJob"}
-{"actor":"transporttrolley", "msgType":"dispatch", "curstate":"waitforjob", "nextstate":"arrival", "msgId":"doJob"}
 {"actor":"basicrobot", "msgType":"dispatch", "curstate":"work", "nextstate":"execcmd", "msgId":"cmd"}
 {"actor":"basicrobot", "msgType":"dispatch", "curstate":"work", "nextstate":"endwork", "msgId":"end"}
 {"actor":"planexec", "msgType":"dispatch", "curstate":"nextMove", "nextstate":"doMove", "msgId":"nextmove"}

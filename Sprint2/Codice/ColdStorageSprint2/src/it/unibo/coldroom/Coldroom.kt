@@ -30,7 +30,7 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="update1",targetState="updateWeight",cond=whenDispatch("updateWeight"))
+					 transition(edgeName="update3",targetState="updateWeight",cond=whenDispatch("updateWeight"))
 				}	 
 				state("updateWeight") { //this:State
 					action { //it:State
@@ -47,7 +47,7 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="update2",targetState="updateWeight",cond=whenDispatch("updateWeight"))
+					 transition(edgeName="update4",targetState="updateWeight",cond=whenDispatch("updateWeight"))
 				}	 
 			}
 		}

@@ -24,6 +24,6 @@ with Diagram('coldstorage2Arch', show=False, outformat='png', graph_attr=graphat
           coldroom=Custom('coldroom','./qakicons/symActorSmall.png')
      with Cluster('ctxbasicrobot', graph_attr=nodeattr):
           transporttrolley=Custom('transporttrolley(ext)','./qakicons/externalQActor.png')
-     controller >> Edge(color='blue', style='solid', xlabel='doJob', fontcolor='blue') >> transporttrolley
+     controller >> Edge(color='magenta', style='solid', xlabel='doJob', fontcolor='magenta') >> transporttrolley
      controller >> Edge(color='blue', style='solid', xlabel='updateWeight', fontcolor='blue') >> coldroom
 diag

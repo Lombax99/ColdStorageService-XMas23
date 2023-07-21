@@ -19,6 +19,8 @@ class Transporttrolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
 			var Peso = 0
+				var CapienzaRobot = 5
+				var Giridafare = 0
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
@@ -38,25 +40,35 @@ class Transporttrolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="startworking1",targetState="arrival",cond=whenDispatch("doJob"))
+					 transition(edgeName="startworking1",targetState="startjob",cond=whenRequest("doJob"))
 				}	 
-				state("arrival") { //this:State
+				state("startjob") { //this:State
 					action { //it:State
-						CommUtils.outgreen("arrival")
 						if( checkMsgContent( Term.createTerm("doJob(KG)"), Term.createTerm("doJob(KG)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
-								 Peso = payloadArg(0).toInt() 
+								 Peso = payloadArg(0).toInt()
+												Giridafare = Math.ceil(Peso.toDouble() / CapienzaRobot.toDouble()).toInt()
 								CommUtils.outgreen("peso ricevuto: $Peso")
-								request("moverobot", "moverobot(0,4)" ,"robotpos" )  
+								CommUtils.outgreen("giri da fare: $Giridafare")
 						}
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="gofetch2",targetState="coldroom",cond=whenReply("moverobotdone"))
+					 transition( edgeName="goto",targetState="movingtoarrival", cond=doswitch() )
 				}	 
-				state("coldroom") { //this:State
+				state("movingtoarrival") { //this:State
+					action { //it:State
+						request("moverobot", "moverobot(0,4)" ,"robotpos" )  
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition(edgeName="gofetch2",targetState="movingtocoldroom",cond=whenReply("moverobotdone"))
+				}	 
+				state("movingtocoldroom") { //this:State
 					action { //it:State
 						request("moverobot", "moverobot(5,3)" ,"robotpos" )  
 						//genTimer( actor, state )
@@ -64,10 +76,25 @@ class Transporttrolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="godrop3",targetState="waitforjob",cond=whenReply("moverobotdone"))
+					 transition(edgeName="godrop3",targetState="checkforjob",cond=whenReply("moverobotdone"))
+				}	 
+				state("checkforjob") { //this:State
+					action { //it:State
+							Giridafare -= 1
+						CommUtils.outblack("giro completato, mancano $Giridafare giri")
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition( edgeName="goto",targetState="waitforjob", cond=doswitchGuarded({	Giridafare == 0   
+					}) )
+					transition( edgeName="goto",targetState="movingtoarrival", cond=doswitchGuarded({! (	Giridafare == 0   
+					) }) )
 				}	 
 				state("waitforjob") { //this:State
 					action { //it:State
+						answer("doJob", "jobdone", "jobdone(1)"   )  
 						CommUtils.outgreen("transporttrolley ! aspetto")
 						//genTimer( actor, state )
 					}
@@ -76,10 +103,10 @@ class Transporttrolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 				 	 		stateTimer = TimerActor("timer_waitforjob", 
 				 	 					  scope, context!!, "local_tout_transporttrolley_waitforjob", 3000.toLong() )
 					}	 	 
-					 transition(edgeName="gofetchagain4",targetState="gohome",cond=whenTimeout("local_tout_transporttrolley_waitforjob"))   
-					transition(edgeName="gofetchagain5",targetState="arrival",cond=whenDispatch("doJob"))
+					 transition(edgeName="gofetchagain4",targetState="goinghome",cond=whenTimeout("local_tout_transporttrolley_waitforjob"))   
+					transition(edgeName="gofetchagain5",targetState="startjob",cond=whenRequest("doJob"))
 				}	 
-				state("gohome") { //this:State
+				state("goinghome") { //this:State
 					action { //it:State
 						CommUtils.outgreen("going home")
 						request("moverobot", "moverobot(0,0)" ,"robotpos" )  
@@ -90,14 +117,6 @@ class Transporttrolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 					sysaction { //it:State
 					}	 	 
 					 transition( edgeName="goto",targetState="work", cond=doswitch() )
-				}	 
-				state("workprova") { //this:State
-					action { //it:State
-						//genTimer( actor, state )
-					}
-					//After Lenzi Aug2002
-					sysaction { //it:State
-					}	 	 
 				}	 
 			}
 		}

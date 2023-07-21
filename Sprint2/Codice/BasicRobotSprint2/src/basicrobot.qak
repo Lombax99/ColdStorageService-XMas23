@@ -1,8 +1,9 @@
 System /* -trace -msglog  */ basicrobot2
 
 
-Dispatch doJob : doJob(KG)
-Dispatch updateWeight : updateWeight(PESO)
+Request doJob : doJob(KG)
+Reply jobdone : jobdone(NO_PARAM)
+Reply robotDead : robotDead(NO_PARAM)
 
 
 /*basic robot */
@@ -48,6 +49,8 @@ ExternalQActor coldroom context ctxcoldstoragearea
 
 QActor transporttrolley context ctxbasicrobot{
 	[#	var Peso = 0
+		var CapienzaRobot = 5
+		var Giridafare = 0
 		#]
 	State s0 initial{
 		forward robotpos -m setrobotstate : setpos(0,0,down)//home
@@ -57,34 +60,42 @@ QActor transporttrolley context ctxbasicrobot{
 	
 	State work{
 		println("robot ! waiting") color green
-	}Transition startworking whenMsg doJob -> arrival
-	//Goto arrival
-	
-	
-	State arrival{
-		println("arrival") color green
-		
-		onMsg(doJob : doJob(KG)) {
-			[# Peso = payloadArg(0).toInt() 
+	}Transition startworking whenRequest doJob -> startjob
+
+	State startjob{
+		onMsg(doJob : doJob( KG )){
+			[# Peso = payloadArg(0).toInt()
+				Giridafare = Math.ceil(Peso.toDouble() / CapienzaRobot.toDouble()).toInt()
 				#]
 			println("peso ricevuto: $Peso") color green
-			request robotpos -m moverobot : moverobot(0,4) //arrival
-		}	
-		
-	} Transition gofetch whenReply moverobotdone -> coldroom
+			println("giri da fare: $Giridafare") color green
+		}
+	}Goto movingtoarrival
 	
-	State coldroom{
+	
+	State movingtoarrival{
+		request robotpos -m moverobot : moverobot(0,4) //arrival	
+	} Transition gofetch whenReply moverobotdone -> movingtocoldroom
+	
+	State movingtocoldroom{
 		request robotpos -m moverobot : moverobot(5,3)  //coldroom
-	} Transition godrop whenReply moverobotdone -> waitforjob
+	} Transition godrop whenReply moverobotdone -> checkforjob
 	
+	State checkforjob {
+		[#	Giridafare -= 1
+			#]
+			println("giro completato, mancano $Giridafare giri")
+	} Goto waitforjob if [#	Giridafare == 0  #] else movingtoarrival
+			
 	State waitforjob {
+		replyTo doJob with jobdone : jobdone( 1 )
 		println("transporttrolley ! aspetto") color green
 	} Transition gofetchagain 
-			whenTime 3000 -> gohome
-			whenMsg doJob -> arrival
+			whenTime 3000 -> goinghome
+			whenRequest doJob -> startjob
 			
 			
-	State gohome{
+	State goinghome{
 		println("going home") color green
 		request robotpos -m moverobot : moverobot(0,0)		//home
 		forward robotpos -m setdirection : dir(down)
@@ -92,14 +103,6 @@ QActor transporttrolley context ctxbasicrobot{
 	
 	
 
-	State workprova{
-		//request basicrobot -m doplan : doplan(wwwwwwwwwwwww,200)
-		
-
-		//request robotpos -m moverobot : moverobot(0,4) //arrival
-		//request robotpos -m moverobot : moverobot(0,0)		//home
-		//forward robotpos -m setdirection : dir(down)
-	}
 	
 	
 }
