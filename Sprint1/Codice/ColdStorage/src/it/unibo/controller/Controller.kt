@@ -18,6 +18,7 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 	}
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
+		 var KG = 0
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
@@ -33,20 +34,40 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 				state("mockRequest") { //this:State
 					action { //it:State
 						
-									var KG = 10	
+									KG = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
 									
 						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
 						 	   
-						forward("doJob", "doJob($KG)" ,"transporttrolley" ) 
+						request("doJob", "doJob($KG)" ,"transporttrolley" )  
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition(edgeName="endjob0",targetState="handlerobotdead",cond=whenReply("robotDead"))
+					transition(edgeName="endjob1",targetState="jobdone",cond=whenReply("jobdone"))
+				}	 
+				state("jobdone") { //this:State
+					action { //it:State
 						forward("updateWeight", "updateWeight($KG)" ,"coldroom" ) 
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
-				 	 		stateTimer = TimerActor("timer_mockRequest", 
-				 	 					  scope, context!!, "local_tout_controller_mockRequest", 15000.toLong() )
+				 	 		stateTimer = TimerActor("timer_jobdone", 
+				 	 					  scope, context!!, "local_tout_controller_jobdone", 15000.toLong() )
 					}	 	 
-					 transition(edgeName="repeat0",targetState="mockRequest",cond=whenTimeout("local_tout_controller_mockRequest"))   
+					 transition(edgeName="repeat2",targetState="mockRequest",cond=whenTimeout("local_tout_controller_jobdone"))   
+				}	 
+				state("handlerobotdead") { //this:State
+					action { //it:State
+						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
+						 	   
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
 				}	 
 			}
 		}

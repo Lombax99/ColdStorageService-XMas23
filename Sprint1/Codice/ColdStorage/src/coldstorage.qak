@@ -2,10 +2,13 @@ System coldstorage
 
 //-----------------------------------------------------------------------
 
-Dispatch doJob : doJob(KG)
+Request doJob : doJob(KG)
+Reply jobdone : jobdone(NO_PARAM)
+Reply robotDead : robotDead(NO_PARAM)
+
 Dispatch updateWeight : updateWeight(PESO)
 
-Event robotDead : robotDead(NO_PARAM)
+
 
 //-----------------------------------------------------------------------
 
@@ -18,9 +21,13 @@ Context ctxbasicrobot ip [host="127.0.0.1" port=8020]
 ExternalQActor transporttrolley context ctxbasicrobot
 
 
+
+
 QActor controller context ctxcoldstoragearea {
 
-	
+	[# var KG = 0
+		#]
+		
 	State s0 initial {
 		printCurrentMessage
 		}
@@ -28,13 +35,23 @@ QActor controller context ctxcoldstoragearea {
 	
 	State mockRequest {
 		[#
-			var KG = 10	
+			KG = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
 			
 		#]
 		printCurrentMessage
-		forward transporttrolley -m doJob : doJob($KG)
+		request transporttrolley -m doJob : doJob($KG)
+		
+	} Transition endjob whenReply robotDead -> handlerobotdead
+						whenReply jobdone -> jobdone
+	
+	State jobdone{
 		forward coldroom -m updateWeight : updateWeight($KG)
+		//ChargeTaken
 	} Transition repeat whenTime 15000 -> mockRequest
+	
+	State handlerobotdead{
+		printCurrentMessage
+	}
 }
 
 
