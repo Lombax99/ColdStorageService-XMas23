@@ -74,16 +74,20 @@ Dobbiamo decidere chi si occupa di controllare se il ticket è scaduto:
 	- principio di singola responsabilità
 	- problemi di sicurezza
 	- problemi di parallelismo
+- Driver Distratto?
+	- problema del peso ipotetico: dato che comunque ad ogni nuova richiesta cicliamo per vedere se ci sono ticket scaduti, tanto vale usare solo il peso effettivo e aggiungere la somma dello spazio promesso nei ticket ancora non riscattati.
+	- Poichè il peso ipotetico deve essere sempre visibile nella GUI, io ho bisogno di venere in ColdRoom sia il peso ipotetico che quello effettivo, questo vuol dire anche che quando il robot finisce il lavoro devo aggiornare sia il peso effettivo sia il peso ipotetico di ColdRoom, i cazzi arrivano quando il peso dichiarato nel ticket e il peso dichiarato in "load done" sono diversi.
 - ciclo di vita dei messaggi al camionista?
 	- emetto il ticket
 	- arrivo --> ticket valido
-	- send "load done" (request/responce mi garantisce di rispondere alla persona giusta)
+	- send "load done" (request/response mi garantisce di rispondere alla persona giusta)
 	- recive "charge taken"
 	- poi il robot lavora
-	- il camion se ne và quando ricceve charge taken o quando riceve job done?
+	- il camion se ne và quando riceve charge taken o quando riceve job done?
 NOTE: ha senso che il camionista se ne vada quando riceve "charge taken", non è compito del camionista gestire il caso in cui il robottino ha avuto dei problemi.
 Altra domanda: chi manda al camionista il messaggio "charge taken"?
 Quando mando la doJob al Robot da parte del controller, poichè sto lavorando con request/responce posso anche mandare al camionista la "charge taken", di conseguenza può essere il controller a mandare il messaggio (e posso anche gestire un minimo di sicurezza... da ragionare meglio su questo aspetto)
+<<<<<<< HEAD
 ==chiediamo  natali per conferma==
 
 
@@ -95,3 +99,6 @@ Quando mando la doJob al Robot da parte del controller, poichè sto lavorando co
 
 
 da aggiungere diagramma ciclo di vita ticket
+=======
+==chiediamo natali per conferma==
+>>>>>>> 73303ae15871ebcaa906e7aaecb4a7e1545393e3

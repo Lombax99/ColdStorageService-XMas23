@@ -63,6 +63,7 @@ Definizioni:
 	La mappatura della stanza viene fatta al momento dell'avviamento del DDR robot, prima di leggere qualsiasi richiesta dal controller.
 - Quando controlla il TransportTrolley se ci sono altre richieste?
 	Appena scarica, prima di tornare in home, come da requisiti (o se è in home)
+- Il robot ha un peso massimo trasportabile, il carico dal camion può essere maggiore del peso trasportabile del robot.
 
 News:
 - Far sapere al controller cosa sta facendo il robottino
