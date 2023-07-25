@@ -4,22 +4,6 @@
     "type": "split",
     "children": [
       {
-        "id": "b52886b9b7ddaba2",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "2f4b0ace96e80799",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "PrimaArchitettura.pdf"
-              }
-            }
-          }
-        ]
-      },
-      {
         "id": "0745c15c97446c5d",
         "type": "tabs",
         "children": [
@@ -34,8 +18,31 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "1520998d8585fa56",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "PrimaArchitettura.pdf"
+              }
+            }
+          },
+          {
+            "id": "322b083967c566f2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Cold Storage Service - Natali.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -85,7 +92,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "0cbe7cb15f361292",
@@ -101,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Cold Storage Service - Natali.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +125,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Cold Storage Service - Natali.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -141,7 +148,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md"
+                "file": "Cold Storage Service - Natali.md"
               }
             }
           }
@@ -162,28 +169,28 @@
       "command-palette:Apri riquadro comandi": false
     }
   },
-  "active": "70fa674c4683f90a",
+  "active": "322b083967c566f2",
   "lastOpenFiles": [
-    "Sprint2/Doc/~$$ArchitetturaLogica_Sprint2.~vsdx",
-    "Sprint2/Doc/ArchitetturaLogica_Sprint2.vsdx",
+    "Architettura_Sprint0.png",
     "PrimaArchitettura.pdf",
+    "Cold Storage Service - Natali.md",
     "Sprint2/Doc/Sprint 2.md",
+    "~$$Architettura_Sprint0.~vsdx",
+    "Architettura_Sprint0.vsdx",
+    "ArchitetturaLogica_Sprint2.vsdx",
+    "Sprint2/Doc/~$$ArchitetturaLogica_Sprint2.~vsdx",
+    "Other/ColdStorageServiceRoomAnnoted.png",
     "Sprint1/Doc/Sprint 1.md",
+    "README.md",
     "Sprint1/Doc/~$$ArchitetturaLogica_Sprint1.~vsdx",
+    "Sprint2/Doc/ArchitetturaLogica_Sprint2.vsdx",
     "Sprint3/Doc/Sprint 3.md",
     "Sprint1/Doc/ArchitetturaLogica_Sprint1.pdf",
-    "Other/ColdStorageServiceRoomAnnoted.png",
-    "README.md",
     "Senza nome.canvas",
     "Senza nome 1.canvas",
     "2023-07-21.md",
-    "Cold Storage Service - Natali.md",
     "Sprint1/codice-Sprint1",
     "Sprint1/Codice/bin/unibolibs/unibonoawtsupports.jar",
-    "Sprint1/Codice/bin/unibolibs/uniboInterfaces.jar",
-    "Sprint1/Codice/bin/unibolibs/unibo.qakactor23-3.5.jar",
-    "Sprint1/Codice/bin/unibolibs/unibo.planner23-1.0.jar",
-    "Sprint1/Codice/bin/unibolibs/unibo.basicomm23-1.0.jar",
     "Sprint4/Doc/Sprint 4.md"
   ]
 }
