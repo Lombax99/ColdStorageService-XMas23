@@ -63,6 +63,7 @@ Definizioni:
 	La mappatura della stanza viene fatta al momento dell'avviamento del DDR robot, prima di leggere qualsiasi richiesta dal controller.
 - Quando controlla il TransportTrolley se ci sono altre richieste?
 	Appena scarica, prima di tornare in home, come da requisiti (o se è in home)
+- Il robot ha un peso massimo trasportabile, il carico dal camion può essere maggiore del peso trasportabile del robot.
 
 News:
 - Far sapere al controller cosa sta facendo il robottino
@@ -70,5 +71,4 @@ News:
 	- Megachad finto di fare il mio lavoro correttamente e pronto per continuare
 - Dobbiamo fare in modo che il robot possa fare più giri
 	- è il robot a sapere quanto peso può trasportare e quindi ha senso dire che deve essere il robot a decidere quanti giri fare in base al peso che deve essere scaricato
-- Driver Distratto?
-	- problema del peso ipotetico: dato che comunque ad ogni nuova richiesta cicliamo per vedere se ci sono ticket scaduti, tanto vale usare solo il peso effettivo e aggiungere la somma dello spazio promesso nei ticket ancora non riscattati.
+
