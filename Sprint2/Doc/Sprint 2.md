@@ -87,18 +87,8 @@ Dobbiamo decidere chi si occupa di controllare se il ticket è scaduto:
 NOTE: ha senso che il camionista se ne vada quando riceve "charge taken", non è compito del camionista gestire il caso in cui il robottino ha avuto dei problemi.
 Altra domanda: chi manda al camionista il messaggio "charge taken"?
 Quando mando la doJob al Robot da parte del controller, poichè sto lavorando con request/responce posso anche mandare al camionista la "charge taken", di conseguenza può essere il controller a mandare il messaggio (e posso anche gestire un minimo di sicurezza... da ragionare meglio su questo aspetto)
-<<<<<<< HEAD
 ==chiediamo  natali per conferma==
-
 
 - Driver Distratto?
 	- problema del peso ipotetico: dato che comunque ad ogni nuova richiesta cicliamo per vedere se ci sono ticket scaduti, tanto vale usare solo il peso effettivo e aggiungere la somma dello spazio promesso nei ticket ancora non riscattati.
-	- 
 
-
-
-
-da aggiungere diagramma ciclo di vita ticket
-=======
-==chiediamo natali per conferma==
->>>>>>> 73303ae15871ebcaa906e7aaecb4a7e1545393e3
