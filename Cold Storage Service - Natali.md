@@ -47,16 +47,46 @@ The story of the ColdStorageService can be summarized as follows:
     - the **current weigth** of the material stored in the ColdRoom;
     - the **number of store-requests rejected** since the start of the service.
 
+## Analisi del TF23
 
+Nelle discussioni con il committente, sono emerse alcune problematiche:
+- Il problema del load-time lungo.
+- Il problema del driver distratto (non coerente, rispetto alle due fasi: scarico preceduto da prenotazione).
+- Il problema del driver malevolo.
+- Il problema di garantire che una risposta venga sempre inviata sempre solo a chi ha fatto la richiesta, anche quando la richiesta è inviata da un ‘alieno’ come una pagine HTML
+
+### Il problema del load-time lungo
+Il problema del load-time lungo è stato affrontato da Arnaudo/Munari con l’idea di inviare due messaggi di ‘risposta’ (una per dire al driver che il ticket inviato è valido e una per inviare `chargeTaken`). A questo fine hanno fatto uso diretto della connessione TCP stabilita da una versione prototipale dell’accessGui fatta come GUI JAVA.
+Per consentire questa possibilità anche a livello di modellazione qak, in _ActorBasicFsm_ è stato introdotto il metodo storeCurrentRequest() che permette di ricordare la richiesta corrente (cancellata da una _replyTo_). Questo però è un trucco/meccanismo che potrebbe risultare pericoloso.
+Meglio affrontare il problema dal punto di vista logico, impostando una interazione a DUE-FASI tra driver e service (compito che può svolgere la _serviceAcessGui_).
+- FASE1: il driver invia il ticket e attenda una risposta (immediata) come ad esempio `ticketaccepted/ticketrejected`
+- FASE2: il driver invia la richiesta `loaddone` e attenda la risposta (`chargeTaken` o fallimento per cause legate al servizio)
+
+### Il problema del driver distratto
+Questo problema ha indotto il committente ad affermare che:
+quando un agente esterno (driver) invia il ticket per indurre il servizio a scaricare il truck, si SUPPPONE GARANTITO che il carico del truck sia UGUALE (o al più MINORE) del carico indicato nella prenotazione.
+Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore del carico effettivo sul Truck.
+
+#
 ### Divisione in Sprint
 1) Basic Robot + Controller e Cold Storage [[Sprint 1]]
 2) Gestione dei ticket: Fake SerAccGui + Cold Storage Service [[Sprint 2]]
 3) Led e Sonar [[Sprint 3]]
 4) Service Status Gui e grafica bellina [[Sprint 4]]
 
+### Divisione dei compiti
+Ogni Sprint verrà affrontato insieme con divisione dei compiti specifica valutata di volta in volta.
+
+### Valutazione dei tempi
+- Sprint 1 con primo esempio funzionante: 1 settimana
+- Sprint 2 completato e funzionante: entro la prima settimana di Agosto
+- Sprint 3: entro la fine di agosto
+- Sprint 4: entro metà settembre
+
+
 - [ ] Primo schema logico dei soli requisiti (non con le modifiche mandate per email)
-- [ ] Scriviamo il motivo della divisione in sprint 
-- [ ] e una valutazione dei tempi 
-- [ ] divisione dei compiti, strategia e motivazioni
+- [x] Scriviamo il motivo della divisione in sprint 
+- [x] e una valutazione dei tempi 
+- [x] divisione dei compiti, strategia e motivazioni
 
 
