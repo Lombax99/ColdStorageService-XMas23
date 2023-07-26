@@ -66,13 +66,25 @@ Meglio affrontare il problema dal punto di vista logico, impostando una interaz
 Questo problema ha indotto il committente ad affermare che:
 quando un agente esterno (driver) invia il ticket per indurre il servizio a scaricare il truck, si SUPPPONE GARANTITO che il carico del truck sia UGUALE (o al più MINORE) del carico indicato nella prenotazione.
 Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore del carico effettivo sul Truck.
-
 #
+
+### Analisi preliminare dei requisiti
+
+![[Architettura_Sprint0.png]]
+
+- per ==doJob==, ==weight==, ==Ticket== e ==RichiestaDeposito== abbiamo bisogno di risposta --> Req/Resp
+- ServiceStatusGui si comportarà come un ==Observer== [StreamQActor](C:/Users/lomba/Desktop/iss23/iss23Material/html/QakActors23.html) per aggiornarsi dinamicamente
+
+
 ### Divisione in Sprint
 1) Basic Robot + Controller e Cold Storage [[Sprint 1]]
+	Lo scopo del primo sprint è avere una prima versione del robot funzionante con la logica di gestione delle richieste a lui relative. Si tratta del core del progetto, senza quello il resto non ha motivo di esistere.
 2) Gestione dei ticket: Fake SerAccGui + Cold Storage Service [[Sprint 2]]
+	Nel secondo sprint implementeremo il sistema di ticketing, implementeremo una prima interfaccia utente solo per i test. Probabilmente la parte che richiederà più tempo, conviene farla prima di aggiungere led e sonar per non complicare la progettazione.
 3) Led e Sonar [[Sprint 3]]
+	Nel terzo sprint implementeremo il sistema di led e sonar con tutta la logica rimanente. Dovrebbe essere facilmente implementabile sopra a tutto quello che già è stato creato senza richiedere alcuna modifica.
 4) Service Status Gui e grafica bellina [[Sprint 4]]
+	L'ultimo sprint si occuperà della service status gui e delle interfacce grafiche finali. Potrebbe richiedere un refactoring parziale delle componenti da osservare, da tenere in considerazione durante lo sviluppo.
 
 ### Divisione dei compiti
 Ogni Sprint verrà affrontato insieme con divisione dei compiti specifica valutata di volta in volta.
@@ -84,7 +96,7 @@ Ogni Sprint verrà affrontato insieme con divisione dei compiti specifica valuta
 - Sprint 4: entro metà settembre
 
 
-- [ ] Primo schema logico dei soli requisiti (non con le modifiche mandate per email)
+- [x] Primo schema logico dei soli requisiti (non con le modifiche mandate per email)
 - [x] Scriviamo il motivo della divisione in sprint 
 - [x] e una valutazione dei tempi 
 - [x] divisione dei compiti, strategia e motivazioni
