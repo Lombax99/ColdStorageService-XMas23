@@ -22,18 +22,39 @@ A company intends to build a ColdStorageService, composed of a set of elements:
 Definizioni:
 `definire in modo più formale e comprensibile alla macchina`
 
-- ==Service Area==: Area rettangolare piana racchiusa entro quattro pareti. Procedendo dal bordo superiore e muovendoci in senso orario, i nomi delle pareti sono: wallUp, wallRight, wallDown, wallLeft. All'interno del Service Area il transport trolley è libero di muoversi. La stanza ha dimensione Lato-Lungo * lato-corto (L * l).
-- ==HOME==: Locazione all'interno della Service Area dove il transport trolley il trova rivolto verso il basso nell'angolo superiore sinistro. La Home è la zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste.
-- ==INDOOR port==: Locazione all'interno della Service Area in cui un camion si presenta per far caricare la merce al transport trolley. Si trova nell'angolo in basso a sinistra della Service Area.
-- ==ColdRoom Container==: Contenitore fisico posizionato all'interno della Service Area in una posizione fissa. In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg. ColdRoom Container rappresenta un ostacolo per il transport trolley, ciò vuol dire che non può muoversi nella posizione in cui l'elemento è localizzato. (mi interessa la coordinata per il software)
-- ==Porta della ColdRoom==: Lato del ColdRoom Container tramite li quale è possibile depositare il cibo. Corrisponde al lato del container rivolto verso il basso della Service Area. Il transport trolley dovrà posizionarsi davanti alla porta della ColdRoom per poter depositare al suo interno il cibo.
-- ==DDR robot==: *Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
-- ==Transport trolley==: DDR quadrato di lunghezza RD in grado di compiere i seguenti comandi: 
+##### ==Service Area==
+```
+Rettangolo di dimensione L*l
+```
+Area rettangolare piana racchiusa entro quattro pareti. Procedendo dal bordo superiore e muovendoci in senso orario, i nomi delle pareti sono: wallUp, wallRight, wallDown, wallLeft. All'interno del Service Area il transport trolley è libero di muoversi. La stanza ha dimensione Lato-Lungo * lato-corto (L * l).
+
+##### ==HOME==
+```
+
+```
+Locazione all'interno della Service Area dove il transport trolley il trova rivolto verso il basso nell'angolo superiore sinistro. La Home è la zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste.
+
+##### ==INDOOR port==
+Locazione all'interno della Service Area in cui un camion si presenta per far caricare la merce al transport trolley. Si trova nell'angolo in basso a sinistra della Service Area.
+
+##### ==ColdRoom Container==
+Contenitore fisico posizionato all'interno della Service Area in una posizione fissa. In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg. ColdRoom Container rappresenta un ostacolo per il transport trolley, ciò vuol dire che non può muoversi nella posizione in cui l'elemento è localizzato. (mi interessa la coordinata per il software)
+
+##### ==Porta della ColdRoom==
+Lato del ColdRoom Container tramite li quale è possibile depositare il cibo. Corrisponde al lato del container rivolto verso il basso della Service Area. Il transport trolley dovrà posizionarsi davanti alla porta della ColdRoom per poter depositare al suo interno il cibo.
+
+##### ==DDR robot==
+*Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
+
+##### ==Transport trolley==
+DDR quadrato di lunghezza RD in grado di compiere i seguenti comandi: 
 	- movimento avanti e indietro
 	- rotazione sul posto a 360°
 	- carica e scarica del cibo
    Come primo prototipo utilizzeremo il seguente robot fisico: https://github.com/XANA-Hub/ProgettoTT.git. Utilizzando il robot fisico si ha che il valore RD sarà più grande dell'effettiva lunghezza del robot per permetterne la rotazione.
-- ==Food-load==: quantità di cibo (in kg) che il robot dovrà scaricare dal Fridge Truck e mettere in ColdRoom Container.
+   
+##### ==Food-load==
+quantità di cibo (in kg) che il robot dovrà scaricare dal Fridge Truck e mettere in ColdRoom Container.
 
 
 ### Analisi del Problema

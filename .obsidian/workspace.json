@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Cold Storage Service - Natali.md",
+                "file": "Sprint1/Doc/Sprint 1.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Cold Storage Service - Natali.md",
+                "file": "Sprint1/Doc/Sprint 1.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Cold Storage Service - Natali.md",
+                "file": "Sprint1/Doc/Sprint 1.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Cold Storage Service - Natali.md"
+                "file": "Sprint1/Doc/Sprint 1.md"
               }
             }
           }
@@ -148,11 +148,11 @@
   },
   "active": "e08bed49ec9f7be4",
   "lastOpenFiles": [
-    "C%3A%2FUsers%2Flomba%2FDesktop%2Fiss23%2Fiss23Material%2Fhtml%2FQakActors23.html%23streamedqactor.md",
-    "Cold Storage Service - Natali.md",
-    "C%3A%2FUsers%2Flomba%2FDesktop%2Fiss23%2Fiss23Material%2Fhtml%2FQakActors23%2Ehtml%23streamedqactor.md",
     "Architettura_Sprint0.png",
-    "Sprint2/Doc/Sprint 2.md",
-    "Sprint1/Doc/Sprint 1.md"
+    "Sprint1/Doc/Sprint 1.md",
+    "Cold Storage Service - Natali.md",
+    "C%3A%2FUsers%2Flomba%2FDesktop%2Fiss23%2Fiss23Material%2Fhtml%2FQakActors23.html%23streamedqactor.md",
+    "C%3A%2FUsers%2Flomba%2FDesktop%2Fiss23%2Fiss23Material%2Fhtml%2FQakActors23%2Ehtml%23streamedqactor.md",
+    "Sprint2/Doc/Sprint 2.md"
   ]
 }
