@@ -23,22 +23,18 @@ Definizioni:
 `definire in modo più formale e comprensibile alla macchina`
 
 ##### ==Service Area==
-```
-Rettangolo di dimensione L*l
-```
-Area rettangolare piana racchiusa entro quattro pareti. Procedendo dal bordo superiore e muovendoci in senso orario, i nomi delle pareti sono: wallUp, wallRight, wallDown, wallLeft. All'interno del Service Area il transport trolley è libero di muoversi. La stanza ha dimensione Lato-Lungo * lato-corto (L * l).
+Area rettangolare piana racchiusa entro quattro pareti. Procedendo dal bordo superiore e muovendoci in senso orario, i nomi delle pareti sono: wallUp, wallRight, wallDown, wallLeft. All'interno del Service Area il transport trolley è libero di muoversi. 
+La stanza è rettangolare ed ha dimensione Lato-Lungo * lato-corto (L * l).
 
 ##### ==HOME==
-```
-
-```
-Locazione all'interno della Service Area dove il transport trolley il trova rivolto verso il basso nell'angolo superiore sinistro. La Home è la zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste.
+Locazione all'interno della Service Area dove il transport trolley si trova rivolto verso il basso nell'angolo superiore sinistro. La Home è la zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste.
 
 ##### ==INDOOR port==
 Locazione all'interno della Service Area in cui un camion si presenta per far caricare la merce al transport trolley. Si trova nell'angolo in basso a sinistra della Service Area.
 
 ##### ==ColdRoom Container==
-Contenitore fisico posizionato all'interno della Service Area in una posizione fissa. In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg. ColdRoom Container rappresenta un ostacolo per il transport trolley, ciò vuol dire che non può muoversi nella posizione in cui l'elemento è localizzato. (mi interessa la coordinata per il software)
+Contenitore fisico posizionato all'interno della Service Area in una posizione fissa. 
+In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg. ColdRoom Container rappresenta un ostacolo all'interno della Service Area per il transport trolley, ciò vuol dire che non può muoversi nella posizione in cui l'elemento è localizzato.
 
 ##### ==Porta della ColdRoom==
 Lato del ColdRoom Container tramite li quale è possibile depositare il cibo. Corrisponde al lato del container rivolto verso il basso della Service Area. Il transport trolley dovrà posizionarsi davanti alla porta della ColdRoom per poter depositare al suo interno il cibo.
@@ -60,36 +56,34 @@ quantità di cibo (in kg) che il robot dovrà scaricare dal Fridge Truck e mette
 ### Analisi del Problema
 - Chi manda i comandi al Transport Trolley?
 	Introduciamo un nuovo attore "Controller" che si occupi di mandare i comandi al Transport Trolley e gestire la logica applicativa. 
-	In questo primo sprint supponiamo che il controller sia a conoscenza dell'istante di arrivo dei Fridge Truck (di conseguenza il processo partirà da un segnale generato dal controller).
-- Quali comandi (inviati dal Controller) è in grado di comprendere il Transport Trolley?
-	L'unico comando mandato dal controller è "move", nell'istante in cui arriva un Fridge Truck.
+	In questo primo sprint supponiamo che il Controller sia a conoscenza dell'istante di arrivo dei Fridge Truck in INDOOR, di conseguenza il servizio partirà da un segnale generato dal controller).
+- Quali comandi è in grado di comprendere il Transport Trolley?
+	L'unico comando mandato dal controller è "doJob", nell'istante in cui è presente un Fridge Truck nella posizione di INDOOR port pronto a scaricare..
 - Come parliamo con il DDR robot? Cosa ci può dare il committente a proposito?
 	Il robot riceve messaggio da socket tcp [Link al protocollo del robot](https://github.com/XANA-Hub/ProgettoTT/blob/main/Sprint%201.md).
-- Chi traduce "move" in una serie di comandi comprendibili al DDR robot?
-	Introduciamo l'attore TransportTrolley per svolgere questo compito. Si occupa di ricevere i comandi dal controller, interpretare quest'ultimi e comunicare con il robot fisico.
-- Che tipo di segnali mando? Dispatch o Req-Resp?
-	Controller manda un segnale di dispatch, dal momento in cui il controller non è interessato a ricevere una risposta dal robot.
-- Vogliamo sapere se il comando è andato a buon fine? Se si che tipo di segnale è la risposta?
-	No, non siamo interessati a ricevere alcun tipo di risposta da parte del Transport Trolley.
-- Potrebbe essere utile sapere se il robot interrompe il suo corretto andamento?
-	Sì, il Trasport Trolley emette l'evento "robot rotto" dopo un tempo definito x che è nello stato di scaricamento.
+- Chi traduce "doJob" in una serie di comandi comprendibili al DDR robot?
+	L'attore TransportTrolley si occupa di svolgere questo compito. Ricevere il comando "doJob" dal Controller, lo interpreta e comunica al robot fisico (DDR robot) le operazioni da eseguire.
+- Come avviene la comunicazione tra Controller e Transport Trolley? Dispatch o Req-Resp?
+	Controller manda un segnale di Req-Resp al Transport Trolley, ovvero rimane in attesa di una risposta da quest'ultimo. In quanto è necessario sapere se il servizio richiesto è andato a buon fine oppure se il DDR robot ha avuto problematiche che lo hanno interrotto.
+- Vogliamo sapere se il comando è andato a buon fine? Se sì che tipo di segnale è la risposta?
+	Sì, è necessario ricevere una risposta da parte del Transport Trolley per sapere se il servizio di carico e scarico è andato a buon fine o meno. Se il robot interrompe il suo corretto andamento gli attori del sistema, in particolar modo il Controller, lo devono sapere.
+	Il Transport Trolley riceve quindi una request dal Controller ("doJob") e risponde con una response, in modo tale da notificare al Controller se il servizio di carico e scarico della merce è andato a buon fine o meno.
 - Come comunicano TransportTrolley e ColdRoom?
 	Transport Trolley e ColdRoom non comunicano direttamente ma solo tramite Controller.
 - Quando viene aggiornato il peso della ColdRoom (e da chi)?
-	Viene aggiornato dal Controller quando questo invia il dispatch a TransportTrolley con un altro dispatch.
+	Il peso della ColdRoom viene aggiornato dal Controller quando quest'ultimo riceve dal TransportTrolley la risposta relativa alla richiesta "doJob" fatta precedentemente. Se il servizio è andato a buon fine allora il Controller aggiorna il peso della ColdRoom tramite Dispatch.
 - Come fa il Transport Trolley a sapere dov'è e dove deve andare?
 	Dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del DDR robot, in realtà per utilizzare il robot fisico sarà necessario prendere in considerazione una griglia di quadrati di lato poco più grande di RD, in modo tale da permettere al robot di girarsi). 
 	Le coordinate del Transport Trolley indicheranno il quadrato in cui si trova. L'origine (0, 0) sarà la posizione di Home. Coordinate crescenti verso il basso e verso destra.
 - Quando viene fatta la mappatura della stanza?
 	La mappatura della stanza viene fatta al momento dell'avviamento del DDR robot, prima di leggere qualsiasi richiesta dal controller.
-- Quando controlla il TransportTrolley se ci sono altre richieste?
-	Appena scarica, prima di tornare in home, come da requisiti (o se è in home)
-- Il robot ha un peso massimo trasportabile, il carico dal camion può essere maggiore del peso trasportabile del robot.
-
-News:
-- Far sapere al controller cosa sta facendo il robottino
-	- Ho sbattuto mi sono perso help me please
-	- Megachad finto di fare il mio lavoro correttamente e pronto per continuare
-- Dobbiamo fare in modo che il robot possa fare più giri
-	- è il robot a sapere quanto peso può trasportare e quindi ha senso dire che deve essere il robot a decidere quanti giri fare in base al peso che deve essere scaricato
+- Quando controlla il TransportTrolley se ci sono altre richieste? 
+	Come da requisiti il controllo se ci sono altre richieste viene fatto:
+	- Quando il DDR robot risulta fermo in HOME, in attesa di nuovi comandi;
+	- Dopo aver scaricato la merce nella ColdRoom, prima di tornare in HOME, il TransportTrolley verifica se ci sono altre richieste.
+- Il robot ha un peso massimo? 
+	Sì, il DDR robot ha un peso massimo trasportabile. Il carico che il robot deve prendere dal camion può essere maggiore del peso trasportabile dal DDR robot. In tal caso sarà il robot a decidere quanti giri fare in base al peso che deve essere trasportato.
+	
+### Architettura logica
+![[ArchitetturaLogica_Sprint1.png]]
 

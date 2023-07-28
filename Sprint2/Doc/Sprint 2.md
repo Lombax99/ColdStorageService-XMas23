@@ -17,35 +17,69 @@ A company intends to build a ColdStorageService, composed of a set of elements:
 3. a ==ServiceAcessGUI== that allows an human being to see the ==current weigth== of the material stored in the ColdRoom and to send to the ==ColdStorageService== a request to store new **FW** kg of food. If the request is accepted, the services return a ==ticket== that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
 
 ### Analisi dei Requisiti
-Definizioni:
-- ==Service Area==: Area rettangolare piana racchiusa entro quattro pareti. Procedendo dal bordo superiore e muovendoci in senso orario, i nomi delle pareti sono: wallUp, wallRight, wallDown, wallLeft. All'interno del Service Area il transport trolley è libero di muoversi. La stanza ha dimensione Lato-Lungo * lato-corto (L * l).
-- ==HOME==: Locazione all'interno della Service Area dove il transport trolley il trova rivolto verso il basso nell'angolo superiore sinistro. La Home è la zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste.
-- ==INDOOR port==: Locazione all'interno della Service Area in cui un camion si presenta per far caricare la merce al transport trolley. Si trova nell'angolo in basso a sinistra della Service Area.
-- ==ColdRoom Container==: Contenitore fisico posizionato all'interno della Service Area in una posizione fissa. In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg. ColdRoom Container rappresenta un ostacolo per il transport trolley, ciò vuol dire che non può muoversi nella posizione in cui l'elemento è localizzato.
-- ==Porta della ColdRoom==: Lato del ColdRoom Container tramite li quale è possibile depositare il cibo. Corrisponde al lato del container rivolto verso il basso della Service Area. Il transport trolley dovrà posizionarsi davanti alla porta della ColdRoom per poter depositare al suo interno il cibo.
-- ==DDR robot==: *Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
-- ==Transport trolley==: DDR quadrato di lunghezza RD in grado di compiere le seguenti mosse: 
+##### ==Service Area==
+Area rettangolare piana racchiusa entro quattro pareti. Procedendo dal bordo superiore e muovendoci in senso orario, i nomi delle pareti sono: wallUp, wallRight, wallDown, wallLeft. All'interno del Service Area il transport trolley è libero di muoversi. 
+La stanza è rettangolare ed ha dimensione Lato-Lungo * lato-corto (L * l).
+
+##### ==HOME==
+Locazione all'interno della Service Area dove il transport trolley si trova rivolto verso il basso nell'angolo superiore sinistro. La Home è la zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste.
+
+##### ==INDOOR port==
+Locazione all'interno della Service Area in cui un camion si presenta per far caricare la merce al transport trolley. Si trova nell'angolo in basso a sinistra della Service Area.
+
+##### ==ColdRoom Container==
+Contenitore fisico posizionato all'interno della Service Area in una posizione fissa. 
+In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg. ColdRoom Container rappresenta un ostacolo all'interno della Service Area per il transport trolley, ciò vuol dire che non può muoversi nella posizione in cui l'elemento è localizzato.
+
+##### ==Porta della ColdRoom==
+Lato del ColdRoom Container tramite li quale è possibile depositare il cibo. Corrisponde al lato del container rivolto verso il basso della Service Area. Il transport trolley dovrà posizionarsi davanti alla porta della ColdRoom per poter depositare al suo interno il cibo.
+
+##### ==DDR robot==
+*Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
+
+##### ==Transport trolley==
+DDR quadrato di lunghezza RD in grado di compiere i seguenti comandi: 
 	- movimento avanti e indietro
 	- rotazione sul posto a 360°
 	- carica e scarica del cibo
    Come primo prototipo utilizzeremo il seguente robot fisico: https://github.com/XANA-Hub/ProgettoTT.git. Utilizzando il robot fisico si ha che il valore RD sarà più grande dell'effettiva lunghezza del robot per permetterne la rotazione.
-- ==Food-load==: quantità di cibo (in kg) che il robot dovrà scaricare dal Fridge Truck e mettere in ColdRoom Container.
-- ==ServiceAcessGUI==:
-- ==ColdStorageService==:
-- ==ticket==: 
-- ==current weigth==: Quantità di cibo contenuto in ColdRoom definito in base al peso.
+   
+##### ==Food-load==
+quantità di cibo (in kg) che il robot dovrà scaricare dal Fridge Truck e mettere in ColdRoom Container.
+
+##### ==Current weight==
+Quantità di cibo attualmente contenuto in ColdRoom definito in base al peso.
+
+##### ==ServiceAccesGUI==
+ServiceAccesGUI permette ai driver di:
+- visualizzare la quantità di cibo (in peso) contenuta all'interno di ColdRoom;
+- richiedere il permesso di scaricare la merce dal Fridge Truck, ovvero richiedere la generazione di un Ticket a lui assegnato da presentare in un secondo momento;
+- presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port;
+- inviare la richiesta "loadDone" quando il driver è pronto a scaricare, inviando l'effettivo peso contenuto nel Fridge Truck.
+
+##### ==ColdStorageService==
+ColdStorageService è un componente del sistema che si occupa di gestire le richieste di scarico merce da parte dei driver. Si occupa quindi di:
+- ricevere le richieste di permesso di scarico;
+- generare Ticket assegnati al singolo driver che ne ha fatto richiesta;
+- ricevere Ticket nel momento in cui il driver arriva in INDOOR;
+- verificare la validità dei Ticket ricevuti, ovvero verificare se questi sono scaduti o meno.
+
+##### ==Ticket==
+Il Ticket viene generato dal ColdStorageService a seguito di una richiesta effettuata da un driver tramite ServiceAccessGUI. Il Ticket rappresenta il permesso di scarico concesso ad un determinato FridgeTruck, valutando il peso della quantità di cibo da scaricare dichiarato dal driver ed il current weight.
+Ogni Ticket è caratterizzato dai seguenti parametri:
+- ticket time: tempo di validità del ticket generato;
+- peso della quantità di cibo da scaricare dichiarato dal driver a cui viene assegnato il ticket;
+- identificativo del driver a cui è assegnato il ticket;
+- codice univoco che identifica il ticket generato.
 
 ### Analisi del Problema
 - Protocollo di richiesta del ticket:
-	1) Inizia con una req/resp verso ColdStorageService a cui viene passato il peso da scaricare
-	2) CSS chiede a coldRoom se c'è abbastanza spazio
-	3) Se c'è abbastanza spazio, ColdRoom aggiorna il peso ipotetico e ritorna True, altrimenti False e non aggiorna un cazzo di niente
-	4) Se CSS riceve true genera il ticket e lo invia come risposta a ServiceAccessGui altrimenti risponde Rejected
+	1) Inizia con una req/resp da parte del driver tramite ServiceAccessGUI verso ColdStorageService, a cui viene passato il peso da scaricare;
+	2) ColdStorageService chiede a ColdRoom se c'è abbastanza spazio per depositare la quantità di cibo dichiarata dal driver;
+	3) Se c'è abbastanza spazio, ColdRoom aggiorna il peso ipotetico e ritorna True, altrimenti False e non aggiorna un cazzo di niente;
+	4) Se ColdStorageService riceve True genera il ticket e lo invia come risposta a ServiceAccessGui, altrimenti risponde Rejected
 - Utilizzo del ticket:
-	Ticket viene mandato a Controller tramite req/resp che verifica il **TICKETTIME** e restituisce approved/rejected. Se la richiesta viene approvata Controller invia a ColdRoom un update weight tramite dispatch che aggiorna il peso effettivo.
-	NOTA: ticket deve contenere il peso da scaricare oltre che al **TICKETTIME**
-- Se il robottino crash?
-	Sticazzi tanto nessuno lo fa ripartire quindi uno stronzo (sistemista) dovrà metterci mano, noi non lo facciamo, quelli sono cazzi vostri.
+	Ticket viene mandato a ColdStorageService tramite req/resp che verifica il **TICKETTIME** e restituisce approved/rejected. Se la richiesta viene approvata ServiceAccessGUI invia tramite req/resp al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto a scaricare. Dopo di che attende una risposta "charge taken" da parte del Controller. 
 - Problema, la sicurezza:
 	- Dobbiamo assicurarci che chi richiede il ticket sia l'unico a poterlo usare.
 	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy
@@ -55,21 +89,23 @@ Definizioni:
 	potrebbe venire accettata anche se dovrebbe essere rifiutata, per risolvere il problema definiamo due pesi diversi: 
 	1) Un peso ipotetico che indica il peso ottenuto completate tutte le richieste.
 	2) Il peso effettivo in coldRoom aggiornato solo dopo che il controller riceve il ticket.
-	Questi due pesi si troveranno entrambi in coldStorageRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune)
+	Questi due pesi si troveranno entrambi in ColdRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune)
 - Se scade un ticket e non viene scaricato il peso, in ColdRoom comunque rimane segnato il peso ipotetico:
-	Diciamo che ColdStorageService si occupa di mantenere in memoria i ticket emessi con il relativo momento, quando viene fatta una richiesta ma lo spazio ipotetico in ColdRoom è pieno CSS controlla che non ci siano ticket scaduti che non hanno mai scaricato e, se presenti, aggiorna coldRoom di conseguenza (rimuove il peso del ticket scaduto e se possibile aggiorna col nuovo ticket). Diventa necessario che Controller faccia sapere a CSS quando viene accattato un ticket (sempre tramite dispatch). NOTA: se il dispatch fallisce? Va tutto a puttane ma non ce ne preoccupiamo perchè non ne vale la pena.
+	ColdStorageService si occupa di mantenere in memoria i ticket emessi con il relativo istante, quando viene fatta una richiesta ma lo spazio ipotetico in ColdRoom è pieno CSS controlla che non ci siano ticket scaduti che non hanno mai scaricato e, se presenti, aggiorna coldRoom di conseguenza (rimuove il peso del ticket scaduto e se possibile aggiorna col nuovo ticket). Diventa necessario che Controller faccia sapere a CSS quando viene accattato un ticket (sempre tramite dispatch). NOTA: se il dispatch fallisce? Va tutto a puttane ma non ce ne preoccupiamo perchè non ne vale la pena.
 - Contesti:
-	- CSS gira sullo stesso contesto di Controller
+	- ColdStorageService gira sullo stesso contesto di Controller
 	- TransportTrolley, ColdRoom e ServiceAccessGui avranno un contesto a parte per ciascuno
-- SAG deve dare la possibilità di vedere il peso in ColdRoom all'utente, lo facciamo come Req/Resp o come osservatore costantemente aggiornato?
-	La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable. In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom.
-	In entrambi i casi usiamo il peso ipotetico altrimenti l'utente crede di essere scemo quando la richiesta viene rifiutata ma il peso sembra starci...
+- ServiceAccessGUI deve dare la possibilità di vedere il peso in ColdRoom all'utente, lo facciamo come Req/Resp o come osservatore costantemente aggiornato?
+	La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable. In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom. In entrambi i casi usiamo il peso ipotetico.
+	
+### Architettura logica
+![[ArchitetturaLogica_Sprint2.png]]
 
 - [ ] facciamo uno schemino che fa per bene tutti i passaggi nello scambio dei messaggi 
 
 NEW:
 Dobbiamo decidere chi si occupa di controllare se il ticket è scaduto:
-- opz1: controller --> perchè?
+- opz1: ColdStorageService --> perchè è lui che si occupa di gestire i ticket
 - opz2: gestoreTicket (chi ha emesso il ticket) --> perchè?
 	- principio di singola responsabilità
 	- problemi di sicurezza
