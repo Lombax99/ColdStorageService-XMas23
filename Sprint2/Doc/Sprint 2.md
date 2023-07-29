@@ -1,7 +1,7 @@
 ### Requisiti
 A company intends to build a ColdStorageService, composed of a set of elements:
 
-1. a ==service area== (rectangular, flat) that includes:
+1. a ==service area== (rectangular, flat) that includes:[[Sprint 2]]
     - an ==INDOOR port==, to enter food (fruits, vegetables, etc. )
     - a ==ColdRoom container==, devoted to store food, upto **MAXW** kg .
     The ColdRoom is positioned within the service area, as shown in the following picture:
@@ -98,28 +98,24 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 - ServiceAccessGUI deve dare la possibilità di vedere il peso in ColdRoom all'utente, lo facciamo come Req/Resp o come osservatore costantemente aggiornato?
 	La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable. In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom. In entrambi i casi usiamo il peso ipotetico.
 	
+- Chi si occupa di verificare la validità del Ticket presentato dal driver? Overo chi si occupa di controllare se il Ticket è scaduto o meno?
+	La responsabilità di ricevere il Ticket da ServiceAccessGUI e di verificarne la validità può essere affidata all'attore TicketHandler oppure al Controller. 
+	Abbiamo deciso di affidare la verifica del Ticket all'attore TicketHandler per le seguenti motivazioni:
+	- principio di singola responsabilità: gli attori devono avere una singola responabilità e un solo motivo per cambiare. Il Controller ha la responsabilità di sapere quando il driver è pronto per scaricare per notificarlo al TransportTrolley in modo tale che quest'ultimo avvii il servizio di carico e scarico merce da parte del DDR robot. Il TicketHandler ha la responsabilità di gestire i  Ticket, di conseguenza è corretto che sia quest'ultimo ad occuparsi non solo di generare i Ticket richiesti dai driver ma anche di verificarne la validità quando ne riceve uno. 
+	- problemi di sicurezza: i Ticket permettono ai FridgeTruck di depositare la merce in ColdRoom tramite il DDR robot e sono assegnati al singolo FridgeTruck. Per motivi di sicurezza i Ticket si preferisce assegnare la verifica al TicketHandler, essendo un'informazione privata del driver generata dal TicketHandler stessi.
 ### Architettura logica
 ![[ArchitetturaLogica_Sprint2.png]]
 
-- [ ] facciamo uno schemino che fa per bene tutti i passaggi nello scambio dei messaggi 
+- [x] facciamo uno schemino che fa per bene tutti i passaggi nello scambio dei messaggi 
+![[cicloVitaMessaggi.png]]
+- [ ] mettere in ordine le domande, in modo tale che tutto abbia un senso
+ATTENZIONE: COLDSTORAGESERVICE rinominato TicketHandler
 
 NEW:
-Dobbiamo decidere chi si occupa di controllare se il ticket è scaduto:
-- opz1: ColdStorageService --> perchè è lui che si occupa di gestire i ticket
-- opz2: gestoreTicket (chi ha emesso il ticket) --> perchè?
-	- principio di singola responsabilità
-	- problemi di sicurezza
-	- problemi di parallelismo
+
 - Driver Distratto?
 	- problema del peso ipotetico: dato che comunque ad ogni nuova richiesta cicliamo per vedere se ci sono ticket scaduti, tanto vale usare solo il peso effettivo e aggiungere la somma dello spazio promesso nei ticket ancora non riscattati.
 	- Poichè il peso ipotetico deve essere sempre visibile nella GUI, io ho bisogno di venere in ColdRoom sia il peso ipotetico che quello effettivo, questo vuol dire anche che quando il robot finisce il lavoro devo aggiornare sia il peso effettivo sia il peso ipotetico di ColdRoom, i cazzi arrivano quando il peso dichiarato nel ticket e il peso dichiarato in "load done" sono diversi.
-- ciclo di vita dei messaggi al camionista?
-	- emetto il ticket
-	- arrivo --> ticket valido
-	- send "load done" (request/response mi garantisce di rispondere alla persona giusta)
-	- recive "charge taken"
-	- poi il robot lavora
-	- il camion se ne và quando riceve charge taken o quando riceve job done?
 NOTE: ha senso che il camionista se ne vada quando riceve "charge taken", non è compito del camionista gestire il caso in cui il robottino ha avuto dei problemi.
 Altra domanda: chi manda al camionista il messaggio "charge taken"?
 Quando mando la doJob al Robot da parte del controller, poichè sto lavorando con request/responce posso anche mandare al camionista la "charge taken", di conseguenza può essere il controller a mandare il messaggio (e posso anche gestire un minimo di sicurezza... da ragionare meglio su questo aspetto)
