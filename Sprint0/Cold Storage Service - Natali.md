@@ -72,19 +72,26 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 
 ![[Architettura_Sprint0.png]]
 
-- per ==doJob==, ==weight==, ==Ticket== e ==RichiestaDeposito== abbiamo bisogno di risposta --> Req/Resp
-- ServiceStatusGui si comportarà come un ==Observer== [StreamQActor](C:/Users/lomba/Desktop/iss23/iss23Material/html/QakActors23.html) per aggiornarsi dinamicamente
+- per ==doJob==, ==WeightRequest==, ==Ticket==, ==DepositRequest== e ==LoadDone== abbiamo bisogno di risposta --> Req/Resp
+	- doJob: ci interessa sapere se l'operazione ha avuto successo
+	- DepositRequest; riceve un ticket come risposta o rejected in caso di fallimento
+	- Ticket: deve riceve risposta in caso di ticket accettato o rifiutato
+	- LoadDone: riceve ChargeTaken da requisiti
+	- WeightRequest: riceve lo spazio disponibile in coldroom
+- ServiceStatusGui si comportarà come un ==Observer== [StreamQActor](C:/Users/lomba/Desktop/iss23/iss23Material/html/QakActors23.html) per aggiornarsi dinamicamente e presentare i dati correnti ad ogni istante
+- Quasi tutto il lavoro passa attraverso ==ColdStorageService==, dalla gestione dei ticket alla logica di controllo del TransportTrolley --> Da valutare una possibile divisione in più componenti.
+- ==ColdRoom== è stato modellato come un ==Attore==. Questo ci semplificherà la vita in caso in futuro debbano essere aggiunte funzionalità e/o logica legata al componente (sia per motivi di progettazione dei requisiti correnti sia in vista di possibili aggiornamenti futuri). Inoltre semplifica la gestione delle interazioni con gli altri componenti potenzialmente remoti.
 
 
 ### Divisione in Sprint
 1) Basic Robot + Controller e Cold Storage [[Sprint 1]]
-	Lo scopo del primo sprint è avere una prima versione del robot funzionante con la logica di gestione delle richieste a lui relative. Si tratta del core del progetto, senza quello il resto non ha motivo di esistere.
+	`Lo scopo del primo sprint è avere una prima versione del robot funzionante con la logica di gestione delle richieste a lui relative. Si tratta del core del progetto, senza quello il resto non ha motivo di esistere.`
 2) Gestione dei ticket: Fake SerAccGui + Cold Storage Service [[Sprint 2]]
-	Nel secondo sprint implementeremo il sistema di ticketing, implementeremo una prima interfaccia utente solo per i test. Probabilmente la parte che richiederà più tempo, conviene farla prima di aggiungere led e sonar per non complicare la progettazione.
+	`Nel secondo sprint implementeremo il sistema di ticketing, implementeremo una prima interfaccia utente solo per i test. Probabilmente la parte che richiederà più tempo, conviene farla prima di aggiungere led e sonar per non complicare la progettazione.`
 3) Led e Sonar [[Sprint 3]]
-	Nel terzo sprint implementeremo il sistema di led e sonar con tutta la logica rimanente. Dovrebbe essere facilmente implementabile sopra a tutto quello che già è stato creato senza richiedere alcuna modifica.
+	`Nel terzo sprint implementeremo il sistema di led e sonar con tutta la logica rimanente. Dovrebbe essere facilmente implementabile sopra a tutto quello che già è stato creato senza richiedere alcuna modifica.`
 4) Service Status Gui e grafica bellina [[Sprint 4]]
-	L'ultimo sprint si occuperà della service status gui e delle interfacce grafiche finali. Potrebbe richiedere un refactoring parziale delle componenti da osservare, da tenere in considerazione durante lo sviluppo.
+	`L'ultimo sprint si occuperà della service status gui e delle interfacce grafiche finali. Potrebbe richiedere un refactoring parziale delle componenti da osservare, da tenere in considerazione durante lo sviluppo.`
 
 ### Divisione dei compiti
 Ogni Sprint verrà affrontato insieme con divisione dei compiti specifica valutata di volta in volta.
@@ -94,11 +101,6 @@ Ogni Sprint verrà affrontato insieme con divisione dei compiti specifica valuta
 - Sprint 2 completato e funzionante: entro la prima settimana di Agosto
 - Sprint 3: entro la fine di agosto
 - Sprint 4: entro metà settembre
-
-
-- [x] Primo schema logico dei soli requisiti (non con le modifiche mandate per email)
-- [x] Scriviamo il motivo della divisione in sprint 
-- [x] e una valutazione dei tempi 
-- [x] divisione dei compiti, strategia e motivazioni
+`NOTA: questa divisione cerca di tener conto delle vacanze estive tenendo i tempi abbastanza laschi ma è probabile sforeremo comunque`
 
 

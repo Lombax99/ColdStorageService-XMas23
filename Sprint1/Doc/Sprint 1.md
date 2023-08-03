@@ -23,37 +23,50 @@ Definizioni:
 `definire in modo più formale e comprensibile alla macchina`
 
 ##### ==Service Area==
-Area rettangolare piana racchiusa entro quattro pareti. Procedendo dal bordo superiore e muovendoci in senso orario, i nomi delle pareti sono: wallUp, wallRight, wallDown, wallLeft. All'interno del Service Area il transport trolley è libero di muoversi. 
-La stanza è rettangolare ed ha dimensione Lato-Lungo * lato-corto (L * l).
+Area rettangolare di dimensione L * l. L'area sarà suddivisa in una griglia con coordinate.
+
+`NOTE: L'area è piana, racchiusa entro quattro pareti. Procedendo dal bordo superiore e muovendoci in senso orario, i nomi delle pareti saranno: wallUp, wallRight, wallDown, wallLeft. All'interno del Service Area il transport trolley è libero di muoversi.La stanza è rettangolare ed ha dimensione Lato-Lungo * lato-corto (L * l). Per definire la posizione del robot in ogni momento l'area è divisa in una griglia con coordinate crescenti associate a partire dall'angolo in alto a sinistra`
 
 ##### ==HOME==
-Locazione all'interno della Service Area dove il transport trolley si trova rivolto verso il basso nell'angolo superiore sinistro. La Home è la zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste.
+Zona della Service Area corrispondente alle coordinate (0,0)
+
+`NOTE: Locazione all'interno della Service Area dove il transport trolley si trova rivolto verso il basso, nell'angolo superiore sinistro. La Home è la zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste.`
 
 ##### ==INDOOR port==
-Locazione all'interno della Service Area in cui un camion si presenta per far caricare la merce al transport trolley. Si trova nell'angolo in basso a sinistra della Service Area.
+Zona della Service Area corrispondente alle coordinate (0,MAX)
+
+`NOTE: Locazione all'interno della Service Area in cui un camion scarica la merce da far caricare al transport trolley. Si trova nell'angolo in basso a sinistra della Service Area. Le coordinate crescono allontanadosi dalla HOME, INDOOR port si trova a distanza massima sull'asse Y`
 
 ##### ==ColdRoom Container==
-Contenitore fisico posizionato all'interno della Service Area in una posizione fissa. 
-In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg. ColdRoom Container rappresenta un ostacolo all'interno della Service Area per il transport trolley, ciò vuol dire che non può muoversi nella posizione in cui l'elemento è localizzato.
+Attore in posizione fissa (x,y) in Service Area in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
+
+`NOTE: Contenitore fisico posizionato all'interno della Service Area in una posizione fissa. In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg. ColdRoom Container rappresenta un ostacolo all'interno della Service Area per il transport trolley, ciò vuol dire che non può muoversi attraverso la posizione in cui l'elemento è localizzato, per semplicità supporremo che il container occupi interamente una sola coordinata di Service Area.`
 
 ##### ==Porta della ColdRoom==
-Lato del ColdRoom Container tramite li quale è possibile depositare il cibo. Corrisponde al lato del container rivolto verso il basso della Service Area. Il transport trolley dovrà posizionarsi davanti alla porta della ColdRoom per poter depositare al suo interno il cibo.
+Lato della ColdRoom che si affaccia sull'area di coordinate (x, y+1). Transport Trolley dovrà trovarsi in questa posizione per interagire con ColdRoom.
+
+`NOTE: Lato del ColdRoom Container tramite li quale è possibile depositare il cibo. Corrisponde al lato del container rivolto verso il basso della Service Area. Il transport trolley dovrà posizionarsi davanti alla porta della ColdRoom per poter depositare al suo interno il cibo overo in corrispondenza delle coordinate (x, y+1).`
 
 ##### ==DDR robot==
 *Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
 
 ##### ==Transport trolley==
-DDR quadrato di lunghezza RD in grado di compiere i seguenti comandi: 
-	- movimento avanti e indietro
-	- rotazione sul posto a 360°
-	- carica e scarica del cibo
-   Come primo prototipo utilizzeremo il seguente robot fisico: https://github.com/XANA-Hub/ProgettoTT.git. Utilizzando il robot fisico si ha che il valore RD sarà più grande dell'effettiva lunghezza del robot per permetterne la rotazione.
-   
+DDR contenuto in un quadrato di lunghezza RD in grado di compiere i seguenti comandi: 
+	- step: `sposta il robot nella casella di fronte`
+	- turn_left: `muove l'orientamento del robot di 90° verso sinistra`
+	- turn_right: `muove l'orientamento del robot di 90° verso destra`
+	- load_food: `carica il cibo (da Indoor)`
+	- unload_food: `scarica il cibo (in ColdRoom)`
+
+
 ##### ==Food-load==
-quantità di cibo (in kg) che il robot dovrà scaricare dal Fridge Truck e mettere in ColdRoom Container.
+Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Container.
 
 
 ### Analisi del Problema
+
+![[Sprint1/Doc/ArchitetturaLogica_Sprint1.png]]
+
 - Chi manda i comandi al Transport Trolley?
 	Introduciamo un nuovo attore "Controller" che si occupi di mandare i comandi al Transport Trolley e gestire la logica applicativa. 
 	In questo primo sprint supponiamo che il Controller sia a conoscenza dell'istante di arrivo dei Fridge Truck in INDOOR, di conseguenza il servizio partirà da un segnale generato dal controller).
@@ -83,7 +96,5 @@ quantità di cibo (in kg) che il robot dovrà scaricare dal Fridge Truck e mette
 	- Dopo aver scaricato la merce nella ColdRoom, prima di tornare in HOME, il TransportTrolley verifica se ci sono altre richieste.
 - Il robot ha un peso massimo? 
 	Sì, il DDR robot ha un peso massimo trasportabile. Il carico che il robot deve prendere dal camion può essere maggiore del peso trasportabile dal DDR robot. In tal caso sarà il robot a decidere quanti giri fare in base al peso che deve essere trasportato.
-	
-### Architettura logica
-![[ArchitetturaLogica_Sprint1.png]]
+
 
