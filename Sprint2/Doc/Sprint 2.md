@@ -107,9 +107,12 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 ![[ArchitetturaLogica_Sprint2.png]]
 
 - [x] facciamo uno schemino che fa per bene tutti i passaggi nello scambio dei messaggi 
+- [ ] cambia ok in ticket e unificare i grafici (nomi uguali) [LISA]
+- [ ] Descrivere brevemente di cosa abbiamo parlato il giorno 11/08 [LISA]
 ![[cicloVitaMessaggi.png]]
 - [ ] mettere in ordine le domande, in modo tale che tutto abbia un senso
 ATTENZIONE: COLDSTORAGESERVICE rinominato TicketHandler
+
 
 NEW:
 
@@ -124,3 +127,9 @@ Quando mando la doJob al Robot da parte del controller, poichè sto lavorando co
 - Driver Distratto?
 	- problema del peso ipotetico: dato che comunque ad ogni nuova richiesta cicliamo per vedere se ci sono ticket scaduti, tanto vale usare solo il peso effettivo e aggiungere la somma dello spazio promesso nei ticket ancora non riscattati.
 
+NEW 11/08:
+Ticket = stringa contenente id, id camion, istante creazione
+
+Chiedere al prof se ChargeTaken prima o dopo doJob. Il camion quando può andare via?
+
+Necessario un ServiceAccessGUI per ogni camion che si presenta in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html (da capire come fare)
