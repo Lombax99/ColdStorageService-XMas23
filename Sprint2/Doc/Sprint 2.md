@@ -73,63 +73,65 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 - codice univoco che identifica il ticket generato.
 
 ### Analisi del Problema
-- Protocollo di richiesta del ticket:
-	1) Inizia con una req/resp da parte del driver tramite ServiceAccessGUI verso ColdStorageService, a cui viene passato il peso da scaricare;
-	2) ColdStorageService chiede a ColdRoom se c'è abbastanza spazio per depositare la quantità di cibo dichiarata dal driver;
-	3) Se c'è abbastanza spazio, ColdRoom aggiorna il peso ipotetico e ritorna True, altrimenti False e non aggiorna un cazzo di niente;
-	4) Se ColdStorageService riceve True genera il ticket e lo invia come risposta a ServiceAccessGui, altrimenti risponde Rejected
+![[ArchitetturaLogica_Sprint2.png]]
+- Chi si occupa della generazione e della verifica di validità dei Ticket?
+	Introduciamo un nuovo attore "TicketHandler" che si occupi di:
+		1) verificare se è possibile generare il Ticket richiesto;
+		2) generare i Ticket;
+		3) verificare se il Ticket ricevuto è valido temporalmente, ovvero se è scaduto o meno.
+- Protocollo di richiesta e generazione del ticket:
+	1) Inizia con una request/response da parte del driver tramite ServiceAccessGUI verso TicketHandler, a cui viene passato il peso da scaricare;
+	2) TicketHandler chiede a ColdRoom se c'è abbastanza spazio per depositare la quantità di cibo dichiarata dal driver sempre tramite Request/Response, la quale viene passata come parametro;
+	3) Se c'è abbastanza spazio, ColdRoom aggiorna i propri attributi in modo tale da memorizzare che una quantità di peso è riservata al driver in questione che ne ha fatto richiesta e ritorna True, altrimenti False;
+	4) Se TicketHandler riceve True genera il ticket e lo invia come risposta a ServiceAccessGui, altrimenti risponde Rejected
 - Utilizzo del ticket:
-	Ticket viene mandato a ColdStorageService tramite req/resp che verifica il **TICKETTIME** e restituisce approved/rejected. Se la richiesta viene approvata ServiceAccessGUI invia tramite req/resp al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto a scaricare. Dopo di che attende una risposta "charge taken" da parte del Controller. 
+	Una volta arivato in INDOOR, il driver, invia il Ticket a TicketHandler tramite Request/Response. Il TicketHandler verifica il **TICKETTIME** e restituisce Ok / Rejected, effettua quindi la verifica di validità temporale del Ticket. 
+	Se la richiesta viene approvata ServiceAccessGUI invia tramite Request/Response al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto e per inviare il peso effettivo che intende scaricare. Dopo di che attende una risposta "charge taken" da parte del Controller.
+	
+![[Sprint2/Doc/cicloVitaMessaggi.png]] 
+
 - Problema, la sicurezza:
 	- Dobbiamo assicurarci che chi richiede il ticket sia l'unico a poterlo usare.
 	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy
 	- Fare in modo che un ticket non sia riutilizzabile? possibile DoS, usiamo ticket sequenziali?
 	- Fare in modo che la risposta ad una richiesta arrivi al camionista che l'ha mandata e solo a lui anche se la richiesta arriva da un dispositivo alieno.
-- Cosa succede se viene fatta una richiesta mentre le prime non sono ancora state scaricate?
-	potrebbe venire accettata anche se dovrebbe essere rifiutata, per risolvere il problema definiamo due pesi diversi: 
-	1) Un peso ipotetico che indica il peso ottenuto completate tutte le richieste.
-	2) Il peso effettivo in coldRoom aggiornato solo dopo che il controller riceve il ticket.
-	Questi due pesi si troveranno entrambi in ColdRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune)
-- Se scade un ticket e non viene scaricato il peso, in ColdRoom comunque rimane segnato il peso ipotetico:
-	ColdStorageService si occupa di mantenere in memoria i ticket emessi con il relativo istante, quando viene fatta una richiesta ma lo spazio ipotetico in ColdRoom è pieno CSS controlla che non ci siano ticket scaduti che non hanno mai scaricato e, se presenti, aggiorna coldRoom di conseguenza (rimuove il peso del ticket scaduto e se possibile aggiorna col nuovo ticket). Diventa necessario che Controller faccia sapere a CSS quando viene accattato un ticket (sempre tramite dispatch). NOTA: se il dispatch fallisce? Va tutto a puttane ma non ce ne preoccupiamo perchè non ne vale la pena.
+- Cosa succede se viene fatta una richiesta prima che i driver che hanno fatto le richieste precedenti abbiano scaricato?
+	La richiesta potrebbe venire accettata anche se dovrebbe essere rifiutata in quanto l'elaborazione delle richieste precedenti non è ancora terminata, per risolvere il problema definiamo due pesi diversi: 
+	1)  Peso effettivo : quantità (peso) di cibo contenuto in ColdRoom nell'istante attuale, aggiornato solo dopo che il DDR robot ha terminato il carico/scarico merce di un determinato driver.
+	2) Peso "promesso" : quantità di peso richiesta tramite Ticket dai driver che ancora però non hanno completato lo scarico, aggiornato dopo che il DDR robot ha terminato il carico/scarico merce di un determinato driver oppure quando la verifica del tickettime di un determinato Ticket ha un esito negativo.
+	Questi due pesi si troveranno entrambi in ColdRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune).
+	Per verificare se accettare o meno una richiesta da parte di un driver è necessario confrontare la somma dei due pesi con il peso massimo contenibile in ColdRoom.
+- Se scade almeno un ticket prima che il driver a cui è associato arrivi in INDOOR, la somma tra il peso effettivo e peso promesso in ColdRoom corrisponde al peso massimo e arriva una richiesta quest'ultima viene rifiutata?
+	Rifiutare la richiesta non sarebbe corretto dato che è presente almeno un Ticket scaduto il cui driver associato ancora non si è presentato in INDOOR e per il quale è ancora riservata una quantità di peso in ColdRoom la quale non verrà mai utilizzata da quel determinato FridgeTruck.
+	Il problema è stato risolto nel seguente modo:
+	TicketHandler mantiene in memoria i ticket emessi e non ancora verificati con il relativo istante, quando viene fatta una richiesta ma la somma tra peso effettivo e promesso in ColdRoom corrisponde al peso massimo allora TicketHansler controlla che non ci siano ticket scaduti che non hanno mai scaricato e, se presenti, aggiorna ColdRoom di conseguenza (rimuove il peso del ticket scaduto e se possibile aggiorna col nuovo ticket). 
 - Contesti:
-	- ColdStorageService gira sullo stesso contesto di Controller
+	- TicketHandler è contenuto sullo stesso contesto di Controller
 	- TransportTrolley, ColdRoom e ServiceAccessGui avranno un contesto a parte per ciascuno
 - ServiceAccessGUI deve dare la possibilità di vedere il peso in ColdRoom all'utente, lo facciamo come Req/Resp o come osservatore costantemente aggiornato?
-	La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable. In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom. In entrambi i casi usiamo il peso ipotetico.
+	La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable. In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom. In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
 	
-- Chi si occupa di verificare la validità del Ticket presentato dal driver? Overo chi si occupa di controllare se il Ticket è scaduto o meno?
+- Chi si occupa di verificare la validità del Ticket presentato dal driver? Ovvero chi si occupa di controllare se il Ticket è scaduto o meno?
 	La responsabilità di ricevere il Ticket da ServiceAccessGUI e di verificarne la validità può essere affidata all'attore TicketHandler oppure al Controller. 
 	Abbiamo deciso di affidare la verifica del Ticket all'attore TicketHandler per le seguenti motivazioni:
 	- principio di singola responsabilità: gli attori devono avere una singola responabilità e un solo motivo per cambiare. Il Controller ha la responsabilità di sapere quando il driver è pronto per scaricare per notificarlo al TransportTrolley in modo tale che quest'ultimo avvii il servizio di carico e scarico merce da parte del DDR robot. Il TicketHandler ha la responsabilità di gestire i  Ticket, di conseguenza è corretto che sia quest'ultimo ad occuparsi non solo di generare i Ticket richiesti dai driver ma anche di verificarne la validità quando ne riceve uno. 
 	- problemi di sicurezza: i Ticket permettono ai FridgeTruck di depositare la merce in ColdRoom tramite il DDR robot e sono assegnati al singolo FridgeTruck. Per motivi di sicurezza i Ticket si preferisce assegnare la verifica al TicketHandler, essendo un'informazione privata del driver generata dal TicketHandler stessi.
-### Architettura logica
-![[ArchitetturaLogica_Sprint2.png]]
+- Quando e da chi vengono aggiornati i pesi in ColdRoom?
+	Entrambi i pesi (effettivo e "promesso") vengono aggiornati quando il DDR robot ha terminato lo scarico del materiale precedentemente contenuto in un determinato driver. 
+	Una volta che il Controller ha ricevuto una response da parte del TrasportTrolley relativa ad una precedente request "doJob", invia a ColdRoom un dispatch tramite il quale notifica a quest'ultimo la quantità peso da modificare sia per quanto riguarda quello effettivo che quello "promesso". In particolar modo viene passata la quantità da decrementare dal peso "promesso" e la quantità da incrementare al peso effettivo, i due valori possono essere diversi a causa del problema del driver distratto [non so come fare collegamento con la spiegazione del dirver distratto in Sprint0]
+- Quando il driver può uscire dal sistema?
+	Il driver può uscire dal sistema quando ha scaricato tutta la merce contenuta, ovvero quando riceve dal Controller la response "charge taken" associata ad una precedente request "load done".
+- Quando viene inviato il "charge taken"?
+	Il "charge taken" può essere inviato al driver in corrispondenza all'istante con il quale il Controller invia al TransportTrolley la request "doJob" associata alla rischiesta del driver in questione oppure una volta che il TransportTrolley invia al Controller la response relativa allo scarico del cibo contenuto nel FridgeTruck in questione.
+	Al driver non interessa sapere se il robot ha avuto problematiche o meno, ovvero se lo scarico è andato a buon fine o meno, quindi il "charge taken" potrebbe essere inviato prima. Ma se il DDR Robot prende il cibo direttamente da dentro il FridgeTruck allora è necessario che quest'ultimo aspetti che il DDR Robot abbia terminato le operazioni per poter ricevere il "charge taken" ed uscire dal sistema.
+	[chidere al professore]
 
 - [x] facciamo uno schemino che fa per bene tutti i passaggi nello scambio dei messaggi 
-- [ ] cambia ok in ticket e unificare i grafici (nomi uguali) [LISA]
-- [ ] Descrivere brevemente di cosa abbiamo parlato il giorno 11/08 [LISA]
-![[cicloVitaMessaggi.png]]
-- [ ] mettere in ordine le domande, in modo tale che tutto abbia un senso
-ATTENZIONE: COLDSTORAGESERVICE rinominato TicketHandler
+- [x] cambia ok in ticket e unificare i grafici (nomi uguali) [LISA]
+- [x] Descrivere brevemente di cosa abbiamo parlato il giorno 11/08 [LISA]
+
+- [x] mettere in ordine le domande, in modo tale che tutto abbia un senso [LISA]
 
 
-NEW:
-
-- Driver Distratto?
-	- problema del peso ipotetico: dato che comunque ad ogni nuova richiesta cicliamo per vedere se ci sono ticket scaduti, tanto vale usare solo il peso effettivo e aggiungere la somma dello spazio promesso nei ticket ancora non riscattati.
-	- Poichè il peso ipotetico deve essere sempre visibile nella GUI, io ho bisogno di venere in ColdRoom sia il peso ipotetico che quello effettivo, questo vuol dire anche che quando il robot finisce il lavoro devo aggiornare sia il peso effettivo sia il peso ipotetico di ColdRoom, i cazzi arrivano quando il peso dichiarato nel ticket e il peso dichiarato in "load done" sono diversi.
-NOTE: ha senso che il camionista se ne vada quando riceve "charge taken", non è compito del camionista gestire il caso in cui il robottino ha avuto dei problemi.
-Altra domanda: chi manda al camionista il messaggio "charge taken"?
-Quando mando la doJob al Robot da parte del controller, poichè sto lavorando con request/responce posso anche mandare al camionista la "charge taken", di conseguenza può essere il controller a mandare il messaggio (e posso anche gestire un minimo di sicurezza... da ragionare meglio su questo aspetto)
-==chiediamo  natali per conferma==
-
-- Driver Distratto?
-	- problema del peso ipotetico: dato che comunque ad ogni nuova richiesta cicliamo per vedere se ci sono ticket scaduti, tanto vale usare solo il peso effettivo e aggiungere la somma dello spazio promesso nei ticket ancora non riscattati.
-
-NEW 11/08:
-Ticket = stringa contenente id, id camion, istante creazione
-
-Chiedere al prof se ChargeTaken prima o dopo doJob. Il camion quando può andare via?
-
-Necessario un ServiceAccessGUI per ogni camion che si presenta in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html (da capire come fare)
+NOTE:
+Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni camion che si presenta, in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html. Che tecnologia utilizzare?
