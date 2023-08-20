@@ -22,8 +22,12 @@ with Diagram('coldstorage2Arch', show=False, outformat='png', graph_attr=graphat
      with Cluster('ctxcoldstoragearea', graph_attr=nodeattr):
           controller=Custom('controller','./qakicons/symActorSmall.png')
           coldroom=Custom('coldroom','./qakicons/symActorSmall.png')
-     with Cluster('ctxbasicrobot', graph_attr=nodeattr):
-          transporttrolley=Custom('transporttrolley(ext)','./qakicons/externalQActor.png')
-     controller >> Edge(color='magenta', style='solid', xlabel='doJob', fontcolor='magenta') >> transporttrolley
+          tickethandler=Custom('tickethandler','./qakicons/symActorSmall.png')
+          serviceaccessgui=Custom('serviceaccessgui','./qakicons/symActorSmall.png')
      controller >> Edge(color='blue', style='solid', xlabel='updateWeight', fontcolor='blue') >> coldroom
+     tickethandler >> Edge(color='magenta', style='solid', xlabel='weightrequest', fontcolor='magenta') >> coldroom
+     tickethandler >> Edge(color='blue', style='solid', xlabel='updateWeight', fontcolor='blue') >> coldroom
+     serviceaccessgui >> Edge(color='magenta', style='solid', xlabel='depositRequest', fontcolor='magenta') >> tickethandler
+     serviceaccessgui >> Edge(color='magenta', style='solid', xlabel='checkmyticket', fontcolor='magenta') >> tickethandler
+     serviceaccessgui >> Edge(color='magenta', style='solid', xlabel='loaddone', fontcolor='magenta') >> controller
 diag

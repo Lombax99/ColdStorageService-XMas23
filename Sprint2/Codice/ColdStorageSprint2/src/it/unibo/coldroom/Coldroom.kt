@@ -20,6 +20,8 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 		val interruptedStateTransitions = mutableListOf<Transition>()
 		
 				var PesoCorrente = 0
+				var PesoPrevisto = 0 
+				var MAXW = 50
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
@@ -30,24 +32,56 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="update3",targetState="updateWeight",cond=whenDispatch("updateWeight"))
+					 transition( edgeName="goto",targetState="work", cond=doswitch() )
 				}	 
-				state("updateWeight") { //this:State
+				state("work") { //this:State
 					action { //it:State
-						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
-						 	   
-						if( checkMsgContent( Term.createTerm("updateWeight(PESO)"), Term.createTerm("updateWeight(PESO)"), 
-						                        currentMsg.msgContent()) ) { //set msgArgList
-								 PesoCorrente += payloadArg(0).toInt() 
-						}
-						CommUtils.outblack("peso aggiornato")
-						CommUtils.outblack("nuovo peso: $PesoCorrente")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="update4",targetState="updateWeight",cond=whenDispatch("updateWeight"))
+					 transition(edgeName="update2",targetState="updateWeight",cond=whenDispatch("updateWeight"))
+					transition(edgeName="update3",targetState="checkweight",cond=whenRequest("weightrequest"))
+				}	 
+				state("updateWeight") { //this:State
+					action { //it:State
+						if( checkMsgContent( Term.createTerm("updateWeight(P_EFF,P_DIC)"), Term.createTerm("updateWeight(PESO,P_DIC)"), 
+						                        currentMsg.msgContent()) ) { //set msgArgList
+								 PesoCorrente += payloadArg(0).toInt() 
+												PesoPrevisto -= payloadArg(1).toInt()
+						}
+						CommUtils.outgreen("coldroom - peso promesso: $PesoPrevisto")
+						CommUtils.outgreen("coldroom - nuovo peso: $PesoCorrente")
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition( edgeName="goto",targetState="work", cond=doswitch() )
+				}	 
+				state("checkweight") { //this:State
+					action { //it:State
+						if( checkMsgContent( Term.createTerm("weightrequest(PESO)"), Term.createTerm("weightrequest(PESO)"), 
+						                        currentMsg.msgContent()) ) { //set msgArgList
+								 var PesoRichiesto = payloadArg(0).toInt() 
+								CommUtils.outgreen("coldroom - richiesti $PesoRichiesto, corrente: $PesoCorrente")
+								if( PesoRichiesto + PesoCorrente + PesoPrevisto <= MAXW  
+								 ){ PesoPrevisto += PesoRichiesto
+								CommUtils.outgreen("coldroom - accettato, peso previsto: $PesoPrevisto")
+								answer("weightrequest", "weightok", "weightok(NO_PARAM)"   )  
+								}
+								else
+								 {CommUtils.outgreen("coldroom - rifiutato")
+								 answer("weightrequest", "weightKO", "weightKO(NO_PARAM)"   )  
+								 }
+						}
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition( edgeName="goto",targetState="work", cond=doswitch() )
 				}	 
 			}
 		}
