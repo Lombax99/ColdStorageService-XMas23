@@ -163,19 +163,19 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Apri selezione rapida": false,
-      "graph:Apri vista grafo": false,
-      "canvas:Crea nuova lavagna": false,
-      "daily-notes:Apri nota del giorno": false,
-      "templates:Inserisci modello": false,
-      "command-palette:Apri riquadro comandi": false
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
     }
   },
   "active": "7f42a1322be079e5",
   "lastOpenFiles": [
-    "Sprint0/Cold Storage Service - Natali.md",
-    "Sprint2/Doc/Sprint 2.md",
     "Sprint1/Doc/Sprint 1.md",
+    "Sprint2/Doc/Sprint 2.md",
+    "Sprint0/Cold Storage Service - Natali.md",
     "Sprint2/Doc/mso1E04.tmp",
     "Sprint2/Doc/~$$cicloVitaMessaggi.~vsdx",
     "Sprint2/Doc/mso4E11.tmp",
