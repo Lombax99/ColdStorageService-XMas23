@@ -44,7 +44,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -94,7 +94,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "9be263e097d05a94",
@@ -110,7 +111,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint1/Doc/Sprint 1.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +128,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint1/Doc/Sprint 1.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +151,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md"
+                "file": "Sprint1/Doc/Sprint 1.md"
               }
             }
           }
@@ -171,7 +172,7 @@
       "command-palette:Apri riquadro comandi": false
     }
   },
-  "active": "7f42a1322be079e5",
+  "active": "f95dc3add1c4a218",
   "lastOpenFiles": [
     "Sprint0/Cold Storage Service - Natali.md",
     "Sprint1/Doc/Sprint 1.md",
