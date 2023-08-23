@@ -36,7 +36,7 @@ The story of the ColdStorageService can be summarized as follows:
     
 2. When the truck is at the INDOOR of the service, the driver uses the _ServiceAcessGUI_ to enter the ticket number and waits until the message **charge taken** (sent by the ColdStorageService) appears on the _ServiceAcessGUI_. At this point, the truck should leave the INDOOR.
     
-3. ==When the service accepts a ticket, the transport trolley reaches the INDOOR, picks up the food, sends the **charge taken** message and then goes to the ColdRoom to store the food.==
+3. When the service accepts a ticket, the transport trolley reaches the INDOOR, picks up the food, sends the **charge taken** message and then goes to the ColdRoom to store the food.
     
 4. When the deposit action is terminated, the transport trolley accepts another ticket (if any) or returns to HOME.
     
@@ -72,16 +72,20 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 
 ![[Architettura_Sprint0.png]]
 
-- per ==doJob==, ==WeightRequest==, ==Ticket==, ==DepositRequest== e ==LoadDone== abbiamo bisogno di risposta --> Req/Resp
+- ==doJob==, ==WeightRequest==, ==Ticket==, ==DepositRequest== e ==LoadDone== saranno **Req/Resp**
 	- doJob: ci interessa sapere se l'operazione ha avuto successo
 	- DepositRequest; riceve un ticket come risposta o rejected in caso di fallimento
 	- Ticket: deve riceve risposta in caso di ticket accettato o rifiutato
 	- LoadDone: riceve ChargeTaken da requisiti
 	- WeightRequest: riceve lo spazio disponibile in coldroom
-- ServiceStatusGui si comportarà come un ==Observer== [StreamQActor](C:/Users/lomba/Desktop/iss23/iss23Material/html/QakActors23.html) per aggiornarsi dinamicamente e presentare i dati correnti ad ogni istante
-- Quasi tutto il lavoro passa attraverso ==ColdStorageService==, dalla gestione dei ticket alla logica di controllo del TransportTrolley --> Da valutare una possibile divisione in più componenti.
-- ==ColdRoom== è stato modellato come un ==Attore==. Questo ci semplificherà la vita in caso in futuro debbano essere aggiunte funzionalità e/o logica legata al componente (sia per motivi di progettazione dei requisiti correnti sia in vista di possibili aggiornamenti futuri). Inoltre semplifica la gestione delle interazioni con gli altri componenti potenzialmente remoti.
 
+- ServiceStatusGui si comportarà come un ==Observer== [StreamQActor](C:/Users/lomba/Desktop/iss23/iss23Material/html/QakActors23.html) 
+	`NOTA: SSG dovrà aggiornarsi dinamicamente e presentare i dati correnti ad ogni istante`
+	
+- Quasi tutto il lavoro passa attraverso ==ColdStorageService==, dalla gestione dei ticket alla logica di controllo del TransportTrolley --> ==Da valutare una possibile divisione in più componenti.==
+
+- ==ColdRoom== è stato modellato come un ==Attore==. 
+	`Questo ci semplificherà la vita in caso in futuro debbano essere aggiunte funzionalità e/o logica legata al componente (sia per motivi di progettazione dei requisiti correnti sia in vista di possibili aggiornamenti futuri). Inoltre semplifica la gestione delle interazioni con gli altri componenti potenzialmente remoti.`
 
 ### Divisione in Sprint
 1) Basic Robot + Controller e Cold Storage [[Sprint 1]]
