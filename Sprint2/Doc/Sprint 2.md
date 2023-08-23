@@ -101,10 +101,10 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 	2) Peso "promesso" : quantità di peso richiesta tramite Ticket dai driver che ancora però non hanno completato lo scarico, aggiornato dopo che il DDR robot ha terminato il carico/scarico merce di un determinato driver oppure quando la verifica del tickettime di un determinato Ticket ha un esito negativo.
 	Questi due pesi si troveranno entrambi in ColdRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune).
 	Per verificare se accettare o meno una richiesta da parte di un driver è necessario confrontare la somma dei due pesi con il peso massimo contenibile in ColdRoom.
-- Se scade almeno un ticket prima che il driver a cui è associato arrivi in INDOOR, la somma tra il peso effettivo e peso promesso in ColdRoom corrisponde al peso massimo e arriva una richiesta quest'ultima viene rifiutata?
+- Cosa succede se scade almeno un ticket prima che il driver a cui è associato arrivi in INDOOR, la somma tra il peso effettivo e peso promesso in ColdRoom corrisponde al peso massimo e arriva una richiesta quest'ultima viene rifiutata?
 	Rifiutare la richiesta non sarebbe corretto dato che è presente almeno un Ticket scaduto il cui driver associato ancora non si è presentato in INDOOR e per il quale è ancora riservata una quantità di peso in ColdRoom la quale non verrà mai utilizzata da quel determinato FridgeTruck.
 	Il problema è stato risolto nel seguente modo:
-	TicketHandler mantiene in memoria i ticket emessi e non ancora verificati con il relativo istante, quando viene fatta una richiesta ma la somma tra peso effettivo e promesso in ColdRoom corrisponde al peso massimo allora TicketHansler controlla che non ci siano ticket scaduti che non hanno mai scaricato e, se presenti, aggiorna ColdRoom di conseguenza (rimuove il peso del ticket scaduto e se possibile aggiorna col nuovo ticket). 
+	TicketHandler mantiene in memoria i ticket emessi e non ancora verificati con il relativo istante, quando viene fatta una richiesta ma la somma tra peso effettivo e promesso in ColdRoom corrisponde al peso massimo allora TicketHandler controlla che non ci siano ticket scaduti che non hanno mai scaricato e, se presenti, aggiorna ColdRoom di conseguenza (rimuove il peso del ticket scaduto e se possibile aggiorna col nuovo ticket). 
 - Contesti:
 	- TicketHandler è contenuto sullo stesso contesto di Controller
 	- TransportTrolley, ColdRoom e ServiceAccessGui avranno un contesto a parte per ciascuno
@@ -124,13 +124,8 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 - Quando viene inviato il "charge taken"?
 	Il "charge taken" può essere inviato al driver in corrispondenza all'istante con il quale il Controller invia al TransportTrolley la request "doJob" associata alla rischiesta del driver in questione oppure una volta che il TransportTrolley invia al Controller la response relativa allo scarico del cibo contenuto nel FridgeTruck in questione.
 	Al driver non interessa sapere se il robot ha avuto problematiche o meno, ovvero se lo scarico è andato a buon fine o meno, quindi il "charge taken" potrebbe essere inviato prima. Ma se il DDR Robot prende il cibo direttamente da dentro il FridgeTruck allora è necessario che quest'ultimo aspetti che il DDR Robot abbia terminato le operazioni per poter ricevere il "charge taken" ed uscire dal sistema.
-	[chidere al professore]
-
-- [x] facciamo uno schemino che fa per bene tutti i passaggi nello scambio dei messaggi 
-- [x] cambia ok in ticket e unificare i grafici (nomi uguali) [LISA]
-- [x] Descrivere brevemente di cosa abbiamo parlato il giorno 11/08 [LISA]
-
-- [x] mettere in ordine le domande, in modo tale che tutto abbia un senso [LISA]
+	[chidere al professore-->NO IPOTIZIAMO NOI]
+	[coda perchè possono arrivare più load done insieme]
 
 
 NOTE:
