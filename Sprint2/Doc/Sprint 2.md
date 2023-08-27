@@ -40,7 +40,7 @@ Attore in posizione fissa (x,y) in Service Area in grado di ricevere e contenere
 ##### ==Porta della ColdRoom==
 Lato della ColdRoom che si affaccia sull'area di coordinate (x, y+1). Transport Trolley dovrà trovarsi in questa posizione per interagire con ColdRoom.
 
-`NOTE: Lato del ColdRoom Container tramite li quale è possibile depositare il cibo. Corrisponde al lato del container rivolto verso il basso della Service Area. Il transport trolley dovrà posizionarsi davanti alla porta della ColdRoom per poter depositare al suo interno il cibo overo in corrispondenza delle coordinate (x, y+1).`
+`NOTE: Lato del ColdRoom Container tramite il quale è possibile depositare il cibo. Corrisponde al lato del container rivolto verso il basso della Service Area. Il transport trolley dovrà posizionarsi davanti alla porta della ColdRoom per poter depositare al suo interno il cibo overo in corrispondenza delle coordinate (x, y+1).`
 
 ##### ==DDR robot==
 *Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
@@ -59,8 +59,8 @@ Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Conta
 ##### ==Current weight==
 Quantità di cibo attualmente contenuto in ColdRoom definito in base al peso.
 
-##### ==ServiceAccesGUI==
-ServiceAccesGUI permette ai driver di:
+##### ==ServiceAccessGUI==
+ServiceAccessGUI permette ai driver di:
 - visualizzare la quantità di cibo (in peso) contenuta all'interno di ColdRoom;
 - richiedere il permesso di scaricare la merce dal Fridge Truck, ovvero richiedere la generazione di un Ticket a lui assegnato da presentare in un secondo momento;
 - presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port;
@@ -111,7 +111,7 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 	
 - ==Come avviene la memorizzazione del peso in ColdRoom?==
 	E' necessario prendere in considerazione il seguente problema:
-	Un driver potrebbe inviare la richiesta di un Ticket prima che driver, a cui è stato generato un Ticket in precedenza, abbiano scaricato.
+	Un driver potrebbe inviare la richiesta di un Ticket prima che driver, a cui è stato generato un Ticket in precedenza, abbia scaricato.
 	Ciò potrebbe essere un problema nel caso in cui la somma tra il peso attuale contenuto in ColdRoom e il peso della quantità di materiale che intendono scaricare i driver che ancora non sono arrivati in INDOOR ma che hanno già un Ticket corrisponde al peso totale contenibile da ColdRoom.
 	
 	Per risolvere il problema definiamo due pesi diversi: 
@@ -124,7 +124,7 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 	Rifiutare la richiesta non sarebbe corretto dato che è presente almeno un Ticket scaduto il cui driver associato ancora non si è presentato in INDOOR e per il quale è ancora riservata una quantità di peso in ColdRoom che non verrà mai utilizzata da quel determinato FridgeTruck.
 	Il problema è stato risolto nel seguente modo:
 	
-	TicketHandler mantiene in memoria i Ticket emessi e non ancora verificati con il relativo istante, quando viene fatta una richiesta ma la somma tra peso effettivo e promesso in ColdRoom corrisponde al peso massimo allora TicketHandler controlla che non ci siano ticket scaduti che non hanno mai scaricato e, se presenti, aggiorna ColdRoom di conseguenza (rimuove il peso del ticket scaduto e se possibile aggiorna col nuovo ticket). 
+	TicketHandler mantiene in memoria i Ticket emessi e non ancora verificati con il relativo istante, quando viene fatta una richiesta ma la somma tra peso effettivo e promesso in ColdRoom corrisponde o supera il peso massimo allora TicketHandler controlla che non ci siano ticket scaduti che non hanno mai scaricato e, se presenti, aggiorna ColdRoom di conseguenza (rimuove il peso del ticket scaduto e se possibile aggiorna col nuovo ticket). 
 	
 - ==Contesti:==
 	- TicketHandler è contenuto sullo stesso contesto di Controller
