@@ -59,21 +59,12 @@ Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Conta
 ##### ==Current weight==
 Quantità di cibo attualmente contenuto in ColdRoom definito in base al peso.
 
-<<<<<<< Updated upstream
-##### ==ServiceAccessGUI==
-ServiceAccessGUI permette ai driver di:
-- visualizzare la quantità di cibo (in peso) contenuta all'interno di ColdRoom;
-- richiedere il permesso di scaricare la merce dal Fridge Truck, ovvero richiedere la generazione di un Ticket a lui assegnato da presentare in un secondo momento;
-- presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port;
-- inviare la richiesta "loadDone" quando il driver è pronto a scaricare, inviando l'effettivo peso contenuto nel Fridge Truck.
-=======
 ##### ==ServiceAccesGUI==
 ServiceAccesGUI permette ai driver di:
 	- visualizzare la quantità di cibo (in peso) contenuta all'interno di ColdRoom;
 	- richiedere il permesso di scaricare la merce dal Fridge Truck, ovvero richiedere la generazione di un Ticket a lui assegnato da presentare in un secondo momento;
 	- presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port;
 	- inviare la richiesta "loadDone" quando il driver è pronto a scaricare, inviando l'effettivo peso contenuto nel Fridge Truck.
->>>>>>> Stashed changes
 
 ##### ==ColdStorageService==
 ColdStorageService è un attore che si occupa di gestire le richieste di scarico merce da parte dei driver. Si occupa quindi di:
