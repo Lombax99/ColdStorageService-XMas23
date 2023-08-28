@@ -59,27 +59,36 @@ Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Conta
 ##### ==Current weight==
 Quantità di cibo attualmente contenuto in ColdRoom definito in base al peso.
 
+<<<<<<< Updated upstream
 ##### ==ServiceAccessGUI==
 ServiceAccessGUI permette ai driver di:
 - visualizzare la quantità di cibo (in peso) contenuta all'interno di ColdRoom;
 - richiedere il permesso di scaricare la merce dal Fridge Truck, ovvero richiedere la generazione di un Ticket a lui assegnato da presentare in un secondo momento;
 - presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port;
 - inviare la richiesta "loadDone" quando il driver è pronto a scaricare, inviando l'effettivo peso contenuto nel Fridge Truck.
+=======
+##### ==ServiceAccesGUI==
+ServiceAccesGUI permette ai driver di:
+	- visualizzare la quantità di cibo (in peso) contenuta all'interno di ColdRoom;
+	- richiedere il permesso di scaricare la merce dal Fridge Truck, ovvero richiedere la generazione di un Ticket a lui assegnato da presentare in un secondo momento;
+	- presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port;
+	- inviare la richiesta "loadDone" quando il driver è pronto a scaricare, inviando l'effettivo peso contenuto nel Fridge Truck.
+>>>>>>> Stashed changes
 
 ##### ==ColdStorageService==
-ColdStorageService è un componente del sistema che si occupa di gestire le richieste di scarico merce da parte dei driver. Si occupa quindi di:
-- ricevere le richieste di permesso di scarico;
-- generare Ticket assegnati al singolo driver che ne ha fatto richiesta;
-- ricevere Ticket nel momento in cui il driver arriva in INDOOR;
-- verificare la validità dei Ticket ricevuti, ovvero verificare se questi sono scaduti o meno.
+ColdStorageService è un attore che si occupa di gestire le richieste di scarico merce da parte dei driver. Si occupa quindi di:
+	- ricevere le richieste di permesso di scarico;
+	- generare Ticket assegnati al singolo driver che ne ha fatto richiesta;
+	- ricevere Ticket nel momento in cui il driver arriva in INDOOR;
+	- verificare la validità dei Ticket ricevuti, ovvero verificare se questi sono scaduti o meno.
 
 ##### ==Ticket==
 Il Ticket viene generato dal ColdStorageService a seguito di una richiesta effettuata da un driver tramite ServiceAccessGUI. Il Ticket rappresenta il permesso di scarico concesso ad un determinato FridgeTruck, valutando il peso della quantità di cibo da scaricare dichiarato dal driver ed il current weight.
 Ogni Ticket è caratterizzato dai seguenti parametri:
-- ticket time: tempo di validità del ticket generato;
-- peso della quantità di cibo da scaricare dichiarato dal driver a cui viene assegnato il ticket;
-- identificativo del driver a cui è assegnato il ticket;
-- codice univoco che identifica il ticket generato.
+	- ticket time: tempo di validità del ticket generato;
+	- peso della quantità di cibo da scaricare dichiarato dal driver a cui viene assegnato il ticket;
+	- identificativo del driver a cui è assegnato il ticket;
+	- codice univoco che identifica il ticket generato.
 
 ### Analisi del Problema
 
@@ -87,9 +96,9 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 
 - ==Chi si occupa della generazione e della verifica di validità dei Ticket?==
 	Introduciamo un nuovo attore "TicketHandler" che si occupi di:
-		1) verificare se è possibile generare il Ticket richiesto;
-		2) generare i Ticket;
-		3) verificare se il Ticket ricevuto è valido temporalmente, ovvero se è scaduto o meno.
+	1) verificare se è possibile generare il Ticket richiesto;
+	2) generare i Ticket;
+	3) verificare se il Ticket ricevuto è valido temporalmente, ovvero se è scaduto o meno.
 
 - ==Protocollo di richiesta e generazione del ticket:==
 	1) Inizia con una request/response da parte del driver tramite ServiceAccessGUI verso TicketHandler, a cui viene passato il peso da scaricare;

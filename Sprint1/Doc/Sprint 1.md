@@ -71,40 +71,110 @@ Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Conta
 	In questo primo sprint supponiamo che il Controller sia a conoscenza dell'istante di arrivo dei Fridge Truck in INDOOR, di conseguenza il servizio partirà da un segnale generato dal controller).
 	
 - ==Quali comandi è in grado di comprendere il Transport Trolley?==
-	L'unico comando mandato dal controller è "doJob", nell'istante in cui è presente un Fridge Truck nella posizione di INDOOR port pronto a scaricare..
+	L'unico comando mandato dal controller è "doJob", inviato solo dopo che un camion ha finito di scaricare...
 	
 - ==Chi traduce "doJob" in una serie di comandi comprendibili al DDR robot?==
-	L'attore TransportTrolley si occupa di svolgere questo compito. Ricevere il comando "doJob" dal Controller, lo interpreta e comunica al robot fisico (DDR robot) le operazioni da eseguire.
+	L'attore TransportTrolley si occupa di svolgere questo compito. Ricevere il comando "doJob" dal Controller, lo interpreta e comunica al robot le operazioni da eseguire.
 	
 - ==Come avviene la comunicazione tra Controller e Transport Trolley? Dispatch o Req-Resp?==
 	Controller manda un segnale di Req-Resp al Transport Trolley, ovvero rimane in attesa di una risposta da quest'ultimo. In quanto è necessario sapere se il servizio richiesto è andato a buon fine oppure se il DDR robot ha avuto problematiche che lo hanno interrotto.
-	
-- ==Vogliamo sapere se il comando è andato a buon fine? Se sì che tipo di segnale è la risposta?==
-	Sì, è necessario ricevere una risposta da parte del Transport Trolley per sapere se il servizio di carico e scarico è andato a buon fine o meno. Se il robot interrompe il suo corretto andamento gli attori del sistema, in particolar modo il Controller, lo devono sapere.
-	Il Transport Trolley riceve quindi una request dal Controller ("doJob") e risponde con una response, in modo tale da notificare al Controller se il servizio di carico e scarico della merce è andato a buon fine o meno.
 	
 - ==Come comunicano TransportTrolley e ColdRoom?==
 	Transport Trolley e ColdRoom non comunicano direttamente ma solo tramite Controller.
 	
 - ==Quando viene aggiornato il peso della ColdRoom (e da chi)?==
-	Il peso della ColdRoom viene aggiornato dal Controller quando quest'ultimo riceve dal TransportTrolley la risposta relativa alla richiesta "doJob" fatta precedentemente. Se il servizio è andato a buon fine allora il Controller aggiorna il peso della ColdRoom tramite Dispatch.
+	Se il servizio è andato a buon fine allora il Controller aggiorna il peso della ColdRoom tramite Dispatch.
 	
 - ==Come fa il Transport Trolley a sapere dov'è e dove deve andare?==
-	Dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del DDR robot, in realtà per utilizzare il robot fisico sarà necessario prendere in considerazione una griglia di quadrati di lato poco più grande di RD, in modo tale da permettere al robot di girarsi). 
+	Dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del DDR robot). 
 	Le coordinate del Transport Trolley indicheranno il quadrato in cui si trova. L'origine (0, 0) sarà la posizione di Home. Coordinate crescenti verso il basso e verso destra.
 	
 - ==Quando viene fatta la mappatura della stanza?==
-	La mappatura della stanza viene fatta al momento dell'avviamento del DDR robot, prima di leggere qualsiasi richiesta dal controller.
+	La mappatura della stanza deve essere fatta a priori e fornita al sistema.
 	
 - ==Quando controlla il TransportTrolley se ci sono altre richieste?==
 	Come da requisiti controllare se ci sono altre richieste viene fatto:
-	- Quando il DDR robot risulta fermo in HOME, in attesa di nuovi comandi;
-	- Dopo aver scaricato la merce nella ColdRoom, prima di tornare in HOME, il TransportTrolley verifica se ci sono altre richieste.
+	- Quando il DDR robot risulta fermo in HOME, in attesa di nuovi comandi.
+	- Dopo aver scaricato la merce nella ColdRoom, prima di tornare in HOME.
 	
 - ==Il robot ha un peso massimo?== 
 	Sì, il DDR robot ha un peso massimo trasportabile. Il carico che il robot deve prendere dal camion può essere maggiore del peso trasportabile dal DDR robot. In tal caso sarà il robot a decidere quanti giri fare in base al peso che deve essere trasportato.
 
 ### Progettazione
-*aggiungiamo il qak in questa parte*
+``` qak
+System coldstorage
+
+//-----------------------------------------------------------------------
+
+Request doJob : doJob(KG)
+Reply jobdone : jobdone(NO_PARAM)
+Reply robotDead : robotDead(NO_PARAM)
+
+Dispatch updateWeight : updateWeight(PESO)
+
+//-----------------------------------------------------------------------
+
+Context ctxcoldstoragearea ip [host="localhost" port=8040]
+
+//-----------------------------------------------------------------------
+
+Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
+
+ExternalQActor transporttrolley context ctxbasicrobot
+
+
+QActor controller context ctxcoldstoragearea {
+
+	[# var KG = 0
+		#]
+		
+	State s0 initial {
+		printCurrentMessage
+		}
+	Goto mockRequest
+	
+	State mockRequest {
+		[#
+			KG = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
+			
+		#]
+		printCurrentMessage
+		request transporttrolley -m doJob : doJob($KG)
+		
+	} Transition endjob whenReply robotDead -> handlerobotdead
+						whenReply jobdone -> jobdone
+	
+	State jobdone{
+		forward coldroom -m updateWeight : updateWeight($KG)
+		//ChargeTaken
+	} Transition repeat whenTime 15000 -> mockRequest
+	
+	State handlerobotdead{
+		printCurrentMessage
+	}
+}
+
+
+QActor coldroom context ctxcoldstoragearea {
+	[#
+		var PesoCorrente = 0
+	#]
+	
+	State s0 initial {
+		printCurrentMessage
+	} Transition update whenMsg updateWeight -> updateWeight
+	
+	State updateWeight {
+		printCurrentMessage
+		onMsg ( updateWeight : updateWeight(PESO) ) {
+			[# PesoCorrente += payloadArg(0).toInt() 
+				#]
+		}
+		println("peso aggiornato")
+		println("nuovo peso: $PesoCorrente")
+	} Transition update whenMsg updateWeight -> updateWeight
+}
+
+```
 
 
