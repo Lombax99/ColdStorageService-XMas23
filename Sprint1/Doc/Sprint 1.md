@@ -1,6 +1,6 @@
 ### Goal Sprint 1
 1) Basic Robot + Controller e Cold Storage
-2) Link al modello precedente
+2) [[Cold Storage Service - Natali |Link al modello precedente]]
 
 ### Requisiti
 A company intends to build a ColdStorageService, composed of a set of elements:

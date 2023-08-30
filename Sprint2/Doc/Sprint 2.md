@@ -1,3 +1,6 @@
+### Goal Sprint 2
+In questa seconda fase ci concentriamo sul processo di emissione dei ticket e le valutazioni di sicurezza annesse.
+[[Sprint 1|Link allo sprint 1]]
 ### Requisiti
 A company intends to build a ColdStorageService, composed of a set of elements:
 
@@ -60,7 +63,7 @@ Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Conta
 Quantità di cibo attualmente contenuto in ColdRoom definito in base al peso.
 
 ##### ==ServiceAccesGUI==
-ServiceAccesGUI permette ai driver di:
+GUI che permette ai driver di:
 - visualizzare la quantità di cibo (in peso) contenuta all'interno di ColdRoom;
 - richiedere il permesso di scaricare la merce dal Fridge Truck, ovvero richiedere la generazione di un Ticket a lui assegnato da presentare in un secondo momento;
 - presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port;
@@ -74,10 +77,10 @@ ColdStorageService è un componente del sistema che si occupa di gestire le rich
 - verificare la validità dei Ticket ricevuti, ovvero verificare se questi sono scaduti o meno.
 
 ##### ==Ticket==
-Il Ticket viene generato dal ColdStorageService a seguito di una richiesta effettuata da un driver tramite ServiceAccessGUI. Il Ticket rappresenta il permesso di scarico concesso ad un determinato FridgeTruck, valutando il peso della quantità di cibo da scaricare dichiarato dal driver ed il current weight.
+Il Ticket, su richiesta di un driver tramite ServiceAccessGUI, viene generato dal ColdStorageService. Il Ticket rappresenta il permesso di scarico concesso ad un determinato FridgeTruck.
 Ogni Ticket è caratterizzato dai seguenti parametri:
-- ticket time: tempo di validità del ticket generato;
-- peso della quantità di cibo da scaricare dichiarato dal driver a cui viene assegnato il ticket;
+- ticket time: istante di emissione del ticket;
+- peso della quantità di cibo da scaricare dichiarato dal driver;
 - identificativo del driver a cui è assegnato il ticket;
 - codice univoco che identifica il ticket generato.
 
@@ -89,23 +92,20 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 	Introduciamo un nuovo attore "TicketHandler" che si occupi di:
 		1) verificare se è possibile generare il Ticket richiesto;
 		2) generare i Ticket;
-		3) verificare se il Ticket ricevuto è valido temporalmente, ovvero se è scaduto o meno.
+		3) verificare se il Ticket ricevuto è scaduto o meno.
 
 - ==Protocollo di richiesta e generazione del ticket:==
+![[Sprint2/Doc/cicloVitaMessaggi.png]] 
 	1) Inizia con una request/response da parte del driver tramite ServiceAccessGUI verso TicketHandler, a cui viene passato il peso da scaricare;
 	2) TicketHandler chiede a ColdRoom se c'è abbastanza spazio per depositare la quantità di cibo dichiarata dal driver sempre tramite request/response, la quale viene passata come parametro;
 	3) Se c'è abbastanza spazio, ColdRoom aggiorna i propri attributi in modo tale da memorizzare che una quantità di peso è riservata al driver in questione che ne ha fatto richiesta e risponde True, altrimenti False;
 	4) Se TicketHandler riceve True genera il ticket e lo invia come risposta a ServiceAccessGui, altrimenti risponde Rejected
+	5) Una volta arrivato in INDOOR, il driver, invia il Ticket a TicketHandler tramite Request/Response. Il TicketHandler verifica il **TICKETTIME** e restituisce Ok / Rejected, effettua quindi la verifica di validità temporale del Ticket. 
+	6) Se la richiesta viene approvata ServiceAccessGUI invia tramite Request/Response al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto e per inviare il peso effettivo che intende scaricare. Dopo di che attende una risposta "charge taken" da parte del Controller.
 	
-- ==Utilizzo del ticket:==
-	Una volta arrivato in INDOOR, il driver, invia il Ticket a TicketHandler tramite Request/Response. Il TicketHandler verifica il **TICKETTIME** e restituisce Ok / Rejected, effettua quindi la verifica di validità temporale del Ticket. 
-	Se la richiesta viene approvata ServiceAccessGUI invia tramite Request/Response al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto e per inviare il peso effettivo che intende scaricare. Dopo di che attende una risposta "charge taken" da parte del Controller.
-	
-![[Sprint2/Doc/cicloVitaMessaggi.png]] 
-
 - ==Problema, la sicurezza:==
 	- Dobbiamo assicurarci che chi richiede il ticket sia l'unico a poterlo usare.
-	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy
+	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy o copia.
 	- Fare in modo che un ticket non sia riutilizzabile? possibile DoS, usiamo ticket sequenziali?
 	- Fare in modo che la risposta ad una richiesta arrivi al camionista che l'ha mandata e solo a lui anche se la richiesta arriva da un dispositivo alieno.
 	
