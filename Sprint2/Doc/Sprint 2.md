@@ -88,12 +88,40 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 
 ![[ArchitetturaLogica_Sprint2.png]]
 
-- ==Chi si occupa della generazione e della verifica di validità dei Ticket?==
+- ==Generazione e della verifica di validità dei Ticket?==
 	Introduciamo un nuovo attore "TicketHandler" che si occupi di:
 		1) verificare se è possibile generare il Ticket richiesto;
 		2) generare i Ticket;
 		3) verificare se il Ticket ricevuto è scaduto o meno.
-
+	
+```
+è stata affidata la verifica dei Ticket al TicketHandler per le seguenti motivazioni:
+1) principio di singola responsabilità: Il TicketHandler ha la responsabilità di gestire i Ticket, di conseguenza è corretto che sia quest'ultimo ad occuparsi sia di generare i Ticket richiesti sia di verificarne la validità. 
+2) motivi disicurezza: si preferisce assegnare la verifica al TicketHandler, avendo lui tutte le informazioni del driver necessarie per generare e verificare i Ticket stessi (ad esempio l'istante di emissione o l'id del driver associato al ticket).
+```
+	
+- ==Problema del peso ipotetico==
+	Un driver potrebbe inviare la richiesta di un Ticket prima che un secondo driver, a cui è stato generato un Ticket in precedenza, abbiano scaricato.
+	Rischio di emettere un ticket per un peso non realmente disponibile nel momento di scarico.
+	
+	Per risolvere il problema definiamo due pesi diversi: 
+	1)  Peso effettivo : quantità (peso) di cibo contenuto in ColdRoom nell'istante attuale. Aggiornato dopo l'azione del TransportTrolley.
+	2) Peso "promesso" : quantità di peso richiesta dai driver tramite Ticket non ancora scaricato, incrementato dopo l'emissione di un ticket e decrementato dopo l'azione del Trasport Trolley o a seguito della scadenza della validità di un Ticket.
+	
+	Questi due pesi si troveranno entrambi in ColdRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune).
+	Useremo la somma dei due pesi per validare o meno una richiesta di emissione ticket.
+	
+- ==Problema del peso fantasma==
+	A seguito della scadenza di un Ticket, il Transport Trolley non si farà carico della richiesta e il peso promesso del ticket rimarrà considerato il Cold Room.
+	
+- ==Quando e da chi vengono aggiornati i pesi in ColdRoom?==
+	1) Terminata l'azione del Transport Trolley, peso promesso e peso effettivo verranno aggiornati tramite dispatch di Controller. In particolar modo viene passata la quantità da decrementare dal peso "promesso" e la quantità da incrementare al peso effettivo, i due valori possono essere diversi a causa del problema del driver distratto [[Cold Storage Service - Natali#Il problema del driver distratto |see Driver Distratto]].
+	
+	2) Caso particolare: i pesi sono aggiornati da TicketHandler tramite dispatch "updateWeight":
+		All'arrivo di una richiesta di emissione del Ticket, se lo spazio calcolato non fosse sufficiente si verifica il TICKETTIME associato ai Ticket generati e non ancora scaricati.
+		In presenza di Ticket scaduti allora il TicketHandler procederà ad aggiornare il peso.
+		In questo modo risolviamo anche il problema del ==peso fantasma==
+	
 - ==Protocollo di richiesta e generazione del ticket:==
 ![[Sprint2/Doc/cicloVitaMessaggi.png]] 
 	1) Inizia con una request/response da parte del driver tramite ServiceAccessGUI verso TicketHandler, a cui viene passato il peso da scaricare;
@@ -103,58 +131,36 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 	5) Una volta arrivato in INDOOR, il driver, invia il Ticket a TicketHandler tramite Request/Response. Il TicketHandler verifica il **TICKETTIME** e restituisce Ok / Rejected, effettua quindi la verifica di validità temporale del Ticket. 
 	6) Se la richiesta viene approvata ServiceAccessGUI invia tramite Request/Response al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto e per inviare il peso effettivo che intende scaricare. Dopo di che attende una risposta "charge taken" da parte del Controller.
 	
-- ==Problema, la sicurezza:==
+- ==Quando il driver può uscire dal sistema?==
+	Il driver può uscire dal sistema quando ha scaricato tutta la merce contenuta, ovvero quando riceve dal Controller la response "charge taken" associata ad una precedente request "load done".
+	==E se non viene inviata la "charge taken?"==
+	
+- ==Quando viene inviato il "charge taken"?==
+	"Charge taken" viene inviato dal Controller subito dopo la "doJob" associata alla richiesta.
+```
+Motivazioni:
+1) Supponiamo che quest'ultimo scarichi la merce in una piattaforma dedicata, dalla quale il DDR robot preleverà il cibo e lo scaricherà in ColdRoom in uno o più volte a seconda della quantità di materiale dichiarata.
+2) Al driver non interessa sapere se il TransportTrolley ha avuto problematiche durante il trasporto del materiale, quindi il "charge taken" può essere inviato prima che il TransportTrolley comunichi al Controller se il carico/scarico in ColdRoom è terminato. 
+```
+	
+- ==Problema della sicurezza:==
 	- Dobbiamo assicurarci che chi richiede il ticket sia l'unico a poterlo usare.
 	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy o copia.
 	- Fare in modo che un ticket non sia riutilizzabile? possibile DoS, usiamo ticket sequenziali?
 	- Fare in modo che la risposta ad una richiesta arrivi al camionista che l'ha mandata e solo a lui anche se la richiesta arriva da un dispositivo alieno.
 	
-- ==Come avviene la memorizzazione del peso in ColdRoom?==
-	E' necessario prendere in considerazione il seguente problema:
-	Un driver potrebbe inviare la richiesta di un Ticket prima che driver, a cui è stato generato un Ticket in precedenza, abbiano scaricato.
-	Ciò potrebbe essere un problema nel caso in cui la somma tra il peso attuale contenuto in ColdRoom e il peso della quantità di materiale che intendono scaricare i driver che ancora non sono arrivati in INDOOR ma che hanno già un Ticket corrisponde al peso totale contenibile da ColdRoom.
+- ==Aggiornamento peso in ServiceAccessGUI==
+	La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable come da analisi preliminari. 
+	In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom. 
+	In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
 	
-	Per risolvere il problema definiamo due pesi diversi: 
-	1)  Peso effettivo : quantità (peso) di cibo contenuto in ColdRoom nell'istante attuale, aggiornato solo dopo che il DDR robot ha terminato il carico/scarico merce di un determinato driver.
-	2) Peso "promesso" : quantità di peso richiesta tramite Ticket dai driver che ancora però non hanno completato lo scarico, aggiornato dopo che il DDR robot ha terminato il carico/scarico merce di un determinato driver oppure quando la verifica del tickettime di un determinato Ticket ha un esito negativo.
-	Questi due pesi si troveranno entrambi in ColdRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune).
-	Per verificare se accettare o meno una richiesta da parte di un driver è necessario confrontare la somma dei due pesi con il peso massimo contenibile in ColdRoom.
+```
+NOTE:
+Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni camion che si presenta, in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html. Che tecnologia utilizzare?
+```
 
-- ==Cosa succede se scade uno o più un Ticket prima che i driver a cui sono associati arrivino in INDOOR, la somma tra il peso effettivo e peso promesso in ColdRoom corrisponde al peso massimo e arriva una richiesta di generazione di un Ticket? Quest'ultima viene rifiutata?==
-	Rifiutare la richiesta non sarebbe corretto dato che è presente almeno un Ticket scaduto il cui driver associato ancora non si è presentato in INDOOR e per il quale è ancora riservata una quantità di peso in ColdRoom che non verrà mai utilizzata da quel determinato FridgeTruck.
-	Il problema è stato risolto nel seguente modo:
-	
-	TicketHandler mantiene in memoria i Ticket emessi e non ancora verificati con il relativo istante, quando viene fatta una richiesta ma la somma tra peso effettivo e promesso in ColdRoom corrisponde al peso massimo allora TicketHandler controlla che non ci siano ticket scaduti che non hanno mai scaricato e, se presenti, aggiorna ColdRoom di conseguenza (rimuove il peso del ticket scaduto e se possibile aggiorna col nuovo ticket). 
-	
+### Progettazione
 - ==Contesti:==
 	- TicketHandler è contenuto sullo stesso contesto di Controller
 	- TransportTrolley, ColdRoom e ServiceAccessGui avranno un contesto a parte per ciascuno
-	
-- ==ServiceAccessGUI deve dare la possibilità di vedere il peso in ColdRoom all'utente, lo facciamo come Req/Resp o come osservatore costantemente aggiornato?==
-	La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable. In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom. In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
-	
-- ==Chi si occupa di verificare la validità del Ticket presentato dal driver? Ovvero chi si occupa di controllare se il Ticket è scaduto o meno?==
-	La responsabilità di ricevere il Ticket da ServiceAccessGUI e di verificarne la validità può essere affidata all'attore TicketHandler oppure al Controller. 
-	Abbiamo deciso di affidare la verifica del Ticket all'attore TicketHandler per le seguenti motivazioni:
-	- principio di singola responsabilità: gli attori devono avere una singola responabilità e un solo motivo per cambiare. Il Controller ha la responsabilità di sapere quando il driver è pronto per scaricare per notificarlo al TransportTrolley in modo tale che quest'ultimo avvii il servizio di carico e scarico merce da parte del DDR robot. Il TicketHandler ha la responsabilità di gestire i  Ticket, di conseguenza è corretto che sia quest'ultimo ad occuparsi non solo di generare i Ticket richiesti dai driver ma anche di verificarne la validità quando ne riceve uno. 
-	- problemi di sicurezza: i Ticket permettono ai FridgeTruck di depositare la merce in ColdRoom tramite il DDR robot e sono assegnati al singolo FridgeTruck. Per motivi di sicurezza i Ticket si preferisce assegnare la verifica al TicketHandler, essendo un'informazione privata del driver generata dal TicketHandler stessi.
-	
-- ==Quando e da chi vengono aggiornati i pesi in ColdRoom?==
-	1) Entrambi i pesi (effettivo e "promesso") vengono aggiornati quando il DDR robot ha terminato lo scarico del materiale precedentemente contenuto in un determinato driver. Una volta che il Controller ha ricevuto una response da parte del TrasportTrolley relativa ad una precedente request "doJob", invia a ColdRoom un dispatch tramite il quale notifica a quest'ultimo la quantità peso da modificare sia per quanto riguarda quello effettivo che quello "promesso". In particolar modo viene passata la quantità da decrementare dal peso "promesso" e la quantità da incrementare al peso effettivo, i due valori possono essere diversi a causa del problema del driver distratto [non so come fare collegamento con la spiegazione del dirver distratto in Sprint0].
-
-	2) In un caso particolare i pesi in ColdRoom sono aggiornati anche da TicketHandler tramite un dispatch "updateWeight". Il caso particolare è il seguente:
-		se scade uno o più un Ticket prima che i driver a cui sono associati arrivino in INDOOR, la somma tra il peso effettivo e peso promesso in ColdRoom corrisponde al peso massimo e arriva una richiesta di generazione di un Ticket.
-		Come spiegato in precedenza se ariva una richiesta di generazione di un Ticket e il peso in ColdRoom corrisponde al peso massimo viene effettuata una verifica del TICKETTIME associato a tutti i Ticket generati ed i cui driver ancora non sono arrivati in INDOOR.
-		Nel caso in cui sia presente almeno un Ticket tra quest'ultimi che è scaduto temporalmente allora il TicketHandler procederà ad aggiornare il peso in ColdRoom tramite dispatch.
-
-- ==Quando il driver può uscire dal sistema?==
-	Il driver può uscire dal sistema quando ha scaricato tutta la merce contenuta, ovvero quando riceve dal Controller la response "charge taken" associata ad una precedente request "load done".
-
-- ==Quando viene inviato il "charge taken"?==
-	Il "charge taken" viene inviato al driver dal Controller in corrispondenza all'istante con il quale il Controller invia al TransporTrolley la request "doJob" associata alla richiesta del driver in questione.
-	Le motivazioni di questa scelta sono le seguenti:
-	1) Al driver non interessa sapere se il TransportTrolley ha avuto problematiche durante il trasporto del materiale precedentemente conenuto nel FridgeTruck, ovvero se lo scarico è andato a buon fine o meno, quindi il "charge taken" può essere inviato prima che il TransportTrolley comunichi al Controller se il carico/scarico in ColdRoom è terminato e il suo esito. 
-	2) Supponiamo che il materiale da portare in ColdRoom non venga prelevato direttamente dal FridgeTruck, supponiamo che quest'ultimo scarichi la merce in una piattaforma dedicata, dalla quale il DDR robot preleverà il cibo e lo scaricherà in ColdRoom in uno o più volte a seconda della quantità di materiale dichiarata.
-
-NOTE:
-Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni camion che si presenta, in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html. Che tecnologia utilizzare?
+`alla fine questa informazione sarà nel qak`
