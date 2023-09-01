@@ -37,14 +37,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint0/Cold Storage Service - Natali.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -94,8 +94,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "9be263e097d05a94",
@@ -111,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint1/Doc/Sprint 1.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -128,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint1/Doc/Sprint 1.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -151,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md"
+                "file": "Sprint1/Doc/Sprint 1.md"
               }
             }
           }
@@ -164,21 +163,23 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "switcher:Apri selezione rapida": false,
+      "graph:Apri vista grafo": false,
+      "canvas:Crea nuova lavagna": false,
+      "daily-notes:Apri nota del giorno": false,
+      "templates:Inserisci modello": false,
+      "command-palette:Apri riquadro comandi": false
     }
   },
-  "active": "7f42a1322be079e5",
+  "active": "f95dc3add1c4a218",
   "lastOpenFiles": [
-    "Sprint1/Doc/Sprint 1.md",
-    "Sprint2/Doc/Sprint 2.md",
     "Sprint0/Cold Storage Service - Natali.md",
-    "Sprint2/Doc/mso1E04.tmp",
+    "Other/ColdStorageServiceRoomAnnoted.png",
+    "Sprint2/Doc/Sprint 2.md",
+    "Sprint2/Doc/msoA68C.tmp",
     "Sprint2/Doc/~$$cicloVitaMessaggi.~vsdx",
+    "Sprint1/Doc/Sprint 1.md",
+    "Sprint2/Doc/mso1E04.tmp",
     "Sprint2/Doc/mso4E11.tmp",
     "Sprint2/Doc/~$$ArchitetturaLogica_Sprint2.~vsdx",
     "Sprint2/Doc/cicloVitaMessaggi.png",
@@ -190,8 +191,6 @@
     "Sprint0/Architettura_Sprint0.png",
     "Sprint3/Doc/Sprint 3.md",
     "Sprint2/Doc/ArchitetturaLogica_Sprint2.png",
-    "Sprint1/Doc/ArchitetturaLogica_Sprint1.pdf",
-    "Other/ColdStorageServiceRoomAnnoted.png",
     "Sprint1/Doc/ArchitetturaLogica_Sprint1 1.png",
     "Senza nome.canvas",
     "Sprint1/Doc/ArchitetturaLogica_Sprint1.png",

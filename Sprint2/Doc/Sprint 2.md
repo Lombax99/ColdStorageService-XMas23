@@ -115,7 +115,7 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 	A seguito della scadenza di un Ticket, il Transport Trolley non si farà carico della richiesta e il peso promesso del ticket rimarrà considerato il Cold Room.
 	
 - ==Quando e da chi vengono aggiornati i pesi in ColdRoom?==
-	1) Terminata l'azione del Transport Trolley, peso promesso e peso effettivo verranno aggiornati tramite dispatch di Controller. In particolar modo viene passata la quantità da decrementare dal peso "promesso" e la quantità da incrementare al peso effettivo, i due valori possono essere diversi a causa del problema del driver distratto [[Cold Storage Service - Natali#Il problema del driver distratto |see Driver Distratto]].
+	1) Terminata l'azione del Transport Trolley, peso promesso e peso effettivo verranno aggiornati tramite dispatch di Controller. In particolar modo viene passata la quantità da decrementare dal peso "promesso" e la quantità da incrementare al peso effettivo, i due valori possono essere diversi a causa del problema del driver distratto ([[Cold Storage Service - Natali#Il problema del driver distratto |see Driver Distratto]]).
 	
 	2) Caso particolare: i pesi sono aggiornati da TicketHandler tramite dispatch "updateWeight":
 		All'arrivo di una richiesta di emissione del Ticket, se lo spazio calcolato non fosse sufficiente si verifica il TICKETTIME associato ai Ticket generati e non ancora scaricati.
@@ -123,7 +123,7 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 		In questo modo risolviamo anche il problema del ==peso fantasma==
 	
 - ==Protocollo di richiesta e generazione del ticket:==
-![[Sprint2/Doc/cicloVitaMessaggi.png]] 
+![[Sprint2/Doc/cicloVitaMessaggi.png]]
 	1) Inizia con una request/response da parte del driver tramite ServiceAccessGUI verso TicketHandler, a cui viene passato il peso da scaricare;
 	2) TicketHandler chiede a ColdRoom se c'è abbastanza spazio per depositare la quantità di cibo dichiarata dal driver sempre tramite request/response, la quale viene passata come parametro;
 	3) Se c'è abbastanza spazio, ColdRoom aggiorna i propri attributi in modo tale da memorizzare che una quantità di peso è riservata al driver in questione che ne ha fatto richiesta e risponde True, altrimenti False;
