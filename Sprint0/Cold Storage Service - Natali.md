@@ -8,13 +8,13 @@ A company intends to build a ColdStorageService, composed of a set of elements:
 
 ![[ColdStorageServiceRoomAnnoted.png]]
 
-2. a DDR robot working as a transport trolley, that is intially situated in its HOME location. The transport trolley has the form of a square of side length **RD**.
+2. a ==DDR robot== working as a transport trolley, that is intially situated in its HOME location. The transport trolley has the form of a square of side length **RD**.
     The transport trolley is used to perform a deposit action that consists in the following phases:
     1. pick up a food-load from a Fridge truck located on the INDOOR
     2. go from the INDOOR to the PORT of the ColdRoom
     3. deposit the food-load in the ColdRoom
 
-3. a ServiceAcessGUI that allows an human being to see the current weigth of the material stored in the ColdRoom and to send to the ColdStorageService a request to store new **FW** kg of food. If the request is accepted, the services return a ticket that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
+3. a ServiceAcessGUI that allows an human being to see the current weigth of the material stored in the ColdRoom and to send to the ColdStorageService a request to store new **FW** kg of food. If the request is accepted, the services return a ==ticket== that expires after a prefixed amount of time (==**TICKETTIME** secs==) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
 
 4. a ServiceStatusGUI that allows a Service-manager (an human being) to supervises the state of the service.
 
@@ -64,7 +64,7 @@ Meglio affrontare il problema dal punto di vista logico, impostando una interaz
 
 ### Il problema del driver distratto
 Questo problema ha indotto il committente ad affermare che:
-quando un agente esterno (driver) invia il ticket per indurre il servizio a scaricare il truck, si SUPPPONE GARANTITO che il carico del truck sia UGUALE (o al più MINORE) del carico indicato nella prenotazione.
+quando un agente esterno (driver) invia il ticket per indurre il servizio a scaricare il truck, si SUPPPONE GARANTITO che il carico del truck sia UGUALE del carico indicato nella prenotazione.
 Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore del carico effettivo sul Truck.
 #
 
@@ -78,14 +78,14 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 	- Ticket: deve riceve risposta in caso di ticket accettato o rifiutato
 	- LoadDone: riceve ChargeTaken da requisiti
 	- WeightRequest: riceve lo spazio disponibile in coldroom
-
+	
 - ServiceStatusGui si comportarà come un ==Observer== [StreamQActor](C:/Users/lomba/Desktop/iss23/iss23Material/html/QakActors23.html) 
 	`NOTA: SSG dovrà aggiornarsi dinamicamente e presentare i dati correnti ad ogni istante`
 	
 - Quasi tutto il lavoro passa attraverso ==ColdStorageService==, dalla gestione dei ticket alla logica di controllo del TransportTrolley --> ==Da valutare una possibile divisione in più componenti.==
-
-- ==ColdRoom== è stato modellato come un ==Attore==. 
-	`Questo ci semplificherà la vita in caso in futuro debbano essere aggiunte funzionalità e/o logica legata al componente (sia per motivi di progettazione dei requisiti correnti sia in vista di possibili aggiornamenti futuri). Inoltre semplifica la gestione delle interazioni con gli altri componenti potenzialmente remoti.`
+	
+- ==ColdRoom== è stato modellato come un ==Attore==.
+	`Questo ci semplificherà la vita in caso in futuro debbano essere aggiunte funzionalità (specificare fuzionalità di unload della ColdRoom perchè altrimenti il sistema è una ciofeca) e/o logica legata al componente (sia per motivi di progettazione dei requisiti correnti sia in vista di possibili aggiornamenti futuri). Inoltre semplifica la gestione delle interazioni con gli altri componenti potenzialmente remoti.`
 
 ### Divisione in Sprint
 1) Basic Robot + Controller e Cold Storage [[Sprint 1]]

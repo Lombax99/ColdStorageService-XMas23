@@ -2,6 +2,7 @@
 1) Basic Robot + Controller e Cold Storage
 2) [[Cold Storage Service - Natali |Link al modello precedente]]
 
+- [ ] Spostare la divisione di ColdStorageService in questa fase, con motivazioni e poi scriviamo che rimandiamo la parte del ticket allo sprint 1 bis 
 ### Requisiti
 A company intends to build a ColdStorageService, composed of a set of elements:
 
@@ -49,6 +50,7 @@ Lato della ColdRoom che si affaccia sull'area di coordinate (x, y+1). Transport 
 
 ##### ==DDR robot==
 *Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
+[robot](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html)
 
 ##### ==Transport trolley==
 DDR contenuto in un quadrato di lunghezza RD in grado di compiere i seguenti comandi: 
@@ -99,6 +101,7 @@ Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Conta
 	
 - ==Il robot ha un peso massimo?== 
 	Sì, il DDR robot ha un peso massimo trasportabile. Il carico che il robot deve prendere dal camion può essere maggiore del peso trasportabile dal DDR robot. In tal caso sarà il robot a decidere quanti giri fare in base al peso che deve essere trasportato.
+	NOTA: abbiamo definito con il committente che il peso da scaricare sia sempre minore o uguale al peso massimo trasportabile.
 
 ### Progettazione
 ``` qak
@@ -178,3 +181,4 @@ QActor coldroom context ctxcoldstoragearea {
 ```
 
 
+- [ ] Tutorial su come far partire la DEMO (passaggi e cose varie)

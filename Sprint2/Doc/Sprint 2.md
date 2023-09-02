@@ -85,6 +85,7 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 - codice univoco che identifica il ticket generato.
 
 ### Analisi del Problema
+- [ ] Vediamo il pattern facade
 
 ![[ArchitetturaLogica_Sprint2.png]]
 
@@ -133,7 +134,6 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 	
 - ==Quando il driver può uscire dal sistema?==
 	Il driver può uscire dal sistema quando ha scaricato tutta la merce contenuta, ovvero quando riceve dal Controller la response "charge taken" associata ad una precedente request "load done".
-	==E se non viene inviata la "charge taken?"==
 	
 - ==Quando viene inviato il "charge taken"?==
 	"Charge taken" viene inviato dal Controller subito dopo la "doJob" associata alla richiesta.
@@ -144,10 +144,10 @@ Motivazioni:
 ```
 	
 - ==Problema della sicurezza:==
-	- Dobbiamo assicurarci che chi richiede il ticket sia l'unico a poterlo usare.
-	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy o copia.
-	- Fare in modo che un ticket non sia riutilizzabile? possibile DoS, usiamo ticket sequenziali?
-	- Fare in modo che la risposta ad una richiesta arrivi al camionista che l'ha mandata e solo a lui anche se la richiesta arriva da un dispositivo alieno.
+	- Dobbiamo assicurarci che chi richiede il ticket sia l'unico a poterlo usare. NO
+	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy o copia. NO
+	- Fare in modo che un ticket non sia riutilizzabile? possibile DoS, usiamo ticket sequenziali? YES
+	- Fare in modo che la risposta ad una richiesta arrivi al camionista che l'ha mandata e solo a lui anche se la richiesta arriva da un dispositivo alieno. NO
 	
 - ==Aggiornamento peso in ServiceAccessGUI==
 	La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable come da analisi preliminari. 
@@ -159,6 +159,7 @@ NOTE:
 Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni camion che si presenta, in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html. Che tecnologia utilizzare?
 ```
 
+- [ ] Aggiungere una figura finale generata dal qak automaticamente
 ### Progettazione
 - ==Contesti:==
 	- TicketHandler è contenuto sullo stesso contesto di Controller
