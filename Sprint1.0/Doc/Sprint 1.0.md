@@ -1,8 +1,7 @@
 ### Goal Sprint 1
-1) Basic Robot + Controller e Cold Storage
+1) Basic Robot + ColdStorageService
 2) [[Cold Storage Service - Natali |Link al modello precedente]]
 
-- [ ] Spostare la divisione di ColdStorageService in questa fase, con motivazioni e poi scriviamo che rimandiamo la parte del ticket allo sprint 1 bis 
 ### Requisiti
 A company intends to build a ColdStorageService, composed of a set of elements:
 
@@ -22,9 +21,17 @@ A company intends to build a ColdStorageService, composed of a set of elements:
 ### Analisi dei Requisiti
 Definizioni:
 `definire in modo più formale e comprensibile alla macchina`
+##### ==DDR robot==
+*Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
+[robot](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html)
+La documentazione introduce il concetto di Step. Sfruttiamo lo Step per muovere il Robot in avanti della sua lunghezza RD.
+RD diventa l'unità di misura dello spazio sostituendo i metri.
+
+##### ==Transport trolley==
+Transport trolley è un DDR robot. I comandi che è in grado di compiere sono descritti nell'apposita [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) .
 
 ##### ==Service Area==
-Area rettangolare di dimensione L * l. L'area sarà suddivisa in una griglia con coordinate.
+Area rettangolare di dimensione L * l. L'area sarà suddivisa in una griglia con coordinate la cui unità di misura è RD.
 
 `NOTE: L'area è piana, racchiusa entro quattro pareti. Procedendo dal bordo superiore e muovendoci in senso orario, i nomi delle pareti saranno: wallUp, wallRight, wallDown, wallLeft. All'interno del Service Area il transport trolley è libero di muoversi.La stanza è rettangolare ed ha dimensione Lato-Lungo * lato-corto (L * l). Per definire la posizione del robot in ogni momento l'area è divisa in una griglia con coordinate crescenti associate a partire dall'angolo in alto a sinistra`
 
@@ -39,7 +46,7 @@ Zona della Service Area corrispondente alle coordinate (0,MAX)
 `NOTE: Locazione all'interno della Service Area in cui un camion scarica la merce da far caricare al transport trolley. Si trova nell'angolo in basso a sinistra della Service Area. Le coordinate crescono allontanadosi dalla HOME, INDOOR port si trova a distanza massima sull'asse Y`
 
 ##### ==ColdRoom Container==
-Attore in posizione fissa (x,y) in Service Area in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
+Contenitore in posizione fissa (x,y) in Service Area in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
 
 `NOTE: Contenitore fisico posizionato all'interno della Service Area in una posizione fissa. In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg. ColdRoom Container rappresenta un ostacolo all'interno della Service Area per il transport trolley, ciò vuol dire che non può muoversi attraverso la posizione in cui l'elemento è localizzato, per semplicità supporremo che il container occupi interamente una sola coordinata di Service Area.`
 
@@ -48,25 +55,20 @@ Lato della ColdRoom che si affaccia sull'area di coordinate (x, y+1). Transport 
 
 `NOTE: Lato del ColdRoom Container tramite li quale è possibile depositare il cibo. Corrisponde al lato del container rivolto verso il basso della Service Area. Il transport trolley dovrà posizionarsi davanti alla porta della ColdRoom per poter depositare al suo interno il cibo overo in corrispondenza delle coordinate (x, y+1).`
 
-##### ==DDR robot==
-*Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
-[robot](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html)
-
-##### ==Transport trolley==
-DDR contenuto in un quadrato di lunghezza RD in grado di compiere i seguenti comandi: 
-	- step: `sposta il robot nella casella di fronte`
-	- turn_left: `muove l'orientamento del robot di 90° verso sinistra`
-	- turn_right: `muove l'orientamento del robot di 90° verso destra`
-	- load_food: `carica il cibo (da Indoor)`
-	- unload_food: `scarica il cibo (in ColdRoom)`
-
 ##### ==Food-load==
 Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Container.
 
 
 ### Analisi del Problema
+- ==Separazione delle responsabilità di ColdStorageService==
+	ColdStorageService è un componente caratterizzato da troppe responsabilità, abbiamo quindi deciso di sostituirlo con 2 attori:
+	- Controller, il quale si occupa di gestire il robot ed aggiornare il peso di ColdRoom.
+	- TicketHandler, il quale si occupa di gestire il ciclo di vita dei Ticket.
+	Abbiamo quindi deciso di dividere lo Sprint1 in due fasi.
+	La progettazione di TicketHandler viene rimandata al prossimo Sprint ([[Sprint 1.1]]). 
 
-![[Sprint1/Doc/ArchitetturaLogica_Sprint1.png]]
+![[ArchitetturaLogica_Sprint1.png]]
+
 
 - ==Chi manda i comandi al Transport Trolley?==
 	Introduciamo un nuovo attore "Controller" che si occupi di mandare i comandi al Transport Trolley e gestire la logica applicativa. 
@@ -102,7 +104,7 @@ Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Conta
 - ==Il robot ha un peso massimo?== 
 	Sì, il DDR robot ha un peso massimo trasportabile. Il carico che il robot deve prendere dal camion può essere maggiore del peso trasportabile dal DDR robot. In tal caso sarà il robot a decidere quanti giri fare in base al peso che deve essere trasportato.
 	NOTA: abbiamo definito con il committente che il peso da scaricare sia sempre minore o uguale al peso massimo trasportabile.
-
+- [ ] Aggiungere una figura finale generata dal qak automaticamente
 ### Progettazione
 ``` qak
 System coldstorage

@@ -66,14 +66,72 @@ Meglio affrontare il problema dal punto di vista logico, impostando una interaz
 Questo problema ha indotto il committente ad affermare che:
 quando un agente esterno (driver) invia il ticket per indurre il servizio a scaricare il truck, si SUPPPONE GARANTITO che il carico del truck sia UGUALE del carico indicato nella prenotazione.
 Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore del carico effettivo sul Truck.
-#
 
 ### Analisi preliminare dei requisiti
 
+- [ ] Leva da grafico messaggi da e verso Led e Sonar
+- [ ] Leva messaggio doJob
+- [ ] ColdRoom da attore diventa un tondo normale brutto
+- [ ] Leva messaggio UpdateWeight
+- [ ] Specifica nel grafico contesti, sono 2: da una parte Led e Sonar, dall'altra parte tutto
+- [ ] risposta del DepositRequest: Accept/Reject --> modifica da fare anche in 1 e 2
+- [ ] messaggio Ticket --> StoCazzoDiTicket --> modifica da fare anche in 1 e 2
 ![[Architettura_Sprint0.png]]
 
-- ==doJob==, ==WeightRequest==, ==Ticket==, ==DepositRequest== e ==LoadDone== saranno **Req/Resp**
-	- doJob: ci interessa sapere se l'operazione ha avuto successo
+##### ==Service Area==
+Area rettangolare di dimensione L * l. L'area sarà suddivisa in una griglia con coordinate.
+Abbiamo richiesto al committente le dimensioni in metri della Service Area: 9m * 6m .
+
+##### ==HOME==
+Zona della Service Area corrispondente alle coordinate (0,0) 
+
+##### ==INDOOR port==
+Zona della Service Area corrispondente alle coordinate (0,5)
+
+##### ==Porta della ColdRoom==
+Lato della ColdRoom che si affaccia sull'area di coordinate (6,2). Transport Trolley dovrà trovarsi in questa posizione per interagire con ColdRoom.
+##### ==ColdRoom Container==
+Contenitore in posizione fissa in Service Area,  il cui punto di accesso è la Porta della ColdRoom, in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
+Abbiamo richiesto al committente la capienza massima e la grandezza del container. Dalla risposta del committente è venuto fuori che:
+- MAXW corrisponde a 100 kg
+- la grandezza di ColdRoom Container è 1m * 1m
+
+##### ==DDR robot==
+*Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
+[robot](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html)
+
+##### ==Transport trolley==
+Transport trolley è un DDR robot. I comandi che è in grado di compiere sono descritti nell'apposita [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) .
+Abbiamo richiesto al committente la dimensione del transport trolley: corrisponde ad un quadrato di lunghezza RD = 1 m.
+
+##### ==Food-load==
+Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Container.
+
+##### ==Current weight==
+Quantità di cibo attualmente contenuto in ColdRoom definito in base al peso.
+
+##### ==TicketTime==
+Costante intera che indica il tempo di vita massimo di un Ticket in secondi.
+
+##### ==Ticket==
+Il Ticket è una stringa che rappresenta il permesso di scarico concesso ad un determinato FridgeTruck.
+
+##### ==ServiceAccesGUI==
+GUI che permette ai driver di:
+- visualizzare la quantità di cibo (in peso) contenuta all'interno di ColdRoom;
+- richiedere il permesso di scaricare la merce dal Fridge Truck, ovvero richiedere la generazione di un Ticket a lui assegnato da presentare in un secondo momento;
+- presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port;
+- inviare la richiesta "loadDone" quando il driver è pronto a scaricare, inviando l'effettivo peso contenuto nel Fridge Truck.
+
+##### ==ColdStorageService==
+ColdStorageService è un componente del sistema che si occupa di gestire le richieste di scarico merce da parte dei driver. Si occupa quindi di:
+- ricevere le richieste di permesso di scarico;
+- generare Ticket assegnati al singolo driver che ne ha fatto richiesta;
+- ricevere Ticket nel momento in cui il driver arriva in INDOOR;
+- verificare la validità dei Ticket ricevuti, ovvero verificare se questi sono scaduti o meno.
+
+
+- ==WeightRequest==, ==StoCazzoDiTicket==, ==DepositRequest== e ==LoadDone== saranno **Req/Resp**
 	- DepositRequest; riceve un ticket come risposta o rejected in caso di fallimento
 	- Ticket: deve riceve risposta in caso di ticket accettato o rifiutato
 	- LoadDone: riceve ChargeTaken da requisiti
@@ -85,16 +143,17 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 - Quasi tutto il lavoro passa attraverso ==ColdStorageService==, dalla gestione dei ticket alla logica di controllo del TransportTrolley --> ==Da valutare una possibile divisione in più componenti.==
 	
 - ==ColdRoom== è stato modellato come un ==Attore==.
-	`Questo ci semplificherà la vita in caso in futuro debbano essere aggiunte funzionalità (specificare fuzionalità di unload della ColdRoom perchè altrimenti il sistema è una ciofeca) e/o logica legata al componente (sia per motivi di progettazione dei requisiti correnti sia in vista di possibili aggiornamenti futuri). Inoltre semplifica la gestione delle interazioni con gli altri componenti potenzialmente remoti.`
+	ColdRoom da requisiti aumenta solo di peso, è logico pensare che prima o poi qualcuno debba svuotare il contenitore. Prevediamo quindi che in futuro la ColdRoom debba interagire con componenti esterni al progetto, motivo per il quale è conveniente definire ColdRoom come un Attore.
+	Inoltre questa scelta semplifica la gestione dell'interazione tra ColdRoom e ServiceStatusGui.
 
 ### Divisione in Sprint
-1) Basic Robot + Controller e Cold Storage [[Sprint 1]]
+1) Basic Robot + Cold StorageService [[Sprint 1.0]]
+	- [ ] sistema descrizione 
 	`Lo scopo del primo sprint è avere una prima versione del robot funzionante con la logica di gestione delle richieste a lui relative. Si tratta del core del progetto, senza quello il resto non ha motivo di esistere.`
-2) Gestione dei ticket: Fake SerAccGui + Cold Storage Service [[Sprint 2]]
 	`Nel secondo sprint implementeremo il sistema di ticketing, implementeremo una prima interfaccia utente solo per i test. Probabilmente la parte che richiederà più tempo, conviene farla prima di aggiungere led e sonar per non complicare la progettazione.`
-3) Led e Sonar [[Sprint 3]]
+2) Led e Sonar [[Sprint 2]]
 	`Nel terzo sprint implementeremo il sistema di led e sonar con tutta la logica rimanente. Dovrebbe essere facilmente implementabile sopra a tutto quello che già è stato creato senza richiedere alcuna modifica.`
-4) Service Status Gui e grafica bellina [[Sprint 4]]
+3) Service Status Gui e grafica bellina [[Sprint 3]]
 	`L'ultimo sprint si occuperà della service status gui e delle interfacce grafiche finali. Potrebbe richiedere un refactoring parziale delle componenti da osservare, da tenere in considerazione durante lo sviluppo.`
 
 ### Divisione dei compiti

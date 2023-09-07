@@ -1,1 +1,0 @@
-Orribile il color petrolio
