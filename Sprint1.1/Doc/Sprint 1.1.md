@@ -85,7 +85,7 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 - [ ] Rileggi tutta l'analisi in modo tale che sia coerente con i punti precedenti
 - [ ] controllare la gestione del peso perchè la storia dell'"al più minore" non vale, il driver è distratto ma non ce ne fotte un c *** o.
 
-![[ArchitetturaLogica_Sprint2.png]]
+![[ArchitetturaLogica_Sprint1.1.png]]
 
 - ==Generazione e della verifica di validità dei Ticket?==
 	Introduciamo un nuovo attore "TicketHandler" che si occupi di:

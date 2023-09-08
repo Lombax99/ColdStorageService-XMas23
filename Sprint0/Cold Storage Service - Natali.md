@@ -69,13 +69,6 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 
 ### Analisi preliminare dei requisiti
 
-- [ ] Leva da grafico messaggi da e verso Led e Sonar
-- [ ] Leva messaggio doJob
-- [ ] ColdRoom da attore diventa un tondo normale brutto
-- [ ] Leva messaggio UpdateWeight
-- [ ] Specifica nel grafico contesti, sono 2: da una parte Led e Sonar, dall'altra parte tutto
-- [ ] risposta del DepositRequest: Accept/Reject --> modifica da fare anche in 1 e 2
-- [ ] messaggio Ticket --> StoCazzoDiTicket --> modifica da fare anche in 1 e 2
 ![[Architettura_Sprint0.png]]
 
 ##### ==Service Area==

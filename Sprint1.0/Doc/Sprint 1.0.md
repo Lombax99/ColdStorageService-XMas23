@@ -67,7 +67,7 @@ Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Conta
 	Abbiamo quindi deciso di dividere lo Sprint1 in due fasi.
 	La progettazione di TicketHandler viene rimandata al prossimo Sprint ([[Sprint 1.1]]). 
 
-![[ArchitetturaLogica_Sprint1.png]]
+![[ArchitetturaLogica_Sprint1.0.png]]
 
 
 - ==Chi manda i comandi al Transport Trolley?==
