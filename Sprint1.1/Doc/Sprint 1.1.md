@@ -128,7 +128,7 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 	3) Se c'è abbastanza spazio, ColdRoom aggiorna i propri attributi in modo tale da memorizzare che una quantità di peso è riservata al driver in questione che ne ha fatto richiesta e risponde True, altrimenti False;
 	4) Se TicketHandler riceve True genera il ticket e lo invia come risposta a ServiceAccessGui, altrimenti risponde Rejected
 	5) Una volta arrivato in INDOOR, il driver, invia il Ticket a TicketHandler tramite Request/Response. Il TicketHandler verifica il **TICKETTIME** e restituisce Ok / Rejected, effettua quindi la verifica di validità temporale del Ticket. 
-	6) Se la richiesta viene approvata ServiceAccessGUI invia tramite Request/Response al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto e per inviare il peso effettivo che intende scaricare. Dopo di che attende una risposta "charge taken" da parte del Controller.
+	6) Se la richiesta viene approvata ServiceAccessGUI invia tramite Request/Response al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto, insieme al peso da scarcare. Dopo di che attende una risposta "charge taken" da parte del Controller.
 	
 - ==Quando il driver può uscire dal sistema?==
 	Il driver può uscire dal sistema quando ha scaricato tutta la merce contenuta, ovvero quando riceve dal Controller la response "charge taken" associata ad una precedente request "load done".
@@ -144,8 +144,10 @@ Motivazioni:
 - ==Problema della sicurezza:==
 	- Dobbiamo assicurarci che chi richiede il ticket sia l'unico a poterlo usare. NO
 	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy o copia. NO
-	- Fare in modo che un ticket non sia riutilizzabile? possibile DoS, usiamo ticket sequenziali? YES
 	- Fare in modo che la risposta ad una richiesta arrivi al camionista che l'ha mandata e solo a lui anche se la richiesta arriva da un dispositivo alieno. NO
+	- Fare in modo che un ticket non sia riutilizzabile? possibile DoS, usiamo ticket sequenziali? YES
+> Io ho già l'elenco dei ticket emessi in TicketHandler per controllare i ticket scaduti ecc..
+> Posso imporre che ogni ticket che ricevo debba essere dentro quella lista e rimuoverlo appena lo ricevo, in questo modo un ticket non può essere presentato più di una volta.
 	
 - ==Aggiornamento peso in ServiceAccessGUI==
 	La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable come da analisi preliminari. 
@@ -154,7 +156,7 @@ Motivazioni:
 	
 ```
 NOTE:
-Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni camion che si presenta, in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html. Che tecnologia utilizzare?
+Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni camion che si presenta, in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html. Che tecnologia utilizzare? SPRING
 ```
 
 - [ ] Aggiungere una figura finale generata dal qak automaticamente

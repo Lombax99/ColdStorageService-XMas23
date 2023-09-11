@@ -16,7 +16,7 @@ eventedgeattr = {
     'color': 'red',
     'style': 'dotted'
 }
-with Diagram('temafinale23Arch', show=False, outformat='png', graph_attr=graphattr) as diag:
+with Diagram('coldstorageArch', show=False, outformat='png', graph_attr=graphattr) as diag:
   with Cluster('env'):
      sys = Custom('','./qakicons/system.png')
      with Cluster('ctxcoldstoragearea', graph_attr=nodeattr):
@@ -24,5 +24,6 @@ with Diagram('temafinale23Arch', show=False, outformat='png', graph_attr=graphat
           coldroom=Custom('coldroom','./qakicons/symActorSmall.png')
      with Cluster('ctxbasicrobot', graph_attr=nodeattr):
           transporttrolley=Custom('transporttrolley(ext)','./qakicons/externalQActor.png')
-     controller >> Edge(color='blue', style='solid', xlabel='doJob', fontcolor='blue') >> transporttrolley
+     controller >> Edge(color='magenta', style='solid', xlabel='doJob', fontcolor='magenta') >> transporttrolley
+     controller >> Edge(color='blue', style='solid', xlabel='updateWeight', fontcolor='blue') >> coldroom
 diag

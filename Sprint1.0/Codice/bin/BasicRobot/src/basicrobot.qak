@@ -1,8 +1,9 @@
-System /* -trace -msglog  */ basicrobot23  
+System /* -trace -msglog  */ basicrobot23
 
 
-Dispatch doJob : doJob(KG)
-Dispatch updateWeight : updateWeight(PESO)
+Request doJob : doJob(KG)
+Reply jobdone : jobdone(NO_PARAM)
+Reply robotDead : robotDead(NO_PARAM)
 
 
 /*basic robot */
@@ -48,6 +49,8 @@ ExternalQActor coldroom context ctxcoldstoragearea
 
 QActor transporttrolley context ctxbasicrobot{
 	[#	var Peso = 0
+		var CapienzaRobot = 5
+		var Giridafare = 0
 		#]
 	State s0 initial{
 		forward robotpos -m setrobotstate : setpos(0,0,down)//home
@@ -57,45 +60,42 @@ QActor transporttrolley context ctxbasicrobot{
 	
 	State work{
 		println("robot ! waiting") color green
-	}Transition startworking whenMsg doJob -> arrival
-	//Goto arrival
-	
-	
-	State arrival{
-		println("arrival") color green
-		
-		onMsg(doJob : doJob(KG)) {
-			[# Peso = payloadArg(0).toInt() 
+	}Transition startworking whenRequest doJob -> startjob
+
+	State startjob{
+		onMsg(doJob : doJob( KG )){
+			[# Peso = payloadArg(0).toInt()
+				Giridafare = Math.ceil(Peso.toDouble() / CapienzaRobot.toDouble()).toInt()
 				#]
 			println("peso ricevuto: $Peso") color green
-			request robotpos -m moverobot : moverobot(0,4) //arrival
-		}	
-		
-	} Transition gofetch whenReply moverobotdone -> raccogli
+			println("giri da fare: $Giridafare") color green
+		}
+	}Goto movingtoarrival
 	
-	State raccogli{
-		println("peso caricato $Peso") color green
-	}Goto coldroom
 	
-	State coldroom{
+	State movingtoarrival{
+		request robotpos -m moverobot : moverobot(0,4) //arrival	
+	} Transition gofetch whenReply moverobotdone -> movingtocoldroom
+	
+	State movingtocoldroom{
 		request robotpos -m moverobot : moverobot(5,3)  //coldroom
-	} Transition godrop whenReply moverobotdone -> scarica
+	} Transition godrop whenReply moverobotdone -> checkforjob
 	
-	State scarica {
-		forward coldroom -m updateWeight : updateWeight($Peso)
-		
-		[#  Peso = 0
-				#]
-		println("scaricato") color green
+	State checkforjob {
+		[#	Giridafare -= 1
+			#]
+			println("giro completato, mancano $Giridafare giri")
+	} Goto waitforjob if [#	Giridafare == 0  #] else movingtoarrival
+			
+	State waitforjob {
+		replyTo doJob with jobdone : jobdone( 1 )
+		println("transporttrolley ! aspetto") color green
 	} Transition gofetchagain 
-			whenTime 3000 -> gohome
-			whenMsg doJob -> arrival
+			whenTime 3000 -> goinghome
+			whenRequest doJob -> startjob
 			
 			
-			
-			
-			
-	State gohome{
+	State goinghome{
 		println("going home") color green
 		request robotpos -m moverobot : moverobot(0,0)		//home
 		forward robotpos -m setdirection : dir(down)
@@ -103,14 +103,6 @@ QActor transporttrolley context ctxbasicrobot{
 	
 	
 
-	State workprova{
-		//request basicrobot -m doplan : doplan(wwwwwwwwwwwww,200)
-		
-
-		//request robotpos -m moverobot : moverobot(0,4) //arrival
-		//request robotpos -m moverobot : moverobot(0,0)		//home
-		//forward robotpos -m setdirection : dir(down)
-	}
 	
 	
 }
@@ -190,7 +182,6 @@ QActor basicrobot context ctxbasicrobot{
 	  	}  
 	    memoCurrentTime StartTime  
 	    [# StepSynchRes = uniborobots.robotSupport.dostep( StepTime )
-	    	 
 	    	#]          
 	}  	
 	Goto stepok if [# StepSynchRes #] else stepKo 
@@ -212,8 +203,8 @@ QActor basicrobot context ctxbasicrobot{
 		
 		run uniborobots.robotSupport.move( "h" )  //stop the (real) robot
 		[# var TunedDuration   = StepTime - ((Duration * 0.80)).toLong()   #]
-		//println("basicrobot | stepKo $StepTime  duration=$Duration  TunedDuration=$TunedDuration") color magenta
-					
+		println("basicrobot | stepKo $StepTime  duration=$Duration  TunedDuration=$TunedDuration") color magenta
+		/* 			
 		if [# TunedDuration > 30 #]{ 
 			
 			//torna indietro
@@ -222,7 +213,7 @@ QActor basicrobot context ctxbasicrobot{
 			run uniborobots.robotSupport.move( "h" ) 
 		 	updateResource [# "stepFail($Duration)" #] 
 	 		delay 300
-		}
+		}*/
 		replyTo step with stepfailed : stepfailed($Duration, obst)
 	 	
     } 
@@ -247,7 +238,7 @@ QActor planexec context ctxbasicrobot{
 	[#  var Plan          = ""
 		var PlanOrig      = ""
 		var CurMoveTodo   = ""		
-		var StepTime      = "400"
+		var StepTime      = "315"
    	#]
    	
 	State s0 initial{
@@ -358,7 +349,7 @@ QActor robotpos context ctxbasicrobot{
 	[# val planner = unibo.planner23.Planner23Util()
 	    val MapName = "mapCompleteWithObst23ok"
 	    val MyName    = name 
-	    var StepTime  = "400"
+	    var StepTime  = "315"
 		var Plan      = ""	
 		var TargetX   = ""
 		var TargetY   = ""
@@ -476,7 +467,7 @@ QActor robotpos context ctxbasicrobot{
 		onMsg( doplanfailed : doplanfailed(ARG) ){
 			[# val PathTodo = payloadArg(0) #]
 			println("pos NOT reached - PathTodo = ${PathTodo} vs. $Plan") color red			 
-			[#   var PathDone = Plan.substring(0, Plan.lastIndexOf(PathTodo))
+			[#   var PathDone = Plan.substring(0, Plan.lastIndexOf(PathTodo)+1)
 				 if( PathDone == "" ) PathDone ="n"				 
 				 else planner.doPathOnMap(PathDone)
 			#]
