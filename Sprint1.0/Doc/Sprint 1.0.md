@@ -104,7 +104,8 @@ Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Conta
 - ==Il robot ha un peso massimo?== 
 	Sì, il DDR robot ha un peso massimo trasportabile. Il carico che il robot deve prendere dal camion può essere maggiore del peso trasportabile dal DDR robot. In tal caso sarà il robot a decidere quanti giri fare in base al peso che deve essere trasportato.
 	NOTA: abbiamo definito con il committente che il peso da scaricare sia sempre minore o uguale al peso massimo trasportabile.
-- [ ] Aggiungere una figura finale generata dal qak automaticamente
+	
+![[Sprint1.0/Doc/coldstoragearch.png | 300]]
 ### Progettazione
 ``` qak
 System coldstorage

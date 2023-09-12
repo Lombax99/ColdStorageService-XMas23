@@ -81,9 +81,6 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 
 ### Analisi del Problema
 - [ ] Vediamo il pattern facade (mettiamo qualcosa che fa da facciata). Aggiungo un nuovo componente ColdStorageFacade in modo tale che la gui si interfacci con un solo componente. Si aggiunge quindi un nuovo attore tra ServiceAccessGui e i due componenti TicketHandler e Controller. Per fare questo cerca info su pattern facade e spring
-- [ ] Si considera solo il peso dichiarato al momento del depositRequest. (quindi in loadDone non dichiara il peso effettivo ma passo sempre lo stesso o passo il ticket)
-- [ ] Rileggi tutta l'analisi in modo tale che sia coerente con i punti precedenti
-- [ ] controllare la gestione del peso perchè la storia dell'"al più minore" non vale, il driver è distratto ma non ce ne fotte un c *** o.
 
 ![[ArchitetturaLogica_Sprint1.1.png]]
 
@@ -159,7 +156,7 @@ NOTE:
 Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni camion che si presenta, in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html. Che tecnologia utilizzare? SPRING
 ```
 
-- [ ] Aggiungere una figura finale generata dal qak automaticamente
+![[Sprint1.1/Doc/coldstorage2arch.png | 350]]
 ### Progettazione
 - ==Contesti:==
 	- TicketHandler è contenuto sullo stesso contesto di Controller
