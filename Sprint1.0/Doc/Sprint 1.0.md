@@ -184,3 +184,8 @@ QActor coldroom context ctxcoldstoragearea {
 
 
 - [ ] Tutorial su come far partire la DEMO (passaggi e cose varie)
+
+1) Avviare il container itunibovirtualrobot23 su docker
+	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
+2) In intellij avviare il file MainCtxbasicrobot.kt del progetto BasicRobot
+3) In intellij avviare il file MainCtxColdStorageArea.kt del progetto coldStorage
