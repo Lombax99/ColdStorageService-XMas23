@@ -19,8 +19,8 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
 		
-				var PesoCorrente = 0
-				var PesoPrevisto = 0 
+				var PesoEffettivo = 0
+				var PesoPromesso = 0 
 				var MAXW = 50
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
@@ -46,13 +46,12 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 				}	 
 				state("updateWeight") { //this:State
 					action { //it:State
-						if( checkMsgContent( Term.createTerm("updateWeight(P_EFF,P_DIC)"), Term.createTerm("updateWeight(PESO,P_DIC)"), 
+						if( checkMsgContent( Term.createTerm("updateWeight(P_EFF,P_PRO)"), Term.createTerm("updateWeight(P_EFF,P_PRO)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
-								 PesoCorrente += payloadArg(0).toInt() 
-												PesoPrevisto -= payloadArg(1).toInt()
+								 PesoEffettivo += payloadArg(0).toInt() 
+												PesoPromesso -= payloadArg(1).toInt()
 						}
-						CommUtils.outgreen("coldroom - peso promesso: $PesoPrevisto")
-						CommUtils.outgreen("coldroom - nuovo peso: $PesoCorrente")
+						CommUtils.outgreen("coldroom update - peso promesso: $PesoPromesso, nuovo peso effettivo: $PesoEffettivo")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
@@ -65,11 +64,11 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 						if( checkMsgContent( Term.createTerm("weightrequest(PESO)"), Term.createTerm("weightrequest(PESO)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								 var PesoRichiesto = payloadArg(0).toInt() 
-								CommUtils.outgreen("coldroom - richiesti $PesoRichiesto, corrente: $PesoCorrente")
-								if( PesoRichiesto + PesoCorrente + PesoPrevisto <= MAXW  
-								 ){ PesoPrevisto += PesoRichiesto
-								CommUtils.outgreen("coldroom - accettato, peso previsto: $PesoPrevisto")
-								answer("weightrequest", "weightok", "weightok(NO_PARAM)"   )  
+								CommUtils.outgreen("coldroom - richiesti: $PesoRichiesto, effettivo: $PesoEffettivo, promesso: $PesoPromesso")
+								if(  PesoEffettivo + PesoPromesso + PesoRichiesto  <= MAXW  
+								 ){ PesoPromesso += PesoRichiesto
+								CommUtils.outgreen("coldroom - accettato, peso promesso: $PesoPromesso")
+								answer("weightrequest", "weightOK", "weightOK(NO_PARAM)"   )  
 								}
 								else
 								 {CommUtils.outgreen("coldroom - rifiutato")

@@ -58,7 +58,7 @@ QActor controller context ctxcoldstoragearea {
 
 QActor coldroom context ctxcoldstoragearea {
 	[#
-		var PesoCorrente = 0
+		var PesoEffettivo = 0
 	#]
 	
 	State s0 initial {
@@ -68,11 +68,11 @@ QActor coldroom context ctxcoldstoragearea {
 	State updateWeight {
 		printCurrentMessage
 		onMsg ( updateWeight : updateWeight(PESO) ) {
-			[# PesoCorrente += payloadArg(0).toInt() 
+			[# PesoEffettivo += payloadArg(0).toInt() 
 				#]
 		}
 		println("peso aggiornato")
-		println("nuovo peso: $PesoCorrente")
+		println("nuovo peso: $PesoEffettivo")
 	} Transition update whenMsg updateWeight -> updateWeight
 }
 

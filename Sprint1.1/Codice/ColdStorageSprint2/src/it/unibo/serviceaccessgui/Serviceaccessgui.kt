@@ -18,8 +18,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 	}
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
-			var P_DIC = 0
-				var P_EFF = 0
+			var PESO = 0
 				var Ticket = ""
 				var Ticketok = false
 		return { //this:ActionBasciFsm
@@ -37,15 +36,15 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 				state("work") { //this:State
 					action { //it:State
 						CommUtils.outyellow("SAG - ricomincio")
-						 P_DIC = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
-						CommUtils.outyellow("SAG - richiedo $P_DIC")
-						request("depositRequest", "depositRequest($P_DIC)" ,"tickethandler" )  
+						 PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
+						CommUtils.outyellow("SAG - richiedo $PESO")
+						request("depositRequest", "depositRequest($PESO)" ,"tickethandler" )  
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t08",targetState="gotoindoor",cond=whenReply("heresyourticket"))
+					 transition(edgeName="t08",targetState="gotoindoor",cond=whenReply("accept"))
 					transition(edgeName="t09",targetState="tryagainlater",cond=whenReply("reject"))
 				}	 
 				state("tryagainlater") { //this:State
@@ -63,7 +62,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 				state("gotoindoor") { //this:State
 					action { //it:State
 						CommUtils.outyellow("SAG - accettato")
-						if( checkMsgContent( Term.createTerm("heresyourticket(TICKET)"), Term.createTerm("heresyourticket(TICKET)"), 
+						if( checkMsgContent( Term.createTerm("accept(TICKET)"), Term.createTerm("accept(TICKET)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
 									Ticket = payloadArg(0)
 								CommUtils.outyellow("SAG - $Ticket")
@@ -119,10 +118,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 				}	 
 				state("loaddone") { //this:State
 					action { //it:State
-						
-									P_EFF = Math.floor(Math.random() *(P_DIC - 10 + 1) + 10).toInt()
-						CommUtils.outyellow("SAG - peso effettivo : $P_EFF")
-						request("loaddone", "loaddone($P_EFF,$P_DIC)" ,"controller" )  
+						request("loaddone", "loaddone($PESO)" ,"controller" )  
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002

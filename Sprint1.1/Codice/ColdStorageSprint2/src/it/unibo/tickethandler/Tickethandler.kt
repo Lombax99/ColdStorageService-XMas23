@@ -58,7 +58,7 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 					sysaction { //it:State
 					}	 	 
 					 transition(edgeName="t16",targetState="checkdeadlines",cond=whenReply("weightKO"))
-					transition(edgeName="t17",targetState="returnticket",cond=whenReply("weightok"))
+					transition(edgeName="t17",targetState="returnticket",cond=whenReply("weightOK"))
 				}	 
 				state("checkdeadlines") { //this:State
 					action { //it:State
@@ -66,7 +66,7 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 						 var Spazioliberato = 0
 									Accepted = false
 									//TODO controllare che si liberi dello spazio con i biglietti scaduti					
-									if (Spazioliberato >= Peso){
+									if (Spazioliberato >= Peso){ //c'è abbastanza spazio per la richiesta corrente'
 										Spazioliberato -= Peso
 										Accepted = true
 										}
@@ -98,7 +98,7 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 						 //TODO
 									Ticket =  "MOCKTICKET"
 						CommUtils.outblue("tickethandler - accettato")
-						answer("depositRequest", "heresyourticket", "heresyourticket($Ticket)"   )  
+						answer("depositRequest", "accept", "accept($Ticket)"   )  
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002

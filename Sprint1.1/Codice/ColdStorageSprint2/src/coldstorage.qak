@@ -6,24 +6,24 @@ Request doJob : doJob(KG)
 Reply jobdone : jobdone(NO_PARAM)
 Reply robotDead : robotDead(NO_PARAM)
 
-//il peso dichiarato viene sottratto, se va aumentato fornire P_DIC negativo
-Dispatch updateWeight : updateWeight(P_EFF, P_DIC)
+//il peso promesso viene sottratto, se va aumentato fornire P_PRO negativo
+Dispatch updateWeight : updateWeight(P_EFF, P_PRO)
 
 //-----------------------------------------------------------------------
 
 Request depositRequest : depositRequest(PESO)
-Reply heresyourticket : heresyourticket(TICKET)
+Reply accept : accept(TICKET)
 Reply reject : reject(NO_PARAM)
 
 
 Request weightrequest : weightrequest(PESO)
-Reply weightok : weightok( NO_PARAM )
+Reply weightOK : weightOK( NO_PARAM )
 Reply weightKO : weightKO( NO_PARAM )
 
 Request checkmyticket : checkmyticket(TICKET)
 Reply	ticketchecked : ticketchecked(BOOL)
 
-Request loaddone : loaddone(P_EFF, P_DIC)
+Request loaddone : loaddone(PESO)
 Reply 	chargetaken : chargetaken(NO_PARAM)
 
 //-----------------------------------------------------------------------
@@ -41,8 +41,7 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 
 QActor controller context ctxcoldstoragearea {
 
-	[# var KG = 0
-		var P_DIC = 0
+	[# var PESO = 0
 		#]
 		
 	State s0 initial {
@@ -55,14 +54,14 @@ QActor controller context ctxcoldstoragearea {
 	
 	//senza robot
 	State startjob  {
-		onMsg(loaddone : loaddone(P_EFF, P_DIC) ){
-			[# KG = payloadArg(0).toInt()
-				P_DIC = payloadArg(1).toInt()
+		onMsg(loaddone : loaddone(PESO) ){
+			[# PESO = payloadArg(0).toInt()
 				#]
-			println("controller - dichiarato: $P_DIC, effettivo: $KG") color green
+			println("controller - dichiarato: $PESO") color green
 		}
-		forward coldroom -m updateWeight : updateWeight($KG, $P_DIC)
+		
 		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
+		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 		
 	} Goto work
 	
@@ -81,7 +80,7 @@ QActor controller context ctxcoldstoragearea {
 						whenReply jobdone -> jobdone
 	*/
 	State jobdone{
-		forward coldroom -m updateWeight : updateWeight($KG, $P_DIC)
+		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 	} Transition repeat whenTime 15000 -> work
 	
 	
@@ -97,8 +96,8 @@ QActor coldroom context ctxcoldstoragearea {
 	//corrente: quanta roba c'è nella cold room
 	//previsto: quanto deve ancora arrivare, ma per cui c'è un biglietto emesso
 	[#
-		var PesoCorrente = 0
-		var PesoPrevisto = 0 
+		var PesoEffettivo = 0
+		var PesoPromesso = 0 
 		var MAXW = 50
 	#]
 	
@@ -113,27 +112,28 @@ QActor coldroom context ctxcoldstoragearea {
 		
 	
 	State updateWeight {
-		onMsg ( updateWeight : updateWeight(PESO, P_DIC) ) {
-			[# PesoCorrente += payloadArg(0).toInt() 
-				PesoPrevisto -= payloadArg(1).toInt()
+		onMsg ( updateWeight : updateWeight(P_EFF, P_PRO) ) {
+			[# PesoEffettivo += payloadArg(0).toInt() 
+				PesoPromesso -= payloadArg(1).toInt()
 				#]
 		}
-		println("coldroom - peso promesso: $PesoPrevisto") color green
-		println("coldroom - nuovo peso: $PesoCorrente") color green
+		println("coldroom update - peso promesso: $PesoPromesso, nuovo peso effettivo: $PesoEffettivo") color green
 	} Goto work
+	
+	
 	
 	
 	State checkweight {
 		onMsg(weightrequest : weightrequest(PESO)){
 			[# var PesoRichiesto = payloadArg(0).toInt() 
 				#]
-			println("coldroom - richiesti $PesoRichiesto, corrente: $PesoCorrente") color green
+			println("coldroom - richiesti: $PesoRichiesto, effettivo: $PesoEffettivo, promesso: $PesoPromesso") color green
 			
-			if [#PesoRichiesto + PesoCorrente + PesoPrevisto <= MAXW #]	{
-				[# PesoPrevisto += PesoRichiesto
+			if [# PesoEffettivo + PesoPromesso + PesoRichiesto  <= MAXW #]	{
+				[# PesoPromesso += PesoRichiesto
 					#]
-					println("coldroom - accettato, peso previsto: $PesoPrevisto") color green
-				replyTo weightrequest with weightok : weightok( NO_PARAM)
+					println("coldroom - accettato, peso promesso: $PesoPromesso") color green
+				replyTo weightrequest with weightOK : weightOK( NO_PARAM)
 			} else {
 				println("coldroom - rifiutato") color green
 				replyTo weightrequest with weightKO : weightKO( NO_PARAM )
@@ -154,9 +154,9 @@ QActor tickethandler context ctxcoldstoragearea {
 		printCurrentMessage
 	} Goto work
 	
+	
 	State work {
-		
-	}Transition t0 whenRequest depositRequest -> checkforweight
+	}Transition t0  whenRequest depositRequest -> checkforweight
 					whenRequest checkmyticket -> checktheticket
 	
 	State checkforweight {
@@ -169,7 +169,7 @@ QActor tickethandler context ctxcoldstoragearea {
 			request coldroom -m weightrequest : weightrequest($Peso)
 		}
 	}Transition t1 whenReply weightKO -> checkdeadlines
-					whenReply weightok -> returnticket
+					whenReply weightOK -> returnticket
 					
 	
 	State checkdeadlines{
@@ -179,7 +179,7 @@ QActor tickethandler context ctxcoldstoragearea {
 		[# var Spazioliberato = 0
 			Accepted = false
 			//TODO controllare che si liberi dello spazio con i biglietti scaduti					
-			if (Spazioliberato >= Peso){
+			if (Spazioliberato >= Peso){ //c'è abbastanza spazio per la richiesta corrente'
 				Spazioliberato -= Peso
 				Accepted = true
 				}
@@ -193,14 +193,18 @@ QActor tickethandler context ctxcoldstoragearea {
 		replyTo depositRequest with reject : reject( reject )
 	} Goto work
 	
+	
+	
 	State returnticket {
 		
 		[# //TODO
 			Ticket =  "MOCKTICKET"
 			#]
 			println("tickethandler - accettato") color blue
-			replyTo depositRequest with heresyourticket : heresyourticket( $Ticket )
+			replyTo depositRequest with accept : accept( $Ticket )
 	} Goto work
+	
+	
 	
 	
 	State checktheticket {
@@ -222,8 +226,7 @@ QActor tickethandler context ctxcoldstoragearea {
 }
 
 QActor serviceaccessgui context ctxcoldstoragearea {
-	[#	var P_DIC = 0
-		var P_EFF = 0
+	[#	var PESO = 0
 		var Ticket = ""
 		var Ticketok = false
 		#]
@@ -236,11 +239,12 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	State work {
 		println("SAG - ricomincio") color yellow
 		//random tra 10 e 20
-		[# P_DIC = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
+		[# PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
 			#]
-		println("SAG - richiedo $P_DIC") color yellow
-		request tickethandler -m depositRequest : depositRequest($P_DIC)
-	} Transition t0 whenReply heresyourticket -> gotoindoor
+		println("SAG - richiedo $PESO") color yellow
+		request tickethandler -m depositRequest : depositRequest($PESO)
+		
+	} Transition t0 whenReply accept -> gotoindoor
 					whenReply reject -> tryagainlater
 					
 				
@@ -253,7 +257,7 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	
 	State gotoindoor{
 		println("SAG - accettato") color yellow
-		onMsg( heresyourticket : heresyourticket(TICKET)){
+		onMsg( accept : accept(TICKET)){
 			[#	Ticket = payloadArg(0)
 				#]
 			println("SAG - $Ticket") color yellow
@@ -280,11 +284,7 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	}Transition t4 whenTime 3000 -> loaddone
 	
 	State loaddone {
-		[#
-			P_EFF = Math.floor(Math.random() *(P_DIC - 10 + 1) + 10).toInt()
-		#]
-		println("SAG - peso effettivo : $P_EFF") color yellow
-		request controller -m loaddone : loaddone($P_EFF, $P_DIC)
+		request controller -m loaddone : loaddone($PESO)
 	} Transition t6 whenReply chargetaken -> work
 	
 }

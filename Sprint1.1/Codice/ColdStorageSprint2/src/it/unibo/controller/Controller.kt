@@ -18,8 +18,7 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 	}
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
-		 var KG = 0
-				var P_DIC = 0
+		 var PESO = 0
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
@@ -44,14 +43,13 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 				}	 
 				state("startjob") { //this:State
 					action { //it:State
-						if( checkMsgContent( Term.createTerm("loaddone(P_EFF,P_DIC)"), Term.createTerm("loaddone(P_EFF,P_DIC)"), 
+						if( checkMsgContent( Term.createTerm("loaddone(PESO)"), Term.createTerm("loaddone(PESO)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
-								 KG = payloadArg(0).toInt()
-												P_DIC = payloadArg(1).toInt()
-								CommUtils.outgreen("controller - dichiarato: $P_DIC, effettivo: $KG")
+								 PESO = payloadArg(0).toInt()
+								CommUtils.outgreen("controller - dichiarato: $PESO")
 						}
-						forward("updateWeight", "updateWeight($KG,$P_DIC)" ,"coldroom" ) 
 						answer("loaddone", "chargetaken", "chargetaken(NO_PARAM)"   )  
+						forward("updateWeight", "updateWeight($PESO,$PESO)" ,"coldroom" ) 
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
@@ -61,7 +59,7 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 				}	 
 				state("jobdone") { //this:State
 					action { //it:State
-						forward("updateWeight", "updateWeight($KG,$P_DIC)" ,"coldroom" ) 
+						forward("updateWeight", "updateWeight($PESO,$PESO)" ,"coldroom" ) 
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
