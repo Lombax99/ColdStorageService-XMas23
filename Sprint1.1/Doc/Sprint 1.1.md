@@ -158,6 +158,9 @@ Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni
 ```
 
 ![[Sprint1.1/Doc/coldstorage2arch.png | 350]]
+
+WEB PAGE
+![[ChristamsClientWeb.png]]
 ### Progettazione
 - ==Contesti:==
 	- TicketHandler è contenuto sullo stesso contesto di Controller
