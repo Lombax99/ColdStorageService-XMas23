@@ -18,10 +18,14 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 	}
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
-			
+			var Token = "_"
 				var Ticket = ""
 				var Peso = 0
+				var Sequenza = 0
 				var Accepted = false
+				var TICKETTIME = 60*60*24//un giorno,in secondi
+				
+				var Tickets = mutableSetOf<String>()
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
@@ -48,7 +52,7 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 					action { //it:State
 						if( checkMsgContent( Term.createTerm("depositRequest(PESO)"), Term.createTerm("depositRequest(PESO)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
-								 Peso = payloadArg(0).toInt()
+								 Peso = payloadArg(0).toInt()  
 								CommUtils.outblue("tickethandler - richiedo $Peso")
 								request("weightrequest", "weightrequest($Peso)" ,"coldroom" )  
 						}
@@ -63,15 +67,29 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 				state("checkdeadlines") { //this:State
 					action { //it:State
 						CommUtils.outblue("tickethandler - rifiutato, controllo i biglietti")
-						 var Spazioliberato = 0
+						 var SpazioLiberato = 0
 									Accepted = false
-									//TODO controllare che si liberi dello spazio con i biglietti scaduti					
-									if (Spazioliberato >= Peso){ //c'è abbastanza spazio per la richiesta corrente'
-										Spazioliberato -= Peso
+									var Now = java.util.Date().getTime()/1000
+									
+									Tickets.forEach(){
+										var TicketTokens = it.split(Token, ignoreCase = true, limit = 0)
+										var StartTime = TicketTokens.get(1).toInt()
+										
+										
+										if( Now > StartTime + TICKETTIME){ //scaduto
+											var PesoTicket = TicketTokens.get(2).toInt()
+											SpazioLiberato += PesoTicket
+											Tickets.remove(it)
+										}
+												
+									}
+											
+									if (SpazioLiberato >= Peso){ //c'è abbastanza spazio per la richiesta corrente
+										SpazioLiberato -= Peso
 										Accepted = true
 										}
-									Spazioliberato *= -1 //andrà in sottrazione, per cui deve essere negativo
-						forward("updateWeight", "updateWeight(0,$Spazioliberato)" ,"coldroom" ) 
+									SpazioLiberato *= -1 //andrà in sottrazione, per cui deve essere negativo
+						forward("updateWeight", "updateWeight(0,$SpazioLiberato)" ,"coldroom" ) 
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
@@ -95,8 +113,14 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 				}	 
 				state("returnticket") { //this:State
 					action { //it:State
-						 //TODO
-									Ticket =  "MOCKTICKET"
+						 Ticket = "T".plus(Token)
+									
+									var Now = java.util.Date().getTime()/1000
+									
+									Ticket = Ticket.plus(Now).plus(Token).plus(Peso).plus(Token).plus(Sequenza)
+									Sequenza++
+									
+									Tickets.add(Ticket)
 						CommUtils.outblue("tickethandler - accettato")
 						answer("depositRequest", "accept", "accept($Ticket)"   )  
 						//genTimer( actor, state )
@@ -110,12 +134,19 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 					action { //it:State
 						if( checkMsgContent( Term.createTerm("checkmyticket(TICKET)"), Term.createTerm("checkmyticket(TICKET)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
-								CommUtils.outblue("tickethandler - controllo il biglietto")
 									var Ticket = payloadArg(0)
+												var Ticketvalid = false;
 												
-												//TODO
+												if(Tickets.contains(Ticket)){
+													var StartTime = Ticket.split(Token, ignoreCase = true, limit = 0).get(1).toInt()
+													
+													var Now = java.util.Date().getTime()/1000
+													if( Now < StartTime + TICKETTIME)
+														Ticketvalid = true
+													
+													Tickets.remove(Ticket)
+												}
 												
-												var Ticketvalid = true
 								CommUtils.outblue("tickethandler - il biglietto è valido? $Ticketvalid")
 								answer("checkmyticket", "ticketchecked", "ticketchecked($Ticketvalid)"   )  
 						}

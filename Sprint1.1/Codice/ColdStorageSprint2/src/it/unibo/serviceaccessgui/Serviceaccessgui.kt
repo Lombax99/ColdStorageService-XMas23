@@ -35,9 +35,8 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 				}	 
 				state("work") { //this:State
 					action { //it:State
-						CommUtils.outyellow("SAG - ricomincio")
 						 PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
-						CommUtils.outyellow("SAG - richiedo $PESO")
+						CommUtils.outyellow("SAG - chiedo $PESO")
 						request("depositRequest", "depositRequest($PESO)" ,"tickethandler" )  
 						//genTimer( actor, state )
 					}
@@ -61,11 +60,10 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 				}	 
 				state("gotoindoor") { //this:State
 					action { //it:State
-						CommUtils.outyellow("SAG - accettato")
 						if( checkMsgContent( Term.createTerm("accept(TICKET)"), Term.createTerm("accept(TICKET)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
 									Ticket = payloadArg(0)
-								CommUtils.outyellow("SAG - $Ticket")
+								CommUtils.outyellow("SAG - accettato, Ticket: $Ticket")
 						}
 						//genTimer( actor, state )
 					}

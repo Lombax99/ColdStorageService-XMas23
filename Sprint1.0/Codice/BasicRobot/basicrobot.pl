@@ -1,5 +1,5 @@
 %====================================================================================
-% basicrobot23 description   
+% basicrobot description   
 %====================================================================================
 context(ctxbasicrobot, "localhost",  "TCP", "8020").
 context(ctxcoldstoragearea, "127.0.0.1",  "TCP", "8040").

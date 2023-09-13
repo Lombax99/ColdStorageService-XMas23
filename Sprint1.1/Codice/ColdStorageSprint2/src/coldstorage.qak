@@ -57,7 +57,7 @@ QActor controller context ctxcoldstoragearea {
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
 				#]
-			println("controller - dichiarato: $PESO") color green
+			println("controller - startjob dichiarato: $PESO") color green
 		}
 		
 		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
@@ -145,10 +145,14 @@ QActor coldroom context ctxcoldstoragearea {
 
 QActor tickethandler context ctxcoldstoragearea {
 	
-	[#	
+	[#	var Token = "_"
 		var Ticket = ""
 		var Peso = 0
+		var Sequenza = 0
 		var Accepted = false
+		var TICKETTIME = 60*60*24//un giorno,in secondi
+		
+		var Tickets = mutableSetOf<String>()
 		#]
 	State s0 initial{
 		printCurrentMessage
@@ -163,8 +167,7 @@ QActor tickethandler context ctxcoldstoragearea {
 		
 		onMsg(depositRequest : depositRequest(PESO)){
 			
-			[# Peso = payloadArg(0).toInt()
-				#]
+			[# Peso = payloadArg(0).toInt() #]
 			println("tickethandler - richiedo $Peso") color blue
 			request coldroom -m weightrequest : weightrequest($Peso)
 		}
@@ -176,16 +179,30 @@ QActor tickethandler context ctxcoldstoragearea {
 				
 		println("tickethandler - rifiutato, controllo i biglietti") color blue
 		
-		[# var Spazioliberato = 0
+		[# var SpazioLiberato = 0
 			Accepted = false
-			//TODO controllare che si liberi dello spazio con i biglietti scaduti					
-			if (Spazioliberato >= Peso){ //c'è abbastanza spazio per la richiesta corrente'
-				Spazioliberato -= Peso
+			var Now = java.util.Date().getTime()/1000
+			
+			Tickets.forEach(){
+				var TicketTokens = it.split(Token, ignoreCase = true, limit = 0)
+				var StartTime = TicketTokens.get(1).toInt()
+				
+				
+				if( Now > StartTime + TICKETTIME){ //scaduto
+					var PesoTicket = TicketTokens.get(2).toInt()
+					SpazioLiberato += PesoTicket
+					Tickets.remove(it)
+				}
+						
+			}
+					
+			if (SpazioLiberato >= Peso){ //c'è abbastanza spazio per la richiesta corrente
+				SpazioLiberato -= Peso
 				Accepted = true
 				}
-			Spazioliberato *= -1 //andrà in sottrazione, per cui deve essere negativo
-			#]
-			forward coldroom -m updateWeight : updateWeight(0, $Spazioliberato)
+			SpazioLiberato *= -1 //andrà in sottrazione, per cui deve essere negativo
+		#]
+		forward coldroom -m updateWeight : updateWeight(0, $SpazioLiberato)
 	} Goto returnticket if [# Accepted #] else reject
 	
 	State reject {
@@ -197,8 +214,14 @@ QActor tickethandler context ctxcoldstoragearea {
 	
 	State returnticket {
 		
-		[# //TODO
-			Ticket =  "MOCKTICKET"
+		[# Ticket = "T".plus(Token)
+			
+			var Now = java.util.Date().getTime()/1000
+			
+			Ticket = Ticket.plus(Now).plus(Token).plus(Peso).plus(Token).plus(Sequenza)
+			Sequenza++
+			
+			Tickets.add(Ticket)
 			#]
 			println("tickethandler - accettato") color blue
 			replyTo depositRequest with accept : accept( $Ticket )
@@ -209,13 +232,19 @@ QActor tickethandler context ctxcoldstoragearea {
 	
 	State checktheticket {
 		onMsg(checkmyticket : checkmyticket(TICKET)){
-			println("tickethandler - controllo il biglietto") color blue
-			
 			[#	var Ticket = payloadArg(0)
+				var Ticketvalid = false;
 				
-				//TODO
+				if(Tickets.contains(Ticket)){
+					var StartTime = Ticket.split(Token, ignoreCase = true, limit = 0).get(1).toInt()
+					
+					var Now = java.util.Date().getTime()/1000
+					if( Now < StartTime + TICKETTIME)
+						Ticketvalid = true
+					
+					Tickets.remove(Ticket)
+				}
 				
-				var Ticketvalid = true
 				#]
 			println("tickethandler - il biglietto è valido? $Ticketvalid") color blue
 			replyTo checkmyticket with ticketchecked : ticketchecked($Ticketvalid)
@@ -237,11 +266,10 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	
 	
 	State work {
-		println("SAG - ricomincio") color yellow
 		//random tra 10 e 20
 		[# PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
 			#]
-		println("SAG - richiedo $PESO") color yellow
+		println("SAG - chiedo $PESO") color yellow
 		request tickethandler -m depositRequest : depositRequest($PESO)
 		
 	} Transition t0 whenReply accept -> gotoindoor
@@ -256,11 +284,10 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	
 	
 	State gotoindoor{
-		println("SAG - accettato") color yellow
 		onMsg( accept : accept(TICKET)){
 			[#	Ticket = payloadArg(0)
 				#]
-			println("SAG - $Ticket") color yellow
+			println("SAG - accettato, Ticket: $Ticket") color yellow
 		}
 	}Transition t2 whenTime 1000 -> giveticket
 	

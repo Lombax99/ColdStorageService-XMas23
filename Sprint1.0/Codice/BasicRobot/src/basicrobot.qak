@@ -1,4 +1,4 @@
-System /* -trace -msglog  */ basicrobot23
+System /* -trace -msglog  */ basicrobot
 
 
 Request doJob : doJob(KG)

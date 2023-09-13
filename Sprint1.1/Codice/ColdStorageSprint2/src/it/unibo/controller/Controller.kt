@@ -46,7 +46,7 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 						if( checkMsgContent( Term.createTerm("loaddone(PESO)"), Term.createTerm("loaddone(PESO)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								 PESO = payloadArg(0).toInt()
-								CommUtils.outgreen("controller - dichiarato: $PESO")
+								CommUtils.outgreen("controller - startjob dichiarato: $PESO")
 						}
 						answer("loaddone", "chargetaken", "chargetaken(NO_PARAM)"   )  
 						forward("updateWeight", "updateWeight($PESO,$PESO)" ,"coldroom" ) 

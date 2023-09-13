@@ -16,7 +16,7 @@ eventedgeattr = {
     'color': 'red',
     'style': 'dotted'
 }
-with Diagram('basicrobot23Arch', show=False, outformat='png', graph_attr=graphattr) as diag:
+with Diagram('basicrobotArch', show=False, outformat='png', graph_attr=graphattr) as diag:
   with Cluster('env'):
      sys = Custom('','./qakicons/system.png')
      with Cluster('ctxbasicrobot', graph_attr=nodeattr):
