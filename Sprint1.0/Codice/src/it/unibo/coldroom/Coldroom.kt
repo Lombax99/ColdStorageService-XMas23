@@ -19,7 +19,7 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
 		
-				var PesoCorrente = 0
+				var PesoEffettivo = 0
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
@@ -38,10 +38,10 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 						 	   
 						if( checkMsgContent( Term.createTerm("updateWeight(PESO)"), Term.createTerm("updateWeight(PESO)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
-								 PesoCorrente += payloadArg(0).toInt() 
+								 PesoEffettivo += payloadArg(0).toInt() 
 						}
 						CommUtils.outblack("peso aggiornato")
-						CommUtils.outblack("nuovo peso: $PesoCorrente")
+						CommUtils.outblack("nuovo peso: $PesoEffettivo")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002

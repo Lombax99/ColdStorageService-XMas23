@@ -76,7 +76,7 @@ Il Ticket, su richiesta di un driver tramite ServiceAccessGUI, viene generato da
 Ogni Ticket è caratterizzato dai seguenti parametri:
 - start time: istante di emissione del ticket;
 - peso della quantità di cibo da scaricare dichiarato dal driver;
-- identificativo del driver a cui è assegnato il ticket;
+- ~~identificativo del driver a cui è assegnato il ticket;~~
 - codice univoco che identifica il ticket generato.
 
 ### Analisi del Problema
@@ -142,6 +142,7 @@ Motivazioni:
 	- Dobbiamo assicurarci che chi richiede il ticket sia l'unico a poterlo usare. NO
 	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy o copia. NO
 	- Fare in modo che la risposta ad una richiesta arrivi al camionista che l'ha mandata e solo a lui anche se la richiesta arriva da un dispositivo alieno. NO
+	- Fare in modo che un singolo camionista non possa continuare a generate ticket all'infinito e occupare tutto il peso ipotetico. Possibile DoS. NO
 	- Fare in modo che un ticket non sia riutilizzabile? possibile DoS, usiamo ticket sequenziali? YES
 > Io ho già l'elenco dei ticket emessi in TicketHandler per controllare i ticket scaduti ecc..
 > Posso imporre che ogni ticket che ricevo debba essere dentro quella lista e rimuoverlo appena lo ricevo, in questo modo un ticket non può essere presentato più di una volta.
@@ -162,3 +163,7 @@ Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni
 	- TicketHandler è contenuto sullo stesso contesto di Controller
 	- TransportTrolley, ColdRoom e ServiceAccessGui avranno un contesto a parte per ciascuno
 `alla fine questa informazione sarà nel qak`
+
+
+### Come avviare il test del prof
+2) avviare l'immagine Docker webrobot23

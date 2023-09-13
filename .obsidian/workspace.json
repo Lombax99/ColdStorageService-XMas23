@@ -1,26 +1,14 @@
 {
   "main": {
-    "id": "30e9b66524fbc155",
+    "id": "c09fbf6f7887a04f",
     "type": "split",
     "children": [
       {
-        "id": "b96caf8b35cc0c7d",
+        "id": "6099e6ae46bf2113",
         "type": "tabs",
         "children": [
           {
-            "id": "a0ae8251d798d85d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint0/Cold Storage Service - Natali.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "247332488a00bdba",
+            "id": "2a6ebf0bf4f9a23e",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -30,35 +18,22 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "16d626ef0a723a60",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "0fc2895ea7d0dd42",
+    "id": "b4637190387643d2",
     "type": "split",
     "children": [
       {
-        "id": "85dc82599eb7c90f",
+        "id": "28d1979f2ba7a729",
         "type": "tabs",
         "children": [
           {
-            "id": "d080882117b9c247",
+            "id": "8e40e15af9ced1c4",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -68,7 +43,7 @@
             }
           },
           {
-            "id": "d832beefa0f1501e",
+            "id": "eb102fb0e4d07f63",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -83,7 +58,7 @@
             }
           },
           {
-            "id": "00a0cfad7405084b",
+            "id": "d62e326a229a59c3",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -94,18 +69,18 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300
   },
   "right": {
-    "id": "9be263e097d05a94",
+    "id": "20840bfd8a4e54bc",
     "type": "split",
     "children": [
       {
-        "id": "ca31754b2d9e6100",
+        "id": "a3ea614306a7e5ae",
         "type": "tabs",
         "children": [
           {
-            "id": "fc2d841332729cea",
+            "id": "8126339681c53f7b",
             "type": "leaf",
             "state": {
               "type": "backlink",
@@ -122,7 +97,7 @@
             }
           },
           {
-            "id": "3d248e7b8028fcf3",
+            "id": "71feeec39bfc8f2d",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
@@ -134,7 +109,7 @@
             }
           },
           {
-            "id": "b8993ffc3f8f08fc",
+            "id": "2433a968091636e0",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -145,22 +120,22 @@
             }
           },
           {
-            "id": "de3d52b488b5355a",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0.md"
-              }
-            }
-          },
-          {
-            "id": "22a466acc43447d7",
+            "id": "8c3889bae59631fd",
             "type": "leaf",
             "state": {
               "type": "all-properties",
               "state": {
                 "sortOrder": "frequency"
+              }
+            }
+          },
+          {
+            "id": "e7e89baac610a1f2",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Sprint1.0/Doc/Sprint 1.0.md"
               }
             }
           }
@@ -173,41 +148,38 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Apri selezione rapida": false,
-      "graph:Apri vista grafo": false,
-      "canvas:Crea nuova lavagna": false,
-      "daily-notes:Apri nota del giorno": false,
-      "templates:Inserisci modello": false,
-      "command-palette:Apri riquadro comandi": false
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
     }
   },
-  "active": "247332488a00bdba",
+  "active": "2a6ebf0bf4f9a23e",
   "lastOpenFiles": [
-    "Sprint0/Cold Storage Service - Natali.md",
-    "Sprint1.0/Doc/Sprint 1.0.md",
+    "Sprint1.1/Codice/qakicons/system.PNG",
+    "Sprint1.1/Codice/qakicons/symActorSmall.png",
+    "Sprint1.1/Codice/qakicons/symActor.png",
+    "Sprint1.1/Codice/qakicons/externalQActor.png",
+    "Sprint1.1/Codice/qakicons/codedQActor.png",
+    "Sprint1.1/Codice/qakicons",
+    "Sprint1.0/Codice/coldstoragearch",
+    "Sprint1.0/Codice/basicrobot23arch",
+    "Sprint1.0/Codice/qakicons/system.PNG",
+    "Sprint1.0/Codice/qakicons/symActorSmall.png",
+    "Sprint1.0/Codice/qakicons/symActor.png",
+    "Sprint1.0/Codice/qakicons/externalQActor.png",
+    "Sprint1.0/Codice/qakicons/codedQActor.png",
+    "Sprint1.0/Codice/qakicons",
     "Sprint1.1/Doc/Sprint 1.1.md",
-    "Sprint1.1/Doc/msoC80.tmp",
-    "Sprint1.1/Doc/~$$cicloVitaMessaggi.~vsdx",
-    "Sprint1.1/Doc/mso7B70.tmp",
-    "Sprint1.1/Doc/~$$ArchitetturaLogica_Sprint1.1.~vsdx",
-    "Sprint1.1/Doc/ArchitetturaLogica_Sprint1.1.vsdx",
-    "Sprint1.1/Doc/~$$ArchitetturaLogica_Sprint1.1 (2).~vsdx",
-    "Sprint1.1/Doc/ArchitetturaLogica_Sprint1.1 (2).vsdx",
-    "Sprint1.0/Doc/mso71BC.tmp",
-    "Sprint1.0/Doc/~$$ArchitetturaLogica_Sprint1.0.~vsdx",
-    "Sprint1.1/Doc/ArchitetturaLogica_Sprint2.vsdx",
-    "Sprint1.1/Doc/coldstorage2arch.png",
-    "Sprint1.0/Doc/coldstoragearch.png",
-    "Sprint2/Doc/Sprint 2.md",
-    "[BasicRobot23.md",
-    "Other/ColdStorageServiceRoomAnnoted.png",
-    "Sprint1.1/Doc/cicloVitaMessaggi.png",
-    "Sprint0/Architettura_Sprint0.png",
-    "Sprint1.1/Doc/ArchitetturaLogica_Sprint1.1.png",
-    "Sprint1/Doc/ArchitetturaLogica_Sprint1 1.png",
-    "Senza nome.canvas",
-    "Sprint1.0/Doc/ArchitetturaLogica_Sprint1.0.png",
-    "C%3A%2FUsers%2Flomba%2FDesktop%2Fiss23%2Fiss23Material%2Fhtml%2FQakActors23.html%23streamedqactor.md",
-    "C%3A%2FUsers%2Flomba%2FDesktop%2Fiss23%2Fiss23Material%2Fhtml%2FQakActors23%2Ehtml%23streamedqactor.md"
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/ctxcoldstoragearea/tickethandler_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/ctxcoldstoragearea/serviceaccessgui_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/ctxcoldstoragearea_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/ctxcoldstoragearea/controller_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/ctxcoldstoragearea/coldroom_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/serverctxcoldstoragearea_MsLog.txt",
+    "Sprint0/Cold Storage Service - Natali.md",
+    "Sprint1.0/Doc/Sprint 1.0.md"
   ]
 }
