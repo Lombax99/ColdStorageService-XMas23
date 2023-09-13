@@ -1,2 +1,0 @@
-{"actor":"transporttrolley", "msgType":"request", "sender":"controller", "msgId":"doJob"}
-{"actor":"coldroom", "msgType":"dispatch", "sender":"controller", "msgId":"updateWeight"}
