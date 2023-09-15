@@ -2,7 +2,7 @@
 
 [![Size][size-shield]][size-url]
 [![Downloads][downloads-shield]][downloads-url]
-[![Stars][stars-shield]][stars-url]
+[![Stars][stars-shield]][stars-url]\
 [![Kotlin][kotlin-shield]][kotlin-url]
 [![IntelliJ IDEA][intellij-shield]][intellij-url]
 
@@ -22,13 +22,13 @@ Descrizione Descrizione Descrizione
 - [x] **Sprint0** - BlaBla
   - Latest Release: 
   - Sprint Review: 
-- [x] **Sprint1** - BlaBla
+- [ ] **Sprint1** - BlaBla
   - Latest Release: 
   - Sprint Review: 
-- [x] **Sprint2** - BlaBla
+- [ ] **Sprint2** - BlaBla
   - Latest Release: 
   - Sprint Review:
-- [x] **Sprint3** - BlaBla
+- [ ] **Sprint3** - BlaBla
   - Latest Release: 
   - Final Exam: 
 
