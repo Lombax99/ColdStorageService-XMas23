@@ -129,7 +129,13 @@ ColdStorageService è un componente del sistema che si occupa di gestire le rich
 - ricevere Ticket nel momento in cui il driver arriva in INDOOR;
 - verificare la validità dei Ticket ricevuti, ovvero verificare se questi sono scaduti o meno.
 
-NOTA: potremmo creare una tabella delle interazioni con _Sender, Reciver, Descrizione, Body, Note_
+NOTA: potremmo creare una tabella delle interazioni con _Sender, Reciver, type, why that type, Descrizione, Body, Note_
+in generale le ragioni per i vari tipi di messaggio sono:
+- req/resp se ho bisogno di ricevere una risposta
+- dispatch se è un messaggio per un componente specifico che conosco e non mi interessa la risposta
+- event se è per uno o più componenti che non conosco direttamente (io emetto e chi è interessato riceve)
+
+
 - ==WeightRequest==, ==StoCazzoDiTicket==, ==DepositRequest== e ==LoadDone== saranno **Req/Resp**
 	- DepositRequest; riceve un ticket come risposta o rejected in caso di fallimento
 	- Ticket: deve riceve risposta in caso di ticket accettato o rifiutato

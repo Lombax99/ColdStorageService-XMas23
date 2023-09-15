@@ -140,6 +140,7 @@ Motivazioni:
 	
 - ==Problema della sicurezza:==
 	- Dobbiamo assicurarci che chi richiede il ticket sia l'unico a poterlo usare. NO
+	NOTA: la Cate lo ha fatto aggiungendo ai ticket un parametro randomico segreto che solo chi ha ricevuto il ticket può conoscere... non so se sia perchè Natali ha detto loro di farlo o per loro scelta ma non è impossibile da implementare, da discutere.
 	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy o copia. NO
 	- Fare in modo che la risposta ad una richiesta arrivi al camionista che l'ha mandata e solo a lui anche se la richiesta arriva da un dispositivo alieno. NO
 	- Fare in modo che un singolo camionista non possa continuare a generate ticket all'infinito e occupare tutto il peso ipotetico. Possibile DoS. NO
@@ -157,15 +158,26 @@ NOTE:
 Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni camion che si presenta, in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html. Che tecnologia utilizzare? SPRING
 ```
 
+
 ![[Sprint1.1/Doc/coldstorage2arch.png | 350]]
 
 WEB PAGE
 ![[ChristamsClientWeb.png]]
+NOTE sulla gui: usare attori per la gui non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfaccia con esso. 
+Opzioni disponibili: SPRING o NODEJS, ma nodejs è brutto, il codice è difficilmente manutenibile e più complesso da sviluppare, usiamo SPRING.
+
+
 ### Progettazione
 - ==Contesti:==
 	- TicketHandler è contenuto sullo stesso contesto di Controller
 	- TransportTrolley, ColdRoom e ServiceAccessGui avranno un contesto a parte per ciascuno
 `alla fine questa informazione sarà nel qak`
+
+- Codice della gestione dei ticket
+	deve avere una lista che contiene i ticket emessi ecc...
+
+- Codice dei ticket
+
 
 
 ### Come avviare il test del prof

@@ -11,11 +11,28 @@
             "id": "78927285b7352167",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Sprint1.0/Doc/Sprint 1.0.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "16d36c0d36c70aaf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -81,6 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -129,7 +148,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Senza nome.canvas"
+                "file": "README.md"
               }
             }
           }
@@ -150,8 +169,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8e40e15af9ced1c4",
+  "active": "16d36c0d36c70aaf",
   "lastOpenFiles": [
+    "Sprint1.1/Doc/Sprint 1.1.md",
+    "Sprint1.0/Doc/Sprint 1.0.md",
+    "Sprint0/Cold Storage Service - Natali.md",
+    "Senza nome.canvas",
     "[BasicRobot23.md",
     "Sprint1.0/Codice/bin/ColdStorage/coldstorage.pl",
     "Sprint1.0/Codice/bin/ColdStorage/Arch_coldstorage.py",
@@ -164,9 +187,6 @@
     "Sprint1.0/Codice/gradle/wrapper",
     "Sprint1.0/Codice/gradle",
     "Sprint1.0/Codice/BasicRobot/basicrobot.pl",
-    "Sprint0/Cold Storage Service - Natali.md",
-    "Sprint1.1/Doc/Sprint 1.1.md",
-    "Sprint1.0/Doc/Sprint 1.0.md",
     "Sprint1.1/Codice/qakicons/system.PNG",
     "Sprint1.1/Codice/qakicons/symActorSmall.png",
     "Sprint1.1/Codice/qakicons/symActor.png",

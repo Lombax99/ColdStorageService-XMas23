@@ -1,5 +1,5 @@
 ### Goal Sprint 1
-1) Basic Robot + ColdStorageService
+1) Basic Robot + ColdStorageService (scriviamo perchè ci concentriamo su questi due soltanto)
 2) [[Cold Storage Service - Natali |Link al modello precedente]]
 
 ### Requisiti
@@ -18,9 +18,17 @@ A company intends to build a ColdStorageService, composed of a set of elements:
     2. go from the INDOOR to the ==PORT of the ColdRoom==
     3. deposit the food-load in the ColdRoom
 
+NOTA: aggiungiamo i requisiti dei ticket con user story perché non abbiamo ancora deciso di rimandare quella parte ad uno sprint successivo e per ora è pertinente.
 ### Analisi dei Requisiti
 Definizioni:
 `definire in modo più formale e comprensibile alla macchina`
+NOTA: aggiungiamo definizione in formato di codice, ad esempio 
+```ticket:
+int TICKETIME      #define the time of emission del ticket
+int TICKETNUMBER   #define the number of ticket
+```
+
+NOTA: ha senso rimettere l'analisi dei requisiti in questo modo o ha più senso definire solo i cambiamenti rispetto allo sprint 0?
 ##### ==DDR robot==
 *Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
 [robot](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html)
@@ -60,6 +68,15 @@ Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Conta
 
 
 ### Analisi del Problema
+
+NOTA: nel file della Cate e di Longhi è stato introdotto qua il concetto di usare una griglia.
+Non viene definito nelle definizioni una coppia di coordinate, solo in questo momento vengo ridefiniti i componenti come entità nella griglia a determinate coordinate.
+Sempre qua viene detto che il robot ha una step che permette di implementare il sistema agevolmente.
+
+NOTA: anche qua possiamo aggiungere pezzi di codice del qak per essere più machine understandable.
+
+NOTA: Ma tutti i parametri che abbiamo tipo MAXW TICKETTIME, da dove vengono? Li mettiamo hardcoded o facciamo un file di config da leggere (magari un bel JSON...)?
+
 - ==Separazione delle responsabilità di ColdStorageService==
 	ColdStorageService è un componente caratterizzato da troppe responsabilità, abbiamo quindi deciso di sostituirlo con 2 attori:
 	- Controller, il quale si occupa di gestire il robot ed aggiornare il peso di ColdRoom.
@@ -106,7 +123,12 @@ Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Conta
 	NOTA: abbiamo definito con il committente che il peso da scaricare sia sempre minore o uguale al peso massimo trasportabile.
 	
 ![[Sprint1.0/Doc/coldstoragearch.png | 300]]
+
+NOTE: test plan?
+definizione di mockGUI per fare i test ecc...
+
 ### Progettazione
+NOTE: dividiamo un po' il codice e aggiungiamo qualche commento legato ai problemi di sopra
 ``` qak
 System coldstorage
 
