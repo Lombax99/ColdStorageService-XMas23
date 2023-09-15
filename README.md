@@ -1,12 +1,3 @@
-<div align="center">
-
-[![Size][size-shield]][size-url]
-[![Downloads][downloads-shield]][downloads-url]
-[![Stars][stars-shield]][stars-url]\
-[![Kotlin][kotlin-shield]][kotlin-url]
-[![IntelliJ IDEA][intellij-shield]][intellij-url]
-
-<br/>
 </div>
 
 <div align="center">
