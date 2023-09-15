@@ -1,3 +1,8 @@
+### Goal dello Sprint 0
+- individuare la struttura principale e le macro-entità del sistema e le loro interazioni.
+- definire un piano di lavoro.
+- ecc...
+
 ### Requisiti
 A company intends to build a ColdStorageService, composed of a set of elements:
 
@@ -70,7 +75,8 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 ### Analisi preliminare dei requisiti
 
 ![[Architettura_Sprint0.png]]
-
+ NOTA: da decidere se aggiungere un collegamento indefinito tra Transport Trolley e Led + Sonar e se collegare allo stesso modo Cold Storage Service con Transport Trolley, inoltre potremmo dover aggiungere il Basic Robot come entità associata a Transport Trolley.
+ NOTA 2: fare il grafico con gli script python del prof? Vorrebbe dire fare il qak... che palle.
 ##### ==Service Area==
 Area rettangolare di dimensione L * l. L'area sarà suddivisa in una griglia con coordinate.
 Abbiamo richiesto al committente le dimensioni in metri della Service Area: 9m * 6m .
@@ -123,7 +129,7 @@ ColdStorageService è un componente del sistema che si occupa di gestire le rich
 - ricevere Ticket nel momento in cui il driver arriva in INDOOR;
 - verificare la validità dei Ticket ricevuti, ovvero verificare se questi sono scaduti o meno.
 
-
+NOTA: potremmo creare una tabella delle interazioni con _Sender, Reciver, Descrizione, Body, Note_
 - ==WeightRequest==, ==StoCazzoDiTicket==, ==DepositRequest== e ==LoadDone== saranno **Req/Resp**
 	- DepositRequest; riceve un ticket come risposta o rejected in caso di fallimento
 	- Ticket: deve riceve risposta in caso di ticket accettato o rifiutato
@@ -138,6 +144,13 @@ ColdStorageService è un componente del sistema che si occupa di gestire le rich
 - ==ColdRoom== è stato modellato come un ==Attore==.
 	ColdRoom da requisiti aumenta solo di peso, è logico pensare che prima o poi qualcuno debba svuotare il contenitore. Prevediamo quindi che in futuro la ColdRoom debba interagire con componenti esterni al progetto, motivo per il quale è conveniente definire ColdRoom come un Attore.
 	Inoltre questa scelta semplifica la gestione dell'interazione tra ColdRoom e ServiceStatusGui.
+	EXTRA: si alleggerisce il lavoro di ColdStorageService e si segue il principio di singola responsabilità.
+	
+- Da requisiti il sistema sarà distribuito su almeno due contesti separati.
+
+
+### Possibili ulteriori note del committente
+Ci sta scrivere a parte le domande e le risposte che abbiamo fatto a Natali, cose come la dimensione della stanza, casi particolari da gestire, come affrontare la sicurezza ecc...
 
 ### Divisione in Sprint
 1) Basic Robot + Cold StorageService [[Sprint 1.0]]
@@ -158,5 +171,8 @@ Ogni Sprint verrà affrontato insieme con divisione dei compiti specifica valuta
 - Sprint 3: entro la fine di agosto
 - Sprint 4: entro metà settembre
 `NOTA: questa divisione cerca di tener conto delle vacanze estive tenendo i tempi abbastanza laschi ma è probabile sforeremo comunque`
+NOTA: fare un piano di lavoro più accurato: con testing e specifiche
+
+NOTA: ci sta mettere i nostri nomi e le info in nel readme di github.
 
 

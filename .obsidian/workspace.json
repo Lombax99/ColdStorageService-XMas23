@@ -128,7 +128,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Senza nome.canvas"
+              }
             }
           }
         ]
@@ -150,6 +152,10 @@
   },
   "active": "8e40e15af9ced1c4",
   "lastOpenFiles": [
+    "[BasicRobot23.md",
+    "Sprint1.0/Codice/bin/ColdStorage/coldstorage.pl",
+    "Sprint1.0/Codice/bin/ColdStorage/Arch_coldstorage.py",
+    "Sprint1.0/Codice/bin/ColdStorage/Api_coldstorage.txt",
     "Sprint1.1/Doc/ChristamsClientWeb.png",
     "Sprint1.0/Codice/gradlew.bat",
     "Sprint1.0/Codice/gradlew",
@@ -158,8 +164,6 @@
     "Sprint1.0/Codice/gradle/wrapper",
     "Sprint1.0/Codice/gradle",
     "Sprint1.0/Codice/BasicRobot/basicrobot.pl",
-    "Sprint1.0/Codice/BasicRobot/Arch_basicrobot.py",
-    "Sprint1.0/Codice/BasicRobot/Api_basicrobot.txt",
     "Sprint0/Cold Storage Service - Natali.md",
     "Sprint1.1/Doc/Sprint 1.1.md",
     "Sprint1.0/Doc/Sprint 1.0.md",
@@ -168,11 +172,9 @@
     "Sprint1.1/Codice/qakicons/symActor.png",
     "Sprint1.1/Codice/qakicons/externalQActor.png",
     "Sprint1.1/Codice/qakicons/codedQActor.png",
-    "Sprint1.1/Codice/qakicons",
     "Sprint1.0/Codice/qakicons/system.PNG",
     "Sprint1.0/Codice/qakicons/symActorSmall.png",
     "Sprint1.0/Codice/qakicons/symActor.png",
-    "Sprint1.0/Codice/qakicons/externalQActor.png",
-    "Sprint1.0/Codice/qakicons/codedQActor.png"
+    "Sprint1.0/Codice/qakicons/externalQActor.png"
   ]
 }
