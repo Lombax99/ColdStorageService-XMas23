@@ -27,9 +27,9 @@ Descrizione Descrizione Descrizione
 <table>
   <!--<tr align="center"><td colspan="3"><b>Team BCR</b></td></tr>-->
   <tr align="center">
-    <td><a href="https://github.com/LisaIU00"></a></td>
-    <td><a href="https://github.com/Lombax99"></a></td>
-    <td><a href="https://github.com/RedDuality"></a></td>
+    <td>LisalU00<a href="https://github.com/LisaIU00"></a></td>
+    <td>Lombax99<a href="https://github.com/Lombax99"></a></td>
+    <td>RedDuality<a href="https://github.com/RedDuality"></a></td>
   </tr>
   <tr align="center">
     <td><b>Lisa Uccini</b></td>
