@@ -29,7 +29,7 @@ Descrizione Descrizione Descrizione
   <tr align="center">
     <td><a href="https://github.com/LisaIU00">LisalU00</a></td>
     <td><a href="https://github.com/Lombax99">Lombax99</a></td>
-    <td>RedDuality<a href="https://github.com/RedDuality">RedDuality</a></td>
+    <td><a href="https://github.com/RedDuality">RedDuality</a></td>
   </tr>
   <tr align="center">
     <td><b>Lisa Uccini</b></td>
