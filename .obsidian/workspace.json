@@ -1,26 +1,14 @@
 {
   "main": {
-    "id": "30e9b66524fbc155",
+    "id": "c09fbf6f7887a04f",
     "type": "split",
     "children": [
       {
-        "id": "b96caf8b35cc0c7d",
+        "id": "933490590b4405c3",
         "type": "tabs",
         "children": [
           {
-            "id": "6c3824540efb1a6f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint0/Cold Storage Service - Natali.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "0622c162b654cdfb",
+            "id": "78927285b7352167",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -32,12 +20,12 @@
             }
           },
           {
-            "id": "1445231b3ef40fa1",
+            "id": "16d36c0d36c70aaf",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -50,15 +38,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "0fc2895ea7d0dd42",
+    "id": "b4637190387643d2",
     "type": "split",
     "children": [
       {
-        "id": "85dc82599eb7c90f",
+        "id": "28d1979f2ba7a729",
         "type": "tabs",
         "children": [
           {
-            "id": "d080882117b9c247",
+            "id": "8e40e15af9ced1c4",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -68,7 +56,7 @@
             }
           },
           {
-            "id": "d832beefa0f1501e",
+            "id": "eb102fb0e4d07f63",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -83,7 +71,7 @@
             }
           },
           {
-            "id": "00a0cfad7405084b",
+            "id": "d62e326a229a59c3",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -94,23 +82,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300
   },
   "right": {
-    "id": "9be263e097d05a94",
+    "id": "20840bfd8a4e54bc",
     "type": "split",
     "children": [
       {
-        "id": "ca31754b2d9e6100",
+        "id": "a3ea614306a7e5ae",
         "type": "tabs",
         "children": [
           {
-            "id": "fc2d841332729cea",
+            "id": "8126339681c53f7b",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,19 +110,19 @@
             }
           },
           {
-            "id": "3d248e7b8028fcf3",
+            "id": "71feeec39bfc8f2d",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "b8993ffc3f8f08fc",
+            "id": "2433a968091636e0",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -145,22 +133,22 @@
             }
           },
           {
-            "id": "de3d52b488b5355a",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0.md"
-              }
-            }
-          },
-          {
-            "id": "22a466acc43447d7",
+            "id": "8c3889bae59631fd",
             "type": "leaf",
             "state": {
               "type": "all-properties",
               "state": {
                 "sortOrder": "frequency"
+              }
+            }
+          },
+          {
+            "id": "e7e89baac610a1f2",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "README.md"
               }
             }
           }
@@ -173,43 +161,41 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Apri selezione rapida": false,
-      "graph:Apri vista grafo": false,
-      "canvas:Crea nuova lavagna": false,
-      "daily-notes:Apri nota del giorno": false,
-      "templates:Inserisci modello": false,
-      "command-palette:Apri riquadro comandi": false
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
     }
   },
-  "active": "0622c162b654cdfb",
+  "active": "16d36c0d36c70aaf",
   "lastOpenFiles": [
     "Sprint1.1/Doc/Sprint 1.1.md",
-    "Sprint0/Cold Storage Service - Natali.md",
     "Sprint1.0/Doc/Sprint 1.0.md",
-    "Sprint1.0/Codice/BasicRobot/basicrobot.pl",
-    "Sprint1.0/Codice/BasicRobot/Arch_basicrobot.py",
-    "Sprint1.0/Codice/BasicRobot/Api_basicrobot.txt",
+    "Sprint0/Cold Storage Service - Natali.md",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/tickethandler_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/coldroom_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/controller_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/serviceaccessgui_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.len",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i.len",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream.len",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.values.at",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream",
+    "README.md",
+    "Senza nome.canvas",
+    "[BasicRobot23.md",
     "Sprint1.1/Doc/ChristamsClientWeb.png",
     "Sprint1.1/Codice/qakicons/system.PNG",
     "Sprint1.1/Codice/qakicons/symActorSmall.png",
     "Sprint1.1/Codice/qakicons/symActor.png",
     "Sprint1.1/Codice/qakicons/externalQActor.png",
     "Sprint1.1/Codice/qakicons/codedQActor.png",
-    "Sprint1.1/Codice/qakicons",
     "Sprint1.0/Codice/qakicons/system.PNG",
     "Sprint1.0/Codice/qakicons/symActorSmall.png",
     "Sprint1.0/Codice/qakicons/symActor.png",
-    "Sprint1.0/Codice/qakicons/externalQActor.png",
-    "Sprint1.0/Codice/qakicons",
-    "Sprint1.0/Codice/ColdStorage/coldstoragearch",
-    "Sprint1.1/Codice/BasicRobotSprint2/bin/robotVirtual/VrobotMsgs.class",
-    "Sprint1.1/Codice/BasicRobotSprint2/bin/robotVirtual/virtualrobotSupport23.kt",
-    "Sprint1.1/Codice/BasicRobotSprint2/bin/robotVirtual/VrobotHLMovesActors23.class",
-    "Sprint1.1/Codice/BasicRobotSprint2/bin/robotVirtual/IVrobotMovesAsynch.class",
-    "Sprint2/Doc/Sprint 2.md",
-    "[BasicRobot23.md",
-    "Senza nome.canvas",
-    "C%3A%2FUsers%2Flomba%2FDesktop%2Fiss23%2Fiss23Material%2Fhtml%2FQakActors23.html%23streamedqactor.md",
-    "C%3A%2FUsers%2Flomba%2FDesktop%2Fiss23%2Fiss23Material%2Fhtml%2FQakActors23%2Ehtml%23streamedqactor.md"
+    "Sprint1.0/Codice/qakicons/externalQActor.png"
   ]
 }

@@ -76,7 +76,7 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 
 ![[Architettura_Sprint0.png]]
  NOTA: da decidere se aggiungere un collegamento indefinito tra Transport Trolley e Led + Sonar e se collegare allo stesso modo Cold Storage Service con Transport Trolley, inoltre potremmo dover aggiungere il Basic Robot come entità associata a Transport Trolley.
- NOTA 2: fare il grafico con gli script python del prof? Vorrebbe dire fare il qak... che palle.
+ NOTA 2: fare il grafico con gli script python del prof? Vorrebbe dire fare il qak... che palle magari lo copio :) .
 ##### ==Service Area==
 Area rettangolare di dimensione L * l. L'area sarà suddivisa in una griglia con coordinate.
 Abbiamo richiesto al committente le dimensioni in metri della Service Area: 9m * 6m .

@@ -1,4 +1,4 @@
-### Goal Sprint 2
+### Goal Sprint 1.1
 In questa seconda fase ci concentriamo sul processo di emissione dei ticket e le valutazioni di sicurezza annesse.
 [[Sprint 1.0|Link allo sprint 1]]
 ### Requisiti
@@ -163,9 +163,10 @@ Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni
 
 WEB PAGE
 ![[ChristamsClientWeb.png]]
-NOTE sulla gui: usare attori per la gui non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfaccia con esso. 
+NOTE sulla gui: usare attori per la gui non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfacci con esso.
 Opzioni disponibili: SPRING o NODEJS, ma nodejs è brutto, il codice è difficilmente manutenibile e più complesso da sviluppare, usiamo SPRING.
 
+NOTE: anche qui dobbiamo mettere i test
 
 ### Progettazione
 - ==Contesti:==

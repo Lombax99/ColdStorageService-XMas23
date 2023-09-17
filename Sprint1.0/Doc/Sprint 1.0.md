@@ -71,9 +71,9 @@ Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Conta
 
 NOTA: nel file della Cate e di Longhi è stato introdotto qua il concetto di usare una griglia.
 Non viene definito nelle definizioni una coppia di coordinate, solo in questo momento vengo ridefiniti i componenti come entità nella griglia a determinate coordinate.
-Sempre qua viene detto che il robot ha una step che permette di implementare il sistema agevolmente.
+Sempre qua viene detto che il robot ha una step che permette di implementare il sistema agevolmente. Forse era nella progettazione?
 
-NOTA: anche qua possiamo aggiungere pezzi di codice del qak per essere più machine understandable.
+NOTA: anche qua possiamo aggiungere pezzi di codice del qak per essere più machine understandable. Solo in progettazione con riferimento ai problemi nell'Analisi.
 
 NOTA: Ma tutti i parametri che abbiamo tipo MAXW TICKETTIME, da dove vengono? Li mettiamo hardcoded o facciamo un file di config da leggere (magari un bel JSON...)?
 
@@ -206,7 +206,7 @@ QActor coldroom context ctxcoldstoragearea {
 ```
 
 
-- [ ] Tutorial su come far partire la DEMO (passaggi e cose varie)
+- [x] Tutorial su come far partire la DEMO (passaggi e cose varie)
 
 1) Avviare il container itunibovirtualrobot23 su docker
 	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
