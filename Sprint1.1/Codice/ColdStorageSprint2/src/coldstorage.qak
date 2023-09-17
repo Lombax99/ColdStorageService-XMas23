@@ -150,7 +150,8 @@ QActor tickethandler context ctxcoldstoragearea {
 		var Peso = 0
 		var Sequenza = 0
 		var Accepted = false
-		var TICKETTIME = 60*60*24//un giorno,in secondi
+		
+		var TICKETTIME = 2//in secondi
 		
 		var Tickets = mutableSetOf<String>()
 		#]
@@ -183,25 +184,37 @@ QActor tickethandler context ctxcoldstoragearea {
 			Accepted = false
 			var Now = java.util.Date().getTime()/1000
 			
-			Tickets.forEach(){
-				var TicketTokens = it.split(Token, ignoreCase = true, limit = 0)
-				var StartTime = TicketTokens.get(1).toInt()
+			
+			
+			
+			val it = Tickets.iterator()
+    		while (it.hasNext()) {
+    			var CurrentTicket = it.next()
+    			
+    			var TicketTokens = CurrentTicket.split(Token, ignoreCase = true, limit = 0)
+    			var StartTime = TicketTokens.get(1).toInt()
 				
 				
 				if( Now > StartTime + TICKETTIME){ //scaduto
 					var PesoTicket = TicketTokens.get(2).toInt()
 					SpazioLiberato += PesoTicket
-					Tickets.remove(it)
-				}
-						
-			}
 					
+					it.remove()
+				}
+        		
+    		}
+    		
+
+
+    
+			
+				
 			if (SpazioLiberato >= Peso){ //c'è abbastanza spazio per la richiesta corrente
 				SpazioLiberato -= Peso
 				Accepted = true
 				}
-			SpazioLiberato *= -1 //andrà in sottrazione, per cui deve essere negativo
 		#]
+		println("tickethandler - Spazio Liberato: $SpazioLiberato")
 		forward coldroom -m updateWeight : updateWeight(0, $SpazioLiberato)
 	} Goto returnticket if [# Accepted #] else reject
 	
@@ -218,7 +231,7 @@ QActor tickethandler context ctxcoldstoragearea {
 			
 			var Now = java.util.Date().getTime()/1000
 			
-			Ticket = Ticket.plus(Now).plus(Token).plus(Peso).plus(Token).plus(Sequenza)
+			Ticket = Ticket.plus( Now ).plus(Token).plus( Peso ).plus(Token).plus( Sequenza)
 			Sequenza++
 			
 			Tickets.add(Ticket)
@@ -239,10 +252,11 @@ QActor tickethandler context ctxcoldstoragearea {
 					var StartTime = Ticket.split(Token, ignoreCase = true, limit = 0).get(1).toInt()
 					
 					var Now = java.util.Date().getTime()/1000
-					if( Now < StartTime + TICKETTIME)
+					if( Now < StartTime + TICKETTIME){
+						Tickets.remove(Ticket)
 						Ticketvalid = true
-					
-					Tickets.remove(Ticket)
+					}
+						
 				}
 				
 				#]
@@ -289,7 +303,7 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 				#]
 			println("SAG - accettato, Ticket: $Ticket") color yellow
 		}
-	}Transition t2 whenTime 1000 -> giveticket
+	}Transition t2 whenTime 3000 -> giveticket
 	
 	State giveticket{
 		println("SAG - consegno il biglietto") color yellow

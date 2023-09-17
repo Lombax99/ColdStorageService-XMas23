@@ -23,7 +23,8 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 				var Peso = 0
 				var Sequenza = 0
 				var Accepted = false
-				var TICKETTIME = 60*60*24//un giorno,in secondi
+				
+				var TICKETTIME = 2//in secondi
 				
 				var Tickets = mutableSetOf<String>()
 		return { //this:ActionBasciFsm
@@ -71,24 +72,36 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 									Accepted = false
 									var Now = java.util.Date().getTime()/1000
 									
-									Tickets.forEach(){
-										var TicketTokens = it.split(Token, ignoreCase = true, limit = 0)
-										var StartTime = TicketTokens.get(1).toInt()
+									
+									
+									
+									val it = Tickets.iterator()
+						    		while (it.hasNext()) {
+						    			var CurrentTicket = it.next()
+						    			
+						    			var TicketTokens = CurrentTicket.split(Token, ignoreCase = true, limit = 0)
+						    			var StartTime = TicketTokens.get(1).toInt()
 										
 										
 										if( Now > StartTime + TICKETTIME){ //scaduto
 											var PesoTicket = TicketTokens.get(2).toInt()
 											SpazioLiberato += PesoTicket
-											Tickets.remove(it)
-										}
-												
-									}
 											
+											it.remove()
+										}
+						        		
+						    		}
+						    		
+						
+						
+						    
+									
+										
 									if (SpazioLiberato >= Peso){ //c'è abbastanza spazio per la richiesta corrente
 										SpazioLiberato -= Peso
 										Accepted = true
 										}
-									SpazioLiberato *= -1 //andrà in sottrazione, per cui deve essere negativo
+						CommUtils.outblack("tickethandler - Spazio Liberato: $SpazioLiberato")
 						forward("updateWeight", "updateWeight(0,$SpazioLiberato)" ,"coldroom" ) 
 						//genTimer( actor, state )
 					}
@@ -117,7 +130,7 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 									
 									var Now = java.util.Date().getTime()/1000
 									
-									Ticket = Ticket.plus(Now).plus(Token).plus(Peso).plus(Token).plus(Sequenza)
+									Ticket = Ticket.plus( Now ).plus(Token).plus( Peso ).plus(Token).plus( Sequenza)
 									Sequenza++
 									
 									Tickets.add(Ticket)
@@ -141,10 +154,11 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 													var StartTime = Ticket.split(Token, ignoreCase = true, limit = 0).get(1).toInt()
 													
 													var Now = java.util.Date().getTime()/1000
-													if( Now < StartTime + TICKETTIME)
+													if( Now < StartTime + TICKETTIME){
+														Tickets.remove(Ticket)
 														Ticketvalid = true
-													
-													Tickets.remove(Ticket)
+													}
+														
 												}
 												
 								CommUtils.outblue("tickethandler - il biglietto è valido? $Ticketvalid")

@@ -70,7 +70,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 					//After Lenzi Aug2002
 					sysaction { //it:State
 				 	 		stateTimer = TimerActor("timer_gotoindoor", 
-				 	 					  scope, context!!, "local_tout_serviceaccessgui_gotoindoor", 1000.toLong() )
+				 	 					  scope, context!!, "local_tout_serviceaccessgui_gotoindoor", 3000.toLong() )
 					}	 	 
 					 transition(edgeName="t211",targetState="giveticket",cond=whenTimeout("local_tout_serviceaccessgui_gotoindoor"))   
 				}	 
