@@ -26,6 +26,11 @@ Reply	ticketchecked : ticketchecked(BOOL)
 Request loaddone : loaddone(PESO)
 Reply 	chargetaken : chargetaken(NO_PARAM)
 
+
+Dispatch startToDoThings : startToDoThings( NO_PARAM )
+
+
+
 //-----------------------------------------------------------------------
 
 Context ctxcoldstoragearea ip [host="localhost" port=8040]
@@ -151,7 +156,7 @@ QActor tickethandler context ctxcoldstoragearea {
 		var Sequenza = 0
 		var Accepted = false
 		
-		var TICKETTIME = 2//in secondi
+		var TICKETTIME = 60*10//10 min, in secondi
 		
 		var Tickets = mutableSetOf<String>()
 		#]
@@ -276,7 +281,9 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	
 	State s0 initial {
 		printCurrentMessage
-	} Goto work
+		println("SAG - in attesa") color yellow
+	} Goto work //Transition t0 whenMsg startToDoThings -> work
+					
 	
 	
 	State work {

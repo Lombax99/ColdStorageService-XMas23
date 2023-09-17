@@ -24,7 +24,7 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 				var Sequenza = 0
 				var Accepted = false
 				
-				var TICKETTIME = 2//in secondi
+				var TICKETTIME = 60*10//10 min, in secondi
 				
 				var Tickets = mutableSetOf<String>()
 		return { //this:ActionBasciFsm
