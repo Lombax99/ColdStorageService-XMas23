@@ -178,7 +178,15 @@ NOTE: anche qui dobbiamo mettere i test
 	deve avere una lista che contiene i ticket emessi ecc...
 
 - Codice dei ticket
-
+Il ticket sarà una stringa composta dai seguenti dati:
+momento di emissione,
+peso della richiesta,
+codice univoco.
+Il momento di emissione viene eseguito come numero di secondi dal primo gennaio 1970, sarà un long.
+Il peso della richiesta non viene modificato, viene salvato in un intero.
+il codice univoco è un numero sequenziale di emissione del ticket.
+la separazione dei campi avverrà tramite il token "_", che non causa problemi al momento della lettura del ticket.
+Sempre per problemi di traduzione del messaggio, il ticket inizia con una lettera: T.
 
 
 ### Come avviare il test del prof

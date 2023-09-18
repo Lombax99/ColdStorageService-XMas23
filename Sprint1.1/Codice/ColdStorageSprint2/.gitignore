@@ -3,6 +3,8 @@ bin/default
 .metadata
 .classpath
 .project
+.idea
+.gradle
 build
 logs 
 
