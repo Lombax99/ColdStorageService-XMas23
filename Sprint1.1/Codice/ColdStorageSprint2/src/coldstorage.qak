@@ -150,17 +150,21 @@ QActor coldroom context ctxcoldstoragearea {
 
 QActor tickethandler context ctxcoldstoragearea {
 	
-	[#	var Token = "_"
+	[#	
+		
+		var TICKETTIME = DomainSystemConfig.getTicketTime();
+		
+
+		var Token = "_"
 		var Ticket = ""
 		var Peso = 0
 		var Sequenza = 0
 		var Accepted = false
 		
-		var TICKETTIME = 60*10//10 min, in secondi
-		
 		var Tickets = mutableSetOf<String>()
 		#]
 	State s0 initial{
+		println("tickethandler - ticketime: $TICKETTIME") color blue
 		printCurrentMessage
 	} Goto work
 	

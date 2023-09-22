@@ -18,18 +18,22 @@ class Tickethandler ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( na
 	}
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
-			var Token = "_"
+			
+				
+				var TICKETTIME = DomainSystemConfig.getTicketTime();
+				
+		
+				var Token = "_"
 				var Ticket = ""
 				var Peso = 0
 				var Sequenza = 0
 				var Accepted = false
 				
-				var TICKETTIME = 60*10//10 min, in secondi
-				
 				var Tickets = mutableSetOf<String>()
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
+						CommUtils.outblue("tickethandler - ticketime: $TICKETTIME")
 						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
 						 	   
 						//genTimer( actor, state )
