@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Sprint0/Cold Storage Service - Natali.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "Sprint0/Cold Storage Service - Natali.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "Sprint0/Cold Storage Service - Natali.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -148,7 +148,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "Sprint0/Cold Storage Service - Natali.md"
               }
             }
           }
@@ -171,20 +171,21 @@
   },
   "active": "16d36c0d36c70aaf",
   "lastOpenFiles": [
-    "Sprint1.1/Doc/Sprint 1.1.md",
-    "Sprint1.0/Doc/Sprint 1.0.md",
-    "Sprint0/Cold Storage Service - Natali.md",
+    "Sprint1.1/testPython.py",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/serviceaccessgui_MsLog.txt",
     "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/tickethandler_MsLog.txt",
     "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/coldroom_MsLog.txt",
     "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/controller_MsLog.txt",
-    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/serviceaccessgui_MsLog.txt",
-    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.len",
-    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i",
-    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i.len",
-    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream.len",
-    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.values.at",
     "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab.keystream",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab.values.at",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/lookups/counters.tab",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.len",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i.len",
     "README.md",
+    "Sprint1.1/Doc/Sprint 1.1.md",
+    "Sprint1.0/Doc/Sprint 1.0.md",
+    "Sprint0/Cold Storage Service - Natali.md",
     "Senza nome.canvas",
     "[BasicRobot23.md",
     "Sprint1.1/Doc/ChristamsClientWeb.png",

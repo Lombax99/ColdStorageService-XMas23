@@ -1,1 +1,2 @@
 {"actor":"coldroom", "msgType":"dispatch", "curstate":"work", "nextstate":"updateWeight", "msgId":"updateWeight"}
+{"actor":"serviceaccessgui", "msgType":"dispatch", "curstate":"s0", "nextstate":"work", "msgId":"startToDoThings"}

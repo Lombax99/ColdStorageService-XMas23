@@ -286,7 +286,7 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	State s0 initial {
 		printCurrentMessage
 		println("SAG - in attesa") color yellow
-	} Goto work //Transition t0 whenMsg startToDoThings -> work
+	} Transition t0 whenMsg startToDoThings -> work
 					
 	
 	
