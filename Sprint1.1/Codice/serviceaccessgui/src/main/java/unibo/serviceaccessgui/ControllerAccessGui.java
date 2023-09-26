@@ -1,3 +1,5 @@
+package unibo.serviceaccessgui;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,7 @@ public class ControllerAccessGui {
     @GetMapping("/")
     public String homePage(Model model) {
         //model.addAttribute("arg", appName);
-        return "ServiceAccessGuiWebPage";
+        return "/static/ServiceAccessGuiWebPage";
     }
 
     @ExceptionHandler
