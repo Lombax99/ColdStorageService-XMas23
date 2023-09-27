@@ -25,7 +25,8 @@
     background-color: white;
     color: black;
     border: 2px solid #008CBA;
-    padding: 15px 32px;
+    padding: 15px;
+    width: 405px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -38,4 +39,24 @@
 .button:hover {
     background-color: #008CBA;
     color: white;
+}
+.buttonup:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
+.buttonup {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+    padding: 15px;
+    width: 100px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition-duration: 0.4s;
 }
