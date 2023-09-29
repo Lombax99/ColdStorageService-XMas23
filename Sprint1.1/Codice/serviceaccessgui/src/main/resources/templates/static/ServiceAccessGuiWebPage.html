@@ -14,11 +14,14 @@
 
 <div class="row">
   <div class="column" >
-    <label style="font-size:150%;" for="foodweight">Ask for ticket here:</label>
-	<br/>
-	<input style="font-size:150%;" type="number" id="foodweight" name="foodweight" placeholder="set food weight" required>
-	<input type="button" class="buttonup" onclick="depositRequest()" id="request" value="Request">
-	<br/>
+  	<form action="storefoodreq" method="post">
+		<label style="font-size:150%;" for="foodweight">Ask for ticket here:</label>
+		<br/>
+		<input style="font-size:150%;" type="number" id="foodweight" name="foodweight" placeholder="set food weight" required>
+		<!--<input type="button" class="buttonup"  value="Request">-->
+		<input type="submit" value="invia">
+  	</form>
+  	<br/>
 	<br/>
 	<input type="button" class="button" onclick="check()" id="check" value="Check Ticket">
 	<br/>

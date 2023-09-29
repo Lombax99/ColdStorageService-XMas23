@@ -11,6 +11,7 @@ var loaddoneText = "Richiesta di scaricare inviata. \nAttendi per sapere quando 
 var currentW = "3";
 document.getElementById('cw').innerHTML = currentW;
 
+
 function updateCurrentW(c) {
     currentW = c;
     document.getElementById('cw').innerHTML = currentW;
