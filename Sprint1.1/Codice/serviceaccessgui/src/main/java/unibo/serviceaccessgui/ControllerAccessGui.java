@@ -24,6 +24,7 @@ public class ControllerAccessGui {
     String COLDSTORAGESERVICEIPADDRESS = "127.0.0.1";
     int COLDSTORAGESERVICEPORT = 8040;
 
+
     Socket client;
     BufferedReader reader;
     BufferedWriter writer;
@@ -45,8 +46,9 @@ public class ControllerAccessGui {
     }
 
     @PostMapping("/storefoodreq")
-    public void storefoodreq(Model model, @RequestParam(name = "foodweight") String fw){
+    public String storefoodreq(Model model, @RequestParam(name = "foodweight") String fw){
         System.out.println("SONO ENTRATO IN FUNCTION");
+        //msg( MSGID, MSGTYPE, SENDER, RECEIVER, CONTENT, SEQNUM )
         String msg = "msg(depositRequest,request,roberto,tickethandler,depositRequest(" +fw + "),1)\n";
         String response;
 
@@ -67,11 +69,20 @@ public class ControllerAccessGui {
                 model.addAttribute("ticketcode", parameters[0]);
                 model.addAttribute("ticketsecret", parameters[1]);
 
-            }**/
+            }
+
+           const ot = document.getElementById("outputText");
+            var loaddoneText = "Richiesta di scaricare inviata. \nAttendi per sapere quando andare via.";
+            ot.innerHTML = loaddoneText;**/
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return "/static/ServiceAccessGuiWebPage";
+
     }
 
     //// UTILITIES////////////////////////////////

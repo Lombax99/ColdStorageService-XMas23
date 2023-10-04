@@ -18,8 +18,8 @@
 		<label style="font-size:150%;" for="foodweight">Ask for ticket here:</label>
 		<br/>
 		<input style="font-size:150%;" type="number" id="foodweight" name="foodweight" placeholder="set food weight" required>
-		<!--<input type="button" class="buttonup"  value="Request">-->
-		<input type="submit" value="invia">
+		<!--<input type="submit" class="buttonup"  value="Request">-->
+		<input type="submit" value="Request">
   	</form>
   	<br/>
 	<br/>
@@ -42,3 +42,20 @@
 
 </body>
 </html>
+
+
+
+
+$('#submit-form').on('click', function() {
+	var form = $('#tweet-form');
+	$.ajax({      url: form.attr('action'),
+		data: form.serialize(),
+		type: post,
+		success: function(result) {
+		// Do something with the response.
+		// Might want to check for errors here.
+		}, error: function(error) {
+			// Here you can handle exceptions thrown by the server or your controller.
+		}
+	})
+}
