@@ -1,10 +1,12 @@
 package unibo.serviceaccessgui;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 @Controller //ANNOTAZIONE IMPORTANTE
 public class ControllerAccessGui {
@@ -25,6 +29,8 @@ public class ControllerAccessGui {
     int COLDSTORAGESERVICEPORT = 8040;
 
 
+    //String loaddoneText = "Richiesta di scaricare inviata. \nAttendi per sapere quando andare via.";
+    String rispostatest = "";
     Socket client;
     BufferedReader reader;
     BufferedWriter writer;
@@ -44,6 +50,8 @@ public class ControllerAccessGui {
                 "HIControllerDemo ERROR " + ex.getMessage(),
                 responseHeaders, HttpStatus.CREATED);
     }
+
+
 
     @PostMapping("/storefoodreq")
     public String storefoodreq(Model model, @RequestParam(name = "foodweight") String fw){
@@ -74,15 +82,20 @@ public class ControllerAccessGui {
            const ot = document.getElementById("outputText");
             var loaddoneText = "Richiesta di scaricare inviata. \nAttendi per sapere quando andare via.";
             ot.innerHTML = loaddoneText;**/
-
+            rispostatest = "La tua richiesta è stata: "+msgType+"\n";
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "/static/ServiceAccessGuiWebPage";
+        return "redirect:/storefoodreqs";
+    }
 
+    @GetMapping("/storefoodreqs")
+    public String storefoodreqs(Model model) {
+        model.addAttribute("out", rispostatest);
+        return "/static/ServiceAccessGuiWebPage";
     }
 
     //// UTILITIES////////////////////////////////

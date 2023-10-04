@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <title>ServiceAccessGui web page</title>
 	<link rel="stylesheet" href="/css/mystyle.css">
@@ -14,7 +14,7 @@
 
 <div class="row">
   <div class="column" >
-  	<form action="storefoodreq" method="post">
+  	<form action="/storefoodreq" method="post">
 		<label style="font-size:150%;" for="foodweight">Ask for ticket here:</label>
 		<br/>
 		<input style="font-size:150%;" type="number" id="foodweight" name="foodweight" placeholder="set food weight" required>
@@ -23,18 +23,26 @@
   	</form>
   	<br/>
 	<br/>
-	<input type="button" class="button" onclick="check()" id="check" value="Check Ticket">
+	  <!--<form action="/check" method="post">-->
+		  <input type="submit" value="Check Ticket">
+	  <!--</form>-->
+	<!--<input type="button" class="button" onclick="check()" id="check" value="Check Ticket">-->
 	<br/>
 	<br/>
-	<input type="button" class="button" onclick="loadDone()" id="load" value="Load done">
+	  <!--<form action="/loaddone" method="post">-->
+		  <input type="submit" value="Load done">
+	  <!--</form>-->
+	<!--<input type="button" class="button" onclick="loadDone()" id="load" value="Load done">-->
 	
   </div>
   
   <div class="column" >
-	<textarea style="font-size:150%;" id="outputText" rows=10 cols=40 wrap=on readonly>Welcome to Christmas's service</textarea>
+	  <p style="font-size:150%;">	<span th:text="${out}"></span></p>
+	<!--<textarea style="font-size:150%;" id="outputText" rows=10 cols=40 wrap=on readonly>Welcome to Christmas's service.</textarea>-->
   
   </div>
 </div>
+
 
 
 <script src="/js/dinamic.js">
@@ -44,18 +52,3 @@
 </html>
 
 
-
-
-$('#submit-form').on('click', function() {
-	var form = $('#tweet-form');
-	$.ajax({      url: form.attr('action'),
-		data: form.serialize(),
-		type: post,
-		success: function(result) {
-		// Do something with the response.
-		// Might want to check for errors here.
-		}, error: function(error) {
-			// Here you can handle exceptions thrown by the server or your controller.
-		}
-	})
-}
