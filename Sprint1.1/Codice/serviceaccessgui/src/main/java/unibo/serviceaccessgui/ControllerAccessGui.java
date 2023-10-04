@@ -1,12 +1,11 @@
 package unibo.serviceaccessgui;
-import java.awt.*;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 
 @Controller //ANNOTAZIONE IMPORTANTE
 public class ControllerAccessGui {
@@ -30,7 +27,9 @@ public class ControllerAccessGui {
 
 
     //String loaddoneText = "Richiesta di scaricare inviata. \nAttendi per sapere quando andare via.";
+    Long peso = 0l;
     String rispostatest = "";
+    String ticket = "";
     Socket client;
     BufferedReader reader;
     BufferedWriter writer;
@@ -39,7 +38,7 @@ public class ControllerAccessGui {
     @GetMapping("/")
     public String homePage(Model model) {
         //ADD COSE PER STAMPARE NUMERO COLDROOM
-        //model.addAttribute("arg", appName);
+        model.addAttribute("out", rispostatest);
         return "/static/ServiceAccessGuiWebPage";
     }
 
@@ -53,11 +52,15 @@ public class ControllerAccessGui {
 
 
 
-    @PostMapping("/storefoodreq")
-    public String storefoodreq(Model model, @RequestParam(name = "foodweight") String fw){
+
+    @PostMapping("/depositreq")
+    public String depositreq(Model model, @RequestParam(name = "foodweight") String fw){
         System.out.println("SONO ENTRATO IN FUNCTION");
         //msg( MSGID, MSGTYPE, SENDER, RECEIVER, CONTENT, SEQNUM )
-        String msg = "msg(depositRequest,request,roberto,tickethandler,depositRequest(" +fw + "),1)\n";
+
+        System.out.println(fw);
+        peso = Long.parseLong(fw);
+        String msg = "msg(depositRequest,request,roberto,tickethandler,depositRequest(" + peso + "),1)\n";
         String response;
 
         try {
@@ -65,38 +68,83 @@ public class ControllerAccessGui {
             connectToColdStorageService();
             writer.write(msg);
             writer.flush();
-            System.out.println("message sent");
+            System.out.println("depositRequest sent");
             // handling response
+
             response = reader.readLine();
-            System.out.println("message read");
-            System.out.println(response);
             String msgType = getMsgType(response);
-            System.out.println(msgType);
-           /** if (msgType.equals("ticketaccepted")) {
-                String[] parameters = getParameters(response);
-                model.addAttribute("ticketcode", parameters[0]);
-                model.addAttribute("ticketsecret", parameters[1]);
+            ticket = getMsgValue(response);
 
-            }
-
-           const ot = document.getElementById("outputText");
-            var loaddoneText = "Richiesta di scaricare inviata. \nAttendi per sapere quando andare via.";
-            ot.innerHTML = loaddoneText;**/
-            rispostatest = "La tua richiesta è stata: "+msgType+"\n";
+            rispostatest = "La tua richiesta è stata: "+msgType+", il tuo biglietto è: " + ticket ;
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "redirect:/storefoodreqs";
+        return "redirect:/";
     }
 
-    @GetMapping("/storefoodreqs")
-    public String storefoodreqs(Model model) {
-        model.addAttribute("out", rispostatest);
-        return "/static/ServiceAccessGuiWebPage";
+
+    @PostMapping("/checkmyticketreq")
+    public String checkmyticketreq(Model model){
+        System.out.println("SONO ENTRATO IN checkticket");
+        //msg( MSGID, MSGTYPE, SENDER, RECEIVER, CONTENT, SEQNUM )
+        String msg = "msg(checkmyticket,request,roberto,tickethandler,checkmyticket(" +ticket + "),1)\n";
+        String response;
+
+        String ticketValid = "false";
+
+        try {
+            // sending message
+            connectToColdStorageService();
+
+            writer.write(msg);
+            writer.flush();
+            System.out.println("message sent");
+
+            // handling response
+            response = reader.readLine();
+            ticketValid = getMsgValue(response);
+            rispostatest = ticketValid;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return "redirect:/";
     }
+
+    @PostMapping("/loaddonereq")
+    public String loaddonereq(Model model){
+
+        String msg = "msg(loaddone,request,roberto,controller,loaddone(" +peso + "),1)\n";
+        String response;
+
+        String ticketValid = "false";
+
+        try {
+            // sending message
+            connectToColdStorageService();
+            writer.write(msg);
+            writer.flush();
+            System.out.println("message sent");
+
+            // handling response
+            response = reader.readLine();
+            System.out.println("message read");
+            System.out.println(response);
+            rispostatest = "Il tuo peso è stato preso in carico!";
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "redirect:/";
+    }
+
+
+
 
     //// UTILITIES////////////////////////////////
     private void connectToColdStorageService() throws IOException {
@@ -114,5 +162,10 @@ public class ControllerAccessGui {
     private String getMsgType(String msg) {
         return msg.split("\\(")[1].split(",")[0];
     }
+
+    private String getMsgValue(String msg) {
+        return msg.split("\\(|\\)")[2];
+    }
+
 
 }
