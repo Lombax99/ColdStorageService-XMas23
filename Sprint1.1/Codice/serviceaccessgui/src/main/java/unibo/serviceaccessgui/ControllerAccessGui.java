@@ -30,6 +30,8 @@ public class ControllerAccessGui {
     Long peso = 0l;
     String rispostatest = "";
     String ticket = "";
+
+    String responseButton = "";
     Socket client;
     BufferedReader reader;
     BufferedWriter writer;
@@ -38,7 +40,10 @@ public class ControllerAccessGui {
     @GetMapping("/")
     public String homePage(Model model) {
         //ADD COSE PER STAMPARE NUMERO COLDROOM
-        model.addAttribute("out", rispostatest);
+        model.addAttribute("out", "XMAS Love" );
+        model.addAttribute("disreq", false);
+        model.addAttribute("discheck", true);
+        model.addAttribute("disload", true);
         return "/static/ServiceAccessGuiWebPage";
     }
 
@@ -73,6 +78,7 @@ public class ControllerAccessGui {
 
             response = reader.readLine();
             String msgType = getMsgType(response);
+            responseButton = msgType;
             ticket = getMsgValue(response);
 
             rispostatest = "La tua richiesta è stata: "+msgType+", il tuo biglietto è: " + ticket ;
@@ -82,7 +88,22 @@ public class ControllerAccessGui {
             e.printStackTrace();
         }
 
-        return "redirect:/";
+        return "redirect:/responseReq";
+    }
+
+    @GetMapping("/responseReq")
+    public String responseReq(Model model) {
+        model.addAttribute("out", rispostatest);
+        if(responseButton.equals("accept")){
+            model.addAttribute("disreq", true);
+            model.addAttribute("discheck", false);
+            model.addAttribute("disload", true);
+        }else{
+            model.addAttribute("disreq", false);
+            model.addAttribute("discheck", true);
+            model.addAttribute("disload", true);
+        }
+        return "/static/ServiceAccessGuiWebPage";
     }
 
 
@@ -105,15 +126,32 @@ public class ControllerAccessGui {
 
             // handling response
             response = reader.readLine();
+
             ticketValid = getMsgValue(response);
             rispostatest = ticketValid;
+            responseButton = ticketValid;
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
-        return "redirect:/";
+        return "redirect:/responseCheck";
+    }
+
+    @GetMapping("/responseCheck")
+    public String responseCheck(Model model) {
+        model.addAttribute("out", rispostatest);
+        if(responseButton.equals("true")){
+            model.addAttribute("disreq", true);
+            model.addAttribute("discheck", true);
+            model.addAttribute("disload", false);
+        }else{
+            model.addAttribute("disreq", false);
+            model.addAttribute("discheck", true);
+            model.addAttribute("disload", true);
+        }
+        return "/static/ServiceAccessGuiWebPage";
     }
 
     @PostMapping("/loaddonereq")
@@ -135,12 +173,22 @@ public class ControllerAccessGui {
             response = reader.readLine();
             System.out.println("message read");
             System.out.println(response);
-            rispostatest = "Il tuo peso è stato preso in carico!";
+            rispostatest = "Il tuo peso è stato preso in carico! ADDIO";
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "redirect:/";
+        return "redirect:/responseLoad";
+    }
+
+    @GetMapping("/responseLoad")
+    public String printResponse(Model model) {
+        model.addAttribute("out", rispostatest);
+        model.addAttribute("disreq", false);
+        model.addAttribute("discheck", true);
+        model.addAttribute("disload", true);
+        return "/static/ServiceAccessGuiWebPage";
     }
 
 

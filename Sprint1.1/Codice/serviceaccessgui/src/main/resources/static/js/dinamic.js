@@ -1,4 +1,4 @@
-const ot = document.getElementById("outputText");
+/**const ot = document.getElementById("outputText");
 document.getElementById("check").disabled = true;
 document.getElementById("load").disabled = true;
 
@@ -18,20 +18,17 @@ function updateCurrentW(c) {
 }
 
 function loadDone() {
-    ot.innerHTML = loaddoneText;
-    document.getElementById("request").disabled = false;
+    document.getElementById("req").disabled = false;
     document.getElementById("check").disabled = true;
     document.getElementById("load").disabled = true;
 }
 
 function check() {
-    ot.innerHTML = checkText;
     document.getElementById("check").disabled = true;
     document.getElementById("load").disabled = false;
 }
 
 function depositRequest() {
-    ot.innerHTML = requestText;
-    document.getElementById("request").disabled = true;
+    document.getElementById("req").disabled = true;
     document.getElementById("check").disabled = false;
-}
+}*/

@@ -19,18 +19,18 @@
 		<br/>
 		<input style="font-size:150%;" type="number" id="foodweight" name="foodweight" placeholder="set food weight" required>
 		<!--<input type="submit" class="buttonup"  value="Request">-->
-		<input type="submit" value="Request">
+		<input type="submit" th:disabled="${disreq}" value="Request">
   	</form>
   	<br/>
 	<br/>
 	  <form action="/checkmyticketreq" method="post">
-		  <input type="submit" value="Check Ticket">
+		  <input type="submit" id="check" th:disabled="${discheck}" value="Check Ticket">
 	  </form>
 	<!--<input type="button" class="button" onclick="check()" id="check" value="Check Ticket">-->
 	<br/>
 	<br/>
 	  <form action="/loaddonereq" method="post">
-		  <input type="submit" value="Load done">
+		  <input type="submit" id="load" th:disabled="${disload}" value="Load done">
 	  </form>
 	<!--<input type="button" class="button" onclick="loadDone()" id="load" value="Load done">-->
 	
