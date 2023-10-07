@@ -13,25 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          }
-        ]
-      },
-      {
-        "id": "375de05d9a9e9570",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "ce64d303a0128c98",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint0/Cold Storage Service - Natali.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -87,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "20840bfd8a4e54bc",
@@ -103,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -153,7 +136,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.md"
+                "file": "README.md"
               }
             }
           },
@@ -180,13 +163,15 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
   "active": "f9f00f93e3553532",
   "lastOpenFiles": [
-    "Sprint0/Cold Storage Service - Natali.md",
     "Sprint0/Cold Storage Service - Natali V2.md",
+    "Sprint0/Cold Storage Service - Natali V2.pdf",
+    "Sprint0/Cold Storage Service - Natali.md",
     "Sprint0/Architettura_Sprint0_V2.png",
     "Sprint0/Architettura_Sprint0_V2.drawio",
     "Sprint1.0/Codice/bin/ColdStorage/gradle/wrapper/gradle-wrapper.properties",
@@ -197,7 +182,6 @@
     "Sprint1.0/Codice/bin/BasicRobot/src/it/unibo/robotpos/Robotpos.kt",
     "Sprint1.0/Codice/bin/BasicRobot/src/it/unibo/planexec/Planexec.kt",
     "Sprint1.0/Codice/bin/BasicRobot/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt",
-    "Sprint1.0/Codice/bin/BasicRobot/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt",
     "Sprint1.1/Doc/Sprint 1.1.md",
     "Sprint1.1/Doc/coldstorage2arch.png",
     "Sprint1.1/Doc/cicloVitaMessaggi.png",

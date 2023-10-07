@@ -13,7 +13,7 @@ Descrizione Descrizione Descrizione
 - [x] **Sprint0** - BlaBla
   - Latest Release: 
   - Sprint Review: 
-- [ ] **Sprint1** - BlaBla
+- [x] **Sprint1** - BlaBla
   - Latest Release: 
   - Sprint Review: 
 - [ ] **Sprint2** - BlaBla

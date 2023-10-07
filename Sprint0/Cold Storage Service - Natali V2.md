@@ -120,36 +120,25 @@ ColdStorageService si occupa di gestire le richieste di scarico merce, questo co
 > - dispatch se è un messaggio per un componente specifico che conosco e non mi interessa la risposta
 > - event se è per uno o più componenti che non conosco direttamente (io emetto e chi è interessato riceve)
 
-
-
-
-
-
-
-
-
-- ServiceStatusGui si comportarà come un ==Observer== [StreamQActor](C:/Users/lomba/Desktop/iss23/iss23Material/html/QakActors23.html) 
-	`NOTA: SSG dovrà aggiornarsi dinamicamente e presentare i dati correnti ad ogni istante`
-	
-- Quasi tutto il lavoro passa attraverso ==ColdStorageService==, dalla gestione dei ticket alla logica di controllo del TransportTrolley --> ==Da valutare una possibile divisione in più componenti.==
-
-
-> Da requisiti il sistema dovrà essere distribuito su almeno due contesti: (specifica quali)
-> Tutte le entità descritte fin'ora saranno dunque modellate come attori, in particolare per ColdRoom decidiamo di modellarla come attore e non come POJO per i seguenti motivi:
-
-- ==ColdRoom== è stato modellato come un ==Attore==.
-	Si ritiene in futuro debba esistere un componente per scaricare ColdRoom.
-
-	ColdRoom da requisiti aumenta solo di peso, è logico pensare che prima o poi qualcuno debba svuotare il contenitore. Prevediamo quindi che in futuro la ColdRoom debba interagire con componenti esterni al progetto, motivo per il quale è conveniente definire ColdRoom come un Attore.
-	Inoltre questa scelta semplifica la gestione dell'interazione tra ColdRoom e ServiceStatusGui.
-	EXTRA: si alleggerisce il lavoro di ColdStorageService e si segue il principio di singola responsabilità.
-	
-- Da requisiti il sistema sarà distribuito su almeno due contesti separati.
+##### Contesti
+Da requisiti il sistema sarà distribuito in almeno due contesti:
+- Un contesto per Sonar e Led
+- Un contesto per il resto dell'applicazione
 
 ### Keypoints
-- blabla
+##### 1) Aggiornamento di ServiceStutusGUI
+SSG dovrà presentare i dati aggiornati del sistema ad ogni istante, dovrà quindi comportarsi come un __Observer__, sfruttiamo la tecnologia degli [StreamQActor](C:/Users/lomba/Desktop/iss23/iss23Material/html/QakActors23.html).
+##### 2) Carico di lavoro di ColdStorageService
+Tutto il lavoro del sistema al momento passa attraverso ColdStorageService, dalla gestione dei Ticket all'interazione con il TransportTrolley --> __Da valutare una divisione in più componenti__
+##### 3) ColdRoom, Attore o POJO?
+Per requisiti il sistema deve essere distribuito, tutte le entità definite finora saranno quindi modellate come __Attori__, in particolare __ColdRoom__ decidiamo di modellarla come attore e non come POJO per i seguenti motivi:
+- Nonostante non sia nei requisiti è logico pensare che in futuro il sistema debba essere esteso con funzionalità per diminuire il peso contenuto in ColdRoom. Definire il componente come attore faciliterà questa aggiunta.
+- Inoltre definire ColdRoom come attore esterno è in linea con il principio di singola responsabilità e alleggerisce il carico di lavoro di ColdStorageService.
+##### Posizione del robot?
+Sarà necessario per il sistema riuscire ad identificare la posizione corrente del robot in ogni istante per pianificare il percorso da intraprendere.
+Per risolvere il problema assoceremo alla __Service Area__ un sistema di coordinate da definire in seguito.
 
-### Possibili ulteriori note del committente
+### Discussioni col committente
 > Richiesta al committente:
 > Dimensione della Service Area: 9m * 6m.
 
@@ -157,33 +146,43 @@ ColdStorageService si occupa di gestire le richieste di scarico merce, questo co
 > - Capienza massima (MAXW) corrisponde a 100 kg
 > - La grandezza di ColdRoom Container è 1m * 1m
 > - Posizione in Service Area come da figura iniziale
+> - Sarà possibile per il robot muoversi attorno alla ColdRoom
 
 > Richiesta al committente:
 > - dimensione del transport trolley corrisponde ad un quadrato di lunghezza RD = 1 m.
 
-Ci sta scrivere a parte le domande e le risposte che abbiamo fatto a Natali, cose come la dimensione della stanza, casi particolari da gestire, come affrontare la sicurezza ecc...
-
 ### Divisione in Sprint
-1) Basic Robot + Cold StorageService [[Sprint 1.0]]
-	- [ ] sistema descrizione 
-	`Lo scopo del primo sprint è avere una prima versione del robot funzionante con la logica di gestione delle richieste a lui relative. Si tratta del core del progetto, senza quello il resto non ha motivo di esistere.`
-	`Nel secondo sprint implementeremo il sistema di ticketing, implementeremo una prima interfaccia utente solo per i test. Probabilmente la parte che richiederà più tempo, conviene farla prima di aggiungere led e sonar per non complicare la progettazione.`
+1) Basic Robot + ColdStorageService [[Sprint 1.0]]
+> [!NOTE]- Descrizione
+> Lo scopo del primo sprint è produrre una prima versione funzionante del core dell'applicazione. Questo comprende ColdStorageService con la logica di gestione dei Ticket e il TransportTrolley funzionante.
+> A questa parte deve essere affiancata una mock version della ServiceAccessGUI per la fase di testing.
+
 2) Led e Sonar [[Sprint 2]]
-	`Nel terzo sprint implementeremo il sistema di led e sonar con tutta la logica rimanente. Dovrebbe essere facilmente implementabile sopra a tutto quello che già è stato creato senza richiedere alcuna modifica.`
-3) Service Status Gui e grafica bellina [[Sprint 3]]
-	`L'ultimo sprint si occuperà della service status gui e delle interfacce grafiche finali. Potrebbe richiedere un refactoring parziale delle componenti da osservare, da tenere in considerazione durante lo sviluppo.`
+> [!NOTE]- Descrizione
+> Nel secondo sprint verranno implementati il sistema di led e sonar con la logica ad essi associata.
+
+3) ServiceStatusGui e grafiche migliorate [[Sprint 3]]
+> [!NOTE]- Descrizione
+> Nel terzo sprint ci occuperemo della ServiceStatusGUI e delle interfacce grafiche finali.
 
 ### Divisione dei compiti
 Ogni Sprint verrà affrontato insieme con divisione dei compiti specifica valutata di volta in volta.
 
-### Valutazione dei tempi
-- Sprint 1 con primo esempio funzionante: 1 settimana
-- Sprint 2 completato e funzionante: entro la prima settimana di Agosto
-- Sprint 3: entro la fine di agosto
-- Sprint 4: entro metà settembre
-`NOTA: questa divisione cerca di tener conto delle vacanze estive tenendo i tempi abbastanza laschi ma è probabile sforeremo comunque`
-NOTA: fare un piano di lavoro più accurato: con testing e specifiche
+### Piano di Lavoro
+| Sprint   | GOAL                                     | Tempo Stimato | Divisione del Lavoro | Note                                                                 |
+| -------- | ---------------------------------------- | ------------- | -------------------- | -------------------------------------------------------------------- |
+| SPRINT 1 | Sviluppo del primo prototipo             | 2 man-days    | 3 persone            |                                                                      |
+|          | Sviluppo della ServiceAccessGUI          | 1 man-day     | 2 persone            |                                                                      | 
+|          | Testing                                  | 2 man-hours   | 1 persona            |                                                                      |
+| SPRINT 2 | Sviluppo di Led e Sonar                  | 4 man-hours   | 3 persone            |                                                                      |
+|          | Testing di Led e sonar                   | 1 man-hour    | 1 persona            |                                                                      |
+|          | Implementazione con il resto del sistema | 1 man-hour    | 1 persona            |                                                                      |
+|          | Testing completo                         | 1 man-hour    | 1 persona            |                                                                      |
+| SPRINT 3 | Sviluppo della ServiceStatusGui          | 1 man-day     | 2 persone            |                                                                      |
+|          | Testing del sistema completo             | 2 man-hour    | 1 persona            |                                                                      |
+|          | Refactoring della user interface         | 1 man-hour    | 1 persona            |                                                                      |
+|          | Testing finale dell'intera applicazione  | 3 man-hour    | 3 persone            | Il testing finale deve essere condiviso da tutti i membri del gruppo |
 
-NOTA: ci sta mettere i nostri nomi e le info in nel readme di github.
+
 
 
