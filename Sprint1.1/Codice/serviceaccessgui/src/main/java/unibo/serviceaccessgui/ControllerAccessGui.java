@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
+import io.micrometer.common.lang.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class ControllerAccessGui {
     //String loaddoneText = "Richiesta di scaricare inviata. \nAttendi per sapere quando andare via.";
     Long peso = 0l;
     String rispostatest = "";
-    String ticket = "";
+    private String ticket = ""; //TE NON DEVI ESSERE QUI SHIT DEVI ESSERE BUTTATO IN JS, COME?
 
     String responseButton = "";
     Socket client;
@@ -81,7 +82,7 @@ public class ControllerAccessGui {
             responseButton = msgType;
             ticket = getMsgValue(response);
 
-            rispostatest = "La tua richiesta è stata: "+msgType+", il tuo biglietto è: " + ticket ;
+            rispostatest = "La tua richiesta è stata:"+msgType+", il tuo biglietto è:" + ticket ;
 
 
         } catch (IOException e) {
@@ -92,8 +93,10 @@ public class ControllerAccessGui {
     }
 
     @GetMapping("/responseReq")
+    @Nullable
     public String responseReq(Model model) {
         model.addAttribute("out", rispostatest);
+        model.addAttribute("varticket", ticket);
         if(responseButton.equals("accept")){
             model.addAttribute("disreq", true);
             model.addAttribute("discheck", false);
@@ -108,10 +111,15 @@ public class ControllerAccessGui {
 
 
     @PostMapping("/checkmyticketreq")
-    public String checkmyticketreq(Model model){
+    public String checkmyticketreq(Model model, @RequestParam(name = "varticket") String tt){
         System.out.println("SONO ENTRATO IN checkticket");
+        ticket = tt;
         //msg( MSGID, MSGTYPE, SENDER, RECEIVER, CONTENT, SEQNUM )
+
+        System.out.println("AAAAABBB : "+ ticket);
+
         String msg = "msg(checkmyticket,request,roberto,tickethandler,checkmyticket(" +ticket + "),1)\n";
+        System.out.println("MESSAGGIO INVIATO: "+msg);
         String response;
 
         String ticketValid = "false";
@@ -142,6 +150,7 @@ public class ControllerAccessGui {
     @GetMapping("/responseCheck")
     public String responseCheck(Model model) {
         model.addAttribute("out", rispostatest);
+
         if(responseButton.equals("true")){
             model.addAttribute("disreq", true);
             model.addAttribute("discheck", true);
