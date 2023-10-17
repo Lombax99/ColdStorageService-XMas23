@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+
+
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <title>ServiceAccessGui web page</title>
@@ -9,7 +12,6 @@
 <h1 style="color:white; font-size:300%; background-color:#008CBA">Cold Storage Service</h1>
 <p style="font-size:150%;">Current weight in cold room:
 <label style="font-size:120%;" id="cw"></label></p>
-
 <br>
 
 <div class="row">
@@ -24,6 +26,9 @@
   	<br/>
 	<br/>
 	  <form action="/checkmyticketreq" method="post">
+		  <label style="font-size:150%;" for="varticket">Ask for check and deposit here:</label>
+		  <br/>
+		  <input style="font-size:150%;" type="text" id="varticket" name="varticket" placeholder="insert ticket here" required>
 		  <input type="submit" id="check" th:disabled="${discheck}" value="Check Ticket">
 	  </form>
 	<!--<input type="button" class="button" onclick="check()" id="check" value="Check Ticket">-->
