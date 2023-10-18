@@ -42,3 +42,9 @@ input[type=submit]:hover {
     color: white;
 }
 
+input[type=submit]:disabled {
+    background-color: dimgrey;
+    color: linen;
+    opacity: 1;
+}
+

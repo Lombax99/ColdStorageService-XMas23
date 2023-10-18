@@ -28,10 +28,6 @@ public class ControllerAccessGui {
 
     String currentWeight = "";
 
-    //String loaddoneText = "Richiesta di scaricare inviata. \nAttendi per sapere quando andare via.";
-    Long peso = 0l;
-
-
     Socket client;
     BufferedReader reader;
     BufferedWriter writer;
@@ -39,7 +35,6 @@ public class ControllerAccessGui {
     //HOMEPAGE
     @GetMapping("/")
     public String homePage(Model model) {
-        //ADD COSE PER STAMPARE NUMERO COLDROOM
         model.addAttribute("out", "XMAS Love" );
         this.aggiornaPesoCorrente(model);
         this.enableButtons("default", model);
@@ -58,22 +53,14 @@ public class ControllerAccessGui {
     public String depositreq(Model model, @RequestParam(name = "foodweight") String fw){
 
         this.aggiornaPesoCorrente(model);
-        peso = Long.parseLong(fw);
-        String msg = "msg(depositRequest,request,roberto,tickethandler,depositRequest(" + peso + "),1)\n";
+        String msg = "msg(depositRequest,request,roberto,tickethandler,depositRequest(" + fw + "),1)\n";
 
-        String ticket = "";
-        String rispostatest = "";
-        String responseButton = "";
-        try {
-            String response = this.sendMessage(msg);
-            responseButton = getMsgType(response);
-            ticket = getMsgValue(response);
+        String response = this.sendMessage(msg);
 
-            rispostatest = "La tua richiesta è stata:" + responseButton + ", il tuo biglietto è:" + ticket ;
+        String responseButton = getMsgType(response);
+        String ticket = getMsgValue(response);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String rispostatest = "La tua richiesta è stata:" + responseButton + ", il tuo biglietto è:" + ticket ;
 
         model.addAttribute("out", rispostatest);
         model.addAttribute("varticket", ticket);
@@ -90,13 +77,9 @@ public class ControllerAccessGui {
     @PostMapping("/checkmyticketreq")
     public String checkmyticketreq(Model model, @RequestParam(name = "varticket") String ticket){
         String msg = "msg(checkmyticket,request,roberto,tickethandler,checkmyticket(" + ticket + "),1)\n";
-        String ticketValid = "false";
-        try {
-            String response = this.sendMessage(msg);
-            ticketValid = getMsgValue(response);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        String response = this.sendMessage(msg);
+        String ticketValid = getMsgValue(response);
 
         model.addAttribute("out", ticketValid);
 
@@ -107,19 +90,16 @@ public class ControllerAccessGui {
 
         this.aggiornaPesoCorrente(model);
 
+        model.addAttribute("peso",getWeightFromTicket(ticket)); //adesso anche il peso scaricato è stateless
+
         return "/static/ServiceAccessGuiWebPage";
     }
 
     @PostMapping("/loaddonereq")
-    public String loaddonereq(Model model){
+    public String loaddonereq(Model model,@RequestParam(name = "peso") String peso){
+
         String msg = "msg(loaddone,request,roberto,controller,loaddone(" +peso + "),1)\n";
-
-        try {
-            this.sendMessage(msg);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        this.sendMessage(msg);
         String rispostatest = "Il tuo peso è stato preso in carico! ADDIO";
 
         this.aggiornaPesoCorrente(model);
@@ -129,26 +109,28 @@ public class ControllerAccessGui {
     }
 
     //// UTILITIES////////////////////////////////
+
     private void aggiornaPesoCorrente(Model model){
         String msg = "msg(getweight,request,roberto,coldroom,getweight(NO_PARAM),1)\n";
-        String response = "";
-        try{
-            response = this.sendMessage(msg);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        String response = this.sendMessage(msg);
         currentWeight = getMsgValue(response);
         model.addAttribute("coldroomweight", currentWeight);
     }
 
-    private String sendMessage(String msg) throws IOException{
-        this.connectToColdStorageService();
-        writer.write(msg);
-        writer.flush();
-        System.out.println("message sent");
+    private String sendMessage(String msg){
+        String response = "";
+        try{
+            this.connectToColdStorageService();
+            writer.write(msg);
+            writer.flush();
+            System.out.println("message sent");
 
-        // handling response
-        return reader.readLine();
+            // handling response
+            response = reader.readLine();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return response;
     }
 
     private void connectToColdStorageService() throws IOException {
@@ -185,5 +167,9 @@ public class ControllerAccessGui {
 
     private String getMsgValue(String msg) {
         return msg.split("\\(|\\)")[2];
+    }
+
+    private String getWeightFromTicket(String ticket){
+        return ticket.split("_")[2];
     }
 }

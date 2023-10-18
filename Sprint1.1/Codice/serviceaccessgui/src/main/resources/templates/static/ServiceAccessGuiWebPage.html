@@ -35,6 +35,7 @@
 	<br/>
 	<br/>
 	  <form action="/loaddonereq" method="post">
+		  <input style="font-size:150%;" type="number" id="peso" name="peso" th:value="${peso}" hidden>
 		  <input type="submit" id="load" th:disabled="${disload}" value="Load done">
 	  </form>
 	<!--<input type="button" class="button" onclick="loadDone()" id="load" value="Load done">-->
