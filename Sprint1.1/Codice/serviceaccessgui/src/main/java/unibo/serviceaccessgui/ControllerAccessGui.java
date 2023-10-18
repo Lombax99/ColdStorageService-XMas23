@@ -30,7 +30,7 @@ public class ControllerAccessGui {
     //String loaddoneText = "Richiesta di scaricare inviata. \nAttendi per sapere quando andare via.";
     Long peso = 0l;
     String rispostatest = "";
-    private String ticket = ""; //TE NON DEVI ESSERE QUI SHIT DEVI ESSERE BUTTATO IN JS, COME?
+    private String ticket = ""; //USATA SOLO PER STAMPARE
 
     String responseButton = "";
     Socket client;
@@ -113,12 +113,9 @@ public class ControllerAccessGui {
     @PostMapping("/checkmyticketreq")
     public String checkmyticketreq(Model model, @RequestParam(name = "varticket") String tt){
         System.out.println("SONO ENTRATO IN checkticket");
-        ticket = tt;
         //msg( MSGID, MSGTYPE, SENDER, RECEIVER, CONTENT, SEQNUM )
 
-        System.out.println("AAAAABBB : "+ ticket);
-
-        String msg = "msg(checkmyticket,request,roberto,tickethandler,checkmyticket(" +ticket + "),1)\n";
+        String msg = "msg(checkmyticket,request,roberto,tickethandler,checkmyticket(" +tt + "),1)\n";
         System.out.println("MESSAGGIO INVIATO: "+msg);
         String response;
 
