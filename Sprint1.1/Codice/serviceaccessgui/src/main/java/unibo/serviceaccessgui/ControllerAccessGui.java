@@ -41,8 +41,7 @@ public class ControllerAccessGui {
     public String homePage(Model model) {
         //ADD COSE PER STAMPARE NUMERO COLDROOM
         model.addAttribute("out", "XMAS Love" );
-        model.addAttribute("coldroomweight", currentWeight);
-        
+        this.aggiornaPesoCorrente(model);
         this.enableButtons("default", model);
         return "/static/ServiceAccessGuiWebPage";
     }
