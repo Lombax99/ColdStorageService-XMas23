@@ -43,6 +43,7 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 					}	 	 
 					 transition(edgeName="update2",targetState="updateWeight",cond=whenDispatch("updateWeight"))
 					transition(edgeName="update3",targetState="checkweight",cond=whenRequest("weightrequest"))
+					transition(edgeName="update4",targetState="returnweight",cond=whenRequest("getweight"))
 				}	 
 				state("updateWeight") { //this:State
 					action { //it:State
@@ -74,6 +75,19 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 								 {CommUtils.outgreen("coldroom - rifiutato")
 								 answer("weightrequest", "weightKO", "weightKO(NO_PARAM)"   )  
 								 }
+						}
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition( edgeName="goto",targetState="work", cond=doswitch() )
+				}	 
+				state("returnweight") { //this:State
+					action { //it:State
+						if( checkMsgContent( Term.createTerm("getweight(NO_PARAM)"), Term.createTerm("getweight(NO_PARAM)"), 
+						                        currentMsg.msgContent()) ) { //set msgArgList
+								answer("getweight", "currentweight", "currentweight($PesoEffettivo)"   )  
 						}
 						//genTimer( actor, state )
 					}

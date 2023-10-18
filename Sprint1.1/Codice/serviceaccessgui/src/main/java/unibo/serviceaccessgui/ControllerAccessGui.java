@@ -26,13 +26,12 @@ public class ControllerAccessGui {
     String COLDSTORAGESERVICEIPADDRESS = "127.0.0.1";
     int COLDSTORAGESERVICEPORT = 8040;
 
+    String currentWeight = "";
 
     //String loaddoneText = "Richiesta di scaricare inviata. \nAttendi per sapere quando andare via.";
     Long peso = 0l;
-    String rispostatest = "";
-    private String ticket = ""; //USATA SOLO PER STAMPARE
 
-    String responseButton = "";
+
     Socket client;
     BufferedReader reader;
     BufferedWriter writer;
@@ -42,9 +41,9 @@ public class ControllerAccessGui {
     public String homePage(Model model) {
         //ADD COSE PER STAMPARE NUMERO COLDROOM
         model.addAttribute("out", "XMAS Love" );
-        model.addAttribute("disreq", false);
-        model.addAttribute("discheck", true);
-        model.addAttribute("disload", true);
+        model.addAttribute("coldroomweight", currentWeight);
+        
+        this.enableButtons("default", model);
         return "/static/ServiceAccessGuiWebPage";
     }
 
@@ -56,151 +55,103 @@ public class ControllerAccessGui {
                 responseHeaders, HttpStatus.CREATED);
     }
 
-
-
-
     @PostMapping("/depositreq")
     public String depositreq(Model model, @RequestParam(name = "foodweight") String fw){
-        System.out.println("SONO ENTRATO IN FUNCTION");
-        //msg( MSGID, MSGTYPE, SENDER, RECEIVER, CONTENT, SEQNUM )
 
-        System.out.println(fw);
+        this.aggiornaPesoCorrente(model);
         peso = Long.parseLong(fw);
         String msg = "msg(depositRequest,request,roberto,tickethandler,depositRequest(" + peso + "),1)\n";
-        String response;
 
+        String ticket = "";
+        String rispostatest = "";
+        String responseButton = "";
         try {
-            // sending message
-            connectToColdStorageService();
-            writer.write(msg);
-            writer.flush();
-            System.out.println("depositRequest sent");
-            // handling response
-
-            response = reader.readLine();
-            String msgType = getMsgType(response);
-            responseButton = msgType;
+            String response = this.sendMessage(msg);
+            responseButton = getMsgType(response);
             ticket = getMsgValue(response);
 
-            rispostatest = "La tua richiesta è stata:"+msgType+", il tuo biglietto è:" + ticket ;
-
+            rispostatest = "La tua richiesta è stata:" + responseButton + ", il tuo biglietto è:" + ticket ;
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "redirect:/responseReq";
-    }
-
-    @GetMapping("/responseReq")
-    @Nullable
-    public String responseReq(Model model) {
         model.addAttribute("out", rispostatest);
         model.addAttribute("varticket", ticket);
-        if(responseButton.equals("accept")){
-            model.addAttribute("disreq", true);
-            model.addAttribute("discheck", false);
-            model.addAttribute("disload", true);
-        }else{
-            model.addAttribute("disreq", false);
-            model.addAttribute("discheck", true);
-            model.addAttribute("disload", true);
-        }
+
+        if(responseButton.equals("accept"))
+            this.enableButtons("requestaccepted",model);
+        else
+            this.enableButtons("default",model);
+
         return "/static/ServiceAccessGuiWebPage";
     }
 
 
     @PostMapping("/checkmyticketreq")
-    public String checkmyticketreq(Model model, @RequestParam(name = "varticket") String tt){
-        System.out.println("SONO ENTRATO IN checkticket");
-        //msg( MSGID, MSGTYPE, SENDER, RECEIVER, CONTENT, SEQNUM )
-
-        String msg = "msg(checkmyticket,request,roberto,tickethandler,checkmyticket(" +tt + "),1)\n";
-        System.out.println("MESSAGGIO INVIATO: "+msg);
-        String response;
-
+    public String checkmyticketreq(Model model, @RequestParam(name = "varticket") String ticket){
+        String msg = "msg(checkmyticket,request,roberto,tickethandler,checkmyticket(" + ticket + "),1)\n";
         String ticketValid = "false";
-
         try {
-            // sending message
-            connectToColdStorageService();
-
-            writer.write(msg);
-            writer.flush();
-            System.out.println("message sent");
-
-            // handling response
-            response = reader.readLine();
-
+            String response = this.sendMessage(msg);
             ticketValid = getMsgValue(response);
-            rispostatest = ticketValid;
-            responseButton = ticketValid;
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        model.addAttribute("out", ticketValid);
 
-        return "redirect:/responseCheck";
-    }
+        if(ticketValid.equals("true"))
+            this.enableButtons("ticketaccepted", model);
+        else
+            this.enableButtons("default", model);
 
-    @GetMapping("/responseCheck")
-    public String responseCheck(Model model) {
-        model.addAttribute("out", rispostatest);
+        this.aggiornaPesoCorrente(model);
 
-        if(responseButton.equals("true")){
-            model.addAttribute("disreq", true);
-            model.addAttribute("discheck", true);
-            model.addAttribute("disload", false);
-        }else{
-            model.addAttribute("disreq", false);
-            model.addAttribute("discheck", true);
-            model.addAttribute("disload", true);
-        }
         return "/static/ServiceAccessGuiWebPage";
     }
 
     @PostMapping("/loaddonereq")
     public String loaddonereq(Model model){
-
         String msg = "msg(loaddone,request,roberto,controller,loaddone(" +peso + "),1)\n";
-        String response;
-
-        String ticketValid = "false";
 
         try {
-            // sending message
-            connectToColdStorageService();
-            writer.write(msg);
-            writer.flush();
-            System.out.println("message sent");
-
-            // handling response
-            response = reader.readLine();
-            System.out.println("message read");
-            System.out.println(response);
-            rispostatest = "Il tuo peso è stato preso in carico! ADDIO";
-
+            this.sendMessage(msg);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "redirect:/responseLoad";
-    }
+        String rispostatest = "Il tuo peso è stato preso in carico! ADDIO";
 
-    @GetMapping("/responseLoad")
-    public String printResponse(Model model) {
+        this.aggiornaPesoCorrente(model);
         model.addAttribute("out", rispostatest);
-        model.addAttribute("disreq", false);
-        model.addAttribute("discheck", true);
-        model.addAttribute("disload", true);
+        this.enableButtons("default", model);
         return "/static/ServiceAccessGuiWebPage";
     }
 
-
-
-
     //// UTILITIES////////////////////////////////
+    private void aggiornaPesoCorrente(Model model){
+        String msg = "msg(getweight,request,roberto,coldroom,getweight(NO_PARAM),1)\n";
+        String response = "";
+        try{
+            response = this.sendMessage(msg);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        currentWeight = getMsgValue(response);
+        model.addAttribute("coldroomweight", currentWeight);
+    }
+
+    private String sendMessage(String msg) throws IOException{
+        this.connectToColdStorageService();
+        writer.write(msg);
+        writer.flush();
+        System.out.println("message sent");
+
+        // handling response
+        return reader.readLine();
+    }
+
     private void connectToColdStorageService() throws IOException {
 
         client = new Socket(COLDSTORAGESERVICEIPADDRESS, COLDSTORAGESERVICEPORT);
@@ -209,8 +160,24 @@ public class ControllerAccessGui {
 
     }
 
-    private String[] getParameters(String msg) {
-        return msg.split("\\(")[2].split("\\)")[0].split(",");
+    private void enableButtons(String  mode, Model model){
+        switch (mode){
+            case "requestaccepted":
+                model.addAttribute("disreq", true);
+                model.addAttribute("discheck", false);
+                model.addAttribute("disload", true);
+                break;
+            case "ticketaccepted":
+                model.addAttribute("disreq", true);
+                model.addAttribute("discheck", true);
+                model.addAttribute("disload", false);
+                break;
+            default:
+                model.addAttribute("disreq", false);
+                model.addAttribute("discheck", true);
+                model.addAttribute("disload", true);
+
+        }
     }
 
     private String getMsgType(String msg) {
@@ -220,6 +187,4 @@ public class ControllerAccessGui {
     private String getMsgValue(String msg) {
         return msg.split("\\(|\\)")[2];
     }
-
-
 }
