@@ -28,7 +28,7 @@
 	  <form action="/checkmyticketreq" method="post">
 		  <label style="font-size:150%;" for="varticket">Ask for check and deposit here:</label>
 		  <br/>
-		  <input style="font-size:150%;" type="text" id="varticket" name="varticket" th:value=${varticket} placeholder="insert ticket here" required>
+		  <input style="font-size:150%;" type="text" id="varticket" name="varticket" disabled="true" th:value=${varticket} placeholder="insert ticket here" required>
 		  <input type="submit" id="check" th:disabled="${discheck}" value="Check Ticket">
 	  </form>
 	<!--<input type="button" class="button" onclick="check()" id="check" value="Check Ticket">-->

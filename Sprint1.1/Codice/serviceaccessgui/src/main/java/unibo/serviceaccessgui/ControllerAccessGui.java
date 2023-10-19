@@ -60,7 +60,7 @@ public class ControllerAccessGui {
         String responseButton = getMsgType(response);
         String ticket = getMsgValue(response);
 
-        String rispostatest = "La tua richiesta è stata:" + responseButton + ", il tuo biglietto è:" + ticket ;
+        String rispostatest = "La tua richiesta è stata:" + responseButton;
 
         model.addAttribute("out", rispostatest);
         model.addAttribute("varticket", ticket);
