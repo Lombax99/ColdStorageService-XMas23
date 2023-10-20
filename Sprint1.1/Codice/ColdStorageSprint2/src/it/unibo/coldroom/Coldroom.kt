@@ -87,7 +87,7 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 					action { //it:State
 						if( checkMsgContent( Term.createTerm("getweight(NO_PARAM)"), Term.createTerm("getweight(NO_PARAM)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
-								answer("getweight", "currentweight", "currentweight($PesoEffettivo)"   )  
+								answer("getweight", "currentweight", "currentweight($PesoEffettivo,$PesoPromesso)"   )  
 						}
 						//genTimer( actor, state )
 					}

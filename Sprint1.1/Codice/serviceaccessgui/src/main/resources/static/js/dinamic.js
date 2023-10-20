@@ -1,34 +1,137 @@
-/**const ot = document.getElementById("outputText");
-document.getElementById("check").disabled = true;
-document.getElementById("load").disabled = true;
-
-var initialText = "Welcome to Christmas's service";
-var requestText = "Richiesta ticket inviata. \nAttendi la risposta.";
-var checkText = "Richiesta di verifica del ticket inviata. \nAttendi la risposta.";
-var loaddoneText = "Richiesta di scaricare inviata. \nAttendi per sapere quando andare via.";
+var peso = 0;
+var ticket = "";
 
 
-var currentW = "3";
-document.getElementById('cw').innerHTML = currentW;
+document.getElementById("weightsubmit").addEventListener("submit", function(e)
+{
+    e.preventDefault();
+    updateweight();
+});
+
+document.getElementById("depositsubmit").addEventListener("submit", function(e)
+{
+    e.preventDefault();
+    var fw = document.getElementById("foodweight").value;
+    sendMessage("depositreq", "fw="+fw);
+    updateweight();
+});
+
+document.getElementById("checksubmit").addEventListener("submit", function(e)
+{
+    e.preventDefault();
+    var ticket = document.getElementById("varticket").value;
+    sendMessage("checkreq","ticket="+ticket);
+    updateweight();
+});
+
+document.getElementById("loadsubmit").addEventListener("submit", function(e)
+{
+    e.preventDefault();
+
+    sendMessage("loadreq","weight="+peso);
+    updateweight();
+});
 
 
-function updateCurrentW(c) {
-    currentW = c;
-    document.getElementById('cw').innerHTML = currentW;
+function responsehandler(type, response){
+    console.log(type);
+    console.log(response);
+    switch (type){
+        case "weightreq":
+            var weights=getMsgValue(response).split(",");
+            document.getElementById("cw").innerHTML=weights[0];
+            document.getElementById("ew").innerHTML=weights[1];
+            break;
+        case "depositreq":
+            var responsebutton = getMsgType(response);
+            var t = getMsgValue(response);
+            document.getElementById("maintext").innerHTML= "La tua richiesta è stata:" + responsebutton;
+            document.getElementById("varticket").value = t;
+            if(responsebutton == "accept") {
+                enableButtons("requestaccepted");
+                ticket = t;
+            }
+            else
+                enableButtons("default");
+            break;
+        case "checkreq":
+            var ticketvalid = getMsgValue(response);
+            document.getElementById("maintext").innerHTML = ticketvalid;
+            if(ticketvalid == "true") {
+                peso = getWeightFromTicket(ticket);
+                enableButtons("ticketaccepted");
+            }
+            else
+                enableButtons("default");
+            break;
+        case "loadreq":
+            document.getElementById("maintext").innerHTML = "Il tuo peso è stato preso in carico! ADDIO";
+            enableButtons("default");
+            break;
+        default:
+            console.log("richiesta non riconosciuta");
+    }
+
 }
 
-function loadDone() {
-    document.getElementById("req").disabled = false;
-    document.getElementById("check").disabled = true;
-    document.getElementById("load").disabled = true;
+function updateweight(){
+    sendMessage("weightreq");
 }
 
-function check() {
-    document.getElementById("check").disabled = true;
-    document.getElementById("load").disabled = false;
+
+function sendMessage(request, parameters){
+    try
+    {
+        if(parameters)
+            var url = "http://localhost:8085/api/"+request+"?"+ parameters;
+        else
+            var url = "http://localhost:8085/api/"+request;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 ) {
+                var response = this.responseText;
+                console.log("response: " + response);
+                responsehandler(request, response);
+            }
+        };
+        xhttp.open("POST", url, true);
+        xhttp.setRequestHeader('Content-Type', 'text/plain');
+        xhttp.send();
+    }
+    catch(erMsg)
+    {
+        console.log(erMsg);
+    }
 }
 
-function depositRequest() {
-    document.getElementById("req").disabled = true;
-    document.getElementById("check").disabled = false;
-}*/
+function getMsgType(msg){
+    console.log(msg);
+    return msg.split('(')[1].split(',')[0];
+}
+
+function getMsgValue(msg){
+    return msg.split(/[\(\)]/)[2];
+}
+
+function getWeightFromTicket(ticket){
+    return ticket.split("_")[2];
+}
+
+function enableButtons(mode){
+    switch(mode){
+        case"requestaccepted":
+            document.getElementById("requestbutton").setAttribute("disabled", "disabled");
+            document.getElementById("checkbutton").removeAttribute("disabled");
+            document.getElementById("loadbutton").setAttribute("disabled", "disabled");
+            break;
+        case "ticketaccepted":
+            document.getElementById("requestbutton").setAttribute("disabled", "disabled");
+            document.getElementById("checkbutton").setAttribute("disabled", "disabled");
+            document.getElementById("loadbutton").removeAttribute("disabled");
+            break;
+        default:
+            document.getElementById("requestbutton").removeAttribute("disabled");
+            document.getElementById("checkbutton").setAttribute("disabled", "disabled");
+            document.getElementById("loadbutton").setAttribute("disabled", "disabled");
+    }
+}

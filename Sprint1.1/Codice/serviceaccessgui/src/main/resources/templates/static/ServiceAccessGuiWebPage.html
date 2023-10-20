@@ -10,45 +10,53 @@
 <body style="text-align:center;">
 
 <h1 style="color:white; font-size:300%; background-color:#008CBA">Cold Storage Service</h1>
-<p style="font-size:150%;">Current weight in cold room:
-<label style="font-size:120%;" id="cw" th:text="${coldroomweight}"></label></p>
+<p style="font-size:150%;"/>in Cold room, current weight:
+<label style="font-size:120%;" id="cw" ></label>
+expected weight:
+<label style="font-size:120%;" id="ew" ></label>
+
+<form id="weightsubmit">
+
+	<input type="submit" id="weightButton" value="Update Weight" >
+</form>
+
 <br>
 
 <div class="row">
   <div class="column" >
-  	<form action="/depositreq" method="post">
+  	<form id="depositsubmit">
 		<label style="font-size:150%;" for="foodweight">Ask for ticket here:</label>
 		<br/>
 		<input style="font-size:150%;" type="number" id="foodweight" name="foodweight" placeholder="set food weight" required>
 		<!--<input type="submit" class="buttonup"  value="Request">-->
-		<input type="submit" th:disabled="${disreq}" value="Request">
+		<input type="submit" id="requestbutton" value="Request" >
   	</form>
+
+
   	<br/>
 	<br/>
-	  <form action="/checkmyticketreq" method="post">
+	  <form id="checksubmit">
 		  <label style="font-size:150%;" for="varticket">Ask for check and deposit here:</label>
 		  <br/>
-		  <input style="font-size:150%;" type="text" id="varticket" name="varticket" disabled="true" th:value=${varticket} placeholder="insert ticket here" required>
-		  <input type="submit" id="check" th:disabled="${discheck}" value="Check Ticket">
+		  <input style="font-size:150%;" type="text" id="varticket" name="varticket" disabled="true" placeholder="insert ticket here" required>
+		  <input type="submit" id="checkbutton" disabled="true" value="Check Ticket" >
 	  </form>
 	<!--<input type="button" class="button" onclick="check()" id="check" value="Check Ticket">-->
 	<br/>
 	<br/>
-	  <form action="/loaddonereq" method="post">
-		  <input style="font-size:150%;" type="number" id="peso" name="peso" th:value="${peso}" hidden>
-		  <input type="submit" id="load" th:disabled="${disload}" value="Load done">
+	  <form id="loadsubmit">
+		  <input type="submit" id="loadbutton" disabled="true" value="Load done" >
 	  </form>
 	<!--<input type="button" class="button" onclick="loadDone()" id="load" value="Load done">-->
-	
+
   </div>
-  
+
   <div class="column" >
-	  <p style="font-size:150%;">	<span th:text="${out}"></span></p>
+	  <p style="font-size:150%;">	<span id="maintext" text="XMAS Love"></span></p>
 	<!--<textarea style="font-size:150%;" id="outputText" rows=10 cols=40 wrap=on readonly>Welcome to Christmas's service.</textarea>-->
-  
+
   </div>
 </div>
-
 
 
 <script src="/js/dinamic.js">
