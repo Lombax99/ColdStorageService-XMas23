@@ -8,3 +8,4 @@
 .trash/
 .DS_Store
 .obsidian/workspace.json
+**/.gradle/
