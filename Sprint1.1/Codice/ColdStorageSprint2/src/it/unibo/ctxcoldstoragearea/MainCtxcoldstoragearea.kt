@@ -10,4 +10,3 @@ fun main() = runBlocking {
 	        "localhost", this, "coldstorage2.pl", "sysRules.pl","ctxcoldstoragearea"
 	)
 }
-

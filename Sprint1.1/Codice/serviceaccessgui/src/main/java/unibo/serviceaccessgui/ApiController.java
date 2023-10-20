@@ -13,59 +13,31 @@ import java.net.Socket;
 @RequestMapping("/api")
 public class ApiController {
 
-    String COLDSTORAGESERVICEIPADDRESS = "127.0.0.1";
-    int COLDSTORAGESERVICEPORT = 8040;
+    private MessageSender sender = new MessageSender();
 
-    Socket client;
-    BufferedReader reader;
-    BufferedWriter writer;
 
     @PostMapping("/weightreq")
     public String weightreq(){
         String msg = "msg(getweight,request,roberto,coldroom,getweight(NO_PARAM),1)\n";
-        return this.sendMessage(msg);
+        return sender.sendMessage(msg);
     }
 
     @PostMapping("/depositreq")
     public String depositreq(@RequestParam String fw){
         String msg = "msg(depositRequest,request,roberto,tickethandler,depositRequest(" + fw + "),1)\n";
-        return this.sendMessage(msg);
+        return sender.sendMessage(msg);
     }
 
     @PostMapping("/checkreq")
     public String checkreq(@RequestParam(name = "ticket") String ticket){
         String msg = "msg(checkmyticket,request,roberto,tickethandler,checkmyticket(" + ticket + "),1)\n";
-        return this.sendMessage(msg);
+        return sender.sendMessage(msg);
     }
 
     @PostMapping("/loadreq")
     public String loadreq(@RequestParam(name = "weight") String weight){
         String msg = "msg(loaddone,request,roberto,controller,loaddone(" +weight + "),1)\n";
-        return this.sendMessage(msg);
-    }
-
-
-    private String sendMessage(String msg){
-        System.out.print(msg);
-        String response = "";
-        try{
-            this.connectToColdStorageService();
-            writer.write(msg);
-            writer.flush();
-
-            response = reader.readLine();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-        return response;
-    }
-
-    private void connectToColdStorageService() throws IOException {
-
-        client = new Socket(COLDSTORAGESERVICEIPADDRESS, COLDSTORAGESERVICEPORT);
-        writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-        reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-
+        return sender.sendMessage(msg);
     }
 
 }

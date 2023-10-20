@@ -14,8 +14,11 @@ public class ControllerAccessGui {
     @Value("${spring.application.name}")
     String appName;
 
+    MessageSender sender = new MessageSender();
+
     @GetMapping("/")
     public String homePage(Model model) {
+        this.aggiornaPesoCorrente(model);
         return "/static/ServiceAccessGuiWebPage";
     }
 
@@ -26,5 +29,16 @@ public class ControllerAccessGui {
                 "HIControllerDemo ERROR " + ex.getMessage(),
                 responseHeaders, HttpStatus.CREATED);
     }
+
+    private void aggiornaPesoCorrente(Model model){
+        String msg = "msg(getweight,request,roberto,coldroom,getweight(NO_PARAM),1)\n";
+        String response = sender.sendMessage(msg);
+        String[] weights = response.split("\\(|\\)")[2].split(",");
+        model.addAttribute("cw", weights[0]);
+        model.addAttribute("ew", weights[1]);
+    }
+
+
+
 
 }
