@@ -1,8 +1,8 @@
 ### Prodotto dello Sprint 0
-È stata individuata un'architettura logica iniziale che definisca le macro-entità del sistema e le loro interazioni, [[Cold Storage Service - Natali V2|link al modello precedente]]:
+È stata individuata un'architettura logica iniziale che definisca le macro-entità del sistema e le loro interazioni, [[Cold Storage Service - Natali V2|link al modello precedente]].
 ![[Architettura_Sprint0_V2.png]]
 ### Goal Sprint 1
-1) Basic Robot + ColdStorageService
+1) Transport Trolley + ColdStorageService
 
 ### Requisiti
 A company intends to build a ColdStorageService, composed of a set of elements:
