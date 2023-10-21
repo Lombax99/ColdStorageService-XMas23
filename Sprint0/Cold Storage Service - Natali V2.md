@@ -152,7 +152,7 @@ Per risolvere il problema assoceremo alla __Service Area__ un sistema di coordin
 > - dimensione del transport trolley corrisponde ad un quadrato di lunghezza RD = 1 m.
 
 ### Divisione in Sprint
-1) Basic Robot + ColdStorageService [[Sprint 1.0]]
+1) Transport Trolley + ColdStorageService [[Sprint 1.0]]
 > [!NOTE]- Descrizione
 > Lo scopo del primo sprint è produrre una prima versione funzionante del core dell'applicazione. Questo comprende ColdStorageService con la logica di gestione dei Ticket e il TransportTrolley funzionante.
 > A questa parte deve essere affiancata una mock version della ServiceAccessGUI per la fase di testing.

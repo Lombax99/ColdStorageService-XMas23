@@ -2,7 +2,7 @@
 È stata individuata un'architettura logica iniziale che definisca le macro-entità del sistema e le loro interazioni:
 ![[Architettura_Sprint0_V2.png]]
 ### Goal Sprint 1
-1) Basic Robot + ColdStorageService (scriviamo perchè ci concentriamo su questi due soltanto)
+1) Basic Robot + ColdStorageService
 2) [[Cold Storage Service - Natali |Link al modello precedente]]
 
 ### Requisiti
