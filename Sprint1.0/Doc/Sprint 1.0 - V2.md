@@ -18,10 +18,12 @@ A company intends to build a ColdStorageService, composed of a set of elements:
     2. go from the INDOOR to the ==PORT of the ColdRoom==
     3. deposit the food-load in the ColdRoom
 
-> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Analisi dei Requisiti]])
+> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Analisi del Problema|see below]])
 3. a ServiceAcessGUI that allows an human being to see the current weigth of the material stored in the ColdRoom and to send to the ColdStorageService a request to store new **FW** kg of food. If the request is accepted, the services return a ticket that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
 
 ### Service users story
+> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Analisi del Problema|see below]])
+
 The story of the ColdStorageService can be summarized as follows:
 
 1. A Fridge truck driver uses the _ServiceAcessGUI_ to send a request to store its load of **FW** kg. If the request is accepted, the driver drives its truck to the INDOOR of the service, before the ticket exipration time **TICKETTIME**.
