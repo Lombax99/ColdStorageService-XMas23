@@ -115,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md",
+                "file": "Sprint0/Cold Storage Service - Natali V2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -132,7 +132,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md",
+                "file": "Sprint0/Cold Storage Service - Natali V2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -165,7 +165,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md"
+                "file": "Sprint0/Cold Storage Service - Natali V2.md"
               }
             }
           },
@@ -195,11 +195,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e427d801116f96e4",
+  "active": "14ee41a090d76a3d",
   "lastOpenFiles": [
-    "Sprint0/Cold Storage Service - Natali V2.md",
-    "Sprint1.0/Doc/Sprint 1.0 - V2.md",
     "Sprint1.0/Doc/Sprint 1.0.md",
+    "Sprint1.0/Doc/Sprint 1.0 - V2.md",
+    "Sprint0/Cold Storage Service - Natali V2.md",
     "Sprint1.1/Doc/Sprint 1.1 - V2.md",
     "README.md",
     "Sprint0/Cold Storage Service - Natali V2.pdf",

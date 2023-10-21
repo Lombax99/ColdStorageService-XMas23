@@ -18,7 +18,7 @@ A company intends to build a ColdStorageService, composed of a set of elements:
     2. go from the INDOOR to the ==PORT of the ColdRoom==
     3. deposit the food-load in the ColdRoom
 
-> 
+> Rinviato a Sprint successivo
 3. a ServiceAcessGUI that allows an human being to see the current weigth of the material stored in the ColdRoom and to send to the ColdStorageService a request to store new **FW** kg of food. If the request is accepted, the services return a ticket that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
 
 ### Service users story
