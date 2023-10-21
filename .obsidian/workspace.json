@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "20840bfd8a4e54bc",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -136,7 +135,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md"
               }
             }
           },
@@ -166,8 +165,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f9f00f93e3553532",
+  "active": "8e40e15af9ced1c4",
   "lastOpenFiles": [
+    "Sprint1.0/Doc/Sprint 1.0.md",
+    "Sprint1.0/Doc/Sprint 1.0 - V2.md",
+    "README.md",
     "Sprint0/Cold Storage Service - Natali V2.md",
     "Sprint0/Cold Storage Service - Natali V2.pdf",
     "Sprint0/Cold Storage Service - Natali.md",
@@ -191,11 +193,9 @@
     "Sprint1.1/Codice/qakicons/symActor.png",
     "Sprint1.1/Codice/qakicons/symActorSmall.png",
     "Sprint1.1/Codice/qakicons/externalQActor.png",
-    "Sprint1.0/Doc/Sprint 1.0.md",
     "Sprint4/Doc/Sprint 4.md",
     "Sprint1/Doc/Sprint 1.md",
     "Cold Storage Service - Natali.md",
-    "README.md",
     "Senza nome.canvas",
     "[BasicRobot23.md"
   ]
