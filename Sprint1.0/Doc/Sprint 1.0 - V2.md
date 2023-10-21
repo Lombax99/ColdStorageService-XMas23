@@ -3,6 +3,9 @@
 ![[Architettura_Sprint0_V2.png]]
 ### Goal Sprint 1
 1) Transport Trolley + ColdStorageService
+> [!NOTE]- Descrizione
+> Lo scopo del primo sprint è produrre una prima versione funzionante del core dell'applicazione. Questo comprende ColdStorageService con la logica di gestione dei Ticket e il TransportTrolley funzionante.
+> A questa parte deve essere affiancata una mock version della ServiceAccessGUI per la fase di testing.
 
 ### Requisiti
 A company intends to build a ColdStorageService, composed of a set of elements:
