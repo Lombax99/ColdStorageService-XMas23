@@ -47,6 +47,8 @@ Nelle discussioni con il committente, sono emerse alcune problematiche:
 - Il problema del driver malevolo.
 - Il problema di garantire che una risposta venga sempre inviata sempre solo a chi ha fatto la richiesta, anche quando la richiesta è inviata da un ‘alieno’ come una pagine HTML
 #### Il problema del load-time lungo
+> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Analisi del Problema|see below]])
+
 Il problema del load-time lungo è stato affrontato da Arnaudo/Munari con l’idea di inviare due messaggi di ‘risposta’ (una per dire al driver che il ticket inviato è valido e una per inviare `chargeTaken`). A questo fine hanno fatto uso diretto della connessione TCP stabilita da una versione prototipale dell’accessGui fatta come GUI JAVA.
 Per consentire questa possibilità anche a livello di modellazione qak, in _ActorBasicFsm_ è stato introdotto il metodo storeCurrentRequest() che permette di ricordare la richiesta corrente (cancellata da una _replyTo_). Questo però è un trucco/meccanismo che potrebbe risultare pericoloso.
 Meglio affrontare il problema dal punto di vista logico, impostando una interazione a DUE-FASI tra driver e service (compito che può svolgere la _serviceAcessGui_).
