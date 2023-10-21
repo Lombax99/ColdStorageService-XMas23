@@ -139,6 +139,7 @@ Motivazioni:
 ```
 	
 - ==Problema della sicurezza:==
+	[[Sprint 1.0 - V2#Analisi del TF23|problema del driver malevolo]]
 	- Dobbiamo assicurarci che chi richiede il ticket sia l'unico a poterlo usare. NO
 	NOTA: la Cate lo ha fatto aggiungendo ai ticket un parametro randomico segreto che solo chi ha ricevuto il ticket può conoscere... non so se sia perchè Natali ha detto loro di farlo o per loro scelta ma non è impossibile da implementare, da discutere.
 	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy o copia. NO
