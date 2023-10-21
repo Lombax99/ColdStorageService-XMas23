@@ -18,10 +18,10 @@ A company intends to build a ColdStorageService, composed of a set of elements:
     2. go from the INDOOR to the ==PORT of the ColdRoom==
     3. deposit the food-load in the ColdRoom
 
+> 
 3. a ServiceAcessGUI that allows an human being to see the current weigth of the material stored in the ColdRoom and to send to the ColdStorageService a request to store new **FW** kg of food. If the request is accepted, the services return a ticket that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
 
 ### Service users story
-
 The story of the ColdStorageService can be summarized as follows:
 
 1. A Fridge truck driver uses the _ServiceAcessGUI_ to send a request to store its load of **FW** kg. If the request is accepted, the driver drives its truck to the INDOOR of the service, before the ticket exipration time **TICKETTIME**.
@@ -39,7 +39,6 @@ The story of the ColdStorageService can be summarized as follows:
     - the **current weigth** of the material stored in the ColdRoom;
     - the **number of store-requests rejected** since the start of the service.
 ### Analisi del TF23
-
 Nelle discussioni con il committente, sono emerse alcune problematiche:
 - Il problema del load-time lungo.
 - Il problema del driver distratto (non coerente, rispetto alle due fasi: scarico preceduto da prenotazione).
