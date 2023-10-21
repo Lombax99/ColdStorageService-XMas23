@@ -40,6 +40,7 @@ The story of the ColdStorageService can be summarized as follows:
     - the **current state** of the transport trolley and it **position** in the room;
     - the **current weigth** of the material stored in the ColdRoom;
     - the **number of store-requests rejected** since the start of the service.
+
 ### Analisi del TF23
 Nelle discussioni con il committente, sono emerse alcune problematiche:
 - Il problema del load-time lungo.
