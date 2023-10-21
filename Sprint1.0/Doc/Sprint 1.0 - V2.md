@@ -7,7 +7,7 @@
 > Lo scopo del primo sprint è produrre una prima versione funzionante del core dell'applicazione. Questo comprende ColdStorageService con la logica di gestione dei Ticket e il TransportTrolley funzionante.
 > A questa parte deve essere affiancata una mock version della ServiceAccessGUI per la fase di testing.
 
-### Requisiti
+### Requisiti relativi allo sprint corrente
 A company intends to build a ColdStorageService, composed of a set of elements:
 
 1. a ==service area== (rectangular, flat) that includes:
