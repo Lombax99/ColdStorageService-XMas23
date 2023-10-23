@@ -69,7 +69,7 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 Partendo dai [[Cold Storage Service - Natali V2#Analisi preliminare dei requisiti|requisiti sprint 0]]:
 
 Definizioni:
-`definire in modo più formale e comprensibile alla macchina`
+`definire in modo più formale e comprensibile alla macchina rispetto allo sprint 0`
 NOTA: aggiungiamo definizione in formato di codice, ad esempio 
 ```ticket:
 int TICKETIME      #define the time of emission del ticket
@@ -224,3 +224,5 @@ QActor coldroom context ctxcoldstoragearea {
 	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
 2) In intellij avviare il file MainCtxbasicrobot.kt del progetto BasicRobot
 3) In intellij avviare il file MainCtxColdStorageArea.kt del progetto coldStorage
+
+
