@@ -66,7 +66,7 @@ quando un agente esterno (driver) invia il ticket per indurre il servizio a scar
 Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore del carico effettivo sul Truck.
 
 ### Analisi dei Requisiti
-
+[[Cold Storage Service - Natali V2]]
 
 Definizioni:
 `definire in modo più formale e comprensibile alla macchina`
