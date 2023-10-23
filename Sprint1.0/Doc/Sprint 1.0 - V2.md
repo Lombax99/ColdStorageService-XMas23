@@ -152,6 +152,8 @@ Reply robotDead : robotDead(NO_PARAM)
 
 Dispatch updateWeight : updateWeight(PESO)
 
+
+
 //-----------------------------------------------------------------------
 
 Context ctxcoldstoragearea ip [host="localhost" port=8040]
@@ -161,6 +163,8 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
 
 ExternalQActor transporttrolley context ctxbasicrobot
+
+
 
 
 QActor controller context ctxcoldstoragearea {
@@ -195,9 +199,10 @@ QActor controller context ctxcoldstoragearea {
 }
 
 
+
 QActor coldroom context ctxcoldstoragearea {
 	[#
-		var PesoCorrente = 0
+		var PesoEffettivo = 0
 	#]
 	
 	State s0 initial {
@@ -207,13 +212,16 @@ QActor coldroom context ctxcoldstoragearea {
 	State updateWeight {
 		printCurrentMessage
 		onMsg ( updateWeight : updateWeight(PESO) ) {
-			[# PesoCorrente += payloadArg(0).toInt() 
+			[# PesoEffettivo += payloadArg(0).toInt() 
 				#]
 		}
 		println("peso aggiornato")
-		println("nuovo peso: $PesoCorrente")
+		println("nuovo peso: $PesoEffettivo")
 	} Transition update whenMsg updateWeight -> updateWeight
 }
+
+
+
 
 ```
 
