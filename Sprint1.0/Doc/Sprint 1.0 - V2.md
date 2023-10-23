@@ -77,34 +77,6 @@ int TICKETNUMBER   #define the number of ticket
 ```
 
 NOTA: ha senso rimettere l'analisi dei requisiti in questo modo o ha più senso definire solo i cambiamenti rispetto allo sprint 0?
-##### ==DDR robot==
-*Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
-[robot](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html)
-La documentazione introduce il concetto di Step. Sfruttiamo lo Step per muovere il Robot in avanti della sua lunghezza RD.
-RD diventa l'unità di misura dello spazio sostituendo i metri.
-
-##### ==HOME==
-Zona della Service Area corrispondente alle coordinate (0,0)
-
-`NOTE: Locazione all'interno della Service Area dove il transport trolley si trova rivolto verso il basso, nell'angolo superiore sinistro. La Home è la zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste.`
-
-##### ==INDOOR port==
-Zona della Service Area corrispondente alle coordinate (0,MAX)
-
-`NOTE: Locazione all'interno della Service Area in cui un camion scarica la merce da far caricare al transport trolley. Si trova nell'angolo in basso a sinistra della Service Area. Le coordinate crescono allontanadosi dalla HOME, INDOOR port si trova a distanza massima sull'asse Y`
-
-##### ==ColdRoom Container==
-Contenitore in posizione fissa (x,y) in Service Area in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
-
-`NOTE: Contenitore fisico posizionato all'interno della Service Area in una posizione fissa. In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg. ColdRoom Container rappresenta un ostacolo all'interno della Service Area per il transport trolley, ciò vuol dire che non può muoversi attraverso la posizione in cui l'elemento è localizzato, per semplicità supporremo che il container occupi interamente una sola coordinata di Service Area.`
-
-##### ==Porta della ColdRoom==
-Lato della ColdRoom che si affaccia sull'area di coordinate (x, y+1). Transport Trolley dovrà trovarsi in questa posizione per interagire con ColdRoom.
-
-`NOTE: Lato del ColdRoom Container tramite li quale è possibile depositare il cibo. Corrisponde al lato del container rivolto verso il basso della Service Area. Il transport trolley dovrà posizionarsi davanti alla porta della ColdRoom per poter depositare al suo interno il cibo overo in corrispondenza delle coordinate (x, y+1).`
-
-##### ==Food-load==
-Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Container.
 
 
 ### Analisi del Problema
