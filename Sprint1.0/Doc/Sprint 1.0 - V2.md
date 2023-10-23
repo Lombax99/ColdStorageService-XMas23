@@ -83,14 +83,6 @@ NOTA: ha senso rimettere l'analisi dei requisiti in questo modo o ha più senso 
 La documentazione introduce il concetto di Step. Sfruttiamo lo Step per muovere il Robot in avanti della sua lunghezza RD.
 RD diventa l'unità di misura dello spazio sostituendo i metri.
 
-##### ==Transport trolley==
-Transport trolley è un DDR robot. I comandi che è in grado di compiere sono descritti nell'apposita [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) .
-
-##### ==Service Area==
-Area rettangolare di dimensione L * l. L'area sarà suddivisa in una griglia con coordinate la cui unità di misura è RD.
-
-`NOTE: L'area è piana, racchiusa entro quattro pareti. Procedendo dal bordo superiore e muovendoci in senso orario, i nomi delle pareti saranno: wallUp, wallRight, wallDown, wallLeft. All'interno del Service Area il transport trolley è libero di muoversi.La stanza è rettangolare ed ha dimensione Lato-Lungo * lato-corto (L * l). Per definire la posizione del robot in ogni momento l'area è divisa in una griglia con coordinate crescenti associate a partire dall'angolo in alto a sinistra`
-
 ##### ==HOME==
 Zona della Service Area corrispondente alle coordinate (0,0)
 
