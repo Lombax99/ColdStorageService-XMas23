@@ -189,6 +189,10 @@ il codice univoco è un numero sequenziale di emissione del ticket.
 la separazione dei campi avverrà tramite il token "_", che non causa problemi al momento della lettura del ticket.
 Sempre per problemi di traduzione del messaggio, il ticket inizia con una lettera: T.
 
+```
+
+```
+
 
 ### Come avviare il test del prof
 2) avviare l'immagine Docker webrobot23

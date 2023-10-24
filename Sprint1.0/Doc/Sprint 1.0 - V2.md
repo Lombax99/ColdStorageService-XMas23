@@ -78,6 +78,8 @@ int TICKETNUMBER   #define the number of ticket
 
 NOTA: ha senso rimettere l'analisi dei requisiti in questo modo o ha più senso definire solo i cambiamenti rispetto allo sprint 0?
 
+##### Ticket 
+
 
 ### Analisi del Problema
 
