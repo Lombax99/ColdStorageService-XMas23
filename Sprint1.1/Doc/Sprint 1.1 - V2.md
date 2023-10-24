@@ -170,6 +170,17 @@ Opzioni disponibili: SPRING o NODEJS, ma nodejs è brutto, il codice è difficil
 NOTE: anche qui dobbiamo mettere i test
 
 ### Progettazione
+
+##### Ticket 
+> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Analisi del Problema|see below]])
+```
+int TIME
+int PESO
+int SEQ
+
+Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_1697643071_15_0
+```
+
 - ==Contesti:==
 	- TicketHandler è contenuto sullo stesso contesto di Controller
 	- TransportTrolley, ColdRoom e ServiceAccessGui avranno un contesto a parte per ciascuno
