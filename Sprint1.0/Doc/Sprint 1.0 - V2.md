@@ -81,7 +81,7 @@ NOTA: anche qua possiamo aggiungere pezzi di codice del qak per essere più mach
 
 NOTA: Ma tutti i parametri che abbiamo tipo MAXW TICKETTIME, da dove vengono? Li mettiamo hardcoded o facciamo un file di config da leggere (magari un bel JSON...)?
 
-###
+##### 
 
 - ==Separazione delle responsabilità di ColdStorageService==
 	ColdStorageService è un componente caratterizzato da troppe responsabilità, abbiamo quindi deciso di sostituirlo con 2 attori:
