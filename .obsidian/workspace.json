@@ -127,7 +127,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md",
+                "file": "Sprint0/Cold Storage Service - Natali V2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -144,7 +144,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md",
+                "file": "Sprint0/Cold Storage Service - Natali V2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -177,7 +177,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md"
+                "file": "Sprint0/Cold Storage Service - Natali V2.md"
               }
             }
           },
@@ -207,8 +207,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e427d801116f96e4",
+  "active": "14ee41a090d76a3d",
   "lastOpenFiles": [
+    "Sprint1.0/Doc/Sprint 1.0 - V2.md",
     "Sprint1.0/Doc/ImmagineGriglia.kra",
     "Sprint1.0/Doc.WKhFaX.kra",
     "Sprint1.0/Doc.euxFNu.kra",
@@ -216,7 +217,6 @@
     "Sprint1.0/Doc/ImmagineGrigliaConCoordinate.png",
     "Sprint1.0/Doc.JJnlHf.kra",
     "Sprint0/Cold Storage Service - Natali V2.md",
-    "Sprint1.0/Doc/Sprint 1.0 - V2.md",
     "Sprint1.0/Doc/ImmagineGriglia.png",
     "Sprint1.0/Doc/ImmagineCoordinateGriglia.png",
     "Sprint1.1/Doc/Sprint 1.1 - V2.md",
@@ -229,7 +229,6 @@
     "Sprint1.0/Codice/bin/ColdStorage/gradle/wrapper/gradle-wrapper.properties",
     "Sprint1.0/Codice/bin/ColdStorage/gradle/wrapper/gradle-wrapper.jar",
     "Sprint1.0/Codice/bin/ColdStorage/gradle/wrapper",
-    "Sprint1.0/Codice/bin/ColdStorage/gradle",
     "Sprint1.1/Doc/Sprint 1.1.md",
     "Sprint1.1/Doc/coldstorage2arch.png",
     "Sprint1.1/Doc/cicloVitaMessaggi.png",
