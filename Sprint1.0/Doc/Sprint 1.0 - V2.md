@@ -146,10 +146,7 @@ System coldstorage
 Request doJob : doJob(KG)
 Reply jobdone : jobdone(NO_PARAM)
 Reply robotDead : robotDead(NO_PARAM)
-
 Dispatch updateWeight : updateWeight(PESO)
-
-
 
 //-----------------------------------------------------------------------
 
@@ -158,11 +155,10 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 //-----------------------------------------------------------------------
 
 Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
-
 ExternalQActor transporttrolley context ctxbasicrobot
 ```
 
-```
+``` qak
 QActor controller context ctxcoldstoragearea {
 
 	[# var KG = 0
@@ -195,7 +191,7 @@ QActor controller context ctxcoldstoragearea {
 }
 ```
 
-```
+``` qak
 QActor coldroom context ctxcoldstoragearea {
 	[#
 		var PesoEffettivo = 0
