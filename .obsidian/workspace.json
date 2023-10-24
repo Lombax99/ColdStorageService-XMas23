@@ -30,8 +30,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "98aeb59b30843b62",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Sprint1.1/Doc/Sprint 1.1.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "21f2099e8dd52390",
@@ -61,7 +74,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -127,7 +141,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md",
+                "file": "Sprint1.0/Doc/Sprint 1.0.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -144,7 +158,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md",
+                "file": "Sprint1.0/Doc/Sprint 1.0.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -177,7 +191,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md"
+                "file": "Sprint1.0/Doc/Sprint 1.0.md"
               }
             }
           },
@@ -207,13 +221,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e427d801116f96e4",
+  "active": "f9f00f93e3553532",
   "lastOpenFiles": [
-    "Sprint1.0/Doc/ArchitetturaLogica_Sprint1.0.pdf",
-    "Sprint1.0/Doc/Sprint 1.0 - V2.md",
-    "Sprint1.0/Doc/ArchitetturaLogica_Sprint1.0.png",
-    "Sprint1.0/Doc/coldstoragearch.png",
+    "Sprint1.1/Doc/Sprint 1.1 - V2.md",
+    "Sprint1.1/Doc/Sprint 1.1.md",
+    "Sprint1.0/Doc/Sprint 1.0.md",
     "Sprint0/Cold Storage Service - Natali V2.md",
+    "Sprint1.0/Doc/Sprint 1.0 - V2.md",
+    "Sprint1.0/Doc/coldstoragearch.png",
+    "Other/ColdStorageServiceRoomAnnoted.png",
+    "Sprint1.0/Doc/ArchitetturaLogica_Sprint1.0.pdf",
+    "Sprint1.0/Doc/ArchitetturaLogica_Sprint1.0.png",
     "Sprint1.0/Doc/ImmagineGriglia.kra",
     "Sprint1.0/Doc.WKhFaX.kra",
     "Sprint1.0/Doc.euxFNu.kra",
@@ -222,8 +240,6 @@
     "Sprint1.0/Doc.JJnlHf.kra",
     "Sprint1.0/Doc/ImmagineGriglia.png",
     "Sprint1.0/Doc/ImmagineCoordinateGriglia.png",
-    "Sprint1.1/Doc/Sprint 1.1 - V2.md",
-    "Sprint1.0/Doc/Sprint 1.0.md",
     "README.md",
     "Sprint0/Cold Storage Service - Natali V2.pdf",
     "Sprint0/Cold Storage Service - Natali.md",
@@ -231,12 +247,9 @@
     "Sprint0/Architettura_Sprint0_V2.drawio",
     "Sprint1.0/Codice/bin/ColdStorage/gradle/wrapper/gradle-wrapper.properties",
     "Sprint1.0/Codice/bin/ColdStorage/gradle/wrapper/gradle-wrapper.jar",
-    "Sprint1.0/Codice/bin/ColdStorage/gradle/wrapper",
-    "Sprint1.1/Doc/Sprint 1.1.md",
     "Sprint1.1/Doc/coldstorage2arch.png",
     "Sprint1.1/Doc/cicloVitaMessaggi.png",
     "Sprint1.1/Doc/ChristamsClientWeb.png",
-    "Sprint1.1/Doc/ArchitetturaLogica_Sprint1.1.png",
     "Sprint4/Doc/Sprint 4.md",
     "Sprint1/Doc/Sprint 1.md",
     "Cold Storage Service - Natali.md",
