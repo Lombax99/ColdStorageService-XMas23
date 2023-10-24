@@ -58,50 +58,14 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 
 ### Analisi dei Requisiti
 
+##### Ticket 
+```
+int TIME
+int PESO
+int SEQ
 
-##### ==ColdRoom Container==
-Attore in posizione fissa (x,y) in Service Area in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
-
-`NOTE: Contenitore fisico posizionato all'interno della Service Area in una posizione fissa. In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg. ColdRoom Container rappresenta un ostacolo all'interno della Service Area per il transport trolley, ciò vuol dire che non può muoversi attraverso la posizione in cui l'elemento è localizzato, per semplicità supporremo che il container occupi interamente una sola coordinata di Service Area.`
-
-##### ==Porta della ColdRoom==
-Lato della ColdRoom che si affaccia sull'area di coordinate (x, y+1). Transport Trolley dovrà trovarsi in questa posizione per interagire con ColdRoom.
-
-`NOTE: Lato del ColdRoom Container tramite li quale è possibile depositare il cibo. Corrisponde al lato del container rivolto verso il basso della Service Area. Il transport trolley dovrà posizionarsi davanti alla porta della ColdRoom per poter depositare al suo interno il cibo overo in corrispondenza delle coordinate (x, y+1).`
-
-##### ==DDR robot==
-*Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
-
-##### ==Transport trolley==
-Transport trolley è un DDR robot. I comandi che è in grado di compiere sono descritti nell'apposita [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) .
-
-##### ==Food-load==
-Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Container.
-
-##### ==Current weight==
-Quantità di cibo attualmente contenuto in ColdRoom definito in base al peso.
-
-##### ==ServiceAccesGUI==
-GUI che permette ai driver di:
-- visualizzare la quantità di cibo (in peso) contenuta all'interno di ColdRoom;
-- richiedere il permesso di scaricare la merce dal Fridge Truck, ovvero richiedere la generazione di un Ticket a lui assegnato da presentare in un secondo momento;
-- presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port;
-- inviare la richiesta "loadDone" quando il driver è pronto a scaricare, inviando l'effettivo peso contenuto nel Fridge Truck.
-
-##### ==ColdStorageService==
-ColdStorageService è un componente del sistema che si occupa di gestire le richieste di scarico merce da parte dei driver. Si occupa quindi di:
-- ricevere le richieste di permesso di scarico;
-- generare Ticket assegnati al singolo driver che ne ha fatto richiesta;
-- ricevere Ticket nel momento in cui il driver arriva in INDOOR;
-- verificare la validità dei Ticket ricevuti, ovvero verificare se questi sono scaduti o meno.
-
-##### ==Ticket==
-Il Ticket, su richiesta di un driver tramite ServiceAccessGUI, viene generato dal ColdStorageService. Il Ticket rappresenta il permesso di scarico concesso ad un determinato FridgeTruck.
-Ogni Ticket è caratterizzato dai seguenti parametri:
-- start time: istante di emissione del ticket;
-- peso della quantità di cibo da scaricare dichiarato dal driver;
-- ~~identificativo del driver a cui è assegnato il ticket;~~
-- codice univoco che identifica il ticket generato.
+Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_1697643071_15_0
+```
 
 ### Analisi del Problema
 - [ ] Vediamo il pattern facade (mettiamo qualcosa che fa da facciata). Aggiungo un nuovo componente ColdStorageFacade in modo tale che la gui si interfacci con un solo componente. Si aggiunge quindi un nuovo attore tra ServiceAccessGui e i due componenti TicketHandler e Controller. Per fare questo cerca info su pattern facade e spring
