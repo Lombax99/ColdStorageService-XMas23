@@ -92,6 +92,7 @@ Cerchiamo quindi di realizzare la seguente __Architettura logica__:
 ![[ArchitetturaLogica_Sprint1.0.png]]
 
 
+
 - ==Chi manda i comandi al Transport Trolley?==
 	Introduciamo un nuovo attore "Controller" che si occupi di mandare i comandi al Transport Trolley e gestire la logica applicativa. 
 	In questo primo sprint supponiamo che il Controller sia a conoscenza dell'istante di arrivo dei Fridge Truck in INDOOR, di conseguenza il servizio partirà da un segnale generato dal controller).
