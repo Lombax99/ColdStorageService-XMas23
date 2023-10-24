@@ -151,8 +151,6 @@ NOTE: anche qui dobbiamo mettere i test
 
 ### Progettazione
 
-```
-
 - ==Contesti:==
 	- TicketHandler è contenuto sullo stesso contesto di Controller
 	- TransportTrolley, ColdRoom e ServiceAccessGui avranno un contesto a parte per ciascuno
@@ -161,15 +159,19 @@ NOTE: anche qui dobbiamo mettere i test
 - Codice della gestione dei ticket
 	deve avere una lista che contiene i ticket emessi ecc...
 
-- Codice dei ticket
-Il ticket sarà una stringa composta dai seguenti dati:
-momento di emissione,
-peso della richiesta,
-codice univoco.
+##### Ticket 
+```
+int TIME
+int PESO
+int SEQ
+
+Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_1697643071_15_0
+```
+
 Il momento di emissione viene eseguito come numero di secondi dal primo gennaio 1970, sarà un long.
 Il peso della richiesta non viene modificato, viene salvato in un intero.
 il codice univoco è un numero sequenziale di emissione del ticket.
-la separazione dei campi avverrà tramite il token "_", che non causa problemi al momento della lettura del ticket.
+la separazione dei campi avverrà tramite il token "\_", che non causa problemi al momento della lettura del ticket.
 Sempre per problemi di traduzione del messaggio, il ticket inizia con una lettera: T.
 
 ```
