@@ -79,6 +79,10 @@ int TICKETNUMBER   #define the number of ticket
 NOTA: ha senso rimettere l'analisi dei requisiti in questo modo o ha più senso definire solo i cambiamenti rispetto allo sprint 0?
 
 ##### Ticket 
+```
+int 
+Ticket = Ticket.plus( Now ).plus(Token).plus( Peso ).plus(Token).plus( Sequenza)
+```
 
 
 ### Analisi del Problema
