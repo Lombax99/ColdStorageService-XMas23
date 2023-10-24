@@ -214,7 +214,6 @@ QActor coldroom context ctxcoldstoragearea {
 ```
 
 
-
 ### Deployment
 
 1) Avviare il container itunibovirtualrobot23 su docker
