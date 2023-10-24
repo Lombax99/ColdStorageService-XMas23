@@ -151,14 +151,6 @@ NOTE: anche qui dobbiamo mettere i test
 
 ### Progettazione
 
-##### Ticket 
-> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Analisi del Problema|see below]])
-```
-int TIME
-int PESO
-int SEQ
-
-Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_1697643071_15_0
 ```
 
 - ==Contesti:==
@@ -229,9 +221,8 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 ```
 QActor controller context ctxcoldstoragearea {
 
-	[# var PESO = 0
-		#]
-		
+	[# var PESO = 0 #]
+	
 	State s0 initial {
 		printCurrentMessage
 	} Goto work
@@ -303,7 +294,7 @@ QActor coldroom context ctxcoldstoragearea {
 		onMsg ( updateWeight : updateWeight(P_EFF, P_PRO) ) {
 			[# PesoEffettivo += payloadArg(0).toInt() 
 				PesoPromesso -= payloadArg(1).toInt()
-				#]
+			#]
 		}
 		println("coldroom update - peso promesso: $PesoPromesso, nuovo peso effettivo: $PesoEffettivo") color green
 	} Goto work
@@ -315,8 +306,7 @@ QActor coldroom context ctxcoldstoragearea {
 			println("coldroom - richiesti: $PesoRichiesto, effettivo: $PesoEffettivo, promesso: $PesoPromesso") color green
 			
 			if [# PesoEffettivo + PesoPromesso + PesoRichiesto  <= MAXW #]	{
-				[# PesoPromesso += PesoRichiesto
-					#]
+				[# PesoPromesso += PesoRichiesto #]
 					println("coldroom - accettato, peso promesso: $PesoPromesso") color green
 				replyTo weightrequest with weightOK : weightOK( NO_PARAM)
 			} else {
@@ -371,10 +361,10 @@ QActor tickethandler context ctxcoldstoragearea {
 		}
 	}Transition t1 whenReply weightKO -> checkdeadlines
 					whenReply weightOK -> returnticket
-					
+	
 	
 	State checkdeadlines{
-				
+		
 		println("tickethandler - rifiutato, controllo i biglietti") color blue
 		
 		[# var SpazioLiberato = 0
