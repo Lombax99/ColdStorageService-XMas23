@@ -23,11 +23,11 @@ A company intends to build a ColdStorageService, composed of a set of elements:
     2. go from the INDOOR to the ==PORT of the ColdRoom==
     3. deposit the food-load in the ColdRoom
 
-> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Analisi del Problema|see below]])
+> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Responsabilità di ColdStorageService|see below]])
 3. a ServiceAcessGUI that allows an human being to see the current weigth of the material stored in the ColdRoom and to send to the ColdStorageService a request to store new **FW** kg of food. If the request is accepted, the services return a ticket that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
 
 ### Service users story
-> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Analisi del Problema|see below]])
+> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Responsabilità di ColdStorageService|see below]])
 
 The story of the ColdStorageService can be summarized as follows:
 
@@ -53,7 +53,7 @@ Nelle discussioni con il committente, sono emerse alcune problematiche:
 - Il problema del driver malevolo.
 - Il problema di garantire che una risposta venga sempre inviata sempre solo a chi ha fatto la richiesta, anche quando la richiesta è inviata da un ‘alieno’ come una pagine HTML
 #### Il problema del load-time lungo
-> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Analisi del Problema|see below]])
+> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Responsabilità di ColdStorageService|see below]])
 
 Il problema del load-time lungo è stato affrontato da Arnaudo/Munari con l’idea di inviare due messaggi di ‘risposta’ (una per dire al driver che il ticket inviato è valido e una per inviare `chargeTaken`). A questo fine hanno fatto uso diretto della connessione TCP stabilita da una versione prototipale dell’accessGui fatta come GUI JAVA.
 Per consentire questa possibilità anche a livello di modellazione qak, in _ActorBasicFsm_ è stato introdotto il metodo storeCurrentRequest() che permette di ricordare la richiesta corrente (cancellata da una _replyTo_). Questo però è un trucco/meccanismo che potrebbe risultare pericoloso.
@@ -91,49 +91,52 @@ Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione d
 Cerchiamo quindi di realizzare la seguente __Architettura logica__: 
 ![[ArchitetturaLogica_Sprint1.0.png]]
 
+##### Segnale per Transport Trolley
+Introduciamo un nuovo segnale "doJob" di tipo Req/Res inviato dal controller.
+```
+Request doJob : doJob(KG)
+Reply jobdone : jobdone(NO_PARAM)
+Reply robotDead : robotDead(NO_PARAM)
+```
+
+> [!NOTE]- motivazioni
+> Definiamo il seganle come un req/res poichè vogliamo sapere se il servizio richiesto è andato a buon fine oppure se il DDR robot ha avuto problematiche che lo hanno interrotto prima di proseguire con una seconda doJob.
+> 
+> Limitiamo il controller ad un semplice comando di doJob, non è compito suo sapere quali operazioni deve compiere il robot per portare a termine il lavoro, è compito del robot stesso.
+
+__ATTENZIONE__: la risposta deve essere inviata appena il cairco è rilasciato nella ColdRoom e non quando il robot torna alla home per requisiti.
+##### Aggiornamento peso ColdRoom
+Se il servizio è andato a buon fine e viene restituita una "jobdone" allora il Controller aggiorna il peso della ColdRoom tramite Dispatch.
+```
+Dispatch updateWeight : updateWeight(PESO)
+```
+##### Da "doJob" a comandi per TransportTrolley
+Dalla [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) fornita è chiaro che non sia presente un comando che ci permetterebbe di limtarci ad un comando "doJob". 
+Se non fosse possibile implementarlo risulterebbe necessario aggiungere un componente intermedio che traduca in comandi comprensibili al TransportTrolley fornitoci.
+Allo stesso modo è anche evidente la mancanza di un comando per caricare e scaricare i materiali trattati e quindi non risulta sufficiente.
+##### Posizione nella Service Area
+Per definire la posizione del TransportTrolley e permettere il movimento autonomo dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del DDR robot). 
+La [[Cold Storage Service - Natali V2#HOME|Home]] corrisponderà all'origine (0, 0). Useremo coordinate crescenti verso il basso e verso destra.
+![[ImmagineGriglia.png]]
+![[ImmagineCoordinateGriglia.png]]
+
+Il TransportTrolley fornito possiede già il supporto a questo tipo di tecnologia. La mappatura della stanza deve essere fatta a priori e fornita tramite file all'avvio.
+##### Peso massimo trasportabile
+Dopo discussioni con il committente è stato decretato che il peso da scaricare non sarà mai maggiore del peso trasportabile del robot fisico. 
 
 
-- ==Chi manda i comandi al Transport Trolley?==
-	Introduciamo un nuovo attore "Controller" che si occupi di mandare i comandi al Transport Trolley e gestire la logica applicativa. 
-	In questo primo sprint supponiamo che il Controller sia a conoscenza dell'istante di arrivo dei Fridge Truck in INDOOR, di conseguenza il servizio partirà da un segnale generato dal controller).
-	
-- ==Quali comandi è in grado di comprendere il Transport Trolley?==
-	L'unico comando mandato dal controller è "doJob", inviato solo dopo che un camion ha finito di scaricare...
-	
-- ==Chi traduce "doJob" in una serie di comandi comprendibili al DDR robot?==
-	L'attore TransportTrolley si occupa di svolgere questo compito. Ricevere il comando "doJob" dal Controller, lo interpreta e comunica al robot le operazioni da eseguire.
-	
-- ==Come avviene la comunicazione tra Controller e Transport Trolley? Dispatch o Req-Resp?==
-	Controller manda un segnale di Req-Resp al Transport Trolley, ovvero rimane in attesa di una risposta da quest'ultimo. In quanto è necessario sapere se il servizio richiesto è andato a buon fine oppure se il DDR robot ha avuto problematiche che lo hanno interrotto.
-	
-- ==Come comunicano TransportTrolley e ColdRoom?==
-	Transport Trolley e ColdRoom non comunicano direttamente ma solo tramite Controller.
-	
-- ==Quando viene aggiornato il peso della ColdRoom (e da chi)?==
-	Se il servizio è andato a buon fine allora il Controller aggiorna il peso della ColdRoom tramite Dispatch.
-	
-- ==Come fa il Transport Trolley a sapere dov'è e dove deve andare?==
-	Dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del DDR robot). 
-	Le coordinate del Transport Trolley indicheranno il quadrato in cui si trova. L'origine (0, 0) sarà la posizione di Home. Coordinate crescenti verso il basso e verso destra.
-	
-- ==Quando viene fatta la mappatura della stanza?==
-	La mappatura della stanza deve essere fatta a priori e fornita al sistema.
-	
-- ==Quando controlla il TransportTrolley se ci sono altre richieste?==
-	Come da requisiti controllare se ci sono altre richieste viene fatto:
-	- Quando il DDR robot risulta fermo in HOME, in attesa di nuovi comandi.
-	- Dopo aver scaricato la merce nella ColdRoom, prima di tornare in HOME.
-	
-- ==Il robot ha un peso massimo?== 
-	Sì, il DDR robot ha un peso massimo trasportabile. Il carico che il robot deve prendere dal camion può essere maggiore del peso trasportabile dal DDR robot. In tal caso sarà il robot a decidere quanti giri fare in base al peso che deve essere trasportato.
-	NOTA: abbiamo definito con il committente che il peso da scaricare sia sempre minore o uguale al peso massimo trasportabile.
-	
+
+
+
+
 ![[Sprint1.0/Doc/coldstoragearch.png | 300]]
 
 NOTE: test plan?
 definizione di mockGUI per fare i test ecc...
 
 ### Progettazione
+Progettazione di tutte le coordinate dei vari pezzi vengono definite qua.
+
 NOTE: dividiamo un po' il codice e aggiungiamo qualche commento legato ai problemi di sopra
 ``` qak
 System coldstorage
