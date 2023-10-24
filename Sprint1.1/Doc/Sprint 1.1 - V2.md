@@ -57,15 +57,7 @@ quando un agente esterno (driver) invia il ticket per indurre il servizio a scar
 Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore del carico effettivo sul Truck.
 
 ### Analisi dei Requisiti
-
-##### Ticket 
-```
-int TIME
-int PESO
-int SEQ
-
-Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_1697643071_15_0
-```
+[[Cold Storage Service - Natali V2#Analisi preliminare dei requisiti|requisiti sprint 0]]
 
 ### Analisi del Problema
 - [ ] Vediamo il pattern facade (mettiamo qualcosa che fa da facciata). Aggiungo un nuovo componente ColdStorageFacade in modo tale che la gui si interfacci con un solo componente. Si aggiunge quindi un nuovo attore tra ServiceAccessGui e i due componenti TicketHandler e Controller. Per fare questo cerca info su pattern facade e spring
@@ -232,7 +224,7 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 //Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
 
 //ExternalQActor transporttrolley context ctxbasicrobot
-
+``┌
 
 
 
