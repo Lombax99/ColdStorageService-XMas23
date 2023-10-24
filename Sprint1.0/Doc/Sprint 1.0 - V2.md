@@ -89,7 +89,6 @@ ColdStorageService è un componente caratterizzato da troppe responsabilità, ab
 Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione dei ticket è rimandata allo sprint successivo ([[Sprint 1.1 - V2]])
 
 
-
 ![[ArchitetturaLogica_Sprint1.0.png]]
 
 
