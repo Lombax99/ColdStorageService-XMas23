@@ -224,10 +224,9 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 //Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
 
 //ExternalQActor transporttrolley context ctxbasicrobot
-``┌
+```
 
-
-
+```
 QActor controller context ctxcoldstoragearea {
 
 	[# var PESO = 0
@@ -278,9 +277,9 @@ QActor controller context ctxcoldstoragearea {
 		printCurrentMessage
 	}
 }
+```
 
-
-
+```
 QActor coldroom context ctxcoldstoragearea {
 	//corrente: quanta roba c'è nella cold room
 	//previsto: quanto deve ancora arrivare, ma per cui c'è un biglietto emesso
@@ -334,15 +333,16 @@ QActor coldroom context ctxcoldstoragearea {
 	} Goto work	
 	
 }
+```
 
-
+```
 QActor tickethandler context ctxcoldstoragearea {
 	
 	[#	
 		
 		var TICKETTIME = DomainSystemConfig.getTicketTime();
 		
-
+		
 		var Token = "_"
 		var Ticket = ""
 		var Peso = 0
@@ -401,11 +401,11 @@ QActor tickethandler context ctxcoldstoragearea {
         		
     		}
     		
-
-
-    
 			
-				
+			
+		    
+			
+			
 			if (SpazioLiberato >= Peso){ //c'è abbastanza spazio per la richiesta corrente
 				SpazioLiberato -= Peso
 				Accepted = true
@@ -464,6 +464,8 @@ QActor tickethandler context ctxcoldstoragearea {
 	
 	
 }
+
+
 
 QActor serviceaccessgui context ctxcoldstoragearea {
 	[#	var PESO = 0
