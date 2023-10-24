@@ -453,10 +453,10 @@ QActor tickethandler context ctxcoldstoragearea {
 						Tickets.remove(Ticket)
 						Ticketvalid = true
 					}
-						
+					
 				}
 				
-				#]
+			#]
 			println("tickethandler - il biglietto è valido? $Ticketvalid") color blue
 			replyTo checkmyticket with ticketchecked : ticketchecked($Ticketvalid)
 		}
@@ -464,9 +464,9 @@ QActor tickethandler context ctxcoldstoragearea {
 	
 	
 }
+```
 
-
-
+```
 QActor serviceaccessgui context ctxcoldstoragearea {
 	[#	var PESO = 0
 		var Ticket = ""
@@ -477,7 +477,7 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 		printCurrentMessage
 		println("SAG - in attesa") color yellow
 	} Transition t0 whenMsg startToDoThings -> work
-					
+	
 	
 	
 	State work {
@@ -489,9 +489,9 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 		
 	} Transition t0 whenReply accept -> gotoindoor
 					whenReply reject -> tryagainlater
-					
-				
-					
+	
+	
+	
 	State tryagainlater{
 		println("SAG - rifiutato") color yellow
 	}Transition wait whenTime 5000 -> work
@@ -514,13 +514,12 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	
 	State checkresponse {
 		onMsg (ticketchecked : ticketchecked(BOOL)){
-			[# Ticketok = payloadArg(0).toBoolean()
-				# ]
+			[# Ticketok = payloadArg(0).toBoolean() # ]
 		}
 		println("SAG - biglietto accettato? : $Ticketok") color yellow
 	} Goto work if [# !Ticketok #] else unloading
-
-
+	
+	
 	State unloading{
 		println("SAG - scarico") color yellow
 	}Transition t4 whenTime 3000 -> loaddone
