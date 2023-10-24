@@ -86,14 +86,9 @@ ColdStorageService è un componente caratterizzato da troppe responsabilità, ab
 	- Controller: si occupa di gestire il robot ed aggiornare il peso di ColdRoom.
 	- TicketHandler: si occupa di gestire il ciclo di vita dei Ticket.
 
-Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione dei ticket è rimandata all
+Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione dei ticket è rimandata allo sprint successivo ([[Sprint 1.1 - V2]])
 
-- ==Separazione delle responsabilità di ColdStorageService==
-	ColdStorageService è un componente caratterizzato da troppe responsabilità, abbiamo quindi deciso di sostituirlo con 2 attori:
-	- Controller, il quale si occupa di gestire il robot ed aggiornare il peso di ColdRoom.
-	- TicketHandler, il quale si occupa di gestire il ciclo di vita dei Ticket.
-	Abbiamo quindi deciso di dividere lo Sprint1 in due fasi.
-	La progettazione di TicketHandler viene rimandata al prossimo Sprint ([[Sprint 1.1]]). 
+
 
 ![[ArchitetturaLogica_Sprint1.0.png]]
 
