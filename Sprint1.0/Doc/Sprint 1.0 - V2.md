@@ -86,6 +86,8 @@ ColdStorageService è un componente caratterizzato da troppe responsabilità, ab
 	- Controller: si occupa di gestire il robot ed aggiornare il peso di ColdRoom.
 	- TicketHandler: si occupa di gestire il ciclo di vita dei Ticket.
 
+Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione dei ticket è rimandata all
+
 - ==Separazione delle responsabilità di ColdStorageService==
 	ColdStorageService è un componente caratterizzato da troppe responsabilità, abbiamo quindi deciso di sostituirlo con 2 attori:
 	- Controller, il quale si occupa di gestire il robot ed aggiornare il peso di ColdRoom.
