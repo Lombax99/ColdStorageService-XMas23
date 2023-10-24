@@ -78,6 +78,7 @@ Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_169764307
 ```
 
 ##### ColdStorageService
+[[Cold Storage Service - Natali V2#ColdStorageService|definizione sprint 0]]
 Entità core business del sistema, verrà modellata come un attore
 ```
 QActor ColdStorageService context ctxcoldstoragearea {}
