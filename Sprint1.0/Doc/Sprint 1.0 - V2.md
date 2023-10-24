@@ -68,6 +68,7 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 ### Analisi dei Requisiti
 Partendo dai [[Cold Storage Service - Natali V2#Analisi preliminare dei requisiti|requisiti sprint 0]]:
 ##### Ticket 
+> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Analisi del Problema|see below]])
 ```
 int TIME
 int PESO
