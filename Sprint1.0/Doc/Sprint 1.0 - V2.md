@@ -66,14 +66,9 @@ quando un agente esterno (driver) invia il ticket per indurre il servizio a scar
 Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore del carico effettivo sul Truck.
 
 ### Analisi dei Requisiti
-Partendo dai [[Cold Storage Service - Natali V2#Analisi preliminare dei requisiti|requisiti sprint 0]]:
+[[Cold Storage Service - Natali V2#Analisi preliminare dei requisiti|requisiti sprint 0]]
 
-##### ColdStorageService
-[[Cold Storage Service - Natali V2#ColdStorageService|definizione sprint 0]]
-Entità core business del sistema, verrà modellata come un attore
-```
-QActor ColdStorageService context ctxcoldstoragearea{}
-```
+> []
 
 ### Analisi del Problema
 
