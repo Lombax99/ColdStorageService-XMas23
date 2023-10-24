@@ -69,7 +69,7 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 [[Cold Storage Service - Natali V2#Analisi preliminare dei requisiti|requisiti sprint 0]]
 
 > [!NOTA]- domanda
-> Possiamo limitarci a mettere il riferimento allo sprint 
+> Possiamo limitarci a mettere il riferimento allo sprint 0 o dobbiamo riportare tutto? 
 
 ### Analisi del Problema
 
