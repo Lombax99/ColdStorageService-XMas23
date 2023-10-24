@@ -136,7 +136,7 @@ definizione di mockGUI per fare i test ecc...
 
 ### Progettazione
 Progettazione di tutte le coordinate dei vari pezzi vengono definite qua.
-Service Are
+Service Area: 9 * 6
 
 NOTE: dividiamo un po' il codice e aggiungiamo qualche commento legato ai problemi di sopra
 ``` qak
