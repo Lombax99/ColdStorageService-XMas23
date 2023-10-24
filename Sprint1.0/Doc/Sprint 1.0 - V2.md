@@ -67,17 +67,6 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 
 ### Analisi dei Requisiti
 Partendo dai [[Cold Storage Service - Natali V2#Analisi preliminare dei requisiti|requisiti sprint 0]]:
-
-Definizioni:
-`definire in modo più formale e comprensibile alla macchina rispetto allo sprint 0`
-NOTA: aggiungiamo definizione in formato di codice, ad esempio 
-```ticket:
-int TICKETIME      #define the time of emission del ticket
-int TICKETNUMBER   #define the number of ticket
-```
-
-NOTA: ha senso rimettere l'analisi dei requisiti in questo modo o ha più senso definire solo i cambiamenti rispetto allo sprint 0?
-
 ##### Ticket 
 ```
 int TIME
