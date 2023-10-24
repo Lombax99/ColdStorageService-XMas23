@@ -214,7 +214,8 @@ QActor coldroom context ctxcoldstoragearea {
 ```
 
 
-- [x] Tutorial su come far partire la DEMO (passaggi e cose varie)
+
+### Deployment
 
 1) Avviare il container itunibovirtualrobot23 su docker
 	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
