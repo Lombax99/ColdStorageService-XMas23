@@ -80,7 +80,9 @@ NOTA: ha senso rimettere l'analisi dei requisiti in questo modo o ha più senso 
 
 ##### Ticket 
 ```
-#T_1697643071_15_0
+#esempio di ticket: T_1697643071_15_0
+Ticket = "T" + "_" + TIME
+
 int TIME
 int PESO
 int SEQ
