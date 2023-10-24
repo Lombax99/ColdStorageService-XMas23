@@ -80,11 +80,10 @@ NOTA: ha senso rimettere l'analisi dei requisiti in questo modo o ha più senso 
 
 ##### Ticket 
 ```
+#T_1697643071_15_0
 int TIME
-string TOKEN
 int PESO
 int SEQ
-Ticket = Ticket.plus( Now ).plus(Token).plus( Peso ).plus(Token).plus( Sequenza)
 ```
 
 
