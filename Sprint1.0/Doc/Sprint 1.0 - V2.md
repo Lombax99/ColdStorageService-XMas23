@@ -194,9 +194,9 @@ QActor controller context ctxcoldstoragearea {
 		printCurrentMessage
 	}
 }
+```
 
-
-
+```
 QActor coldroom context ctxcoldstoragearea {
 	[#
 		var PesoEffettivo = 0
@@ -216,10 +216,6 @@ QActor coldroom context ctxcoldstoragearea {
 		println("nuovo peso: $PesoEffettivo")
 	} Transition update whenMsg updateWeight -> updateWeight
 }
-
-
-
-
 ```
 
 
