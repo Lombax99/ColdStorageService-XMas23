@@ -79,6 +79,11 @@ Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_169764307
 
 ##### ColdStorageService
 Entità core business del sistema, verrà modellata come un attore
+```
+QActor ColdStorageService context ctxcoldstoragearea {
+	
+}
+```
 
 ### Analisi del Problema
 
