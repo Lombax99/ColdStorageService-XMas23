@@ -80,7 +80,10 @@ NOTA: ha senso rimettere l'analisi dei requisiti in questo modo o ha più senso 
 
 ##### Ticket 
 ```
-int 
+int TIME
+string TOKEN
+int PESO
+int SEQ
 Ticket = Ticket.plus( Now ).plus(Token).plus( Peso ).plus(Token).plus( Sequenza)
 ```
 
