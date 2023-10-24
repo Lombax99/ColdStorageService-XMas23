@@ -77,6 +77,7 @@ int SEQ
 Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_1697643071_15_0
 ```
 
+##### ColdStorageService
 
 ### Analisi del Problema
 
