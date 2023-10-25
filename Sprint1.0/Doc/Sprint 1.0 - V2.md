@@ -136,8 +136,8 @@ Indoor = (0, 4)
 ColdRoom = (5, 2)
 ColdRoomPORT = (5, 3)
 Service Area = {
-	height = 4             # asse c
-	lenght
+	height = 4             # asse x
+	lenght = 6             # asse y
 }
 ```
 ![[ImmagineGrigliaConCoordinate.png]]
