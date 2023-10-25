@@ -192,7 +192,7 @@ QActor coldroom context ctxcoldstoragearea {
 ```
 ##### TransportTrolley
 ```
-QActor transporttrolley context ctxbasicrobot{
+QActor transporttrolley context ctxcoldstoragearea {
 	[# var Peso = 0 #]
 	
 	State s0 initial{
