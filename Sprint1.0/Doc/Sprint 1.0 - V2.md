@@ -134,7 +134,7 @@ Sia RD l'unità di misura
 Home = (0, 0)
 Indoor = (0, 4)
 ColdRoom = (5, 2)
-ColdRoomPORT = (5, 3)
+ColdRoomPORT = (5, 3)      # posizione del robot per poter scaricare
 Service Area = {
 	height = 4             # asse x
 	lenght = 6             # asse y
