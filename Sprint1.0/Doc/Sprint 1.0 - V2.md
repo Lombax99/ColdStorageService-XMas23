@@ -119,9 +119,9 @@ Per definire la posizione del TransportTrolley e permettere il movimento autonom
 La [[Cold Storage Service - Natali V2#HOME|Home]] corrisponderà all'origine (0, 0). Useremo coordinate crescenti verso il basso e verso destra.
 ![[ImmagineGrigliaConCoordinate.png]]
 Date le dimensioni dell'area, Service Area sarà divisa in una griglia 4 x 6.
-ColdR
+ColdRoom si troverà in posizione (5, 2).
 
-Il TransportTrolley fornito possiede già il supporto a questo tipo di tecnologia. La mappatura della stanza deve essere fatta a priori e fornita tramite file all'avvio.
+Il [TransportTrolley]() fornito possiede già il supporto a questo tipo di tecnologia. La mappatura della stanza deve essere fatta a priori e fornita tramite file all'avvio.
 ##### Peso massimo trasportabile
 Dopo discussioni con il committente è stato decretato che il peso da scaricare non sarà mai maggiore del peso trasportabile del robot fisico. 
 ##### Architettura logica dopo l'analisi del problema
