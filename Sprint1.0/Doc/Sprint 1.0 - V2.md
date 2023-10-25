@@ -129,6 +129,7 @@ Dopo discussioni con il committente è stato decretato che il peso da scaricare 
 ### Progettazione
 Progettazione di tutte le coordinate dei vari pezzi vengono definite qua.
 Service Area: 9 * 6
+![[ImmagineGrigliaConCoordinate.png]]
 
 ##### Definizione dei contesti
 ``` qak
@@ -138,6 +139,7 @@ Context ctxbasicrobot ip [host="127.0.0.1" port=8020]
 ExternalQActor transporttrolley context ctxbasicrobot
 ```
 
+##### Controller
 ``` qak
 QActor controller context ctxcoldstoragearea {
 
@@ -171,6 +173,7 @@ QActor controller context ctxcoldstoragearea {
 }
 ```
 
+##### ColdRoom
 ``` qak
 QActor coldroom context ctxcoldstoragearea {
 	[#
