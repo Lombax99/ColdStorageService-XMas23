@@ -124,10 +124,7 @@ Il TransportTrolley fornito possiede già il supporto a questo tipo di tecnologi
 ##### Peso massimo trasportabile
 Dopo discussioni con il committente è stato decretato che il peso da scaricare non sarà mai maggiore del peso trasportabile del robot fisico. 
 ##### Architettura logica dopo l'analisi del problema
-![[]]
-
-NOTE: test plan?
-definizione di mockGUI per fare i test ecc...
+![[Sprint1.0/Doc/coldstoragearch.png]]
 
 ### Progettazione
 Progettazione di tutte le coordinate dei vari pezzi vengono definite qua.
