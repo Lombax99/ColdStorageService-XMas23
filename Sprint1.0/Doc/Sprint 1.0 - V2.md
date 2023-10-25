@@ -156,8 +156,7 @@ ExternalQActor transporttrolley context ctxbasicrobot
 ``` qak
 QActor controller context ctxcoldstoragearea {
 
-	[# var KG = 0
-		#]
+	[# var KG = 0 #]
 		
 	State s0 initial {
 		printCurrentMessage
