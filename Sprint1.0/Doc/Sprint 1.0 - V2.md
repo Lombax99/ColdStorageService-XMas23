@@ -217,7 +217,9 @@ QActor transporttrolley context ctxbasicrobot{
 	State movingtocoldroom{
 		request robotpos -m moverobot : moverobot(5,3)                //move to coldroom
 	} Transition godrop whenReply moverobotdone -> waitforjob
-	
+
+//alla fine di waitforjob mandiamo la risposta 
+
 	State waitforjob {
 		replyTo doJob with jobdone : jobdone( 1 )
 		println("transporttrolley ! aspetto") color green
@@ -231,7 +233,7 @@ QActor transporttrolley context ctxbasicrobot{
 	}	Goto work
 }
 ```
-NOTA: finito di 
+
 ### Deployment
 
 1) Avviare il container itunibovirtualrobot23 su docker
