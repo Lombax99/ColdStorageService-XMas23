@@ -8,20 +8,17 @@ Reply robotDead : robotDead(NO_PARAM)
 
 Dispatch updateWeight : updateWeight(PESO)
 
-
-
 //-----------------------------------------------------------------------
 
 Context ctxcoldstoragearea ip [host="localhost" port=8040]
 
 //-----------------------------------------------------------------------
 
-Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
-
-ExternalQActor transporttrolley context ctxbasicrobot
-
-
-
+QActor transporttrolley context ctxcoldstoragearea {
+	State s0 initial {
+		printCurrentMessage
+	}
+}
 
 QActor controller context ctxcoldstoragearea {
 
