@@ -43,8 +43,8 @@ function responsehandler(type, response){
             document.getElementById("ew").innerHTML=weights[1];
             break;
         case "depositreq":
-            var responsebutton = getMsgType(response);
-            var t = getMsgValue(response);
+            var responsebutton = getMsgType(response); //accept o reject
+            var t = getMsgValue(response); //ticket
             document.getElementById("maintext").innerHTML= "La tua richiesta è stata:" + responsebutton;
             document.getElementById("varticket").value = t;
             if(responsebutton == "accept") {
