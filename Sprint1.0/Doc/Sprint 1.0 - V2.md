@@ -73,9 +73,6 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 > Possiamo limitarci a mettere il riferimento allo sprint 0 o dobbiamo riportare tutto? 
 
 ### Analisi del Problema
-
-NOTA: Ma tutti i parametri che abbiamo tipo MAXW TICKETTIME, da dove vengono? Li mettiamo hardcoded o facciamo un file di config da leggere (magari un bel JSON...)?
-
 ##### Responsabilità di ColdStorageService
 ColdStorageService è un componente caratterizzato da troppe responsabilità, abbiamo quindi deciso di sostituirlo con 2 attori:
 	- Controller: si occupa di gestire il robot ed aggiornare il peso di ColdRoom.

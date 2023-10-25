@@ -140,6 +140,8 @@ Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni
 ```
 
 
+NOTA: Ma tutti i parametri che abbiamo tipo MAXW TICKETTIME, da dove vengono? Li mettiamo hardcoded o facciamo un file di config da leggere (magari un bel JSON...)?
+
 ![[Sprint1.1/Doc/coldstorage2arch.png | 350]]
 
 WEB PAGE
