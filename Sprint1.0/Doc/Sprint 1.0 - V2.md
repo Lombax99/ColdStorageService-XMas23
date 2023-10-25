@@ -1,4 +1,4 @@
-- [ ] Alcuni link fanno riferimen
+- [ ] Alcuni link fanno riferimento a doc solo sul mio pc, da cambiare...
 ### Prodotto dello Sprint 0
 È stata individuata un'architettura logica iniziale che definisca le macro-entità del sistema e le loro interazioni, [[Cold Storage Service - Natali V2|link al modello precedente]].
 ![[Architettura_Sprint0_V2.png]]
@@ -208,7 +208,6 @@ QActor coldroom context ctxcoldstoragearea {
 	} Transition update whenMsg updateWeight -> updateWeight
 }
 ```
-
 
 ### Deployment
 
