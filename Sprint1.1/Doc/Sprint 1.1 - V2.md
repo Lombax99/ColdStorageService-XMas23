@@ -4,7 +4,7 @@ TicketHandler + ServiceAccessGUI
 > In questa seconda parte del primo sprint verrà trattata la logica dei ticket, i componenti e la sicurezza associati.
 
 [[Sprint 1.0|Link allo sprint precedente]]
-[[Architet]]
+![[ArchitetturaLogica_Sprint1.0.png]]
 ### Requisiti
 A company intends to build a ColdStorageService, composed of a set of elements:
 
