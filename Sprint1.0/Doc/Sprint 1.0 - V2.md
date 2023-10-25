@@ -216,8 +216,19 @@ QActor transporttrolley context ctxbasicrobot{
 	
 	State movingtocoldroom{
 		request robotpos -m moverobot : moverobot(5,3)               //coldroom
-	} Transition godrop whenReply moverobotdone -> checkforjob
-
+	} Transition godrop whenReply moverobotdone -> waitforjob
+	
+	State waitforjob {
+		replyTo doJob with jobdone : jobdone( 1 )
+		println("transporttrolley ! aspetto") color green
+	} Transition gofetchagain 
+			whenTime 3000 -> goinghome
+			whenRequest doJob -> startjob
+	
+	State goinghome{
+		request robotpos -m moverobot : moverobot(0,0)		//home
+		forward robotpos -m setdirection : dir(down)
+	}	Goto work
 }
 ```
 
