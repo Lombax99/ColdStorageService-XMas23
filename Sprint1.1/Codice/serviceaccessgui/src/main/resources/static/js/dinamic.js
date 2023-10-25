@@ -73,7 +73,7 @@ function responsehandler(type, response){
             break;
         default:
             console.log("richiesta non riconosciuta");
-
+            
     }
 
 }
