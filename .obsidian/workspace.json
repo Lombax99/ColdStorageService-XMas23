@@ -43,8 +43,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "21f2099e8dd52390",
@@ -140,7 +139,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md",
+                "file": "Sprint0/Cold Storage Service - Natali V2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -157,7 +156,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md",
+                "file": "Sprint0/Cold Storage Service - Natali V2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -190,7 +189,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md"
+                "file": "Sprint0/Cold Storage Service - Natali V2.md"
               }
             }
           },
@@ -221,10 +220,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "8e40e15af9ced1c4",
+  "active": "14ee41a090d76a3d",
   "lastOpenFiles": [
-    "Sprint1.0/Doc/coldstoragearch.png",
     "Sprint1.0/Doc/Sprint 1.0 - V2.md",
+    "Sprint1.0/Doc/coldstoragearch.png",
     "Sprint1.0/Codice/ColdStorage/coldstoragearch",
     "Sprint1.0/Doc/Sprint 1.0.md",
     "Sprint1.1/Doc/Sprint 1.1.md",
