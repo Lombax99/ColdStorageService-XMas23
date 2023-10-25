@@ -133,9 +133,11 @@ Sia RD l'unità di misura
 ```
 Home = (0, 0)
 Indoor = (0, 4)
-ColdRoom = ()
+ColdRoom = (5, 2)
+ColdRoomPORT = (5, 3)
 Service Area = {
-
+	height = 4             # asse c
+	lenght
 }
 ```
 ![[ImmagineGrigliaConCoordinate.png]]
