@@ -94,10 +94,13 @@ Il sistema sarà dunque ampliato secondo la seguente __Architettura logica__:
 	
 ##### Quando viene inviato il "charge taken"?
 "Charge taken" viene inviato dal Controller subito dopo la "doJob" associata alla richiesta.
+> [!NOTE]- motivazioni
+> 1) Supponiamo che quest'ultimo scarichi la merce in una piattaforma dedicata, dalla quale il DDR robot preleverà il cibo e lo scaricherà in ColdRoom in uno o più volte a seconda della quantità di materiale dichiarata.
+> 2) Al driver non interessa sapere se il TransportTrolley ha avuto problematiche durante il trasporto del materiale, quindi il "charge taken" può essere inviato prima che il TransportTrolley comunichi al Controller se il carico/scarico in ColdRoom è terminato. 
 
-> [!NOTE]- motivazioni:
-1) Supponiamo che quest'ultimo scarichi la merce in una piattaforma dedicata, dalla quale il DDR robot preleverà il cibo e lo scaricherà in ColdRoom in uno o più volte a seconda della quantità di materiale dichiarata.
-2) Al driver non interessa sapere se il TransportTrolley ha avuto problematiche durante il trasporto del materiale, quindi il "charge taken" può essere inviato prima che il TransportTrolley comunichi al Controller se il carico/scarico in ColdRoom è terminato. 
+Ricevuta la "charge taken" associata ad una precedente request "load done".
+
+
 
 
 - ==Problema del peso ipotetico==
