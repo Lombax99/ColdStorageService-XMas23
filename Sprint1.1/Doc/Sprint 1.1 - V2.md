@@ -87,11 +87,6 @@ Il sistema sarà dunque ampliato secondo la seguente __Architettura logica__:
 	5) Una volta arrivato in INDOOR, il driver, invia il Ticket a TicketHandler tramite Request/Response. Il TicketHandler verifica il **TICKETTIME** e restituisce Ok / Rejected, effettua quindi la verifica di validità temporale del Ticket. 
 	6) Se la richiesta viene approvata ServiceAccessGUI invia tramite Request/Response al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto, insieme al peso da scarcare. Dopo di che attende una risposta "charge taken" da parte del Controller.
 - [ ] Sostituire questo malloppo di roba con del codice dei vari segnali inviati
-
-
-- ==Quando il driver può uscire dal sistema?==
-	Il driver può uscire dal sistema quando ha scaricato tutta la merce contenuta, ovvero quando riceve dal Controller la response "charge taken" associata ad una precedente request "load done".
-	
 ##### Quando viene inviato il "charge taken"?
 "Charge taken" viene inviato dal Controller subito dopo la "doJob" associata alla richiesta.
 > [!NOTE]- motivazioni
@@ -99,22 +94,18 @@ Il sistema sarà dunque ampliato secondo la seguente __Architettura logica__:
 > 2) Al driver non interessa sapere se il TransportTrolley ha avuto problematiche durante il trasporto del materiale, quindi il "charge taken" può essere inviato prima che il TransportTrolley comunichi al Controller se il carico/scarico in ColdRoom è terminato. 
 
 Ricevuta la "charge taken" il driver può uscire dal sistema considerando la transizione conclusa con successo.
+##### Problema del peso ipotetico
+Un driver potrebbe inviare la richiesta di un Ticket prima che un secondo driver, a cui è stato generato un Ticket in precedenza, abbiano scaricato.
+Rischio di emettere un ticket per un peso non realmente disponibile nel momento di scarico.
 
+Per risolvere il problema definiamo due pesi diversi: 
+1)  Peso effettivo : quantità (peso) di cibo contenuto in ColdRoom nell'istante attuale. Aggiornato dopo l'azione del TransportTrolley.
+2) Peso "promesso" : quantità di peso richiesta dai driver tramite Ticket non ancora scaricato, incrementato dopo l'emissione di un ticket e decrementato dopo l'azione del Trasport Trolley o a seguito della scadenza della validità di un Ticket.
 
+Questi due pesi si troveranno entrambi in ColdRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune).
+Useremo la somma dei due pesi per validare o meno una richiesta di emissione ticket.
 
-
-- ==Problema del peso ipotetico==
-	Un driver potrebbe inviare la richiesta di un Ticket prima che un secondo driver, a cui è stato generato un Ticket in precedenza, abbiano scaricato.
-	Rischio di emettere un ticket per un peso non realmente disponibile nel momento di scarico.
-	
-	Per risolvere il problema definiamo due pesi diversi: 
-	1)  Peso effettivo : quantità (peso) di cibo contenuto in ColdRoom nell'istante attuale. Aggiornato dopo l'azione del TransportTrolley.
-	2) Peso "promesso" : quantità di peso richiesta dai driver tramite Ticket non ancora scaricato, incrementato dopo l'emissione di un ticket e decrementato dopo l'azione del Trasport Trolley o a seguito della scadenza della validità di un Ticket.
-	
-	Questi due pesi si troveranno entrambi in ColdRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune).
-	Useremo la somma dei due pesi per validare o meno una richiesta di emissione ticket.
-	
-- ==Problema del peso fantasma==
+##### ==Problema del peso fantasma==
 	A seguito della scadenza di un Ticket, il Transport Trolley non si farà carico della richiesta e il peso promesso del ticket rimarrà considerato il Cold Room.
 	
 - ==Quando e da chi vengono aggiornati i pesi in ColdRoom?==
