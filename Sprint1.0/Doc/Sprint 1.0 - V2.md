@@ -82,7 +82,6 @@ Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione d
 
 Cerchiamo quindi di realizzare la seguente __Architettura logica__: 
 ![[ArchitetturaLogica_Sprint1.0.png]]
-
 ##### Segnale per Transport Trolley
 Introduciamo un nuovo segnale "doJob" di tipo Req/Res inviato dal controller.
 ```
@@ -96,7 +95,7 @@ Reply robotDead : robotDead(NO_PARAM)
 > 
 > Limitiamo il controller ad un semplice comando di doJob, non è compito suo sapere quali operazioni deve compiere il robot per portare a termine il lavoro, è compito del robot stesso.
 
-__ATTENZIONE__: la risposta deve essere inviata appena il cairco è rilasciato nella ColdRoom e non quando il robot torna alla home per requisiti.
+__ATTENZIONE__: la risposta deve essere inviata appena il carico è rilasciato nella ColdRoom e non quando il robot torna alla home per requisiti.
 ##### Aggiornamento peso ColdRoom
 Se il servizio è andato a buon fine e viene restituita una "jobdone" allora il Controller aggiorna il peso della ColdRoom tramite Dispatch.
 ```
