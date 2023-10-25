@@ -34,11 +34,8 @@ public class ControllerAccessGui {
         String msg = "msg(getweight,request,roberto,coldroom,getweight(NO_PARAM),1)\n";
         String response = sender.sendMessage(msg);
         String[] weights = response.split("\\(|\\)")[2].split(",");
-        model.addAttribute("cw", weights[0]);
+        //model.addAttribute("cw", weights[0]);
         model.addAttribute("ew", weights[1]);
     }
-
-
-
 
 }
