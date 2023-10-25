@@ -76,20 +76,9 @@ TicketHandler si occuperà di:
 2) generare i Ticket;
 3) verificare se il Ticket ricevuto è scaduto o meno.
 
-
-
-
-- ==Generazione e della verifica di validità dei Ticket?==
-	Introduciamo un nuovo attore "TicketHandler" che si occupi di:
-		1) verificare se è possibile generare il Ticket richiesto;
-		2) generare i Ticket;
-		3) verificare se il Ticket ricevuto è scaduto o meno.
-	
-```
-è stata affidata la verifica dei Ticket al TicketHandler per le seguenti motivazioni:
+> [!NOTE]- motivazioni:
 1) principio di singola responsabilità: Il TicketHandler ha la responsabilità di gestire i Ticket, di conseguenza è corretto che sia quest'ultimo ad occuparsi sia di generare i Ticket richiesti sia di verificarne la validità. 
 2) motivi disicurezza: si preferisce assegnare la verifica al TicketHandler, avendo lui tutte le informazioni del driver necessarie per generare e verificare i Ticket stessi (ad esempio l'istante di emissione o l'id del driver associato al ticket).
-```
 
 ![[ArchitetturaLogica_Sprint1.1.png]]
 
