@@ -132,7 +132,7 @@ Service Area = {
 	lenght = 6             # asse y
 }
 ```
-![[ImmagineGrigliaConCoordinate.png]]
+![[ImmagineGrigliaCorrectSize.png]]
 ##### Definizione dei contesti
 - [ ] Siamo sicuri di voler mettere TransportTrolley in un contesto di verso?
 ``` qak
