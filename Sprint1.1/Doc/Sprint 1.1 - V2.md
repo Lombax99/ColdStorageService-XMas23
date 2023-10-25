@@ -19,65 +19,45 @@ A company intends to build a ColdStorageService, composed of a set of elements:
 
 3. a ==ServiceAcessGUI== that allows an human being to see the ==current weigth== of the material stored in the ColdRoom and to send to the ==ColdStorageService== a request to store new **FW** kg of food. If the request is accepted, the services return a ==ticket== that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
 
+### Service users story
+
+The story of the ColdStorageService can be summarized as follows:
+
+1. A Fridge truck driver uses the _ServiceAcessGUI_ to send a request to store its load of **FW** kg. If the request is accepted, the driver drives its truck to the INDOOR of the service, before the ticket exipration time **TICKETTIME**.
+    
+2. When the truck is at the INDOOR of the service, the driver uses the _ServiceAcessGUI_ to enter the ticket number and waits until the message **charge taken** (sent by the ColdStorageService) appears on the _ServiceAcessGUI_. At this point, the truck should leave the INDOOR.
+    
+3. When the service accepts a ticket, the transport trolley reaches the INDOOR, picks up the food, sends the **charge taken** message and then goes to the ColdRoom to store the food.
+    
+4. When the deposit action is terminated, the transport trolley accepts another ticket (if any) or returns to HOME.
+    
+5. While the transport trolley is moving, the Alarm requirements should be satisfied. However, the transport trolley should not be stopped if some prefixed amount of time (**MINT** msecs) is not passed from the previous stop.
+    
+6. A _Service-manager_ migtht use the ServiceStatusGUI to see:
+    - the **current state** of the transport trolley and it **position** in the room;
+    - the **current weigth** of the material stored in the ColdRoom;
+    - the **number of store-requests rejected** since the start of the service.
+
+### Analisi del TF23
+
+Nelle discussioni con il committente, sono emerse alcune problematiche:
+- Il problema del load-time lungo.
+- Il problema del driver distratto (non coerente, rispetto alle due fasi: scarico preceduto da prenotazione).
+- Il problema del driver malevolo.
+- Il problema di garantire che una risposta venga sempre inviata sempre solo a chi ha fatto la richiesta, anche quando la richiesta è inviata da un ‘alieno’ come una pagine HTML
+#### Il problema del load-time lungo
+Il problema del load-time lungo è stato affrontato da Arnaudo/Munari con l’idea di inviare due messaggi di ‘risposta’ (una per dire al driver che il ticket inviato è valido e una per inviare `chargeTaken`). A questo fine hanno fatto uso diretto della connessione TCP stabilita da una versione prototipale dell’accessGui fatta come GUI JAVA.
+Per consentire questa possibilità anche a livello di modellazione qak, in _ActorBasicFsm_ è stato introdotto il metodo storeCurrentRequest() che permette di ricordare la richiesta corrente (cancellata da una _replyTo_). Questo però è un trucco/meccanismo che potrebbe risultare pericoloso.
+Meglio affrontare il problema dal punto di vista logico, impostando una interazione a DUE-FASI tra driver e service (compito che può svolgere la _serviceAcessGui_).
+- FASE1: il driver invia il ticket e attenda una risposta (immediata) come ad esempio `ticketaccepted/ticketrejected`
+- FASE2: il driver invia la richiesta `loaddone` e attenda la risposta (`chargeTaken` o fallimento per cause legate al servizio)
+#### Il problema del driver distratto
+Questo problema ha indotto il committente ad affermare che:
+quando un agente esterno (driver) invia il ticket per indurre il servizio a scaricare il truck, si SUPPPONE GARANTITO che il carico del truck sia UGUALE al carico indicato nella prenotazione.
+Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore del carico effettivo sul Truck.
+
 ### Analisi dei Requisiti
-##### ==Service Area==
-Area rettangolare di dimensione L * l. L'area sarà suddivisa in una griglia con coordinate.
-
-`NOTE: L'area è piana, racchiusa entro quattro pareti. Procedendo dal bordo superiore e muovendoci in senso orario, i nomi delle pareti saranno: wallUp, wallRight, wallDown, wallLeft. All'interno del Service Area il transport trolley è libero di muoversi.La stanza è rettangolare ed ha dimensione Lato-Lungo * lato-corto (L * l). Per definire la posizione del robot in ogni momento l'area è divisa in una griglia con coordinate crescenti associate a partire dall'angolo in alto a sinistra`
-
-##### ==HOME==
-Zona della Service Area corrispondente alle coordinate (0,0)
-
-`NOTE: Locazione all'interno della Service Area dove il transport trolley si trova rivolto verso il basso, nell'angolo superiore sinistro. La Home è la zona della Service Area in cui il robot si troverà all'avvio e in ogni periodo di attesa di nuove richieste.`
-
-##### ==INDOOR port==
-Zona della Service Area corrispondente alle coordinate (0,MAX)
-
-`NOTE: Locazione all'interno della Service Area in cui un camion scarica la merce da far caricare al transport trolley. Si trova nell'angolo in basso a sinistra della Service Area. Le coordinate crescono allontanadosi dalla HOME, INDOOR port si trova a distanza massima sull'asse Y`
-
-##### ==ColdRoom Container==
-Attore in posizione fissa (x,y) in Service Area in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
-
-`NOTE: Contenitore fisico posizionato all'interno della Service Area in una posizione fissa. In questo elemento il transport trolley è in grado di depositare cibo fino ad un massimo di MAXW kg. ColdRoom Container rappresenta un ostacolo all'interno della Service Area per il transport trolley, ciò vuol dire che non può muoversi attraverso la posizione in cui l'elemento è localizzato, per semplicità supporremo che il container occupi interamente una sola coordinata di Service Area.`
-
-##### ==Porta della ColdRoom==
-Lato della ColdRoom che si affaccia sull'area di coordinate (x, y+1). Transport Trolley dovrà trovarsi in questa posizione per interagire con ColdRoom.
-
-`NOTE: Lato del ColdRoom Container tramite li quale è possibile depositare il cibo. Corrisponde al lato del container rivolto verso il basso della Service Area. Il transport trolley dovrà posizionarsi davanti alla porta della ColdRoom per poter depositare al suo interno il cibo overo in corrispondenza delle coordinate (x, y+1).`
-
-##### ==DDR robot==
-*Differential Drive Robot*, vedi [DDR](https://www.youtube.com/watch?v=aE7RQNhwnPQ).
-
-##### ==Transport trolley==
-Transport trolley è un DDR robot. I comandi che è in grado di compiere sono descritti nell'apposita [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) .
-
-##### ==Food-load==
-Carico (in kg) che il robot caricherà da Indoor e depositerà in ColdRoom Container.
-
-##### ==Current weight==
-Quantità di cibo attualmente contenuto in ColdRoom definito in base al peso.
-
-##### ==ServiceAccesGUI==
-GUI che permette ai driver di:
-- visualizzare la quantità di cibo (in peso) contenuta all'interno di ColdRoom;
-- richiedere il permesso di scaricare la merce dal Fridge Truck, ovvero richiedere la generazione di un Ticket a lui assegnato da presentare in un secondo momento;
-- presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port;
-- inviare la richiesta "loadDone" quando il driver è pronto a scaricare, inviando l'effettivo peso contenuto nel Fridge Truck.
-
-##### ==ColdStorageService==
-ColdStorageService è un componente del sistema che si occupa di gestire le richieste di scarico merce da parte dei driver. Si occupa quindi di:
-- ricevere le richieste di permesso di scarico;
-- generare Ticket assegnati al singolo driver che ne ha fatto richiesta;
-- ricevere Ticket nel momento in cui il driver arriva in INDOOR;
-- verificare la validità dei Ticket ricevuti, ovvero verificare se questi sono scaduti o meno.
-
-##### ==Ticket==
-Il Ticket, su richiesta di un driver tramite ServiceAccessGUI, viene generato dal ColdStorageService. Il Ticket rappresenta il permesso di scarico concesso ad un determinato FridgeTruck.
-Ogni Ticket è caratterizzato dai seguenti parametri:
-- start time: istante di emissione del ticket;
-- peso della quantità di cibo da scaricare dichiarato dal driver;
-- ~~identificativo del driver a cui è assegnato il ticket;~~
-- codice univoco che identifica il ticket generato.
+[[Cold Storage Service - Natali V2#Analisi preliminare dei requisiti|requisiti sprint 0]]
 
 ### Analisi del Problema
 - [ ] Vediamo il pattern facade (mettiamo qualcosa che fa da facciata). Aggiungo un nuovo componente ColdStorageFacade in modo tale che la gui si interfacci con un solo componente. Si aggiunge quindi un nuovo attore tra ServiceAccessGui e i due componenti TicketHandler e Controller. Per fare questo cerca info su pattern facade e spring
@@ -171,16 +151,6 @@ NOTE: anche qui dobbiamo mettere i test
 
 ### Progettazione
 
-##### Ticket 
-> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Analisi del Problema|see below]])
-```
-int TIME
-int PESO
-int SEQ
-
-Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_1697643071_15_0
-```
-
 - ==Contesti:==
 	- TicketHandler è contenuto sullo stesso contesto di Controller
 	- TransportTrolley, ColdRoom e ServiceAccessGui avranno un contesto a parte per ciascuno
@@ -189,15 +159,19 @@ Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_169764307
 - Codice della gestione dei ticket
 	deve avere una lista che contiene i ticket emessi ecc...
 
-- Codice dei ticket
-Il ticket sarà una stringa composta dai seguenti dati:
-momento di emissione,
-peso della richiesta,
-codice univoco.
+##### Ticket 
+```
+int TIME
+int PESO
+int SEQ
+
+Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_1697643071_15_0
+```
+
 Il momento di emissione viene eseguito come numero di secondi dal primo gennaio 1970, sarà un long.
 Il peso della richiesta non viene modificato, viene salvato in un intero.
 il codice univoco è un numero sequenziale di emissione del ticket.
-la separazione dei campi avverrà tramite il token "_", che non causa problemi al momento della lettura del ticket.
+la separazione dei campi avverrà tramite il token "\_", che non causa problemi al momento della lettura del ticket.
 Sempre per problemi di traduzione del messaggio, il ticket inizia con una lettera: T.
 
 ```
@@ -244,15 +218,13 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 //Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
 
 //ExternalQActor transporttrolley context ctxbasicrobot
+```
 
-
-
-
+```
 QActor controller context ctxcoldstoragearea {
 
-	[# var PESO = 0
-		#]
-		
+	[# var PESO = 0 #]
+	
 	State s0 initial {
 		printCurrentMessage
 	} Goto work
@@ -298,9 +270,9 @@ QActor controller context ctxcoldstoragearea {
 		printCurrentMessage
 	}
 }
+```
 
-
-
+```
 QActor coldroom context ctxcoldstoragearea {
 	//corrente: quanta roba c'è nella cold room
 	//previsto: quanto deve ancora arrivare, ma per cui c'è un biglietto emesso
@@ -324,7 +296,7 @@ QActor coldroom context ctxcoldstoragearea {
 		onMsg ( updateWeight : updateWeight(P_EFF, P_PRO) ) {
 			[# PesoEffettivo += payloadArg(0).toInt() 
 				PesoPromesso -= payloadArg(1).toInt()
-				#]
+			#]
 		}
 		println("coldroom update - peso promesso: $PesoPromesso, nuovo peso effettivo: $PesoEffettivo") color green
 	} Goto work
@@ -336,8 +308,7 @@ QActor coldroom context ctxcoldstoragearea {
 			println("coldroom - richiesti: $PesoRichiesto, effettivo: $PesoEffettivo, promesso: $PesoPromesso") color green
 			
 			if [# PesoEffettivo + PesoPromesso + PesoRichiesto  <= MAXW #]	{
-				[# PesoPromesso += PesoRichiesto
-					#]
+				[# PesoPromesso += PesoRichiesto #]
 					println("coldroom - accettato, peso promesso: $PesoPromesso") color green
 				replyTo weightrequest with weightOK : weightOK( NO_PARAM)
 			} else {
@@ -354,15 +325,16 @@ QActor coldroom context ctxcoldstoragearea {
 	} Goto work	
 	
 }
+```
 
-
+```
 QActor tickethandler context ctxcoldstoragearea {
 	
 	[#	
 		
 		var TICKETTIME = DomainSystemConfig.getTicketTime();
 		
-
+		
 		var Token = "_"
 		var Ticket = ""
 		var Peso = 0
@@ -391,10 +363,10 @@ QActor tickethandler context ctxcoldstoragearea {
 		}
 	}Transition t1 whenReply weightKO -> checkdeadlines
 					whenReply weightOK -> returnticket
-					
+	
 	
 	State checkdeadlines{
-				
+		
 		println("tickethandler - rifiutato, controllo i biglietti") color blue
 		
 		[# var SpazioLiberato = 0
@@ -421,11 +393,11 @@ QActor tickethandler context ctxcoldstoragearea {
         		
     		}
     		
-
-
-    
 			
-				
+			
+		    
+			
+			
 			if (SpazioLiberato >= Peso){ //c'è abbastanza spazio per la richiesta corrente
 				SpazioLiberato -= Peso
 				Accepted = true
@@ -473,10 +445,10 @@ QActor tickethandler context ctxcoldstoragearea {
 						Tickets.remove(Ticket)
 						Ticketvalid = true
 					}
-						
+					
 				}
 				
-				#]
+			#]
 			println("tickethandler - il biglietto è valido? $Ticketvalid") color blue
 			replyTo checkmyticket with ticketchecked : ticketchecked($Ticketvalid)
 		}
@@ -484,7 +456,9 @@ QActor tickethandler context ctxcoldstoragearea {
 	
 	
 }
+```
 
+```
 QActor serviceaccessgui context ctxcoldstoragearea {
 	[#	var PESO = 0
 		var Ticket = ""
@@ -495,7 +469,7 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 		printCurrentMessage
 		println("SAG - in attesa") color yellow
 	} Transition t0 whenMsg startToDoThings -> work
-					
+	
 	
 	
 	State work {
@@ -507,9 +481,9 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 		
 	} Transition t0 whenReply accept -> gotoindoor
 					whenReply reject -> tryagainlater
-					
-				
-					
+	
+	
+	
 	State tryagainlater{
 		println("SAG - rifiutato") color yellow
 	}Transition wait whenTime 5000 -> work
@@ -532,13 +506,12 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	
 	State checkresponse {
 		onMsg (ticketchecked : ticketchecked(BOOL)){
-			[# Ticketok = payloadArg(0).toBoolean()
-				# ]
+			[# Ticketok = payloadArg(0).toBoolean() # ]
 		}
 		println("SAG - biglietto accettato? : $Ticketok") color yellow
 	} Goto work if [# !Ticketok #] else unloading
-
-
+	
+	
 	State unloading{
 		println("SAG - scarico") color yellow
 	}Transition t4 whenTime 3000 -> loaddone

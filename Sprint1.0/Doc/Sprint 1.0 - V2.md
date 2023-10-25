@@ -123,12 +123,7 @@ La [[Cold Storage Service - Natali V2#HOME|Home]] corrisponderà all'origine (0,
 Il TransportTrolley fornito possiede già il supporto a questo tipo di tecnologia. La mappatura della stanza deve essere fatta a priori e fornita tramite file all'avvio.
 ##### Peso massimo trasportabile
 Dopo discussioni con il committente è stato decretato che il peso da scaricare non sarà mai maggiore del peso trasportabile del robot fisico. 
-
-
-
-
-
-
+##### Architettura logica dopo l'analisi del problema
 ![[Sprint1.0/Doc/coldstoragearch.png | 300]]
 
 NOTE: test plan?
@@ -136,6 +131,7 @@ definizione di mockGUI per fare i test ecc...
 
 ### Progettazione
 Progettazione di tutte le coordinate dei vari pezzi vengono definite qua.
+Service Area: 9 * 6
 
 NOTE: dividiamo un po' il codice e aggiungiamo qualche commento legato ai problemi di sopra
 ``` qak
@@ -146,10 +142,7 @@ System coldstorage
 Request doJob : doJob(KG)
 Reply jobdone : jobdone(NO_PARAM)
 Reply robotDead : robotDead(NO_PARAM)
-
 Dispatch updateWeight : updateWeight(PESO)
-
-
 
 //-----------------------------------------------------------------------
 
@@ -158,12 +151,10 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 //-----------------------------------------------------------------------
 
 Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
-
 ExternalQActor transporttrolley context ctxbasicrobot
+```
 
-
-
-
+``` qak
 QActor controller context ctxcoldstoragearea {
 
 	[# var KG = 0
@@ -194,9 +185,9 @@ QActor controller context ctxcoldstoragearea {
 		printCurrentMessage
 	}
 }
+```
 
-
-
+``` qak
 QActor coldroom context ctxcoldstoragearea {
 	[#
 		var PesoEffettivo = 0
@@ -216,14 +207,10 @@ QActor coldroom context ctxcoldstoragearea {
 		println("nuovo peso: $PesoEffettivo")
 	} Transition update whenMsg updateWeight -> updateWeight
 }
-
-
-
-
 ```
 
 
-- [x] Tutorial su come far partire la DEMO (passaggi e cose varie)
+### Deployment
 
 1) Avviare il container itunibovirtualrobot23 su docker
 	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
