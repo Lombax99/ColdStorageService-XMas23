@@ -118,7 +118,8 @@ Allo stesso modo è anche evidente la mancanza di un comando per caricare e scar
 Per definire la posizione del TransportTrolley e permettere il movimento autonomo dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del DDR robot). 
 La [[Cold Storage Service - Natali V2#HOME|Home]] corrisponderà all'origine (0, 0). Useremo coordinate crescenti verso il basso e verso destra.
 ![[ImmagineGrigliaConCoordinate.png]]
-
+Date le dimensioni dell'area, Service Area sarà divisa in una griglia 4 x 6.
+ColdR
 
 Il TransportTrolley fornito possiede già il supporto a questo tipo di tecnologia. La mappatura della stanza deve essere fatta a priori e fornita tramite file all'avvio.
 ##### Peso massimo trasportabile
