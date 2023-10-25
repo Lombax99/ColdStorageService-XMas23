@@ -201,7 +201,7 @@ QActor transporttrolley context ctxbasicrobot{
 	
 	State work{
 		println("robot waiting") color green
-	} Transition startworking whenRequest doJob -> startjob          //wait for dojob
+	} Transition startworking whenRequest doJob -> startjob          //wait for doJob
 	
 	State startjob{
 		onMsg(doJob : doJob( KG )){
@@ -211,11 +211,11 @@ QActor transporttrolley context ctxbasicrobot{
 	} Goto movingtoarrival
 	
 	State movingtoarrival{
-		request robotpos -m moverobot : moverobot(0,4)               //arrival	
+		request robotpos -m moverobot : moverobot(0,4)                //move to indoor	
 	} Transition gofetch whenReply moverobotdone -> movingtocoldroom
 	
 	State movingtocoldroom{
-		request robotpos -m moverobot : moverobot(5,3)               //coldroom
+		request robotpos -m moverobot : moverobot(5,3)                //move to coldroom
 	} Transition godrop whenReply moverobotdone -> waitforjob
 	
 	State waitforjob {
@@ -231,7 +231,7 @@ QActor transporttrolley context ctxbasicrobot{
 	}	Goto work
 }
 ```
-
+NOTA: finito di 
 ### Deployment
 
 1) Avviare il container itunibovirtualrobot23 su docker
