@@ -133,7 +133,6 @@ Service Area = {
 }
 ```
 ![[ImmagineGrigliaConCoordinate.png]]
-
 ##### Definizione dei contesti
 ``` qak
 Context ctxcoldstoragearea ip [host="localhost" port=8040]
@@ -141,7 +140,6 @@ Context ctxbasicrobot ip [host="127.0.0.1" port=8020]
 
 ExternalQActor transporttrolley context ctxbasicrobot
 ```
-
 ##### Controller
 ``` qak
 QActor controller context ctxcoldstoragearea {
@@ -167,7 +165,6 @@ QActor controller context ctxcoldstoragearea {
 	}
 }
 ```
-
 ##### ColdRoom
 ``` qak
 QActor coldroom context ctxcoldstoragearea {
