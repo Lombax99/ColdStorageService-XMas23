@@ -1,11 +1,8 @@
 ### Goal Sprint 1.1
 TicketHandler + ServiceAccessGUI
 > [!NOTE]- Descrizione
-> In questa seconda parte del primo sprint verrà trattata la l
-> Lo scopo del primo sprint è produrre una prima versione funzionante del core dell'applicazione. Questo comprende ColdStorageService con la logica di gestione dei Ticket e il TransportTrolley funzionante.
-> A questa parte deve essere affiancata una mock version della ServiceAccessGUI per la fase di testing.
+> In questa seconda parte del primo sprint verrà trattata la logica dei ticket, i componenti e la sicurezza associati.
 
-In questa seconda fase ci concentriamo sul processo di emissione dei ticket e le valutazioni di sicurezza annesse.
 [[Sprint 1.0|Link allo sprint 1]]
 ### Requisiti
 A company intends to build a ColdStorageService, composed of a set of elements:
