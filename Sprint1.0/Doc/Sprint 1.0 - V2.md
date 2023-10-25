@@ -183,7 +183,11 @@ QActor coldroom context ctxcoldstoragearea {
 }
 ```
 ##### TransportTrolley
-- [ ] da fare
+```
+Request doJob : doJob(KG)
+Reply jobdone : jobdone(NO_PARAM)
+Reply robotDead : robotDead(NO_PARAM)
+```
 
 ### Deployment
 
