@@ -132,6 +132,8 @@ Dopo discussioni con il committente è stato decretato che il peso da scaricare 
 Sia RD l'unità di misura
 ```
 Home = (0, 0)
+Indoor = (0, 4)
+ColdRoom = ()
 Service Area = {
 
 }
