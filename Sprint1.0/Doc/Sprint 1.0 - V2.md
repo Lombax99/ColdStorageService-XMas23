@@ -127,8 +127,12 @@ Dopo discussioni con il committente è stato decretato che il peso da scaricare 
 ![[Sprint1.0/Doc/coldstoragearch.png]]
 
 ### Progettazione
-Progettazione di tutte le coordinate dei vari pezzi vengono definite qua.
-Service Area: 9 * 6
+
+##### Sistema di coordinate
+Sia RD l'unità di misura
+```
+Service A
+```
 ![[ImmagineGrigliaConCoordinate.png]]
 
 ##### Definizione dei contesti
