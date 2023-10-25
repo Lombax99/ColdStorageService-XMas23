@@ -69,7 +69,26 @@ NOTA: da qualche parte devo aggiungere (se non c'è già) che si possono collega
 - [ ] Vediamo il pattern facade (mettiamo qualcosa che fa da facciata). Aggiungo un nuovo componente ColdStorageFacade in modo tale che la gui si interfacci con un solo componente. Si aggiunge quindi un nuovo attore tra ServiceAccessGui e i due componenti TicketHandler e Controller. Per fare questo cerca info su pattern facade e spring
 
 
+
+
+
+
+
+
+- ==Generazione e della verifica di validità dei Ticket?==
+	Introduciamo un nuovo attore "TicketHandler" che si occupi di:
+		1) verificare se è possibile generare il Ticket richiesto;
+		2) generare i Ticket;
+		3) verificare se il Ticket ricevuto è scaduto o meno.
 	
+```
+è stata affidata la verifica dei Ticket al TicketHandler per le seguenti motivazioni:
+1) principio di singola responsabilità: Il TicketHandler ha la responsabilità di gestire i Ticket, di conseguenza è corretto che sia quest'ultimo ad occuparsi sia di generare i Ticket richiesti sia di verificarne la validità. 
+2) motivi disicurezza: si preferisce assegnare la verifica al TicketHandler, avendo lui tutte le informazioni del driver necessarie per generare e verificare i Ticket stessi (ad esempio l'istante di emissione o l'id del driver associato al ticket).
+```
+
+![[ArchitetturaLogica_Sprint1.1.png]]
+
 - ==Protocollo di richiesta e generazione del ticket:==
 ![[Sprint1.1/Doc/cicloVitaMessaggi.png]]
 	1) Inizia con una request/response da parte del driver tramite ServiceAccessGUI verso TicketHandler, a cui viene passato il peso da scaricare;
@@ -90,21 +109,6 @@ Motivazioni:
 2) Al driver non interessa sapere se il TransportTrolley ha avuto problematiche durante il trasporto del materiale, quindi il "charge taken" può essere inviato prima che il TransportTrolley comunichi al Controller se il carico/scarico in ColdRoom è terminato. 
 ```
 
-
-![[ArchitetturaLogica_Sprint1.1.png]]
-
-- ==Generazione e della verifica di validità dei Ticket?==
-	Introduciamo un nuovo attore "TicketHandler" che si occupi di:
-		1) verificare se è possibile generare il Ticket richiesto;
-		2) generare i Ticket;
-		3) verificare se il Ticket ricevuto è scaduto o meno.
-	
-```
-è stata affidata la verifica dei Ticket al TicketHandler per le seguenti motivazioni:
-1) principio di singola responsabilità: Il TicketHandler ha la responsabilità di gestire i Ticket, di conseguenza è corretto che sia quest'ultimo ad occuparsi sia di generare i Ticket richiesti sia di verificarne la validità. 
-2) motivi disicurezza: si preferisce assegnare la verifica al TicketHandler, avendo lui tutte le informazioni del driver necessarie per generare e verificare i Ticket stessi (ad esempio l'istante di emissione o l'id del driver associato al ticket).
-```
-	
 - ==Problema del peso ipotetico==
 	Un driver potrebbe inviare la richiesta di un Ticket prima che un secondo driver, a cui è stato generato un Ticket in precedenza, abbiano scaricato.
 	Rischio di emettere un ticket per un peso non realmente disponibile nel momento di scarico.
