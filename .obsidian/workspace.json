@@ -32,24 +32,6 @@
             }
           },
           {
-            "id": "98aeb59b30843b62",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          }
-        ]
-      },
-      {
-        "id": "21f2099e8dd52390",
-        "type": "tabs",
-        "children": [
-          {
             "id": "e427d801116f96e4",
             "type": "leaf",
             "state": {
@@ -62,6 +44,25 @@
             }
           },
           {
+            "id": "98aeb59b30843b62",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Sprint1.1/Doc/Sprint 1.1.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 2
+      },
+      {
+        "id": "21f2099e8dd52390",
+        "type": "tabs",
+        "children": [
+          {
             "id": "3aa83ee35566a993",
             "type": "leaf",
             "state": {
@@ -73,8 +74,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -222,6 +222,9 @@
   },
   "active": "3aa83ee35566a993",
   "lastOpenFiles": [
+    "Sprint0/Cold Storage Service - Natali V2.md",
+    "Sprint1.0/Doc/Sprint 1.0.md",
+    "Sprint1.1/Doc/Sprint 1.1 - V2.md",
     "Sprint1.0/Doc/Sprint 1.0 - V2.md",
     "Sprint1.0/Doc/ImmagineGrigliaCorrectSize.png",
     "Sprint1.0/Doc.mpfIgN.kra",
@@ -229,12 +232,9 @@
     "Sprint1.0/Doc.djLVYW.kra",
     "Sprint1.0/Doc.kTPyur.kra",
     "Sprint1.0/Doc/ImmagineGriglia.kra~",
-    "Sprint0/Cold Storage Service - Natali V2.md",
     "Sprint2/Codice/BasicRobotSprint2",
     "Sprint2/Codice",
-    "Sprint1.1/Doc/Sprint 1.1 - V2.md",
     "Sprint1.1/Doc/ChristamsClientWeb.png",
-    "Sprint1.0/Doc/Sprint 1.0.md",
     "Sprint1.1/Doc/Sprint 1.1.md",
     "Sprint1.0/Doc/coldstoragearch.png",
     "Other/ColdStorageServiceRoomAnnoted.png",
