@@ -133,9 +133,15 @@ Service Area = {
 }
 ```
 ![[ImmagineGrigliaCorrectSize.png]]
-##### Definizione dei contesti
+##### Definizione messaggi e contesti
 ``` qak
 System coldstorage
+
+Request doJob : doJob(KG)
+Reply jobdone : jobdone(NO_PARAM)
+Reply robotDead : robotDead(NO_PARAM)
+
+Dispatch updateWeight : updateWeight(PESO)
 
 //-----------------------------------------------------------------------
 
