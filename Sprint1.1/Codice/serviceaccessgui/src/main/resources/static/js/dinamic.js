@@ -13,7 +13,7 @@ document.getElementById("depositsubmit").addEventListener("submit", function(e)
     e.preventDefault();
     var fw = document.getElementById("foodweight").value;
     sendMessage("depositreq", "fw="+fw);
-    updateweight();
+
 });
 
 document.getElementById("checksubmit").addEventListener("submit", function(e)
@@ -21,7 +21,6 @@ document.getElementById("checksubmit").addEventListener("submit", function(e)
     e.preventDefault();
     var ticket = document.getElementById("varticket").value;
     sendMessage("checkreq","ticket="+ticket);
-    updateweight();
 });
 
 document.getElementById("loadsubmit").addEventListener("submit", function(e)
@@ -29,7 +28,6 @@ document.getElementById("loadsubmit").addEventListener("submit", function(e)
     e.preventDefault();
 
     sendMessage("loadreq","weight="+peso);
-    updateweight();
 });
 
 
@@ -53,6 +51,7 @@ function responsehandler(type, response){
             }
             else
                 enableButtons("default");
+            updateweight();
             break;
         case "checkreq":
             var ticketvalid = getMsgValue(response);
@@ -63,13 +62,16 @@ function responsehandler(type, response){
             }
             else
                 enableButtons("default");
+            updateweight();
             break;
         case "loadreq":
             document.getElementById("maintext").innerHTML = "Il tuo peso è stato preso in carico! ADDIO";
             enableButtons("default");
+            updateweight();
             break;
         default:
             console.log("richiesta non riconosciuta");
+            updateweight();
     }
 
 }
