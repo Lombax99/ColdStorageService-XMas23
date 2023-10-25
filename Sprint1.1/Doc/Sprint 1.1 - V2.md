@@ -155,6 +155,8 @@ Opzioni disponibili: SPRING o NODEJS, ma nodejs è brutto, il codice è difficil
 ### Tesing
 - Ticket scaduto
 - Ticket ripetuto
+- Peso eccessivo
+- Un test con la funzionalità di base
 
 ### Progettazione
 
