@@ -160,8 +160,8 @@ QActor controller context ctxcoldstoragearea {
 	
 	State s0 initial { printCurrentMessage }
 	Goto mockRequest
-
-
+	
+	# generiamo una richiesta casuale per 
 	State mockRequest {
 		[# KG = Math.random() #]
 		request transporttrolley -m doJob : doJob($KG)
