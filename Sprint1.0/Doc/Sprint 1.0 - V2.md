@@ -198,13 +198,11 @@ QActor transporttrolley context ctxbasicrobot{
 	
 	State s0 initial{
 		forward robotpos -m setrobotstate : setpos(0,0,down)//home
-	}Transition ready whenMsg robotready -> work
-	
-	
+	} Transition ready whenMsg robotready -> work
 	
 	State work{
 		println("robot ! waiting") color green
-	}Transition startworking whenRequest doJob -> startjob
+	} Transition startworking whenRequest doJob -> startjob
 
 	State startjob{
 		onMsg(doJob : doJob( KG )){
