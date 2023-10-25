@@ -78,17 +78,7 @@ TicketHandler si occuperà di:
 
 Il sistema sarà dunque ampliato secondo la seguente __Architettura logica__: 
 ![[ArchitetturaLogica_Sprint1.1.png]]
-
-
-
-
-
-
-
-
-
-
-- ==Protocollo di richiesta e generazione del ticket:==
+##### Protocollo di richiesta e generazione del ticket
 ![[Sprint1.1/Doc/cicloVitaMessaggi.png]]
 	1) Inizia con una request/response da parte del driver tramite ServiceAccessGUI verso TicketHandler, a cui viene passato il peso da scaricare;
 	2) TicketHandler chiede a ColdRoom se c'è abbastanza spazio per depositare la quantità di cibo dichiarata dal driver sempre tramite request/response, la quale viene passata come parametro;
