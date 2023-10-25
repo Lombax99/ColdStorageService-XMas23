@@ -202,13 +202,22 @@ QActor transporttrolley context ctxbasicrobot{
 	State work{
 		println("robot waiting") color green
 	} Transition startworking whenRequest doJob -> startjob
-
+	
 	State startjob{
 		onMsg(doJob : doJob( KG )){
 			[# Peso = payloadArg(0).toInt()	#]
 			println("peso ricevuto: $Peso") color green
 		}
-	}Goto movingtoarrival
+	} Goto movingtoarrival
+	
+	State movingtoarrival{
+		request robotpos -m moverobot : moverobot(0,4)               //arrival	
+	} Transition gofetch whenReply moverobotdone -> movingtocoldroom
+	
+	State movingtocoldroom{
+		request robotpos -m moverobot : moverobot(5,3)               //coldroom
+	} Transition godrop whenReply moverobotdone -> checkforjob
+}
 ```
 
 ### Deployment
