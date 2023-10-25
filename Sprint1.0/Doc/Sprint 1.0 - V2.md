@@ -182,9 +182,9 @@ QActor coldroom context ctxcoldstoragearea {
 	} Transition update whenMsg updateWeight -> updateWeight
 }
 ```
-
 ##### TransportTrolley
 - [ ] da fare
+
 ### Deployment
 
 1) Avviare il container itunibovirtualrobot23 su docker
