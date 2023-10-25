@@ -192,9 +192,29 @@ QActor coldroom context ctxcoldstoragearea {
 ```
 ##### TransportTrolley
 ```
-Request doJob : doJob(KG)
-Reply jobdone : jobdone(NO_PARAM)
-Reply robotDead : robotDead(NO_PARAM)
+QActor transporttrolley context ctxbasicrobot{
+	[#	var Peso = 0
+	#]
+	
+	State s0 initial{
+		forward robotpos -m setrobotstate : setpos(0,0,down)//home
+	}Transition ready whenMsg robotready -> work
+	
+	
+	
+	State work{
+		println("robot ! waiting") color green
+	}Transition startworking whenRequest doJob -> startjob
+
+	State startjob{
+		onMsg(doJob : doJob( KG )){
+			[# Peso = payloadArg(0).toInt()
+				Giridafare = Math.ceil(Peso.toDouble() / CapienzaRobot.toDouble()).toInt()
+				#]
+			println("peso ricevuto: $Peso") color green
+			println("giri da fare: $Giridafare") color green
+		}
+	}Goto movingtoarrival
 ```
 
 ### Deployment
