@@ -130,24 +130,11 @@ Dopo discussioni con il committente è stato decretato che il peso da scaricare 
 Progettazione di tutte le coordinate dei vari pezzi vengono definite qua.
 Service Area: 9 * 6
 
-NOTE: dividiamo un po' il codice e aggiungiamo qualche commento legato ai problemi di sopra
+##### Definizione dei contesti
 ``` qak
-System coldstorage
-
-//-----------------------------------------------------------------------
-
-Request doJob : doJob(KG)
-Reply jobdone : jobdone(NO_PARAM)
-Reply robotDead : robotDead(NO_PARAM)
-Dispatch updateWeight : updateWeight(PESO)
-
-//-----------------------------------------------------------------------
-
 Context ctxcoldstoragearea ip [host="localhost" port=8040]
-
-//-----------------------------------------------------------------------
-
 Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
+
 ExternalQActor transporttrolley context ctxbasicrobot
 ```
 
