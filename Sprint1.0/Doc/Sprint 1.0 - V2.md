@@ -134,12 +134,14 @@ Service Area = {
 ```
 ![[ImmagineGrigliaCorrectSize.png]]
 ##### Definizione dei contesti
-- [ ] Siamo sicuri di voler mettere TransportTrolley in un contesto di verso?
 ``` qak
-Context ctxcoldstoragearea ip [host="localhost" port=8040]
-Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
+System coldstorage
 
-ExternalQActor transporttrolley context ctxbasicrobot
+//-----------------------------------------------------------------------
+
+Context ctxcoldstoragearea ip [host="localhost" port=8040]
+
+//-----------------------------------------------------------------------
 ```
 ##### Controller
 ``` qak
