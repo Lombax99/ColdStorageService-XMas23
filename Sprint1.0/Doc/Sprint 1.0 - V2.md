@@ -119,7 +119,6 @@ Dopo discussioni con il committente è stato decretato che il peso da scaricare 
 ![[Sprint1.0/Doc/coldstoragearch.png]]
 
 ### Progettazione
-- [ ] rifaccio la tabella con i segnali aggiornati?
 ##### Sistema di coordinate
 Sia RD l'unità di misura
 ```
