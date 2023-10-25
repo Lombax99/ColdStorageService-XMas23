@@ -64,6 +64,8 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 [[Cold Storage Service - Natali V2#Analisi preliminare dei requisiti|requisiti sprint 0]]
 
 ### Analisi del Problema
+NOTA: da qualche parte devo aggiungere (se non c'è già)
+
 - [ ] Vediamo il pattern facade (mettiamo qualcosa che fa da facciata). Aggiungo un nuovo componente ColdStorageFacade in modo tale che la gui si interfacci con un solo componente. Si aggiunge quindi un nuovo attore tra ServiceAccessGui e i due componenti TicketHandler e Controller. Per fare questo cerca info su pattern facade e spring
 
 ![[ArchitetturaLogica_Sprint1.1.png]]
@@ -157,6 +159,7 @@ Opzioni disponibili: SPRING o NODEJS, ma nodejs è brutto, il codice è difficil
 - Ticket ripetuto
 - Peso eccessivo
 - Un test con la funzionalità di base
+- Test con più utenti collegati contemporaneamente
 
 ### Progettazione
 
