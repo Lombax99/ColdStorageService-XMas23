@@ -70,7 +70,11 @@ NOTA: da qualche parte devo aggiungere (se non c'è già) che si possono collega
 
 
 
-##### Compiti di Ticket
+##### Compiti di TicketHandler
+TicketHandler che si occupi di:
+		1) verificare se è possibile generare il Ticket richiesto;
+		2) generare i Ticket;
+		3) verificare se il Ticket ricevuto è scaduto o meno.
 
 
 
