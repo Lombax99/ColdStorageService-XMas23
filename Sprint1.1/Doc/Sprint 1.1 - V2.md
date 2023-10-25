@@ -68,6 +68,29 @@ NOTA: da qualche parte devo aggiungere (se non c'è già) che si possono collega
 
 - [ ] Vediamo il pattern facade (mettiamo qualcosa che fa da facciata). Aggiungo un nuovo componente ColdStorageFacade in modo tale che la gui si interfacci con un solo componente. Si aggiunge quindi un nuovo attore tra ServiceAccessGui e i due componenti TicketHandler e Controller. Per fare questo cerca info su pattern facade e spring
 
+
+	
+- ==Protocollo di richiesta e generazione del ticket:==
+![[Sprint1.1/Doc/cicloVitaMessaggi.png]]
+	1) Inizia con una request/response da parte del driver tramite ServiceAccessGUI verso TicketHandler, a cui viene passato il peso da scaricare;
+	2) TicketHandler chiede a ColdRoom se c'è abbastanza spazio per depositare la quantità di cibo dichiarata dal driver sempre tramite request/response, la quale viene passata come parametro;
+	3) Se c'è abbastanza spazio, ColdRoom aggiorna i propri attributi in modo tale da memorizzare che una quantità di peso è riservata al driver in questione che ne ha fatto richiesta e risponde True, altrimenti False;
+	4) Se TicketHandler riceve True genera il ticket e lo invia come risposta a ServiceAccessGui, altrimenti risponde Rejected
+	5) Una volta arrivato in INDOOR, il driver, invia il Ticket a TicketHandler tramite Request/Response. Il TicketHandler verifica il **TICKETTIME** e restituisce Ok / Rejected, effettua quindi la verifica di validità temporale del Ticket. 
+	6) Se la richiesta viene approvata ServiceAccessGUI invia tramite Request/Response al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto, insieme al peso da scarcare. Dopo di che attende una risposta "charge taken" da parte del Controller.
+	
+- ==Quando il driver può uscire dal sistema?==
+	Il driver può uscire dal sistema quando ha scaricato tutta la merce contenuta, ovvero quando riceve dal Controller la response "charge taken" associata ad una precedente request "load done".
+	
+- ==Quando viene inviato il "charge taken"?==
+	"Charge taken" viene inviato dal Controller subito dopo la "doJob" associata alla richiesta.
+```
+Motivazioni:
+1) Supponiamo che quest'ultimo scarichi la merce in una piattaforma dedicata, dalla quale il DDR robot preleverà il cibo e lo scaricherà in ColdRoom in uno o più volte a seconda della quantità di materiale dichiarata.
+2) Al driver non interessa sapere se il TransportTrolley ha avuto problematiche durante il trasporto del materiale, quindi il "charge taken" può essere inviato prima che il TransportTrolley comunichi al Controller se il carico/scarico in ColdRoom è terminato. 
+```
+
+
 ![[ArchitetturaLogica_Sprint1.1.png]]
 
 - ==Generazione e della verifica di validità dei Ticket?==
@@ -104,25 +127,6 @@ NOTA: da qualche parte devo aggiungere (se non c'è già) che si possono collega
 		In presenza di Ticket scaduti allora il TicketHandler procederà ad aggiornare il peso.
 		In questo modo risolviamo anche il problema del ==peso fantasma==
 	
-- ==Protocollo di richiesta e generazione del ticket:==
-![[Sprint1.1/Doc/cicloVitaMessaggi.png]]
-	1) Inizia con una request/response da parte del driver tramite ServiceAccessGUI verso TicketHandler, a cui viene passato il peso da scaricare;
-	2) TicketHandler chiede a ColdRoom se c'è abbastanza spazio per depositare la quantità di cibo dichiarata dal driver sempre tramite request/response, la quale viene passata come parametro;
-	3) Se c'è abbastanza spazio, ColdRoom aggiorna i propri attributi in modo tale da memorizzare che una quantità di peso è riservata al driver in questione che ne ha fatto richiesta e risponde True, altrimenti False;
-	4) Se TicketHandler riceve True genera il ticket e lo invia come risposta a ServiceAccessGui, altrimenti risponde Rejected
-	5) Una volta arrivato in INDOOR, il driver, invia il Ticket a TicketHandler tramite Request/Response. Il TicketHandler verifica il **TICKETTIME** e restituisce Ok / Rejected, effettua quindi la verifica di validità temporale del Ticket. 
-	6) Se la richiesta viene approvata ServiceAccessGUI invia tramite Request/Response al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto, insieme al peso da scarcare. Dopo di che attende una risposta "charge taken" da parte del Controller.
-	
-- ==Quando il driver può uscire dal sistema?==
-	Il driver può uscire dal sistema quando ha scaricato tutta la merce contenuta, ovvero quando riceve dal Controller la response "charge taken" associata ad una precedente request "load done".
-	
-- ==Quando viene inviato il "charge taken"?==
-	"Charge taken" viene inviato dal Controller subito dopo la "doJob" associata alla richiesta.
-```
-Motivazioni:
-1) Supponiamo che quest'ultimo scarichi la merce in una piattaforma dedicata, dalla quale il DDR robot preleverà il cibo e lo scaricherà in ColdRoom in uno o più volte a seconda della quantità di materiale dichiarata.
-2) Al driver non interessa sapere se il TransportTrolley ha avuto problematiche durante il trasporto del materiale, quindi il "charge taken" può essere inviato prima che il TransportTrolley comunichi al Controller se il carico/scarico in ColdRoom è terminato. 
-```
 	
 - ==Problema della sicurezza:==
 	[[Sprint 1.0 - V2#Analisi del TF23|problema del driver malevolo]]
