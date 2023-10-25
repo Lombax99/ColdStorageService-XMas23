@@ -210,11 +210,12 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
-    "width": 391.5
+    "width": 391.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -227,7 +228,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "e427d801116f96e4",
+  "active": "122772334ff323b2",
   "lastOpenFiles": [
     "Sprint0/Cold Storage Service - Natali V2.md",
     "Sprint1.1/Doc/Sprint 1.1 - V2.md",
