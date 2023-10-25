@@ -223,7 +223,7 @@ QActor transporttrolley context ctxcoldstoragearea {
 		replyTo doJob with jobdone : jobdone( 1 )
 		println("transporttrolley ! aspetto") color green
 	} Transition gofetchagain 
-			whenTime 3000 -> goinghome                               //torna al
+			whenTime 3000 -> goinghome                               //torna alla Home
 			whenRequest doJob -> startjob                            //torna a scaricare
 	
 	State goinghome{
