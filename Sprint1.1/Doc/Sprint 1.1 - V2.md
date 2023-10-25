@@ -94,6 +94,12 @@ Il sistema sarà dunque ampliato secondo la seguente __Architettura logica__:
 > 2) Al driver non interessa sapere se il TransportTrolley ha avuto problematiche durante il trasporto del materiale, quindi il "charge taken" può essere inviato prima che il TransportTrolley comunichi al Controller se il carico/scarico in ColdRoom è terminato. 
 
 Ricevuta la "charge taken" il driver può uscire dal sistema considerando la transizione conclusa con successo.
+
+
+
+
+
+
 ##### Problema del peso ipotetico
 Un driver potrebbe inviare la richiesta di un Ticket prima che un secondo driver, a cui è stato generato un Ticket in precedenza, abbiano scaricato.
 Rischio di emettere un ticket per un peso non realmente disponibile nel momento di scarico.
@@ -104,9 +110,8 @@ Per risolvere il problema definiamo due pesi diversi:
 
 Questi due pesi si troveranno entrambi in ColdRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune).
 Useremo la somma dei due pesi per validare o meno una richiesta di emissione ticket.
-
-##### ==Problema del peso fantasma==
-	A seguito della scadenza di un Ticket, il Transport Trolley non si farà carico della richiesta e il peso promesso del ticket rimarrà considerato il Cold Room.
+##### Problema del peso fantasma
+A seguito della scadenza di un Ticket, il Transport Trolley non si farà carico della richiesta e il peso promesso del ticket rimarrà considerato il Cold Room.
 	
 - ==Quando e da chi vengono aggiornati i pesi in ColdRoom?==
 	1) Terminata l'azione del Transport Trolley, peso promesso e peso effettivo verranno aggiornati tramite dispatch di Controller. In particolar modo viene passata la quantità da decrementare dal peso "promesso" e la quantità da incrementare al peso effettivo, i due valori possono essere diversi a causa del problema del driver distratto ([[Cold Storage Service - Natali#Il problema del driver distratto |see Driver Distratto]]).

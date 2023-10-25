@@ -102,7 +102,7 @@ Se il servizio è andato a buon fine e viene restituita una "jobdone" allora il 
 Dispatch updateWeight : updateWeight(PESO)
 ```
 ##### Da "doJob" a comandi per TransportTrolley
-Dalla [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) fornita è chiaro che non sia presente un comando che ci permetterebbe di limtarci ad un comando "doJob". 
+Dalla [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) fornita è chiaro che non sia presente un comando che ci permetterebbe di limitarci ad un comando "doJob". 
 Se non fosse possibile implementarlo risulterebbe necessario aggiungere un componente intermedio che traduca in comandi comprensibili al TransportTrolley fornitoci.
 Allo stesso modo è anche evidente la mancanza di un comando per caricare e scaricare i materiali trattati e quindi non risulta sufficiente.
 ##### Posizione nella Service Area
