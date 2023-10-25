@@ -218,7 +218,7 @@ QActor transporttrolley context ctxbasicrobot{
 		request robotpos -m moverobot : moverobot(5,3)                //move to coldroom
 	} Transition godrop whenReply moverobotdone -> waitforjob
 
-//alla fine di waitforjob mandiamo la risposta 
+//alla fine di waitforjob mandiamo la risposta "jobdone" e attendiamo per verificare che non ci siano altre richieste "doJob" da 
 
 	State waitforjob {
 		replyTo doJob with jobdone : jobdone( 1 )
