@@ -157,20 +157,13 @@ ExternalQActor transporttrolley context ctxbasicrobot
 QActor controller context ctxcoldstoragearea {
 
 	[# var KG = 0 #]
-		
-	State s0 initial {
-		printCurrentMessage
-		}
+	
+	State s0 initial { printCurrentMessage }
 	Goto mockRequest
 	
 	State mockRequest {
-		[#
-			KG = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
-			
-		#]
-		printCurrentMessage
+		[# KG = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt() #]
 		request transporttrolley -m doJob : doJob($KG)
-		
 	} Transition endjob whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
 	
