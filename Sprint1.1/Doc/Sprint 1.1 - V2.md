@@ -80,6 +80,7 @@ TicketHandler si occuperà di:
 > 1) principio di singola responsabilità: Il TicketHandler ha la responsabilità di gestire i Ticket, di conseguenza è corretto che sia quest'ultimo ad occuparsi sia di generare i Ticket richiesti sia di verificarne la validità. 
 >2) motivi disicurezza: si preferisce assegnare la verifica al TicketHandler, avendo lui tutte le informazioni del driver necessarie per generare e verificare i Ticket stessi (ad esempio l'istante di emissione o l'id del driver associato al ticket).
 
+ __Architettura logica__: 
 ![[ArchitetturaLogica_Sprint1.1.png]]
 
 - ==Protocollo di richiesta e generazione del ticket:==
