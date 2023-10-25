@@ -170,7 +170,6 @@ QActor controller context ctxcoldstoragearea {
 	
 	State jobdone{
 		forward coldroom -m updateWeight : updateWeight($KG)
-		//ChargeTaken
 	} Transition repeat whenTime 15000 -> mockRequest
 	
 	State handlerobotdead{
@@ -182,19 +181,15 @@ QActor controller context ctxcoldstoragearea {
 ##### ColdRoom
 ``` qak
 QActor coldroom context ctxcoldstoragearea {
-	[#
-		var PesoEffettivo = 0
-	#]
+	[# var PesoEffettivo = 0 #]
 	
-	State s0 initial {
-		printCurrentMessage
-	} Transition update whenMsg updateWeight -> updateWeight
+	State s0 initial { printCurrentMessage }
+	Transition update whenMsg updateWeight -> updateWeight
 	
 	State updateWeight {
 		printCurrentMessage
 		onMsg ( updateWeight : updateWeight(PESO) ) {
-			[# PesoEffettivo += payloadArg(0).toInt() 
-				#]
+			[# PesoEffettivo += payloadArg(0).toInt() ]
 		}
 		println("peso aggiornato")
 		println("nuovo peso: $PesoEffettivo")
