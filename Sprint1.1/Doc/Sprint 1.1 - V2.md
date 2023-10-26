@@ -187,7 +187,7 @@ Tenere presente che ci possono essere più utenti collegati contemporaneamente.
 NOTE sulla gui: usare attori per la gui non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfacci con esso.
 Opzioni disponibili: SPRING o NODEJS, ma nodejs è brutto, il codice è difficilmente manutenibile e più complesso da sviluppare, usiamo SPRING.
 
-Spring server prende il posto di facade e spring client prende il posto di 
+Spring server prende il posto di facade e spring client prende il posto di ServiceAccessGUI.
 
 __NOTA:__ In questa fase il server spring verrà lanciato localmente al resto del sistema, in futuro potrebbe non essere così. Come gestiamo la conoscenza dell'indirizzo degli attori?
 
