@@ -184,7 +184,7 @@ QActor tickethandler context ctxcoldstoragearea {
 Progettare le GUI come attori non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfacci con esso.
 Per fare ciò ci appoggiamo alla tecnologia di SPRING che permette l'interazione tramite web e la gestione di molti utenti collegati contemporaneamente.
 
-Nello schema inizSpring server prende il posto di facade e spring client prende il posto di ServiceAccessGUI.
+Nello schema iniziale il server Spring prenderà quindi il posto dell'attore Facade mentre le GUI saranno pagine html statiche fornite dal server ad ogni utente che si collega.
 
 
 
