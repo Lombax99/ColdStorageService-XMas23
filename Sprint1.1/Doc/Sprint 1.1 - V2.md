@@ -185,7 +185,7 @@ WEB PAGE
 NOTE sulla gui: usare attori per la gui non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfacci con esso.
 Opzioni disponibili: SPRING o NODEJS, ma nodejs è brutto, il codice è difficilmente manutenibile e più complesso da sviluppare, usiamo SPRING.
 ##### Gestione dei parametri di sistema
-TICKETTIME è un parametro 
+TICKETTIME è un parametro variabile al lancio del sistema. Definiamo un file di configurazione con i valori da caricare al lancio (AppConfig.json):
 ```json
 {  
  "TicketTime": "600"  
