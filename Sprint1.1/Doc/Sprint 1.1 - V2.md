@@ -188,7 +188,7 @@ Nello schema iniziale il server Spring prenderà quindi il posto dell'attore Fac
 
 __NOTA:__ In questa fase il server spring verrà lanciato localmente al resto del sistema, in futuro potrebbe non essere così. Come gestiamo la conoscenza dell'indirizzo degli attori?
 
-- [ ] Schema che mostra la relazione dei client e del server con il resto degli attori.
+![[SpringStructure.png]]
 
 
 
