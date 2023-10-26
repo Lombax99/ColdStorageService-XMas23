@@ -171,15 +171,6 @@ QActor tickethandler context ctxcoldstoragearea {
 	...
 }
 ```
-
-
-
-
-
-
-
-
-
 ##### ServiceAccessGUI
 Progettare le GUI come attori non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfacci con esso.
 Per fare ciò ci appoggiamo alla tecnologia di SPRING che permette l'interazione tramite web e la gestione di molti utenti collegati contemporaneamente.
@@ -194,6 +185,13 @@ __NOTA:__ In questa fase il server spring verrà lanciato localmente al resto de
 
 
 
+
+
+
+
+
+
+
 ##### Aggiornamento peso in ServiceAccessGUI
 La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable come da analisi preliminari. 
 In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom. 
@@ -202,7 +200,7 @@ In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
 il server spring diventa il nostro patter facade.
 tutti i client HTML si interfacciano allo stesso server spring, che fa le richieste direttamente a controller, tickethandler e coldroom
 
-WEB PAGE
+##### WEB PAGE
 ![[ChristamsClientWeb.png]]
 
 
