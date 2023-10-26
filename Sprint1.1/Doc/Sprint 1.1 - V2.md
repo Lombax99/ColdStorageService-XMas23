@@ -192,23 +192,33 @@ Si tratta di un problema di poco conto che non giustifica un cambiamento verso p
 ##### Architettura logica dopo l'analisi del problema
 ![[Sprint1.1/Doc/coldstorage2arch.png | 350]]
 
-
-
-
-
-
-
-
-
-
-
 ### Tesing
 Durante la face di testing dovranno essere verificati i seguenti casi:
 1) Test del processo in condizioni normali
 2) Test con ticket scaduto
 3) Test con ticket ripetuto
-4) Test con peso superiore al disponbile
+4) Test con peso superiore al disponibile
 Ciascuno dei test deve essere superato con più utenti collegati contemporaneamente da uno stesso browser o da browser diversi.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Progettazione
 
