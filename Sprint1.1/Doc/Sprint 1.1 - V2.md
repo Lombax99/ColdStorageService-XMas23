@@ -181,6 +181,11 @@ QActor tickethandler context ctxcoldstoragearea {
 
 
 ##### ServiceAccessGUI
+Progettare le GUI come attori non è vantaggioso
+
+
+
+
 Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni camion che si presenta, in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html. Che tecnologia utilizzare? SPRING
 Tenere presente che ci possono essere più utenti collegati contemporaneamente.
 
