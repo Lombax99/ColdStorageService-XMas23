@@ -111,28 +111,16 @@ Per risolvere il problema definiamo due pesi diversi:
 
 ```
 QActor coldroom context ctxcoldstoragearea {
-	//corrente: quanta roba c'è nella cold room
-	//previsto: quanto deve ancora arrivare, ma per cui c'è un biglietto emesso
 	[#
 		var PesoEffettivo = 0
 		var PesoPromesso = 0 
 		var MAXW = 50
 	#]
 	
-	State s0 initial {
-		printCurrentMessage
-	} Goto work
-	
-	State work{
-		
-	}Transition update whenMsg updateWeight -> updateWeight
-					   whenRequest weightrequest -> checkweight
-					   whenRequest getweight -> returnweight
-					   
 	State updateWeight {
 		onMsg ( updateWeight : updateWeight(P_EFF, P_PRO) ) {
-			[# PesoEffettivo += payloadArg(0).toInt() 
-				PesoPromesso -= payloadArg(1).toInt()
+			[# PesoEffettivo += P_EFF 
+			   PesoPromesso -= P_PRO
 			#]
 		}
 		println("coldroom update - peso promesso: $PesoPromesso, nuovo peso effettivo: $PesoEffettivo") color green
