@@ -167,7 +167,7 @@ TICKETTIME è un parametro variabile al lancio del sistema. Definiamo un file di
 
 ```
 QActor tickethandler context ctxcoldstoragearea {
-	[# var TICKETTIME = GetTicketTimeFromConfig(); #]
+	[# var TICKETTIME = GetTicketTimeFromConfigFile(); #]
 	...
 }
 ```
