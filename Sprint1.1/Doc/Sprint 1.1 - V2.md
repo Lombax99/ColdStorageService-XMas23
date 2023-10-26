@@ -188,7 +188,7 @@ In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in
 In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
 
 __PROBLEMA:__ Usando pagine html statiche, anche mantenendo aggiornato il peso corrente nel server spring l'utente deve ricaricare la pagina per visualizzare il nuovo peso.
-Esistono soluzioni diverse ma nessuna 
+Si tratta di un problema di poco conto che non giustifica un cambiamento verso pagine html dinamiche e non verrà trattato.
 
 
 
