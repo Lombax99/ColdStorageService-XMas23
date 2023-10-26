@@ -186,22 +186,14 @@ Per fare ciò ci appoggiamo alla tecnologia di SPRING che permette l'interazione
 
 Nello schema iniziale il server Spring prenderà quindi il posto dell'attore Facade mentre le GUI saranno pagine html statiche fornite dal server ad ogni utente che si collega.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 __NOTA:__ In questa fase il server spring verrà lanciato localmente al resto del sistema, in futuro potrebbe non essere così. Come gestiamo la conoscenza dell'indirizzo degli attori?
 
 - [ ] Schema che mostra la relazione dei client e del server con il resto degli attori.
+
+
+
+
+
 ##### Aggiornamento peso in ServiceAccessGUI
 La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable come da analisi preliminari. 
 In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom. 
