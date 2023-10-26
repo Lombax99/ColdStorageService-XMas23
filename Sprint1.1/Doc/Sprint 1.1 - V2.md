@@ -180,6 +180,8 @@ Nello schema iniziale il server Spring prenderà quindi il posto dell'attore Fac
 __NOTA:__ In questa fase il server spring verrà lanciato localmente al resto del sistema, in futuro potrebbe non essere così. Come gestiamo la conoscenza dell'indirizzo degli attori?
 
 ![[SpringStructure.png]]
+##### WEB PAGE design
+![[ChristamsClientWeb.png]]
 
 
 
@@ -199,9 +201,6 @@ In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
 
 il server spring diventa il nostro patter facade.
 tutti i client HTML si interfacciano allo stesso server spring, che fa le richieste direttamente a controller, tickethandler e coldroom
-
-##### WEB PAGE
-![[ChristamsClientWeb.png]]
 
 
 
