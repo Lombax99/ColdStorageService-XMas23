@@ -136,14 +136,7 @@ QActor coldroom context ctxcoldstoragearea {
 				replyTo weightrequest with weightKO : weightKO( NO_PARAM )
 			}
 		}
-	} Goto work
-	
-	State returnweight{
-		onMsg(getweight : getweight(NO_PARAM)){
-			replyTo getweight with currentweight : currentweight($PesoEffettivo, $PesoPromesso)
-		}
-	} Goto work	
-	
+	}
 }
 ```
 
