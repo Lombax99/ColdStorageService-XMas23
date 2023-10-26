@@ -152,7 +152,7 @@ Dall'analisi della sicurezza sono apparse le seguenti vulnerabilità:
 1) Bisogna assicurarsi che chi richiede il ticket sia l'unico a poterlo usare.
 2) Ulteriori dati potrebbero essere visibili ad un utente malevolo (Peso scaricato, ecc...).
 3) Un ticket non deve essere riutilizzabile da un qualsiasi utente.
-4) Possibile DoS di un utente che richiede troppi ticket e occupa tutto il peso disponibile
+4) Possibile DoS di un utente che richiede troppi ticket e occupa tutto il peso disponibile.
 
 
 
