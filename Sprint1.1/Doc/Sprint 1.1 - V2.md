@@ -173,8 +173,7 @@ tutti i client HTML si interfacciano allo stesso server spring, che fa le richie
 
 
 
-##### Architettura logica dopo l'analisi del problema
-![[Sprint1.1/Doc/coldstorage2arch.png | 350]]
+
 
 WEB PAGE
 ![[ChristamsClientWeb.png]]
@@ -194,6 +193,9 @@ QActor tickethandler context ctxcoldstoragearea {
 	...
 }
 ```
+##### Architettura logica dopo l'analisi del problema
+![[Sprint1.1/Doc/coldstorage2arch.png | 350]]
+
 ### Tesing
 - Ticket scaduto
 - Ticket ripetuto
