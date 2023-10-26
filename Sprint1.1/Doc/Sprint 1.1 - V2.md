@@ -75,7 +75,6 @@ TicketHandler si occuperà di:
 
 Il sistema sarà dunque ampliato secondo la seguente __Architettura logica__: 
 ![[ArchitetturaLogica_Sprint1.1.png]]
--  [ ] definizione dei contesti e entità esterne del camionisti che si collegano
 ##### Protocollo di richiesta e generazione del ticket
 ![[Sprint1.1/Doc/cicloVitaMessaggi.png]]
 	1) Inizia con una request/response da parte del driver tramite ServiceAccessGUI verso TicketHandler, a cui viene passato il peso da scaricare;
