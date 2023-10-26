@@ -123,21 +123,16 @@ QActor coldroom context ctxcoldstoragearea {
 			   PesoPromesso -= P_PRO
 			#]
 		}
-		println("coldroom update - peso promesso: $PesoPromesso, nuovo peso effettivo: $PesoEffettivo") color green
-	} Goto work
+	}
 	
 	State checkweight {
 		onMsg(weightrequest : weightrequest(PESO)){
-			[# var PesoRichiesto = payloadArg(0).toInt() 
-				#]
-			println("coldroom - richiesti: $PesoRichiesto, effettivo: $PesoEffettivo, promesso: $PesoPromesso") color green
+			[# var PesoRichiesto = PESO #]
 			
 			if [# PesoEffettivo + PesoPromesso + PesoRichiesto  <= MAXW #]	{
 				[# PesoPromesso += PesoRichiesto #]
-					println("coldroom - accettato, peso promesso: $PesoPromesso") color green
 				replyTo weightrequest with weightOK : weightOK( NO_PARAM)
 			} else {
-				println("coldroom - rifiutato") color green
 				replyTo weightrequest with weightKO : weightKO( NO_PARAM )
 			}
 		}
