@@ -205,13 +205,10 @@ Si tratta di un problema di poco conto che non giustifica un cambiamento verso p
 ### Tesing
 Durante la face di testing dovranno essere verificati i seguenti casi:
 1) Test del processo in condizioni normali
-2) Test con ticket scaduto --> rifiutato
+2) Test con ticket scaduto
 3) Test con ticket ripetuto
-- Ticket scaduto
-- Ticket ripetuto
-- Peso eccessivo
-- Un test con la funzionalità di base
-- Test con più utenti collegati contemporaneamente (più pagine web da browser diversi)
+4) Test con peso superiore al disponbile
+Ciascuno dei test deve essere superato con più utenti collegati contemporaneamente 
 
 ### Progettazione
 
