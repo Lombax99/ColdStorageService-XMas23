@@ -107,8 +107,9 @@ Rischio di emettere un ticket per un peso non realmente disponibile nel momento 
 
 Per risolvere il problema definiamo due pesi diversi: 
 1)  Peso effettivo : quantità (peso) di cibo contenuto in ColdRoom nell'istante attuale. Aggiornato dopo l'azione del TransportTrolley.
-2) Peso "promesso" : quantità di peso richiesta dai driver tramite Ticket non ancora scaricato, incrementato dopo l'emissione di un ticket e decrementato dopo l'azione del Trasport Trolley o a seguito della scadenza della validità di un Ticket.
+2) Peso "promesso" : quantità di peso richiesta dai driver tramite Ticket non ancora scaricato, incrementato dopo l'emissione di un ticket e decrementato dopo l'azione del Transport Trolley o a seguito della scadenza della validità di un Ticket.
 
+Useremo la somma dei due pesi per validare o meno una richiesta di emissione ticket.
 ```
 QActor coldroom context ctxcoldstoragearea {
 	[#
@@ -139,9 +140,6 @@ QActor coldroom context ctxcoldstoragearea {
 	}
 }
 ```
-
-Questi due pesi si troveranno entrambi in ColdRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune).
-Useremo la somma dei due pesi per validare o meno una richiesta di emissione ticket.
 ##### Problema del peso fantasma
 A seguito della scadenza di un Ticket, il Transport Trolley non si farà carico della richiesta e il peso promesso del ticket rimarrà considerato il Cold Room.
 
