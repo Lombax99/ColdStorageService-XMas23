@@ -64,9 +64,6 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 [[Cold Storage Service - Natali V2#Analisi preliminare dei requisiti|requisiti sprint 0]]
 
 ### Analisi del Problema
-NOTA: da qualche parte devo aggiungere (se non c'è già) che si possono collegare più utenti in contemporanea e i problemi che questo può creare.
-
-- [ ] Vediamo il pattern facade (mettiamo qualcosa che fa da facciata). Aggiungo un nuovo componente ColdStorageFacade in modo tale che la gui si interfacci con un solo componente. Si aggiunge quindi un nuovo attore tra ServiceAccessGui e i due componenti TicketHandler e Controller. Per fare questo cerca info su pattern facade e spring
 ##### Compiti di TicketHandler
 TicketHandler si occuperà di:
 1) verificare se è possibile generare il Ticket richiesto;
@@ -161,16 +158,18 @@ Dei punti definiti, parlando col committente, dovremmo rispettare solo 1 e 3.
 > 3) Avendo già l'elenco dei ticket emessi in TicketHandler per controllare i ticket scaduti posso imporre che ogni ticket che ricevo debba essere dentro quella lista e rimuoverlo appena lo ricevo, in questo modo un ticket non può essere presentato più di una volta.
 ##### ServiceAccessGUI
 Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni camion che si presenta, in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html. Che tecnologia utilizzare? SPRING
+Tenere presente che ci possono essere più utenti collegati contemporaneamente.
+
+- [ ] Vediamo il pattern facade (mettiamo qualcosa che fa da facciata). Aggiungo un nuovo componente ColdStorageFacade in modo tale che la gui si interfacci con un solo componente. Si aggiunge quindi un nuovo attore tra ServiceAccessGui e i due componenti TicketHandler e Controller. Per fare questo cerca info su pattern facade e spring
 
 
 
 
 
 
-- ==Aggiornamento peso in ServiceAccessGUI==
-	La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable come da analisi preliminari. 
-	In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom. 
-	In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
+
+
+
 	
 ```
 NOTE:
