@@ -183,9 +183,11 @@ __NOTA:__ In questa fase il server spring verrà lanciato localmente al resto de
 ##### WEB PAGE design
 ![[ChristamsClientWeb.png]]
 ##### Aggiornamento peso in ServiceAccessGUI
-Ad ogni modifica del peso in ColdRoom
+La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable come da analisi preliminari. 
+In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom. 
+In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
 
-
+__PROBLEMA:__ Usando pagine html statiche, anche mantenendo aggiornato il peso corrente nel server spring, l'
 
 
 
