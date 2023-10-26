@@ -154,9 +154,10 @@ Dall'analisi della sicurezza sono apparse le seguenti vulnerabilità:
 3) Un ticket non deve essere riutilizzabile da un qualsiasi utente.
 4) Possibile DoS di un utente che richiede troppi ticket e occupa tutto il peso disponibile.
 
-
-
-
+Dei punti definiti, parlando col committente, dovremmo rispettare solo 1 e 3.
+> [!NOTE]- soluzioni possibili
+> 
+ 
 
 
 
