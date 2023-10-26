@@ -23,7 +23,7 @@ with Diagram('coldstorage2Arch', show=False, outformat='png', graph_attr=graphat
           controller=Custom('controller','./qakicons/symActorSmall.png')
           coldroom=Custom('coldroom','./qakicons/symActorSmall.png')
           tickethandler=Custom('tickethandler','./qakicons/symActorSmall.png')
-          serviceaccessgui=Custom('springserver','./qakicons/externalQActor.png')
+          serviceaccessgui=Custom('springserver','./qakicons/Alien.png')
           transporttrolley=Custom('transporttrolley(ext)','../qakicons/symActorSmall.png')
      controller >> Edge(color='magenta', style='solid', xlabel='doJob', fontcolor='magenta') >> transporttrolley
      controller >> Edge(color='blue', style='solid', xlabel='updateWeight', fontcolor='blue') >> coldroom
