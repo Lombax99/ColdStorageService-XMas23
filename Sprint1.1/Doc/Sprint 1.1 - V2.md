@@ -203,6 +203,7 @@ Si tratta di un problema di poco conto che non giustifica un cambiamento verso p
 
 
 ### Tesing
+Durante la face di testing dovranno essere verificati i seguenti casi:
 - Ticket scaduto
 - Ticket ripetuto
 - Peso eccessivo
