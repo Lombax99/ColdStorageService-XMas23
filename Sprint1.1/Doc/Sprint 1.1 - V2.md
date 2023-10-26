@@ -184,6 +184,9 @@ WEB PAGE
 ![[ChristamsClientWeb.png]]
 NOTE sulla gui: usare attori per la gui non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfacci con esso.
 Opzioni disponibili: SPRING o NODEJS, ma nodejs è brutto, il codice è difficilmente manutenibile e più complesso da sviluppare, usiamo SPRING.
+##### Gestione dei parametri di sistema
+Ma tutti i parametri che abbiamo tipo MAXW TICKETTIME, da dove vengono? Li mettiamo hardcoded o facciamo un file di config da leggere (magari un bel JSON...)?
+
 
 ### Tesing
 - Ticket scaduto
