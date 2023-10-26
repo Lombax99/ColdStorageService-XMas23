@@ -205,7 +205,7 @@ QActor tickethandler context ctxcoldstoragearea {
 - Ticket ripetuto
 - Peso eccessivo
 - Un test con la funzionalità di base
-- Test con più utenti collegati contemporaneamente
+- Test con più utenti collegati contemporaneamente (più pagine web da browser diversi)
 
 ### Progettazione
 
