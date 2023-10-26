@@ -22,7 +22,7 @@ with Diagram('coldstorageArch', show=False, outformat='png', graph_attr=graphatt
      with Cluster('ctxcoldstoragearea', graph_attr=nodeattr):
           controller=Custom('controller','../qakicons/symActorSmall.png')
           coldroom=Custom('coldroom','../qakicons/symActorSmall.png')
-          transporttrolley=Custom('transporttrolley(ext)','../qakicons/symActorSmall.png')
+          transporttrolley=Custom('transporttrolley','../qakicons/symActorSmall.png')
      controller >> Edge(color='magenta', style='solid', xlabel='doJob', fontcolor='magenta') >> transporttrolley
      controller >> Edge(color='blue', style='solid', xlabel='updateWeight', fontcolor='blue') >> coldroom
 diag
