@@ -95,19 +95,13 @@ Il sistema sarà dunque ampliato secondo la seguente __Architettura logica__:
 > 2) Al driver non interessa sapere se il TransportTrolley ha avuto problematiche durante il trasporto del materiale, quindi il "charge taken" può essere inviato prima che il TransportTrolley comunichi al Controller se il carico/scarico in ColdRoom è terminato. 
 
 Ricevuta la "charge taken" il driver può uscire dal sistema considerando la transizione conclusa con successo.
-
-
-
-
-
-
 ##### Problema del peso ipotetico
 Un driver potrebbe inviare la richiesta di un Ticket prima che un secondo driver, a cui è stato generato un Ticket in precedenza, abbiano scaricato.
 Rischio di emettere un ticket per un peso non realmente disponibile nel momento di scarico.
 
 Per risolvere il problema definiamo due pesi diversi: 
 1)  Peso effettivo : quantità (peso) di cibo contenuto in ColdRoom nell'istante attuale. Aggiornato dopo l'azione del TransportTrolley.
-2) Peso "promesso" : quantità di peso richiesta dai driver tramite Ticket non ancora scaricato, incrementato dopo l'emissione di un ticket e decrementato dopo l'azione del Transport Trolley o a seguito della scadenza della validità di un Ticket.
+2) Peso promesso : quantità di peso richiesta dai driver tramite Ticket non ancora scaricato, incrementato dopo l'emissione di un ticket e decrementato dopo l'azione del Transport Trolley o a seguito della scadenza della validità di un Ticket.
 
 Useremo la somma dei due pesi per validare o meno una richiesta di emissione ticket.
 ```
@@ -140,6 +134,14 @@ QActor coldroom context ctxcoldstoragearea {
 	}
 }
 ```
+
+
+
+
+
+
+
+
 ##### Problema del peso fantasma
 A seguito della scadenza di un Ticket, il Transport Trolley non si farà carico della richiesta e il peso promesso del ticket rimarrà considerato il Cold Room.
 
