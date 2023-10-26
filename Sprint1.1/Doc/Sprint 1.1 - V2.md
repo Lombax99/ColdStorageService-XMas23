@@ -183,23 +183,24 @@ __NOTA:__ In questa fase il server spring verrà lanciato localmente al resto de
 ##### WEB PAGE design
 ![[ChristamsClientWeb.png]]
 ##### Aggiornamento peso in ServiceAccessGUI
-La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable come da analisi preliminari. 
+La soluzione migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable come da analisi preliminari.
 In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom. 
 In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
 
 __PROBLEMA:__ Usando pagine html statiche, anche mantenendo aggiornato il peso corrente nel server spring l'utente deve ricaricare la pagina per visualizzare il nuovo peso.
 Si tratta di un problema di poco conto che non giustifica un cambiamento verso pagine html dinamiche e non verrà trattato.
-
-
-
-
-
-
-
-
-
 ##### Architettura logica dopo l'analisi del problema
 ![[Sprint1.1/Doc/coldstorage2arch.png | 350]]
+
+
+
+
+
+
+
+
+
+
 
 ### Tesing
 - Ticket scaduto
