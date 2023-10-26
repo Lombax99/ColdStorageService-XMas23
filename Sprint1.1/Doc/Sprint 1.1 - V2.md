@@ -150,6 +150,7 @@ In questo modo risolviamo anche il [[Sprint 1.1 - V2#Problema del peso fantasma|
 ##### Sicurezza dei Ticket
 Dall'analisi della sicurezza sono apparse le seguenti vulnerabilità:
 1) Bisogna assicurarsi che chi richiede il ticket sia l'unico a poterlo usare.
+2) Uteriori dati 
 
 
 
