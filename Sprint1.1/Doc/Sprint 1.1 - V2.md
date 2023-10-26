@@ -109,6 +109,61 @@ Per risolvere il problema definiamo due pesi diversi:
 1)  Peso effettivo : quantità (peso) di cibo contenuto in ColdRoom nell'istante attuale. Aggiornato dopo l'azione del TransportTrolley.
 2) Peso "promesso" : quantità di peso richiesta dai driver tramite Ticket non ancora scaricato, incrementato dopo l'emissione di un ticket e decrementato dopo l'azione del Trasport Trolley o a seguito della scadenza della validità di un Ticket.
 
+```
+QActor coldroom context ctxcoldstoragearea {
+	//corrente: quanta roba c'è nella cold room
+	//previsto: quanto deve ancora arrivare, ma per cui c'è un biglietto emesso
+	[#
+		var PesoEffettivo = 0
+		var PesoPromesso = 0 
+		var MAXW = 50
+	#]
+	
+	State s0 initial {
+		printCurrentMessage
+	} Goto work
+	
+	State work{
+		
+	}Transition update whenMsg updateWeight -> updateWeight
+					   whenRequest weightrequest -> checkweight
+					   whenRequest getweight -> returnweight
+					   
+	State updateWeight {
+		onMsg ( updateWeight : updateWeight(P_EFF, P_PRO) ) {
+			[# PesoEffettivo += payloadArg(0).toInt() 
+				PesoPromesso -= payloadArg(1).toInt()
+			#]
+		}
+		println("coldroom update - peso promesso: $PesoPromesso, nuovo peso effettivo: $PesoEffettivo") color green
+	} Goto work
+	
+	State checkweight {
+		onMsg(weightrequest : weightrequest(PESO)){
+			[# var PesoRichiesto = payloadArg(0).toInt() 
+				#]
+			println("coldroom - richiesti: $PesoRichiesto, effettivo: $PesoEffettivo, promesso: $PesoPromesso") color green
+			
+			if [# PesoEffettivo + PesoPromesso + PesoRichiesto  <= MAXW #]	{
+				[# PesoPromesso += PesoRichiesto #]
+					println("coldroom - accettato, peso promesso: $PesoPromesso") color green
+				replyTo weightrequest with weightOK : weightOK( NO_PARAM)
+			} else {
+				println("coldroom - rifiutato") color green
+				replyTo weightrequest with weightKO : weightKO( NO_PARAM )
+			}
+		}
+	} Goto work
+	
+	State returnweight{
+		onMsg(getweight : getweight(NO_PARAM)){
+			replyTo getweight with currentweight : currentweight($PesoEffettivo, $PesoPromesso)
+		}
+	} Goto work	
+	
+}
+```
+
 Questi due pesi si troveranno entrambi in ColdRoom (se un giorno ci saranno due punti di accesso il peso futuro deve essere in comune).
 Useremo la somma dei due pesi per validare o meno una richiesta di emissione ticket.
 ##### Problema del peso fantasma
