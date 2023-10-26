@@ -239,6 +239,11 @@ int SEQ
 Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_1697643071_15_0
 ```
 
+
+
+
+
+
 Il momento di emissione viene eseguito come numero di secondi dal primo gennaio 1970, sarà un long.
 Il peso della richiesta non viene modificato, viene salvato in un intero.
 il codice univoco è un numero sequenziale di emissione del ticket.
