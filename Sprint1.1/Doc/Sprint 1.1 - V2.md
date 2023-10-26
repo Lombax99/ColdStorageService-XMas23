@@ -146,8 +146,8 @@ QActor coldroom context ctxcoldstoragearea {
 A seguito della scadenza di un Ticket, il Transport Trolley non si farà carico della richiesta e il peso promesso del ticket rimarrà considerato il Cold Room.
 
 ##### Quando e da chi vengono aggiornati i pesi in ColdRoom?
-1) Terminata l'azione del Transport Trolley, peso promesso e peso effettivo verranno aggiornati tramite dispatch di Controller. In particolar modo viene passata la quantità da decrementare dal peso "promesso" e la quantità da incrementare al peso effettivo, i due valori possono essere diversi a causa del problema del driver distratto ([[Cold Storage Service - Natali#Il problema del driver distratto |see Driver Distratto]]).
-2) Caso particolare: i pesi sono aggiornati da TicketHandler tramite dispatch "updateWeight":
+1) Terminata l'azione del Transport Trolley, peso promesso e peso effettivo verranno aggiornati tramite dispatch di Controller. Viene passata la quantità da decrementare dal peso promesso e la quantità da incrementare al peso effettivo (i due valori possono essere diversi a causa del problema del [[Cold Storage Service - Natali#Il problema del driver distratto |Driver Distratto]]).
+3) Caso particolare: i pesi sono aggiornati da TicketHandler tramite dispatch "updateWeight":
 All'arrivo di una richiesta di emissione del Ticket, se lo spazio calcolato non fosse sufficiente si verifica il TICKETTIME associato ai Ticket generati e non ancora scaricati.
 In presenza di Ticket scaduti allora il TicketHandler procederà ad aggiornare il peso.
 In questo modo risolviamo anche il problema del ==peso fantasma==
