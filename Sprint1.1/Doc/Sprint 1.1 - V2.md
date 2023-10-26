@@ -134,20 +134,8 @@ QActor coldroom context ctxcoldstoragearea {
 	}
 }
 ```
-
-
-
-
-
-
-
-
 ##### Problema del peso fantasma
 A seguito della scadenza di un Ticket, il Transport Trolley non si farà carico della richiesta e il peso promesso del ticket rimarrà considerato il Cold Room.
-##### Quando e da chi vengono aggiornati i pesi in ColdRoom?
-1) Terminata l'azione del Transport Trolley, Controller aggiorna i due pesi tramite dispatch. Viene passata la quantità da decrementare dal peso promesso e la quantità da incrementare al peso effettivo (i due valori possono essere diversi a causa del problema del [[Cold Storage Service - Natali#Il problema del driver distratto |Driver Distratto]]).
-
-2) Caso particolare: i pesi sono aggiornati da TicketHandler tramite dispatch "updateWeight" nella [[Sprint 1.1 - V2#Gestione dei Ticket scaduti|gestione dei ticket scaduti]].
 ##### Gestione dei Ticket scaduti
 L'eliminazione dei ticket scaduti viene fatta per necessità.
 
@@ -155,6 +143,14 @@ All'arrivo di una richiesta di emissione del Ticket, se lo spazio calcolato non 
 
 In presenza di Ticket scaduti allora il TicketHandler procederà ad aggiornare il peso.
 In questo modo risolviamo anche il [[Sprint 1.1 - V2#Problema del peso fantasma|problema del peso fantasma]].
+##### Quando e da chi vengono aggiornati i pesi in ColdRoom?
+1) Terminata l'azione del Transport Trolley, Controller aggiorna i due pesi tramite dispatch. Viene passata la quantità da decrementare dal peso promesso e la quantità da incrementare al peso effettivo (i due valori possono essere diversi a causa del problema del [[Cold Storage Service - Natali#Il problema del driver distratto |Driver Distratto]]).
+
+2) Caso particolare: i pesi sono aggiornati da TicketHandler tramite dispatch "updateWeight" nella [[Sprint 1.1 - V2#Gestione dei Ticket scaduti|gestione dei ticket scaduti]].
+
+
+
+
 
 
 
