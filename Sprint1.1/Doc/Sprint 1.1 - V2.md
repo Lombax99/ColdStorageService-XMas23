@@ -148,7 +148,7 @@ In questo modo risolviamo anche il [[Sprint 1.1 - V2#Problema del peso fantasma|
 
 2) Caso particolare: i pesi sono aggiornati da TicketHandler tramite dispatch "updateWeight" nella [[Sprint 1.1 - V2#Gestione dei Ticket scaduti|gestione dei ticket scaduti]].
 ##### Sicurezza dei Ticket
-
+Dall'analisi della sicurezza sono 
 
 
 
