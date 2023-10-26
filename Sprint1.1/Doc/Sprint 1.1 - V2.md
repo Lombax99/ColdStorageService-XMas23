@@ -181,7 +181,8 @@ QActor tickethandler context ctxcoldstoragearea {
 
 
 ##### ServiceAccessGUI
-Progettare le GUI come attori non è vantaggioso
+Progettare le GUI come attori non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfacci con esso.
+Per fare ciò ci app
 
 
 
