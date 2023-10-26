@@ -614,5 +614,5 @@ object DomainSystemConfig {
 }
 ```
 
-### Come avviare il test del prof
-2) avviare l'immagine Docker webrobot23
+### Deployment
+
