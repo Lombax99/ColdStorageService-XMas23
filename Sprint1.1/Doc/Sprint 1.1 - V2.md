@@ -166,17 +166,6 @@ Dei punti definiti, parlando col committente, dovremmo rispettare solo 1 e 3.
 
 
 
-- ==Problema della sicurezza:==
-	[[Sprint 1.0 - V2#Analisi del TF23|problema del driver malevolo]]
-	- Dobbiamo assicurarci che chi richiede il ticket sia l'unico a poterlo usare. NO
-	NOTA: la Cate lo ha fatto aggiungendo ai ticket un parametro randomico segreto che solo chi ha ricevuto il ticket può conoscere... non so se sia perchè Natali ha detto loro di farlo o per loro scelta ma non è impossibile da implementare, da discutere.
-	- Tutti vedono l'emissione di un ticket, ci sta bene? possibile violazione della privacy o copia. NO
-	- Fare in modo che la risposta ad una richiesta arrivi al camionista che l'ha mandata e solo a lui anche se la richiesta arriva da un dispositivo alieno. NO
-	- Fare in modo che un singolo camionista non possa continuare a generate ticket all'infinito e occupare tutto il peso ipotetico. Possibile DoS. NO
-	- Fare in modo che un ticket non sia riutilizzabile? possibile DoS, usiamo ticket sequenziali? YES
-> Io ho già l'elenco dei ticket emessi in TicketHandler per controllare i ticket scaduti ecc..
-> Posso imporre che ogni ticket che ricevo debba essere dentro quella lista e rimuoverlo appena lo ricevo, in questo modo un ticket non può essere presentato più di una volta.
-	
 - ==Aggiornamento peso in ServiceAccessGUI==
 	La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable come da analisi preliminari. 
 	In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom. 
