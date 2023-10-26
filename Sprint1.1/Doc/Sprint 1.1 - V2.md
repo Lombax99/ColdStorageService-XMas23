@@ -174,7 +174,7 @@ In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in
 In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
 
 il server spring diventa il nostro patter facade.
-tutti i client HTML si interfacciano allo stesso server spring, che fa le richieste direttamente a controller, tickethamdler e coldroom
+tutti i client HTML si interfacciano allo stesso server spring, che fa le richieste direttamente a controller, tickethandler e coldroom
 
 
 
