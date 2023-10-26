@@ -284,16 +284,11 @@ Reply 	currentweight : currentweight(PESO_EFF,PESO_PRO)
 
 Dispatch startToDoThings : startToDoThings( NO_PARAM )
 
-
 //-----------------------------------------------------------------------
 
 Context ctxcoldstoragearea ip [host="localhost" port=8040]
 
 //-----------------------------------------------------------------------
-
-//Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
-
-//ExternalQActor transporttrolley context ctxbasicrobot
 ```
 
 ```
