@@ -161,23 +161,17 @@ Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni
 Tenere presente che ci possono essere più utenti collegati contemporaneamente.
 
 - [ ] Vediamo il pattern facade (mettiamo qualcosa che fa da facciata). Aggiungo un nuovo componente ColdStorageFacade in modo tale che la gui si interfacci con un solo componente. Si aggiunge quindi un nuovo attore tra ServiceAccessGui e i due componenti TicketHandler e Controller. Per fare questo cerca info su pattern facade e spring
+##### Aggiornamento peso in ServiceAccessGUI
+La cosa migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable come da analisi preliminari. 
+In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom. 
+In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
 
 
 
 
 
 
-
-
-
-	
-```
-NOTE:
-Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni camion che si presenta, in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html. Che tecnologia utilizzare? SPRING
-```
-
-==NOTA==: Ma tutti i parametri che abbiamo tipo MAXW TICKETTIME, da dove vengono? Li mettiamo hardcoded o facciamo un file di config da leggere (magari un bel JSON...)?
-
+##### Architettura logica dopo l'analisi del problema
 ![[Sprint1.1/Doc/coldstorage2arch.png | 350]]
 
 WEB PAGE
