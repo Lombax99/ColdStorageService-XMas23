@@ -182,18 +182,22 @@ QActor tickethandler context ctxcoldstoragearea {
 
 ##### ServiceAccessGUI
 Progettare le GUI come attori non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfacci con esso.
-Per fare ciò ci app
+Per fare ciò ci appoggiamo alla tecnologia di SPRING che permette l'interazione tramite web e la gestione di molti utenti collegati contemporaneamente.
+
+Nello schema inizSpring server prende il posto di facade e spring client prende il posto di ServiceAccessGUI.
 
 
 
 
-Per quanto riguarda l'implementazione è necessario un ServiceAccessGUI per ogni camion che si presenta, in quanto tutte le richieste e comunicazioni sono sincrone bloccanti. Ad ogni ServiceAccessGUI deve essere associata una grafica html. Che tecnologia utilizzare? SPRING
-Tenere presente che ci possono essere più utenti collegati contemporaneamente.
 
-NOTE sulla gui: usare attori per la gui non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfacci con esso.
-Opzioni disponibili: SPRING o NODEJS, ma nodejs è brutto, il codice è difficilmente manutenibile e più complesso da sviluppare, usiamo SPRING.
 
-Spring server prende il posto di facade e spring client prende il posto di ServiceAccessGUI.
+
+
+
+
+
+
+
 
 __NOTA:__ In questa fase il server spring verrà lanciato localmente al resto del sistema, in futuro potrebbe non essere così. Come gestiamo la conoscenza dell'indirizzo degli attori?
 
