@@ -147,6 +147,7 @@ In questo modo risolviamo anche il [[Sprint 1.1 - V2#Problema del peso fantasma|
 1) Terminata l'azione del Transport Trolley, Controller aggiorna i due pesi tramite dispatch. Viene passata la quantità da decrementare dal peso promesso e la quantità da incrementare al peso effettivo (i due valori possono essere diversi a causa del problema del [[Cold Storage Service - Natali#Il problema del driver distratto |Driver Distratto]]).
 
 2) Caso particolare: i pesi sono aggiornati da TicketHandler tramite dispatch "updateWeight" nella [[Sprint 1.1 - V2#Gestione dei Ticket scaduti|gestione dei ticket scaduti]].
+##### Sicurezza dei Ticket
 
 
 
