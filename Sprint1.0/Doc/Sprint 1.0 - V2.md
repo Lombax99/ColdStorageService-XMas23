@@ -148,6 +148,7 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 
 //-----------------------------------------------------------------------
 ```
+__NOTA:__ in questo momento coldRoom è definita nello stesso contesto 
 ##### Controller
 ``` qak
 QActor controller context ctxcoldstoragearea {
