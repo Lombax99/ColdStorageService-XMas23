@@ -104,12 +104,12 @@ Request loaddone : loaddone(PESO)
 Reply 	chargetaken : chargetaken(NO_PARAM)
 ```
 ##### Quando viene inviato il "charge taken"?
-"Charge taken" viene inviato dal Controller subito dopo la "doJob" associata alla richiesta.
+"chargetaken" viene inviato dal Controller subito dopo la "doJob" associata alla richiesta.
 > [!NOTE]- motivazioni
 > 1) Supponiamo che quest'ultimo scarichi la merce in una piattaforma dedicata, dalla quale il DDR robot preleverà il cibo e lo scaricherà in ColdRoom in uno o più volte a seconda della quantità di materiale dichiarata.
 > 2) Al driver non interessa sapere se il TransportTrolley ha avuto problematiche durante il trasporto del materiale, quindi il "charge taken" può essere inviato prima che il TransportTrolley comunichi al Controller se il carico/scarico in ColdRoom è terminato. 
 
-Ricevuta la "charge taken" il driver può uscire dal sistema considerando la transizione conclusa con successo.
+Ricevuta la "chargetaken" il driver può uscire dal sistema considerando la transizione conclusa con successo.
 ##### Problema del peso ipotetico
 Un driver potrebbe inviare la richiesta di un Ticket prima che un secondo driver, a cui è stato generato un Ticket in precedenza, abbiano scaricato.
 Rischio di emettere un ticket per un peso non realmente disponibile nel momento di scarico.
