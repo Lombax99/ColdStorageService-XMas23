@@ -446,11 +446,10 @@ object DomainSystemConfig {
     init {  
         try {  
             val config = File("AppConfig.json").readText(Charsets.UTF_8)  
-            val jsonObject =  JSONObject( config );  
-  
-            TicketTime= jsonObject.getLong("TicketTime")  
-            Maxweight= jsonObject.getLong("Maxweight")  
-  
+            val jsonObject = JSONObject( config );
+            
+            TicketTime= jsonObject.getLong("TicketTime")
+			 
         } catch (e : Exception) {  
             println(" ${this.javaClass.name}  | ${e.localizedMessage}, activate simulation by default")  
         }  
