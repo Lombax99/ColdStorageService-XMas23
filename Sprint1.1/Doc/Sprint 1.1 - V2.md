@@ -99,7 +99,10 @@ Request checkmyticket : checkmyticket(TICKET)
 Reply	ticketchecked : ticketchecked(BOOL)
 ```
 6) Se la richiesta viene approvata ServiceAccessGUI invia tramite Request/Response al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto, insieme al peso da scaricare. Dopo di che attende una risposta "charge taken" da parte del Controller.
-- [ ] Sostituire questo malloppo di roba con del codice dei vari segnali inviati
+```
+Request loaddone : loaddone(PESO)
+Reply 	chargetaken : chargetaken(NO_PARAM)
+```
 ##### Quando viene inviato il "charge taken"?
 "Charge taken" viene inviato dal Controller subito dopo la "doJob" associata alla richiesta.
 > [!NOTE]- motivazioni
