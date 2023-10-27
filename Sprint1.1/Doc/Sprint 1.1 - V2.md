@@ -217,26 +217,6 @@ Durante la face di testing dovranno essere verificati i seguenti casi:
 4) Test con peso superiore al disponibile
 Ciascuno dei test deve essere superato con più utenti collegati contemporaneamente da uno stesso browser o da browser diversi.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Progettazione
 ##### Ticket 
 Ticket conterrà TIME, PESO e SEQ. La stringa sarà composta da questi 3 valori separati da "\_" ed inizierà con "T":
@@ -276,8 +256,6 @@ Reply 	chargetaken : chargetaken(NO_PARAM)
 
 Request getweight : getweight(NO_PARAM)
 Reply 	currentweight : currentweight(PESO_EFF,PESO_PRO)
-
-Dispatch startToDoThings : startToDoThings( NO_PARAM )
 
 //-----------------------------------------------------------------------
 
