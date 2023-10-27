@@ -460,15 +460,16 @@ object DomainSystemConfig {
 }
 ```
 ##### Spring Server
+Il server si collegherà agli attori tramite socket
 ```
 public class MessageSender {  
     String COLDSTORAGESERVICEIPADDRESS = "127.0.0.1";  
     int COLDSTORAGESERVICEPORT = 8040;  
-  
+	
     Socket client;  
     BufferedReader reader;  
     BufferedWriter writer;  
-  
+	
     public String sendMessage(String msg){  
         System.out.print(msg);  
         String response = "";  
@@ -476,7 +477,6 @@ public class MessageSender {
             this.connectToColdStorageService();  
             writer.write(msg);  
             writer.flush();  
-  
             response = reader.readLine();  
         } catch (IOException e){  
             e.printStackTrace();  
@@ -485,11 +485,9 @@ public class MessageSender {
     }  
   
     private void connectToColdStorageService() throws IOException {  
-  
         client = new Socket(COLDSTORAGESERVICEIPADDRESS, COLDSTORAGESERVICEPORT);  
         writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));  
         reader = new BufferedReader(new InputStreamReader(client.getInputStream()));  
-  
     }  
 }
 ```
