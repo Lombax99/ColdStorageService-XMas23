@@ -238,15 +238,6 @@ Ciascuno dei test deve essere superato con più utenti collegati contemporaneame
 
 
 ### Progettazione
-
-- ==Contesti:==
-	- TicketHandler è contenuto sullo stesso contesto di Controller
-	- TransportTrolley, ColdRoom e ServiceAccessGui avranno un contesto a parte per ciascuno
-`alla fine questa informazione sarà nel qak`
-
-- Codice della gestione dei ticket
-	deve avere una lista che contiene i ticket emessi ecc...
-
 ##### Ticket 
 ```
 int TIME
