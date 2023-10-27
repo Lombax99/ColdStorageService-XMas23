@@ -68,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       },
       {
         "id": "21f2099e8dd52390",
@@ -252,13 +252,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "867e3bb5abac38f9",
+  "active": "3aa83ee35566a993",
   "lastOpenFiles": [
+    "Sprint1.0/Doc/Sprint 1.0 - V2.md",
     "Sprint1.1/Doc/Sprint 1.1 - V2.md",
+    "Sprint1.1/Doc/Sprint 1.1.md",
     "Sprint1.1/Doc/SpringStructure.png",
     "Sprint1.1/Codice/ColdStorageSprint2/qakicons/Alien.png",
     "Sprint1.1/Codice/ColdStorageSprint2/qakicons.ECNtFI.kra",
-    "Sprint1.0/Doc/Sprint 1.0 - V2.md",
     "Sprint1.1/Codice/ColdStorageSprint2/qakicons/system.PNG",
     "Sprint1.1/Codice/ColdStorageSprint2/qakicons/symActorSmall.png",
     "Sprint1.1/Codice/ColdStorageSprint2/qakicons/symActor.png",
@@ -276,7 +277,6 @@
     "Sprint2/Codice/BasicRobotSprint2",
     "Sprint2/Codice",
     "Sprint1.1/Doc/ChristamsClientWeb.png",
-    "Sprint1.1/Doc/Sprint 1.1.md",
     "Sprint1.0/Doc/coldstoragearch.png",
     "Sprint1.0/Doc/ArchitetturaLogica_Sprint1.0.pdf",
     "README.md",

@@ -136,6 +136,8 @@ Service Area = {
 ``` qak
 System coldstorage
 
+//-----------------------------------------------------------------------
+
 Request doJob : doJob(KG)
 Reply jobdone : jobdone(NO_PARAM)
 Reply robotDead : robotDead(NO_PARAM)

@@ -247,8 +247,7 @@ int SEQ
 
 Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_1697643071_15_0
 ```
-
-
+##### Definizione messaggi e contesti
 ```
 System coldstorage2
 
@@ -257,9 +256,6 @@ System coldstorage2
 Request doJob : doJob(KG)
 Reply jobdone : jobdone(NO_PARAM)
 Reply robotDead : robotDead(NO_PARAM)
-
-//il peso promesso viene sottratto, se va aumentato fornire P_PRO negativo
-Dispatch updateWeight : updateWeight(P_EFF, P_PRO)
 
 //-----------------------------------------------------------------------
 
