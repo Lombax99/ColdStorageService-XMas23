@@ -4,7 +4,6 @@ import java.io.*;
 import java.net.Socket;
 
 public class MessageSender {
-
     String COLDSTORAGESERVICEIPADDRESS = "127.0.0.1";
     int COLDSTORAGESERVICEPORT = 8040;
 
