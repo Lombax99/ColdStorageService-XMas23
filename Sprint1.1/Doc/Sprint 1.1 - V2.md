@@ -419,27 +419,23 @@ QActor tickethandler context ctxcoldstoragearea {
 	
 	State checktheticket {
 		onMsg(checkmyticket : checkmyticket(TICKET)){
-			[#	var Ticket = payloadArg(0)
+			[#	
+				var Ticket = payloadArg(0)
 				var Ticketvalid = false;
 				
 				if(Tickets.contains(Ticket)){
-					var StartTime = Ticket.split(Token, ignoreCase = true, limit = 0).get(1).toInt()
+					var StartTime = Ticket.split(Token).get(1).toInt()
 					
 					var Now = java.util.Date().getTime()/1000
 					if( Now < StartTime + TICKETTIME){
 						Tickets.remove(Ticket)
 						Ticketvalid = true
 					}
-					
 				}
-				
 			#]
-			println("tickethandler - il biglietto è valido? $Ticketvalid") color blue
 			replyTo checkmyticket with ticketchecked : ticketchecked($Ticketvalid)
 		}
 	} Goto work
-	
-	
 }
 ```
 ##### SerciveAccessGUI
