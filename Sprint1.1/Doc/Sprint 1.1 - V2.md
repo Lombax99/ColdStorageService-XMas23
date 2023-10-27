@@ -408,19 +408,14 @@ QActor tickethandler context ctxcoldstoragearea {
 	
 	State returnticket {
 		[# 
-			Ticket = "T".plus(Token)
 			var Now = java.util.Date().getTime()/1000
-			Ticket = Ticket.plus( Now ).plus(Token).plus( Peso ).plus(Token).plus( Sequenza)
+			Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ
 			Sequenza++
 			
 			Tickets.add(Ticket)
-			#]
-			println("tickethandler - accettato") color blue
-			replyTo depositRequest with accept : accept( $Ticket )
+		#]
+		replyTo depositRequest with accept : accept( $Ticket )
 	} Goto work
-	
-	
-	
 	
 	State checktheticket {
 		onMsg(checkmyticket : checkmyticket(TICKET)){
