@@ -264,7 +264,7 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 //-----------------------------------------------------------------------
 ```
 ##### Controller
-Rispetto allo sprint 1 non abbiamo più bisogno delle mockRequest e gestiamo i pesi 
+Rispetto allo sprint 1 non abbiamo più bisogno della mockRequest e gestiamo il [[Sprint 1.1 - V2#Problema del peso ipotetico|problema del peso ipotetico]].
 ```
 QActor controller context ctxcoldstoragearea {
 
