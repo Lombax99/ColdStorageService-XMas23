@@ -93,7 +93,11 @@ Reply weightKO : weightKO( NO_PARAM )
 ```
 3) Se c'è abbastanza spazio, ColdRoom aggiorna i propri attributi;
 4) Se TicketHandler riceve True genera il ticket e lo invia a ServiceAccessGui, altrimenti rejected;
-5) Una volta arrivato in INDOOR, il driver, invia il Ticket a TicketHandler tramite Request/Response. Il TicketHandler verifica il **TICKETTIME** e restituisce Ok / Rejected, effettua quindi la verifica di validità temporale del Ticket;
+5) Arrivato in INDOOR, il driver, invia il Ticket a TicketHandler. Il TicketHandler verifica il **TICKETTIME** e restituisce Ok / Rejected;
+```
+Request checkmyticket : checkmyticket(TICKET)
+Reply	ticketchecked : ticketchecked(BOOL)
+```
 6) Se la richiesta viene approvata ServiceAccessGUI invia tramite Request/Response al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto, insieme al peso da scaricare. Dopo di che attende una risposta "charge taken" da parte del Controller.
 - [ ] Sostituire questo malloppo di roba con del codice dei vari segnali inviati
 ##### Quando viene inviato il "charge taken"?
