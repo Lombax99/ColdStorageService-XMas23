@@ -294,10 +294,9 @@ QActor controller context ctxcoldstoragearea {
 	} Transition repeat -> work
 ```
 ##### ColdRoom
-```
-//il peso promesso viene sottratto, se va aumentato fornire P_PRO negativo
+il peso promesso viene sottratto, se va aumentato fornire P_PRO negativo
 Dispatch updateWeight : updateWeight(P_EFF, P_PRO)
-
+```
 QActor coldroom context ctxcoldstoragearea {
 	[#
 		var PesoEffettivo = 0
@@ -310,14 +309,14 @@ QActor coldroom context ctxcoldstoragearea {
 	} Goto work
 	
 	State work{
-		
+		printCurrentMessage
 	}Transition update whenMsg updateWeight -> updateWeight
 					   whenRequest weightrequest -> checkweight
 					   whenRequest getweight -> returnweight
 					   
 	State updateWeight {
 		onMsg ( updateWeight : updateWeight(P_EFF, P_PRO) ) {
-			[# PesoEffettivo += payloadArg(0).toInt() 
+			[# PesoEffettivo += payloadArg(0).toInt()
 				PesoPromesso -= payloadArg(1).toInt()
 			#]
 		}
