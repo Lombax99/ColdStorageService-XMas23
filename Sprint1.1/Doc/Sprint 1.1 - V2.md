@@ -291,10 +291,8 @@ QActor controller context ctxcoldstoragearea {
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 	} Transition repeat -> work
 	
-	
 	State handlerobotdead{
 		println("robotdead") color green
-		printCurrentMessage
 	}
 }
 ```
