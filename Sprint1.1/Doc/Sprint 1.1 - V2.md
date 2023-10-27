@@ -85,8 +85,13 @@ Request depositRequest : depositRequest(PESO)
 Reply accept : accept(TICKET)
 Reply reject : reject(NO_PARAM)
 ```
-2) TicketHandler chiede a ColdRoom se c'è abbastanza spazio per depositare la quantità di cibo dichiarata dal driver sempre tramite request/response, la quale viene passata come parametro;
-3) Se c'è abbastanza spazio, ColdRoom aggiorna i propri attributi in modo tale da memorizzare che una quantità di peso è riservata al driver in questione che ne ha fatto richiesta e risponde True, altrimenti False;
+2) TicketHandler chiede a ColdRoom se c'è abbastanza spazio;
+```
+Request weightrequest : weightrequest(PESO)
+Reply weightOK : weightOK( NO_PARAM )
+Reply weightKO : weightKO( NO_PARAM )
+```
+3) Se c'è abbastanza spazio, ColdRoom aggiorna i propri attributi;
 4) Se TicketHandler riceve True genera il ticket e lo invia come risposta a ServiceAccessGui, altrimenti risponde Rejected
 5) Una volta arrivato in INDOOR, il driver, invia il Ticket a TicketHandler tramite Request/Response. Il TicketHandler verifica il **TICKETTIME** e restituisce Ok / Rejected, effettua quindi la verifica di validità temporale del Ticket. 
 6) Se la richiesta viene approvata ServiceAccessGUI invia tramite Request/Response al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto, insieme al peso da scaricare. Dopo di che attende una risposta "charge taken" da parte del Controller.
