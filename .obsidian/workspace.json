@@ -67,49 +67,7 @@
               }
             }
           }
-        ],
-        "currentTab": 4
-      },
-      {
-        "id": "21f2099e8dd52390",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "3aa83ee35566a993",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "91856c012568fd12",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.4.16"
-              }
-            }
-          },
-          {
-            "id": "9fe849370c4abbee",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V2.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -175,7 +133,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md",
+                "file": "Sprint0/Cold Storage Service - Natali V2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -192,7 +150,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md",
+                "file": "Sprint0/Cold Storage Service - Natali V2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -225,7 +183,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md"
+                "file": "Sprint0/Cold Storage Service - Natali V2.md"
               }
             }
           },
@@ -264,7 +222,7 @@
       "command-palette:Apri riquadro comandi": false
     }
   },
-  "active": "91856c012568fd12",
+  "active": "14ee41a090d76a3d",
   "lastOpenFiles": [
     "Sprint1.0/Doc/Sprint 1.0 - V2.md",
     "Sprint1.1/Doc/Sprint 1.1 - V2.md",
