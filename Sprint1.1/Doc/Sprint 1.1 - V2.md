@@ -278,8 +278,8 @@ QActor controller context ctxcoldstoragearea {
 	
 	State startjob  {
 		onMsg(loaddone : loaddone(P_EFF, P_DIC) ){
-			[# KG = payloadArg(0).toInt()
-			   PESO = payloadArg(1).toInt()
+			[# P_EFF = payloadArg(0).toInt()
+			   P_DIC = payloadArg(1).toInt()
 			#]
 		}
 		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
@@ -296,7 +296,7 @@ QActor controller context ctxcoldstoragearea {
 	}
 }
 ```
-
+##### ColdRoom
 ```
 //il peso promesso viene sottratto, se va aumentato fornire P_PRO negativo
 Dispatch updateWeight : updateWeight(P_EFF, P_PRO)
