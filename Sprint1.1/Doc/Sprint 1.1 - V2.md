@@ -449,20 +449,14 @@ object DomainSystemConfig {
             val jsonObject = JSONObject( config );
             
             TicketTime= jsonObject.getLong("TicketTime")
-			 
         } catch (e : Exception) {  
-            println(" ${this.javaClass.name}  | ${e.localizedMessage}, activate simulation by default")  
+            println(e)  
         }  
     }  
-  
+	
     fun getTicketTime() : Long {  
         return TicketTime;  
-    }  
-  
-    fun getMaxWeight() : Long {  
-        return Maxweight;  
-    }  
-  
+    }
 }
 ```
 ##### Spring Server
