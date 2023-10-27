@@ -263,6 +263,7 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 
 //-----------------------------------------------------------------------
 ```
+##### Controller
 
 ```
 QActor controller context ctxcoldstoragearea {
@@ -275,11 +276,10 @@ QActor controller context ctxcoldstoragearea {
 		println("controller - in attesa") color green
 	} Transition t0 whenRequest loaddone -> startjob
 	
-	//senza robot
-	State startjob  {
+	State startjob {
 		onMsg(loaddone : loaddone(PESO) ) {
-			[# PESO = payloadArg(0).toInt()	#]
-			println("controller - startjob dichiarato: $PESO") color green
+			[# PESO = payloadArg(0)	#]
+			request transporttrolley -m doJob : doJob($PESO)
 		}
 		
 		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
