@@ -393,26 +393,22 @@ QActor tickethandler context ctxcoldstoragearea {
 					it.remove()
 				}
     		}
-			if (SpazioLiberato >= Peso){ //c'è abbastanza spazio per la richiesta corrente
+    		
+			if (SpazioLiberato >= Peso){ //c'è abbastanza spazio adesso
 				SpazioLiberato -= Peso
 				Accepted = true
-				}
+			}
 		#]
-		println("tickethandler - Spazio Liberato: $SpazioLiberato")
 		forward coldroom -m updateWeight : updateWeight(0, $SpazioLiberato)
 	} Goto returnticket if [# Accepted #] else reject
 	
 	State reject {
-		println("tickethandler - non c'è comunque posto, vai a casa") color blue
 		replyTo depositRequest with reject : reject( reject )
 	} Goto work
 	
-	
-	
 	State returnticket {
-		
-		[# Ticket = "T".plus(Token)
-			
+		[# 
+			Ticket = "T".plus(Token)
 			var Now = java.util.Date().getTime()/1000
 			
 			Ticket = Ticket.plus( Now ).plus(Token).plus( Peso ).plus(Token).plus( Sequenza)
