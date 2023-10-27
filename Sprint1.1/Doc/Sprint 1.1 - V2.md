@@ -286,10 +286,10 @@ QActor controller context ctxcoldstoragearea {
 		request transporttrolley -m doJob : doJob($KG)
 	} Transition endjob whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
-					
+	
 	State jobdone{
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
-	} Transition repeat whenTime 15000 -> work
+	} Transition repeat -> work
 	
 	
 	State handlerobotdead{
