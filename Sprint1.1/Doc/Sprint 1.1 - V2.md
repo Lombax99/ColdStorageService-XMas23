@@ -264,7 +264,7 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 //-----------------------------------------------------------------------
 ```
 ##### Controller
-
+Rispetto allo sprint 1 non abbiamo più bisogno delle mockRequest
 ```
 QActor controller context ctxcoldstoragearea {
 
@@ -276,30 +276,17 @@ QActor controller context ctxcoldstoragearea {
 		println("controller - in attesa") color green
 	} Transition t0 whenRequest loaddone -> startjob
 	
-	State startjob {
-		onMsg(loaddone : loaddone(PESO) ) {
-			[# PESO = payloadArg(0)	#]
-			request transporttrolley -m doJob : doJob($PESO)
-		}
-		
-		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
-		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
-	} Goto work
-	
-	/* col robot 
 	State startjob  {
 		onMsg(loaddone : loaddone(P_EFF, P_DIC) ){
 			[# KG = payloadArg(0).toInt()
-				P_DIC = payloadArg(1).toInt()
-				#]
-			println("controller - dichiarato: $P_DIC, effettivo: $KG") color green
+			   P_DIC = payloadArg(1).toInt()
+			#]
 		}
 		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
 		request transporttrolley -m doJob : doJob($KG)
-		
 	} Transition endjob whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
-	*/
+					
 	State jobdone{
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 	} Transition repeat whenTime 15000 -> work
