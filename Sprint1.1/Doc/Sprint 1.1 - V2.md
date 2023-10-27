@@ -288,7 +288,7 @@ QActor controller context ctxcoldstoragearea {
 						whenReply jobdone -> jobdone
 	
 	State jobdone{
-		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
+		forward coldroom -m updateWeight : updateWeight($P_EFF, $P_PROM)
 	} Transition repeat -> work
 	
 	State handlerobotdead{
