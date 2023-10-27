@@ -356,19 +356,18 @@ QActor tickethandler context ctxcoldstoragearea {
 		var Accepted = false
 		
 		var Tickets = mutableSetOf<String>()
-		#]
+	#]
+	
 	State s0 initial{
-		println("tickethandler - ticketime: $TICKETTIME") color blue
 		printCurrentMessage
 	} Goto work
 	
-	
 	State work {
+		printCurrentMessage
 	}Transition t0  whenRequest depositRequest -> checkforweight
 					whenRequest checkmyticket -> checktheticket
 	
 	State checkforweight {
-		
 		onMsg(depositRequest : depositRequest(PESO)){
 			
 			[# Peso = payloadArg(0).toInt() #]
