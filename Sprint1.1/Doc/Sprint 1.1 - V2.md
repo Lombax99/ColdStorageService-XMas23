@@ -342,14 +342,12 @@ QActor coldroom context ctxcoldstoragearea {
 	} Goto work
 }
 ```
-
+##### TicketHandler
 ```
 QActor tickethandler context ctxcoldstoragearea {
 	
-	[#	
-		
+	[#
 		var TICKETTIME = DomainSystemConfig.getTicketTime();
-		
 		
 		var Token = "_"
 		var Ticket = ""
