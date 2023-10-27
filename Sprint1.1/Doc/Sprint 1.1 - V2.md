@@ -279,7 +279,7 @@ QActor controller context ctxcoldstoragearea {
 	State startjob  {
 		onMsg(loaddone : loaddone(P_EFF, P_DIC) ){
 			[# KG = payloadArg(0).toInt()
-			   P_DIC = payloadArg(1).toInt()
+			   PESO = payloadArg(1).toInt()
 			#]
 		}
 		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
