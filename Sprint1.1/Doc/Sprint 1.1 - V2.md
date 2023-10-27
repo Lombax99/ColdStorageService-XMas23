@@ -295,9 +295,8 @@ QActor controller context ctxcoldstoragearea {
 ```
 ##### ColdRoom
 Rispetto allo sprint precedente ColdRoom deve verificare se è presente abbastanza spazio e rispondere di conseguenza.
-UpdateWeight inoltre deve essere ag
-il peso promesso viene sottratto, se va aumentato fornire P_PRO negativo
-Dispatch updateWeight : updateWeight(P_EFF, P_PRO)
+UpdateWeight inoltre deve essere aggiornato per gestire il [[Sprint 1.1 - V2#Problema del peso ipotetico|problema del peso ipotetico]].
+Il peso promesso viene sottratto, se va aumentato fornire __P_PRO negativo__.
 ```
 QActor coldroom context ctxcoldstoragearea {
 	[#
