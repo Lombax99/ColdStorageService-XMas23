@@ -339,6 +339,9 @@ QActor controller context ctxcoldstoragearea {
 ```
 
 ```
+//il peso promesso viene sottratto, se va aumentato fornire P_PRO negativo
+Dispatch updateWeight : updateWeight(P_EFF, P_PRO)
+
 QActor coldroom context ctxcoldstoragearea {
 	//corrente: quanta roba c'è nella cold room
 	//previsto: quanto deve ancora arrivare, ma per cui c'è un biglietto emesso
