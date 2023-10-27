@@ -381,31 +381,18 @@ QActor tickethandler context ctxcoldstoragearea {
 			Accepted = false
 			var Now = java.util.Date().getTime()/1000
 			
-			
-			
-			
 			val it = Tickets.iterator()
     		while (it.hasNext()) {
     			var CurrentTicket = it.next()
-    			
-    			var TicketTokens = CurrentTicket.split(Token, ignoreCase = true, limit = 0)
+    			var TicketTokens = CurrentTicket.split(Token)
     			var StartTime = TicketTokens.get(1).toInt()
-				
 				
 				if( Now > StartTime + TICKETTIME){ //scaduto
 					var PesoTicket = TicketTokens.get(2).toInt()
 					SpazioLiberato += PesoTicket
-					
 					it.remove()
 				}
-        		
     		}
-    		
-			
-			
-		    
-			
-			
 			if (SpazioLiberato >= Peso){ //c'è abbastanza spazio per la richiesta corrente
 				SpazioLiberato -= Peso
 				Accepted = true
