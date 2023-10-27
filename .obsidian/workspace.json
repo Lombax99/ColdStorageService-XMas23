@@ -107,19 +107,7 @@
             }
           },
           {
-            "id": "cc6ce2b1bf6554f3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "WebPage.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "78aaba3ede9be31f",
+            "id": "47820eb9b83a02bb",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -127,7 +115,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -277,7 +265,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "78aaba3ede9be31f",
+  "active": "8e40e15af9ced1c4",
   "lastOpenFiles": [
     "WebPage.md",
     "Sprint1.1/Doc/Sprint 1.1 - V2.md",
