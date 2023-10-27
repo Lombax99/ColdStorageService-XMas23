@@ -438,83 +438,15 @@ QActor tickethandler context ctxcoldstoragearea {
 	} Goto work
 }
 ```
-##### SerciveAccessGUI
-```
-QActor serviceaccessgui context ctxcoldstoragearea {
-	[#	var PESO = 0
-		var Ticket = ""
-		var Ticketok = false
-		#]
-	
-	State s0 initial {
-		printCurrentMessage
-		println("SAG - in attesa") color yellow
-	} Transition t0 whenMsg startToDoThings -> work
-	
-	
-	
-	State work {
-		//random tra 10 e 20
-		[# PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
-			#]
-		println("SAG - chiedo $PESO") color yellow
-		request tickethandler -m depositRequest : depositRequest($PESO)
-		
-	} Transition t0 whenReply accept -> gotoindoor
-					whenReply reject -> tryagainlater
-	
-	
-	
-	State tryagainlater{
-		println("SAG - rifiutato") color yellow
-	}Transition wait whenTime 5000 -> work
-	
-	
-	
-	State gotoindoor{
-		onMsg( accept : accept(TICKET)){
-			[#	Ticket = payloadArg(0)
-				#]
-			println("SAG - accettato, Ticket: $Ticket") color yellow
-		}
-	}Transition t2 whenTime 3000 -> giveticket
-	
-	State giveticket{
-		println("SAG - consegno il biglietto") color yellow
-		
-		request tickethandler -m checkmyticket : checkmyticket($Ticket)
-	}Transition tc whenReply ticketchecked -> checkresponse
-	
-	State checkresponse {
-		onMsg (ticketchecked : ticketchecked(BOOL)){
-			[# Ticketok = payloadArg(0).toBoolean() # ]
-		}
-		println("SAG - biglietto accettato? : $Ticketok") color yellow
-	} Goto work if [# !Ticketok #] else unloading
-	
-	
-	State unloading{
-		println("SAG - scarico") color yellow
-	}Transition t4 whenTime 3000 -> loaddone
-	
-	State loaddone {
-		request controller -m loaddone : loaddone($PESO)
-	} Transition t6 whenReply chargetaken -> work
-	
-}
-```
 ##### Parametrizzazione valori
 ```
-object DomainSystemConfig {  
-  
-   private var TicketTime : Long = 0;  
-    private var Maxweight : Long = 0;  
-  
-  
+object DomainSystemConfig {
+	private var TicketTime : Long = 0;
+	
     init {  
         try {  
             val config = File("AppConfig.json").readText(Charsets.UTF_8)  
-            val jsonObject   =  JSONObject( config );  
+            val jsonObject =  JSONObject( config );  
   
             TicketTime= jsonObject.getLong("TicketTime")  
             Maxweight= jsonObject.getLong("Maxweight")  
