@@ -239,6 +239,7 @@ Ciascuno dei test deve essere superato con più utenti collegati contemporaneame
 
 ### Progettazione
 ##### Ticket 
+Ticket conterrà TIME, PESO e SEQ number. La stringa sarà composta da questi 3 va
 ```
 int TIME
 int PESO
