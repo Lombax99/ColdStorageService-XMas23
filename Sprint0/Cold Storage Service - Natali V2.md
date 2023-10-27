@@ -19,8 +19,9 @@ A company intends to build a ColdStorageService, composed of a set of elements:
 
 3. a ServiceAcessGUI that allows an human being to see the current weigth of the material stored in the ColdRoom and to send to the ColdStorageService a request to store new **FW** kg of food. If the request is accepted, the services return a ticket that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
 
-4. a ServiceStatusGUI that allows a Service-manager (an human being) to supervises the state of the service.
-
+4. a ServiceStatusGUI that allows a Service-manager (an human being) to supervises the ==state== of the ==service==.
+- [ ] def di service: i primi 3 punti
+- [ ] def di service status gui: 
 #### Alarm requirements
 
 The system includes a Sonar and a Led connected to a RaspberryPi.
@@ -71,7 +72,8 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 ### Analisi preliminare dei requisiti
 
 ![[Architettura_Sprint0_V2.png]]
-
+- [ ] niente linguaggio naturale, solo cose comprensibili
+- [ ] ColdRoom diventa un pojo che dopo verrà cambiato in Attore
 ##### Service Area
 Area rettangolare di dimensione L * l dove agisce il Transport Trolley.
 ##### HOME
@@ -80,6 +82,7 @@ Zona della Service Area corrispondente all'angolo in alto a sinistra.
 Zona della Service Area corrispondente all'angolo in basso a sinistra.
 ##### Porta della ColdRoom
 Lato sud della ColdRoom. Transport Trolley potrà interagire con ColdRoom attraverso questa.
+- [ ] variabili in coldroom
 ##### ColdRoom Container
 Contenitore in posizione fissa in Service Area, il cui punto di accesso è la [[Cold Storage Service - Natali V2#Porta della ColdRoom|Porta della ColdRoom]], in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
 ##### DDR robot

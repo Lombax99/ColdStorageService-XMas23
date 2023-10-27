@@ -78,6 +78,8 @@ ColdStorageService è un componente caratterizzato da troppe responsabilità, ab
 	- Controller: si occupa di gestire il robot ed aggiornare il peso di ColdRoom.
 	- TicketHandler: si occupa di gestire il ciclo di vita dei Ticket.
 
+- [ ] Definire cosa dei comandi vanno a controller e cosa vanno a TicketHandler.
+
 Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione dei ticket è rimandata allo sprint successivo ([[Sprint 1.1 - V2]])
 
 Cerchiamo quindi di realizzare la seguente __Architettura logica__: 

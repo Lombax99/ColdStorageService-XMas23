@@ -85,6 +85,7 @@ Request depositRequest : depositRequest(PESO)
 Reply accept : accept(TICKET)
 Reply reject : reject(NO_PARAM)
 ```
+- [ ] Reject potrebbe essere restituito anche per problemi del sistema, tipo il robot che non va.
 2) TicketHandler chiede a ColdRoom se c'è abbastanza spazio;
 ```
 Request weightrequest : weightrequest(PESO)
@@ -207,7 +208,7 @@ In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
 __PROBLEMA:__ Usando pagine html statiche, anche mantenendo aggiornato il peso corrente nel server spring l'utente deve ricaricare la pagina per visualizzare il nuovo peso.
 Si tratta di un problema di poco conto che non giustifica un cambiamento verso pagine html dinamiche e non verrà trattato.
 ##### Architettura logica dopo l'analisi del problema
-![[Sprint1.1/Doc/coldstorage2arch.png | 350]]
+![[Sprint1.1/Doc/coldstorage2arch.png]]
 
 ### Tesing
 Durante la face di testing dovranno essere verificati i seguenti casi:
@@ -227,6 +228,9 @@ int SEQ
 
 Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_1697643071_15_0
 ```
+
+> [!NOTE]- Domanda
+> Ci sono ottimi motivi per cui abbiamo deciso di farlo così, se vuole possiamo nascondere il tutto al cliente nell'html. 
 ##### Definizione messaggi e contesti
 ```
 System coldstorage2
