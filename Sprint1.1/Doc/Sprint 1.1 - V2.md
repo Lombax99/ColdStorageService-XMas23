@@ -98,7 +98,7 @@ Reply weightKO : weightKO( NO_PARAM )
 Request checkmyticket : checkmyticket(TICKET)
 Reply	ticketchecked : ticketchecked(BOOL)
 ```
-6) Se la richiesta viene approvata ServiceAccessGUI invia tramite Request/Response al Controller la richiesta "load done" per notificare al Controller che il FridgeTruck è pronto, insieme al peso da scaricare. Dopo di che attende una risposta "charge taken" da parte del Controller.
+6) Se la richiesta viene approvata ServiceAccessGUI invia "loaddone" al Controller per notificare che il FridgeTruck è pronto, insieme al peso da scaricare. Dopo di che attende una risposta "charge taken" da parte del Controller.
 ```
 Request loaddone : loaddone(PESO)
 Reply 	chargetaken : chargetaken(NO_PARAM)
