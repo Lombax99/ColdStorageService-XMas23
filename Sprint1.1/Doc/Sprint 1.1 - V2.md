@@ -285,18 +285,13 @@ QActor controller context ctxcoldstoragearea {
 			#]
 		}
 		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
-		request transporttrolley -m doJob : doJob($KG)
+		request transporttrolley -m doJob : doJob($P_EFF)
 	} Transition endjob whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
 	
 	State jobdone{
 		forward coldroom -m updateWeight : updateWeight($P_EFF, $P_PROM)
 	} Transition repeat -> work
-	
-	State handlerobotdead{
-		println("robotdead") color green
-	}
-}
 ```
 ##### ColdRoom
 ```
