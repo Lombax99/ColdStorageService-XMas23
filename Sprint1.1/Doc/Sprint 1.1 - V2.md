@@ -410,7 +410,6 @@ QActor tickethandler context ctxcoldstoragearea {
 		[# 
 			Ticket = "T".plus(Token)
 			var Now = java.util.Date().getTime()/1000
-			
 			Ticket = Ticket.plus( Now ).plus(Token).plus( Peso ).plus(Token).plus( Sequenza)
 			Sequenza++
 			
