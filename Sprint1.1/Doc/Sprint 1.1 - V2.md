@@ -269,9 +269,7 @@ QActor controller context ctxcoldstoragearea {
 
 	[# var PESO = 0 #]
 	
-	State s0 initial {
-		printCurrentMessage
-	} Goto work
+	State s0 initial { printCurrentMessage } Goto work
 	
 	State work{
 		println("controller - in attesa") color green
@@ -279,15 +277,13 @@ QActor controller context ctxcoldstoragearea {
 	
 	//senza robot
 	State startjob  {
-		onMsg(loaddone : loaddone(PESO) ){
-			[# PESO = payloadArg(0).toInt()
-				#]
+		onMsg(loaddone : loaddone(PESO) ) {
+			[# PESO = payloadArg(0).toInt()	#]
 			println("controller - startjob dichiarato: $PESO") color green
 		}
 		
 		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
-		
 	} Goto work
 	
 	/* col robot 
