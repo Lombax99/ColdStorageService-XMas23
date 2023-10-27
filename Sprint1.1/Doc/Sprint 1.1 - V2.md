@@ -294,6 +294,7 @@ QActor controller context ctxcoldstoragearea {
 	} Transition repeat -> work
 ```
 ##### ColdRoom
+Rispetto allo sprint precedente ColdRoom deve verificare se è present
 il peso promesso viene sottratto, se va aumentato fornire P_PRO negativo
 Dispatch updateWeight : updateWeight(P_EFF, P_PRO)
 ```
@@ -317,14 +318,10 @@ QActor coldroom context ctxcoldstoragearea {
 	State checkweight {
 		onMsg(weightrequest : weightrequest(PESO)){
 			[# var PesoRichiesto = payloadArg(0).toInt() #]
-			println("coldroom - richiesti: $PesoRichiesto, effettivo: $PesoEffettivo, promesso: $PesoPromesso") color green
-			
 			if [# PesoEffettivo + PesoPromesso + PesoRichiesto  <= MAXW #]	{
 				[# PesoPromesso += PesoRichiesto #]
-					println("coldroom - accettato, peso promesso: $PesoPromesso") color green
 				replyTo weightrequest with weightOK : weightOK( NO_PARAM)
 			} else {
-				println("coldroom - rifiutato") color green
 				replyTo weightrequest with weightKO : weightKO( NO_PARAM )
 			}
 		}
