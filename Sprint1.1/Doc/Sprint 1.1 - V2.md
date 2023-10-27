@@ -264,11 +264,13 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 //-----------------------------------------------------------------------
 ```
 ##### Controller
-Rispetto allo sprint 1 non abbiamo più bisogno delle mockRequest
+Rispetto allo sprint 1 non abbiamo più bisogno delle mockRequest e gestiamo i pesi 
 ```
 QActor controller context ctxcoldstoragearea {
 
-	[# var PESO = 0 #]
+	[# var P_EFF = 0
+	   var P_DIC = 0 
+	#]
 	
 	State s0 initial { printCurrentMessage } Goto work
 	
