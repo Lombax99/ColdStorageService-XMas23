@@ -115,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.md",
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -132,7 +132,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.md",
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -165,7 +165,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.md"
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md"
               }
             }
           },
@@ -203,13 +203,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "14ee41a090d76a3d",
+  "active": "3aa83ee35566a993",
   "lastOpenFiles": [
-    "Sprint1.1/Doc/Sprint 1.1 - V2.md",
-    "Sprint1.1/Doc/Sprint 1.1 - V2.pdf",
-    "Sprint1.0/Doc/Sprint 1.0 - V2.md",
-    "Sprint1.0/Doc/Sprint 1.0 - V2.pdf",
     "Sprint0/Cold Storage Service - Natali V2.md",
+    "Sprint1.0/Doc/Sprint 1.0 - V2.md",
+    "Sprint1.1/Doc/Sprint 1.1 - V2.md",
+    "conflict-files-obsidian-git.md",
+    "Sprint1.1/Doc/Sprint 1.1 - V2.pdf",
+    "Sprint1.0/Doc/Sprint 1.0 - V2.pdf",
     "Sprint1.1/Doc/Sprint 1.1.md",
     "WebPage.md",
     "Sprint1.1/Doc/SpringStructure.png",
