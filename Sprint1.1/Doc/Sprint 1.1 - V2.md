@@ -364,24 +364,19 @@ QActor tickethandler context ctxcoldstoragearea {
 	
 	State work {
 		printCurrentMessage
-	}Transition t0  whenRequest depositRequest -> checkforweight
+	} Transition t0 whenRequest depositRequest -> checkforweight
 					whenRequest checkmyticket -> checktheticket
 	
 	State checkforweight {
 		onMsg(depositRequest : depositRequest(PESO)){
-			
 			[# Peso = payloadArg(0).toInt() #]
-			println("tickethandler - richiedo $Peso") color blue
 			request coldroom -m weightrequest : weightrequest($Peso)
 		}
-	}Transition t1 whenReply weightKO -> checkdeadlines
+	} Transition t1 whenReply weightKO -> checkdeadlines
 					whenReply weightOK -> returnticket
 	
-	
-	State checkdeadlines{
-		
-		println("tickethandler - rifiutato, controllo i biglietti") color blue
-		
+	//prima di rifiutare la richiesta controlliamo se ci sono ticket scaduti
+	State checkdeadlines{		
 		[# var SpazioLiberato = 0
 			Accepted = false
 			var Now = java.util.Date().getTime()/1000
