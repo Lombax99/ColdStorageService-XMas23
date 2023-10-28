@@ -59,15 +59,14 @@
             "id": "867e3bb5abac38f9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md",
-                "mode": "source",
-                "source": false
+                "file": "Sprint0/Cold Storage Service - Natali V2.pdf"
               }
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -133,7 +132,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md",
+                "file": "Sprint0/Cold Storage Service - Natali V2.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -150,7 +149,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md",
+                "file": "Sprint0/Cold Storage Service - Natali V2.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -183,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md"
+                "file": "Sprint0/Cold Storage Service - Natali V2.pdf"
               }
             }
           },
@@ -222,14 +221,15 @@
       "command-palette:Apri riquadro comandi": false
     }
   },
-  "active": "14ee41a090d76a3d",
+  "active": "867e3bb5abac38f9",
   "lastOpenFiles": [
+    "Other/ColdStorageServiceRoomAnnoted.png",
+    "Sprint1.1/Doc/Sprint 1.1 - V2.md",
     "Sprint1.1/Doc/Sprint 1.1 - V2.pdf",
     "Sprint1.0/Doc/Sprint 1.0 - V2.pdf",
     "Sprint0/Cold Storage Service - Natali V2.md",
     "Sprint0/Cold Storage Service - Natali V2.pdf",
     "Sprint2/Doc/Sprint 2.md",
-    "Sprint1.1/Doc/Sprint 1.1 - V2.md",
     "conflict-files-obsidian-git.md",
     "Sprint1.0/Doc/Sprint 1.0 - V2.md",
     "WebPage.md",
