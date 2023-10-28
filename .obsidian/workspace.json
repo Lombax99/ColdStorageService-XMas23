@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.md",
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md",
                 "mode": "source",
                 "source": false
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.md",
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -150,7 +150,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.md",
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -183,7 +183,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.md"
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V2.md"
               }
             }
           },
@@ -224,6 +224,8 @@
   },
   "active": "14ee41a090d76a3d",
   "lastOpenFiles": [
+    "Sprint0/Cold Storage Service - Natali V2.md",
+    "Sprint0/Cold Storage Service - Natali V2.pdf",
     "conflict-files-obsidian-git.md",
     "Sprint1.1/Doc/Sprint 1.1 - V2.pdf",
     "Sprint1.0/Doc/Sprint 1.0 - V2.pdf",
@@ -241,14 +243,12 @@
     "Sprint1.1/Codice/ColdStorageSprint2/qakicons/codedQActor.png",
     "Sprint1.1/Codice/ColdStorageSprint2/qakicons",
     "Sprint1.0/Doc/Sprint 1.0.md",
-    "Sprint0/Cold Storage Service - Natali V2.md",
     "Sprint1.0/Doc/ImmagineGrigliaCorrectSize.png",
     "Sprint1.0/Doc.mpfIgN.kra",
     "Sprint1.0/Doc/ImmagineGriglia.kra-autosave.kra",
     "Sprint1.0/Doc.djLVYW.kra",
     "Sprint1.0/Doc.kTPyur.kra",
     "Sprint1.0/Doc/ImmagineGriglia.kra~",
-    "Sprint2/Codice/BasicRobotSprint2",
     "Sprint1.1/Doc/ChristamsClientWeb.png",
     "Sprint1.0/Doc/coldstoragearch.png",
     "README.md",
