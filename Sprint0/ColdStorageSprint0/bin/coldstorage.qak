@@ -1,8 +1,8 @@
-System coldstorage2
+System coldstorage0
 
 //-----------------------------------------------------------------------
 
-
+ 
 Request depositRequest : depositRequest(PESO)
 Reply accept : accept(TICKET)
 Reply reject : reject(NO_PARAM)
@@ -23,11 +23,6 @@ Dispatch startToDoThings : startToDoThings( NO_PARAM )
 Context ctxcoldstoragearea ip [host="localhost" port=8040]
 
 //-----------------------------------------------------------------------
-
-//Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
-
-//ExternalQActor transporttrolley context ctxbasicrobot
-
 
 
 
@@ -73,14 +68,11 @@ QActor coldstorageservice context ctxcoldstoragearea {
 		
 		var TICKETTIME = DomainSystemConfig.getTicketTime();
 		
-
 		var Token = "_"
 		var Ticket = ""
-		var Peso = 0
 		var Sequenza = 0
 		var Accepted = false
 		
-		var Tickets = mutableSetOf<String>()
 		#]
 	State s0 initial{
 		println("coldstorageservice - ticketime: $TICKETTIME") color blue
@@ -113,11 +105,9 @@ QActor coldstorageservice context ctxcoldstoragearea {
 	
 	State returnticket {
 		
-		[# Ticket = "T".plus(Token)
+		[#  var Now = java.util.Date().getTime()/1000
 			
-			var Now = java.util.Date().getTime()/1000
-			
-			Ticket = Ticket.plus( Now ).plus(Token).plus( Peso ).plus(Token).plus( Sequenza)
+			Ticket = Ticket.plus( Now ).plus(Token).plus( Sequenza)
 			Sequenza++
 			
 			Tickets.add(Ticket)
@@ -134,15 +124,11 @@ QActor coldstorageservice context ctxcoldstoragearea {
 			[#	var Ticket = payloadArg(0)
 				var Ticketvalid = false;
 				
-				if(Tickets.contains(Ticket)){
-					var StartTime = Ticket.split(Token, ignoreCase = true, limit = 0).get(1).toInt()
+				var StartTime = Ticket.split(Token, ignoreCase = true, limit = 0).get(0).toInt()
 					
-					var Now = java.util.Date().getTime()/1000
-					if( Now < StartTime + TICKETTIME){
-						Tickets.remove(Ticket)
-						Ticketvalid = true
-					}
-						
+				var Now = java.util.Date().getTime()/1000
+				if( Now < StartTime + TICKETTIME){
+					Ticketvalid = true
 				}
 				
 				#]
@@ -208,5 +194,3 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	} Transition t3 whenTime 5000 -> work
 	
 }
-
-
