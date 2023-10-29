@@ -51,6 +51,7 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								 PesoEffettivo += payloadArg(0).toInt() 
 												PesoPromesso -= payloadArg(1).toInt()
+							updateResourceRep("" + PesoEffettivo + "_" + PesoPromesso + "");
 						}
 						CommUtils.outgreen("coldroom update - peso promesso: $PesoPromesso, nuovo peso effettivo: $PesoEffettivo")
 						//genTimer( actor, state )
@@ -68,6 +69,7 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 								CommUtils.outgreen("coldroom - richiesti: $PesoRichiesto, effettivo: $PesoEffettivo, promesso: $PesoPromesso")
 								if(  PesoEffettivo + PesoPromesso + PesoRichiesto  <= MAXW  
 								 ){ PesoPromesso += PesoRichiesto
+									updateResourceRep("" + PesoEffettivo + "_" + PesoPromesso + "");
 								CommUtils.outgreen("coldroom - accettato, peso promesso: $PesoPromesso")
 								answer("weightrequest", "weightOK", "weightOK(NO_PARAM)"   )  
 								}

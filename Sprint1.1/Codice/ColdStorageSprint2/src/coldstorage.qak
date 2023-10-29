@@ -32,6 +32,7 @@ Reply 	currentweight : currentweight(PESO_EFF,PESO_PRO)
 Dispatch startToDoThings : startToDoThings( NO_PARAM )
 
 
+
 //-----------------------------------------------------------------------
 
 Context ctxcoldstoragearea ip [host="localhost" port=8040]
@@ -122,6 +123,8 @@ QActor coldroom context ctxcoldstoragearea {
 			[# PesoEffettivo += payloadArg(0).toInt() 
 				PesoPromesso -= payloadArg(1).toInt()
 				#]
+				
+			updateResource[# "" + PesoEffettivo + "_" + PesoPromesso + ""#]
 		}
 		println("coldroom update - peso promesso: $PesoPromesso, nuovo peso effettivo: $PesoEffettivo") color green
 	} Goto work
@@ -135,6 +138,7 @@ QActor coldroom context ctxcoldstoragearea {
 			if [# PesoEffettivo + PesoPromesso + PesoRichiesto  <= MAXW #]	{
 				[# PesoPromesso += PesoRichiesto
 					#]
+					updateResource[# "" + PesoEffettivo + "_" + PesoPromesso + ""#]
 					println("coldroom - accettato, peso promesso: $PesoPromesso") color green
 				replyTo weightrequest with weightOK : weightOK( NO_PARAM)
 			} else {

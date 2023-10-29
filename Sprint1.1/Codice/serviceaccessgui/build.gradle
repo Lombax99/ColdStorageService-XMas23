@@ -9,10 +9,12 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	sourceCompatibility = '17'
+
 }
 
 repositories {
 	mavenCentral()
+	flatDir {   dirs '../unibolibs'	 }
 }
 
 dependencies {
@@ -23,6 +25,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	//JSON
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
+	/* COAP **************************************************************************************************************** */
+	// https://mvnrepository.com/artifact/org.eclipse.californium/californium-core
+	implementation group: 'org.eclipse.californium', name: 'californium-core', version: '3.5.0'
+	// https://mvnrepository.com/artifact/org.eclipse.californium/californium-proxy2
+	implementation group: 'org.eclipse.californium', name: 'californium-proxy2', version: '3.5.0'
+
+	implementation name: 'uniboInterfaces'
+	implementation name: 'unibo.basicomm23-1.0'
 }
 
 tasks.named('test') {

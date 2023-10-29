@@ -7,7 +7,7 @@
 <title>ServiceAccessGui web page</title>
 	<link rel="stylesheet" href="/css/mystyle.css">
 </head>
-<body style="text-align:center;">
+<body style="text-align:center;" onload="connect()">
 
 <h1 style="color:white; font-size:300%; background-color:#008CBA">Cold Storage Service</h1>
 <p style="font-size:150%;"/>Cold room Weight: <!--
@@ -15,11 +15,6 @@
 <label style="font-size:120%;" id="cw" th:text="${cw}"></label>
 expected weight:-->
 <label style="font-size:120%;" id="ew" th:text="${ew}"></label>
-
-<form id="weightsubmit">
-
-	<input type="submit" style="width: 25%;" id="weightButton" value="Update Weight" >
-</form>
 
 <br>
 
@@ -60,9 +55,8 @@ expected weight:-->
 </div>
 
 
-<script src="/js/dinamic.js">
-</script>
-
+<script src="/js/dinamic.js"></script>
+<script src="/js/socket.js"></script>
 </body>
 </html>
 

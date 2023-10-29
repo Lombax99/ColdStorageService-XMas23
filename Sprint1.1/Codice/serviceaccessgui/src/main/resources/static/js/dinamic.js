@@ -4,12 +4,6 @@ var ticket = "";
 
 var IP = "http://localhost:8085/api/";
 
-document.getElementById("weightsubmit").addEventListener("submit", function(e)
-{
-    e.preventDefault();
-    updateweight();
-});
-
 document.getElementById("depositsubmit").addEventListener("submit", function(e)
 {
     e.preventDefault();
@@ -33,8 +27,6 @@ document.getElementById("loadsubmit").addEventListener("submit", function(e)
 
 
 function responsehandler(type, response){
-    console.log(type);
-    console.log(response);
     switch (type){
         case "weightreq":
             var weights=getMsgValue(response).split(",");
@@ -50,35 +42,26 @@ function responsehandler(type, response){
                 enableButtons("requestaccepted");
             else
                 enableButtons("default");
-            updateweight();
             break;
         case "checkreq":
             var ticketvalid = getMsgValue(response);
             document.getElementById("maintext").innerHTML = ticketvalid;
             if(ticketvalid == "true") {
                 peso = getWeightFromTicket(ticket);
-                console.log("ciao1" + ticket);
-                console.log("ciao2: " + peso);
                 enableButtons("ticketaccepted");
             }
             else
                 enableButtons("default");
-            updateweight();
             break;
         case "loadreq":
             document.getElementById("maintext").innerHTML = "Il tuo peso è stato preso in carico! ADDIO";
             peso=0;
             enableButtons("default");
-            updateweight();
             break;
         default:
             console.log("richiesta non riconosciuta");
     }
 
-}
-
-function updateweight(){
-    sendMessage("weightreq");
 }
 
 
@@ -89,7 +72,6 @@ function sendMessage(request, parameters) {
             var url = IP+request+"?"+ parameters;
         else
             var url = IP+request;
-
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 ) {
