@@ -24,7 +24,7 @@ public class ApiController {
 
     @PostMapping("/depositreq")
     public String depositreq(@RequestParam String fw){
-        String msg = "msg(depositRequest,request,roberto,tickethandler,depositRequest(" + fw + "),1)\n";
+        String msg = "msg(depositRequestF,request,roberto,facade,depositRequestF(" + fw + "),1)\n";
         return sender.sendMessage(msg);
     }
 

@@ -15,6 +15,10 @@ Request depositRequest : depositRequest(PESO)
 Reply accept : accept(TICKET)
 Reply reject : reject(NO_PARAM)
 
+Request depositRequestF : depositRequestF(PESO)
+Reply acceptF : acceptF(TICKET)
+Reply rejectF : rejectF(NO_PARAM)
+
 
 Request weightrequest : weightrequest(PESO)
 Reply weightOK : weightOK( NO_PARAM )
@@ -283,6 +287,49 @@ QActor tickethandler context ctxcoldstoragearea {
 		}
 	} Goto work
 	
+	
+}
+
+QActor facade context ctxcoldstoragearea {
+	[#
+		var Ticket = ""
+		var Peso = 0
+		
+	#]
+	State s0 initial{
+		println("ColdStorageFacade - in attesa") color blue
+		printCurrentMessage
+	} Goto work
+	
+	
+	State work {
+	}Transition t0  whenRequest depositRequestF -> depositReqHandler
+	
+	State checkforweight {
+		
+		onMsg(depositRequestF : depositRequestF(PESO)){
+			
+			[# Peso = payloadArg(0).toInt() #]
+			println("send request to TicketHandler") color blue
+			request tickethandler -m depositRequest : depositRequest(PESO)
+		}
+	}Transition t1 whenReply accept -> returnticket
+					whenReply reject -> rejectticket
+					
+	State rejectticket {
+		println("facade - ticket reject") color blue
+		replyTo depositRequestF with rejectF : rejectF( reject )
+	} Goto work
+	
+	
+	
+	State returnticket {
+		onMsg(accept : accept(TICKET)){
+			
+			[# Ticket = payloadArg(0).toString() #]
+		println("facade - accettato") color blue
+		replyTo depositRequestF with acceptF : acceptF( $Ticket )
+	} Goto work
 	
 }
 

@@ -61,7 +61,7 @@
             "state": {
               "type": "pdf",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.pdf"
+                "file": "Sprint1.1/Doc/cicloVitaMessaggi.pdf"
               }
             }
           }
@@ -132,7 +132,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.pdf",
+                "file": "Sprint1.1/Doc/cicloVitaMessaggi.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -149,7 +149,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.pdf",
+                "file": "Sprint1.1/Doc/cicloVitaMessaggi.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V2.pdf"
+                "file": "Sprint1.1/Doc/cicloVitaMessaggi.pdf"
               }
             }
           },
@@ -221,14 +221,20 @@
       "command-palette:Apri riquadro comandi": false
     }
   },
-  "active": "867e3bb5abac38f9",
+  "active": "8e40e15af9ced1c4",
   "lastOpenFiles": [
+    "Sprint1.1/Codice/serviceaccessgui/build/classes/java/main/unibo/serviceaccessgui/ApiController.class",
+    "Sprint1.1/Codice/serviceaccessgui/build/tmp/compileJava/compileTransaction/stash-dir/ApiController.class.uniqueId0",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/serviceaccessgui_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/tickethandler_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/coldroom_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/controller_MsLog.txt",
+    "Sprint0/Cold Storage Service - Natali V2.pdf",
     "Other/ColdStorageServiceRoomAnnoted.png",
     "Sprint1.1/Doc/Sprint 1.1 - V2.md",
     "Sprint1.1/Doc/Sprint 1.1 - V2.pdf",
     "Sprint1.0/Doc/Sprint 1.0 - V2.pdf",
     "Sprint0/Cold Storage Service - Natali V2.md",
-    "Sprint0/Cold Storage Service - Natali V2.pdf",
     "Sprint2/Doc/Sprint 2.md",
     "conflict-files-obsidian-git.md",
     "Sprint1.0/Doc/Sprint 1.0 - V2.md",
@@ -245,13 +251,7 @@
     "Sprint1.1/Codice/ColdStorageSprint2/qakicons",
     "Sprint1.0/Doc/Sprint 1.0.md",
     "Sprint1.0/Doc/ImmagineGrigliaCorrectSize.png",
-    "Sprint1.0/Doc.mpfIgN.kra",
-    "Sprint1.0/Doc/ImmagineGriglia.kra-autosave.kra",
-    "Sprint1.0/Doc.djLVYW.kra",
-    "Sprint1.0/Doc.kTPyur.kra",
-    "Sprint1.0/Doc/ImmagineGriglia.kra~",
     "Sprint1.1/Doc/ChristamsClientWeb.png",
-    "Sprint1.0/Doc/coldstoragearch.png",
     "README.md",
     "Sprint0/Cold Storage Service - Natali.md",
     "Sprint4/Doc/Sprint 4.md",
