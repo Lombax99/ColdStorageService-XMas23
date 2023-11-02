@@ -10,8 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-	
-class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, scope ){
+import it.unibo.kactor.sysUtil.createActor   //Sept2023
+class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : ActorBasicFsm( name, scope, confined=isconfined ){
 
 	override fun getInitialState() : String{
 		return "s0"
@@ -21,7 +21,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 			var PESO = 0
 				var Ticket = ""
 				var Ticketok = false
-		return { //this:ActionBasciFsm
+				return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
 						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
@@ -32,7 +32,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t09",targetState="work",cond=whenDispatch("startToDoThings"))
+					 transition(edgeName="t012",targetState="work",cond=whenDispatch("startToDoThings"))
 				}	 
 				state("work") { //this:State
 					action { //it:State
@@ -44,8 +44,8 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t010",targetState="gotoindoor",cond=whenReply("accept"))
-					transition(edgeName="t011",targetState="tryagainlater",cond=whenReply("reject"))
+					 transition(edgeName="t013",targetState="gotoindoor",cond=whenReply("accept"))
+					transition(edgeName="t014",targetState="tryagainlater",cond=whenReply("reject"))
 				}	 
 				state("tryagainlater") { //this:State
 					action { //it:State
@@ -57,7 +57,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 				 	 		stateTimer = TimerActor("timer_tryagainlater", 
 				 	 					  scope, context!!, "local_tout_serviceaccessgui_tryagainlater", 5000.toLong() )
 					}	 	 
-					 transition(edgeName="wait12",targetState="work",cond=whenTimeout("local_tout_serviceaccessgui_tryagainlater"))   
+					 transition(edgeName="wait15",targetState="work",cond=whenTimeout("local_tout_serviceaccessgui_tryagainlater"))   
 				}	 
 				state("gotoindoor") { //this:State
 					action { //it:State
@@ -73,7 +73,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 				 	 		stateTimer = TimerActor("timer_gotoindoor", 
 				 	 					  scope, context!!, "local_tout_serviceaccessgui_gotoindoor", 3000.toLong() )
 					}	 	 
-					 transition(edgeName="t213",targetState="giveticket",cond=whenTimeout("local_tout_serviceaccessgui_gotoindoor"))   
+					 transition(edgeName="t216",targetState="giveticket",cond=whenTimeout("local_tout_serviceaccessgui_gotoindoor"))   
 				}	 
 				state("giveticket") { //this:State
 					action { //it:State
@@ -84,7 +84,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="tc14",targetState="checkresponse",cond=whenReply("ticketchecked"))
+					 transition(edgeName="tc17",targetState="checkresponse",cond=whenReply("ticketchecked"))
 				}	 
 				state("checkresponse") { //this:State
 					action { //it:State
@@ -113,7 +113,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 				 	 		stateTimer = TimerActor("timer_unloading", 
 				 	 					  scope, context!!, "local_tout_serviceaccessgui_unloading", 3000.toLong() )
 					}	 	 
-					 transition(edgeName="t415",targetState="loaddone",cond=whenTimeout("local_tout_serviceaccessgui_unloading"))   
+					 transition(edgeName="t418",targetState="loaddone",cond=whenTimeout("local_tout_serviceaccessgui_unloading"))   
 				}	 
 				state("loaddone") { //this:State
 					action { //it:State
@@ -123,8 +123,8 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t616",targetState="work",cond=whenReply("chargetaken"))
+					 transition(edgeName="t619",targetState="work",cond=whenReply("chargetaken"))
 				}	 
 			}
 		}
-}
+} 

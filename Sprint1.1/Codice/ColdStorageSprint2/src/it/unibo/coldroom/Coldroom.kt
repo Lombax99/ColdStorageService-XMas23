@@ -10,8 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-	
-class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, scope ){
+import it.unibo.kactor.sysUtil.createActor   //Sept2023
+class Coldroom ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : ActorBasicFsm( name, scope, confined=isconfined ){
 
 	override fun getInitialState() : String{
 		return "s0"
@@ -22,7 +22,7 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 				var PesoEffettivo = 0
 				var PesoPromesso = 0 
 				var MAXW = 50
-		return { //this:ActionBasciFsm
+				return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
 						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
@@ -51,7 +51,8 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								 PesoEffettivo += payloadArg(0).toInt() 
 												PesoPromesso -= payloadArg(1).toInt()
-							updateResourceRep("" + PesoEffettivo + "_" + PesoPromesso + "");
+								updateResourceRep( "" + PesoEffettivo + "_" + PesoPromesso + "" 
+								)
 						}
 						CommUtils.outgreen("coldroom update - peso promesso: $PesoPromesso, nuovo peso effettivo: $PesoEffettivo")
 						//genTimer( actor, state )
@@ -69,7 +70,8 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 								CommUtils.outgreen("coldroom - richiesti: $PesoRichiesto, effettivo: $PesoEffettivo, promesso: $PesoPromesso")
 								if(  PesoEffettivo + PesoPromesso + PesoRichiesto  <= MAXW  
 								 ){ PesoPromesso += PesoRichiesto
-									updateResourceRep("" + PesoEffettivo + "_" + PesoPromesso + "");
+								updateResourceRep( "" + PesoEffettivo + "_" + PesoPromesso + "" 
+								)
 								CommUtils.outgreen("coldroom - accettato, peso promesso: $PesoPromesso")
 								answer("weightrequest", "weightOK", "weightOK(NO_PARAM)"   )  
 								}
@@ -100,4 +102,4 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 				}	 
 			}
 		}
-}
+} 

@@ -1,3 +1,4 @@
+### conda install diagrams
 from diagrams import Cluster, Diagram, Edge
 from diagrams.custom import Custom
 import os
@@ -19,17 +20,17 @@ eventedgeattr = {
 with Diagram('coldstorage2Arch', show=False, outformat='png', graph_attr=graphattr) as diag:
   with Cluster('env'):
      sys = Custom('','./qakicons/system.png')
+### see https://renenyffenegger.ch/notes/tools/Graphviz/attributes/label/HTML-like/index
      with Cluster('ctxcoldstoragearea', graph_attr=nodeattr):
           controller=Custom('controller','./qakicons/symActorSmall.png')
           coldroom=Custom('coldroom','./qakicons/symActorSmall.png')
           tickethandler=Custom('tickethandler','./qakicons/symActorSmall.png')
-          serviceaccessgui=Custom('springserver','./qakicons/Alien.png')
-          transporttrolley=Custom('transporttrolley','../qakicons/symActorSmall.png')
-     controller >> Edge(color='magenta', style='solid', xlabel='doJob', fontcolor='magenta') >> transporttrolley
-     controller >> Edge(color='blue', style='solid', xlabel='updateWeight', fontcolor='blue') >> coldroom
-     tickethandler >> Edge(color='magenta', style='solid', xlabel='weightrequest', fontcolor='magenta') >> coldroom
-     tickethandler >> Edge(color='blue', style='solid', xlabel='updateWeight', fontcolor='blue') >> coldroom
-     serviceaccessgui >> Edge(color='magenta', style='solid', xlabel='depositRequest', fontcolor='magenta') >> tickethandler
-     serviceaccessgui >> Edge(color='magenta', style='solid', xlabel='checkmyticket', fontcolor='magenta') >> tickethandler
-     serviceaccessgui >> Edge(color='magenta', style='solid', xlabel='loaddone', fontcolor='magenta') >> controller
+          facade=Custom('facade','./qakicons/symActorSmall.png')
+          serviceaccessgui=Custom('serviceaccessgui','./qakicons/symActorSmall.png')
+     serviceaccessgui >> Edge(color='magenta', style='solid', decorate='true', label='<loaddone &nbsp; >',  fontcolor='magenta') >> controller
+     tickethandler >> Edge(color='magenta', style='solid', decorate='true', label='<weightrequest &nbsp; >',  fontcolor='magenta') >> coldroom
+     serviceaccessgui >> Edge(color='magenta', style='solid', decorate='true', label='<depositRequest &nbsp; checkmyticket &nbsp; >',  fontcolor='magenta') >> tickethandler
+     facade >> Edge(color='magenta', style='solid', decorate='true', label='<depositRequest &nbsp; >',  fontcolor='magenta') >> tickethandler
+     controller >> Edge(color='blue', style='solid',  label='<updateWeight &nbsp; >',  fontcolor='blue') >> coldroom
+     tickethandler >> Edge(color='blue', style='solid',  label='<updateWeight &nbsp; >',  fontcolor='blue') >> coldroom
 diag

@@ -61,7 +61,8 @@ QActor controller context ctxcoldstoragearea {
 	
 	State work{
 		println("controller - in attesa") color green
-	} Transition t0 whenRequest loaddone -> startjob
+	} 
+	Transition t0 whenRequest loaddone -> startjob
 	
 	//senza robot
 	State startjob  {
@@ -305,7 +306,7 @@ QActor facade context ctxcoldstoragearea {
 	State work {
 	}Transition t0  whenRequest depositRequestF -> depositReqHandler
 	
-	State checkforweight {
+	State depositReqHandler {
 		
 		onMsg(depositRequestF : depositRequestF(PESO)){
 			
@@ -327,6 +328,7 @@ QActor facade context ctxcoldstoragearea {
 		onMsg(accept : accept(TICKET)){
 			
 			[# Ticket = payloadArg(0).toString() #]
+			}
 		println("facade - accettato") color blue
 		replyTo depositRequestF with acceptF : acceptF( $Ticket )
 	} Goto work
