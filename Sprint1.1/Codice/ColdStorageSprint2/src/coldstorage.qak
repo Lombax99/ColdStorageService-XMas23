@@ -312,7 +312,7 @@ QActor facade context ctxcoldstoragearea {
 			
 			[# Peso = payloadArg(0).toInt() #]
 			println("send request to TicketHandler") color blue
-			request tickethandler -m depositRequest : depositRequest(PESO)
+			request tickethandler -m depositRequest : depositRequest($Peso)
 		}
 	}Transition t1 whenReply accept -> returnticket
 					whenReply reject -> rejectticket

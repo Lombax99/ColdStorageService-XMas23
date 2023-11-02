@@ -50,7 +50,7 @@ class Facade ( name: String, scope: CoroutineScope, isconfined: Boolean=false  )
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								 Peso = payloadArg(0).toInt()  
 								CommUtils.outblue("send request to TicketHandler")
-								request("depositRequest", "depositRequest(PESO)" ,"tickethandler" )  
+								request("depositRequest", "depositRequest($Peso)" ,"tickethandler" )  
 						}
 						//genTimer( actor, state )
 					}
