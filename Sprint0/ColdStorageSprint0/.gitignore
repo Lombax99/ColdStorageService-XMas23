@@ -1,5 +1,25 @@
-# Ignore Gradle project-specific cache directory
-.gradle
-
-# Ignore Gradle build output directory
+bin
+bin/default
+.metadata
+.classpath
+.project
+.idea
 build
+logs 
+
+log4jInfo.log
+
+#node
+nodeCode/*/node_modules/
+*.lck
+package-lock.json
+
+# MQTT generated
+*-tcp*
+
+
+/ReadMe.html
+.lck/ 
+docker/
+/.metadata/
+/src-gen/
