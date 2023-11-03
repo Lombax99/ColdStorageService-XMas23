@@ -27,11 +27,20 @@ Reply weightKO : weightKO( NO_PARAM )
 Request checkmyticket : checkmyticket(TICKET)
 Reply	ticketchecked : ticketchecked(BOOL)
 
+Request checkmyticketF : checkmyticketF(TICKET)
+Reply	ticketcheckedF : ticketcheckedF(BOOL)
+
 Request loaddone : loaddone(PESO)
 Reply 	chargetaken : chargetaken(NO_PARAM)
 
+Request loaddoneF : loaddoneF(PESO)
+Reply 	chargetakenF : chargetakenF(NO_PARAM)
+
 Request getweight : getweight(NO_PARAM)
 Reply 	currentweight : currentweight(PESO_EFF,PESO_PRO)
+
+Request getweightF : getweightF(NO_PARAM)
+Reply 	currentweightF : currentweightF(PESO_EFF,PESO_PRO)
 
 Dispatch startToDoThings : startToDoThings( NO_PARAM )
 
@@ -295,6 +304,9 @@ QActor facade context ctxcoldstoragearea {
 	[#
 		var Ticket = ""
 		var Peso = 0
+		var PesoEff = 0
+		var PesoProm = 0
+		var Valid = true
 		
 	#]
 	State s0 initial{
@@ -304,9 +316,12 @@ QActor facade context ctxcoldstoragearea {
 	
 	
 	State work {
-	}Transition t0  whenRequest depositRequestF -> depositReqHandler
+	}Transition t0  whenRequest depositRequestF -> depositreqhandler
+					whenRequest loaddoneF -> loadcontroller
+					whenRequest checkmyticketF -> checktickethandler
+					whenRequest getweightF -> getweightcoldroom
 	
-	State depositReqHandler {
+	State depositreqhandler {
 		
 		onMsg(depositRequestF : depositRequestF(PESO)){
 			
@@ -332,6 +347,61 @@ QActor facade context ctxcoldstoragearea {
 		println("facade - accettato") color blue
 		replyTo depositRequestF with acceptF : acceptF( $Ticket )
 	} Goto work
+	
+	State checktickethandler {
+		onMsg(checkmyticketF : checkmyticketF(TICKET)){
+			[#	var Ticket = payloadArg(0)		
+				#]
+			println("send check ticket to TicketHandler") color blue
+			request tickethandler -m checkmyticket : checkmyticket($Ticket)
+		}
+	}Transition tc whenReply ticketchecked -> checkresponse
+	
+	State checkresponse {
+		onMsg (ticketchecked : ticketchecked(BOOL)){
+			[# 
+				var Valid = payloadArg(0).toBoolean()
+				# ]
+				println("facade - biglietto accettato? : $Valid") color blue
+				replyTo checkmyticketF with ticketcheckedF : ticketcheckedF($Valid)
+		}
+	}Goto work
+	
+	State getweightcoldroom{
+		onMsg(getweight : getweight(NO_PARAM)){
+			println("send request getweight to ColdRoom") color blue
+			request coldroom -m getweight : getweight(NO_PARAM)
+		}
+	} Transition tg whenReply currentweight -> returnweight
+	
+	State returnweight{
+		onMsg (currentweight : currentweight(PESO_EFF,PESO_PRO)){
+			[# PesoEff = payloadArg(0).toInt()
+				PesoProm = payloadArg(1).toInt()
+			#]
+			println("facade - getweight : $PesoEff , $PesoProm") color blue
+			replyTo getweightF with currentweightF : currentweightF($PesoEff, $PesoProm)
+		}		
+	}Goto work
+	
+	State loadcontroller{
+		onMsg(loaddoneF : loaddoneF(PESO) ){
+			[# var Peso = payloadArg(0).toInt()
+				#]
+			println("send loaddone to Controller") color blue
+			request controller -m loaddone : loaddone($Peso)
+		}
+		
+	}Transition t0 whenReply chargetaken -> returnload
+	
+	State returnload{
+		onMsg (chargetaken : chargetaken( NO_PARAM )){
+			println("facade - loaddone") color blue
+			replyTo loaddoneF with chargetakenF : chargetakenF( NO_PARAM )
+		}	
+	}Goto work
+	
+	
 	
 }
 

@@ -30,7 +30,9 @@ with Diagram('coldstorage2Arch', show=False, outformat='png', graph_attr=graphat
      serviceaccessgui >> Edge(color='magenta', style='solid', decorate='true', label='<loaddone &nbsp; >',  fontcolor='magenta') >> controller
      tickethandler >> Edge(color='magenta', style='solid', decorate='true', label='<weightrequest &nbsp; >',  fontcolor='magenta') >> coldroom
      serviceaccessgui >> Edge(color='magenta', style='solid', decorate='true', label='<depositRequest &nbsp; checkmyticket &nbsp; >',  fontcolor='magenta') >> tickethandler
-     facade >> Edge(color='magenta', style='solid', decorate='true', label='<depositRequest &nbsp; >',  fontcolor='magenta') >> tickethandler
+     facade >> Edge(color='magenta', style='solid', decorate='true', label='<depositRequest &nbsp; checkmyticket &nbsp; >',  fontcolor='magenta') >> tickethandler
+     facade >> Edge(color='magenta', style='solid', decorate='true', label='<loaddone &nbsp; >',  fontcolor='magenta') >> controller
+     facade >> Edge(color='magenta', style='solid', decorate='true', label='<getweight &nbsp; >',  fontcolor='magenta') >> coldroom
      controller >> Edge(color='blue', style='solid',  label='<updateWeight &nbsp; >',  fontcolor='blue') >> coldroom
      tickethandler >> Edge(color='blue', style='solid',  label='<updateWeight &nbsp; >',  fontcolor='blue') >> coldroom
 diag

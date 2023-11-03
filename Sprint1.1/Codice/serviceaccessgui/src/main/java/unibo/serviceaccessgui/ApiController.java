@@ -30,13 +30,13 @@ public class ApiController {
 
     @PostMapping("/checkreq")
     public String checkreq(@RequestParam(name = "ticket") String ticket){
-        String msg = "msg(checkmyticket,request,roberto,tickethandler,checkmyticket(" + ticket + "),1)\n";
+        String msg = "msg(checkmyticketF,request,roberto,facade,checkmyticketF(" + ticket + "),1)\n";
         return sender.sendMessage(msg);
     }
 
     @PostMapping("/loadreq")
     public String loadreq(@RequestParam(name = "weight") String weight){
-        String msg = "msg(loaddone,request,roberto,controller,loaddone(" +weight + "),1)\n";
+        String msg = "msg(loaddoneF,request,roberto,facade,loaddoneF(" +weight + "),1)\n";
         return sender.sendMessage(msg);
     }
 
