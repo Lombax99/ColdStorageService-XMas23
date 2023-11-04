@@ -50,7 +50,7 @@ QActor coldroom context ctxcoldstoragearea {
 			if [# Peso + PesoRichiesto  <= MAXW #]	{
 				[# Peso += PesoRichiesto
 					#]
-					println("coldroom - accettato, peso promesso: $PesoPromesso") color green
+					println("coldroom - accettato peso: $PesoPromesso. Peso totale in coldroom: $Peso") color green
 				replyTo weightrequest with weightOK : weightOK( NO_PARAM)
 			} else {
 				println("coldroom - rifiutato") color green

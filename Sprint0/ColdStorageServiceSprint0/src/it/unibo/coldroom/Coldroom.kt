@@ -49,7 +49,7 @@ class Coldroom ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 								 var PesoRichiesto = payloadArg(0).toInt() 
 								if(  Peso + PesoRichiesto  <= MAXW  
 								 ){ Peso += PesoRichiesto
-								CommUtils.outgreen("coldroom - accettato, peso promesso: $PesoPromesso")
+								CommUtils.outgreen("coldroom - accettato peso: $PesoPromesso. Peso totale in coldroom: $Peso")
 								answer("weightrequest", "weightOK", "weightOK(NO_PARAM)"   )  
 								}
 								else
