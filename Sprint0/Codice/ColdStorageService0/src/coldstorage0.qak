@@ -1,0 +1,195 @@
+System coldstorage0
+
+//-----------------------------------------------------------------------
+
+ 
+Request depositRequest : depositRequest(PESO)
+Reply accept : accept(TICKET)
+Reply reject : reject(NO_PARAM)
+
+
+Request weightrequest : weightrequest(PESO)
+Reply weightOK : weightOK( NO_PARAM )
+Reply weightKO : weightKO( NO_PARAM )
+
+Request checkmyticket : checkmyticket(TICKET)
+Reply	ticketchecked : ticketchecked(BOOL)
+
+Dispatch startToDoThings : startToDoThings( NO_PARAM )
+
+
+//-----------------------------------------------------------------------
+
+Context ctxcoldstoragearea ip [host="localhost" port=8040]
+
+//-----------------------------------------------------------------------
+
+
+
+QActor coldroom context ctxcoldstoragearea {
+	//corrente: quanta roba c'è nella cold room
+	//previsto: quanto deve ancora arrivare, ma per cui c'è un biglietto emesso
+	[#
+		var Peso = 0
+		var MAXW = 50
+	#]
+	
+	State s0 initial {
+		printCurrentMessage
+	} Goto work
+	
+	State work{
+		
+	}Transition update whenRequest weightrequest -> checkweight
+					   
+	State checkweight {
+		onMsg(weightrequest : weightrequest(PESO)){
+			[# var PesoRichiesto = payloadArg(0).toInt() 
+				#]
+			
+			if [# Peso + PesoRichiesto  <= MAXW #]	{
+				[# Peso += PesoRichiesto
+					#]
+					println("coldroom - accettato peso: $PesoRichiesto. Peso totale in coldroom: $Peso") color green
+				replyTo weightrequest with weightOK : weightOK( NO_PARAM)
+			} else {
+				println("coldroom - rifiutato") color green
+				replyTo weightrequest with weightKO : weightKO( NO_PARAM )
+			}
+		}
+	} Goto work
+	
+}
+
+
+QActor coldstorageservice context ctxcoldstoragearea {
+	
+	[#	
+		
+		var TICKETTIME = 10000;
+		
+		var Token = "_"
+		var Ticket = ""
+		var Sequenza = 0
+		
+		#]
+	State s0 initial{
+		println("coldstorageservice - ticketime: $TICKETTIME") color blue
+		printCurrentMessage
+	} Goto work
+	
+	
+	State work {
+	}Transition t0  whenRequest depositRequest -> checkforweight
+					whenRequest checkmyticket -> checktheticket
+	
+	State checkforweight {
+		
+		onMsg(depositRequest : depositRequest(PESO)){
+			
+			[# var Peso = payloadArg(0).toInt() #]
+			println("coldstorageservice - richiedo $Peso") color blue
+			request coldroom -m weightrequest : weightrequest($Peso)
+		}
+	}Transition t1 whenReply weightKO -> reject
+					whenReply weightOK -> returnticket
+					
+	
+	State reject {
+		println("coldstorageservice - non c'è comunque posto, vai a casa") color blue
+		replyTo depositRequest with reject : reject( reject )
+	} Goto work
+	
+	
+	
+	State returnticket {
+		
+		[#  var Now = java.util.Date().getTime()/1000
+			
+			Ticket = Ticket.plus( Now ).plus(Token).plus( Sequenza)
+			Sequenza++
+			
+			//Tickets.add(Ticket)
+			#]
+			println("coldstorageservice - accettato") color blue
+			replyTo depositRequest with accept : accept( $Ticket )
+	} Goto work
+	
+	
+	
+	
+	State checktheticket {
+		onMsg(checkmyticket : checkmyticket(TICKET)){
+			[#	var Ticket = payloadArg(0)
+				var Ticketvalid = false;
+				
+				var StartTime = Ticket.split(Token, ignoreCase = true, limit = 0).get(0).toInt()
+					
+				var Now = java.util.Date().getTime()/1000
+				if( Now < StartTime + TICKETTIME){
+					Ticketvalid = true
+				}
+				
+				#]
+			println("coldstorageservice - il biglietto è valido? $Ticketvalid") color blue
+			replyTo checkmyticket with ticketchecked : ticketchecked($Ticketvalid)
+		}
+	} Goto work
+	
+	
+}
+
+QActor serviceaccessgui context ctxcoldstoragearea {
+	[#	
+		var Ticket = ""
+		var Ticketok = false
+		#]
+	
+	State s0 initial {
+		printCurrentMessage
+		println("SAG - in attesa") color yellow
+	} Transition t0 whenMsg startToDoThings -> work
+					
+	
+	
+	State work {
+		//random tra 10 e 20
+		[# var PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
+			#]
+		println("SAG - chiedo $PESO") color yellow
+		request coldstorageservice -m depositRequest : depositRequest($PESO)
+		
+	} Transition t0 whenReply accept -> gotoindoor
+					whenReply reject -> tryagainlater
+					
+				
+					
+	State tryagainlater{
+		println("SAG - rifiutato") color yellow
+	}Transition wait whenTime 5000 -> work
+	
+	
+	
+	State gotoindoor{
+		onMsg( accept : accept(TICKET)){
+			[#	Ticket = payloadArg(0)
+				#]
+			println("SAG - accettato, Ticket: $Ticket") color yellow
+		}
+	}Transition t2 whenTime 3000 -> giveticket
+	
+	State giveticket{
+		println("SAG - consegno il biglietto") color yellow
+		
+		request coldstorageservice -m checkmyticket : checkmyticket($Ticket)
+	}Transition tc whenReply ticketchecked -> checkresponse
+	
+	State checkresponse {
+		onMsg (ticketchecked : ticketchecked(BOOL)){
+			[# Ticketok = payloadArg(0).toBoolean()
+				# ]
+		}
+		println("SAG - biglietto accettato? : $Ticketok") color yellow
+	} Transition t3 whenTime 5000 -> work
+	
+}
