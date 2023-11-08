@@ -11,7 +11,7 @@ A company intends to build a ColdStorageService, composed of a set of elements:
 
 ![[ColdStorageServiceRoomAnnoted.png]]
 
-2. a DDR robot working as a transport trolley, that is intially situated in its HOME location. The transport trolley has the form of a square of side length **RD**.
+2. a DDR robot working as a transport trolley, that is initially situated in its HOME location. The transport trolley has the form of a square of side length **RD**.
     The transport trolley is used to perform a deposit action that consists in the following phases:
     1. pick up a food-load from a Fridge truck located on the INDOOR
     2. go from the INDOOR to the PORT of the ColdRoom

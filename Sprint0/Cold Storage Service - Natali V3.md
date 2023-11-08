@@ -20,8 +20,6 @@ A company intends to build a ColdStorageService, composed of a set of elements:
 3. a ServiceAcessGUI that allows an human being to see the current weigth of the material stored in the ColdRoom and to send to the ColdStorageService a request to store new **FW** kg of food. If the request is accepted, the services return a ticket that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
 
 4. a ServiceStatusGUI that allows a Service-manager (an human being) to supervises the ==state== of the ==service==.
-- [ ] def di service: i primi 3 punti
-- [ ] def di service status gui: 
 #### Alarm requirements
 
 The system includes a Sonar and a Led connected to a RaspberryPi.
@@ -88,7 +86,7 @@ val Home = object {
 ```
 ##### INDOOR port
 ```
-val Home = object {
+val IndoorPort = object {
     int x = 0
     int y = MAX_Y
 }
@@ -98,9 +96,9 @@ Lato sud del ColdRoom Container. Transport Trolley potrà interagire con ColdRoo
 ##### ColdRoom Container
 Contenitore in posizione fissa in Service Area, il cui punto di accesso è la [[Cold Storage Service - Natali V2#Porta della ColdRoom|Porta della ColdRoom]], in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
 ```
-val ColdRoom = object {
+var ColdRoom = object {
     int MAXW
-    int CurrentW = 0
+    int CurrentWeight = 0
     int x
     int y
 }
@@ -110,6 +108,9 @@ val ColdRoom = object {
 ##### Transport trolley
 Transport trolley è un DDR robot capace di spostarsi all'interno di [[Cold Storage Service - Natali V2#Service Area|Service Area]]. 
 I comandi che è in grado di compiere sono descritti nell'apposita [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) .
+```
+int RD      #lunghezza del lato del quadrato
+```
 ##### Food-load
 Carico (in kg) che il robot preleverà da Indoor e depositerà in ColdRoom Container.
 ```
@@ -120,8 +121,9 @@ int FoodLoad
 long TicketTime   #tempo esperesso in secondi
 ```
 ##### Ticket
-- [ ] Sostituire con il codice di definizione, come lo definiamo?
-Il Ticket è una stringa che rappresenta il permesso di scarico concesso ad un determinato FridgeTruck.
+```
+int TicketNumber
+```
 ##### ServiceAccesGUI (dovrò mettere il codice)
 - [ ] Sostituire con il codice dal qak
 GUI che permette ai driver di:
@@ -131,12 +133,24 @@ GUI che permette ai driver di:
 - inviare la richiesta "LoadDone" quando il driver è pronto a scaricare.
 ##### ColdStorageService (dovrò cambiare nome e mettere il codice)
 - [ ] Cambiare nome e sostituire con il codice dal qak
+> Non ha senso cambiargli il nome, se lo chiamo in modo diverso allora sto definendo un componente che nei requisiti non è dichiarato da nessuna parte... DIO NJVDJONHNKN
+
 ColdStorageService si occupa di gestire le richieste di scarico merce, questo comprende:
 - ricevere le richieste di permesso di scarico.
 - generare Ticket assegnati al singolo driver che ne ha fatto richiesta.
 - ricevere e verificare i Ticket nel momento in cui il driver arriva in INDOOR.
+##### ServiceStatusGUI
+Componente che permette al Service-manager (persona fisica) di supervisionare lo [[Cold Storage Service - Natali V3#Stato del Servizio|Stato del servizio]]
+##### Stato del Servizio
+Lo stato del servizio comprende:
+- Lo stato e la posizione del TransportTrolley.
+- Lo stato della ColdRoom (peso corrente su totale).
+- Il numero di richieste negate dall'inizio del servizio.
+
 ##### Segnali
-- [ ] La tabella mi piace, aggiungiamo solo il codice dal qak di come sono definiti i segnali
+```
+codice da aggiungere dal qak dei segnali
+```
 
 | Name           | Sender             | Receiver           | Type     | Motivazioni                             |
 | -------------- | ------------------ | ------------------ | -------- | --------------------------------------- |
@@ -152,12 +166,10 @@ ColdStorageService si occupa di gestire le richieste di scarico merce, questo co
 > - event se è per uno o più componenti che non conosco direttamente (io emetto e chi è interessato riceve)
 
 ##### Contesti
-- [ ] sostituire con il qak (anche se non metto i componenti nei requisiti ci sono i due contesti definiti quindi devo metterli)
-> Non ha senso cambiargli il nome, se lo chiamo in modo diverso allora sto definendo un componente che nei requisiti non è dichiarato da nessuna parte... DIO NJVDJONHNKN
-
-Da requisiti il sistema sarà distribuito in almeno due contesti:
-- Un contesto per Sonar e Led
-- Un contesto per il resto dell'applicazione
+```
+Context ctxcoldstoragearea ip [host="localhost" port=8040]
+Context ctxLedSonar ip [host="127.0.0.1" port=8088]
+```
 
 ### Keypoints
 ##### 1) Aggiornamento di ServiceStutusGUI

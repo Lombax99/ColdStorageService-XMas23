@@ -75,6 +75,8 @@ TicketHandler si occuperà di:
 
 La separazione di TicketHandler e Controller porta l'utente a dover potenzialmente interagire con due entità diverse del sistema. Decidiamo di introdurre un componente intermedio per nascondere questa complessità dal lato dell'utente secondo il modello del __patter facade__.
 
+- [ ] Da cambiare con il discorso del FacadeActor
+
 Il sistema sarà dunque ampliato secondo la seguente __Architettura logica__: 
 ![[ArchitetturaLogica_Sprint1.1.png]]
 ##### Protocollo di richiesta e generazione del ticket
@@ -169,6 +171,7 @@ Dall'analisi della sicurezza sono apparse le seguenti vulnerabilità:
 2) Ulteriori dati potrebbero essere visibili ad un utente malevolo (Peso scaricato, ecc...).
 3) Un ticket non deve essere riutilizzabile da un qualsiasi utente.
 4) Possibile DoS di un utente che richiede troppi ticket e occupa tutto il peso disponibile.
+5) Possibile modifica malevola del Ticket dopo l'emissione.
 
 Dei punti definiti, parlando col committente, dovremmo rispettare solo 1 e 3.
 > [!NOTE]- soluzioni possibili

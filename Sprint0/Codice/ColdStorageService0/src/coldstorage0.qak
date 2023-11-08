@@ -21,6 +21,7 @@ Dispatch startToDoThings : startToDoThings( NO_PARAM )
 //-----------------------------------------------------------------------
 
 Context ctxcoldstoragearea ip [host="localhost" port=8040]
+Context ctxLedSonar ip [host="127.0.0.1" port=8088]
 
 //-----------------------------------------------------------------------
 
