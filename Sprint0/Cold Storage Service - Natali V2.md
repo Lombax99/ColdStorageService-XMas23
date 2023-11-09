@@ -188,4 +188,10 @@ Ogni Sprint verrà affrontato insieme con divisione dei compiti specifica valuta
 
 
 
+### Da Fare
+1. qak sprint0 -> coldroom e serviceacces -> LUCA/LISIX  
+2. sitemare doc sprint0 -> LUCA  
+3. observer [con web socket] -> JACK  
+4. nuovo attore facade -> LISIX
+
 

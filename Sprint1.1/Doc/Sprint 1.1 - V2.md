@@ -219,6 +219,7 @@ Durante la face di testing dovranno essere verificati i seguenti casi:
 2) Test con ticket scaduto
 3) Test con ticket ripetuto
 4) Test con peso superiore al disponibile
+5) Controllare che quando il controller aggiorna la ColdRoom il cambiamento di peso risulti nella service access gui.
 Ciascuno dei test deve essere superato con più utenti collegati contemporaneamente da uno stesso browser o da browser diversi.
 
 ### Progettazione

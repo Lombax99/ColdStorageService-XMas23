@@ -124,21 +124,154 @@ long TicketTime   #tempo esperesso in secondi
 ```
 int TicketNumber
 ```
-##### ServiceAccesGUI (dovrò mettere il codice)
-- [ ] Sostituire con il codice dal qak
+##### ServiceAccesGUI
 GUI che permette ai driver di:
 - visualizzare la quantità di cibo (in peso) contenuta all'interno di ColdRoom.
 - richiedere la generazione di un Ticket da presentare in un secondo momento.
 - presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port.
 - inviare la richiesta "LoadDone" quando il driver è pronto a scaricare.
-##### ColdStorageService (dovrò cambiare nome e mettere il codice)
-- [ ] Cambiare nome e sostituire con il codice dal qak
-> Non ha senso cambiargli il nome, se lo chiamo in modo diverso allora sto definendo un componente che nei requisiti non è dichiarato da nessuna parte... DIO NJVDJONHNKN
+```
+QActor serviceaccessgui context ctxcoldstoragearea {
+	[#	
+		var Ticket = " "
+		var Ticketok = false
+		var PESO = 0
+	#]
+	
+	State s0 initial {
+		printCurrentMessage
+		println("SAG - in attesa") color yellow
+	} Goto work 
+	
+	State work {
+		//random tra 10 e 20
+		[# PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
+			#]
+		println("SAG - chiedo $PESO") color yellow
+		request coldstorageservice -m depositRequest : depositRequest($PESO)
+		
+	} Transition t0 whenReply accept -> gotoindoor
+					whenReply reject -> tryagainlater
+	
+	State tryagainlater{
+		println("SAG - rifiutato") color yellow
+	}Transition wait whenTime 5000 -> work
+	
+	State gotoindoor{
+		onMsg( accept : accept(TICKET)){
+			[#	Ticket = payloadArg(0)
+				#]
+			println("SAG - accettato, Ticket: $Ticket") color yellow
+		}
+	}Transition t2 whenTime 3000 -> giveticket
+	
+	State giveticket{
+		println("SAG - consegno il biglietto") color yellow
+		
+		request coldstorageservice -m checkmyticket : checkmyticket($Ticket)
+	}Transition tc whenReply ticketchecked -> checkresponse
+	
+	State checkresponse {
+		onMsg (ticketchecked : ticketchecked(BOOL)){
+			[# Ticketok = payloadArg(0).toBoolean()
+				# ]
+		}
+		println("SAG - biglietto accettato? : $Ticketok") color yellow
+	} Goto work if [# !Ticketok #] else unloading
+	
+	State unloading{
+		println("SAG - scarico") color yellow
+	}Transition t4 whenTime 3000 -> loaddone
+	
+	State loaddone {
+		request coldstorageservice -m loaddone : loaddone($PESO)
+	} Transition t6 whenReply chargetaken -> work
+}
+```
 
+##### ColdStorageService
 ColdStorageService si occupa di gestire le richieste di scarico merce, questo comprende:
 - ricevere le richieste di permesso di scarico.
 - generare Ticket assegnati al singolo driver che ne ha fatto richiesta.
 - ricevere e verificare i Ticket nel momento in cui il driver arriva in INDOOR.
+```
+QActor coldstorageservice context ctxcoldstoragearea {
+	
+	[#	
+		var TICKETTIME = 10000;
+		
+		var Token = "_"
+		var InitialToken = "T"
+		var Ticket = ""
+		var Sequenza = 0
+	#]
+	
+	State s0 initial{
+		println("coldstorageservice - ticketime: $TICKETTIME") color blue
+		printCurrentMessage
+	} Goto work
+	
+	State work {
+	}Transition t0  whenRequest depositRequest -> checkforweight
+					whenRequest checkmyticket -> checktheticket
+					whenRequest loaddone -> loadchargetaken
+	
+	State checkforweight {
+		onMsg(depositRequest : depositRequest(PESO)){
+			[# var Peso = payloadArg(0).toInt() #]
+			println("coldstorageservice - richiedo $Peso") color blue
+			request coldroom -m weightrequest : weightrequest($Peso)
+		}
+	}Transition t1 whenReply weightKO -> reject
+					whenReply weightOK -> returnticket
+	
+	State reject {
+		println("coldstorageservice - non c'è comunque posto, vai a casa") color blue
+		replyTo depositRequest with reject : reject( reject )
+	} Goto work
+	
+	State returnticket {
+		
+		[#  Ticket = "T".plus(Token)
+			var Now = java.util.Date().getTime()/1000
+			
+			Ticket = Ticket.plus( Now ).plus(Token).plus( Sequenza)
+			Sequenza++
+		#]
+		println("coldstorageservice - accettato") color blue
+		replyTo depositRequest with accept : accept( $Ticket )
+	} Goto work
+	
+	
+	State checktheticket {
+		onMsg(checkmyticket : checkmyticket(TICKET)){
+			[#	var Ticket = payloadArg(0)
+				var Ticketvalid = false;
+				
+			var StartTime = Ticket.split(Token, ignoreCase=true, limit=0).get(1).toInt()
+			var Now = java.util.Date().getTime()/1000
+			if( Now < StartTime + TICKETTIME){
+				Ticketvalid = true
+			}
+				
+			#]
+			println("coldstorageservice - biglietto valido? $Ticketvalid") color blue
+			replyTo checkmyticket with ticketchecked : ticketchecked($Ticketvalid)
+		}
+	} Goto work
+	
+	State loadchargetaken {
+		onMsg(loaddone : loaddone(PESO) ){
+			[# var Peso = payloadArg(0).toInt()#]
+		println("coldstorageservice - chargetaken peso dichiarato: $Peso") color blue
+		}
+		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
+		
+	}Goto work
+	
+	
+}
+```
 ##### ServiceStatusGUI
 Componente che permette al Service-manager (persona fisica) di supervisionare lo [[Cold Storage Service - Natali V3#Stato del Servizio|Stato del servizio]]
 ##### Stato del Servizio
@@ -149,7 +282,21 @@ Lo stato del servizio comprende:
 
 ##### Segnali
 ```
-codice da aggiungere dal qak dei segnali
+Request depositRequest : depositRequest(PESO)
+Reply accept : accept(TICKET)
+Reply reject : reject(NO_PARAM)
+
+Request weightrequest : weightrequest(PESO)
+Reply weightOK : weightOK( NO_PARAM )
+Reply weightKO : weightKO( NO_PARAM )
+
+Request checkmyticket : checkmyticket(TICKET)
+Reply	ticketchecked : ticketchecked(BOOL)
+
+Request loaddone : loaddone(PESO)
+Reply 	chargetaken : chargetaken(NO_PARAM)
+
+Dispatch startToDoThings : startToDoThings( NO_PARAM )
 ```
 
 | Name           | Sender             | Receiver           | Type     | Motivazioni                             |
@@ -180,6 +327,39 @@ Tutto il lavoro del sistema al momento passa attraverso ColdStorageService, dall
 Per requisiti il sistema deve essere distribuito, tutte le entità definite finora saranno quindi modellate come __Attori__, in particolare __ColdRoom__ decidiamo di modellarla come attore e non come POJO per i seguenti motivi:
 - Nonostante non sia nei requisiti è logico pensare che in futuro il sistema debba essere esteso con funzionalità per diminuire il peso contenuto in ColdRoom. Definire il componente come attore faciliterà questa aggiunta.
 - Inoltre definire ColdRoom come attore esterno è in linea con il principio di singola responsabilità e alleggerisce il carico di lavoro di ColdStorageService.
+```
+QActor coldroom context ctxcoldstoragearea {
+	//corrente: quanta roba c'è nella cold room
+	//previsto: quanto deve ancora arrivare, ma per cui c'è un biglietto emesso
+	[#
+		var Peso = 0
+		var MAXW = 50
+	#]
+	
+	State s0 initial {
+		printCurrentMessage
+	} Goto work
+	
+	State work{
+		
+	}Transition update whenRequest weightrequest -> checkweight
+	
+	State checkweight {
+		onMsg(weightrequest : weightrequest(PESO)){
+			[# var PesoRichiesto = payloadArg(0).toInt()#]
+			
+			if [# Peso + PesoRichiesto  <= MAXW #]	{
+				[# Peso += PesoRichiesto#]
+				println("coldroom - accettato peso: $PesoRichiesto. Peso totale in coldroom: $Peso") color green
+				replyTo weightrequest with weightOK : weightOK( NO_PARAM)
+			} else {
+				println("coldroom - rifiutato") color green
+				replyTo weightrequest with weightKO : weightKO( NO_PARAM )
+			}
+		}
+	} Goto work
+}
+```
 ##### Posizione del robot?
 Sarà necessario per il sistema riuscire ad identificare la posizione corrente del robot in ogni istante per pianificare il percorso da intraprendere.
 Per risolvere il problema assoceremo alla __Service Area__ un sistema di coordinate da definire in seguito.
