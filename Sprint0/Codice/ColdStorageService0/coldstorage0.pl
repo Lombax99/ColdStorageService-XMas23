@@ -4,6 +4,7 @@
 request( depositRequest, depositRequest(PESO) ).
 request( weightrequest, weightrequest(PESO) ).
 request( checkmyticket, checkmyticket(TICKET) ).
+request( loaddone, loaddone(PESO) ).
 dispatch( startToDoThings, startToDoThings(NO_PARAM) ).
 %====================================================================================
 context(ctxcoldstoragearea, "localhost",  "TCP", "8040").

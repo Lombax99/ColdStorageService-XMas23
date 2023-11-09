@@ -25,6 +25,6 @@ with Diagram('coldstorage0Arch', show=False, outformat='png', graph_attr=graphat
           coldroom=Custom('coldroom','./qakicons/symActorSmall.png')
           coldstorageservice=Custom('coldstorageservice','./qakicons/symActorSmall.png')
           serviceaccessgui=Custom('serviceaccessgui','./qakicons/symActorSmall.png')
-     serviceaccessgui >> Edge(color='magenta', style='solid', decorate='true', label='<depositRequest &nbsp; checkmyticket &nbsp; >',  fontcolor='magenta') >> coldstorageservice
+     serviceaccessgui >> Edge(color='magenta', style='solid', decorate='true', label='<depositRequest &nbsp; checkmyticket &nbsp; loaddone &nbsp; >',  fontcolor='magenta') >> coldstorageservice
      coldstorageservice >> Edge(color='magenta', style='solid', decorate='true', label='<weightrequest &nbsp; >',  fontcolor='magenta') >> coldroom
 diag

@@ -15,13 +15,16 @@ Reply weightKO : weightKO( NO_PARAM )
 Request checkmyticket : checkmyticket(TICKET)
 Reply	ticketchecked : ticketchecked(BOOL)
 
+Request loaddone : loaddone(PESO)
+Reply 	chargetaken : chargetaken(NO_PARAM)
+
 Dispatch startToDoThings : startToDoThings( NO_PARAM )
 
 
 //-----------------------------------------------------------------------
 
 Context ctxcoldstoragearea ip [host="localhost" port=8040]
-Context ctxLedSonar ip [host="127.0.0.1" port=8088]
+//Context ctxLedSonar ip [host="127.0.0.1" port=8088]
 
 //-----------------------------------------------------------------------
 
@@ -70,6 +73,7 @@ QActor coldstorageservice context ctxcoldstoragearea {
 		var TICKETTIME = 10000;
 		
 		var Token = "_"
+		var InitialToken = "T"
 		var Ticket = ""
 		var Sequenza = 0
 		
@@ -83,6 +87,7 @@ QActor coldstorageservice context ctxcoldstoragearea {
 	State work {
 	}Transition t0  whenRequest depositRequest -> checkforweight
 					whenRequest checkmyticket -> checktheticket
+					whenRequest loaddone -> loadchargetaken
 	
 	State checkforweight {
 		
@@ -105,18 +110,17 @@ QActor coldstorageservice context ctxcoldstoragearea {
 	
 	State returnticket {
 		
-		[#  var Now = java.util.Date().getTime()/1000
+		[#  Ticket = "T".plus(Token)
+			
+			var Now = java.util.Date().getTime()/1000
 			
 			Ticket = Ticket.plus( Now ).plus(Token).plus( Sequenza)
 			Sequenza++
 			
-			//Tickets.add(Ticket)
 			#]
 			println("coldstorageservice - accettato") color blue
 			replyTo depositRequest with accept : accept( $Ticket )
 	} Goto work
-	
-	
 	
 	
 	State checktheticket {
@@ -124,8 +128,8 @@ QActor coldstorageservice context ctxcoldstoragearea {
 			[#	var Ticket = payloadArg(0)
 				var Ticketvalid = false;
 				
-				var StartTime = Ticket.split(Token, ignoreCase = true, limit = 0).get(0).toInt()
-					
+				var StartTime = Ticket.split(Token, ignoreCase = true, limit = 0).get(1).toInt()
+				
 				var Now = java.util.Date().getTime()/1000
 				if( Now < StartTime + TICKETTIME){
 					Ticketvalid = true
@@ -137,25 +141,36 @@ QActor coldstorageservice context ctxcoldstoragearea {
 		}
 	} Goto work
 	
+	State loadchargetaken {
+		onMsg(loaddone : loaddone(PESO) ){
+			[# var Peso = payloadArg(0).toInt()
+				#]
+		println("coldstorageservice - chargetaken peso dichiarato: $Peso") color blue
+		}
+		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
+		
+	}Goto work
+	
 	
 }
 
 QActor serviceaccessgui context ctxcoldstoragearea {
 	[#	
-		var Ticket = ""
+		var Ticket = " "
 		var Ticketok = false
+		var PESO = 0
 		#]
 	
 	State s0 initial {
 		printCurrentMessage
 		println("SAG - in attesa") color yellow
-	} Transition t0 whenMsg startToDoThings -> work
+	} Goto work 
 					
 	
 	
 	State work {
 		//random tra 10 e 20
-		[# var PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
+		[# PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
 			#]
 		println("SAG - chiedo $PESO") color yellow
 		request coldstorageservice -m depositRequest : depositRequest($PESO)
@@ -191,6 +206,17 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 				# ]
 		}
 		println("SAG - biglietto accettato? : $Ticketok") color yellow
-	} Transition t3 whenTime 5000 -> work
+	} Goto work if [# !Ticketok #] else unloading
+
+
+	State unloading{
+		println("SAG - scarico") color yellow
+	}Transition t4 whenTime 3000 -> loaddone
+	
+	State loaddone {
+		request coldstorageservice -m loaddone : loaddone($PESO)
+	} Transition t6 whenReply chargetaken -> work
+	
+	
 	
 }

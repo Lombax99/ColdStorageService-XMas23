@@ -19,8 +19,9 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
 			
-				var Ticket = ""
+				var Ticket = " "
 				var Ticketok = false
+				var PESO = 0
 				return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
@@ -32,11 +33,11 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t05",targetState="work",cond=whenDispatch("startToDoThings"))
+					 transition( edgeName="goto",targetState="work", cond=doswitch() )
 				}	 
 				state("work") { //this:State
 					action { //it:State
-						 var PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
+						 PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
 						CommUtils.outyellow("SAG - chiedo $PESO")
 						request("depositRequest", "depositRequest($PESO)" ,"coldstorageservice" )  
 						//genTimer( actor, state )
@@ -97,10 +98,33 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
-				 	 		stateTimer = TimerActor("timer_checkresponse", 
-				 	 					  scope, context!!, "local_tout_serviceaccessgui_checkresponse", 5000.toLong() )
 					}	 	 
-					 transition(edgeName="t311",targetState="work",cond=whenTimeout("local_tout_serviceaccessgui_checkresponse"))   
+					 transition( edgeName="goto",targetState="work", cond=doswitchGuarded({ !Ticketok  
+					}) )
+					transition( edgeName="goto",targetState="unloading", cond=doswitchGuarded({! ( !Ticketok  
+					) }) )
+				}	 
+				state("unloading") { //this:State
+					action { //it:State
+						CommUtils.outyellow("SAG - scarico")
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+				 	 		stateTimer = TimerActor("timer_unloading", 
+				 	 					  scope, context!!, "local_tout_serviceaccessgui_unloading", 3000.toLong() )
+					}	 	 
+					 transition(edgeName="t411",targetState="loaddone",cond=whenTimeout("local_tout_serviceaccessgui_unloading"))   
+				}	 
+				state("loaddone") { //this:State
+					action { //it:State
+						request("loaddone", "loaddone($PESO)" ,"coldstorageservice" )  
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition(edgeName="t612",targetState="work",cond=whenReply("chargetaken"))
 				}	 
 			}
 		}
