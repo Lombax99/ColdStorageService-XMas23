@@ -35,9 +35,8 @@ Request depositRequest : depositRequest(PESO)
 Reply accept : accept(TICKET)
 Reply reject : reject(NO_PARAM)
 ```
-- [ ] Reject potrebbe essere restituito anche per problemi del sistema, tipo il robot che non va.
-
-1) TicketHandler chiede a ColdRoom se c'è abbastanza spazio;
+- [x] Reject potrebbe essere restituito anche per problemi del sistema, tipo il robot che non va. ✅ 2023-11-10 (ce ne freghiamo)
+2) TicketHandler chiede a ColdRoom se c'è abbastanza spazio;
 ```
 Request weightrequest : weightrequest(PESO)
 Reply weightOK : weightOK( NO_PARAM )
@@ -165,7 +164,7 @@ Si tratta di un problema di poco conto che non giustifica un cambiamento verso p
 ### Tesing
 Durante la face di testing dovranno essere verificati i seguenti casi:
 1) Test del processo in condizioni normali
-2) Test con ticket scaduto
+2) Test con ticket scaduto (facciamo questo)
 3) Test con ticket ripetuto
 4) Test con peso superiore al disponibile
 5) Controllare che quando il controller aggiorna la ColdRoom il cambiamento di peso risulti nella service access gui.
@@ -292,7 +291,7 @@ QActor coldroom context ctxcoldstoragearea {
    
 	State updateWeight {
 		onMsg ( updateWeight : updateWeight(P_EFF, P_PRO) ) {
-			[# PesoEffettivo += payloadArg(0).toInt()
+			[#  PesoEffettivo += payloadArg(0).toInt()
 				PesoPromesso -= payloadArg(1).toInt()
 			#]
 		}
@@ -440,7 +439,7 @@ public class MessageSender {
         }  
         return response;  
     }  
-  
+	
     private void connectToColdStorageService() throws IOException {  
         client = new Socket(COLDSTORAGESERVICEIPADDRESS, COLDSTORAGESERVICEPORT);  
         writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));  

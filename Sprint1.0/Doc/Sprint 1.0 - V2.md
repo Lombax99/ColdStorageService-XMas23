@@ -1,5 +1,5 @@
-- [ ] Alcuni link fanno riferimento a doc solo sul mio pc, da cambiare...
-- [ ] Il grafico dello sprint1 deve essere in linea con quanto definito nello sprint0
+- [x] Alcuni link fanno riferimento a doc solo sul mio pc, da cambiare... ✅ 2023-11-10
+- [x] Il grafico dello sprint1 deve essere in linea con quanto definito nello sprint0 ✅ 2023-11-10
 ### Prodotto dello Sprint 0
 È stata individuata un'architettura logica iniziale che definisca le macro-entità del sistema e le loro interazioni, [[Cold Storage Service - Natali V2|link al modello precedente]].
 ![[Architettura_Sprint0_V2.png]]

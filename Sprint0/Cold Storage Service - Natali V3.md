@@ -1,3 +1,5 @@
+- [ ] indicare con commenti nella formalizzazione dei limiti (tipo valore solo positivo)
+
 ### Goal dello Sprint 0
 - individuare la struttura principale e le macro-entità del sistema e le loro interazioni.
 - definire un piano di lavoro.
@@ -159,8 +161,7 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	
 	State gotoindoor{
 		onMsg( accept : accept(TICKET)){
-			[#	Ticket = payloadArg(0)
-				#]
+			[# Ticket = payloadArg(0) #]
 			println("SAG - accettato, Ticket: $Ticket") color yellow
 		}
 	}Transition t2 whenTime 3000 -> giveticket
@@ -173,8 +174,7 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	
 	State checkresponse {
 		onMsg (ticketchecked : ticketchecked(BOOL)){
-			[# Ticketok = payloadArg(0).toBoolean()
-				# ]
+			[# Ticketok = payloadArg(0).toBoolean() # ]
 		}
 		println("SAG - biglietto accettato? : $Ticketok") color yellow
 	} Goto work if [# !Ticketok #] else unloading
@@ -280,7 +280,9 @@ Lo stato del servizio comprende:
 - Lo stato della ColdRoom (peso corrente su totale).
 - Il numero di richieste negate dall'inizio del servizio.
 
-##### Segnali
+
+- [ ] cambiamo da segnali a messaggi, i segnali sono una cosa più specifica, segnale emesso da un entità per indicare (tipo segnale dell'ambulanza) qualcosa in modo deliberato.  
+##### Messaggi
 ```
 Request depositRequest : depositRequest(PESO)
 Reply accept : accept(TICKET)
@@ -377,6 +379,12 @@ Per risolvere il problema assoceremo alla __Service Area__ un sistema di coordin
 > Richiesta al committente:
 > - dimensione del transport trolley corrisponde ad un quadrato di lunghezza RD = 1 m.
 
+### Test Plan
+- [ ] Riportiamo qua il test plan indicato dopo per quello che possiamo già definire qua.
+
+- Ticket iter corretto (controllo che il peso sia come da aspettative)
+- Check peso giusto ma tempo scaduto (controllo che il peso sia come da aspettative)
+- Check peso non corretto (troppo alto) (check peso come da aspettative) (facciamo questo)
 ### Divisione in Sprint
 1) Transport Trolley + ColdStorageService [[Sprint 1.0]]
 > [!NOTE]- Descrizione
@@ -409,6 +417,24 @@ Ogni Sprint verrà affrontato insieme con divisione dei compiti specifica valuta
 |          | Refactoring della user interface         | 1 man-hour    | 1 persona            |                                                                      |
 |          | Testing finale dell'intera applicazione  | 3 man-hour    | 3 persone            | Il testing finale deve essere condiviso da tutti i membri del gruppo |
 
+- [ ] aggiungere nome e cognome + foto dei 3 in ogni file
 
-
+<table>
+  <!--<tr align="center"><td colspan="3"><b>Team BCR</b></td></tr>-->
+  <tr align="center">
+    <td><a href="https://github.com/LisaIU00">LisalU00</a></td>
+    <td><a href="https://github.com/Lombax99">Lombax99</a></td>
+    <td><a href="https://github.com/RedDuality">RedDuality</a></td>
+  </tr>
+  <tr align="center">
+    <td><img width="75%" src="./LisaUccini.jpg"></td>
+    <td><a href="https://github.com/Lombax99">Lombax99</a></td>
+    <td><a href="https://github.com/RedDuality">RedDuality</a></td>
+  </tr>
+  <tr align="center">
+    <td><b>Lisa Uccini</b></td>
+    <td><b>Luca Lombardi</b></td>
+    <td><b>Giacomo Romanini</b></td>
+  </tr>
+</table>
 

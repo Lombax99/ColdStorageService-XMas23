@@ -75,7 +75,7 @@ TicketHandler si occuperà di:
 
 La separazione di TicketHandler e Controller porta l'utente a dover potenzialmente interagire con due entità diverse del sistema. Decidiamo di introdurre un componente intermedio per nascondere questa complessità dal lato dell'utente secondo il modello del __patter facade__.
 
-- [ ] Da cambiare con il discorso del FacadeActor
+- [x] Da cambiare con il discorso del FacadeActor ✅ 2023-11-10
 
 Il sistema sarà dunque ampliato secondo la seguente __Architettura logica__: 
 ![[ArchitetturaLogica_Sprint1.1.png]]

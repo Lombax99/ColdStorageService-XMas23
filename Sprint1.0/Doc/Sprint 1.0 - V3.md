@@ -21,7 +21,7 @@
 
 ### Analisi del Problema
 ##### Responsabilità di ColdStorageService
-ColdStorageService è un componente caratterizzato da troppe responsabilità, abbiamo quindi deciso di sostituirlo con 2 attori:
+ColdStorageService è un componente caratterizzato da troppe responsabilità, l'analista ritiene opportuno suddividerlo in 2 attori:
 	- Controller: si occupa di gestire il robot ed aggiornare il peso di ColdRoom.
 	- TicketHandler: si occupa di gestire il ciclo di vita dei Ticket.
 
@@ -49,7 +49,8 @@ Se il servizio è andato a buon fine e viene restituita una "jobdone" allora il 
 Dispatch updateWeight : updateWeight(PESO)
 ```
 ##### Da "doJob" a comandi per TransportTrolley
-Dalla [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) fornita è chiaro che non sia presente un comando che ci permetterebbe di limitarci ad un comando "doJob". 
+- [ ] spiega meglio che il transport trolley è un layer intermedio per implementare "doJob"
+Dalla [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) fornita è chiaro che non sia presente un comando che ci permetterebbe di limitarci ad un comando "doJob".
 Se non fosse possibile implementarlo risulterebbe necessario aggiungere un componente intermedio che traduca in comandi comprensibili al TransportTrolley fornitoci.
 Allo stesso modo è anche evidente la mancanza di un comando per caricare e scaricare i materiali trattati e quindi non risulta sufficiente.
 ##### Posizione nella Service Area
@@ -63,6 +64,7 @@ Il [TransportTrolley](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/Ba
 ##### Peso massimo trasportabile
 Dopo discussioni con il committente è stato decretato che il peso da scaricare non sarà mai maggiore del peso trasportabile del robot fisico. 
 ##### Architettura logica dopo l'analisi del problema
+- [ ] reply nameSignal : blabla for nomeDelSegnaleaCuiRisponde
 ![[Sprint1.1/Doc/coldstorage2arch.png]]
 
 ### Progettazione
@@ -166,7 +168,7 @@ QActor transporttrolley context ctxcoldstoragearea {
 	State movingtocoldroom{
 		request robotpos -m moverobot : moverobot(5,3)                //move to coldroom
 	} Transition godrop whenReply moverobotdone -> waitforjob
-
+	
 //alla fine di waitforjob mandiamo la risposta "jobdone" e attendiamo per verificare //che non ci siano altre richieste "doJob" da portare avanti prima di tornare alla Home
 	State waitforjob {
 		replyTo doJob with jobdone : jobdone( 1 )
@@ -181,9 +183,14 @@ QActor transporttrolley context ctxcoldstoragearea {
 	}	Goto work
 }
 ```
+### TestPlan
+- [ ] anche qui aggiungere il test plan con del codice, solo un esempio significativo
 
+- Check che il robot torni alla home e non si sia bloccato in giro
+- Check che il peso in cold room sia aggiornato correttamente
+- Check con peso eccessivo
+- Test della rottura del robot (non implementato tanto lo mettiamo in sonar e led)
 ### Deployment
-
 1) Avviare il container itunibovirtualrobot23 su docker
 	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
 2) In intellij avviare il file MainCtxbasicrobot.kt del progetto BasicRobot
