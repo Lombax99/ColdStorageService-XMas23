@@ -29,8 +29,8 @@ Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione d
 
 Cerchiamo quindi di realizzare la seguente __Architettura logica__: 
 ![[ArchitetturaLogica_Sprint1.0-V2.png]]
-##### Segnale per Transport Trolley
-Introduciamo un nuovo segnale "doJob" di tipo Req/Res inviato dal controller.
+##### Messaggio per Transport Trolley
+Introduciamo un nuovo messaggio "doJob" di tipo Req/Res inviato dal controller.
 ```
 Request doJob : doJob(KG)
 Reply jobdone : jobdone(NO_PARAM)
@@ -196,4 +196,12 @@ QActor transporttrolley context ctxcoldstoragearea {
 2) In intellij avviare il file MainCtxbasicrobot.kt del progetto BasicRobot
 3) In intellij avviare il file MainCtxColdStorageArea.kt del progetto coldStorage
 
+
+# 
+----------------
+
+| Lica Uccini              | Luca Lombardi              | Giacomo Romanini              |
+| ------------------------ | -------------------------- | ----------------------------- |
+| ![[LisaUccini.png\|180]] | ![[LucaLombardi.jpg\|245]] | ![[GiacomoRomanini.jpg\|180]] |
+| [github: LisaIU00](https://github.com/LisaIU00)    | [github: Lombax99](https://github.com/Lombax99)             | [github: RedDuality](https://github.com/RedDuality)                              |
 

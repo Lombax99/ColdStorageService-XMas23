@@ -161,7 +161,7 @@ Si tratta di un problema di poco conto che non giustifica un cambiamento verso p
 ##### Architettura logica dopo l'analisi del problema
 ![[Sprint1.1/Doc/coldstorage2arch.png]]
 
-### Tesing
+### Test Plan
 Durante la face di testing dovranno essere verificati i seguenti casi:
 1) Test del processo in condizioni normali
 2) Test con ticket scaduto (facciamo questo)
@@ -484,4 +484,13 @@ public class ApiController {
 [[Sprint1.1/ServiceAccessGuiWebPage.html|ServiceAccessGuiWebPage]]
 
 ### Deployment
+
+
+# 
+----------------
+
+| Lica Uccini              | Luca Lombardi              | Giacomo Romanini              |
+| ------------------------ | -------------------------- | ----------------------------- |
+| ![[LisaUccini.png\|180]] | ![[LucaLombardi.jpg\|245]] | ![[GiacomoRomanini.jpg\|180]] |
+| [github: LisaIU00](https://github.com/LisaIU00)    | [github: Lombax99](https://github.com/Lombax99)             | [github: RedDuality](https://github.com/RedDuality)                              |
 

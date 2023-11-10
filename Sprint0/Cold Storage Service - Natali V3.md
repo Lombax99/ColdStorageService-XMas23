@@ -1,5 +1,3 @@
-- [ ] indicare con commenti nella formalizzazione dei limiti (tipo valore solo positivo)
-
 ### Goal dello Sprint 0
 - individuare la struttura principale e le macro-entità del sistema e le loro interazioni.
 - definire un piano di lavoro.
@@ -75,8 +73,8 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 ##### Service Area
 ```
 val ServiceArea = object {
-    int LatoLungo
-    int LatoCorto
+    int LatoLungo             # valore maggiore di 0
+    int LatoCorto             # valore maggiore di 0
 }
 ```
 ##### HOME
@@ -99,10 +97,10 @@ Lato sud del ColdRoom Container. Transport Trolley potrà interagire con ColdRoo
 Contenitore in posizione fissa in Service Area, il cui punto di accesso è la [[Cold Storage Service - Natali V2#Porta della ColdRoom|Porta della ColdRoom]], in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
 ```
 var ColdRoom = object {
-    int MAXW
+    int MAXW                  # valore maggiore di 0
     int CurrentWeight = 0
-    int x
-    int y
+    int x                     # valore non negativo
+    int y                     # valore non negativo
 }
 ```
 ##### DDR robot
@@ -111,16 +109,16 @@ var ColdRoom = object {
 Transport trolley è un DDR robot capace di spostarsi all'interno di [[Cold Storage Service - Natali V2#Service Area|Service Area]]. 
 I comandi che è in grado di compiere sono descritti nell'apposita [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) .
 ```
-int RD      #lunghezza del lato del quadrato
+int RD                        #lunghezza del lato del quadrato
 ```
 ##### Food-load
 Carico (in kg) che il robot preleverà da Indoor e depositerà in ColdRoom Container.
 ```
-int FoodLoad
+int FoodLoad                  # valore non negativo
 ```
 ##### TicketTime
 ```
-long TicketTime   #tempo esperesso in secondi
+long TicketTime               #tempo esperesso in secondi
 ```
 ##### Ticket
 ```
@@ -249,11 +247,10 @@ QActor coldstorageservice context ctxcoldstoragearea {
 				var Ticketvalid = false;
 				
 			var StartTime = Ticket.split(Token, ignoreCase=true, limit=0).get(1).toInt()
-			var Now = java.util.Date().getTime()/1000
-			if( Now < StartTime + TICKETTIME){
-				Ticketvalid = true
-			}
-				
+				var Now = java.util.Date().getTime()/1000
+				if( Now < StartTime + TICKETTIME){
+					Ticketvalid = true
+				}
 			#]
 			println("coldstorageservice - biglietto valido? $Ticketvalid") color blue
 			replyTo checkmyticket with ticketchecked : ticketchecked($Ticketvalid)
@@ -266,10 +263,7 @@ QActor coldstorageservice context ctxcoldstoragearea {
 		println("coldstorageservice - chargetaken peso dichiarato: $Peso") color blue
 		}
 		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
-		
 	}Goto work
-	
-	
 }
 ```
 ##### ServiceStatusGUI
@@ -279,9 +273,6 @@ Lo stato del servizio comprende:
 - Lo stato e la posizione del TransportTrolley.
 - Lo stato della ColdRoom (peso corrente su totale).
 - Il numero di richieste negate dall'inizio del servizio.
-
-
-- [ ] cambiamo da segnali a messaggi, i segnali sono una cosa più specifica, segnale emesso da un entità per indicare (tipo segnale dell'ambulanza) qualcosa in modo deliberato.  
 ##### Messaggi
 ```
 Request depositRequest : depositRequest(PESO)
@@ -308,7 +299,7 @@ Dispatch startToDoThings : startToDoThings( NO_PARAM )
 | WeightRequest  | ColdStorageService | ColdRoom           | Req/Resp | Risposta necessaria per proseguire: WeightOK/KO |
 | CheckMyTicket  | ServiceAccesGUI    | ColdStorageService | Req/Resp | Deve attendere la risposta: Ok/Rejected      |
 
->[!NOTE]- Tipi di segnali
+>[!NOTE]- Tipi di messagg
 >in generale le ragioni per i vari tipi di messaggio sono:
 > - req/resp se ho bisogno di ricevere una risposta
 > - dispatch se è un messaggio per un componente specifico che conosco e non mi interessa la risposta
@@ -380,11 +371,13 @@ Per risolvere il problema assoceremo alla __Service Area__ un sistema di coordin
 > - dimensione del transport trolley corrisponde ad un quadrato di lunghezza RD = 1 m.
 
 ### Test Plan
-- [ ] Riportiamo qua il test plan indicato dopo per quello che possiamo già definire qua.
+Durante la face di testing dovranno essere verificati i seguenti casi:
+- Inserendo un ticket valido il peso in ColdRoom deve aggiornarsi correttamente.
+- Un ticket deve essere rifiutato per timeout (il peso non deve cambiare)
+- Una richiesta di peso eccessiva deve essere rifiutata (il peso non deve cambiare)
 
-- Ticket iter corretto (controllo che il peso sia come da aspettative)
-- Check peso giusto ma tempo scaduto (controllo che il peso sia come da aspettative)
-- Check peso non corretto (troppo alto) (check peso come da aspettative) (facciamo questo)
+- [ ] inserisci codice del terzo test
+
 ### Divisione in Sprint
 1) Transport Trolley + ColdStorageService [[Sprint 1.0]]
 > [!NOTE]- Descrizione
@@ -417,24 +410,13 @@ Ogni Sprint verrà affrontato insieme con divisione dei compiti specifica valuta
 |          | Refactoring della user interface         | 1 man-hour    | 1 persona            |                                                                      |
 |          | Testing finale dell'intera applicazione  | 3 man-hour    | 3 persone            | Il testing finale deve essere condiviso da tutti i membri del gruppo |
 
-- [ ] aggiungere nome e cognome + foto dei 3 in ogni file
+# 
+----------------
 
-<table>
-  <!--<tr align="center"><td colspan="3"><b>Team BCR</b></td></tr>-->
-  <tr align="center">
-    <td><a href="https://github.com/LisaIU00">LisalU00</a></td>
-    <td><a href="https://github.com/Lombax99">Lombax99</a></td>
-    <td><a href="https://github.com/RedDuality">RedDuality</a></td>
-  </tr>
-  <tr align="center">
-    <td><img width="75%" src="./LisaUccini.jpg"></td>
-    <td><a href="https://github.com/Lombax99">Lombax99</a></td>
-    <td><a href="https://github.com/RedDuality">RedDuality</a></td>
-  </tr>
-  <tr align="center">
-    <td><b>Lisa Uccini</b></td>
-    <td><b>Luca Lombardi</b></td>
-    <td><b>Giacomo Romanini</b></td>
-  </tr>
-</table>
+| Lica Uccini              | Luca Lombardi              | Giacomo Romanini              |
+| ------------------------ | -------------------------- | ----------------------------- |
+| ![[LisaUccini.png\|180]] | ![[LucaLombardi.jpg\|245]] | ![[GiacomoRomanini.jpg\|180]] |
+| [github: LisaIU00](https://github.com/LisaIU00)    | [github: Lombax99](https://github.com/Lombax99)             | [github: RedDuality](https://github.com/RedDuality)                              |
+
+
 

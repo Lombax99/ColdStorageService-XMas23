@@ -10,17 +10,17 @@ Descrizione Descrizione Descrizione
 </div>
 
 ### Roadmap
-- [x] **Sprint0** - BlaBla
-  - Latest Release: 
-  - Sprint Review: 
-- [x] **Sprint1** - BlaBla
-  - Latest Release: 
-  - Sprint Review: 
-- [ ] **Sprint2** - BlaBla
-  - Latest Release: 
+- [x] **Sprint0** - Requirements analysis and system basic structure: 
+  - Latest Release: [[Cold Storage Service - Natali V3]]
+  - Sprint Review: 10/11/2023
+- [x] **Sprint1** - Transport Trolley + ColdStorageService: 
+  - Latest Release: [[Sprint 1.0 - V3]], [[Sprint 1.1 - V3]]
+  - Sprint Review: 17/11/2023
+- [ ] **Sprint2** - Led e Sonar: 
+  - Latest Release: [[Sprint 2]]
   - Sprint Review:
-- [ ] **Sprint3** - BlaBla
-  - Latest Release: 
+- [ ] **Sprint3** - ServiceStatusGui: 
+  - Latest Release: [[Sprint 3]]
   - Final Exam: 
 
 ## Team
