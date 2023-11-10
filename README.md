@@ -31,6 +31,11 @@ Descrizione Descrizione Descrizione
     <td><a href="https://github.com/Lombax99">Lombax99</a></td>
     <td><a href="https://github.com/RedDuality">RedDuality</a></td>
   </tr>
+    <tr align="center">
+    <td><img width="75%" src="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\LisaUccini.png"></td>
+    <td><img width="75%" src=".\LisaUccini.png"></td>
+    <td><a href="https://github.com/RedDuality">RedDuality</a></td>
+  </tr>
   <tr align="center">
     <td><b>Lisa Uccini</b></td>
     <td><b>Luca Lombardi</b></td>
