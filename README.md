@@ -33,8 +33,8 @@ Descrizione Descrizione Descrizione
   </tr>
     <tr align="center">
     <td><img width="75%" src=".\LisaUccini.png"></td>
-    <td><img width="75%" src=".\LucaLombardi.png"></td>
-    <td><img width="75%" src=".\GiacomoRomanini.png"></td>
+    <td><img width="75%" src=".\LucaLombardi.jpg"></td>
+    <td><img width="75%" src=".\GiacomoRomanini.jpg"></td>
   </tr>
   <tr align="center">
     <td><b>Lisa Uccini</b></td>
