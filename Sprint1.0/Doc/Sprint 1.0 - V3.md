@@ -1,4 +1,3 @@
-- [ ] Alcuni link fanno riferimento a doc solo sul mio pc, da cambiare...
 ### Prodotto dello Sprint 0
 È stata individuata un'architettura logica iniziale che definisca le macro-entità del sistema e le loro interazioni, [[Cold Storage Service - Natali V3|link al modello precedente]].
 ![[Architettura_Sprint0_V2.png]]
@@ -15,9 +14,6 @@
 
 ### Analisi dei Requisiti
 [[Cold Storage Service - Natali V3#Analisi preliminare dei requisiti|analisi requisiti sprint 0]]
-
-> [!NOTA]- domanda
-> Possiamo limitarci a mettere il riferimento allo sprint 0 o dobbiamo riportare tutto? 
 
 ### Analisi del Problema
 ##### Responsabilità di ColdStorageService
@@ -49,10 +45,10 @@ Se il servizio è andato a buon fine e viene restituita una "jobdone" allora il 
 Dispatch updateWeight : updateWeight(PESO)
 ```
 ##### Da "doJob" a comandi per TransportTrolley
-- [ ] spiega meglio che il transport trolley è un layer intermedio per implementare "doJob"
-Dalla [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) fornita è chiaro che non sia presente un comando che ci permetterebbe di limitarci ad un comando "doJob".
-Se non fosse possibile implementarlo risulterebbe necessario aggiungere un componente intermedio che traduca in comandi comprensibili al TransportTrolley fornitoci.
-Allo stesso modo è anche evidente la mancanza di un comando per caricare e scaricare i materiali trattati e quindi non risulta sufficiente.
+Dalla [documentazione](https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html) fornita è chiaro che il basicRobot non possa ricevere il comando "doJob".
+Risulta necessario aggiungere un componente intermedio che traduca la "doJob" in una serie di comandi, TransportTrolley si occuperà di quello.
+Allo stesso modo è anche evidente la mancanza di un comando per caricare e scaricare i materiali trattati in basicRobot, non sarebbe quindi sufficiente in un caso reale.
+- [ ] controlla che il codice rispetti quando definito in questo punto. TransportTrolley si appoggia sulla doc fornita o abbiamo fatto una roba nuova di testa nostra?
 ##### Posizione nella Service Area
 Per definire la posizione del TransportTrolley e permettere il movimento autonomo dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del DDR robot). 
 La [[Cold Storage Service - Natali V2#HOME|Home]] corrisponderà all'origine (0, 0). Useremo coordinate crescenti verso il basso e verso destra.
@@ -60,7 +56,7 @@ La [[Cold Storage Service - Natali V2#HOME|Home]] corrisponderà all'origine (0,
 Date le dimensioni dell'area, Service Area sarà divisa in una griglia 4 x 6.
 ColdRoom si troverà in posizione (5, 2).
 
-Il [TransportTrolley](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) fornito possiede già il supporto a questo tipo di tecnologia. La mappatura della stanza deve essere fatta a priori e fornita tramite file all'avvio.
+Il [TransportTrolley](https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html) fornito possiede già il supporto a questo tipo di tecnologia. La mappatura della stanza deve essere fatta a priori e fornita tramite file all'avvio.
 ##### Peso massimo trasportabile
 Dopo discussioni con il committente è stato decretato che il peso da scaricare non sarà mai maggiore del peso trasportabile del robot fisico. 
 ##### Architettura logica dopo l'analisi del problema
@@ -184,12 +180,13 @@ QActor transporttrolley context ctxcoldstoragearea {
 }
 ```
 ### TestPlan
-- [ ] anche qui aggiungere il test plan con del codice, solo un esempio significativo
+Durante la face di testing dovranno essere verificati i seguenti casi:
+- Verifichiamo che a seguito di richieste ben formate il robot ritorni nella HOME e che il peso sia aggiornato correttamente.
+- Verifichiamo che richieste con peso superiore al disponibile vengano scartate correttamente.
+- Verifichiamo che in caso il robot subisca dei problemi il sistema si fermi correttamente.
 
-- Check che il robot torni alla home e non si sia bloccato in giro
-- Check che il peso in cold room sia aggiornato correttamente
-- Check con peso eccessivo
-- Test della rottura del robot (non implementato tanto lo mettiamo in sonar e led)
+- [ ] aggiungere codice del primo test
+
 ### Deployment
 1) Avviare il container itunibovirtualrobot23 su docker
 	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/

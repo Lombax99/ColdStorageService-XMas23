@@ -104,10 +104,10 @@ var ColdRoom = object {
 }
 ```
 ##### DDR robot
-*Differential Drive Robot*, vedi [robot](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html).
+*Differential Drive Robot*, vedi [robot](https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html).
 ##### Transport trolley
 Transport trolley è un DDR robot capace di spostarsi all'interno di [[Cold Storage Service - Natali V2#Service Area|Service Area]]. 
-I comandi che è in grado di compiere sono descritti nell'apposita [documentazione](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/BasicRobot23.html) .
+I comandi che è in grado di compiere sono descritti nell'apposita [documentazione](https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html) .
 ```
 int RD                        #lunghezza del lato del quadrato
 ```
@@ -313,7 +313,7 @@ Context ctxLedSonar ip [host="127.0.0.1" port=8088]
 
 ### Keypoints
 ##### 1) Aggiornamento di ServiceStutusGUI
-SSG dovrà presentare i dati aggiornati del sistema ad ogni istante, dovrà quindi comportarsi come un __Observer__, sfruttiamo la tecnologia degli [StreamQActor](C:/Users/lomba/Desktop/iss23/iss23Material/html/QakActors23.html).
+SSG dovrà presentare i dati aggiornati del sistema ad ogni istante, dovrà quindi comportarsi come un __Observer__, sfruttiamo la tecnologia degli [StreamQActor](https://github.com/anatali/issLab23/blob/main/iss23Material/html/QakActors23.html).
 ##### 2) Carico di lavoro di ColdStorageService
 Tutto il lavoro del sistema al momento passa attraverso ColdStorageService, dalla gestione dei Ticket all'interazione con il TransportTrolley --> __Da valutare una divisione in più componenti__
 ##### 3) ColdRoom, Attore o POJO?

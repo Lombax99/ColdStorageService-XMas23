@@ -35,7 +35,7 @@ Request depositRequest : depositRequest(PESO)
 Reply accept : accept(TICKET)
 Reply reject : reject(NO_PARAM)
 ```
-- [x] Reject potrebbe essere restituito anche per problemi del sistema, tipo il robot che non va. ✅ 2023-11-10 (ce ne freghiamo)
+
 2) TicketHandler chiede a ColdRoom se c'è abbastanza spazio;
 ```
 Request weightrequest : weightrequest(PESO)
