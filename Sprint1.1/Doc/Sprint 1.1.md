@@ -80,7 +80,7 @@ Ogni Ticket è caratterizzato dai seguenti parametri:
 - codice univoco che identifica il ticket generato.
 
 ### Analisi del Problema
-- [ ] Vediamo il pattern facade (mettiamo qualcosa che fa da facciata). Aggiungo un nuovo componente ColdStorageFacade in modo tale che la gui si interfacci con un solo componente. Si aggiunge quindi un nuovo attore tra ServiceAccessGui e i due componenti TicketHandler e Controller. Per fare questo cerca info su pattern facade e spring
+- [x] Vediamo il pattern facade (mettiamo qualcosa che fa da facciata). Aggiungo un nuovo componente ColdStorageFacade in modo tale che la gui si interfacci con un solo componente. Si aggiunge quindi un nuovo attore tra ServiceAccessGui e i due componenti TicketHandler e Controller. Per fare questo cerca info su pattern facade e spring ✅ 2023-11-10
 
 ![[ArchitetturaLogica_Sprint1.1.png]]
 

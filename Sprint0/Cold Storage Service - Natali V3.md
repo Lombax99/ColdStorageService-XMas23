@@ -366,11 +366,10 @@ Per risolvere il problema assoceremo alla __Service Area__ un sistema di coordin
 
 ### Discussioni col committente
 > Richiesta al committente:
-> Dimensione della Service Area: 9m * 6m.
-- [ ] Da controllare che i numeri vadano bene
+> Dimensione della Service Area: 7m * 5m.
 
 > Richiesta al committente:
-> - Capienza massima (MAXW) corrisponde a 100 kg
+> - Capienza massima (MAXW) corrisponde a 50 kg
 > - La grandezza di ColdRoom Container è 1m * 1m
 > - Posizione in Service Area come da figura iniziale
 > - Sarà possibile per il robot muoversi attorno alla ColdRoom

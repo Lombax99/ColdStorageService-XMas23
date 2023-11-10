@@ -1,7 +1,6 @@
 - [ ] Alcuni link fanno riferimento a doc solo sul mio pc, da cambiare...
-- [ ] Il grafico dello sprint1 deve essere in linea con quanto definito nello sprint0
 ### Prodotto dello Sprint 0
-È stata individuata un'architettura logica iniziale che definisca le macro-entità del sistema e le loro interazioni, [[Cold Storage Service - Natali V2|link al modello precedente]].
+È stata individuata un'architettura logica iniziale che definisca le macro-entità del sistema e le loro interazioni, [[Cold Storage Service - Natali V3|link al modello precedente]].
 ![[Architettura_Sprint0_V2.png]]
 ### Goal Sprint 1
 1) Transport Trolley + ColdStorageService
@@ -10,65 +9,12 @@
 > A questa parte deve essere affiancata una mock version della ServiceAccessGUI per la fase di testing.
 
 ### Requisiti relativi allo sprint corrente
-A company intends to build a ColdStorageService, composed of a set of elements:
-
-1. a ==service area== (rectangular, flat) that includes:
-    - an ==INDOOR port==, to enter food (fruits, vegetables, etc. )
-    - a ==ColdRoom container==, devoted to store food, upto **MAXW** kg .
-    The ColdRoom is positioned within the service area, as shown in the following picture:
 
 ![[ColdStorageServiceRoomAnnoted.png]]
-
-2. a ==DDR robot== working as a ==transport trolley==, that is intially situated in its ==HOME location==. The transport trolley has the form of a square of side length **RD**.
-    The transport trolley is used to perform a deposit action that consists in the following phases:
-    1. pick up a ==food-load== from a Fridge truck located on the INDOOR
-    2. go from the INDOOR to the ==PORT of the ColdRoom==
-    3. deposit the food-load in the ColdRoom
-
-> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Responsabilità di ColdStorageService|see below]])
-3. a ServiceAcessGUI that allows an human being to see the current weigth of the material stored in the ColdRoom and to send to the ColdStorageService a request to store new **FW** kg of food. If the request is accepted, the services return a ticket that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
-
-### Service users story
-> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Responsabilità di ColdStorageService|see below]])
-
-The story of the ColdStorageService can be summarized as follows:
-
-1. A Fridge truck driver uses the _ServiceAcessGUI_ to send a request to store its load of **FW** kg. If the request is accepted, the driver drives its truck to the INDOOR of the service, before the ticket exipration time **TICKETTIME**.
-    
-2. When the truck is at the INDOOR of the service, the driver uses the _ServiceAcessGUI_ to enter the ticket number and waits until the message **charge taken** (sent by the ColdStorageService) appears on the _ServiceAcessGUI_. At this point, the truck should leave the INDOOR.
-    
-3. When the service accepts a ticket, the transport trolley reaches the INDOOR, picks up the food, sends the **charge taken** message and then goes to the ColdRoom to store the food.
-    
-4. When the deposit action is terminated, the transport trolley accepts another ticket (if any) or returns to HOME.
-    
-5. While the transport trolley is moving, the Alarm requirements should be satisfied. However, the transport trolley should not be stopped if some prefixed amount of time (**MINT** msecs) is not passed from the previous stop.
-    
-6. A _Service-manager_ migtht use the ServiceStatusGUI to see:
-    - the **current state** of the transport trolley and it **position** in the room;
-    - the **current weigth** of the material stored in the ColdRoom;
-    - the **number of store-requests rejected** since the start of the service.
-
-### Analisi del TF23
-Nelle discussioni con il committente, sono emerse alcune problematiche:
-- Il problema del load-time lungo.
-- Il problema del driver distratto (non coerente, rispetto alle due fasi: scarico preceduto da prenotazione).
-- Il problema del driver malevolo.
-- Il problema di garantire che una risposta venga sempre inviata sempre solo a chi ha fatto la richiesta, anche quando la richiesta è inviata da un ‘alieno’ come una pagine HTML
-#### Il problema del load-time lungo
-> Rinviato a Sprint successivo ([[Sprint 1.0 - V2#Responsabilità di ColdStorageService|see below]])
-
-Il problema del load-time lungo è stato affrontato da Arnaudo/Munari con l’idea di inviare due messaggi di ‘risposta’ (una per dire al driver che il ticket inviato è valido e una per inviare `chargeTaken`). A questo fine hanno fatto uso diretto della connessione TCP stabilita da una versione prototipale dell’accessGui fatta come GUI JAVA.
-Per consentire questa possibilità anche a livello di modellazione qak, in _ActorBasicFsm_ è stato introdotto il metodo storeCurrentRequest() che permette di ricordare la richiesta corrente (cancellata da una __replyTo__). Questo però è un trucco/meccanismo che potrebbe risultare pericoloso.
-Meglio affrontare il problema dal punto di vista logico, impostando una interazione a DUE-FASI tra driver e service (compito che può svolgere la _serviceAcessGui_).
-- FASE1: il driver invia il ticket e attenda una risposta (immediata) come ad esempio `ticketaccepted/ticketrejected`
-- FASE2: il driver invia la richiesta `loaddone` e attenda la risposta (`chargeTaken` o fallimento per cause legate al servizio)
-#### Il problema del driver distratto
-Questo problema ha indotto il committente ad affermare che:
-quando un agente esterno (driver) invia il ticket per indurre il servizio a scaricare il truck, si SUPPPONE GARANTITO che il carico del truck sia UGUALE al carico indicato nella prenotazione.
-Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore del carico effettivo sul Truck.
+[[Cold Storage Service - Natali V3#Requisiti|Requisiti]]
 
 ### Analisi dei Requisiti
-[[Cold Storage Service - Natali V2#Analisi preliminare dei requisiti|requisiti sprint 0]]
+[[Cold Storage Service - Natali V3#Analisi preliminare dei requisiti|analisi requisiti sprint 0]]
 
 > [!NOTA]- domanda
 > Possiamo limitarci a mettere il riferimento allo sprint 0 o dobbiamo riportare tutto? 
@@ -79,12 +25,10 @@ ColdStorageService è un componente caratterizzato da troppe responsabilità, ab
 	- Controller: si occupa di gestire il robot ed aggiornare il peso di ColdRoom.
 	- TicketHandler: si occupa di gestire il ciclo di vita dei Ticket.
 
-- [x] Definire cosa dei comandi vanno a controller e cosa vanno a TicketHandler. ✅ 2023-11-10
-
-Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione dei ticket è rimandata allo sprint successivo ([[Sprint 1.1 - V2]])
+Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione dei ticket è rimandata allo sprint successivo ([[Sprint 1.1 - V3]])
 
 Cerchiamo quindi di realizzare la seguente __Architettura logica__: 
-![[ArchitetturaLogica_Sprint1.0.png]]
+![[ArchitetturaLogica_Sprint1.0-V2.png]]
 ##### Segnale per Transport Trolley
 Introduciamo un nuovo segnale "doJob" di tipo Req/Res inviato dal controller.
 ```
@@ -119,7 +63,7 @@ Il [TransportTrolley](file:///C:/Users/lomba/Desktop/iss23/iss23Material/html/Ba
 ##### Peso massimo trasportabile
 Dopo discussioni con il committente è stato decretato che il peso da scaricare non sarà mai maggiore del peso trasportabile del robot fisico. 
 ##### Architettura logica dopo l'analisi del problema
-![[Sprint1.0/Doc/coldstoragearch.png]]
+![[Sprint1.1/Doc/coldstorage2arch.png]]
 
 ### Progettazione
 ##### Sistema di coordinate

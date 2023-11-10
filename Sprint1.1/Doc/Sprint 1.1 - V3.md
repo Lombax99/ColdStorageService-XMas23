@@ -3,65 +3,15 @@ TicketHandler + ServiceAccessGUI
 > [!NOTE]- Descrizione
 > In questa seconda parte del primo sprint verrà trattata la logica dei ticket, i componenti e la sicurezza associati.
 
-Modello dello [[Sprint 1.0|sprint precedente]].
-![[ArchitetturaLogica_Sprint1.0.png]]
+Modello dello [[Sprint 1.0 - V3|sprint precedente]].
+![[ArchitetturaLogica_Sprint1.0-V2.png]]
 ### Requisiti
-A company intends to build a ColdStorageService, composed of a set of elements:
-
-1. a ==service area== (rectangular, flat) that includes:[[Sprint 1.1]]
-    - an ==INDOOR port==, to enter food (fruits, vegetables, etc. )
-    - a ==ColdRoom container==, devoted to store food, upto **MAXW** kg .
-    The ColdRoom is positioned within the service area, as shown in the following picture:
 
 ![[ColdStorageServiceRoomAnnoted.png]]
-
-2. a ==DDR robot== working as a ==transport trolley==, that is intially situated in its ==HOME location==. The transport trolley has the form of a square of side length **RD**.
-    The transport trolley is used to perform a deposit action that consists in the following phases:
-    1. pick up a ==food-load== from a Fridge truck located on the INDOOR
-    2. go from the INDOOR to the ==PORT of the ColdRoom==
-    3. deposit the food-load in the ColdRoom
-
-3. a ==ServiceAcessGUI== that allows an human being to see the ==current weigth== of the material stored in the ColdRoom and to send to the ==ColdStorageService== a request to store new **FW** kg of food. If the request is accepted, the services return a ==ticket== that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
-
-### Service users story
-
-The story of the ColdStorageService can be summarized as follows:
-
-1. A Fridge truck driver uses the _ServiceAcessGUI_ to send a request to store its load of **FW** kg. If the request is accepted, the driver drives its truck to the INDOOR of the service, before the ticket exipration time **TICKETTIME**.
-    
-2. When the truck is at the INDOOR of the service, the driver uses the _ServiceAcessGUI_ to enter the ticket number and waits until the message **charge taken** (sent by the ColdStorageService) appears on the _ServiceAcessGUI_. At this point, the truck should leave the INDOOR.
-    
-3. When the service accepts a ticket, the transport trolley reaches the INDOOR, picks up the food, sends the **charge taken** message and then goes to the ColdRoom to store the food.
-    
-4. When the deposit action is terminated, the transport trolley accepts another ticket (if any) or returns to HOME.
-    
-5. While the transport trolley is moving, the Alarm requirements should be satisfied. However, the transport trolley should not be stopped if some prefixed amount of time (**MINT** msecs) is not passed from the previous stop.
-    
-6. A _Service-manager_ migtht use the ServiceStatusGUI to see:
-    - the **current state** of the transport trolley and it **position** in the room;
-    - the **current weigth** of the material stored in the ColdRoom;
-    - the **number of store-requests rejected** since the start of the service.
-
-### Analisi del TF23
-
-Nelle discussioni con il committente, sono emerse alcune problematiche:
-- Il problema del load-time lungo.
-- Il problema del driver distratto (non coerente, rispetto alle due fasi: scarico preceduto da prenotazione).
-- Il problema del driver malevolo.
-- Il problema di garantire che una risposta venga sempre inviata sempre solo a chi ha fatto la richiesta, anche quando la richiesta è inviata da un ‘alieno’ come una pagine HTML
-#### Il problema del load-time lungo
-Il problema del load-time lungo è stato affrontato da Arnaudo/Munari con l’idea di inviare due messaggi di ‘risposta’ (una per dire al driver che il ticket inviato è valido e una per inviare `chargeTaken`). A questo fine hanno fatto uso diretto della connessione TCP stabilita da una versione prototipale dell’accessGui fatta come GUI JAVA.
-Per consentire questa possibilità anche a livello di modellazione qak, in _ActorBasicFsm_ è stato introdotto il metodo storeCurrentRequest() che permette di ricordare la richiesta corrente (cancellata da una __replyTo__). Questo però è un trucco/meccanismo che potrebbe risultare pericoloso.
-Meglio affrontare il problema dal punto di vista logico, impostando una interazione a DUE-FASI tra driver e service (compito che può svolgere la _serviceAcessGui_).
-- FASE1: il driver invia il ticket e attenda una risposta (immediata) come ad esempio `ticketaccepted/ticketrejected`
-- FASE2: il driver invia la richiesta `loaddone` e attenda la risposta (`chargeTaken` o fallimento per cause legate al servizio)
-#### Il problema del driver distratto
-Questo problema ha indotto il committente ad affermare che:
-quando un agente esterno (driver) invia il ticket per indurre il servizio a scaricare il truck, si SUPPPONE GARANTITO che il carico del truck sia UGUALE al carico indicato nella prenotazione.
-Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore del carico effettivo sul Truck.
+[[Cold Storage Service - Natali V3#Requisiti|Requisiti]]
 
 ### Analisi dei Requisiti
-[[Cold Storage Service - Natali V2#Analisi preliminare dei requisiti|requisiti sprint 0]]
+[[Cold Storage Service - Natali V3#Analisi preliminare dei requisiti|requisiti sprint 0]]
 
 ### Analisi del Problema
 ##### Compiti di TicketHandler
@@ -75,8 +25,6 @@ TicketHandler si occuperà di:
 
 La separazione di TicketHandler e Controller porta l'utente a dover potenzialmente interagire con due entità diverse del sistema. Decidiamo di introdurre un componente intermedio per nascondere questa complessità dal lato dell'utente secondo il modello del __patter facade__.
 
-- [ ] Da cambiare con il discorso del FacadeActor
-
 Il sistema sarà dunque ampliato secondo la seguente __Architettura logica__: 
 ![[ArchitetturaLogica_Sprint1.1.png]]
 ##### Protocollo di richiesta e generazione del ticket
@@ -87,8 +35,9 @@ Request depositRequest : depositRequest(PESO)
 Reply accept : accept(TICKET)
 Reply reject : reject(NO_PARAM)
 ```
-- [x] Reject potrebbe essere restituito anche per problemi del sistema, tipo il robot che non va. ✅ 2023-11-10
-2) TicketHandler chiede a ColdRoom se c'è abbastanza spazio;
+- [ ] Reject potrebbe essere restituito anche per problemi del sistema, tipo il robot che non va.
+
+1) TicketHandler chiede a ColdRoom se c'è abbastanza spazio;
 ```
 Request weightrequest : weightrequest(PESO)
 Reply weightOK : weightOK( NO_PARAM )
@@ -196,7 +145,7 @@ QActor tickethandler context ctxcoldstoragearea {
 Progettare le GUI come attori non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfacci con esso.
 Per fare ciò ci appoggiamo alla tecnologia di SPRING che permette l'interazione tramite web e la gestione di molti utenti collegati contemporaneamente.
 
-Nello schema iniziale il server Spring prenderà quindi il posto dell'attore Facade mentre le GUI saranno pagine html statiche fornite dal server ad ogni utente che si collega.
+Nello schema iniziale il server Spring prenderà quindi il posto dell'attore ServiceAccessGUI, l'interazione con l'utente avverrà tramite pagine html statiche fornite dal server ad ogni utente che si collega.
 
 __NOTA:__ In questa fase il server spring verrà lanciato localmente al resto del sistema, in futuro potrebbe non essere così. Come gestiamo la conoscenza dell'indirizzo degli attori?
 
