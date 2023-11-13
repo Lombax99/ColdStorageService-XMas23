@@ -10,8 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-	
-class Basicrobot ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, scope ){
+import it.unibo.kactor.sysUtil.createActor   //Sept2023
+class Basicrobot ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : ActorBasicFsm( name, scope, confined=isconfined ){
 
 	override fun getInitialState() : String{
 		return "ss0"
@@ -25,7 +25,7 @@ class Basicrobot ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 		  var RobotType     = "" 
 		  var CurrentMove   = "unkknown"
 		  var StepSynchRes  = false
-		return { //this:ActionBasciFsm
+				return { //this:ActionBasciFsm
 				state("ss0") { //this:State
 					action { //it:State
 						discardMessages = true
@@ -34,8 +34,8 @@ class Basicrobot ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 						delegate("setrobotstate", "robotpos") 
 						delegate("moverobot", "robotpos") 
 						delegate("setdirection", "robotpos") 
-						uniborobots.robotSupport.create(myself ,"basicrobotConfig.json" )
-						 RobotType = uniborobots.robotSupport.robotKind  
+						 uniborobots.robotSupport.create(myself,"basicrobotConfig.json")	
+						 		 RobotType = uniborobots.robotSupport.robotKind  
 						delay(3000) 
 						CommUtils.outmagenta("basicrobot | STARTING ... ")
 						//genTimer( actor, state )
@@ -139,4 +139,4 @@ class Basicrobot ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 				}	 
 			}
 		}
-}
+} 

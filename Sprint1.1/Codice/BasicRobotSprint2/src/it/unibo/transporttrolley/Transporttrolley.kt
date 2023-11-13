@@ -10,8 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-	
-class Transporttrolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, scope ){
+import it.unibo.kactor.sysUtil.createActor   //Sept2023
+class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : ActorBasicFsm( name, scope, confined=isconfined ){
 
 	override fun getInitialState() : String{
 		return "s0"
@@ -21,7 +21,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 			var Peso = 0
 				var CapienzaRobot = 5
 				var Giridafare = 0
-		return { //this:ActionBasciFsm
+				return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
 						forward("setrobotstate", "setpos(0,0,down)" ,"robotpos" ) 
@@ -120,4 +120,4 @@ class Transporttrolley ( name: String, scope: CoroutineScope  ) : ActorBasicFsm(
 				}	 
 			}
 		}
-}
+} 

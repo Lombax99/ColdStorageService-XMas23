@@ -1,3 +1,4 @@
+### conda install diagrams
 from diagrams import Cluster, Diagram, Edge
 from diagrams.custom import Custom
 import os
@@ -19,6 +20,7 @@ eventedgeattr = {
 with Diagram('basicrobot2Arch', show=False, outformat='png', graph_attr=graphattr) as diag:
   with Cluster('env'):
      sys = Custom('','./qakicons/system.png')
+### see https://renenyffenegger.ch/notes/tools/Graphviz/attributes/label/HTML-like/index
      with Cluster('ctxbasicrobot', graph_attr=nodeattr):
           transporttrolley=Custom('transporttrolley','./qakicons/symActorSmall.png')
           basicrobot=Custom('basicrobot','./qakicons/symActorSmall.png')
@@ -26,13 +28,10 @@ with Diagram('basicrobot2Arch', show=False, outformat='png', graph_attr=graphatt
           robotpos=Custom('robotpos','./qakicons/symActorSmall.png')
      with Cluster('ctxcoldstoragearea', graph_attr=nodeattr):
           coldroom=Custom('coldroom(ext)','./qakicons/externalQActor.png')
-     transporttrolley >> Edge(color='blue', style='solid', xlabel='setrobotstate', fontcolor='blue') >> robotpos
-     transporttrolley >> Edge(color='magenta', style='solid', xlabel='moverobot', fontcolor='magenta') >> robotpos
-     transporttrolley >> Edge(color='blue', style='solid', xlabel='setdirection', fontcolor='blue') >> robotpos
-     basicrobot >> Edge(color='blue', style='solid', xlabel='robotready', fontcolor='blue') >> transporttrolley
-     sys >> Edge(color='red', style='dashed', xlabel='alarm', fontcolor='red') >> planexec
-     planexec >> Edge(color='blue', style='solid', xlabel='nextmove', fontcolor='blue') >> planexec
-     planexec >> Edge(color='blue', style='solid', xlabel='nomoremove', fontcolor='blue') >> planexec
-     planexec >> Edge(color='magenta', style='solid', xlabel='step', fontcolor='magenta') >> basicrobot
-     robotpos >> Edge(color='magenta', style='solid', xlabel='doplan', fontcolor='magenta') >> planexec
+     transporttrolley >> Edge(color='magenta', style='solid', decorate='true', label='<moverobot &nbsp; >',  fontcolor='magenta') >> robotpos
+     robotpos >> Edge(color='magenta', style='solid', decorate='true', label='<doplan &nbsp; >',  fontcolor='magenta') >> planexec
+     planexec >> Edge(color='magenta', style='solid', decorate='true', label='<step &nbsp; >',  fontcolor='magenta') >> basicrobot
+     basicrobot >> Edge(color='blue', style='solid',  label='<robotready &nbsp; >',  fontcolor='blue') >> transporttrolley
+     planexec >> Edge(color='blue', style='solid',  label='<nextmove &nbsp; nomoremove &nbsp; >',  fontcolor='blue') >> planexec
+     transporttrolley >> Edge(color='blue', style='solid',  label='<setrobotstate &nbsp; setdirection &nbsp; >',  fontcolor='blue') >> robotpos
 diag

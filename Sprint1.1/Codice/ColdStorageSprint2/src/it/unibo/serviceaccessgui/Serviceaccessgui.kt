@@ -32,7 +32,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t018",targetState="work",cond=whenDispatch("startToDoThings"))
+					 transition(edgeName="t020",targetState="work",cond=whenDispatch("startToDoThings"))
 				}	 
 				state("work") { //this:State
 					action { //it:State
@@ -44,8 +44,8 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t019",targetState="gotoindoor",cond=whenReply("accept"))
-					transition(edgeName="t020",targetState="tryagainlater",cond=whenReply("reject"))
+					 transition(edgeName="t021",targetState="gotoindoor",cond=whenReply("accept"))
+					transition(edgeName="t022",targetState="tryagainlater",cond=whenReply("reject"))
 				}	 
 				state("tryagainlater") { //this:State
 					action { //it:State
@@ -57,7 +57,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 				 	 		stateTimer = TimerActor("timer_tryagainlater", 
 				 	 					  scope, context!!, "local_tout_serviceaccessgui_tryagainlater", 5000.toLong() )
 					}	 	 
-					 transition(edgeName="wait21",targetState="work",cond=whenTimeout("local_tout_serviceaccessgui_tryagainlater"))   
+					 transition(edgeName="wait23",targetState="work",cond=whenTimeout("local_tout_serviceaccessgui_tryagainlater"))   
 				}	 
 				state("gotoindoor") { //this:State
 					action { //it:State
@@ -73,7 +73,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 				 	 		stateTimer = TimerActor("timer_gotoindoor", 
 				 	 					  scope, context!!, "local_tout_serviceaccessgui_gotoindoor", 3000.toLong() )
 					}	 	 
-					 transition(edgeName="t222",targetState="giveticket",cond=whenTimeout("local_tout_serviceaccessgui_gotoindoor"))   
+					 transition(edgeName="t224",targetState="giveticket",cond=whenTimeout("local_tout_serviceaccessgui_gotoindoor"))   
 				}	 
 				state("giveticket") { //this:State
 					action { //it:State
@@ -84,7 +84,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="tc23",targetState="checkresponse",cond=whenReply("ticketchecked"))
+					 transition(edgeName="tc25",targetState="checkresponse",cond=whenReply("ticketchecked"))
 				}	 
 				state("checkresponse") { //this:State
 					action { //it:State
@@ -113,7 +113,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 				 	 		stateTimer = TimerActor("timer_unloading", 
 				 	 					  scope, context!!, "local_tout_serviceaccessgui_unloading", 3000.toLong() )
 					}	 	 
-					 transition(edgeName="t424",targetState="loaddone",cond=whenTimeout("local_tout_serviceaccessgui_unloading"))   
+					 transition(edgeName="t426",targetState="loaddone",cond=whenTimeout("local_tout_serviceaccessgui_unloading"))   
 				}	 
 				state("loaddone") { //this:State
 					action { //it:State
@@ -123,7 +123,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t625",targetState="work",cond=whenReply("chargetaken"))
+					 transition(edgeName="t627",targetState="work",cond=whenReply("chargetaken"))
 				}	 
 			}
 		}

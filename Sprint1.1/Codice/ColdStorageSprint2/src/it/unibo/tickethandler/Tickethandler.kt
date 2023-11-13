@@ -50,8 +50,8 @@ class Tickethandler ( name: String, scope: CoroutineScope, isconfined: Boolean=f
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t05",targetState="checkforweight",cond=whenRequest("depositRequest"))
-					transition(edgeName="t06",targetState="checktheticket",cond=whenRequest("checkmyticket"))
+					 transition(edgeName="t07",targetState="checkforweight",cond=whenRequest("depositRequest"))
+					transition(edgeName="t08",targetState="checktheticket",cond=whenRequest("checkmyticket"))
 				}	 
 				state("checkforweight") { //this:State
 					action { //it:State
@@ -66,8 +66,8 @@ class Tickethandler ( name: String, scope: CoroutineScope, isconfined: Boolean=f
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t17",targetState="checkdeadlines",cond=whenReply("weightKO"))
-					transition(edgeName="t18",targetState="returnticket",cond=whenReply("weightOK"))
+					 transition(edgeName="t19",targetState="checkdeadlines",cond=whenReply("weightKO"))
+					transition(edgeName="t110",targetState="returnticket",cond=whenReply("weightOK"))
 				}	 
 				state("checkdeadlines") { //this:State
 					action { //it:State

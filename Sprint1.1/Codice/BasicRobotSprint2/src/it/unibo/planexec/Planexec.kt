@@ -10,8 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-	
-class Planexec ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, scope ){
+import it.unibo.kactor.sysUtil.createActor   //Sept2023
+class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : ActorBasicFsm( name, scope, confined=isconfined ){
 
 	override fun getInitialState() : String{
 		return "s0"
@@ -22,7 +22,7 @@ class Planexec ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 				var PlanOrig      = ""
 				var CurMoveTodo   = ""		
 				var StepTime      = "315"
-		return { //this:ActionBasciFsm
+				return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
 						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
@@ -158,4 +158,4 @@ class Planexec ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 				}	 
 			}
 		}
-}
+} 

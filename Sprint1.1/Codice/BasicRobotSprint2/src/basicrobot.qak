@@ -101,10 +101,6 @@ QActor transporttrolley context ctxbasicrobot{
 		forward robotpos -m setdirection : dir(down)
 	}	Goto work
 	
-	
-
-	
-	
 }
 
 
@@ -136,8 +132,8 @@ QActor basicrobot context ctxbasicrobot{
  		delegate "setdirection" to robotpos
  		
  		
- 		qrun uniborobots.robotSupport.create(myself,"basicrobotConfig.json")	
- 		[# RobotType = uniborobots.robotSupport.robotKind #]  
+ 		[# uniborobots.robotSupport.create(myself,"basicrobotConfig.json")	
+ 		 RobotType = uniborobots.robotSupport.robotKind #]  
  		
  		delay 3000
  		

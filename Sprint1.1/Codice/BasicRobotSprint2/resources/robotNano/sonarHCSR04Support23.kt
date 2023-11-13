@@ -41,8 +41,8 @@ class sonarHCSR04Support23 ( name : String ) : ActorBasic( name ) {
 		
 	suspend fun doRead(   ){
  		var counter = 0
-		//GlobalScope.launch{	//to allow message handling
-		scope.launch{
+		GlobalScope.launch{	//to allow message handling
+		//scope.launch{
 		while( true ){
 				var data = reader.readLine()
 				//CommUtils.outyellow("$name with python: data = $data"   )

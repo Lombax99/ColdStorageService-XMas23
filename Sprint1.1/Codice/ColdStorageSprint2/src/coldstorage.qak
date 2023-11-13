@@ -52,9 +52,9 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 
 //-----------------------------------------------------------------------
 
-//Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
+Context ctxbasicrobot ip [host="127.0.0.1" port=8020] 
 
-//ExternalQActor transporttrolley context ctxbasicrobot
+ExternalQActor transporttrolley context ctxbasicrobot
 
 
 
@@ -62,6 +62,7 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 QActor controller context ctxcoldstoragearea {
 
 	[# var PESO = 0
+		
 		#]
 		
 	State s0 initial {
@@ -74,6 +75,7 @@ QActor controller context ctxcoldstoragearea {
 	Transition t0 whenRequest loaddone -> startjob
 	
 	//senza robot
+	/*
 	State startjob  {
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
@@ -86,20 +88,19 @@ QActor controller context ctxcoldstoragearea {
 		
 	} Goto work
 	
-	/* col robot 
+	*/
 	State startjob  {
-		onMsg(loaddone : loaddone(P_EFF, P_DIC) ){
-			[# KG = payloadArg(0).toInt()
-				P_DIC = payloadArg(1).toInt()
+		onMsg(loaddone : loaddone(PESO) ){
+			[# PESO = payloadArg(0).toInt()
 				#]
-			println("controller - dichiarato: $P_DIC, effettivo: $KG") color green
+			println("controller - startjob dichiarato: $PESO") color green
 		}
 		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
-		request transporttrolley -m doJob : doJob($KG)
+		request transporttrolley -m doJob : doJob($PESO)
 		
 	} Transition endjob whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
-	*/
+	
 	State jobdone{
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 	} Transition repeat whenTime 15000 -> work
