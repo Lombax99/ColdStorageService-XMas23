@@ -1,0 +1,9 @@
+{"actor":"led", "msgType":"dispatch", "curstate":"s0", "nextstate":"athome", "msgId":"arrivedhome"}
+{"actor":"led", "msgType":"dispatch", "curstate":"s0", "nextstate":"currmoving", "msgId":"moving"}
+{"actor":"led", "msgType":"dispatch", "curstate":"s0", "nextstate":"arrested", "msgId":"stopped"}
+{"actor":"led", "msgType":"dispatch", "curstate":"athome", "nextstate":"currmoving", "msgId":"moving"}
+{"actor":"led", "msgType":"dispatch", "curstate":"athome", "nextstate":"arrested", "msgId":"stopped"}
+{"actor":"led", "msgType":"dispatch", "curstate":"currmoving", "nextstate":"athome", "msgId":"arrivedhome"}
+{"actor":"led", "msgType":"dispatch", "curstate":"currmoving", "nextstate":"arrested", "msgId":"stopped"}
+{"actor":"led", "msgType":"dispatch", "curstate":"arrested", "nextstate":"athome", "msgId":"arrivedhome"}
+{"actor":"led", "msgType":"dispatch", "curstate":"arrested", "nextstate":"currmoving", "msgId":"moving"}

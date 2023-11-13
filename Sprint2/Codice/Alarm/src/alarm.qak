@@ -1,0 +1,74 @@
+System alarm
+
+
+
+Dispatch arrivedhome : arrivedhome(NO_PARAM)
+Dispatch moving : moving(NO_PARAM)
+Dispatch stopped : stopped(NO_PARAM)
+
+Dispatch stop : stop(NO_PARAM)
+Dispatch continue : continue(NO_PARAM)
+
+
+
+Context ctxalarm ip [host="localhost" port=8300]
+
+
+//-----------------------------------------------------------------------
+
+Context ctxcoldstoragearea ip [host="127.0.0.1" port=8040]
+
+ExternalQActor planexec context ctxcoldstoragearea
+
+//-----------------------------------------------------------------------
+
+
+
+
+QActor sonar context ctxalarm{
+	
+	State s0 initial {
+		println("alarm - sonar started") color green
+	} Goto work
+	
+	State work{
+		
+	}Transition t0 whenTime 3000 -> stop
+	
+	State stop  {
+		forward planexec -m stop : stop(1)
+		println("alarm - sent stop") color green
+	} Transition t1 whenTime 2000 -> continue
+	
+	State continue  {
+		forward planexec -m continue : continue(1)
+		println("alarm - sent continue") color green
+	} Transition t1 whenTime 10000 -> work
+	
+}
+
+
+
+QActor led context ctxalarm{
+	
+	State s0 initial {
+		
+	}Transition t0 whenMsg arrivedhome -> athome
+					whenMsg moving -> currmoving
+					whenMsg stopped -> arrested
+	
+	State athome {
+		println("alarm - atHome") color yellow
+	} Transition t1 whenMsg moving -> currmoving
+					whenMsg stopped -> arrested
+	
+	State currmoving {
+		println("alarm - moving") color yellow
+	} Transition t2 whenMsg arrivedhome -> athome
+					whenMsg stopped -> arrested
+	
+	State arrested {
+		println("alarm - arrested") color yellow
+	} Transition t3 whenMsg arrivedhome -> athome
+					whenMsg moving -> currmoving
+}

@@ -35,6 +35,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolea
 				state("work") { //this:State
 					action { //it:State
 						CommUtils.outgreen("robot ! waiting")
+						forward("arrivedhome", "arrivedhome(1)" ,"led" ) 
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
@@ -44,6 +45,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolea
 				}	 
 				state("startjob") { //this:State
 					action { //it:State
+						forward("moving", "moving(1)" ,"led" ) 
 						if( checkMsgContent( Term.createTerm("doJob(KG)"), Term.createTerm("doJob(KG)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								 Peso = payloadArg(0).toInt()
