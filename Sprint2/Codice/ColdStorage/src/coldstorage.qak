@@ -717,13 +717,9 @@ QActor planexec context ctxcoldstoragearea{
 	State work{
 		//println("planexec | waiting ...")  
 	}
-	Transition t0 whenMsg stop -> stoppedathome
-					whenMsg continue -> work
+	Transition t0 whenMsg stop -> stopped
+				whenMsg continue -> work
 				whenRequest doplan -> execplan
-    
-    State stoppedathome{
-		//per consumare la coda dei messaggi se non sono in movimento
-	}Transition t0 whenMsg continue -> work
 	
 	
 	State execplan{
@@ -752,7 +748,6 @@ QActor planexec context ctxcoldstoragearea{
 	Transition t0  whenMsg stop     -> planinterruptedalarm
 		           whenMsg nextmove  -> doMove
 		           
-	
 	
 	
 	
@@ -794,8 +789,7 @@ QActor planexec context ctxcoldstoragearea{
  		#]
  		updateResource [# "planfailed($Plan,$Plantodo )" #] 
  		replyTo doplan with doplanfailed : doplanfailed( $Plantodo )
- 	}	
- 	Goto work 
+ 	}Goto work 
  	
  	
  	State planinterruptedalarm{  
@@ -809,13 +803,20 @@ QActor planexec context ctxcoldstoragearea{
  		//updateResource [# "planfailed($PlanOrig,$Plantodo )" #]
  		 
  		//replyTo doplan with doplanfailed : doplanfailed( $Plantodo )
- 	}Transition waitingforrestart whenMsg continue -> moving
+ 	} Goto stopped
+ 	
+ 	State stopped{
+ 			
+ 	}Transition waitingforrestart whenMsg stop -> stopped
+ 								whenMsg continue -> moving
  	
  	State moving {
  		println("$name |  movinggg $Plantodo ")	color magenta
  		forward led -m moving : moving(1)
  	}Transition t1 whenReply stepdone   -> nextMove
- 					whenMsg nextmove    -> nextMove 
+ 					whenMsg nextmove    -> nextMove
+ 					whenRequest doplan -> execplan
+ 					 
 }
 
 /*

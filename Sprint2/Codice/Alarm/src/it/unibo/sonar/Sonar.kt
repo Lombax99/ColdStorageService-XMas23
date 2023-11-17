@@ -18,6 +18,8 @@ class Sonar ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) 
 	}
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
+		 	var Distanza = 100;
+				var InputStream = "";
 				return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
@@ -31,29 +33,16 @@ class Sonar ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) 
 				}	 
 				state("work") { //this:State
 					action { //it:State
-						//genTimer( actor, state )
-					}
-					//After Lenzi Aug2002
-					sysaction { //it:State
-				 	 		stateTimer = TimerActor("timer_work", 
-				 	 					  scope, context!!, "local_tout_sonar_work", 3000.toLong() )
-					}	 	 
-					 transition(edgeName="t00",targetState="stop",cond=whenTimeout("local_tout_sonar_work"))   
-				}	 
-				state("stop") { //this:State
-					action { //it:State
 						forward("stop", "stop(1)" ,"planexec" ) 
 						CommUtils.outgreen("alarm - sent stop")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
-				 	 		stateTimer = TimerActor("timer_stop", 
-				 	 					  scope, context!!, "local_tout_sonar_stop", 2000.toLong() )
 					}	 	 
-					 transition(edgeName="t11",targetState="continue",cond=whenTimeout("local_tout_sonar_stop"))   
+					 transition( edgeName="goto",targetState="stopped", cond=doswitch() )
 				}	 
-				state("continue") { //this:State
+				state("stopped") { //this:State
 					action { //it:State
 						forward("continue", "continue(1)" ,"planexec" ) 
 						CommUtils.outgreen("alarm - sent continue")
@@ -61,10 +50,8 @@ class Sonar ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) 
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
-				 	 		stateTimer = TimerActor("timer_continue", 
-				 	 					  scope, context!!, "local_tout_sonar_continue", 10000.toLong() )
 					}	 	 
-					 transition(edgeName="t12",targetState="work",cond=whenTimeout("local_tout_sonar_continue"))   
+					 transition( edgeName="goto",targetState="work", cond=doswitch() )
 				}	 
 			}
 		}

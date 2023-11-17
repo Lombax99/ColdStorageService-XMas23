@@ -26,42 +26,47 @@ class Led ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t03",targetState="athome",cond=whenDispatch("arrivedhome"))
-					transition(edgeName="t04",targetState="currmoving",cond=whenDispatch("moving"))
-					transition(edgeName="t05",targetState="arrested",cond=whenDispatch("stopped"))
+					 transition(edgeName="t00",targetState="athome",cond=whenDispatch("arrivedhome"))
+					transition(edgeName="t01",targetState="currmoving",cond=whenDispatch("moving"))
+					transition(edgeName="t02",targetState="arrested",cond=whenDispatch("stopped"))
 				}	 
 				state("athome") { //this:State
 					action { //it:State
-						CommUtils.outyellow("alarm - atHome")
+						CommUtils.outyellow("alarm - atHome - led off")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t16",targetState="currmoving",cond=whenDispatch("moving"))
-					transition(edgeName="t17",targetState="arrested",cond=whenDispatch("stopped"))
+					 transition(edgeName="t13",targetState="currmoving",cond=whenDispatch("moving"))
+					transition(edgeName="t14",targetState="arrested",cond=whenDispatch("stopped"))
 				}	 
 				state("currmoving") { //this:State
 					action { //it:State
-						CommUtils.outyellow("alarm - moving")
+						CommUtils.outyellow("alarm - moving - led on")
+						 Thread.sleep(1000);
+						CommUtils.outyellow("alarm - moving - led off")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
+				 	 		stateTimer = TimerActor("timer_currmoving", 
+				 	 					  scope, context!!, "local_tout_led_currmoving", 1000.toLong() )
 					}	 	 
-					 transition(edgeName="t28",targetState="athome",cond=whenDispatch("arrivedhome"))
-					transition(edgeName="t29",targetState="arrested",cond=whenDispatch("stopped"))
+					 transition(edgeName="t25",targetState="currmoving",cond=whenTimeout("local_tout_led_currmoving"))   
+					transition(edgeName="t26",targetState="athome",cond=whenDispatch("arrivedhome"))
+					transition(edgeName="t27",targetState="arrested",cond=whenDispatch("stopped"))
 				}	 
 				state("arrested") { //this:State
 					action { //it:State
-						CommUtils.outyellow("alarm - arrested")
+						CommUtils.outyellow("alarm - arrested - led on")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t310",targetState="athome",cond=whenDispatch("arrivedhome"))
-					transition(edgeName="t311",targetState="currmoving",cond=whenDispatch("moving"))
+					 transition(edgeName="t38",targetState="athome",cond=whenDispatch("arrivedhome"))
+					transition(edgeName="t39",targetState="currmoving",cond=whenDispatch("moving"))
 				}	 
 			}
 		}

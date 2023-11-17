@@ -27,10 +27,29 @@ ExternalQActor planexec context ctxcoldstoragearea
 
 QActor sonar context ctxalarm{
 	
+	[# 	var Distanza = 100;
+		var InputStream = "";
+		#]
+	
 	State s0 initial {
 		println("alarm - sonar started") color green
 	} Goto work
 	
+	
+	
+	State work{
+		//[# while( > Distanza){ } #]
+		forward planexec -m stop : stop(1)
+		println("alarm - sent stop") color green
+	}Goto stopped
+	
+	State stopped  {
+		//[# while( < Distanza){ } #]
+		forward planexec -m continue : continue(1)
+		println("alarm - sent continue") color green
+	} Goto work
+	
+	/* 
 	State work{
 		
 	}Transition t0 whenTime 3000 -> stop
@@ -40,11 +59,12 @@ QActor sonar context ctxalarm{
 		println("alarm - sent stop") color green
 	} Transition t1 whenTime 2000 -> continue
 	
+	
 	State continue  {
 		forward planexec -m continue : continue(1)
 		println("alarm - sent continue") color green
 	} Transition t1 whenTime 10000 -> work
-	
+	*/
 }
 
 
@@ -58,17 +78,21 @@ QActor led context ctxalarm{
 					whenMsg stopped -> arrested
 	
 	State athome {
-		println("alarm - atHome") color yellow
+		println("alarm - atHome - led off") color yellow
 	} Transition t1 whenMsg moving -> currmoving
 					whenMsg stopped -> arrested
 	
 	State currmoving {
-		println("alarm - moving") color yellow
-	} Transition t2 whenMsg arrivedhome -> athome
+		println("alarm - moving - led on") color yellow
+		[# Thread.sleep(1000);
+			#]
+		println("alarm - moving - led off") color yellow
+	} Transition t2 whenTime 1000 -> currmoving
+					whenMsg arrivedhome -> athome
 					whenMsg stopped -> arrested
 	
 	State arrested {
-		println("alarm - arrested") color yellow
+		println("alarm - arrested - led on") color yellow
 	} Transition t3 whenMsg arrivedhome -> athome
 					whenMsg moving -> currmoving
 }
