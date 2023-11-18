@@ -41,9 +41,9 @@ class Coldroom ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="update4",targetState="updateWeight",cond=whenDispatch("updateWeight"))
-					transition(edgeName="update5",targetState="checkweight",cond=whenRequest("weightrequest"))
-					transition(edgeName="update6",targetState="returnweight",cond=whenRequest("getweight"))
+					 transition(edgeName="update1",targetState="updateWeight",cond=whenDispatch("updateWeight"))
+					transition(edgeName="update2",targetState="checkweight",cond=whenRequest("weightrequest"))
+					transition(edgeName="update3",targetState="returnweight",cond=whenRequest("getweight"))
 				}	 
 				state("updateWeight") { //this:State
 					action { //it:State

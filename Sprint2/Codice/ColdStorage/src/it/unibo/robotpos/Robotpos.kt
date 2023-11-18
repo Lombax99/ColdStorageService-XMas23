@@ -50,10 +50,10 @@ class Robotpos ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t046",targetState="getRobotState",cond=whenRequest("getrobotstate"))
-					transition(edgeName="t047",targetState="planTheRobotmoves",cond=whenRequest("moverobot"))
-					transition(edgeName="t048",targetState="setTheRobotState",cond=whenDispatch("setrobotstate"))
-					transition(edgeName="t049",targetState="setTheDirection",cond=whenDispatch("setdirection"))
+					 transition(edgeName="t043",targetState="getRobotState",cond=whenRequest("getrobotstate"))
+					transition(edgeName="t044",targetState="planTheRobotmoves",cond=whenRequest("moverobot"))
+					transition(edgeName="t045",targetState="setTheRobotState",cond=whenDispatch("setrobotstate"))
+					transition(edgeName="t046",targetState="setTheDirection",cond=whenDispatch("setdirection"))
 				}	 
 				state("getRobotState") { //this:State
 					action { //it:State
@@ -81,8 +81,8 @@ class Robotpos ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t050",targetState="planfordirok",cond=whenReply("doplandone"))
-					transition(edgeName="t051",targetState="fatalerror",cond=whenReply("doplanfailed"))
+					 transition(edgeName="t047",targetState="planfordirok",cond=whenReply("doplandone"))
+					transition(edgeName="t048",targetState="fatalerror",cond=whenReply("doplanfailed"))
 				}	 
 				state("planfordirok") { //this:State
 					action { //it:State
@@ -146,8 +146,8 @@ class Robotpos ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t052",targetState="endok",cond=whenReply("doplandone"))
-					transition(edgeName="t053",targetState="endko",cond=whenReply("doplanfailed"))
+					 transition(edgeName="t049",targetState="endok",cond=whenReply("doplandone"))
+					transition(edgeName="t050",targetState="endko",cond=whenReply("doplanfailed"))
 				}	 
 				state("endok") { //this:State
 					action { //it:State

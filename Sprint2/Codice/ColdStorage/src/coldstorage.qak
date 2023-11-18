@@ -122,7 +122,7 @@ QActor controller context ctxcoldstoragearea {
 	Transition t0 whenRequest loaddone -> startjob
 	
 	//senza robot
-	/* 
+	
 	State startjob  {
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
@@ -134,8 +134,9 @@ QActor controller context ctxcoldstoragearea {
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 		
 	} Goto work
-	*/
 	
+	
+	/* 
 	State startjob  {
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
@@ -152,7 +153,7 @@ QActor controller context ctxcoldstoragearea {
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 	} Transition repeat whenTime 15000 -> work
 	
-	
+	*/
 	State handlerobotdead{
 		println("robotdead") color green
 		printCurrentMessage

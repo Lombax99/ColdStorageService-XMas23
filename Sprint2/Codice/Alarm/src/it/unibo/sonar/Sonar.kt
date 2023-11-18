@@ -18,8 +18,8 @@ class Sonar ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) 
 	}
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
-		 	var Distanza = 100;
-				var InputStream = "";
+		 	var Distanza = 20.0;
+				
 				return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
@@ -33,7 +33,8 @@ class Sonar ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) 
 				}	 
 				state("work") { //this:State
 					action { //it:State
-						forward("stop", "stop(1)" ,"planexec" ) 
+						    
+									while(SonarService.getDistance() > Distanza){}
 						CommUtils.outgreen("alarm - sent stop")
 						//genTimer( actor, state )
 					}
@@ -44,7 +45,8 @@ class Sonar ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) 
 				}	 
 				state("stopped") { //this:State
 					action { //it:State
-						forward("continue", "continue(1)" ,"planexec" ) 
+						    
+									while(SonarService.getDistance() < Distanza){}
 						CommUtils.outgreen("alarm - sent continue")
 						//genTimer( actor, state )
 					}

@@ -32,6 +32,13 @@ class Led ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : 
 				}	 
 				state("athome") { //this:State
 					action { //it:State
+						    
+									try{
+						      			val p  = Runtime.getRuntime().exec("python3 ledOFF.py")
+						      			
+						    			}catch( e : Exception){
+						      				println(e.message)
+						    			}
 						CommUtils.outyellow("alarm - atHome - led off")
 						//genTimer( actor, state )
 					}
@@ -43,8 +50,22 @@ class Led ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : 
 				}	 
 				state("currmoving") { //this:State
 					action { //it:State
+						    
+									try{
+						      			val p  = Runtime.getRuntime().exec("python3 ledON.py")
+						      			
+						    			}catch( e : Exception){
+						      				println(e.message)
+						    			}
 						CommUtils.outyellow("alarm - moving - led on")
 						 Thread.sleep(1000);
+									try{
+						      			val p  = Runtime.getRuntime().exec("python3 ledOFF.py")
+						      			
+						    			}catch( e : Exception){
+						      				println(e.message)
+						    			}
+									
 						CommUtils.outyellow("alarm - moving - led off")
 						//genTimer( actor, state )
 					}
@@ -59,6 +80,13 @@ class Led ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : 
 				}	 
 				state("arrested") { //this:State
 					action { //it:State
+						    
+									try{
+						      			val p  = Runtime.getRuntime().exec("python3 ledON.py")
+						      			
+						    			}catch( e : Exception){
+						      				println(e.message)
+						    			}
 						CommUtils.outyellow("alarm - arrested - led on")
 						//genTimer( actor, state )
 					}
