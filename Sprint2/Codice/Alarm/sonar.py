@@ -2,7 +2,7 @@ import time
 import math
 
 num = 0
-
+gradient = 10 #how much space between the x for generate the data(the lowest the more values), between 1 and 199
 file = open('sonar.txt', 'w')
 
 while True:
@@ -12,7 +12,7 @@ while True:
     print(str(outnumber))
     file.write(str(outnumber)+"\n")
 
-    num = (num + 10) % 200
+    num = (num + gradient) % 200
     time.sleep(1) #sleep one second
 
 file.close()
