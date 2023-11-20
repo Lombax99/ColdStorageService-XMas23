@@ -374,9 +374,9 @@ Per risolvere il problema assoceremo alla __Service Area__ un sistema di coordin
 Durante la face di testing dovranno essere verificati i seguenti casi:
 - Inserendo un ticket valido il peso in ColdRoom deve aggiornarsi correttamente.
 - Un ticket deve essere rifiutato per timeout (il peso non deve cambiare)
-- Una richiesta di peso eccessiva deve essere rifiutata (il peso non deve cambiare)
+- Una richiesta di peso eccessiva deve essere rifiutata
 
-- [ ] inserisci codice del terzo test
+- [x] inserisci codice del terzo test
 
 ### Divisione in Sprint
 1) Transport Trolley + ColdStorageService [[Sprint 1.0]]

@@ -37,9 +37,8 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 				}	 
 				state("work") { //this:State
 					action { //it:State
-						 PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
+						 PESO = 0
 						CommUtils.outyellow("SAG - chiedo $PESO")
-						request("depositRequest", "depositRequest($PESO)" ,"coldstorageservice" )  
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002

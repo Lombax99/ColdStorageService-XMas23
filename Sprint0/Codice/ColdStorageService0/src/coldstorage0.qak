@@ -170,10 +170,12 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	
 	State work {
 		//random tra 10 e 20
-		[# PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
+		//[# PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
+		//	#]
+		[# PESO = 0
 			#]
 		println("SAG - chiedo $PESO") color yellow
-		request coldstorageservice -m depositRequest : depositRequest($PESO)
+		//request coldstorageservice -m depositRequest : depositRequest($PESO)
 		
 	} Transition t0 whenReply accept -> gotoindoor
 					whenReply reject -> tryagainlater

@@ -164,11 +164,12 @@ Si tratta di un problema di poco conto che non giustifica un cambiamento verso p
 ### Test Plan
 Durante la face di testing dovranno essere verificati i seguenti casi:
 1) Test del processo in condizioni normali
-2) Test con ticket scaduto (facciamo questo)
+2) Test con ticket scaduto (facciamo questo) 
 3) Test con ticket ripetuto
 4) Test con peso superiore al disponibile
 5) Controllare che quando il controller aggiorna la ColdRoom il cambiamento di peso risulti nella service access gui.
 Ciascuno dei test deve essere superato con più utenti collegati contemporaneamente da uno stesso browser o da browser diversi.
+
 
 ### Progettazione
 ##### Ticket 
