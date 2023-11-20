@@ -181,11 +181,11 @@ QActor transporttrolley context ctxcoldstoragearea {
 ```
 ### TestPlan
 Durante la face di testing dovranno essere verificati i seguenti casi:
-- Verifichiamo che a seguito di richieste ben formate il robot ritorni nella HOME e che il peso sia aggiornato correttamente.
+- Verifichiamo che a seguito di richieste ben formate il robot ritorni nella HOME inviando il messaggio corretto (jobdone).
 - Verifichiamo che richieste con peso superiore al disponibile vengano scartate correttamente.
 - Verifichiamo che in caso il robot subisca dei problemi il sistema si fermi correttamente.
 
-- [ ] aggiungere codice del primo test
+- [x] aggiungere codice del primo test
 
 ### Deployment
 1) Avviare il container itunibovirtualrobot23 su docker

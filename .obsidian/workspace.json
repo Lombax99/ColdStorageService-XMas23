@@ -4,11 +4,23 @@
     "type": "split",
     "children": [
       {
-        "id": "5ddce5631bb8fc48",
+        "id": "526e4d8c4f798887",
         "type": "tabs",
         "children": [
           {
-            "id": "dfb6d442222d95ae",
+            "id": "6086baefe16fe7f3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f39cc6a8f102d953",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -20,24 +32,12 @@
             }
           },
           {
-            "id": "4893cd21921e19b9",
+            "id": "8c21e2004e902fd9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "88324b2d4cffa444",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,8 +94,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "b7d0927a7144a728",
@@ -111,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -128,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -161,7 +160,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md"
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md"
               }
             }
           },
@@ -183,39 +182,40 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
+      "switcher:Apri selezione rapida": false,
+      "graph:Apri vista grafo": false,
+      "canvas:Crea nuova lavagna": false,
+      "daily-notes:Apri nota del giorno": false,
+      "templates:Inserisci modello": false,
+      "command-palette:Apri riquadro comandi": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "88324b2d4cffa444",
+  "active": "8c21e2004e902fd9",
   "lastOpenFiles": [
-    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
-    "Sprint2/Doc/Sprint 2.md",
     "Sprint0/Cold Storage Service - Natali V3.md",
+    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
     "Sprint1.0/Doc/Sprint 1.0 - V3.md",
+    "Sprint0/Codice/ColdStorageService0/test/TestService.java~",
+    "Sprint1.0/Codice/ColdStorage/build/test-results/test/binary/output.bin.idx",
+    "Sprint1.0/Codice/ColdStorage/build/classes/java/test/TestService.class",
+    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction/compile-output/TestService.class",
+    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction/stash-dir/TestService.class.uniqueId0",
+    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction/stash-dir",
+    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction/header-output",
+    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction/compile-output",
+    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction/annotation-output",
+    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction",
+    "Sprint1.1/Doc/Sprint 1.1.md",
+    "Sprint2/Doc/Sprint 2.md",
     "Sprint1.1/Doc/Sprint 1.1 - V2.md",
     "README.md",
-    "Sprint0/PrimaArchitettura.pdf",
     "GiacomoRomanini.jpg{size = 100}.md",
     "LucaLombardi.jpg",
     "GiacomoRomanini.jpg",
     "LisaUccini.png",
     "ToDo.md",
     "Untitled.md",
-    "Sprint0/Codice/userDocs/Cold Storage Service - Natali V3.pdf",
-    "Sprint0/Codice/userDocs",
-    "Sprint0/Codice/userDoc",
-    "Sprint0/Codice/Nuova cartella",
-    "Sprint1.0/Codice/userDocs/Sprint 1.0 - V3.pdf",
-    "Sprint1.0/Codice/userDocs",
-    "Sprint1.0/Codice/Nuova cartella",
-    "Sprint1.1/Codice/userDocs/Sprint 1.1 - V3.pdf",
-    "Sprint1.1/Codice/userDocs",
     "Sprint0/Cold Storage Service - Natali.md",
     "Sprint0/Cold Storage Service - Natali V2.md",
     "Sprint1.0/Doc/Sprint 1.0 - V2.md",
