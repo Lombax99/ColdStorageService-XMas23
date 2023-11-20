@@ -23,6 +23,7 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 				var CurMoveTodo   = ""		
 				var StepTime      = "315"
 				var Plantodo = ""
+				var AtHome = true
 				return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
@@ -42,9 +43,34 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t026",targetState="stopped",cond=whenDispatch("stop"))
-					transition(edgeName="t027",targetState="work",cond=whenDispatch("continue"))
-					transition(edgeName="t028",targetState="execplan",cond=whenRequest("doplan"))
+					 transition(edgeName="t029",targetState="stoppedathome",cond=whenDispatch("stop"))
+					transition(edgeName="t030",targetState="work",cond=whenDispatch("continue"))
+					transition(edgeName="t031",targetState="execplan",cond=whenRequest("doplan"))
+				}	 
+				state("stoppedathome") { //this:State
+					action { //it:State
+						CommUtils.outmagenta("$name |  stoppedathome")
+						forward("stopped", "stopped(1)" ,"led" ) 
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition(edgeName="t032",targetState="stoppedathome",cond=whenDispatch("stop"))
+					transition(edgeName="t033",targetState="workfromhome",cond=whenDispatch("continue"))
+				}	 
+				state("workfromhome") { //this:State
+					action { //it:State
+						CommUtils.outmagenta("$name |  workfromhome")
+						forward("arrivedhome", "arrivedhome(1)" ,"led" ) 
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition(edgeName="t034",targetState="stoppedathome",cond=whenDispatch("stop"))
+					transition(edgeName="t035",targetState="work",cond=whenDispatch("continue"))
+					transition(edgeName="t036",targetState="execplan",cond=whenRequest("doplan"))
 				}	 
 				state("execplan") { //this:State
 					action { //it:State
@@ -62,8 +88,8 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 				 	 		stateTimer = TimerActor("timer_execplan", 
 				 	 					  scope, context!!, "local_tout_planexec_execplan", 100.toLong() )
 					}	 	 
-					 transition(edgeName="t029",targetState="nextMove",cond=whenTimeout("local_tout_planexec_execplan"))   
-					transition(edgeName="t030",targetState="planinterruptedalarm",cond=whenDispatch("stop"))
+					 transition(edgeName="t037",targetState="nextMove",cond=whenTimeout("local_tout_planexec_execplan"))   
+					transition(edgeName="t038",targetState="planinterruptedalarm",cond=whenDispatch("stop"))
 				}	 
 				state("nextMove") { //this:State
 					action { //it:State
@@ -78,11 +104,12 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t031",targetState="planinterruptedalarm",cond=whenDispatch("stop"))
-					transition(edgeName="t032",targetState="doMove",cond=whenDispatch("nextmove"))
+					 transition(edgeName="t039",targetState="planinterruptedalarm",cond=whenDispatch("stop"))
+					transition(edgeName="t040",targetState="doMove",cond=whenDispatch("nextmove"))
 				}	 
 				state("doMove") { //this:State
 					action { //it:State
+						forward("moving", "moving(1)" ,"led" ) 
 						if(  CurMoveTodo == ""  
 						 ){forward("nomoremove", "nomoremove(end)" ,"planexec" ) 
 						}
@@ -101,11 +128,11 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t033",targetState="planinterruptedalarm",cond=whenDispatch("stop"))
-					transition(edgeName="t034",targetState="planend",cond=whenDispatch("nomoremove"))
-					transition(edgeName="t035",targetState="nextMove",cond=whenDispatch("nextmove"))
-					transition(edgeName="t036",targetState="nextMove",cond=whenReply("stepdone"))
-					transition(edgeName="t037",targetState="planinterruptedobstacle",cond=whenReply("stepfailed"))
+					 transition(edgeName="t041",targetState="planinterruptedalarm",cond=whenDispatch("stop"))
+					transition(edgeName="t042",targetState="planend",cond=whenDispatch("nomoremove"))
+					transition(edgeName="t043",targetState="nextMove",cond=whenDispatch("nextmove"))
+					transition(edgeName="t044",targetState="nextMove",cond=whenReply("stepdone"))
+					transition(edgeName="t045",targetState="planinterruptedobstacle",cond=whenReply("stepfailed"))
 				}	 
 				state("planend") { //this:State
 					action { //it:State
@@ -137,7 +164,6 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 				state("planinterruptedalarm") { //this:State
 					action { //it:State
 						CommUtils.outmagenta("$name |  planinterruptedalarm $CurMoveTodo ")
-						forward("stopped", "stopped(1)" ,"led" ) 
 						  Plantodo = CurMoveTodo + Plan
 						//genTimer( actor, state )
 					}
@@ -148,13 +174,15 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 				}	 
 				state("stopped") { //this:State
 					action { //it:State
+						CommUtils.outmagenta("$name |  stopped")
+						forward("stopped", "stopped(1)" ,"led" ) 
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="waitingforrestart38",targetState="stopped",cond=whenDispatch("stop"))
-					transition(edgeName="waitingforrestart39",targetState="moving",cond=whenDispatch("continue"))
+					 transition(edgeName="waitingforrestart46",targetState="stopped",cond=whenDispatch("stop"))
+					transition(edgeName="waitingforrestart47",targetState="moving",cond=whenDispatch("continue"))
 				}	 
 				state("moving") { //this:State
 					action { //it:State
@@ -165,9 +193,9 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t140",targetState="nextMove",cond=whenReply("stepdone"))
-					transition(edgeName="t141",targetState="nextMove",cond=whenDispatch("nextmove"))
-					transition(edgeName="t142",targetState="execplan",cond=whenRequest("doplan"))
+					 transition(edgeName="t148",targetState="nextMove",cond=whenReply("stepdone"))
+					transition(edgeName="t149",targetState="nextMove",cond=whenDispatch("nextmove"))
+					transition(edgeName="t150",targetState="execplan",cond=whenRequest("doplan"))
 				}	 
 			}
 		}

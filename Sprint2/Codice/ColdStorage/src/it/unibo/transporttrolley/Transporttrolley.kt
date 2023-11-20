@@ -30,7 +30,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolea
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="ready17",targetState="work",cond=whenDispatch("robotready"))
+					 transition(edgeName="ready20",targetState="work",cond=whenDispatch("robotready"))
 				}	 
 				state("work") { //this:State
 					action { //it:State
@@ -41,11 +41,10 @@ class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolea
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="startworking18",targetState="startjob",cond=whenRequest("doJob"))
+					 transition(edgeName="startworking21",targetState="startjob",cond=whenRequest("doJob"))
 				}	 
 				state("startjob") { //this:State
 					action { //it:State
-						forward("moving", "moving(1)" ,"led" ) 
 						if( checkMsgContent( Term.createTerm("doJob(KG)"), Term.createTerm("doJob(KG)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								 Peso = payloadArg(0).toInt()
@@ -68,7 +67,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolea
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="gofetch19",targetState="movingtocoldroom",cond=whenReply("moverobotdone"))
+					 transition(edgeName="gofetch22",targetState="movingtocoldroom",cond=whenReply("moverobotdone"))
 				}	 
 				state("movingtocoldroom") { //this:State
 					action { //it:State
@@ -78,7 +77,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolea
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="godrop20",targetState="checkforjob",cond=whenReply("moverobotdone"))
+					 transition(edgeName="godrop23",targetState="checkforjob",cond=whenReply("moverobotdone"))
 				}	 
 				state("checkforjob") { //this:State
 					action { //it:State
@@ -105,8 +104,8 @@ class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolea
 				 	 		stateTimer = TimerActor("timer_waitforjob", 
 				 	 					  scope, context!!, "local_tout_transporttrolley_waitforjob", 3000.toLong() )
 					}	 	 
-					 transition(edgeName="gofetchagain21",targetState="goinghome",cond=whenTimeout("local_tout_transporttrolley_waitforjob"))   
-					transition(edgeName="gofetchagain22",targetState="startjob",cond=whenRequest("doJob"))
+					 transition(edgeName="gofetchagain24",targetState="goinghome",cond=whenTimeout("local_tout_transporttrolley_waitforjob"))   
+					transition(edgeName="gofetchagain25",targetState="startjob",cond=whenRequest("doJob"))
 				}	 
 				state("goinghome") { //this:State
 					action { //it:State

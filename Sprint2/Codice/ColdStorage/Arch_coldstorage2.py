@@ -33,6 +33,7 @@ with Diagram('coldstorage2Arch', show=False, outformat='png', graph_attr=graphat
      with Cluster('ctxalarm', graph_attr=nodeattr):
           led=Custom('led(ext)','./qakicons/externalQActor.png')
           sonar=Custom('sonar(ext)','./qakicons/externalQActor.png')
+     controller >> Edge(color='magenta', style='solid', decorate='true', label='<doJob &nbsp; >',  fontcolor='magenta') >> transporttrolley
      transporttrolley >> Edge(color='magenta', style='solid', decorate='true', label='<moverobot &nbsp; >',  fontcolor='magenta') >> robotpos
      tickethandler >> Edge(color='magenta', style='solid', decorate='true', label='<weightrequest &nbsp; >',  fontcolor='magenta') >> coldroom
      robotpos >> Edge(color='magenta', style='solid', decorate='true', label='<doplan &nbsp; >',  fontcolor='magenta') >> planexec
@@ -43,8 +44,8 @@ with Diagram('coldstorage2Arch', show=False, outformat='png', graph_attr=graphat
      controller >> Edge(color='blue', style='solid',  label='<updateWeight &nbsp; >',  fontcolor='blue') >> coldroom
      basicrobot >> Edge(color='blue', style='solid',  label='<robotready &nbsp; >',  fontcolor='blue') >> transporttrolley
      planexec >> Edge(color='blue', style='solid',  label='<nextmove &nbsp; nomoremove &nbsp; >',  fontcolor='blue') >> planexec
-     transporttrolley >> Edge(color='blue', style='solid',  label='<arrivedhome &nbsp; moving &nbsp; >',  fontcolor='blue') >> led
+     transporttrolley >> Edge(color='blue', style='solid',  label='<arrivedhome &nbsp; >',  fontcolor='blue') >> led
      transporttrolley >> Edge(color='blue', style='solid',  label='<setrobotstate &nbsp; setdirection &nbsp; >',  fontcolor='blue') >> robotpos
      tickethandler >> Edge(color='blue', style='solid',  label='<updateWeight &nbsp; >',  fontcolor='blue') >> coldroom
-     planexec >> Edge(color='blue', style='solid',  label='<stopped &nbsp; moving &nbsp; >',  fontcolor='blue') >> led
+     planexec >> Edge(color='blue', style='solid',  label='<stopped &nbsp; arrivedhome &nbsp; moving &nbsp; >',  fontcolor='blue') >> led
 diag

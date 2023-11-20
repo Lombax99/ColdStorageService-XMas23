@@ -50,13 +50,26 @@ class Controller ( name: String, scope: CoroutineScope, isconfined: Boolean=fals
 								CommUtils.outgreen("controller - startjob dichiarato: $PESO")
 						}
 						answer("loaddone", "chargetaken", "chargetaken(NO_PARAM)"   )  
-						forward("updateWeight", "updateWeight($PESO,$PESO)" ,"coldroom" ) 
+						request("doJob", "doJob($PESO)" ,"transporttrolley" )  
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition( edgeName="goto",targetState="work", cond=doswitch() )
+					 transition(edgeName="endjob1",targetState="handlerobotdead",cond=whenReply("robotDead"))
+					transition(edgeName="endjob2",targetState="jobdone",cond=whenReply("jobdone"))
+				}	 
+				state("jobdone") { //this:State
+					action { //it:State
+						forward("updateWeight", "updateWeight($PESO,$PESO)" ,"coldroom" ) 
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+				 	 		stateTimer = TimerActor("timer_jobdone", 
+				 	 					  scope, context!!, "local_tout_controller_jobdone", 15000.toLong() )
+					}	 	 
+					 transition(edgeName="repeat3",targetState="work",cond=whenTimeout("local_tout_controller_jobdone"))   
 				}	 
 				state("handlerobotdead") { //this:State
 					action { //it:State

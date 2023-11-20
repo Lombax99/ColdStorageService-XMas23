@@ -35,6 +35,7 @@ class Sonar ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) 
 					action { //it:State
 						    
 									while(SonarService.getDistance() > Distanza){}
+						forward("stop", "stop(1)" ,"planexec" ) 
 						CommUtils.outgreen("alarm - sent stop")
 						//genTimer( actor, state )
 					}
@@ -47,6 +48,7 @@ class Sonar ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) 
 					action { //it:State
 						    
 									while(SonarService.getDistance() < Distanza){}
+						forward("continue", "continue(1)" ,"planexec" ) 
 						CommUtils.outgreen("alarm - sent continue")
 						//genTimer( actor, state )
 					}

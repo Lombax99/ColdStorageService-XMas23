@@ -21,7 +21,7 @@ object SonarService {
 
     fun getDistance() : Double {
         var distance = reader!!.readLine().toDouble()
-        //println(distance)
+        println(distance)
         return distance
     }
 

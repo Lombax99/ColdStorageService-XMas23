@@ -16,9 +16,9 @@ Context ctxalarm ip [host="localhost" port=8300]
 
 //-----------------------------------------------------------------------
 
-//Context ctxcoldstoragearea ip [host="127.0.0.1" port=8040]
+Context ctxcoldstoragearea ip [host="127.0.0.1" port=8040]
 
-//ExternalQActor planexec context ctxcoldstoragearea
+ExternalQActor planexec context ctxcoldstoragearea
 
 //-----------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ QActor sonar context ctxalarm{
 			while(SonarService.getDistance() > Distanza){}
  		#]
  		
-		//forward planexec -m stop : stop(1)
+		forward planexec -m stop : stop(1)
 		println("alarm - sent stop") color green
 	}Goto stopped
 	
@@ -51,7 +51,7 @@ QActor sonar context ctxalarm{
 		[#    
 			while(SonarService.getDistance() < Distanza){}
  		#]
-		//forward planexec -m continue : continue(1)
+		forward planexec -m continue : continue(1)
 		println("alarm - sent continue") color green
 	} Goto work
 	
@@ -96,7 +96,9 @@ QActor led context ctxalarm{
 			#]
 		println("alarm - atHome - led off") color yellow
 		
-	} Transition t1 whenMsg moving -> currmoving
+	} Transition t1 
+					whenMsg arrivedhome -> athome
+					whenMsg moving -> currmoving
 					whenMsg stopped -> arrested
 	
 	State currmoving {
@@ -121,6 +123,7 @@ QActor led context ctxalarm{
 			#]
 		println("alarm - moving - led off") color yellow
 	} Transition t2 whenTime 1000 -> currmoving
+					whenMsg moving -> currmoving
 					whenMsg arrivedhome -> athome
 					whenMsg stopped -> arrested
 	
@@ -134,7 +137,8 @@ QActor led context ctxalarm{
     			}
 			#]
 		println("alarm - arrested - led on") color yellow
-	} Transition t3 whenMsg arrivedhome -> athome
+	} Transition t3 whenMsg stopped -> arrested
+					whenMsg arrivedhome -> athome
 					whenMsg moving -> currmoving
 }
 

@@ -2,8 +2,12 @@
 {"actor":"transporttrolley", "msgType":"dispatch", "curstate":"s0", "nextstate":"work", "msgId":"robotready"}
 {"actor":"basicrobot", "msgType":"dispatch", "curstate":"work", "nextstate":"execcmd", "msgId":"cmd"}
 {"actor":"basicrobot", "msgType":"dispatch", "curstate":"work", "nextstate":"endwork", "msgId":"end"}
-{"actor":"planexec", "msgType":"dispatch", "curstate":"work", "nextstate":"stopped", "msgId":"stop"}
+{"actor":"planexec", "msgType":"dispatch", "curstate":"work", "nextstate":"stoppedathome", "msgId":"stop"}
 {"actor":"planexec", "msgType":"dispatch", "curstate":"work", "nextstate":"work", "msgId":"continue"}
+{"actor":"planexec", "msgType":"dispatch", "curstate":"stoppedathome", "nextstate":"stoppedathome", "msgId":"stop"}
+{"actor":"planexec", "msgType":"dispatch", "curstate":"stoppedathome", "nextstate":"workfromhome", "msgId":"continue"}
+{"actor":"planexec", "msgType":"dispatch", "curstate":"workfromhome", "nextstate":"stoppedathome", "msgId":"stop"}
+{"actor":"planexec", "msgType":"dispatch", "curstate":"workfromhome", "nextstate":"work", "msgId":"continue"}
 {"actor":"planexec", "msgType":"dispatch", "curstate":"execplan", "nextstate":"planinterruptedalarm", "msgId":"stop"}
 {"actor":"planexec", "msgType":"dispatch", "curstate":"nextMove", "nextstate":"planinterruptedalarm", "msgId":"stop"}
 {"actor":"planexec", "msgType":"dispatch", "curstate":"nextMove", "nextstate":"doMove", "msgId":"nextmove"}

@@ -122,7 +122,7 @@ QActor controller context ctxcoldstoragearea {
 	Transition t0 whenRequest loaddone -> startjob
 	
 	//senza robot
-	
+	/* 
 	State startjob  {
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
@@ -134,9 +134,9 @@ QActor controller context ctxcoldstoragearea {
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 		
 	} Goto work
+	*/
 	
 	
-	/* 
 	State startjob  {
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
@@ -153,7 +153,7 @@ QActor controller context ctxcoldstoragearea {
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 	} Transition repeat whenTime 15000 -> work
 	
-	*/
+	
 	State handlerobotdead{
 		println("robotdead") color green
 		printCurrentMessage
@@ -539,7 +539,6 @@ QActor transporttrolley context ctxcoldstoragearea{
 	}Transition startworking whenRequest doJob -> startjob
 
 	State startjob{
-		forward led -m moving : moving(1)
 		
 		onMsg(doJob : doJob( KG )){
 			[# Peso = payloadArg(0).toInt()
@@ -708,21 +707,41 @@ QActor planexec context ctxcoldstoragearea{
 		var CurMoveTodo   = ""		
 		var StepTime      = "315"
 		var Plantodo = ""
+		var AtHome = true
    	#]
    	
 	State s0 initial{
 		printCurrentMessage
 	}
 	Goto work
-
+	
 	State work{
-		//println("planexec | waiting ...")  
-	}
-	Transition t0 whenMsg stop -> stopped
-				whenMsg continue -> work
-				whenRequest doplan -> execplan
-	
-	
+		
+		
+	}Transition t0 whenMsg stop -> stoppedathome
+ 					whenMsg continue -> work
+ 					whenRequest doplan -> execplan
+ 				
+ 	
+ 		
+ 	State stoppedathome{
+ 		println("$name |  stoppedathome")	color magenta
+ 		forward led -m stopped : stopped(1)
+	} Transition t0 whenMsg stop -> stoppedathome
+ 					whenMsg continue -> workfromhome
+ 					
+ 	State workfromhome{
+ 		println("$name |  workfromhome")	color magenta
+ 		forward led -m arrivedhome : arrivedhome(1)
+	} Transition t0 whenMsg stop -> stoppedathome
+					whenMsg continue -> work
+					whenRequest doplan -> execplan
+ 					
+ 	
+ 					
+ 
+					
+					
 	State execplan{
 		onMsg( doplan : doplan(PLAN, STEPTIME)){
     		[# Plan       = payloadArg(0).replace("[","").replace("]","").replace(",","").replace(" ","")
@@ -753,6 +772,7 @@ QActor planexec context ctxcoldstoragearea{
 	
 	
 	State doMove{
+		forward led -m moving : moving(1)
 		//println("$name | domove $CurMoveTodo")  
  		if [# CurMoveTodo == "" #] { 
  			forward planexec -m nomoremove : nomoremove(end)
@@ -790,13 +810,13 @@ QActor planexec context ctxcoldstoragearea{
  		#]
  		updateResource [# "planfailed($Plan,$Plantodo )" #] 
  		replyTo doplan with doplanfailed : doplanfailed( $Plantodo )
- 	}Goto work 
+ 	} Goto work 
  	
  	
  	State planinterruptedalarm{  
 		//printCurrentMessage
 		println("$name |  planinterruptedalarm $CurMoveTodo ")	color magenta
-		forward led -m stopped : stopped(1)
+		
  		
  		
  		[#  Plantodo = CurMoveTodo + Plan
@@ -807,7 +827,8 @@ QActor planexec context ctxcoldstoragearea{
  	} Goto stopped
  	
  	State stopped{
- 			
+ 			println("$name |  stopped")	color magenta
+ 			forward led -m stopped : stopped(1)
  	}Transition waitingforrestart whenMsg stop -> stopped
  								whenMsg continue -> moving
  	
@@ -817,6 +838,7 @@ QActor planexec context ctxcoldstoragearea{
  	}Transition t1 whenReply stepdone   -> nextMove
  					whenMsg nextmove    -> nextMove
  					whenRequest doplan -> execplan
+
  					 
 }
 
@@ -865,6 +887,7 @@ QActor robotpos context ctxcoldstoragearea{
     		val DIR = ""+planner.getDir()
     	#]
     	replyTo getrobotstate with robotstate : robotstate(pos($PX,$PY),$DIR)
+    	println("$name | replied to ropbotstate")
     }
     Goto waitclientrequest
     
