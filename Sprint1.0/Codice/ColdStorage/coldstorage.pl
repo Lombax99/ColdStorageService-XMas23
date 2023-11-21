@@ -2,6 +2,8 @@
 % coldstorage description   
 %====================================================================================
 request( doJob, doJob(KG) ).
+reply( jobdone, jobdone(NO_PARAM) ).  %%for doJob
+reply( robotDead, robotDead(NO_PARAM) ).  %%for doJob
 dispatch( updateWeight, updateWeight(PESO) ).
 %====================================================================================
 context(ctxcoldstoragearea, "localhost",  "TCP", "8040").

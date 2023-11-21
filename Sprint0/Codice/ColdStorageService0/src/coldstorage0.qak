@@ -4,19 +4,19 @@ System coldstorage0
 
  
 Request depositRequest : depositRequest(PESO)
-Reply accept : accept(TICKET)
-Reply reject : reject(NO_PARAM)
+Reply accept : accept(TICKET) for depositRequest
+Reply reject : reject(NO_PARAM) for depositRequest
 
 
 Request weightrequest : weightrequest(PESO)
-Reply weightOK : weightOK( NO_PARAM )
-Reply weightKO : weightKO( NO_PARAM )
+Reply weightOK : weightOK( NO_PARAM ) for weightrequest
+Reply weightKO : weightKO( NO_PARAM ) for weightrequest
 
 Request checkmyticket : checkmyticket(TICKET)
-Reply	ticketchecked : ticketchecked(BOOL)
+Reply	ticketchecked : ticketchecked(BOOL) for checkmyticket
 
 Request loaddone : loaddone(PESO)
-Reply 	chargetaken : chargetaken(NO_PARAM)
+Reply 	chargetaken : chargetaken(NO_PARAM) for loaddone
 
 Dispatch startToDoThings : startToDoThings( NO_PARAM )
 
@@ -175,7 +175,7 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 		[# PESO = 0
 			#]
 		println("SAG - chiedo $PESO") color yellow
-		//request coldstorageservice -m depositRequest : depositRequest($PESO)
+		request coldstorageservice -m depositRequest : depositRequest($PESO)
 		
 	} Transition t0 whenReply accept -> gotoindoor
 					whenReply reject -> tryagainlater

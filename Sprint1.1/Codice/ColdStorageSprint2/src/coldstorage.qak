@@ -3,8 +3,8 @@ System coldstorage2
 //-----------------------------------------------------------------------
 
 Request doJob : doJob(KG)
-Reply jobdone : jobdone(NO_PARAM)
-Reply robotDead : robotDead(NO_PARAM)
+Reply jobdone : jobdone(NO_PARAM) for doJob
+Reply robotDead : robotDead(NO_PARAM)for doJob
 
 //il peso promesso viene sottratto, se va aumentato fornire P_PRO negativo
 Dispatch updateWeight : updateWeight(P_EFF, P_PRO)
@@ -12,35 +12,35 @@ Dispatch updateWeight : updateWeight(P_EFF, P_PRO)
 //-----------------------------------------------------------------------
 
 Request depositRequest : depositRequest(PESO)
-Reply accept : accept(TICKET)
-Reply reject : reject(NO_PARAM)
+Reply accept : accept(TICKET) for depositRequest
+Reply reject : reject(NO_PARAM) for depositRequest
 
 Request depositRequestF : depositRequestF(PESO)
-Reply acceptF : acceptF(TICKET)
-Reply rejectF : rejectF(NO_PARAM)
+Reply acceptF : acceptF(TICKET) for depositRequestF
+Reply rejectF : rejectF(NO_PARAM)for depositRequestF
 
 
 Request weightrequest : weightrequest(PESO)
-Reply weightOK : weightOK( NO_PARAM )
-Reply weightKO : weightKO( NO_PARAM )
+Reply weightOK : weightOK( NO_PARAM ) for weightrequest
+Reply weightKO : weightKO( NO_PARAM ) for weightrequest
 
 Request checkmyticket : checkmyticket(TICKET)
-Reply	ticketchecked : ticketchecked(BOOL)
+Reply	ticketchecked : ticketchecked(BOOL) for checkmyticket
 
 Request checkmyticketF : checkmyticketF(TICKET)
-Reply	ticketcheckedF : ticketcheckedF(BOOL)
+Reply	ticketcheckedF : ticketcheckedF(BOOL)  for checkmyticketF
 
 Request loaddone : loaddone(PESO)
-Reply 	chargetaken : chargetaken(NO_PARAM)
+Reply 	chargetaken : chargetaken(NO_PARAM) for loaddone
 
 Request loaddoneF : loaddoneF(PESO)
-Reply 	chargetakenF : chargetakenF(NO_PARAM)
+Reply 	chargetakenF : chargetakenF(NO_PARAM) for loaddoneF
 
 Request getweight : getweight(NO_PARAM)
-Reply 	currentweight : currentweight(PESO_EFF,PESO_PRO)
+Reply 	currentweight : currentweight(PESO_EFF,PESO_PRO)  for getweight
 
 Request getweightF : getweightF(NO_PARAM)
-Reply 	currentweightF : currentweightF(PESO_EFF,PESO_PRO)
+Reply 	currentweightF : currentweightF(PESO_EFF,PESO_PRO)  for getweightF
 
 Dispatch startToDoThings : startToDoThings( NO_PARAM )
 
@@ -422,10 +422,10 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 		[# PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
 			#]
 		println("SAG - chiedo $PESO") color yellow
-		request tickethandler -m depositRequest : depositRequest($PESO)
+		request facade -m depositRequestF : depositRequestF($PESO)
 		
-	} Transition t0 whenReply accept -> gotoindoor
-					whenReply reject -> tryagainlater
+	} Transition t0 whenReply acceptF -> gotoindoor
+					whenReply rejectF -> tryagainlater
 					
 				
 					
@@ -436,7 +436,7 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	
 	
 	State gotoindoor{
-		onMsg( accept : accept(TICKET)){
+		onMsg( acceptF : accept(TICKET)){
 			[#	Ticket = payloadArg(0)
 				#]
 			println("SAG - accettato, Ticket: $Ticket") color yellow
@@ -446,11 +446,11 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	State giveticket{
 		println("SAG - consegno il biglietto") color yellow
 		
-		request tickethandler -m checkmyticket : checkmyticket($Ticket)
-	}Transition tc whenReply ticketchecked -> checkresponse
+		request facade -m checkmyticketF : checkmyticketF($Ticket)
+	}Transition tc whenReply ticketcheckedF -> checkresponse
 	
 	State checkresponse {
-		onMsg (ticketchecked : ticketchecked(BOOL)){
+		onMsg (ticketcheckedF : ticketcheckedF(BOOL)){
 			[# Ticketok = payloadArg(0).toBoolean()
 				# ]
 		}
@@ -463,7 +463,7 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	}Transition t4 whenTime 3000 -> loaddone
 	
 	State loaddone {
-		request controller -m loaddone : loaddone($PESO)
+		request facade -m loaddoneF : loaddoneF($PESO)
 	} Transition t6 whenReply chargetaken -> work
 	
 }

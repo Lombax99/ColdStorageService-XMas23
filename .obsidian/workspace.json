@@ -1,14 +1,14 @@
 {
   "main": {
-    "id": "9bf39df30210d961",
+    "id": "293953f10d681b31",
     "type": "split",
     "children": [
       {
-        "id": "526e4d8c4f798887",
+        "id": "ee1d02ccb94c2447",
         "type": "tabs",
         "children": [
           {
-            "id": "6086baefe16fe7f3",
+            "id": "9a67ccc737f32d87",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -18,47 +18,22 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "f39cc6a8f102d953",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "8c21e2004e902fd9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "684d5e5f0c700cf5",
+    "id": "03e3760900e1fc71",
     "type": "split",
     "children": [
       {
-        "id": "fcc28bb10927a524",
+        "id": "00b1eece8d894a62",
         "type": "tabs",
         "children": [
           {
-            "id": "6fc1be4f57fcb028",
+            "id": "726e73350f6e47d3",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -68,7 +43,7 @@
             }
           },
           {
-            "id": "40b76e487696fb2c",
+            "id": "bc3989564c222395",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -83,7 +58,7 @@
             }
           },
           {
-            "id": "7d10a3e891d8b186",
+            "id": "f36d281c600424c3",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -97,20 +72,20 @@
     "width": 300
   },
   "right": {
-    "id": "b7d0927a7144a728",
+    "id": "12792832c1c3a2b4",
     "type": "split",
     "children": [
       {
-        "id": "473bd7d0c18e97be",
+        "id": "1fb5905a7928970c",
         "type": "tabs",
         "children": [
           {
-            "id": "727c24c9b74462b5",
+            "id": "d36ae820cec97f3b",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,19 +97,19 @@
             }
           },
           {
-            "id": "4d372d362700deef",
+            "id": "4a2ebf1e8928b427",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "7d224d847e103625",
+            "id": "27846c0a235aa387",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -145,7 +120,7 @@
             }
           },
           {
-            "id": "bcd525dda1fac2ed",
+            "id": "2d9322cd6b5f1ba1",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -155,70 +130,56 @@
             }
           },
           {
-            "id": "cb43fc2b051551d1",
+            "id": "7b60eca7c54e3934",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md"
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md"
               }
             }
-          },
-          {
-            "id": "556cb82f5f940773",
-            "type": "leaf",
-            "state": {
-              "type": "online.larslockefeer.obsidian-plugin-todo",
-              "state": {}
-            }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 387.5,
+    "width": 300,
     "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
       "switcher:Apri selezione rapida": false,
       "graph:Apri vista grafo": false,
       "canvas:Crea nuova lavagna": false,
       "daily-notes:Apri nota del giorno": false,
       "templates:Inserisci modello": false,
-      "command-palette:Apri riquadro comandi": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false
+      "command-palette:Apri riquadro comandi": false
     }
   },
-  "active": "8c21e2004e902fd9",
+  "active": "9a67ccc737f32d87",
   "lastOpenFiles": [
-    "Sprint0/Cold Storage Service - Natali V3.md",
-    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
-    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
-    "Sprint0/Codice/ColdStorageService0/test/TestService.java~",
-    "Sprint1.0/Codice/ColdStorage/build/test-results/test/binary/output.bin.idx",
-    "Sprint1.0/Codice/ColdStorage/build/classes/java/test/TestService.class",
-    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction/compile-output/TestService.class",
-    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction/stash-dir/TestService.class.uniqueId0",
-    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction/stash-dir",
-    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction/header-output",
-    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction/compile-output",
-    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction/annotation-output",
-    "Sprint1.0/Codice/ColdStorage/build/tmp/compileTestJava/compileTransaction",
-    "Sprint1.1/Doc/Sprint 1.1.md",
-    "Sprint2/Doc/Sprint 2.md",
-    "Sprint1.1/Doc/Sprint 1.1 - V2.md",
-    "README.md",
-    "GiacomoRomanini.jpg{size = 100}.md",
-    "LucaLombardi.jpg",
-    "GiacomoRomanini.jpg",
-    "LisaUccini.png",
-    "ToDo.md",
-    "Untitled.md",
-    "Sprint0/Cold Storage Service - Natali.md",
-    "Sprint0/Cold Storage Service - Natali V2.md",
-    "Sprint1.0/Doc/Sprint 1.0 - V2.md",
-    "Sprint1.0/Doc/ArchitetturaLogica_Sprint1.0-V2.png"
+    "Sprint0/Codice/ColdStorageService0/coldstorage0arch",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/serviceaccessgui_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/facade_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/tickethandler_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/coldroom_MsLog.txt",
+    "Sprint1.1/Codice/BasicRobotSprint2/logs/noctx/transporttrolley_MsLog.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/test-results/test/binary/results.bin",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/test-results/test/binary/output.bin.idx",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/classes/java/test/TestService.class",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileTestKotlin/dirty-sources.txt",
+    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileTestKotlin/caches-jvm/jvm/kotlin/dirty-output-classes.tab_i.len",
+    "Sprint0/Codice/ColdStorageService0/qakicons/system.PNG",
+    "Sprint0/Codice/ColdStorageService0/qakicons/symActorSmall.png",
+    "Sprint0/Codice/ColdStorageService0/qakicons/symActor.png",
+    "Sprint0/Codice/ColdStorageService0/qakicons/externalQActor.png",
+    "Sprint0/Codice/ColdStorageService0/qakicons/codedQActor.png",
+    "Sprint0/Codice/qakicons/system.PNG",
+    "Sprint0/Codice/qakicons/symActorSmall.png",
+    "Sprint0/Codice/qakicons/symActor.png",
+    "Sprint0/Codice/qakicons/externalQActor.png",
+    "Sprint0/Codice/qakicons/codedQActor.png",
+    "Sprint0/Cold Storage Service - Natali V3.md"
   ]
 }

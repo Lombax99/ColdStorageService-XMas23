@@ -39,6 +39,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 					action { //it:State
 						 PESO = 0
 						CommUtils.outyellow("SAG - chiedo $PESO")
+						request("depositRequest", "depositRequest($PESO)" ,"coldstorageservice" )  
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
