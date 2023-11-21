@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
+                "file": "Sprint2/Doc/Sprint 2.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
+                "file": "Sprint2/Doc/Sprint 2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
+                "file": "Sprint2/Doc/Sprint 2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,7 +135,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md"
+                "file": "Sprint2/Doc/Sprint 2.md"
               }
             }
           }
@@ -157,29 +157,29 @@
       "command-palette:Apri riquadro comandi": false
     }
   },
-  "active": "9a67ccc737f32d87",
+  "active": "726e73350f6e47d3",
   "lastOpenFiles": [
+    "Sprint2/Codice/ColdStorage/coldstorage2arch",
+    "Sprint2/Codice/ColdStorage/qakicons/system.PNG",
+    "Sprint2/Codice/ColdStorage/qakicons/symActorSmall.png",
+    "Sprint2/Codice/ColdStorage/qakicons/symActor.png",
+    "Sprint2/Codice/ColdStorage/qakicons/externalQActor.png",
+    "Sprint2/Codice/ColdStorage/qakicons/codedQActor.png",
+    "Sprint2/Codice/ColdStorage/qakicons",
+    "Sprint2/Codice/qakicons/system.PNG",
+    "Sprint2/Codice/qakicons/symActorSmall.png",
+    "Sprint2/Codice/qakicons/symActor.png",
+    "Sprint2/Codice/qakicons/codedQActor.png",
+    "Sprint2/Codice/qakicons/externalQActor.png",
+    "Sprint2/Codice/qakicons",
+    "Sprint2/Codice/userDocs/Sprint 1.0 - V3.pdf",
+    "Sprint2/Codice/userDocs",
+    "Sprint2/Codice/ColdStorage/src/it/unibo/serviceaccessgui/Serviceaccessgui.kt",
+    "Sprint2/Codice/ColdStorage/src/it/unibo/serviceaccessgui",
+    "Sprint2/Codice/ColdStorage/src-gen",
+    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
     "Sprint0/Codice/ColdStorageService0/coldstorage0arch",
     "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/serviceaccessgui_MsLog.txt",
-    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/facade_MsLog.txt",
-    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/tickethandler_MsLog.txt",
-    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/coldroom_MsLog.txt",
-    "Sprint1.1/Codice/BasicRobotSprint2/logs/noctx/transporttrolley_MsLog.txt",
-    "Sprint1.1/Codice/ColdStorageSprint2/build/test-results/test/binary/results.bin",
-    "Sprint1.1/Codice/ColdStorageSprint2/build/test-results/test/binary/output.bin.idx",
-    "Sprint1.1/Codice/ColdStorageSprint2/build/classes/java/test/TestService.class",
-    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileTestKotlin/dirty-sources.txt",
-    "Sprint1.1/Codice/ColdStorageSprint2/build/kotlin/compileTestKotlin/caches-jvm/jvm/kotlin/dirty-output-classes.tab_i.len",
-    "Sprint0/Codice/ColdStorageService0/qakicons/system.PNG",
-    "Sprint0/Codice/ColdStorageService0/qakicons/symActorSmall.png",
-    "Sprint0/Codice/ColdStorageService0/qakicons/symActor.png",
-    "Sprint0/Codice/ColdStorageService0/qakicons/externalQActor.png",
-    "Sprint0/Codice/ColdStorageService0/qakicons/codedQActor.png",
-    "Sprint0/Codice/qakicons/system.PNG",
-    "Sprint0/Codice/qakicons/symActorSmall.png",
-    "Sprint0/Codice/qakicons/symActor.png",
-    "Sprint0/Codice/qakicons/externalQActor.png",
-    "Sprint0/Codice/qakicons/codedQActor.png",
     "Sprint0/Cold Storage Service - Natali V3.md"
   ]
 }
