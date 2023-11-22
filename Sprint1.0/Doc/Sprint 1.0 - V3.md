@@ -185,7 +185,31 @@ Durante la face di testing dovranno essere verificati i seguenti casi:
 - Verifichiamo che richieste con peso superiore al disponibile vengano scartate correttamente.
 - Verifichiamo che in caso il robot subisca dei problemi il sistema si fermi correttamente.
 
-- [x] aggiungere codice del primo test
+Codice primo test:
+```
+@Test  
+public void mainUseCaseTest(){  
+    //connect to port  
+    try{  
+        Socket client= new Socket("localhost", 8040);  
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));  
+        BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));  
+  
+        //send message  
+        out.write("msg(doJob,request,test,trasporttrolley,doJob(5),1)\n");  
+        out.flush();  
+        //wait for response  
+        String response= in.readLine();  
+        System.out.println(response);  
+        assertTrue(response.contains("jobdone"));  
+  
+  
+    }catch(Exception e){  
+        fail();  
+        System.out.println(e.getStackTrace());  
+    }  
+}
+```
 
 ### Deployment
 1) Avviare il container itunibovirtualrobot23 su docker

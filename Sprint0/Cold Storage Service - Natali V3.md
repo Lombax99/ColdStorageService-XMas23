@@ -376,7 +376,29 @@ Durante la face di testing dovranno essere verificati i seguenti casi:
 - Un ticket deve essere rifiutato per timeout (il peso non deve cambiare)
 - Una richiesta di peso eccessiva deve essere rifiutata
 
-- [x] inserisci codice del terzo test
+Codice terzo test:
+```
+@Test  
+public void mainUseCaseTest(){  
+    //connect to port  
+    try{  
+        Socket client= new Socket("localhost", 8040);  
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));  
+        BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));  
+  
+        //send message  
+        out.write("msg(depositRequest,request,test,coldstorageservice,depositRequest(100),1)\n");  
+        out.flush();  
+        //wait for response  
+        String response= in.readLine();  
+        System.out.println(response);  
+        assertTrue(response.contains("reject"));  
+    }catch(Exception e){  
+        fail();  
+        System.out.println(e.getStackTrace());  
+    }  
+}
+```
 
 ### Divisione in Sprint
 1) Transport Trolley + ColdStorageService [[Sprint 1.0]]

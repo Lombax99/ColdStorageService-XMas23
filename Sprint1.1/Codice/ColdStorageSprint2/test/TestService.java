@@ -16,8 +16,11 @@ public class TestService{
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
-            //send message
-            out.write("msg(depositRequestF,request,test,facade,depositRequestF(1),1)\n");
+            //send message first client request ticket
+            out.write("msg(depositRequestF,request,test2,facade,depositRequestF(1),1)\n");
+
+            //send message second client request ticket
+            out.write("msg(depositRequestF,request,test2,facade,depositRequestF(1),1)\n");
             out.flush();
             //wait for response
             String response= in.readLine();
@@ -30,12 +33,13 @@ public class TestService{
             String ticket = response.replace("acceptF(","");
             ticket = ticket.replace(")","");
 
+
             //Thread.sleep(800);
             System.out.println("sleep 2 minutes");
             TimeUnit.MINUTES.sleep(2);
 
-
-            out.write("msg(checkmyticketF,request,test,facade,checkmyticketF(" + ticket + "),1)\n");
+            //send message second client check ticket
+            out.write("msg(checkmyticketF,request,test2,facade,checkmyticketF(" + ticket + "),1)\n");
             out.flush();
             //wait for response
             String response1 = in.readLine();

@@ -13,13 +13,38 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint0/Cold Storage Service - Natali V3.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "68b9df524bfb502b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "044b29dd3989b602",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -85,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,7 +160,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md"
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md"
               }
             }
           }
@@ -157,8 +182,13 @@
       "command-palette:Apri riquadro comandi": false
     }
   },
-  "active": "726e73350f6e47d3",
+  "active": "044b29dd3989b602",
   "lastOpenFiles": [
+    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
+    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+    "Sprint0/Cold Storage Service - Natali V3.md",
+    "Sprint2/Doc/Sprint 2.md",
+    "Sprint3/Doc/Sprint 3.md",
     "Sprint2/Codice/ColdStorage/coldstorage2arch",
     "Sprint2/Codice/ColdStorage/qakicons/system.PNG",
     "Sprint2/Codice/ColdStorage/qakicons/symActorSmall.png",
@@ -177,9 +207,7 @@
     "Sprint2/Codice/ColdStorage/src/it/unibo/serviceaccessgui/Serviceaccessgui.kt",
     "Sprint2/Codice/ColdStorage/src/it/unibo/serviceaccessgui",
     "Sprint2/Codice/ColdStorage/src-gen",
-    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
     "Sprint0/Codice/ColdStorageService0/coldstorage0arch",
-    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/serviceaccessgui_MsLog.txt",
-    "Sprint0/Cold Storage Service - Natali V3.md"
+    "Sprint1.1/Codice/ColdStorageSprint2/logs/noctx/serviceaccessgui_MsLog.txt"
   ]
 }
