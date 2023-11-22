@@ -215,6 +215,7 @@ QActor coldroom context ctxcoldstoragearea {
 	
 	State s0 initial {
 		printCurrentMessage
+		updateResource[# "" + PesoEffettivo + "_" + PesoPromesso + ""#]
 	} Goto work
 	
 	State work{

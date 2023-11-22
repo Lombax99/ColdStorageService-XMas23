@@ -27,6 +27,8 @@ class Coldroom ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					action { //it:State
 						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
 						 	   
+						updateResourceRep( "" + PesoEffettivo + "_" + PesoPromesso + "" 
+						)
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
