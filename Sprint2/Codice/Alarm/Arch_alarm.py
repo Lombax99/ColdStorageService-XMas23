@@ -25,6 +25,6 @@ with Diagram('alarmArch', show=False, outformat='png', graph_attr=graphattr) as 
           sonar=Custom('sonar','./qakicons/symActorSmall.png')
           led=Custom('led','./qakicons/symActorSmall.png')
      with Cluster('ctxcoldstoragearea', graph_attr=nodeattr):
-          planexec=Custom('planexec(ext)','./qakicons/externalQActor.png')
-     sonar >> Edge(color='blue', style='solid',  label='<stop &nbsp; continue &nbsp; >',  fontcolor='blue') >> planexec
+          controller=Custom('controller(ext)','./qakicons/externalQActor.png')
+     sonar >> Edge(color='blue', style='solid',  label='<stop &nbsp; continue &nbsp; >',  fontcolor='blue') >> controller
 diag

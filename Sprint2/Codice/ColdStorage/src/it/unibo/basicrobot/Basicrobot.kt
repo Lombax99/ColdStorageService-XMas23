@@ -58,9 +58,9 @@ class Basicrobot ( name: String, scope: CoroutineScope, isconfined: Boolean=fals
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t026",targetState="doStep",cond=whenRequest("step"))
-					transition(edgeName="t027",targetState="execcmd",cond=whenDispatch("cmd"))
-					transition(edgeName="t028",targetState="endwork",cond=whenDispatch("end"))
+					 transition(edgeName="t034",targetState="doStep",cond=whenRequest("step"))
+					transition(edgeName="t035",targetState="execcmd",cond=whenDispatch("cmd"))
+					transition(edgeName="t036",targetState="endwork",cond=whenDispatch("end"))
 				}	 
 				state("execcmd") { //this:State
 					action { //it:State

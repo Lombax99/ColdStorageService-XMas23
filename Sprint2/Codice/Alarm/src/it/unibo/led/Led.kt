@@ -26,9 +26,7 @@ class Led ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t00",targetState="athome",cond=whenDispatch("arrivedhome"))
-					transition(edgeName="t01",targetState="currmoving",cond=whenDispatch("moving"))
-					transition(edgeName="t02",targetState="arrested",cond=whenDispatch("stopped"))
+					 transition( edgeName="goto",targetState="athome", cond=doswitch() )
 				}	 
 				state("athome") { //this:State
 					action { //it:State
@@ -39,15 +37,15 @@ class Led ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : 
 						    			}catch( e : Exception){
 						      				println(e.message)
 						    			}
-						CommUtils.outyellow("alarm - atHome - led off")
+						CommUtils.outyellow("alarm - atHome -led off ")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t13",targetState="athome",cond=whenDispatch("arrivedhome"))
-					transition(edgeName="t14",targetState="currmoving",cond=whenDispatch("moving"))
-					transition(edgeName="t15",targetState="arrested",cond=whenDispatch("stopped"))
+					 transition(edgeName="t10",targetState="athome",cond=whenDispatch("arrivedhome"))
+					transition(edgeName="t11",targetState="currmoving",cond=whenDispatch("moving"))
+					transition(edgeName="t12",targetState="arrested",cond=whenDispatch("stopped"))
 				}	 
 				state("currmoving") { //this:State
 					action { //it:State
@@ -58,7 +56,7 @@ class Led ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : 
 						    			}catch( e : Exception){
 						      				println(e.message)
 						    			}
-						CommUtils.outyellow("alarm - moving - led on")
+						CommUtils.outyellow("alarm - moving - ledOn")
 						 Thread.sleep(1000);
 									try{
 						      			val p  = Runtime.getRuntime().exec("python3 ledOFF.py")
@@ -67,7 +65,7 @@ class Led ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : 
 						      				println(e.message)
 						    			}
 									
-						CommUtils.outyellow("alarm - moving - led off")
+						CommUtils.outyellow("alarm - moving - LedOff")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
@@ -75,10 +73,10 @@ class Led ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : 
 				 	 		stateTimer = TimerActor("timer_currmoving", 
 				 	 					  scope, context!!, "local_tout_led_currmoving", 1000.toLong() )
 					}	 	 
-					 transition(edgeName="t26",targetState="currmoving",cond=whenTimeout("local_tout_led_currmoving"))   
-					transition(edgeName="t27",targetState="currmoving",cond=whenDispatch("moving"))
-					transition(edgeName="t28",targetState="athome",cond=whenDispatch("arrivedhome"))
-					transition(edgeName="t29",targetState="arrested",cond=whenDispatch("stopped"))
+					 transition(edgeName="t23",targetState="currmoving",cond=whenTimeout("local_tout_led_currmoving"))   
+					transition(edgeName="t24",targetState="currmoving",cond=whenDispatch("moving"))
+					transition(edgeName="t25",targetState="athome",cond=whenDispatch("arrivedhome"))
+					transition(edgeName="t26",targetState="arrested",cond=whenDispatch("stopped"))
 				}	 
 				state("arrested") { //this:State
 					action { //it:State
@@ -89,15 +87,15 @@ class Led ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : 
 						    			}catch( e : Exception){
 						      				println(e.message)
 						    			}
-						CommUtils.outyellow("alarm - arrested - led on")
+						CommUtils.outyellow("alarm - arrested  - led on")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t310",targetState="arrested",cond=whenDispatch("stopped"))
-					transition(edgeName="t311",targetState="athome",cond=whenDispatch("arrivedhome"))
-					transition(edgeName="t312",targetState="currmoving",cond=whenDispatch("moving"))
+					 transition(edgeName="t37",targetState="arrested",cond=whenDispatch("stopped"))
+					transition(edgeName="t38",targetState="athome",cond=whenDispatch("arrivedhome"))
+					transition(edgeName="t39",targetState="currmoving",cond=whenDispatch("moving"))
 				}	 
 			}
 		}

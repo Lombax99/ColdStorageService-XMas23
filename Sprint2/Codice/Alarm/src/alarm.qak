@@ -18,7 +18,7 @@ Context ctxalarm ip [host="localhost" port=8300]
 
 Context ctxcoldstoragearea ip [host="127.0.0.1" port=8040]
 
-ExternalQActor planexec context ctxcoldstoragearea
+ExternalQActor controller context ctxcoldstoragearea
 
 //-----------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ QActor sonar context ctxalarm{
 			while(SonarService.getDistance() > Distanza){}
  		#]
  		
-		forward planexec -m stop : stop(1)
+		forward controller -m stop : stop(1)
 		println("alarm - sent stop") color green
 	}Goto stopped
 	
@@ -51,7 +51,7 @@ QActor sonar context ctxalarm{
 		[#    
 			while(SonarService.getDistance() < Distanza){}
  		#]
-		forward planexec -m continue : continue(1)
+		forward controller -m continue : continue(1)
 		println("alarm - sent continue") color green
 	} Goto work
 	
@@ -79,10 +79,7 @@ QActor led context ctxalarm{
 	
 	State s0 initial {
 		
-		
-	}Transition t0 whenMsg arrivedhome -> athome
-					whenMsg moving -> currmoving
-					whenMsg stopped -> arrested
+	}Goto athome
 	
 	State athome {
 		
@@ -94,12 +91,14 @@ QActor led context ctxalarm{
       				println(e.message)
     			}
 			#]
-		println("alarm - atHome - led off") color yellow
+		println("alarm - atHome -led off ") color yellow
 		
-	} Transition t1 
-					whenMsg arrivedhome -> athome
+	} Transition t1 whenMsg arrivedhome -> athome
 					whenMsg moving -> currmoving
 					whenMsg stopped -> arrested
+					
+					
+					
 	
 	State currmoving {
 		
@@ -111,7 +110,7 @@ QActor led context ctxalarm{
       				println(e.message)
     			}
 			#]
-		println("alarm - moving - led on") color yellow
+		println("alarm - moving - ledOn") color yellow
 		[# Thread.sleep(1000);
 			try{
       			val p  = Runtime.getRuntime().exec("python3 ledOFF.py")
@@ -121,7 +120,7 @@ QActor led context ctxalarm{
     			}
 			
 			#]
-		println("alarm - moving - led off") color yellow
+		println("alarm - moving - LedOff") color yellow
 	} Transition t2 whenTime 1000 -> currmoving
 					whenMsg moving -> currmoving
 					whenMsg arrivedhome -> athome
@@ -136,7 +135,7 @@ QActor led context ctxalarm{
       				println(e.message)
     			}
 			#]
-		println("alarm - arrested - led on") color yellow
+		println("alarm - arrested  - led on") color yellow
 	} Transition t3 whenMsg stopped -> arrested
 					whenMsg arrivedhome -> athome
 					whenMsg moving -> currmoving

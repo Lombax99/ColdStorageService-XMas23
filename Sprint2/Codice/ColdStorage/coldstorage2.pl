@@ -44,6 +44,8 @@ reply( moverobotdone, moverobotok(ARG) ).  %%for moverobot
 reply( moverobotfailed, moverobotfailed(PLANDONE,PLANTODO) ).  %%for moverobot
 request( getrobotstate, getrobotstate(ARG) ).
 reply( robotstate, robotstate(POS,DIR) ).  %%for getrobotstate
+dispatch( stopplan, stopplan(NO_PARAM) ).
+dispatch( continueplan, continueplan(NO_PARAM) ).
 dispatch( setrobotstate, setpos(X,Y,D) ).
 dispatch( arrivedhome, arrivedhome(NO_PARAM) ).
 dispatch( moving, moving(NO_PARAM) ).

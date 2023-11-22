@@ -34,16 +34,44 @@ class Controller ( name: String, scope: CoroutineScope, isconfined: Boolean=fals
 				}	 
 				state("work") { //this:State
 					action { //it:State
-						CommUtils.outgreen("controller - in attesa")
+						CommUtils.outgreen("controller - work")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t00",targetState="startjob",cond=whenRequest("loaddone"))
+					 transition(edgeName="t00",targetState="stopped",cond=whenDispatch("stop"))
+					transition(edgeName="t01",targetState="work",cond=whenDispatch("continue"))
+					transition(edgeName="t02",targetState="startjob",cond=whenRequest("loaddone"))
+				}	 
+				state("stopped") { //this:State
+					action { //it:State
+						CommUtils.outgreen("controller - stopped")
+						forward("stopped", "stopped(1)" ,"led" ) 
+						forward("stopplan", "stopplan(1)" ,"planexec" ) 
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition(edgeName="t03",targetState="stopped",cond=whenDispatch("stop"))
+					transition(edgeName="t04",targetState="continueworking",cond=whenDispatch("continue"))
+				}	 
+				state("continueworking") { //this:State
+					action { //it:State
+						CommUtils.outgreen("controller - continue")
+						forward("arrivedhome", "arrivedhome(1)" ,"led" ) 
+						forward("continueplan", "continueplan(1)" ,"planexec" ) 
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition( edgeName="goto",targetState="work", cond=doswitch() )
 				}	 
 				state("startjob") { //this:State
 					action { //it:State
+						forward("moving", "moving(1)" ,"led" ) 
 						if( checkMsgContent( Term.createTerm("loaddone(PESO)"), Term.createTerm("loaddone(PESO)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								 PESO = payloadArg(0).toInt()
@@ -56,24 +84,51 @@ class Controller ( name: String, scope: CoroutineScope, isconfined: Boolean=fals
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="endjob1",targetState="handlerobotdead",cond=whenReply("robotDead"))
-					transition(edgeName="endjob2",targetState="jobdone",cond=whenReply("jobdone"))
+					 transition(edgeName="endjob5",targetState="stoppedwhileworking",cond=whenDispatch("stop"))
+					transition(edgeName="endjob6",targetState="handlerobotdead",cond=whenReply("robotDead"))
+					transition(edgeName="endjob7",targetState="jobdone",cond=whenReply("jobdone"))
 				}	 
-				state("jobdone") { //this:State
+				state("stoppedwhileworking") { //this:State
 					action { //it:State
-						forward("updateWeight", "updateWeight($PESO,$PESO)" ,"coldroom" ) 
+						forward("stopplan", "stopplan(1)" ,"planexec" ) 
+						CommUtils.outmagenta("stopped while working")
+						forward("stopped", "stopped(1)" ,"led" ) 
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
-				 	 		stateTimer = TimerActor("timer_jobdone", 
-				 	 					  scope, context!!, "local_tout_controller_jobdone", 15000.toLong() )
 					}	 	 
-					 transition(edgeName="repeat3",targetState="work",cond=whenTimeout("local_tout_controller_jobdone"))   
+					 transition(edgeName="t08",targetState="waitingforreply",cond=whenDispatch("continue"))
+				}	 
+				state("waitingforreply") { //this:State
+					action { //it:State
+						forward("continueplan", "continueplan(1)" ,"planexec" ) 
+						CommUtils.outgreen("continued")
+						forward("moving", "moving(1)" ,"led" ) 
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition(edgeName="endjob9",targetState="stoppedwhileworking",cond=whenDispatch("stop"))
+					transition(edgeName="endjob10",targetState="handlerobotdead",cond=whenReply("robotDead"))
+					transition(edgeName="endjob11",targetState="jobdone",cond=whenReply("jobdone"))
+				}	 
+				state("jobdone") { //this:State
+					action { //it:State
+						CommUtils.outgreen("jobdone")
+						forward("updateWeight", "updateWeight($PESO,$PESO)" ,"coldroom" ) 
+						forward("arrivedhome", "arrivedhome(1)" ,"led" ) 
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+					 transition( edgeName="goto",targetState="work", cond=doswitch() )
 				}	 
 				state("handlerobotdead") { //this:State
 					action { //it:State
-						CommUtils.outgreen("robotdead")
+						CommUtils.outred("robotdead")
 						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
 						 	   
 						//genTimer( actor, state )

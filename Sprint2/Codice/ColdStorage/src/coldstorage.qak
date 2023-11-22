@@ -78,6 +78,10 @@ Reply moverobotfailed:  moverobotfailed(PLANDONE, PLANTODO) for moverobot
 Request getrobotstate : getrobotstate(ARG)
 Reply robotstate      : robotstate(POS,DIR) for getrobotstate
 
+
+Dispatch stopplan : stopplan(NO_PARAM)
+Dispatch continueplan : continueplan(NO_PARAM)
+
 Dispatch setrobotstate: setpos(X,Y,D)
 
 //-----------------------------------------------------------------------
@@ -113,14 +117,30 @@ QActor controller context ctxcoldstoragearea {
 		#]
 		
 	State s0 initial {
+		
 		printCurrentMessage
 	} Goto work
 	
-	State work{
-		println("controller - in attesa") color green
-	} 
-	Transition t0 whenRequest loaddone -> startjob
+	State work{ //inHome
+		println("controller - work") color green
+		
+	} Transition t0 whenMsg stop -> stopped
+					whenMsg continue -> work
+					whenRequest loaddone -> startjob
+		
+			
+	State stopped{
+		println("controller - stopped") color green
+		forward led -m stopped : stopped(1)
+		forward planexec -m stopplan : stopplan(1)
+	}Transition t0 whenMsg stop -> stopped
+					whenMsg continue -> continueworking
 	
+	State continueworking{
+		println("controller - continue") color green
+		forward led -m arrivedhome : arrivedhome(1)
+		forward planexec -m continueplan : continueplan(1)
+	}Goto work
 	//senza robot
 	/* 
 	State startjob  {
@@ -138,6 +158,7 @@ QActor controller context ctxcoldstoragearea {
 	
 	
 	State startjob  {
+		forward led -m moving : moving(1)
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
 				#]
@@ -146,16 +167,37 @@ QActor controller context ctxcoldstoragearea {
 		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
 		request transporttrolley -m doJob : doJob($PESO)
 		
-	} Transition endjob whenReply robotDead -> handlerobotdead
+	} Transition endjob whenMsg stop -> stoppedwhileworking
+						whenReply robotDead -> handlerobotdead
+						whenReply jobdone -> jobdone
+						
+						
+	State stoppedwhileworking {
+		forward planexec -m stopplan : stopplan(1)
+		println("stopped while working") color magenta
+		forward led -m stopped : stopped(1)
+		
+	}Transition t0 whenMsg continue -> waitingforreply
+	
+	State waitingforreply{
+		forward planexec -m continueplan : continueplan(1)
+		println("continued") color green
+		forward led -m moving : moving(1)
+	}Transition endjob whenMsg stop -> stoppedwhileworking
+						whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
 	
+	
+	
 	State jobdone{
+		println("jobdone") color green
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
-	} Transition repeat whenTime 15000 -> work
+		forward led -m arrivedhome : arrivedhome(1)
+	} Goto work
 	
 	
 	State handlerobotdead{
-		println("robotdead") color green
+		println("robotdead") color red
 		printCurrentMessage
 	}
 }
@@ -536,8 +578,9 @@ QActor transporttrolley context ctxcoldstoragearea{
 	
 	State work{
 		println("robot ! waiting") color green
-		forward led -m arrivedhome : arrivedhome(1)
 	}Transition startworking whenRequest doJob -> startjob
+
+
 
 	State startjob{
 		
@@ -718,29 +761,14 @@ QActor planexec context ctxcoldstoragearea{
 	
 	State work{
 		
-		
-	}Transition t0 whenMsg stop -> stoppedathome
- 					whenMsg continue -> work
- 					whenRequest doplan -> execplan
- 				
- 	
- 		
- 	State stoppedathome{
- 		println("$name |  stoppedathome")	color magenta
- 		forward led -m stopped : stopped(1)
-	} Transition t0 whenMsg stop -> stoppedathome
- 					whenMsg continue -> workfromhome
- 					
- 	State workfromhome{
- 		println("$name |  workfromhome")	color magenta
- 		forward led -m arrivedhome : arrivedhome(1)
-	} Transition t0 whenMsg stop -> stoppedathome
-					whenMsg continue -> work
+	}Transition t0 whenMsg stopplan -> stoppedwhilenothing
+					whenMsg continueplan -> work
 					whenRequest doplan -> execplan
- 					
- 	
- 					
- 
+ 				
+				
+ 	State stoppedwhilenothing{
+ 	}Transition t0 whenMsg stopplan -> stoppedwhilenothing
+ 					whenMsg continueplan -> work
 					
 					
 	State execplan{
@@ -751,9 +779,7 @@ QActor planexec context ctxcoldstoragearea{
     		#]
     		println("plan ${Plan}")
     	}
-	} Transition t0 
-		whenTime 100    -> nextMove
-		whenMsg stop     -> planinterruptedalarm
+	} Transition t0 whenTime 100  -> nextMove
 	  
 	
 	State nextMove{ 
@@ -766,14 +792,10 @@ QActor planexec context ctxcoldstoragearea{
 		//println("$name | CurMoveTodo= $CurMoveTodo remain:$Plan" ) 
 		forward planexec -m nextmove : nextmove($CurMoveTodo)
 	} 	 
-	Transition t0  whenMsg stop     -> planinterruptedalarm
-		           whenMsg nextmove  -> doMove
+	Transition t0 whenMsg nextmove  -> doMove
 		           
 	
-	
-	
 	State doMove{
-		forward led -m moving : moving(1)
 		//println("$name | domove $CurMoveTodo")  
  		if [# CurMoveTodo == "" #] { 
  			forward planexec -m nomoremove : nomoremove(end)
@@ -790,7 +812,7 @@ QActor planexec context ctxcoldstoragearea{
 			}
 		}
  	}
-	Transition t0  whenMsg stop     -> planinterruptedalarm
+	Transition t0  whenMsg stopplan     -> planinterruptedalarm
 	               whenMsg nomoremove  -> planend
 	               whenMsg nextmove    -> nextMove 
 	               whenReply stepdone   -> nextMove 
@@ -801,8 +823,8 @@ QActor planexec context ctxcoldstoragearea{
 		println("$name | planend ok plan=$PlanOrig ") color blue
 		replyTo doplan with doplandone : doplandone($PlanOrig)
 		updateResource [# "plandone($PlanOrig)" #] 
-	}
-	Goto work
+	}Goto work
+	
 	
 	State planinterruptedobstacle{  
 		//printCurrentMessage
@@ -819,7 +841,6 @@ QActor planexec context ctxcoldstoragearea{
 		println("$name |  planinterruptedalarm $CurMoveTodo ")	color magenta
 		
  		
- 		
  		[#  Plantodo = CurMoveTodo + Plan
  		#]
  		//updateResource [# "planfailed($PlanOrig,$Plantodo )" #]
@@ -829,13 +850,11 @@ QActor planexec context ctxcoldstoragearea{
  	
  	State stopped{
  			println("$name |  stopped")	color magenta
- 			forward led -m stopped : stopped(1)
- 	}Transition waitingforrestart whenMsg stop -> stopped
- 								whenMsg continue -> moving
+ 	}Transition waitingforrestart whenMsg stopplan -> stopped
+ 								whenMsg continueplan -> moving
  	
  	State moving {
- 		println("$name |  movinggg $Plantodo ")	color magenta
- 		forward led -m moving : moving(1)
+ 		println("$name |  moving $Plantodo ")	color magenta
  	}Transition t1 whenReply stepdone   -> nextMove
  					whenMsg nextmove    -> nextMove
  					whenRequest doplan -> execplan
