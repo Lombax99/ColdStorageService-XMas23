@@ -53,6 +53,12 @@ Il testing di un sonar riguarda due aspetti distinti:
 2. il test sul corretto funzionamento del componente software responsabile della trasformazione del dispositivo in un produttore di dati consumabili da un altro componente.
 
 ### Progettazione
+Anche qui faccio uno script che si limita a leggere una singola distanza e lascio che sia l'attore a implementare la logica di invocare il sonar ogni x finché non ottengo un valore minore della soglia, in questo modo posso gestire tutti i parametri con un file di config e modificarli in futuro se necessario.
+
+Segnali? Per il sonar va bene dispatch, so perfettamente a chi devo mandarlo (quindi non event) e non mi serve req/resp perché basta inviargliene altri nel peggior dei casi, farlo req/resp complica troppo per nessun vantaggio.
+
+Gestiamo solo il caso in cui mi arrivano più volte gli stessi messaggi perché perdo i messaggi intermedi (ottengo 2 stop di fila perché perdo il continue in mezzo)
+
 sonar in python
 ```python
 # File: sonar.py
@@ -156,6 +162,8 @@ int main(void) {
     return 0;
 }
 ```
+
+facciamo solo uno script che accende e uno script che spegne e ci pensa l'attore ad invocare lo script secondo bisogno per mostrare lo stato corrente, la logica di lampeggiamento è lasciata all'attore led da gestire e non allo script in shell.
 
 led in python
 ``` python
