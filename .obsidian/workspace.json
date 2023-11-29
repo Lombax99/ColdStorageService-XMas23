@@ -32,6 +32,18 @@
             }
           },
           {
+            "id": "322e361bc3b8fb99",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "88324b2d4cffa444",
             "type": "leaf",
             "state": {
@@ -44,7 +56,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -182,17 +194,22 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
+      "switcher:Apri selezione rapida": false,
+      "graph:Apri vista grafo": false,
+      "canvas:Crea nuova lavagna": false,
+      "daily-notes:Apri nota del giorno": false,
+      "templates:Inserisci modello": false,
+      "command-palette:Apri riquadro comandi": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
   "active": "88324b2d4cffa444",
   "lastOpenFiles": [
+    "Sprint0/Cold Storage Service - Natali V3.md",
+    "Sprint2/Doc/Sprint 2.md",
+    "Sprint0/coldstorage0arch.png",
+    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
     "Sprint2/Codice/Alarm/resources/SonarService.kt",
     "Sprint2/Codice/Alarm/resources",
     "Sprint1.1/Codice/ColdStorageSprint2/test/TestService.java",
@@ -208,16 +225,10 @@
     "Sprint0/Codice/qakicons",
     "Sprint0/Codice/gradle/wrapper/gradle-wrapper.properties",
     "Sprint0/Codice/gradle/wrapper/gradle-wrapper.jar",
-    "Sprint0/Codice/gradle/wrapper",
     "Sprint2/Codice/qakicons/system.PNG",
     "Sprint2/Codice/qakicons/symActorSmall.png",
     "Sprint2/Codice/qakicons/symActor.png",
     "Sprint2/Codice/qakicons/externalQActor.png",
-    "Sprint2/Codice/qakicons/codedQActor.png",
-    "Sprint0/Cold Storage Service - Natali V3.md",
-    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
-    "Sprint2/Doc/Sprint 2.md",
-    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
     "Sprint1.1/Doc/Sprint 1.1 - V2.md",
     "README.md",
     "GiacomoRomanini.jpg{size = 100}.md",
