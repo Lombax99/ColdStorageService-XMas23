@@ -75,7 +75,7 @@ GPIO.setup(ECHO,GPIO.IN)
 
 GPIO.output(TRIG, False)   #TRIG parte LOW
 print ('Waiting a few seconds for the sensor to settle')
-time.sleep(0,5)
+time.sleep(2)
 
 while True:
    GPIO.output(TRIG, True)    #invia impulsoTRIG
@@ -100,26 +100,30 @@ while True:
 
 facciamo solo uno script che accende e uno script che spegne e ci pensa l'attore ad invocare lo script secondo bisogno per mostrare lo stato corrente, la logica di lampeggiamento è lasciata all'attore led da gestire e non allo script in shell.
 
-led in python
+ledOn in python
 ``` python
-#File: LedControl.py
-import time
 import RPi.GPIO as GPIO
 
 LED_PIN = 21
-tempo = 1 #in secondi
 
-#setup
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED_PIN,GPIO.OUT)
+GPIO.setwarnings(False)
 
-#basic blink
-GPIO.output(LED_PIN,GPIO.HIGH)
-time.sleep(tempo)
-GPIO.output(LED_PIN,GPIO.LOW)
-time.sleep(tempo)
+GPIO.output(LED_PIN, GPIO.HIGH)
+```
 
-GPIO.cleanup()
+ledOff in python
+``` python
+import RPi.GPIO as GPIO
+
+LED_PIN = 21
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LED_PIN,GPIO.OUT)
+GPIO.setwarnings(False)
+
+GPIO.output(LED_PIN, GPIO.LOW)
 ```
 
 ### Deployment
