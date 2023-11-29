@@ -8,7 +8,7 @@ file = open('sonar.txt', 'w')
 while True:
 
     outnumber =  50 * (math.cos(0.01 * math.pi * num) + 1)
-
+    #outnumber=500
     print(str(outnumber))
     file.write(str(outnumber)+"\n")
 
