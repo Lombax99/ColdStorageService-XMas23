@@ -56,7 +56,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -122,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -139,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -172,7 +172,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md"
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md"
               }
             }
           },
@@ -194,17 +194,19 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Apri selezione rapida": false,
-      "graph:Apri vista grafo": false,
-      "canvas:Crea nuova lavagna": false,
-      "daily-notes:Apri nota del giorno": false,
-      "templates:Inserisci modello": false,
-      "command-palette:Apri riquadro comandi": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "88324b2d4cffa444",
+  "active": "4893cd21921e19b9",
   "lastOpenFiles": [
+    "Sprint2/Doc/Sprint 2.md",
+    "Sprint2/Doc/RaspPin.png",
     "Sprint3/Codice/statusgui/src/test/java/unibo/statusgui/StatusguiApplicationTests.java",
     "Sprint3/Codice/statusgui/src/main/resources/templates/static/ServiceStatusGui.html",
     "Sprint3/Codice/statusgui/src/main/resources/static/js/socket.js",
@@ -215,16 +217,13 @@
     "Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/StatusguiApplication.java",
     "Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/RobotPosObserver.java",
     "Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/MessageSender.java",
-    "Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/ControllerStatusGui.java",
     "Sprint3/Codice/ColdStorage3/qakicons/system.PNG",
     "Sprint3/Codice/ColdStorage3/qakicons/symActorSmall.png",
     "Sprint3/Codice/ColdStorage3/qakicons/symActor.png",
     "Sprint3/Codice/ColdStorage3/qakicons/externalQActor.png",
     "Sprint3/Codice/ColdStorage3/qakicons/codedQActor.png",
     "Sprint3/Codice/ColdStorage3/coldstorage3arch.png",
-    "Pasted image 20231129180114.png",
     "Sprint1.1/Doc/Sprint 1.1 - V3.md",
-    "Sprint2/Doc/Sprint 2.md",
     "Sprint0/Cold Storage Service - Natali V3.md",
     "Sprint0/coldstorage0arch.png",
     "Sprint1.0/Doc/Sprint 1.0 - V3.md",

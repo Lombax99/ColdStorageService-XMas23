@@ -137,9 +137,9 @@ Gestiamo solo il caso in cui mi arrivano più volte gli stessi messaggi perché 
 
 sonar in python
 ```python
-# File: sonar.py
 import RPi.GPIO as GPIO
 import time
+import sys
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -169,131 +169,50 @@ while True:
    pulse_duration = pulse_end - pulse_start
    distance = pulse_duration * 17165   #distance = vt/2
    distance = round(distance, 1)
-   #print ('Distance:',distance,'cm')
    print ( distance )
    sys.stdout.flush()   #Importante!
    time.sleep(0.25)
 ```
 
-sonar in c
-``` c
-#include <iostream>
-#include <wiringPi.h>
-#include <fstream>
-#include <cmath>
-  
-//#define TRUE 1
-//Wiring Pi numbers for radar with stepper
-#define TRIG 0  //4
-#define ECHO 2  //5
-  
-using namespace std;
-/*
- * in the directory: of SonarAlone.c:
-1)  [ sudo ../../pi-blaster/pi-blaster ] if servo
-2)  nano
-sudo ./SonarAlone
-In nat/servosonar:
-sudo java -jar   SonarAloneP2PMain.jar
-sudo python radar.py
- */
-void setup() {
-    wiringPiSetup();
-    pinMode(TRIG, OUTPUT);
-    pinMode(ECHO, INPUT);
-  
-    //TRIG pin must start LOW
-    digitalWrite(TRIG, LOW);
-    delay(30);
-}
-  
-int getCM() {
-    //Send trig pulse
-    digitalWrite(TRIG, HIGH);
-    delayMicroseconds(20);
-    digitalWrite(TRIG, LOW);
-  
-    //Wait for echo start
-    while(digitalRead(ECHO) == LOW);
-  
-    //Wait for echo end
-    long startTime = micros();
-    while(digitalRead(ECHO) == HIGH);
-    long travelTime = micros() - startTime;
-  
-    //Get distance in cm
-    int distance = travelTime / 58;
-  
-    return distance;
-}
-  
-int main(void) {
-    int cm ;    
-    setup();
-    while(1) {
-        cm = getCM();
-        cout <<  cm <<   endl;
-        delay(300);
-    }
-    return 0;
-}
-```
-
 facciamo solo uno script che accende e uno script che spegne e ci pensa l'attore ad invocare lo script secondo bisogno per mostrare lo stato corrente, la logica di lampeggiamento è lasciata all'attore led da gestire e non allo script in shell.
 
-led in python
+ledOn in python
 ``` python
-#File: LedControl.py
-import sys
 import RPi.GPIO as GPIO
 
+LED_PIN = 21
+
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(25,GPIO.OUT)
+GPIO.setup(LED_PIN,GPIO.OUT)
+GPIO.setwarnings(False)
 
-for line in sys.stdin:
-   print(line)
-   v = float(line)
-   if v <= 10 :
-      GPIO.output(25,GPIO.HIGH)
-   else:
-      GPIO.output(25,GPIO.LOW)
+GPIO.output(LED_PIN, GPIO.HIGH)
 ```
 
-led in shellscript (blink)
-```sh
-echo Unexporting.
-echo 25 > /sys/class/gpio/unexport #
-echo 25 > /sys/class/gpio/export #
-cd /sys/class/gpio/gpio25 #
+ledOff in python
+``` python
+import RPi.GPIO as GPIO
 
-echo Setting direction to out.
-echo out > direction #
-echo Setting pin high.
-echo 1 > value #
-sleep 1 #
-echo Setting pin low
-echo 0 > value #
-sleep 1 #
-echo Setting pin high.
-echo 1 > value #
-sleep 1 #
-echo Setting pin low
-echo 0 > value #
+LED_PIN = 21
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LED_PIN,GPIO.OUT)
+GPIO.setwarnings(False)
+
+GPIO.output(LED_PIN, GPIO.LOW)
 ```
-led in shellscript (single turnOn)
-``` shell
-gpio readall #
-echo Setting direction to out
-gpio mode 6 out #
-echo Write 1
-gpio write 6 1 #
-sleep 1 #
-echo Write 0
-gpio write 6 0 #
-```
+
 ### Deployment
-
-
+#### Deployment on RaspberryPi 3B/3B+
+![[RaspPin.png]]
+##### Led
+- braccino corto: pin fisico 39 (GND)
+- braccino lungo: pin fisico 40 (GPIO21)
+##### Sonar
+- VCC : pin fisico 4 (+5v)
+- GND : pin fisico 6 (GND)
+- TRIG: pin fisico 11 (GPIO 17)
+- ECHO: pin fisico 13 (GPIO 27)
 
 # 
 ----------------
