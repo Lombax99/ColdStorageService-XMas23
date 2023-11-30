@@ -37,7 +37,6 @@ public class TestService{
             System.out.println("sleep 2 seconds");
             TimeUnit.SECONDS.sleep(4);
 
-            //send message first client request ticket
             out.write("msg(stop,dispatch,test2,controller,stop(),1)\n");
 
 

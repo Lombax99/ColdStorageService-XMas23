@@ -52,6 +52,82 @@ Il testing di un sonar riguarda due aspetti distinti:
 1. il test sul corretto funzionamento del dispositivo in quanto tale. Supponendo di porre di fronte al Sonar un ostacolo a distanza D, il Sonar deve emettere dati di valore D +/- epsilon.
 2. il test sul corretto funzionamento del componente software responsabile della trasformazione del dispositivo in un produttore di dati consumabili da un altro componente.
 
+Test implementato: 
+Supponendo di porre di fronte al Sonar un ostacolo a distanza D, il BasicRobot deve farmarsi, riparte solo quando non è presente alcun ostacolo di fronte al Sonar di distanza minore di D.
+```
+@Test  
+public void mainUseCaseTest(){  
+    //connect to port  
+    try{  
+        Socket client= new Socket("localhost", 8040);  
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));  
+        BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));  
+  
+        out.write("msg(depositRequestF,request,test2,facade,depositRequestF(1),1)\n");  
+        out.flush();  
+        //wait for response  
+        String response= in.readLine();  
+        response = response.split(",")[4];  
+        String ticket = response.replace("acceptF(","");  
+        ticket = ticket.replace(")","");  
+  
+        out.write("msg(checkmyticketF,request,test2,facade,checkmyticketF(" + ticket + "),1)\n");  
+        out.flush();  
+        String responseC= in.readLine();  
+  
+        out.write("msg(loaddoneF,request,test2,facade,loaddoneF(1),1)\n");  
+        out.flush();  
+        String responseL= in.readLine();  
+  
+  
+        System.out.println("sleep 2 seconds");  
+        TimeUnit.SECONDS.sleep(4);  
+  
+        out.write("msg(stop,dispatch,test2,controller,stop(),1)\n");  
+  
+  
+        System.out.println("sleep 1 seconds");  
+        TimeUnit.SECONDS.sleep(1);  
+  
+        out.write("msg(getrobotstate,request,test2,robotpos,getrobotstate(ARG),1)\n");  
+        out.flush();  
+        String responsePos1= in.readLine();  
+        responsePos1 = responsePos1.split(",")[4];  
+        System.out.println("pos1: "+responsePos1); //robotstate(pos(0,4),DOWN)  
+  
+        System.out.println("sleep 1 seconds for pos");  
+        TimeUnit.SECONDS.sleep(1);  
+  
+        out.write("msg(getrobotstate,request,test2,robotpos,getrobotstate(ARG),1)\n");  
+        out.flush();  
+        String responsePos2= in.readLine();  
+        responsePos2 = responsePos2.split(",")[4];  
+        System.out.println("pos2: "+responsePos2);   //robotstate(pos(0,4),DOWN)  
+  
+        assertTrue(responsePos1.equalsIgnoreCase(responsePos2));  
+  
+        out.write("msg(continue,dispatch,test2,controller,continue(),1)\n");  
+  
+  
+        System.out.println("sleep 1 seconds for pos");  
+        TimeUnit.SECONDS.sleep(1);  
+  
+        out.write("msg(getrobotstate,request,test2,robotpos,getrobotstate(ARG),1)\n");  
+        out.flush();  
+        String responsePos3= in.readLine();  
+  
+        System.out.println("pos3: "+responsePos3);  
+  
+        assertFalse(responsePos1.equalsIgnoreCase(responsePos3));  
+  
+  
+    }catch(Exception e){  
+        fail();  
+        System.out.println(e.getStackTrace());  
+    }  
+}
+```
+
 ### Progettazione
 Anche qui faccio uno script che si limita a leggere una singola distanza e lascio che sia l'attore a implementare la logica di invocare il sonar ogni x finché non ottengo un valore minore della soglia, in questo modo posso gestire tutti i parametri con un file di config e modificarli in futuro se necessario.
 
@@ -61,9 +137,9 @@ Gestiamo solo il caso in cui mi arrivano più volte gli stessi messaggi perché 
 
 sonar in python
 ```python
+# File: sonar.py
 import RPi.GPIO as GPIO
 import time
-import sys
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -93,50 +169,130 @@ while True:
    pulse_duration = pulse_end - pulse_start
    distance = pulse_duration * 17165   #distance = vt/2
    distance = round(distance, 1)
+   #print ('Distance:',distance,'cm')
    print ( distance )
    sys.stdout.flush()   #Importante!
    time.sleep(0.25)
 ```
 
+sonar in c
+``` c
+#include <iostream>
+#include <wiringPi.h>
+#include <fstream>
+#include <cmath>
+  
+//#define TRUE 1
+//Wiring Pi numbers for radar with stepper
+#define TRIG 0  //4
+#define ECHO 2  //5
+  
+using namespace std;
+/*
+ * in the directory: of SonarAlone.c:
+1)  [ sudo ../../pi-blaster/pi-blaster ] if servo
+2)  nano
+sudo ./SonarAlone
+In nat/servosonar:
+sudo java -jar   SonarAloneP2PMain.jar
+sudo python radar.py
+ */
+void setup() {
+    wiringPiSetup();
+    pinMode(TRIG, OUTPUT);
+    pinMode(ECHO, INPUT);
+  
+    //TRIG pin must start LOW
+    digitalWrite(TRIG, LOW);
+    delay(30);
+}
+  
+int getCM() {
+    //Send trig pulse
+    digitalWrite(TRIG, HIGH);
+    delayMicroseconds(20);
+    digitalWrite(TRIG, LOW);
+  
+    //Wait for echo start
+    while(digitalRead(ECHO) == LOW);
+  
+    //Wait for echo end
+    long startTime = micros();
+    while(digitalRead(ECHO) == HIGH);
+    long travelTime = micros() - startTime;
+  
+    //Get distance in cm
+    int distance = travelTime / 58;
+  
+    return distance;
+}
+  
+int main(void) {
+    int cm ;    
+    setup();
+    while(1) {
+        cm = getCM();
+        cout <<  cm <<   endl;
+        delay(300);
+    }
+    return 0;
+}
+```
+
 facciamo solo uno script che accende e uno script che spegne e ci pensa l'attore ad invocare lo script secondo bisogno per mostrare lo stato corrente, la logica di lampeggiamento è lasciata all'attore led da gestire e non allo script in shell.
 
-ledOn in python
+led in python
 ``` python
+#File: LedControl.py
+import sys
 import RPi.GPIO as GPIO
 
-LED_PIN = 21
-
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(LED_PIN,GPIO.OUT)
-GPIO.setwarnings(False)
+GPIO.setup(25,GPIO.OUT)
 
-GPIO.output(LED_PIN, GPIO.HIGH)
+for line in sys.stdin:
+   print(line)
+   v = float(line)
+   if v <= 10 :
+      GPIO.output(25,GPIO.HIGH)
+   else:
+      GPIO.output(25,GPIO.LOW)
 ```
 
-ledOff in python
-``` python
-import RPi.GPIO as GPIO
+led in shellscript (blink)
+```sh
+echo Unexporting.
+echo 25 > /sys/class/gpio/unexport #
+echo 25 > /sys/class/gpio/export #
+cd /sys/class/gpio/gpio25 #
 
-LED_PIN = 21
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(LED_PIN,GPIO.OUT)
-GPIO.setwarnings(False)
-
-GPIO.output(LED_PIN, GPIO.LOW)
+echo Setting direction to out.
+echo out > direction #
+echo Setting pin high.
+echo 1 > value #
+sleep 1 #
+echo Setting pin low
+echo 0 > value #
+sleep 1 #
+echo Setting pin high.
+echo 1 > value #
+sleep 1 #
+echo Setting pin low
+echo 0 > value #
 ```
-
+led in shellscript (single turnOn)
+``` shell
+gpio readall #
+echo Setting direction to out
+gpio mode 6 out #
+echo Write 1
+gpio write 6 1 #
+sleep 1 #
+echo Write 0
+gpio write 6 0 #
+```
 ### Deployment
-#### Deployment on RaspberryPi 3B/3B+
-![[Pasted image 20231129180114.png]]
-##### Led
-- braccino corto: pin fisico 39 (GND)
-- braccino lungo: pin fisico 40 (GPIO21)
-##### Sonar
-- VCC : pin fisico 4 (+5v)
-- GND : pin fisico 6 (GND)
-- TRIG: pin fisico 11 (GPIO 17)
-- ECHO: pin fisico 13 (GPIO 27)
+
 
 
 # 
