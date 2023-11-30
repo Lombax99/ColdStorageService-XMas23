@@ -210,7 +210,7 @@ QActor controller context ctxcoldstoragearea {
 
 
 QActor coldroom context ctxcoldstoragearea {
-	//corrente: quanta roba c'è nella cold room
+	//effettivo: quanta roba c'è nella cold room
 	//previsto: quanto deve ancora arrivare, ma per cui c'è un biglietto emesso
 	[#
 		var PesoEffettivo = 0
@@ -655,7 +655,6 @@ QActor planexec context ctxcoldstoragearea{
 		var CurMoveTodo   = ""		
 		var StepTime      = "315"
 		var Plantodo = ""
-		var AtHome = true
    	#]
    	
 	State s0 initial{

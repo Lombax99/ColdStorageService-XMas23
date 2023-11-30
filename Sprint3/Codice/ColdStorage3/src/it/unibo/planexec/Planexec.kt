@@ -23,7 +23,6 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 				var CurMoveTodo   = ""		
 				var StepTime      = "315"
 				var Plantodo = ""
-				var AtHome = true
 				return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State

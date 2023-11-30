@@ -14,7 +14,7 @@ public class ColdRoomObserver implements CoapHandler{
     String ctxqakdest = "ctxcoldstoragearea";
 
     public ColdRoomObserver(){
-        System.out.println("observer started");
+        System.out.println("crobserver started");
 
         CoapConnection coldroomconn = new CoapConnection(CSIPADDRESS+":"+CSPORT, ctxqakdest+"/coldroom" );
         coldroomconn.observeResource( this );
