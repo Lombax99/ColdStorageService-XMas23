@@ -90,7 +90,7 @@ function sendMessage(request, parameters) {
 }
 
 
-//msg(accept,reply,tickethandler,roberto,accept(T_1698228378_2_0),17)
+//msg(accept,reply,tickethandler,accessgui,accept(T_1698228378_2_0),17)
 //accept
 function getMsgType(msg){
     return msg.split('(')[1].split(',')[0];

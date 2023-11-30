@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+
+
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ServiceAccessGui web page</title>
+    <link rel="stylesheet" href="/css/mystyle.css">
+</head>
+<body style="text-align:center;" onload="connect()">
+
+<h1 style="color:white; font-size:300%; background-color:#008CBA">Status GUI</h1>
+
+
+<br>
+
+<p style="font-size:150%;"/>Cold room Effective Weight: <!--
+, current weight:
+<label style="font-size:120%;" id="cw" th:text="${cw}"></label>
+expected weight:-->
+<label style="font-size:120%;" id="ew" th:text="${ew}"></label>
+
+
+<p style="font-size:150%;"/>Cold room Promised Weight: <!--
+, current weight:
+<label style="font-size:120%;" id="cw" th:text="${cw}"></label>
+expected weight:-->
+<label style="font-size:120%;" id="pw" th:text="${pw}"></label>
+
+
+<p style="font-size:150%;"/>Rejected Tickets: <!--
+, current weight:
+<label style="font-size:120%;" id="cw" th:text="${cw}"></label>
+expected weight:-->
+<label style="font-size:120%;" id="rt" th:text="${rt}"></label>
+
+
+<script src="/js/socket.js"></script>
+</body>
+</html>
+
