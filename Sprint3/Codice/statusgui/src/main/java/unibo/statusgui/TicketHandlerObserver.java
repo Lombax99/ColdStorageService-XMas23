@@ -16,8 +16,8 @@ public class TicketHandlerObserver implements CoapHandler{
     public TicketHandlerObserver(){
         System.out.println("thobserver started");
 
-        CoapConnection coldroomconn = new CoapConnection(CSIPADDRESS+":"+CSPORT, ctxqakdest+"/tickethandler" );
-        coldroomconn.observeResource( this );
+        CoapConnection tickethandlerconn = new CoapConnection(CSIPADDRESS+":"+CSPORT, ctxqakdest+"/tickethandler" );
+        tickethandlerconn.observeResource( this );
     }
 
 

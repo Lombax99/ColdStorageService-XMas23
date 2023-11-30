@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 
 
-
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>ServiceAccessGui web page</title>
     <link rel="stylesheet" href="/css/mystyle.css">
@@ -33,6 +32,17 @@ expected weight:-->
 <label style="font-size:120%;" id="cw" th:text="${cw}"></label>
 expected weight:-->
 <label style="font-size:120%;" id="rt" th:text="${rt}"></label>
+
+
+<p style="font-size:150%;"/>Robot Status: </br><!--
+, current weight:
+<label style="font-size:120%;" id="cw" th:text="${cw}"></label>
+expected weight:-->
+<textarea style="font-size:120%;" id="maintext" th:text="${maintext}" cols="30" rows="10"></textarea>
+
+
+
+    <!--<textarea style="font-size:150%;" id="outputText" rows=10 cols=40 wrap=on readonly>Welcome to Christmas's service.</textarea>-->
 
 
 <script src="/js/socket.js"></script>

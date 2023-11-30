@@ -44,10 +44,10 @@ class Facade ( name: String, scope: CoroutineScope, isconfined: Boolean=false  )
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t017",targetState="depositreqhandler",cond=whenRequest("depositRequestF"))
-					transition(edgeName="t018",targetState="loadcontroller",cond=whenRequest("loaddoneF"))
-					transition(edgeName="t019",targetState="checktickethandler",cond=whenRequest("checkmyticketF"))
-					transition(edgeName="t020",targetState="getweightcoldroom",cond=whenRequest("getweightF"))
+					 transition(edgeName="t020",targetState="depositreqhandler",cond=whenRequest("depositRequestF"))
+					transition(edgeName="t021",targetState="loadcontroller",cond=whenRequest("loaddoneF"))
+					transition(edgeName="t022",targetState="checktickethandler",cond=whenRequest("checkmyticketF"))
+					transition(edgeName="t023",targetState="getweightcoldroom",cond=whenRequest("getweightF"))
 				}	 
 				state("depositreqhandler") { //this:State
 					action { //it:State
@@ -62,8 +62,8 @@ class Facade ( name: String, scope: CoroutineScope, isconfined: Boolean=false  )
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t121",targetState="returnticket",cond=whenReply("accept"))
-					transition(edgeName="t122",targetState="rejectticket",cond=whenReply("reject"))
+					 transition(edgeName="t124",targetState="returnticket",cond=whenReply("accept"))
+					transition(edgeName="t125",targetState="rejectticket",cond=whenReply("reject"))
 				}	 
 				state("rejectticket") { //this:State
 					action { //it:State
@@ -104,7 +104,7 @@ class Facade ( name: String, scope: CoroutineScope, isconfined: Boolean=false  )
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="tc23",targetState="checkresponse",cond=whenReply("ticketchecked"))
+					 transition(edgeName="tc26",targetState="checkresponse",cond=whenReply("ticketchecked"))
 				}	 
 				state("checkresponse") { //this:State
 					action { //it:State
@@ -134,7 +134,7 @@ class Facade ( name: String, scope: CoroutineScope, isconfined: Boolean=false  )
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="tg24",targetState="returnweight",cond=whenReply("currentweight"))
+					 transition(edgeName="tg27",targetState="returnweight",cond=whenReply("currentweight"))
 				}	 
 				state("returnweight") { //this:State
 					action { //it:State
@@ -165,7 +165,7 @@ class Facade ( name: String, scope: CoroutineScope, isconfined: Boolean=false  )
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t025",targetState="returnload",cond=whenReply("chargetaken"))
+					 transition(edgeName="t028",targetState="returnload",cond=whenReply("chargetaken"))
 				}	 
 				state("returnload") { //this:State
 					action { //it:State

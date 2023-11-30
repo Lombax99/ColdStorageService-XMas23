@@ -146,7 +146,7 @@ QActor controller context ctxcoldstoragearea {
 	}Goto work
 	
 	//senza robot
-	
+	/*
 	State startjob  {
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
@@ -158,12 +158,12 @@ QActor controller context ctxcoldstoragearea {
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 		
 	} Goto work
-	
+	*/
 	
 	//col robot
-	/* 
+	
 	State startjob  {
-		forward led -m moving : moving(1)
+		//forward led -m moving : moving(1)
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
 				#]
@@ -175,7 +175,7 @@ QActor controller context ctxcoldstoragearea {
 	} Transition endjob whenMsg stop -> stoppedwhileworking
 						whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
-	*/				
+					
 						
 	State stoppedwhileworking {
 		forward planexec -m stopplan : stopplan(1)
@@ -285,9 +285,11 @@ QActor tickethandler context ctxcoldstoragearea {
 		
 		var Rejected = 0
 		#]
+		
 	State s0 initial{
-		println("tickethandler - ticketime: $TICKETTIME") color blue
 		printCurrentMessage
+		println("tickethandler - ticketime: $TICKETTIME") color blue
+		updateResource [# "" + Rejected #]
 	} Goto work
 	
 	

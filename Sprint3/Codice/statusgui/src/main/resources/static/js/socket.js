@@ -26,25 +26,29 @@ function connect(){
         //alert(`Got Message: ${event.data}`);
         msg = event.data;
         //alert(`Got Message: ${msg}`);
-        console.log("ws, message: " + msg);
-        updateWeightField(msg);
+        console.log(msg);
+        if(!msg.includes("created") && msg.toString().length != 3){
+            updateWeightField(msg);
+        }
     };
 
     function updateWeightField(msg){
 
-        splittedmsg = msg.split("_");
+        let splittedmsg = msg.split("_");
         switch(splittedmsg[0]){
             case "th":
-                console.log("tickethandler");
                 document.getElementById("rt").innerHTML=splittedmsg[1];
                 break
             case "cr":
-                console.log("coldroom");
                 document.getElementById("ew").innerHTML=splittedmsg[1];
                 document.getElementById("pw").innerHTML=splittedmsg[2];
                 break
+            case "rp":
+                console.log(splittedmsg[1]);
+                document.getElementById("maintext").innerHTML=splittedmsg[1];
+                break
             default:
-                //
+                //console.log("default");
         }
 
 

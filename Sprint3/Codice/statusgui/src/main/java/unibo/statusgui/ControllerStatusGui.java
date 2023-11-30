@@ -23,6 +23,7 @@ public class ControllerStatusGui {
     public String homePage(Model model) {
         this.aggiornaPesoCorrente(model);
         this.aggiornaBigliettiRifiutati(model);
+        this.aggiornaRobotPos(model);
         return "/static/ServiceStatusGui";
     }
 
@@ -49,6 +50,17 @@ public class ControllerStatusGui {
         System.out.println(response);
         String rejectednum = response.split("\\(|\\)")[2];
         model.addAttribute("rt", rejectednum);
+    }
+
+    private void aggiornaRobotPos(Model model){
+        String msg = "msg(getrobotstate,request,statusgui,robotpos,getrobotstate(NO_PARAM),1)\n";
+        String response = sender.sendMessage(msg);
+        System.out.println(response);
+        String[] robotpos = response.split("\\(|\\)|,");
+        System.out.println(robotpos[7]);
+        System.out.println(robotpos[8]);
+        System.out.println(robotpos[10]);
+        model.addAttribute("maintext", "RobotPos=("+ robotpos[7] +"," + robotpos[7] +") direction="+robotpos[10]);
     }
 
 }
