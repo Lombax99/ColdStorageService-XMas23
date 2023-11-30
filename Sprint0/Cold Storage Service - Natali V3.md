@@ -71,21 +71,21 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 
 ![[Architettura_Sprint0_V2.png]]
 ##### Service Area
-```
+``` kotlin
 val ServiceArea = object {
     int LatoLungo             # valore maggiore di 0
     int LatoCorto             # valore maggiore di 0
 }
 ```
 ##### HOME
-```
+``` kotlin
 val Home = object {
     int x = 0
     int y = 0
 }
 ```
 ##### INDOOR port
-```
+``` kotlin
 val IndoorPort = object {
     int x = 0
     int y = MAX_Y
@@ -95,7 +95,7 @@ val IndoorPort = object {
 Lato sud del ColdRoom Container. Transport Trolley potrà interagire con ColdRoom attraverso questa.
 ##### ColdRoom Container
 Contenitore in posizione fissa in Service Area, il cui punto di accesso è la [[Cold Storage Service - Natali V2#Porta della ColdRoom|Porta della ColdRoom]], in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
-```
+``` kotlin
 var ColdRoom = object {
     int MAXW                  # valore maggiore di 0
     int CurrentWeight = 0
@@ -108,20 +108,20 @@ var ColdRoom = object {
 ##### Transport trolley
 Transport trolley è un DDR robot capace di spostarsi all'interno di [[Cold Storage Service - Natali V2#Service Area|Service Area]]. 
 I comandi che è in grado di compiere sono descritti nell'apposita [documentazione](https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html) .
-```
+``` java
 int RD                        #lunghezza del lato del quadrato
 ```
 ##### Food-load
 Carico (in kg) che il robot preleverà da Indoor e depositerà in ColdRoom Container.
-```
+``` java
 int FoodLoad                  # valore non negativo
 ```
 ##### TicketTime
-```
+``` java
 long TicketTime               #tempo esperesso in secondi
 ```
 ##### Ticket
-```
+``` java
 int TicketNumber
 ```
 ##### ServiceAccesGUI
@@ -377,7 +377,7 @@ Durante la face di testing dovranno essere verificati i seguenti casi:
 - Una richiesta di peso eccessiva deve essere rifiutata
 
 Codice terzo test:
-```
+```kotlin
 @Test  
 public void mainUseCaseTest(){  
     //connect to port  

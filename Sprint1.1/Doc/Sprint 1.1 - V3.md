@@ -171,7 +171,7 @@ Durante la face di testing dovranno essere verificati i seguenti casi:
 Ciascuno dei test deve essere superato con più utenti collegati contemporaneamente da uno stesso browser o da browser diversi.
 
 Codice secondo test:
-```
+```kotlin
 @Test  
 public void mainUseCaseTest(){  
     //connect to port  
@@ -224,7 +224,7 @@ public void mainUseCaseTest(){
 ### Progettazione
 ##### Ticket 
 Ticket conterrà TIME, PESO e SEQ. La stringa sarà composta da questi 3 valori separati da "\_" ed inizierà con "T":
-```
+``` java
 int TIME
 int PESO
 int SEQ
@@ -249,7 +249,6 @@ Reply robotDead : robotDead(NO_PARAM)
 Request depositRequest : depositRequest(PESO)
 Reply accept : accept(TICKET)
 Reply reject : reject(NO_PARAM)
-
 
 Request weightrequest : weightrequest(PESO)
 Reply weightOK : weightOK( NO_PARAM )
@@ -446,7 +445,7 @@ QActor tickethandler context ctxcoldstoragearea {
 }
 ```
 ##### Parametrizzazione valori
-```
+```kotlin
 object DomainSystemConfig {
 	private var TicketTime : Long = 0;
 	
@@ -468,7 +467,7 @@ object DomainSystemConfig {
 ```
 ##### Spring Server
 Il server si collegherà agli attori tramite socket
-```
+```kotlin
 public class MessageSender {  
     String COLDSTORAGESERVICEIPADDRESS = "127.0.0.1";  
     int COLDSTORAGESERVICEPORT = 8040;  
@@ -499,7 +498,7 @@ public class MessageSender {
 }
 ```
 Handler dei bottoni:
-```
+``` kotlin
 @RestController
 @RequestMapping("/api")  
 public class ApiController {  
@@ -535,7 +534,11 @@ public class ApiController {
 [[Sprint1.1/ServiceAccessGuiWebPage.html|ServiceAccessGuiWebPage]]
 
 ### Deployment
-
+1) Avviare il container itunibovirtualrobot23 su docker
+	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
+2) In intellij avviare il file MainCtxbasicrobot.kt del progetto BasicRobot
+3) In intellij avviare il file MainCtxColdStorageArea.kt del progetto coldStorage
+4) Avviare la parte web
 
 # 
 ----------------

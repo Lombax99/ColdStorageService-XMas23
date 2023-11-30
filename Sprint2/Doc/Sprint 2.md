@@ -3,9 +3,7 @@ Implementazione di Led e Sonar su RaspberryPi.
 > [!NOTE]- Descrizione
 > Nel secondo sprint verranno implementati il sistema di led e sonar con la logica ad essi associata. I due componenti si troveranno su un dispositivo esterno e dovranno interagire con il sistema remotamente.
 
-- [ ] potrei voler cambiare questo grafico per mostrare anche la parte legata a Spring...
-Modello dello [[Sprint 1.1 - V3|sprint precedente]].
-![[ArchitetturaLogica_Sprint1.1.png]]
+![[Sprint1.1/Doc/coldstorage2arch.png]]
 ### Requisiti
 
 ![[ColdStorageServiceRoomAnnoted.png]]
@@ -24,37 +22,56 @@ The Led is used as a _warning devices_, according to the following scheme:
 [[Cold Storage Service - Natali V3#Analisi preliminare dei requisiti|requisiti sprint 0]]
 
 ### Domande al Committente
-Il committente fornisce software relativo al Led e al Sonar?
-Il LED può/deve essere connesso allo stesso RaspberryPi del sonar?
+Il committente fornisce software relativo al Led e al Sonar? NO
+Il LED può/deve essere connesso allo stesso RaspberryPi del sonar? SI
 Il valore `DLIMIT` deve essere cablato nel sistema o è bene sia definibile in modo configurabile dall’utente finale?
 
 ### Analisi del Problema
-- si tratta di realizzare il software per un **sistema distribuito** costituito da due nodi di elaborazione: un RaspberryPi e un PC convenzionale;
-- i due nodi di elaborazione devono potersi scambiare informazione via rete, usando supporti WIFI;
+##### Sistema distribuito - Come implementiamo la comunicazione?
+```
+Context ctxalarm ip [host="localhost" port=8300]
+Context ctxcoldstoragearea ip [host="127.0.0.1" port=8040]
 
-- Sonar sarà un dispositivo di Input mentre led sarà un dispositivo di output.
+ExternalQActor controller context ctxcoldstoragearea
+```
+Rispetto al resto del sistema Sonar e Led si trovano da requisiti su un RaspberryPi esterno.
+I due nodi di elaborazione devono potersi scambiare informazione via rete.
+Incapsuliamo in due attori i componenti che si occuperanno di gestire Led e Sonar e sfruttiamo questi per scambiare i messaggi.
+##### Segnali
+```
+#segnali per il led
+Dispatch arrivedhome : arrivedhome(NO_PARAM)
+Dispatch moving : moving(NO_PARAM)
+Dispatch stopped : stopped(NO_PARAM)
 
-1. è opportuno incapsulare i componenti disponibli entro altri componenti capaci di interagire via rete? Una fonte di ispirazione in questo senso è il concetto di [DigitalTwin](https://en.wikipedia.org/wiki/Digital_twin);
-2. dove è più opportuno inserire la ‘businenss logic’? In un oggetto che estende il sonar o il `radarSupport`? Oppure è meglio introdurre un terzo componente?
-> Seguendo il [Principio di singola responsabilità](https://it.wikipedia.org/wiki/Principio_di_singola_responsabilit%C3%A0) (e un pò di buon senso) la realizzazione degli use-cases applicativi non deve essere attribuita al software di gestione dei dispositivi di I/O.
-> Lasciamo che sia il controller a gestire la logica.
-> Il `Controller` deve ricevere in ingresso i dati del sensore `HC-SR04`, elaborarli e inviare comandi al Led.
+#segnali per il sonar
+Dispatch stop : stop(NO_PARAM)
+Dispatch continue : continue(NO_PARAM)
+```
 
-3. quale forma di interazione è più opportuna? diretta/mediata (aka observer), sincrona/asincrona?
-
-
-
+> [!NOTE]- Perchè Dispatch?
+> In entrambi i casi i segnali sono destinati ad un attore specifico conosciuto.
+> Nel caso del sonar, anche trattandosi di uno stop d'emergenza non è stato usato Req/Resp poiché in un caso reale, se anche malauguratamente il segnale di stop dovesse non arrivare correttamente sarebbe estremamente facile mandarne un secondo immediatamente
+##### Business Logic
+**Led:** La logica di accensione e spegnimento del led verrà gestita dall'attore associato in base allo stato comunicato dal controller. Il componente di basso livello deve solo essere in grado di accendere/spegnere il led.
+**Sonar:** Sfruttiamo l'attore associato al sonar per elaborare i dati emessi dal sonar e decidere se lanciare al controller il segnale di allarme.
+- PRO: alleggerisco il carico di dati nella rete, semplifico il controller, principio di singola responsabilità.
+- CONTRO: difficoltà maggiore nel caso di DLIMIT variabile, il file di config sarebbe diverso dal precedente e posto sul raspberry.
+##### Problema del messaggio duplicato
+Dobbiamo gestire il caso in cui arrivano più volte gli stessi messaggi (ottengo 2 stop di fila ad esempio perdendo il "continue" intermedio)
+##### Architettura logica dopo l'analisi del problema
+![[Sprint1.1/Doc/coldstorage2arch.png]]
 ### Test Plan
 Stato del led che si aggiorna correttamente.
 Controller che modifica correttamente lo stato dopo aver ricevuto un segnale dal sonar.
 
 Il testing di un sonar riguarda due aspetti distinti:
-1. il test sul corretto funzionamento del dispositivo in quanto tale. Supponendo di porre di fronte al Sonar un ostacolo a distanza D, il Sonar deve emettere dati di valore D +/- epsilon.
-2. il test sul corretto funzionamento del componente software responsabile della trasformazione del dispositivo in un produttore di dati consumabili da un altro componente.
+1) il test sul corretto funzionamento del dispositivo in quanto tale. Supponendo di porre di fronte al Sonar un ostacolo a distanza D, il Sonar deve emettere dati di valore D +/- epsilon.
+2) il test sul corretto funzionamento del componente software responsabile della trasformazione del dispositivo in un produttore di dati consumabili da un altro componente.
 
 Test implementato: 
-Supponendo di porre di fronte al Sonar un ostacolo a distanza D, il BasicRobot deve farmarsi, riparte solo quando non è presente alcun ostacolo di fronte al Sonar di distanza minore di D.
-```
+Supponendo di porre di fronte al Sonar un ostacolo a distanza D, il BasicRobot deve fermarsi e riparte solo dopo che l'ostacolo è rimosso.
+``` kotlin
 @Test  
 public void mainUseCaseTest(){  
     //connect to port  
@@ -62,7 +79,7 @@ public void mainUseCaseTest(){
         Socket client= new Socket("localhost", 8040);  
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));  
         BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));  
-  
+		
         out.write("msg(depositRequestF,request,test2,facade,depositRequestF(1),1)\n");  
         out.flush();  
         //wait for response  
@@ -70,57 +87,56 @@ public void mainUseCaseTest(){
         response = response.split(",")[4];  
         String ticket = response.replace("acceptF(","");  
         ticket = ticket.replace(")","");  
-  
+		
         out.write("msg(checkmyticketF,request,test2,facade,checkmyticketF(" + ticket + "),1)\n");  
         out.flush();  
         String responseC= in.readLine();  
-  
+		
         out.write("msg(loaddoneF,request,test2,facade,loaddoneF(1),1)\n");  
         out.flush();  
         String responseL= in.readLine();  
-  
-  
+		
+		
         System.out.println("sleep 2 seconds");  
         TimeUnit.SECONDS.sleep(4);  
-  
+		
         out.write("msg(stop,dispatch,test2,controller,stop(),1)\n");  
-  
-  
+		
+		
         System.out.println("sleep 1 seconds");  
         TimeUnit.SECONDS.sleep(1);  
-  
+		
         out.write("msg(getrobotstate,request,test2,robotpos,getrobotstate(ARG),1)\n");  
         out.flush();  
         String responsePos1= in.readLine();  
         responsePos1 = responsePos1.split(",")[4];  
         System.out.println("pos1: "+responsePos1); //robotstate(pos(0,4),DOWN)  
-  
+		
         System.out.println("sleep 1 seconds for pos");  
         TimeUnit.SECONDS.sleep(1);  
-  
+		
         out.write("msg(getrobotstate,request,test2,robotpos,getrobotstate(ARG),1)\n");  
         out.flush();  
         String responsePos2= in.readLine();  
         responsePos2 = responsePos2.split(",")[4];  
         System.out.println("pos2: "+responsePos2);   //robotstate(pos(0,4),DOWN)  
-  
+		
         assertTrue(responsePos1.equalsIgnoreCase(responsePos2));  
-  
+		
         out.write("msg(continue,dispatch,test2,controller,continue(),1)\n");  
-  
-  
+		
+		
         System.out.println("sleep 1 seconds for pos");  
         TimeUnit.SECONDS.sleep(1);  
-  
+		
         out.write("msg(getrobotstate,request,test2,robotpos,getrobotstate(ARG),1)\n");  
         out.flush();  
         String responsePos3= in.readLine();  
-  
+		
         System.out.println("pos3: "+responsePos3);  
-  
+		
         assertFalse(responsePos1.equalsIgnoreCase(responsePos3));  
-  
-  
+		
     }catch(Exception e){  
         fail();  
         System.out.println(e.getStackTrace());  
@@ -129,13 +145,61 @@ public void mainUseCaseTest(){
 ```
 
 ### Progettazione
-Anche qui faccio uno script che si limita a leggere una singola distanza e lascio che sia l'attore a implementare la logica di invocare il sonar ogni x finché non ottengo un valore minore della soglia, in questo modo posso gestire tutti i parametri con un file di config e modificarli in futuro se necessario.
+##### SonarActor
+```
+QActor sonar context ctxalarm{
+	
+	[# 	var Distanza = 20.0; #]
+	
+	State s0 initial {
+		println("alarm - sonar started") color green
+	} Goto work
+	
+	State work{
+		[#    
+			while(SonarService.getDistance() > Distanza){}
+		#]
+		
+		forward controller -m stop : stop(1)
+		println("alarm - sent stop") color green
+	}Goto stopped
+	
+	State stopped  {
+		[#    
+			while(SonarService.getDistance() < Distanza){}
+ 		#]
+		forward controller -m continue : continue(1)
+		println("alarm - sent continue") color green
+	} Goto work
+}
+```
+##### SonarService
+Legge i dati rilevato dal sonar da stdin
+``` kotlin
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
-Segnali? Per il sonar va bene dispatch, so perfettamente a chi devo mandarlo (quindi non event) e non mi serve req/resp perché basta inviargliene altri nel peggior dei casi, farlo req/resp complica troppo per nessun vantaggio.
-
-Gestiamo solo il caso in cui mi arrivano più volte gli stessi messaggi perché perdo i messaggi intermedi (ottengo 2 stop di fila perché perdo il continue in mezzo)
-
-sonar in python
+object SonarService {
+    var reader: BufferedReader? = null
+	
+    init {
+        try {
+            var p  = Runtime.getRuntime().exec("python3 -u sonar.py")
+            reader = BufferedReader( InputStreamReader(p.inputStream))
+        } catch (e : Exception) {
+            println(e.message)
+        }
+    }
+	
+    fun getDistance() : Double {
+        var distance = reader!!.readLine().toDouble()
+        println(distance)
+        return distance
+    }
+}
+```
+##### Sonar
+sonar in python: dopo l'avvio scrive la distanza calcolata su stdout 4 volte al secondo
 ```python
 import RPi.GPIO as GPIO
 import time
@@ -173,8 +237,68 @@ while True:
    sys.stdout.flush()   #Importante!
    time.sleep(0.25)
 ```
-
-facciamo solo uno script che accende e uno script che spegne e ci pensa l'attore ad invocare lo script secondo bisogno per mostrare lo stato corrente, la logica di lampeggiamento è lasciata all'attore led da gestire e non allo script in shell.
+##### LedActor
+```
+QActor led context ctxalarm{
+	State s0 initial {
+		
+	}Goto athome
+	
+	State athome {
+		[#    
+			try{
+    			val p  = Runtime.getRuntime().exec("python3 ledOFF.py")
+    		}catch( e : Exception){
+    			println(e.message)
+    		}
+		#]
+		println("alarm - atHome -led off ") color yellow
+		
+	} Transition t1 whenMsg arrivedhome -> athome
+					whenMsg moving -> currmoving
+					whenMsg stopped -> arrested
+	
+	State currmoving {
+		[#    
+			try{
+    			val p  = Runtime.getRuntime().exec("python3 ledON.py")
+    		}catch( e : Exception){
+    			println(e.message)
+    		}
+		#]
+		
+		println("alarm - moving - ledOn") color yellow
+		
+		[# Thread.sleep(1000);
+			try{
+    			val p  = Runtime.getRuntime().exec("python3 ledOFF.py")
+    		}catch( e : Exception){
+    			println(e.message)
+    		}
+		#]
+		
+		println("alarm - moving - LedOff") color yellow
+	} Transition t2 whenTime 1000 -> currmoving
+					whenMsg moving -> currmoving
+					whenMsg arrivedhome -> athome
+					whenMsg stopped -> arrested
+	
+	State arrested {
+		[#    
+			try{
+    			val p  = Runtime.getRuntime().exec("python3 ledON.py")
+			}catch( e : Exception){
+				println(e.message)
+			}
+		#]
+		println("alarm - arrested  - led on") color yellow
+	} Transition t3 whenMsg stopped -> arrested
+					whenMsg arrivedhome -> athome
+					whenMsg moving -> currmoving
+}
+```
+##### Led
+facciamo solo uno script che accende e uno script che spegne e ci pensa l'attore ad invocare lo script secondo bisogno per mostrare lo stato corrente, la logica di lampeggiamento è lasciata all'attore led da gestire e non allo script.
 
 ledOn in python
 ``` python
@@ -201,7 +325,73 @@ GPIO.setwarnings(False)
 
 GPIO.output(LED_PIN, GPIO.LOW)
 ```
+##### Controller
+```
+QActor controller context ctxcoldstoragearea {
 
+	[# var PESO = 0	#]
+	
+	State s0 initial {
+		printCurrentMessage
+	} Goto work
+	
+	State work{ //inHome
+		println("controller - work") color green
+	} Transition t0 whenMsg stop -> stopped
+					whenMsg continue -> work
+					whenRequest loaddone -> startjob
+	
+	State stopped{
+		println("controller - stopped") color green
+		forward led -m stopped : stopped(1)
+		forward planexec -m stopplan : stopplan(1)
+	}Transition t0 whenMsg stop -> stopped
+					whenMsg continue -> continueworking
+	
+	State continueworking{
+		println("controller - continue") color green
+		forward led -m arrivedhome : arrivedhome(1)
+		forward planexec -m continueplan : continueplan(1)
+	}Goto work
+	
+	State startjob  {
+		forward led -m moving : moving(1)
+		onMsg(loaddone : loaddone(PESO) ){
+			[# PESO = payloadArg(0).toInt()	#]
+			println("controller - startjob dichiarato: $PESO") color green
+		}
+		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
+		request transporttrolley -m doJob : doJob($PESO)
+	} Transition endjob whenMsg stop -> stoppedwhileworking
+						whenReply robotDead -> handlerobotdead
+						whenReply jobdone -> jobdone
+	
+	State stoppedwhileworking {
+		forward planexec -m stopplan : stopplan(1)
+		println("stopped while working") color magenta
+		forward led -m stopped : stopped(1)
+	}Transition t0 whenMsg continue -> waitingforreply
+	
+	State waitingforreply{
+		forward planexec -m continueplan : continueplan(1)
+		println("continued") color green
+		forward led -m moving : moving(1)
+	}Transition endjob whenMsg stop -> stoppedwhileworking
+						whenReply robotDead -> handlerobotdead
+						whenReply jobdone -> jobdone
+	
+	State jobdone{
+		println("jobdone") color green
+		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
+		forward led -m arrivedhome : arrivedhome(1)
+	} Goto work
+	
+	State handlerobotdead{
+		println("robotdead") color red
+		printCurrentMessage
+	}
+}
+```
 ### Deployment
 #### Deployment on RaspberryPi 3B/3B+
 ![[RaspPin.png]]
@@ -213,7 +403,6 @@ GPIO.output(LED_PIN, GPIO.LOW)
 - GND : pin fisico 6 (GND)
 - TRIG: pin fisico 11 (GPIO 17)
 - ECHO: pin fisico 13 (GPIO 27)
-
 # 
 ----------------
 

@@ -65,7 +65,7 @@ Dopo discussioni con il committente è stato decretato che il peso da scaricare 
 ### Progettazione
 ##### Sistema di coordinate
 Sia RD l'unità di misura
-```
+``` kotlin
 Home = (0, 0)
 Indoor = (0, 4)
 ColdRoom = (5, 2)
@@ -185,7 +185,7 @@ Durante la face di testing dovranno essere verificati i seguenti casi:
 - Verifichiamo che in caso il robot subisca dei problemi il sistema si fermi correttamente.
 
 Codice primo test:
-```
+``` kotlin
 @Test  
 public void mainUseCaseTest(){  
     //connect to port  

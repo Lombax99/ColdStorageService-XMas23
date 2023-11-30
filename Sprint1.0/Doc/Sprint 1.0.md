@@ -123,10 +123,6 @@ NOTA: Ma tutti i parametri che abbiamo tipo MAXW TICKETTIME, da dove vengono? Li
 	NOTA: abbiamo definito con il committente che il peso da scaricare sia sempre minore o uguale al peso massimo trasportabile.
 	
 ![[Sprint1.0/Doc/coldstoragearch.png | 300]]
-
-NOTE: test plan?
-definizione di mockGUI per fare i test ecc...
-
 ### Progettazione
 NOTE: dividiamo un po' il codice e aggiungiamo qualche commento legato ai problemi di sopra
 ``` qak
