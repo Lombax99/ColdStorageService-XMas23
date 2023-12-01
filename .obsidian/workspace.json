@@ -54,14 +54,7 @@
                 "source": false
               }
             }
-          }
-        ],
-        "currentTab": 2
-      },
-      {
-        "id": "f5fdf39ca9484362",
-        "type": "tabs",
-        "children": [
+          },
           {
             "id": "88324b2d4cffa444",
             "type": "leaf",
@@ -73,8 +66,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "ba515decaf40df39",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Sprint2/Codice/ColdStorage/coldstorage2arch.png"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -140,7 +144,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint2/Codice/ColdStorage/coldstorage2arch.png",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -157,7 +161,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint2/Codice/ColdStorage/coldstorage2arch.png",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -190,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md"
+                "file": "Sprint2/Codice/ColdStorage/coldstorage2arch.png"
               }
             }
           },
@@ -221,12 +225,12 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "88324b2d4cffa444",
+  "active": "ba515decaf40df39",
   "lastOpenFiles": [
+    "Sprint2/Doc/Sprint 2.md",
     "Sprint1.1/Doc/Sprint 1.1 - V3.md",
     "Sprint1.0/Doc/Sprint 1.0 - V3.md",
     "Sprint0/Cold Storage Service - Natali V3.md",
-    "Sprint2/Doc/Sprint 2.md",
     "Sprint2/Codice/Alarm/alarmarch",
     "Sprint2/Codice/Alarm/qakicons/system.PNG",
     "Sprint2/Codice/Alarm/qakicons/symActorSmall.png",

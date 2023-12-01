@@ -1,9 +1,11 @@
+- [ ] c'è il discorso del timer prima del prossimo stop da cambiare
 ### Goal dello Sprint 2
 Implementazione di Led e Sonar su RaspberryPi.
 > [!NOTE]- Descrizione
 > Nel secondo sprint verranno implementati il sistema di led e sonar con la logica ad essi associata. I due componenti si troveranno su un dispositivo esterno e dovranno interagire con il sistema remotamente.
 
 ![[Sprint1.1/Doc/coldstorage2arch.png]]
+
 ### Requisiti
 
 ![[ColdStorageServiceRoomAnnoted.png]]
@@ -24,7 +26,7 @@ The Led is used as a _warning devices_, according to the following scheme:
 ### Domande al Committente
 Il committente fornisce software relativo al Led e al Sonar? NO
 Il LED può/deve essere connesso allo stesso RaspberryPi del sonar? SI
-Il valore `DLIMIT` deve essere cablato nel sistema o è bene sia definibile in modo configurabile dall’utente finale?
+Il valore `DLIMIT` deve essere cablato nel sistema o è bene sia definibile in modo configurabile dall’utente finale? Non deve cambiare
 
 ### Analisi del Problema
 ##### Sistema distribuito - Come implementiamo la comunicazione?
@@ -37,7 +39,7 @@ ExternalQActor controller context ctxcoldstoragearea
 Rispetto al resto del sistema Sonar e Led si trovano da requisiti su un RaspberryPi esterno.
 I due nodi di elaborazione devono potersi scambiare informazione via rete.
 Incapsuliamo in due attori i componenti che si occuperanno di gestire Led e Sonar e sfruttiamo questi per scambiare i messaggi.
-##### Segnali
+##### Messaggi
 ```
 #segnali per il led
 Dispatch arrivedhome : arrivedhome(NO_PARAM)
@@ -49,6 +51,7 @@ Dispatch stop : stop(NO_PARAM)
 Dispatch continue : continue(NO_PARAM)
 ```
 
+- [ ] indicare meglio cosa intendo e dispatch non è udp, se fallisce o se crolla ottengo un errore... ?
 > [!NOTE]- Perchè Dispatch?
 > In entrambi i casi i segnali sono destinati ad un attore specifico conosciuto.
 > Nel caso del sonar, anche trattandosi di uno stop d'emergenza non è stato usato Req/Resp poiché in un caso reale, se anche malauguratamente il segnale di stop dovesse non arrivare correttamente sarebbe estremamente facile mandarne un secondo immediatamente
@@ -177,6 +180,7 @@ QActor sonar context ctxalarm{
 ```
 ##### SonarService
 Legge i dati rilevato dal sonar da stdin
+- [ ] c'è il discorso del timer prima del prossimo stop da sistemare
 ``` kotlin
 import java.io.BufferedReader
 import java.io.InputStreamReader
