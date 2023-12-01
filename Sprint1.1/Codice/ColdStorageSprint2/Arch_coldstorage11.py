@@ -17,7 +17,7 @@ eventedgeattr = {
     'color': 'red',
     'style': 'dotted'
 }
-with Diagram('coldstorage2Arch', show=False, outformat='png', graph_attr=graphattr) as diag:
+with Diagram('coldstorage11Arch', show=False, outformat='png', graph_attr=graphattr) as diag:
   with Cluster('env'):
      sys = Custom('','./qakicons/system.png')
 ### see https://renenyffenegger.ch/notes/tools/Graphviz/attributes/label/HTML-like/index
@@ -26,21 +26,15 @@ with Diagram('coldstorage2Arch', show=False, outformat='png', graph_attr=graphat
           coldroom=Custom('coldroom','./qakicons/symActorSmall.png')
           tickethandler=Custom('tickethandler','./qakicons/symActorSmall.png')
           facade=Custom('facade','./qakicons/symActorSmall.png')
-          transporttrolley=Custom('transporttrolley','./qakicons/symActorSmall.png')
-          basicrobot=Custom('basicrobot','./qakicons/symActorSmall.png')
-          planexec=Custom('planexec','./qakicons/symActorSmall.png')
-          robotpos=Custom('robotpos','./qakicons/symActorSmall.png')
-     transporttrolley >> Edge(color='magenta', style='solid', decorate='true', label='<moverobot<font color="darkgreen"> moverobotdone moverobotfailed</font> &nbsp; >',  fontcolor='magenta') >> robotpos
+          serviceaccessgui=Custom('serviceaccessgui','./qakicons/symActorSmall.png')
+     with Cluster('ctxbasicrobot', graph_attr=nodeattr):
+          transporttrolley=Custom('transporttrolley(ext)','./qakicons/externalQActor.png')
+     controller >> Edge(color='magenta', style='solid', decorate='true', label='<doJob<font color="darkgreen"> jobdone robotDead</font> &nbsp; >',  fontcolor='magenta') >> transporttrolley
      tickethandler >> Edge(color='magenta', style='solid', decorate='true', label='<weightrequest<font color="darkgreen"> weightOK weightKO</font> &nbsp; >',  fontcolor='magenta') >> coldroom
-     robotpos >> Edge(color='magenta', style='solid', decorate='true', label='<doplan<font color="darkgreen"> doplandone doplanfailed</font> &nbsp; >',  fontcolor='magenta') >> planexec
      facade >> Edge(color='magenta', style='solid', decorate='true', label='<depositRequest<font color="darkgreen"> accept reject</font> &nbsp; checkmyticket<font color="darkgreen"> ticketchecked</font> &nbsp; >',  fontcolor='magenta') >> tickethandler
+     serviceaccessgui >> Edge(color='magenta', style='solid', decorate='true', label='<depositRequestF<font color="darkgreen"> acceptF rejectF</font> &nbsp; checkmyticketF<font color="darkgreen"> ticketcheckedF</font> &nbsp; loaddoneF<font color="darkgreen"> chargetakenF</font> &nbsp; >',  fontcolor='magenta') >> facade
      facade >> Edge(color='magenta', style='solid', decorate='true', label='<loaddone<font color="darkgreen"> chargetaken</font> &nbsp; >',  fontcolor='magenta') >> controller
      facade >> Edge(color='magenta', style='solid', decorate='true', label='<getweight<font color="darkgreen"> currentweight</font> &nbsp; >',  fontcolor='magenta') >> coldroom
-     planexec >> Edge(color='magenta', style='solid', decorate='true', label='<step<font color="darkgreen"> stepdone stepfailed</font> &nbsp; >',  fontcolor='magenta') >> basicrobot
      controller >> Edge(color='blue', style='solid',  label='<updateWeight &nbsp; >',  fontcolor='blue') >> coldroom
-     basicrobot >> Edge(color='blue', style='solid',  label='<robotready &nbsp; >',  fontcolor='blue') >> transporttrolley
-     planexec >> Edge(color='blue', style='solid',  label='<nextmove &nbsp; nomoremove &nbsp; >',  fontcolor='blue') >> planexec
-     transporttrolley >> Edge(color='blue', style='solid',  label='<setrobotstate &nbsp; setdirection &nbsp; >',  fontcolor='blue') >> robotpos
      tickethandler >> Edge(color='blue', style='solid',  label='<updateWeight &nbsp; >',  fontcolor='blue') >> coldroom
-     controller >> Edge(color='blue', style='solid',  label='<stopplan &nbsp; continueplan &nbsp; >',  fontcolor='blue') >> planexec
 diag

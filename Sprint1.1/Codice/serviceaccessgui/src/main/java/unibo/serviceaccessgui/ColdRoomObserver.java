@@ -23,12 +23,12 @@ public class ColdRoomObserver implements CoapHandler{
 
     @Override
     public void onLoad(CoapResponse response) {
-        CommUtils.outcyan("PlanCoapObserver changed! " + response.getResponseText() );
+        CommUtils.outcyan("ColdRoomCoapObserver changed! " + response.getResponseText() );
         WebSocketConfiguration.wshandler.sendToAll("" + response.getResponseText());
     }
 
     @Override
     public void onError() {
-        System.out.println("ColdRoomObserver observe error!");
+        System.out.println("ColdRoomCoapObserver observe error!");
     }
 }
