@@ -18,7 +18,7 @@ public class ApiController {
 
     @PostMapping("/weightreq")
     public String weightreq(){
-        String msg = "msg(getweight,request,accessgui,coldroom,getweight(NO_PARAM),1)\n";
+        String msg = "msg(getweightF,request,accessgui,facade,getweight(NO_PARAM),1)\n";
         return sender.sendMessage(msg);
     }
 
