@@ -30,7 +30,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolea
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="ready25",targetState="work",cond=whenDispatch("robotready"))
+					 transition(edgeName="ready28",targetState="work",cond=whenDispatch("robotready"))
 				}	 
 				state("work") { //this:State
 					action { //it:State
@@ -40,7 +40,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolea
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="startworking26",targetState="startjob",cond=whenRequest("doJob"))
+					 transition(edgeName="startworking29",targetState="startjob",cond=whenRequest("doJob"))
 				}	 
 				state("startjob") { //this:State
 					action { //it:State
@@ -66,7 +66,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolea
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="gofetch27",targetState="movingtocoldroom",cond=whenReply("moverobotdone"))
+					 transition(edgeName="gofetch30",targetState="movingtocoldroom",cond=whenReply("moverobotdone"))
 				}	 
 				state("movingtocoldroom") { //this:State
 					action { //it:State
@@ -76,7 +76,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolea
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="godrop28",targetState="checkforjob",cond=whenReply("moverobotdone"))
+					 transition(edgeName="godrop31",targetState="checkforjob",cond=whenReply("moverobotdone"))
 				}	 
 				state("checkforjob") { //this:State
 					action { //it:State
@@ -103,8 +103,8 @@ class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolea
 				 	 		stateTimer = TimerActor("timer_waitforjob", 
 				 	 					  scope, context!!, "local_tout_transporttrolley_waitforjob", 3000.toLong() )
 					}	 	 
-					 transition(edgeName="gofetchagain29",targetState="goinghome",cond=whenTimeout("local_tout_transporttrolley_waitforjob"))   
-					transition(edgeName="gofetchagain30",targetState="startjob",cond=whenRequest("doJob"))
+					 transition(edgeName="gofetchagain32",targetState="goinghome",cond=whenTimeout("local_tout_transporttrolley_waitforjob"))   
+					transition(edgeName="gofetchagain33",targetState="startjob",cond=whenRequest("doJob"))
 				}	 
 				state("goinghome") { //this:State
 					action { //it:State

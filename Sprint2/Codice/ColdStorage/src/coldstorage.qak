@@ -101,10 +101,10 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 
 //-----------------------------------------------------------------------
 
-//Context ctxalarm ip [host="127.0.0.1" port=8300]
+Context ctxalarm ip [host="127.0.0.1" port=8300]
 
-//ExternalQActor led context ctxalarm
-//ExternalQActor sonar context ctxalarm
+ExternalQActor led context ctxalarm
+ExternalQActor sonar context ctxalarm
 
 //-----------------------------------------------------------------------
 
@@ -131,18 +131,18 @@ QActor controller context ctxcoldstoragearea {
 			
 	State stopped{
 		println("controller - stopped") color green
-		//forward led -m stopped : stopped(1)
+		forward led -m stopped : stopped(1)
 		forward planexec -m stopplan : stopplan(1)
 	}Transition t0 whenMsg stop -> stopped
 					whenMsg continue -> continueworking
 	
 	State continueworking{
 		println("controller - continue") color green
-		//forward led -m arrivedhome : arrivedhome(1)
+		forward led -m arrivedhome : arrivedhome(1)
 		forward planexec -m continueplan : continueplan(1)
 	}Goto work
 	//senza robot
-	 
+	/* 
 	State startjob  {
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
@@ -154,9 +154,9 @@ QActor controller context ctxcoldstoragearea {
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 		
 	} Goto work
+	*/
 	
 	
-	/*
 	State startjob  {
 		forward led -m moving : moving(1)
 		onMsg(loaddone : loaddone(PESO) ){
@@ -171,18 +171,18 @@ QActor controller context ctxcoldstoragearea {
 						whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
 						
-		*/				
+						
 	State stoppedwhileworking {
 		forward planexec -m stopplan : stopplan(1)
 		println("stopped while working") color magenta
-		//forward led -m stopped : stopped(1)
+		forward led -m stopped : stopped(1)
 		
 	}Transition t0 whenMsg continue -> waitingforreply
 	
 	State waitingforreply{
 		forward planexec -m continueplan : continueplan(1)
 		println("continued") color green
-		//forward led -m moving : moving(1)
+		forward led -m moving : moving(1)
 	}Transition endjob whenMsg stop -> stoppedwhileworking
 						whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
@@ -192,7 +192,7 @@ QActor controller context ctxcoldstoragearea {
 	State jobdone{
 		println("jobdone") color green
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
-		//forward led -m arrivedhome : arrivedhome(1)
+		forward led -m arrivedhome : arrivedhome(1)
 	} Goto work
 	
 	
