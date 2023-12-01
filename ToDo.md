@@ -4,6 +4,7 @@
 - [ ] rifare grafico sprint1
 - [ ] Aggiungere codice di gestione aggiornamento peso come observer sprint 1.1
 - [ ] deployment sprint 1.1
+- [ ] Devo fare un bel lavorone sui grafici per mantenere continuità e per farli bene
 
 
 
