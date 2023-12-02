@@ -53,24 +53,8 @@ QActor sonar context ctxalarm{
  		#]
 		forward controller -m continue : continue(1)
 		println("alarm - sent continue") color green
-	} Goto work
+	} Transition t0 whenTime 3000 -> work
 	
-	/* 
-	State work{
-		
-	}Transition t0 whenTime 3000 -> stop
-	
-	State stop  {
-		forward planexec -m stop : stop(1)
-		println("alarm - sent stop") color green
-	} Transition t1 whenTime 2000 -> continue
-	
-	
-	State continue  {
-		forward planexec -m continue : continue(1)
-		println("alarm - sent continue") color green
-	} Transition t1 whenTime 10000 -> work
-	*/
 }
 
 

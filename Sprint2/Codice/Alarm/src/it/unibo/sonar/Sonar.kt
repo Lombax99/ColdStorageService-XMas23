@@ -54,8 +54,10 @@ class Sonar ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) 
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
+				 	 		stateTimer = TimerActor("timer_stopped", 
+				 	 					  scope, context!!, "local_tout_sonar_stopped", 3000.toLong() )
 					}	 	 
-					 transition( edgeName="goto",targetState="work", cond=doswitch() )
+					 transition(edgeName="t00",targetState="work",cond=whenTimeout("local_tout_sonar_stopped"))   
 				}	 
 			}
 		}

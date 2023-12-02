@@ -43,9 +43,9 @@ class Led ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t10",targetState="athome",cond=whenDispatch("arrivedhome"))
-					transition(edgeName="t11",targetState="currmoving",cond=whenDispatch("moving"))
-					transition(edgeName="t12",targetState="arrested",cond=whenDispatch("stopped"))
+					 transition(edgeName="t11",targetState="athome",cond=whenDispatch("arrivedhome"))
+					transition(edgeName="t12",targetState="currmoving",cond=whenDispatch("moving"))
+					transition(edgeName="t13",targetState="arrested",cond=whenDispatch("stopped"))
 				}	 
 				state("currmoving") { //this:State
 					action { //it:State
@@ -73,10 +73,10 @@ class Led ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : 
 				 	 		stateTimer = TimerActor("timer_currmoving", 
 				 	 					  scope, context!!, "local_tout_led_currmoving", 1000.toLong() )
 					}	 	 
-					 transition(edgeName="t23",targetState="currmoving",cond=whenTimeout("local_tout_led_currmoving"))   
-					transition(edgeName="t24",targetState="currmoving",cond=whenDispatch("moving"))
-					transition(edgeName="t25",targetState="athome",cond=whenDispatch("arrivedhome"))
-					transition(edgeName="t26",targetState="arrested",cond=whenDispatch("stopped"))
+					 transition(edgeName="t24",targetState="currmoving",cond=whenTimeout("local_tout_led_currmoving"))   
+					transition(edgeName="t25",targetState="currmoving",cond=whenDispatch("moving"))
+					transition(edgeName="t26",targetState="athome",cond=whenDispatch("arrivedhome"))
+					transition(edgeName="t27",targetState="arrested",cond=whenDispatch("stopped"))
 				}	 
 				state("arrested") { //this:State
 					action { //it:State
@@ -93,9 +93,9 @@ class Led ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t37",targetState="arrested",cond=whenDispatch("stopped"))
-					transition(edgeName="t38",targetState="athome",cond=whenDispatch("arrivedhome"))
-					transition(edgeName="t39",targetState="currmoving",cond=whenDispatch("moving"))
+					 transition(edgeName="t38",targetState="arrested",cond=whenDispatch("stopped"))
+					transition(edgeName="t39",targetState="athome",cond=whenDispatch("arrivedhome"))
+					transition(edgeName="t310",targetState="currmoving",cond=whenDispatch("moving"))
 				}	 
 			}
 		}
