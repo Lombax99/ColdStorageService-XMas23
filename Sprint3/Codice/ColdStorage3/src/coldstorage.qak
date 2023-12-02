@@ -104,10 +104,10 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 
 //-----------------------------------------------------------------------
 
-//Context ctxalarm ip [host="127.0.0.1" port=8300]
+Context ctxalarm ip [host="127.0.0.1" port=8300]
 
-//ExternalQActor led context ctxalarm
-//ExternalQActor sonar context ctxalarm
+ExternalQActor led context ctxalarm
+ExternalQActor sonar context ctxalarm
 
 //-----------------------------------------------------------------------
 
@@ -134,19 +134,19 @@ QActor controller context ctxcoldstoragearea {
 			
 	State stopped{
 		println("controller - stopped") color green
-		//forward led -m stopped : stopped(1)
+		forward led -m stopped : stopped(1)
 		forward planexec -m stopplan : stopplan(1)
 	}Transition t0 whenMsg stop -> stopped
 					whenMsg continue -> continueworking
 	
 	State continueworking{
 		println("controller - continue") color green
-		//forward led -m arrivedhome : arrivedhome(1)
+		forward led -m arrivedhome : arrivedhome(1)
 		forward planexec -m continueplan : continueplan(1)
 	}Goto work
 	
 	//senza robot
-	/*
+	
 	State startjob  {
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
@@ -158,10 +158,10 @@ QActor controller context ctxcoldstoragearea {
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 		
 	} Goto work
-	*/
+	
 	
 	//col robot
-	
+	/* 
 	State startjob  {
 		//forward led -m moving : moving(1)
 		onMsg(loaddone : loaddone(PESO) ){
@@ -176,18 +176,18 @@ QActor controller context ctxcoldstoragearea {
 						whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
 					
-						
+		*/				
 	State stoppedwhileworking {
 		forward planexec -m stopplan : stopplan(1)
 		println("stopped while working") color magenta
-		//forward led -m stopped : stopped(1)
+		forward led -m stopped : stopped(1)
 		
 	}Transition t0 whenMsg continue -> waitingforreply
 	
 	State waitingforreply{
 		forward planexec -m continueplan : continueplan(1)
 		println("continued") color green
-		//forward led -m moving : moving(1)
+		forward led -m moving : moving(1)
 	}Transition endjob whenMsg stop -> stoppedwhileworking
 						whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
@@ -197,7 +197,7 @@ QActor controller context ctxcoldstoragearea {
 	State jobdone{
 		println("jobdone") color green
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
-		//forward led -m arrivedhome : arrivedhome(1)
+		forward led -m arrivedhome : arrivedhome(1)
 	} Goto work
 	
 	
@@ -411,107 +411,6 @@ QActor tickethandler context ctxcoldstoragearea {
 	}Goto work
 }
 
-QActor facade context ctxcoldstoragearea {
-	[#
-		var Ticket = ""
-		var PesoEff = 0
-		var PesoProm = 0
-		var Valid = true
-		
-	#]
-	State s0 initial{
-		println("ColdStorageFacade - in attesa") color blue
-		printCurrentMessage
-	} Goto work
-	
-	
-	State work {
-	}Transition t0  whenRequest depositRequestF -> depositreqhandler
-					whenRequest loaddoneF -> loadcontroller
-					whenRequest checkmyticketF -> checktickethandler
-					whenRequest getweightF -> getweightcoldroom
-	
-	State depositreqhandler {
-		
-		onMsg(depositRequestF : depositRequestF(PESO)){
-			
-			[# var Peso = payloadArg(0).toInt() #]
-			println("send request to TicketHandler") color blue
-			request tickethandler -m depositRequest : depositRequest($Peso)
-		}
-	}Transition t1 whenReply accept -> returnticket
-					whenReply reject -> rejectticket
-					
-	State rejectticket {
-		println("facade - ticket reject") color blue
-		replyTo depositRequestF with rejectF : rejectF( reject )
-	} Goto work
-	
-	
-	
-	State returnticket {
-		onMsg(accept : accept(TICKET)){
-			
-			[# Ticket = payloadArg(0).toString() #]
-			}
-		println("facade - accettato") color blue
-		replyTo depositRequestF with acceptF : acceptF( $Ticket )
-	} Goto work
-	
-	State checktickethandler {
-		onMsg(checkmyticketF : checkmyticketF(TICKET)){
-			[#	var Ticket = payloadArg(0)		
-				#]
-			println("send check ticket to TicketHandler") color blue
-			request tickethandler -m checkmyticket : checkmyticket($Ticket)
-		}
-	}Transition tc whenReply ticketchecked -> checkresponse
-	
-	State checkresponse {
-		onMsg (ticketchecked : ticketchecked(BOOL)){
-			[# 
-				var Valid = payloadArg(0).toBoolean()
-				# ]
-				println("facade - biglietto accettato? : $Valid") color blue
-				replyTo checkmyticketF with ticketcheckedF : ticketcheckedF($Valid)
-		}
-	}Goto work
-	
-	State getweightcoldroom{
-		onMsg(getweight : getweight(NO_PARAM)){
-			println("send request getweight to ColdRoom") color blue
-			request coldroom -m getweight : getweight(NO_PARAM)
-		}
-	} Transition tg whenReply currentweight -> returnweight
-	
-	State returnweight{
-		onMsg (currentweight : currentweight(PESO_EFF,PESO_PRO)){
-			[# PesoEff = payloadArg(0).toInt()
-				PesoProm = payloadArg(1).toInt()
-			#]
-			println("facade - getweight : $PesoEff , $PesoProm") color blue
-			replyTo getweightF with currentweightF : currentweightF($PesoEff, $PesoProm)
-		}		
-	}Goto work
-	
-	State loadcontroller{
-		onMsg(loaddoneF : loaddoneF(PESO) ){
-			[# var Peso = payloadArg(0).toInt()
-				#]
-			println("send loaddone to Controller") color blue
-			request controller -m loaddone : loaddone($Peso)
-		}
-		
-	}Transition t0 whenReply chargetaken -> returnload
-	
-	State returnload{
-		onMsg (chargetaken : chargetaken( NO_PARAM )){
-			println("facade - loaddone") color blue
-			replyTo loaddoneF with chargetakenF : chargetakenF( NO_PARAM )
-		}	
-	}Goto work
-	
-}
 
 /*
 QActor serviceaccessgui context ctxcoldstoragearea {
@@ -1021,3 +920,117 @@ QActor basicrobot context ctxcoldstoragearea{
 	}   
    
 } 
+
+
+
+
+QActor facade context ctxcoldstoragearea {
+	[#
+		var Ticket = ""
+		var PesoEff = 0
+		var PesoProm = 0
+		var Valid = true
+		
+	#]
+	
+	State s0 initial{
+		
+		delegate "getrejectedtickets" to tickethandler
+		delegate "getrobotstate" to robotpos
+		delegate "getweight" to coldroom
+		
+		
+		
+		println("ColdStorageFacade - in attesa") color blue
+		printCurrentMessage
+	} Goto work
+	
+	
+	State work {
+	}Transition t0  whenRequest depositRequestF -> depositreqhandler
+					whenRequest loaddoneF -> loadcontroller
+					whenRequest checkmyticketF -> checktickethandler
+					whenRequest getweightF -> getweightcoldroom
+	
+	State depositreqhandler {
+		
+		onMsg(depositRequestF : depositRequestF(PESO)){
+			
+			[# var Peso = payloadArg(0).toInt() #]
+			println("send request to TicketHandler") color blue
+			request tickethandler -m depositRequest : depositRequest($Peso)
+		}
+	}Transition t1 whenReply accept -> returnticket
+					whenReply reject -> rejectticket
+					
+	State rejectticket {
+		println("facade - ticket reject") color blue
+		replyTo depositRequestF with rejectF : rejectF( reject )
+	} Goto work
+	
+	
+	
+	State returnticket {
+		onMsg(accept : accept(TICKET)){
+			
+			[# Ticket = payloadArg(0).toString() #]
+			}
+		println("facade - accettato") color blue
+		replyTo depositRequestF with acceptF : acceptF( $Ticket )
+	} Goto work
+	
+	State checktickethandler {
+		onMsg(checkmyticketF : checkmyticketF(TICKET)){
+			[#	var Ticket = payloadArg(0)		
+				#]
+			println("send check ticket to TicketHandler") color blue
+			request tickethandler -m checkmyticket : checkmyticket($Ticket)
+		}
+	}Transition tc whenReply ticketchecked -> checkresponse
+	
+	State checkresponse {
+		onMsg (ticketchecked : ticketchecked(BOOL)){
+			[# 
+				var Valid = payloadArg(0).toBoolean()
+				# ]
+				println("facade - biglietto accettato? : $Valid") color blue
+				replyTo checkmyticketF with ticketcheckedF : ticketcheckedF($Valid)
+		}
+	}Goto work
+	
+	State getweightcoldroom{
+		onMsg(getweight : getweight(NO_PARAM)){
+			println("send request getweight to ColdRoom") color blue
+			request coldroom -m getweight : getweight(NO_PARAM)
+		}
+	} Transition tg whenReply currentweight -> returnweight
+	
+	State returnweight{
+		onMsg (currentweight : currentweight(PESO_EFF,PESO_PRO)){
+			[# PesoEff = payloadArg(0).toInt()
+				PesoProm = payloadArg(1).toInt()
+			#]
+			println("facade - getweight : $PesoEff , $PesoProm") color blue
+			replyTo getweightF with currentweightF : currentweightF($PesoEff, $PesoProm)
+		}		
+	}Goto work
+	
+	State loadcontroller{
+		onMsg(loaddoneF : loaddoneF(PESO) ){
+			[# var Peso = payloadArg(0).toInt()
+				#]
+			println("send loaddone to Controller") color blue
+			request controller -m loaddone : loaddone($Peso)
+		}
+		
+	}Transition t0 whenReply chargetaken -> returnload
+	
+	State returnload{
+		onMsg (chargetaken : chargetaken( NO_PARAM )){
+			println("facade - loaddone") color blue
+			replyTo loaddoneF with chargetakenF : chargetakenF( NO_PARAM )
+		}	
+	}Goto work
+	
+}
+

@@ -36,7 +36,7 @@ public class ControllerStatusGui {
     }
 
     private void aggiornaPesoCorrente(Model model){
-        String msg = "msg(getweight,request,statusgui,coldroom,getweight(NO_PARAM),1)\n";
+        String msg = "msg(getweight,request,statusgui,facade,getweight(NO_PARAM),1)\n";
         String response = sender.sendMessage(msg);
         System.out.println(response);
         String[] weights = response.split("\\(|\\)")[2].split(",");
@@ -45,7 +45,7 @@ public class ControllerStatusGui {
     }
 
     private void aggiornaBigliettiRifiutati(Model model){
-        String msg = "msg(getrejectedtickets,request,statusgui,tickethandler,getrejectedtickets(NO_PARAM),1)\n";
+        String msg = "msg(getrejectedtickets,request,statusgui,facade,getrejectedtickets(NO_PARAM),1)\n";
         String response = sender.sendMessage(msg);
         System.out.println(response);
         String rejectednum = response.split("\\(|\\)")[2];
@@ -53,13 +53,10 @@ public class ControllerStatusGui {
     }
 
     private void aggiornaRobotPos(Model model){
-        String msg = "msg(getrobotstate,request,statusgui,robotpos,getrobotstate(NO_PARAM),1)\n";
+        String msg = "msg(getrobotstate,request,statusgui,facade,getrobotstate(NO_PARAM),1)\n";
         String response = sender.sendMessage(msg);
         System.out.println(response);
         String[] robotpos = response.split("\\(|\\)|,");
-        System.out.println(robotpos[7]);
-        System.out.println(robotpos[8]);
-        System.out.println(robotpos[10]);
         model.addAttribute("maintext", "RobotPos=("+ robotpos[7] +"," + robotpos[7] +") direction="+robotpos[10]);
     }
 

@@ -2,7 +2,6 @@
 {"actor":"controller", "msgType":"dispatch", "curstate":"work", "nextstate":"work", "msgId":"continue"}
 {"actor":"controller", "msgType":"dispatch", "curstate":"stopped", "nextstate":"stopped", "msgId":"stop"}
 {"actor":"controller", "msgType":"dispatch", "curstate":"stopped", "nextstate":"continueworking", "msgId":"continue"}
-{"actor":"controller", "msgType":"dispatch", "curstate":"startjob", "nextstate":"stoppedwhileworking", "msgId":"stop"}
 {"actor":"controller", "msgType":"dispatch", "curstate":"stoppedwhileworking", "nextstate":"waitingforreply", "msgId":"continue"}
 {"actor":"controller", "msgType":"dispatch", "curstate":"waitingforreply", "nextstate":"stoppedwhileworking", "msgId":"stop"}
 {"actor":"coldroom", "msgType":"dispatch", "curstate":"work", "nextstate":"updateWeight", "msgId":"updateWeight"}
