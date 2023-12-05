@@ -8,18 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "dfb6d442222d95ae",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "4893cd21921e19b9",
             "type": "leaf",
             "state": {
@@ -30,67 +18,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "322e361bc3b8fb99",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "9c9deac18e6ae1b2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "88324b2d4cffa444",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "ba515decaf40df39",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "Sprint2/Codice/ColdStorage/coldstorage2arch.png"
-              }
-            }
-          },
-          {
-            "id": "739100c2ca5aba5c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ToDo.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -156,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+                "file": "ToDo.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -173,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+                "file": "ToDo.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -206,7 +135,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md"
+                "file": "ToDo.md"
               }
             }
           },
@@ -237,14 +166,20 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "322e361bc3b8fb99",
+  "active": "4893cd21921e19b9",
   "lastOpenFiles": [
-    "Sprint2/Doc/Sprint 2.md",
-    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
+    "LucaLombardi.jpg",
+    "LisaUccini.png",
+    "GiacomoRomanini.jpg",
     "ToDo.md",
+    "Sprint2/Doc/Sprint 2.md",
     "Sprint2/Codice/ColdStorage/coldstorage2arch.png",
     "Sprint1.1/Doc/Sprint 1.1 - V3.md",
     "Sprint0/Cold Storage Service - Natali V3.md",
+    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
+    "Sprint3/Doc/Sprint 3.md",
+    "Sprint1.0/Doc/Sprint 1.0.md",
+    "Sprint0/Cold Storage Service - Natali V2.md",
     "Sprint2/Codice/Alarm/alarmarch",
     "Sprint2/Codice/Alarm/qakicons/system.PNG",
     "Sprint2/Codice/Alarm/qakicons/symActorSmall.png",
@@ -254,7 +189,6 @@
     "Sprint2/Codice/Alarm/qakicons",
     "Sprint2/Codice/Alarm/alarmarch.png",
     "Sprint2/Codice/ColdStorage/coldstorage2arch",
-    "Sprint1.0/Doc/Sprint 1.0.md",
     "Sprint2/Doc/RaspPin.png",
     "Sprint3/Codice/statusgui/src/test/java/unibo/statusgui/StatusguiApplicationTests.java",
     "Sprint3/Codice/statusgui/src/main/resources/templates/static/ServiceStatusGui.html",
@@ -263,14 +197,11 @@
     "Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/WebSocketConfiguration.java",
     "Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/WebSocketHandler.java",
     "Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/TicketHandlerObserver.java",
-    "Sprint3/Codice/ColdStorage3/qakicons/system.PNG",
-    "Sprint3/Codice/ColdStorage3/qakicons/symActorSmall.png",
     "Sprint1.1/Doc/Sprint 1.1 - V2.md",
     "README.md",
     "GiacomoRomanini.jpg{size = 100}.md",
     "Untitled.md",
     "Sprint0/Cold Storage Service - Natali.md",
-    "Sprint0/Cold Storage Service - Natali V2.md",
     "Sprint1.0/Doc/Sprint 1.0 - V2.md"
   ]
 }

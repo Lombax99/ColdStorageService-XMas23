@@ -72,8 +72,6 @@ Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore
 ### Analisi preliminare dei requisiti
 
 ![[Architettura_Sprint0_V2.png]]
-- [x] niente linguaggio naturale, solo cose comprensibili ✅ 2023-11-10
-- [x] ColdRoom diventa un pojo che dopo verrà cambiato in Attore ✅ 2023-11-10
 ##### Service Area
 Area rettangolare di dimensione L * l dove agisce il Transport Trolley.
 ##### HOME
@@ -82,7 +80,6 @@ Zona della Service Area corrispondente all'angolo in alto a sinistra.
 Zona della Service Area corrispondente all'angolo in basso a sinistra.
 ##### Porta della ColdRoom
 Lato sud della ColdRoom. Transport Trolley potrà interagire con ColdRoom attraverso questa.
-- [x] variabili in coldroom ✅ 2023-11-10
 ##### ColdRoom Container
 Contenitore in posizione fissa in Service Area, il cui punto di accesso è la [[Cold Storage Service - Natali V2#Porta della ColdRoom|Porta della ColdRoom]], in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
 ##### DDR robot

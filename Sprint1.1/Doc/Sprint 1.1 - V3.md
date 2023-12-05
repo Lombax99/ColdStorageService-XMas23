@@ -108,11 +108,11 @@ L'eliminazione dei ticket scaduti viene fatta per necessità.
 All'arrivo di una richiesta di emissione del Ticket, se lo spazio calcolato non fosse sufficiente si verifica il TICKETTIME associato ai Ticket generati e non ancora scaricati.
 
 In presenza di Ticket scaduti allora il TicketHandler procederà ad aggiornare il peso.
-In questo modo risolviamo anche il [[Sprint 1.1 - V2#Problema del peso fantasma|problema del peso fantasma]].
+In questo modo risolviamo anche il [[Sprint 1.1 - V3#Problema del peso fantasma|problema del peso fantasma]].
 ##### Quando e da chi vengono aggiornati i pesi in ColdRoom?
-1) Terminata l'azione del Transport Trolley, Controller aggiorna i due pesi tramite dispatch. Viene passata la quantità da decrementare dal peso promesso e la quantità da incrementare al peso effettivo (i due valori possono essere diversi a causa del problema del [[Cold Storage Service - Natali#Il problema del driver distratto |Driver Distratto]]).
+1) Terminata l'azione del Transport Trolley, Controller aggiorna i due pesi tramite dispatch. Viene passata la quantità da decrementare dal peso promesso e la quantità da incrementare al peso effettivo (i due valori possono essere diversi a causa del problema del [[Cold Storage Service - Natali V3#Il problema del driver distratto |Driver Distratto]]).
 
-2) Caso particolare: i pesi sono aggiornati da TicketHandler tramite dispatch "updateWeight" nella [[Sprint 1.1 - V2#Gestione dei Ticket scaduti|gestione dei ticket scaduti]].
+2) Caso particolare: i pesi sono aggiornati da TicketHandler tramite dispatch "updateWeight" nella [[Sprint 1.1 - V3#Gestione dei Ticket scaduti|gestione dei ticket scaduti]].
 ##### Sicurezza dei Ticket
 Dall'analisi della sicurezza sono apparse le seguenti vulnerabilità:
 1) Bisogna assicurarsi che chi richiede il ticket sia l'unico a poterlo usare.
@@ -270,7 +270,7 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 //-----------------------------------------------------------------------
 ```
 ##### Controller
-Rispetto allo sprint 1 non abbiamo più bisogno della mockRequest e gestiamo il [[Sprint 1.1 - V2#Problema del peso ipotetico|problema del peso ipotetico]].
+Rispetto allo sprint 1 non abbiamo più bisogno della mockRequest e gestiamo il [[Sprint 1.1 - V3#Problema del peso ipotetico|problema del peso ipotetico]].
 ```
 QActor controller context ctxcoldstoragearea {
 
@@ -301,7 +301,7 @@ QActor controller context ctxcoldstoragearea {
 ```
 ##### ColdRoom
 Rispetto allo sprint precedente ColdRoom deve verificare se è presente abbastanza spazio e rispondere di conseguenza.
-UpdateWeight inoltre deve essere aggiornato per gestire il [[Sprint 1.1 - V2#Problema del peso ipotetico|problema del peso ipotetico]].
+UpdateWeight inoltre deve essere aggiornato per gestire il [[Sprint 1.1 - V3#Problema del peso ipotetico|problema del peso ipotetico]].
 Il peso promesso viene sottratto, se va aumentato fornire __P_PRO negativo__.
 ```
 QActor coldroom context ctxcoldstoragearea {

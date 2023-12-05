@@ -19,7 +19,7 @@ A company intends to build a ColdStorageService, composed of a set of elements:
 
 3. a ServiceAcessGUI that allows an human being to see the current weigth of the material stored in the ColdRoom and to send to the ColdStorageService a request to store new **FW** kg of food. If the request is accepted, the services return a ticket that expires after a prefixed amount of time (**TICKETTIME** secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.
 
-4. a ServiceStatusGUI that allows a Service-manager (an human being) to supervises the ==state== of the ==service==.
+4. a ServiceStatusGUI that allows a Service-manager (an human being) to supervises the state of the service.
 #### Alarm requirements
 
 The system includes a Sonar and a Led connected to a RaspberryPi.
@@ -94,7 +94,7 @@ val IndoorPort = object {
 ##### Porta della ColdRoom
 Lato sud del ColdRoom Container. Transport Trolley potrà interagire con ColdRoom attraverso questa.
 ##### ColdRoom Container
-Contenitore in posizione fissa in Service Area, il cui punto di accesso è la [[Cold Storage Service - Natali V2#Porta della ColdRoom|Porta della ColdRoom]], in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
+Contenitore in posizione fissa in Service Area, il cui punto di accesso è la [[Cold Storage Service - Natali V3#Porta della ColdRoom|Porta della ColdRoom]], in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.
 ``` kotlin
 var ColdRoom = object {
     int MAXW                  # valore maggiore di 0
@@ -106,7 +106,7 @@ var ColdRoom = object {
 ##### DDR robot
 *Differential Drive Robot*, vedi [robot](https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html).
 ##### Transport trolley
-Transport trolley è un DDR robot capace di spostarsi all'interno di [[Cold Storage Service - Natali V2#Service Area|Service Area]]. 
+Transport trolley è un DDR robot capace di spostarsi all'interno di [[Cold Storage Service - Natali V3#Service Area|Service Area]]. 
 I comandi che è in grado di compiere sono descritti nell'apposita [documentazione](https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html) .
 ``` java
 int RD                        #lunghezza del lato del quadrato
@@ -401,7 +401,7 @@ public void mainUseCaseTest(){
 ```
 
 ### Divisione in Sprint
-1) Transport Trolley + ColdStorageService [[Sprint 1.0]]
+1) Transport Trolley + ColdStorageService [[Sprint 1.0 - V3]]
 > [!NOTE]- Descrizione
 > Lo scopo del primo sprint è produrre una prima versione funzionante del core dell'applicazione. Questo comprende ColdStorageService con la logica di gestione dei Ticket e il TransportTrolley funzionante.
 > A questa parte deve essere affiancata una mock version della ServiceAccessGUI per la fase di testing.
