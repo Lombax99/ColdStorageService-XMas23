@@ -58,6 +58,7 @@ public class ControllerStatusGui {
         System.out.println(response);
         String[] robotpos = response.split("\\(|\\)|,");
         model.addAttribute("maintext", "RobotPos=("+ robotpos[7] +"," + robotpos[7] +") direction="+robotpos[10]);
+
     }
 
 }
