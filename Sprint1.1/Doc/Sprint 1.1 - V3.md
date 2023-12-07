@@ -530,6 +530,36 @@ public class ApiController {
     }
 }
 ```
+
+##### ColdRoomObserver
+```
+@Component  
+public class ColdRoomObserver implements CoapHandler{  
+    String CSIPADDRESS = "127.0.0.1";  
+    int CSPORT = 8040;  
+    String ctxqakdest = "ctxcoldstoragearea";  
+  
+    public ColdRoomObserver(){  
+        System.out.println("observer started");  
+  
+        CoapConnection coldroomconn = new CoapConnection(CSIPADDRESS+":"+CSPORT, ctxqakdest+"/coldroom" );  
+        coldroomconn.observeResource( this );  
+    }  
+  
+  
+    @Override  
+    public void onLoad(CoapResponse response) {  
+        CommUtils.outcyan("ColdRoomCoapObserver changed! " + response.getResponseText() );  
+        WebSocketConfiguration.wshandler.sendToAll("" + response.getResponseText());  
+    }  
+  
+    @Override  
+    public void onError() {  
+        System.out.println("ColdRoomCoapObserver observe error!");  
+    }  
+}
+```
+
 ##### HTML page
 [[Sprint1.1/ServiceAccessGuiWebPage.html|ServiceAccessGuiWebPage]]
 
