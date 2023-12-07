@@ -1,4 +1,3 @@
-- [ ] c'è il discorso del timer prima del prossimo stop da cambiare
 ### Goal dello Sprint 2
 Implementazione di Led e Sonar su RaspberryPi.
 > [!NOTE]- Descrizione
@@ -51,10 +50,10 @@ Dispatch stop : stop(NO_PARAM)
 Dispatch continue : continue(NO_PARAM)
 ```
 
-- [ ] indicare meglio cosa intendo e dispatch non è udp, se fallisce o se crolla ottengo un errore... ?
-> [!NOTE]- Perchè Dispatch?
+> [!NOTE]- Perché Dispatch?
 > In entrambi i casi i segnali sono destinati ad un attore specifico conosciuto.
-> Nel caso del sonar, anche trattandosi di uno stop d'emergenza non è stato usato Req/Resp poiché in un caso reale, se anche malauguratamente il segnale di stop dovesse non arrivare correttamente sarebbe estremamente facile mandarne un secondo immediatamente
+> Nel caso del sonar, anche trattandosi di uno stop d'emergenza non è stato usato Req/Resp poiché il raspberry non mi permette comunque di visualizzare facilmente una risposta (solo un led come output) inoltre da requisiti non è richiesto e la buona riuscita del comando può essere visualizzato nella ServiceStatusGUI.
+> Inoltre il sistema non è business/safety critical. Nel peggiore dei casi un utente potrebbe interagire una seconda volta con il sonar se la prima volta non avesse funzionato correttamente.
 ##### Business Logic
 **Led:** La logica di accensione e spegnimento del led verrà gestita dall'attore associato in base allo stato comunicato dal controller. Il componente di basso livello deve solo essere in grado di accendere/spegnere il led.
 **Sonar:** Sfruttiamo l'attore associato al sonar per elaborare i dati emessi dal sonar e decidere se lanciare al controller il segnale di allarme.
@@ -161,26 +160,22 @@ QActor sonar context ctxalarm{
 	} Goto work
 	
 	State work{
-		[#    
-			while(SonarService.getDistance() > Distanza){}
-		#]
+		[# while(SonarService.getDistance() > Distanza){} #]
 		
 		forward controller -m stop : stop(1)
 		println("alarm - sent stop") color green
 	}Goto stopped
 	
 	State stopped  {
-		[#    
-			while(SonarService.getDistance() < Distanza){}
- 		#]
+		[# while(SonarService.getDistance() < Distanza){} #]
+		
 		forward controller -m continue : continue(1)
 		println("alarm - sent continue") color green
-	} Goto work
+	} Transition t0 whenTime 3000 -> work         #wait before next signal da requisiti
 }
 ```
 ##### SonarService
 Legge i dati rilevato dal sonar da stdin
-- [ ] c'è il discorso del timer prima del prossimo stop da sistemare
 ``` kotlin
 import java.io.BufferedReader
 import java.io.InputStreamReader
