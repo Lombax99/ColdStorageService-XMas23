@@ -1,10 +1,12 @@
-```tasks # Only tasks that are not done, that is, which begin like this (but without the quotes): # '- [ ] ' or # '* [ ] ' or # '1. [ ] ' # Indented tasks are supported, but only single-line tasks. not done # Tasks due today or earlier: due before tomorrow # Restrict to at most 100 tasks. # If you ask Tasks to display many hundreds or thousands of tasks, # Obsidian's editing performance really slows down. limit 100 # Group and sort the output: group by filename sort by due reverse sort by description # Optionally, ask Tasks to explain how it interpreted this query: explain 
-```
 
+- [ ] Fare lo sprint 3
 - [ ] rifare grafico sprint1
 - [ ] Aggiungere codice di gestione aggiornamento peso come observer sprint 1.1
-- [ ] deployment sprint 1.1 (controllare anche gli altri)
+- [ ] fare i vari deployment
 - [ ] Devo fare un bel lavorone sui grafici per mantenere continuità e per farli bene
+- [ ] controlla che il codice rispetti quando definito in [[Sprint 1.0 - V3#Da "doJob" a comandi per TransportTrolley|questo punto]]. TransportTrolley si appoggia sulla doc fornita o abbiamo fatto una roba nuova di testa nostra?
 
+- [ ] Portare la Doc in un bel formato html che il prof possa navigare per bene
+- [ ] Video demo finale per esame
 
 

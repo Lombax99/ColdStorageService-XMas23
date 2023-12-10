@@ -16,7 +16,7 @@ Descrizione Descrizione Descrizione
 - [x] **Sprint1** - Transport Trolley + ColdStorageService: 
   - Latest Release: [[Sprint 1.0 - V3]], [[Sprint 1.1 - V3]]
   - Sprint Review: 17/11/2023
-- [ ] **Sprint2** - Led e Sonar: 
+- [x] **Sprint2** - Led e Sonar: ✅ 2023-12-09
   - Latest Release: [[Sprint 2]]
   - Sprint Review:
 - [ ] **Sprint3** - ServiceStatusGui: 

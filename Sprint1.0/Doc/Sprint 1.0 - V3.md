@@ -48,7 +48,6 @@ Dispatch updateWeight : updateWeight(PESO)
 Dalla [documentazione](https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html) fornita è chiaro che il basicRobot non possa ricevere il comando "doJob".
 Risulta necessario aggiungere un componente intermedio che traduca la "doJob" in una serie di comandi, TransportTrolley si occuperà di quello.
 Allo stesso modo è anche evidente la mancanza di un comando per caricare e scaricare i materiali trattati in basicRobot, non sarebbe quindi sufficiente in un caso reale.
-- [ ] controlla che il codice rispetti quando definito in questo punto. TransportTrolley si appoggia sulla doc fornita o abbiamo fatto una roba nuova di testa nostra?
 ##### Posizione nella Service Area
 Per definire la posizione del TransportTrolley e permettere il movimento autonomo dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del DDR robot). 
 La [[Cold Storage Service - Natali V3#HOME|Home]] corrisponderà all'origine (0, 0). Useremo coordinate crescenti verso il basso e verso destra.

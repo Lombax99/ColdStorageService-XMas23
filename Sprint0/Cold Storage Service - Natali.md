@@ -160,7 +160,7 @@ Ci sta scrivere a parte le domande e le risposte che abbiamo fatto a Natali, cos
 
 ### Divisione in Sprint
 1) Basic Robot + Cold StorageService [[Sprint 1.0]]
-	- [ ] sistema descrizione 
+	- [x] sistema descrizione ✅ 2023-12-09
 	`Lo scopo del primo sprint è avere una prima versione del robot funzionante con la logica di gestione delle richieste a lui relative. Si tratta del core del progetto, senza quello il resto non ha motivo di esistere.`
 	`Nel secondo sprint implementeremo il sistema di ticketing, implementeremo una prima interfaccia utente solo per i test. Probabilmente la parte che richiederà più tempo, conviene farla prima di aggiungere led e sonar per non complicare la progettazione.`
 2) Led e Sonar [[Sprint 2]]
