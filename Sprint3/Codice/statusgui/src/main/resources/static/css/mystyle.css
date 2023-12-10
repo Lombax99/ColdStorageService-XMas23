@@ -7,6 +7,17 @@
     display: flex;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 2px solid #d2ebf1;
+  text-align: center;
+  padding: 12px;
+}
+
 /* Create two equal columns that sits next to each other */
 .column {
     float: left;
