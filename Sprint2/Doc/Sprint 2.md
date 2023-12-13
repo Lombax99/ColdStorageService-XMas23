@@ -404,6 +404,12 @@ QActor controller context ctxcoldstoragearea {
 - GND : pin fisico 6 (GND)
 - TRIG: pin fisico 11 (GPIO 17)
 - ECHO: pin fisico 13 (GPIO 27)
+
+1) Avviare il container itunibovirtualrobot23 su docker
+	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
+3) In intellij avviare il file MainCtxColdStorageArea.kt del progetto coldStorage
+4) Avvia main alarm
+5) Avviare la parte web
 # 
 ----------------
 
