@@ -6,7 +6,7 @@ A company intends to build a ColdStorageService, composed of a set of elements:
 
 1. a service area (rectangular, flat) that includes:
     - an INDOOR port, to enter food (fruits, vegetables, etc. )
-    - a ColdRoom container, devoted to store food, upto **MAXW** kg .
+    - a ColdRoom container, devoted to store food, up to **MAXW** kg .
     The ColdRoom is positioned within the service area, as shown in the following picture:
 
 ![[ColdStorageServiceRoomAnnoted.png]]

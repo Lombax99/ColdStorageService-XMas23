@@ -8,30 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "4893cd21921e19b9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "0ae024e43c13e9b6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "5dff4cd59ff17530",
             "type": "leaf",
             "state": {
@@ -42,69 +18,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "f9d3fe5962d81c08",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b45a222d9d473d59",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "049f66b9a966c597",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "5d15a519d2829e55",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "475264b95e4c2744",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint3/Doc/Sprint 3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -242,23 +157,23 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Apri selezione rapida": false,
-      "graph:Apri vista grafo": false,
-      "canvas:Crea nuova lavagna": false,
-      "daily-notes:Apri nota del giorno": false,
-      "templates:Inserisci modello": false,
-      "command-palette:Apri riquadro comandi": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
   "active": "5dff4cd59ff17530",
   "lastOpenFiles": [
-    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+    "Sprint3/Doc/Sprint 3.md",
     "Sprint2/Doc/Sprint 2.md",
     "ToDo Per Giovedì ore 00.00.md",
-    "Sprint3/Codice/ColdStorage3/coldstorage3arch",
-    "Sprint3/Doc/Sprint 3.md",
+    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
     "Sprint1.0/Doc/Sprint 1.0 - V3.md",
+    "Sprint3/Codice/ColdStorage3/coldstorage3arch",
     "Sprint0/Cold Storage Service - Natali V3.md",
     "Sprint1.0/Doc/coldstorage2arch.png",
     "Sprint3/Codice/ColdStorage3/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.values.s",
