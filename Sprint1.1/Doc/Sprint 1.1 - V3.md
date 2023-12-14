@@ -468,7 +468,77 @@ object DomainSystemConfig {
 ##### Spring Server: socket e observer
 Il server si collegherà agli attori tramite socket o come coapObserver.
 Le richieste ajax provenienti dai client verranno inoltrate tramite socket.
-```kotlin
+
+```javascript 
+var IP = "http://localhost:8085/api/";
+
+var peso = 0;
+var ticket = "";
+
+function sendMessage(request, parameters) {
+    try
+    {
+        if(parameters)
+            var url = IP+request+"?"+ parameters;
+        else
+            var url = IP+request;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 ) {
+                var response = this.responseText;
+                //console.log("response: " + response);
+                responsehandler(request, response);
+            }
+        };
+        xhttp.open("POST", url, true);
+        xhttp.setRequestHeader('Content-Type', 'text/plain');
+        xhttp.send();
+    }
+    catch(erMsg) {
+        console.log(erMsg);
+    }
+}
+
+function responsehandler(type, response){
+    switch (type){
+        case "weightreq":
+            var weights=getMsgValue(response).split(",");
+            document.getElementById("ew").innerHTML=weights[1];
+            break;
+        case "depositreq":
+            var responsebutton = getMsgType(response);
+            var t = getMsgValue(response);
+            document.getElementById("maintext").innerHTML= "La tua richiesta è stata:" + responsebutton;
+            document.getElementById("varticket").value = t;
+            if(responsebutton == "accept")
+                enableButtons("requestaccepted");
+            else
+                enableButtons("default");
+            break;
+        case "checkreq":
+            var ticketvalid = getMsgValue(response);
+            document.getElementById("maintext").innerHTML = ticketvalid;
+            if(ticketvalid == "true") {
+                peso = getWeightFromTicket(ticket);
+                enableButtons("ticketaccepted");
+            }
+            else
+                enableButtons("default");
+            break;
+        case "loadreq":
+            document.getElementById("maintext").innerHTML = "Il tuo peso è stato preso in carico! ADDIO";
+            peso=0;
+            enableButtons("default");
+            break;
+        default:
+            console.log("richiesta non riconosciuta");
+    }
+
+}
+
+```
+
+```java
 public class MessageSender {  
     String COLDSTORAGESERVICEIPADDRESS = "127.0.0.1";  
     int COLDSTORAGESERVICEPORT = 8040;  
@@ -499,7 +569,7 @@ public class MessageSender {
 }
 ```
 
-``` kotlin
+``` java
 @RestController
 @RequestMapping("/api")  
 public class ApiController {  
@@ -533,7 +603,7 @@ public class ApiController {
 ```
 
 Gli eventi degli attori osservati tramite observer verranno inoltrati ai client tramite websocket, create all'inizio di ogni sessione.
-``` kotlin
+``` java
 @Component  
 public class ColdRoomObserver implements CoapHandler{  
     String CSIPADDRESS = "127.0.0.1";  
@@ -558,6 +628,42 @@ public class ColdRoomObserver implements CoapHandler{
     public void onError() {  
         System.out.println("ColdRoomCoapObserver observe error!");  
     }  
+}
+```
+``` javascript
+var socket;
+var socketIP = "localhost:8085";
+
+
+function connect(){
+    var addr     = "ws://" + socketIP + "/socket"  ;
+    //alert("connect addr=" + addr   );
+
+    // Assicura che sia aperta un unica connessione
+    if(socket !== undefined && socket.readyState !== WebSocket.CLOSED){
+        alert("WARNING: Connessione WebSocket già stabilita");
+    }
+    socket = new WebSocket(addr);
+
+    socket.onopen = function (event) {
+        console.log("Connected to " + addr);
+    };
+
+    socket.onmessage = function (event) {
+        //alert(`Got Message: ${event.data}`);
+        msg = event.data;
+        //alert(`Got Message: ${msg}`);
+        console.log("ws-status:" + msg);
+        updateWeightField(msg);
+    };
+
+    function updateWeightField(msg){
+        if(msg.split("_").length == 2){
+            document.getElementById("ew").innerHTML=msg.split("_")[1];
+        }
+
+    }
+
 }
 ```
 
