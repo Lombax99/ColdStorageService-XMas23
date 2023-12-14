@@ -465,8 +465,9 @@ object DomainSystemConfig {
     }
 }
 ```
-##### Spring Server
-Il server si collegherà agli attori tramite socket
+##### Spring Server: socket e observer
+Il server si collegherà agli attori tramite socket o come coapObserver.
+Le richieste ajax provenienti dai client verranno inoltrate tramite socket.
 ```kotlin
 public class MessageSender {  
     String COLDSTORAGESERVICEIPADDRESS = "127.0.0.1";  
@@ -497,7 +498,7 @@ public class MessageSender {
     }  
 }
 ```
-Handler dei bottoni:
+
 ``` kotlin
 @RestController
 @RequestMapping("/api")  
@@ -531,8 +532,8 @@ public class ApiController {
 }
 ```
 
-##### ColdRoomObserver
-```
+Gli eventi degli attori osservati tramite observer verranno inoltrati ai client tramite websocket, create all'inizio di ogni sessione.
+``` kotlin
 @Component  
 public class ColdRoomObserver implements CoapHandler{  
     String CSIPADDRESS = "127.0.0.1";  
@@ -568,7 +569,7 @@ public class ColdRoomObserver implements CoapHandler{
 	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
 2) In intellij avviare il file MainCtxbasicrobot.kt del progetto BasicRobot
 3) In intellij avviare il file MainCtxColdStorageArea.kt del progetto coldStorage
-4) Avviare la parte web
+4) In intellij avviare il file ServiceaccessguiApplication.java del progetto serviceaccessgui. Aprire il client all'indirizzo http://localhost:8085/
 
 # 
 ----------------
