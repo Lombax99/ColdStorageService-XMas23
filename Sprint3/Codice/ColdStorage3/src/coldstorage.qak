@@ -584,7 +584,7 @@ QActor planexec context ctxcoldstoragearea{
     		println("plan ${Plan}")
     	}
 	} Transition t0 whenTime 100  -> nextMove
-	  
+	
 	
 	State nextMove{ 
 		[# 
