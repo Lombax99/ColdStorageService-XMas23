@@ -57,6 +57,7 @@ Decidiamo di fare richiesta esplicita poiché in mancanza di richieste da parte 
 ##### Come mandare le richieste
 Sfruttiamo la facade già creata in precedenza per richiedere al sistema i valori iniziali per la ServiceStatusGui.
 ##### Architettura logica dopo l'analisi del problema
+- [ ] Problema del grafico che non mostra i delegate 
 ![[Sprint3/Codice/ColdStorage3/coldstorage3arch.png]]
 ![[ArchitetturaWebSprint3.png]]
 ### Test Plan
