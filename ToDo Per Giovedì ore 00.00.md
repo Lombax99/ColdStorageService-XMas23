@@ -7,6 +7,7 @@
 - [ ] Commentare codice di gestione aggiornamento peso observer sprint1.1 (jack)
 
 ToDo Per Esame
+- [ ] Fix contesto del basic robot negli sprint 0, 1 e 1.1
 - [ ] rifare grafico sprint1.0 (as coldstorage2arch ma con lib nuove)
 - [ ] In sprint1.1,1.0 basic sta in un contesto a parte (sta cosa deve essere chiara in tutta la doc)
 - [ ] Crea e testa deployment sprint2
