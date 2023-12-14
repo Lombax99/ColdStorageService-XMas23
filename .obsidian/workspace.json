@@ -55,7 +55,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -121,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ToDo Per Giovedì ore 00.00.md",
+                "file": "Sprint3/Doc/Sprint 3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -138,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ToDo Per Giovedì ore 00.00.md",
+                "file": "Sprint3/Doc/Sprint 3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -171,7 +172,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ToDo Per Giovedì ore 00.00.md"
+                "file": "Sprint3/Doc/Sprint 3.md"
               }
             }
           },
@@ -202,10 +203,12 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "5dff4cd59ff17530",
+  "active": "d4be7a5636e32724",
   "lastOpenFiles": [
-    "Sprint3/Doc/Sprint 3.md",
+    "ToDo Per Giovedì ore 00.00.md",
     "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+    "Sprint2/Doc/Sprint 2.md",
+    "Sprint3/Doc/Sprint 3.md",
     "Sprint3/Codice/ColdStorage3/coldstorage3arch",
     "Sprint0/Cold Storage Service - Natali V3.md",
     "Sprint3/Doc/coldstorage3arch.png",
@@ -216,10 +219,8 @@
     "Sprint3/Codice/ColdStorage3/Arch_coldstorage2.py",
     "Sprint3/Codice/ColdStorage3/coldstorage2arch.png",
     "Sprint3/Codice/ColdStorage3/coldstorage2arch",
-    "Sprint2/Doc/Sprint 2.md",
     "Sprint3/Codice/ColdStorage/coldstorage2arch.png.md",
     "Sprint3/Codice/ColdStorage",
-    "ToDo Per Giovedì ore 00.00.md",
     "Sprint1.0/Doc/Sprint 1.0 - V3.md",
     "Sprint1.0/Doc/coldstorage2arch.png",
     "Sprint3/Codice/ColdStorage3/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.values.s",

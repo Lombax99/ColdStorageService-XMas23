@@ -5,8 +5,8 @@ ServiceStatusGui e grafiche migliorate [[Sprint 3]]
 
 Modello dello [[Sprint 2|sprint precedente]].
 ![[Sprint2/Codice/ColdStorage/coldstorage2arch.png]]
-### Requisiti
 
+### Requisiti
 ![[ColdStorageServiceRoomAnnoted.png]]
 [[Cold Storage Service - Natali V3#Requisiti|Requisiti]]
 
@@ -14,8 +14,7 @@ Modello dello [[Sprint 2|sprint precedente]].
 [[Cold Storage Service - Natali V3#Analisi preliminare dei requisiti|requisiti sprint 0]]
 
 ### Domande al committente:
-Stato del robot? macrostati: movimento, in home, ecc... --> usiamo mappetta e coordinate
-altrimenti tutto più preciso con coordinate, per il cliente non è necessario quest'ultimo punto dipende da noi.
+Per la posizione quanto dobbiamo essere precisi? Serve sapere la posizione corrente ad ogni step? per il cliente non è necessario quest'ultimo punto dipende da noi. --> per semplicità forniamo le coordinate ad ogni cambiamento del macrostato (in home, fase di load, fase di unload, posizione in caso di errore)
 
 ### Analisi del Problema
 ##### Cosa implica lo stato del servizio?
@@ -23,7 +22,8 @@ Lo stato del servizio comprende:
 - Lo stato e la posizione del TransportTrolley.
 - Lo stato della ColdRoom (peso corrente su totale).
 - Il numero di richieste negate dall'inizio del servizio.
-##### Numero di richieste negate non è un dato che abbiamo
+##### Numero di richieste negate
+Aggiorniamo il componente
 ##### Rendo tutti i componenti observable
 Devo usare una righettina nuova nel qak: "updateResource [# planner.robotOnMap() #]"
 ##### Dato iniziale quando carico il componente
