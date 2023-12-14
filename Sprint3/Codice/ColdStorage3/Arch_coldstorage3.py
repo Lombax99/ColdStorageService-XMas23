@@ -33,6 +33,7 @@ with Diagram('coldstorage3Arch', show=False, outformat='png', graph_attr=graphat
      with Cluster('ctxalarm', graph_attr=nodeattr):
           led=Custom('led(ext)','./qakicons/externalQActor.png')
           sonar=Custom('sonar(ext)','./qakicons/externalQActor.png')
+     controller >> Edge(color='magenta', style='solid', decorate='true', label='<doJob<font color="darkgreen"> jobdone robotDead</font> &nbsp; >',  fontcolor='magenta') >> transporttrolley
      transporttrolley >> Edge(color='magenta', style='solid', decorate='true', label='<moverobot<font color="darkgreen"> moverobotdone moverobotfailed</font> &nbsp; >',  fontcolor='magenta') >> robotpos
      tickethandler >> Edge(color='magenta', style='solid', decorate='true', label='<weightrequest<font color="darkgreen"> weightOK weightKO</font> &nbsp; >',  fontcolor='magenta') >> coldroom
      facade >> Edge(color='magenta', style='solid', decorate='true', label='<depositRequest<font color="darkgreen"> accept reject</font> &nbsp; checkmyticket<font color="darkgreen"> ticketchecked</font> &nbsp; >',  fontcolor='magenta') >> tickethandler

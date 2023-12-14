@@ -146,7 +146,7 @@ QActor controller context ctxcoldstoragearea {
 	}Goto work
 	
 	//senza robot
-	
+	/*
 	State startjob  {
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
@@ -159,9 +159,9 @@ QActor controller context ctxcoldstoragearea {
 		
 	} Goto work
 	
-	
+	 */
 	//col robot
-	/* 
+	
 	State startjob  {
 		//forward led -m moving : moving(1)
 		onMsg(loaddone : loaddone(PESO) ){
@@ -176,7 +176,7 @@ QActor controller context ctxcoldstoragearea {
 						whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
 					
-		*/				
+						
 	State stoppedwhileworking {
 		forward planexec -m stopplan : stopplan(1)
 		println("stopped while working") color magenta

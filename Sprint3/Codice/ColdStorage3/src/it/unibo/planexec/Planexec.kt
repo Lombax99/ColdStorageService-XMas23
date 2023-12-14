@@ -42,9 +42,9 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t023",targetState="stoppedwhilenothing",cond=whenDispatch("stopplan"))
-					transition(edgeName="t024",targetState="work",cond=whenDispatch("continueplan"))
-					transition(edgeName="t025",targetState="execplan",cond=whenRequest("doplan"))
+					 transition(edgeName="t026",targetState="stoppedwhilenothing",cond=whenDispatch("stopplan"))
+					transition(edgeName="t027",targetState="work",cond=whenDispatch("continueplan"))
+					transition(edgeName="t028",targetState="execplan",cond=whenRequest("doplan"))
 				}	 
 				state("stoppedwhilenothing") { //this:State
 					action { //it:State
@@ -53,8 +53,8 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t026",targetState="stoppedwhilenothing",cond=whenDispatch("stopplan"))
-					transition(edgeName="t027",targetState="work",cond=whenDispatch("continueplan"))
+					 transition(edgeName="t029",targetState="stoppedwhilenothing",cond=whenDispatch("stopplan"))
+					transition(edgeName="t030",targetState="work",cond=whenDispatch("continueplan"))
 				}	 
 				state("execplan") { //this:State
 					action { //it:State
@@ -72,7 +72,7 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 				 	 		stateTimer = TimerActor("timer_execplan", 
 				 	 					  scope, context!!, "local_tout_planexec_execplan", 100.toLong() )
 					}	 	 
-					 transition(edgeName="t028",targetState="nextMove",cond=whenTimeout("local_tout_planexec_execplan"))   
+					 transition(edgeName="t031",targetState="nextMove",cond=whenTimeout("local_tout_planexec_execplan"))   
 				}	 
 				state("nextMove") { //this:State
 					action { //it:State
@@ -87,7 +87,7 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t029",targetState="doMove",cond=whenDispatch("nextmove"))
+					 transition(edgeName="t032",targetState="doMove",cond=whenDispatch("nextmove"))
 				}	 
 				state("doMove") { //this:State
 					action { //it:State
@@ -109,11 +109,11 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t030",targetState="planinterruptedalarm",cond=whenDispatch("stopplan"))
-					transition(edgeName="t031",targetState="planend",cond=whenDispatch("nomoremove"))
-					transition(edgeName="t032",targetState="nextMove",cond=whenDispatch("nextmove"))
-					transition(edgeName="t033",targetState="nextMove",cond=whenReply("stepdone"))
-					transition(edgeName="t034",targetState="planinterruptedobstacle",cond=whenReply("stepfailed"))
+					 transition(edgeName="t033",targetState="planinterruptedalarm",cond=whenDispatch("stopplan"))
+					transition(edgeName="t034",targetState="planend",cond=whenDispatch("nomoremove"))
+					transition(edgeName="t035",targetState="nextMove",cond=whenDispatch("nextmove"))
+					transition(edgeName="t036",targetState="nextMove",cond=whenReply("stepdone"))
+					transition(edgeName="t037",targetState="planinterruptedobstacle",cond=whenReply("stepfailed"))
 				}	 
 				state("planend") { //this:State
 					action { //it:State
@@ -161,8 +161,8 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="waitingforrestart35",targetState="stopped",cond=whenDispatch("stopplan"))
-					transition(edgeName="waitingforrestart36",targetState="moving",cond=whenDispatch("continueplan"))
+					 transition(edgeName="waitingforrestart38",targetState="stopped",cond=whenDispatch("stopplan"))
+					transition(edgeName="waitingforrestart39",targetState="moving",cond=whenDispatch("continueplan"))
 				}	 
 				state("moving") { //this:State
 					action { //it:State
@@ -172,9 +172,9 @@ class Planexec ( name: String, scope: CoroutineScope, isconfined: Boolean=false 
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t137",targetState="nextMove",cond=whenReply("stepdone"))
-					transition(edgeName="t138",targetState="nextMove",cond=whenDispatch("nextmove"))
-					transition(edgeName="t139",targetState="execplan",cond=whenRequest("doplan"))
+					 transition(edgeName="t140",targetState="nextMove",cond=whenReply("stepdone"))
+					transition(edgeName="t141",targetState="nextMove",cond=whenDispatch("nextmove"))
+					transition(edgeName="t142",targetState="execplan",cond=whenRequest("doplan"))
 				}	 
 			}
 		}
