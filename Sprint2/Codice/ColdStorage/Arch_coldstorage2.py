@@ -6,6 +6,7 @@ os.environ['PATH'] += os.pathsep + 'C:/Program Files/Graphviz/bin/'
 
 graphattr = {     #https://www.graphviz.org/doc/info/attrs.html
     'fontsize': '22',
+    'splines':'ortho',
 }
 
 nodeattr = {   
@@ -27,25 +28,16 @@ with Diagram('coldstorage2Arch', show=False, outformat='png', graph_attr=graphat
           tickethandler=Custom('tickethandler','./qakicons/symActorSmall.png')
           facade=Custom('facade','./qakicons/symActorSmall.png')
           transporttrolley=Custom('transporttrolley','./qakicons/symActorSmall.png')
-          basicrobot=Custom('basicrobot','./qakicons/symActorSmall.png')
-          planexec=Custom('planexec','./qakicons/symActorSmall.png')
-          robotpos=Custom('robotpos','./qakicons/symActorSmall.png')
      with Cluster('ctxalarm', graph_attr=nodeattr):
           led=Custom('led(ext)','./qakicons/externalQActor.png')
           sonar=Custom('sonar(ext)','./qakicons/externalQActor.png')
-     controller >> Edge(color='magenta', style='solid', decorate='true', label='<doJob<font color="darkgreen"> jobdone robotDead</font> &nbsp; >',  fontcolor='magenta') >> transporttrolley
-     transporttrolley >> Edge(color='magenta', style='solid', decorate='true', label='<moverobot<font color="darkgreen"> moverobotdone moverobotfailed</font> &nbsp; >',  fontcolor='magenta') >> robotpos
-     tickethandler >> Edge(color='magenta', style='solid', decorate='true', label='<weightrequest<font color="darkgreen"> weightOK weightKO</font> &nbsp; >',  fontcolor='magenta') >> coldroom
-     robotpos >> Edge(color='magenta', style='solid', decorate='true', label='<doplan<font color="darkgreen"> doplandone doplanfailed</font> &nbsp; >',  fontcolor='magenta') >> planexec
-     facade >> Edge(color='magenta', style='solid', decorate='true', label='<depositRequest<font color="darkgreen"> accept reject</font> &nbsp; checkmyticket<font color="darkgreen"> ticketchecked</font> &nbsp; >',  fontcolor='magenta') >> tickethandler
-     facade >> Edge(color='magenta', style='solid', decorate='true', label='<loaddone<font color="darkgreen"> chargetaken</font> &nbsp; >',  fontcolor='magenta') >> controller
-     facade >> Edge(color='magenta', style='solid', decorate='true', label='<getweight<font color="darkgreen"> currentweight</font> &nbsp; >',  fontcolor='magenta') >> coldroom
-     planexec >> Edge(color='magenta', style='solid', decorate='true', label='<step<font color="darkgreen"> stepdone stepfailed</font> &nbsp; >',  fontcolor='magenta') >> basicrobot
-     controller >> Edge(color='blue', style='solid',  label='<updateWeight &nbsp; >',  fontcolor='blue') >> coldroom
-     basicrobot >> Edge(color='blue', style='solid',  label='<robotready &nbsp; >',  fontcolor='blue') >> transporttrolley
-     controller >> Edge(color='blue', style='solid',  label='<stopped &nbsp; arrivedhome &nbsp; moving &nbsp; >',  fontcolor='blue') >> led
-     planexec >> Edge(color='blue', style='solid',  label='<nextmove &nbsp; nomoremove &nbsp; >',  fontcolor='blue') >> planexec
-     transporttrolley >> Edge(color='blue', style='solid',  label='<setrobotstate &nbsp; setdirection &nbsp; >',  fontcolor='blue') >> robotpos
-     tickethandler >> Edge(color='blue', style='solid',  label='<updateWeight &nbsp; >',  fontcolor='blue') >> coldroom
-     controller >> Edge(color='blue', style='solid',  label='<stopplan &nbsp; continueplan &nbsp; >',  fontcolor='blue') >> planexec
+     controller >> Edge(minlen="4", color='magenta', style='solid',xlabel='<doJob<font color="darkgreen"> jobdone robotDead</font> &nbsp; >',  fontcolor='magenta') >> transporttrolley
+     tickethandler >> Edge(minlen="4", color='magenta', style='solid',xlabel='<weightrequest<font color="darkgreen"> weightOK weightKO</font> &nbsp; >',  fontcolor='magenta') >> coldroom
+     facade >> Edge(minlen="8", color='magenta', style='solid', xlabel='<depositRequest<font color="darkgreen"> accept reject</font> &nbsp; checkmyticket<font color="darkgreen"> ticketchecked</font> &nbsp; >',  fontcolor='magenta') >> tickethandler
+     facade >> Edge(minlen="4", color='magenta', style='solid', xlabel='<loaddone<font color="darkgreen"> chargetaken</font> &nbsp; >',  fontcolor='magenta') >> controller
+     facade >> Edge(minlen="4", color='magenta', style='solid', xlabel='<getweight<font color="darkgreen"> currentweight</font> &nbsp; >',  fontcolor='magenta') >> coldroom
+     controller >> Edge(minlen="4", color='blue', style='solid', xlabel='<updateWeight &nbsp; >',  fontcolor='blue') >> coldroom
+     controller >> Edge(minlen="4", color='blue', style='solid', xlabel='<stopped &nbsp; arrivedhome &nbsp; moving &nbsp; >',  fontcolor='blue') >> led
+     tickethandler >> Edge(minlen="4", color='blue', style='solid', xlabel='<updateWeight &nbsp; >',  fontcolor='blue') >> coldroom
+     sonar >> Edge(minlen="4", color='blue', style='solid', xlabel='<stop &nbsp; continue &nbsp; >',  fontcolor='blue') >> controller
 diag

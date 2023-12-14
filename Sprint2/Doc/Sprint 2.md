@@ -63,7 +63,7 @@ Dispatch continue : continue(NO_PARAM)
 Dobbiamo gestire il caso in cui arrivano più volte gli stessi messaggi (ottengo 2 stop di fila ad esempio perdendo il "continue" intermedio)
 ##### Architettura logica dopo l'analisi del problema
 ![[Sprint2/Codice/ColdStorage/coldstorage2arch.png]]
-![[alarmarch.png]]
+
 
 ### Test Plan
 Stato del led che si aggiorna correttamente.

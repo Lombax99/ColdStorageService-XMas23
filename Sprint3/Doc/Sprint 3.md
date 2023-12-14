@@ -30,6 +30,12 @@ Devo usare una righettina nuova nel qak: "updateResource [# planner.robotOnMap()
 Richieste singole tramite facade
 ##### Facade?
 Ci serve? Ne usiamo una nuova o sfruttiamo quella che già abbiamo?
+
+
+##### Architettura logica dopo l'analisi del problema
+![[Sprint3/Codice/ColdStorage3/coldstorage3arch.png]]
+
+
 ### Test Plan
 1) Testiamo che tutto si aggiorni correttamente
 2) A seguito di una richiesta rifiutata devono aumentare le richieste rifiutate
