@@ -1,8 +1,8 @@
 - [x] Doc Sprint3 (luca) ✅ 2023-12-14
 - [x] Sistema grafico Sprint2: elimina attori, merge tra i 2 grafici dei 2 attori (luca)
 - [x] Stronzate per deployment 2/3 (luca) ✅ 2023-12-14
-- [ ] Sistema codice html Sprint3 (lisix)
-- [ ]  Sistema deployment 1.0 e 1.1 (lisix)
+- [x] Sistema codice html Sprint3 (lisix)
+- [x]  Sistema deployment 1.0 e 1.1 (lisix)
 - [ ] Commentare codice di gestione aggiornamento peso observer sprint1.1 (jack)
 
 ToDo Per Esame
