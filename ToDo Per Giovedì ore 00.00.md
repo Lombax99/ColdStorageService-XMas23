@@ -6,6 +6,7 @@
 - [ ] Commentare codice di gestione aggiornamento peso observer sprint1.1 (jack)
 
 ToDo Per Esame
+- [ ] Link nel deployment e verso i file del codice
 - [ ] Aggiornare la doc sprint 1.1 per far vedere anche i segnali con la F
 - [ ] Grafico Sprint3: elimina attori, comparsa delle gui (luca)
 - [ ] Fix contesto del basic robot negli sprint 0, 1 e 1.1

@@ -58,6 +58,7 @@ Decidiamo di fare richiesta esplicita poiché in mancanza di richieste da parte 
 Sfruttiamo la facade già creata in precedenza per richiedere al sistema i valori iniziali per la ServiceStatusGui.
 ##### Architettura logica dopo l'analisi del problema
 - [ ] Problema del grafico che non mostra i delegate 
+Possiamo definire la gui come un attore (mock GUI) che poi verrà sostituito
 ![[Sprint3/Codice/ColdStorage3/coldstorage3arch.png]]
 ![[ArchitetturaWebSprint3.png]]
 ### Test Plan
