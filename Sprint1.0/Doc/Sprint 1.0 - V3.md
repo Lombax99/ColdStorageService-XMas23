@@ -23,8 +23,11 @@ ColdStorageService è un componente caratterizzato da troppe responsabilità, l'
 
 Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione dei ticket è rimandata allo sprint successivo ([[Sprint 1.1 - V3]])
 
-Cerchiamo quindi di realizzare la seguente __Architettura logica__: 
+Cerchiamo quindi di realizzare solo la parte corrispondente a Controller, ColdRoom e TransportTrolley della seguente __Architettura logica__: 
 ![[ArchitetturaLogica_Sprint1.0-V2.png]]
+
+Che si traduce con la seguente;
+![[ArchitetturaLogica_Sprint1.0.png]]
 ##### Messaggio per Transport Trolley
 Introduciamo un nuovo messaggio "doJob" di tipo Req/Res inviato dal controller.
 ```

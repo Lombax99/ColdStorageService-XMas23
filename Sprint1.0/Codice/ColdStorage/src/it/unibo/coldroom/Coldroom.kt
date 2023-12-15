@@ -10,8 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-	
-class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, scope ){
+import it.unibo.kactor.sysUtil.createActor   //Sept2023
+class Coldroom ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : ActorBasicFsm( name, scope, confined=isconfined ){
 
 	override fun getInitialState() : String{
 		return "s0"
@@ -20,7 +20,7 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 		val interruptedStateTransitions = mutableListOf<Transition>()
 		
 				var PesoEffettivo = 0
-		return { //this:ActionBasciFsm
+				return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
 						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
@@ -30,7 +30,7 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="update3",targetState="updateWeight",cond=whenDispatch("updateWeight"))
+					 transition(edgeName="update4",targetState="updateWeight",cond=whenDispatch("updateWeight"))
 				}	 
 				state("updateWeight") { //this:State
 					action { //it:State
@@ -47,8 +47,8 @@ class Coldroom ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, s
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="update4",targetState="updateWeight",cond=whenDispatch("updateWeight"))
+					 transition(edgeName="update5",targetState="updateWeight",cond=whenDispatch("updateWeight"))
 				}	 
 			}
 		}
-}
+} 

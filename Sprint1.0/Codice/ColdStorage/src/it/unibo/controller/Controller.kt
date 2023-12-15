@@ -10,8 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-	
-class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, scope ){
+import it.unibo.kactor.sysUtil.createActor   //Sept2023
+class Controller ( name: String, scope: CoroutineScope, isconfined: Boolean=false  ) : ActorBasicFsm( name, scope, confined=isconfined ){
 
 	override fun getInitialState() : String{
 		return "s0"
@@ -19,7 +19,7 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
 		 var KG = 0
-		return { //this:ActionBasciFsm
+				return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
 						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
@@ -28,8 +28,10 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
+				 	 		stateTimer = TimerActor("timer_s0", 
+				 	 					  scope, context!!, "local_tout_controller_s0", 2000.toLong() )
 					}	 	 
-					 transition( edgeName="goto",targetState="mockRequest", cond=doswitch() )
+					 transition(edgeName="t10",targetState="mockRequest",cond=whenTimeout("local_tout_controller_s0"))   
 				}	 
 				state("mockRequest") { //this:State
 					action { //it:State
@@ -39,13 +41,14 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
 						 	   
 						request("doJob", "doJob($KG)" ,"transporttrolley" )  
+						CommUtils.outgreen("controller ! dojobsent")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="endjob0",targetState="handlerobotdead",cond=whenReply("robotDead"))
-					transition(edgeName="endjob1",targetState="jobdone",cond=whenReply("jobdone"))
+					 transition(edgeName="endjob1",targetState="handlerobotdead",cond=whenReply("robotDead"))
+					transition(edgeName="endjob2",targetState="jobdone",cond=whenReply("jobdone"))
 				}	 
 				state("jobdone") { //this:State
 					action { //it:State
@@ -57,7 +60,7 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 				 	 		stateTimer = TimerActor("timer_jobdone", 
 				 	 					  scope, context!!, "local_tout_controller_jobdone", 15000.toLong() )
 					}	 	 
-					 transition(edgeName="repeat2",targetState="mockRequest",cond=whenTimeout("local_tout_controller_jobdone"))   
+					 transition(edgeName="repeat3",targetState="mockRequest",cond=whenTimeout("local_tout_controller_jobdone"))   
 				}	 
 				state("handlerobotdead") { //this:State
 					action { //it:State
@@ -71,4 +74,4 @@ class Controller ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name,
 				}	 
 			}
 		}
-}
+} 
