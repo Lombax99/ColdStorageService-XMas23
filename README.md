@@ -18,10 +18,10 @@ Descrizione Descrizione Descrizione
   - Sprint Review: 17/11/2023
 - [x] **Sprint2** - Led e Sonar: ✅ 2023-12-09
   - Latest Release: [[Sprint 2]]
-  - Sprint Review:
-- [ ] **Sprint3** - ServiceStatusGui: 
+  - Sprint Review: 01/12/2023
+- [x] **Sprint3** - ServiceStatusGui: ✅ 2023-12-17
   - Latest Release: [[Sprint 3]]
-  - Final Exam: 
+  - Final Exam: 29/12/2023
 
 ## Team
 <table>

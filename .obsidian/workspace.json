@@ -85,7 +85,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ToDo EXAM (entro 27-12).md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -158,7 +158,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ToDo EXAM (entro 27-12).md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -175,7 +175,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ToDo EXAM (entro 27-12).md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -208,7 +208,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ToDo EXAM (entro 27-12).md"
+                "file": "README.md"
               }
             }
           },
@@ -241,6 +241,7 @@
   },
   "active": "17f242b3e87afd73",
   "lastOpenFiles": [
+    "ToDo EXAM (entro 27-12).md",
     "tofo.md",
     "Sprint0/Cold Storage Service - Natali V3.md",
     "PRESENTAZIONE DEMO.md",
@@ -249,7 +250,6 @@
     "Sprint3/Doc/Sprint 3.md",
     "Sprint2/Doc/Sprint 2.md",
     "Sprint1.1/Doc/Sprint 1.1 - V3.md",
-    "ToDo EXAM (entro 27-12).md",
     "Sprint3/Codice/userDoc/Sprint 3.pdf",
     "Sprint3/Codice/userDoc",
     "Sprint3/Codice/Nuova cartella",
