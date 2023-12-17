@@ -3,7 +3,7 @@ DOC
 - [ ] Sostituisci codice nella doc con link ai file del codice (Luca)
 - [ ] Aggiornare grafico 1.1, 2, 3 dopo aver completato qak e rigenera tutti i grafici per sicurezza (Luca)
 - [ ] Verifica nella doc che contesto basicRobot uguale a contesto ColdRoom, e correggi (Lisix)
-- [ ] Aggiungere collegamento in fondo a ogni doc il link alla repo git (Luca)
+- [x] Aggiungere collegamento in fondo a ogni doc il link alla repo git (Luca) ✅ 2023-12-17
 - [ ] RILEGGERE TUTTI TUTTE LE DOC E SEGNALARE EVENTUALI CORREZIONI
 
 CODICE
