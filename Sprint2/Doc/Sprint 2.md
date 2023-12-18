@@ -75,6 +75,7 @@ Il testing di un sonar riguarda due aspetti distinti:
 
 Test implementato: 
 Supponendo di porre di fronte al Sonar un ostacolo a distanza D, il BasicRobot deve fermarsi e riparte solo dopo che l'ostacolo è rimosso.
+[[Sprint2/Codice/ColdStorage/test/TestService.java|TestService]]
 ``` kotlin
 @Test  
 public void mainUseCaseTest(){  
@@ -150,6 +151,7 @@ public void mainUseCaseTest(){
 
 ### Progettazione
 ##### SonarActor
+[[alarm.qak]]
 ```
 QActor sonar context ctxalarm{
 	
@@ -176,6 +178,7 @@ QActor sonar context ctxalarm{
 ```
 ##### SonarService
 Legge i dati rilevato dal sonar da stdin
+[[SonarService.kt]]
 ``` kotlin
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -201,6 +204,7 @@ object SonarService {
 ```
 ##### Sonar
 sonar in python: dopo l'avvio scrive la distanza calcolata su stdout 4 volte al secondo
+[[sonarRasp.py]]
 ```python
 import RPi.GPIO as GPIO
 import time
@@ -239,6 +243,7 @@ while True:
    time.sleep(0.25)
 ```
 ##### LedActor
+[[SonarService.kt]]
 ```
 QActor led context ctxalarm{
 	State s0 initial {
@@ -302,6 +307,7 @@ QActor led context ctxalarm{
 facciamo solo uno script che accende e uno script che spegne e ci pensa l'attore ad invocare lo script secondo bisogno per mostrare lo stato corrente, la logica di lampeggiamento è lasciata all'attore led da gestire e non allo script.
 
 ledOn in python
+[[ledOnRasp.py]]
 ``` python
 import RPi.GPIO as GPIO
 
@@ -315,6 +321,7 @@ GPIO.output(LED_PIN, GPIO.HIGH)
 ```
 
 ledOff in python
+[[ledOffRasp.py]]
 ``` python
 import RPi.GPIO as GPIO
 
@@ -327,6 +334,7 @@ GPIO.setwarnings(False)
 GPIO.output(LED_PIN, GPIO.LOW)
 ```
 ##### Controller
+[[Sprint2/Codice/ColdStorage/src/coldstorage.qak|coldstorage]]
 ```
 QActor controller context ctxcoldstoragearea {
 

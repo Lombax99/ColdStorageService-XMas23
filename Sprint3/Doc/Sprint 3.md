@@ -68,6 +68,7 @@ Possiamo definire la gui come un attore (mock GUI) che poi verrà sostituito
 
 ### Progettazione
 ##### Facade aggiornato
+[[Sprint3/Codice/ColdStorage3/src/coldstorage.qak|coldstorage]]
 ```
 QActor facade context ctxcoldstoragearea {
 	[#
@@ -132,6 +133,7 @@ QActor facade context ctxcoldstoragearea {
 }
 ```
 ##### La classe per la parte web
+[[ControllerStatusGui.java]]
 ``` java
 package unibo.statusgui;
 
@@ -198,6 +200,9 @@ public class ControllerStatusGui {
 ```
 
 Gli observer
+[[Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/ColdRoomObserver.java|ColdRoomObserver]]
+[[RobotPosObserver.java]]
+[[TicketHandlerObserver.java]]
 ``` kotlin
 package unibo.statusgui;  
   
@@ -309,6 +314,7 @@ public class TicketHandlerObserver implements CoapHandler{
 ```
 
 Socket Handler
+[[Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/WebSocketHandler.java|WebSocketHandler]]
 ``` kotlin
 package unibo.statusgui;  
   
@@ -402,6 +408,7 @@ public class WebSocketHandler extends AbstractWebSocketHandler {
 }
 ```
 ##### Ticket Handler per contare quanti ticket vengono rifiutati
+[[Sprint3/Codice/ColdStorage3/src/coldstorage.qak|coldstorage]]
 ```
 QActor tickethandler context ctxcoldstoragearea {
 	

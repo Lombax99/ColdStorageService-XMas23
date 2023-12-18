@@ -64,7 +64,41 @@ Dopo discussioni con il committente è stato decretato che il peso da scaricare 
 ##### Architettura logica dopo l'analisi del problema
 ![[Sprint1.1/Doc/coldstorage2arch.png]]
 
+### TestPlan
+Durante la face di testing dovranno essere verificati i seguenti casi:
+- Verifichiamo che a seguito di richieste ben formate il robot ritorni nella HOME inviando il messaggio corretto (jobdone).
+- Verifichiamo che richieste con peso superiore al disponibile vengano scartate correttamente.
+- Verifichiamo che in caso il robot subisca dei problemi il sistema si fermi correttamente.
+
+Codice primo test:
+[[Sprint1.0/Codice/ColdStorage/test/TestService.java|TestService]]
+``` kotlin
+@Test  
+public void mainUseCaseTest(){  
+    //connect to port  
+    try{  
+        Socket client= new Socket("localhost", 8040);  
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));  
+        BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));  
+  
+        //send message  
+        out.write("msg(doJob,request,test,trasporttrolley,doJob(5),1)\n");  
+        out.flush();  
+        //wait for response  
+        String response= in.readLine();  
+        System.out.println(response);  
+        assertTrue(response.contains("jobdone"));  
+  
+  
+    }catch(Exception e){  
+        fail();  
+        System.out.println(e.getStackTrace());  
+    }  
+}
+```
+
 ### Progettazione
+[[Sprint1.0/Codice/ColdStorage/src/coldstorage.qak|coldstorage]]
 ##### Sistema di coordinate
 Sia RD l'unità di misura
 ``` kotlin
@@ -178,37 +212,6 @@ QActor transporttrolley context ctxcoldstoragearea {
 		request robotpos -m moverobot : moverobot(0,0)               // Home pos
 		forward robotpos -m setdirection : dir(down)
 	}	Goto work
-}
-```
-### TestPlan
-Durante la face di testing dovranno essere verificati i seguenti casi:
-- Verifichiamo che a seguito di richieste ben formate il robot ritorni nella HOME inviando il messaggio corretto (jobdone).
-- Verifichiamo che richieste con peso superiore al disponibile vengano scartate correttamente.
-- Verifichiamo che in caso il robot subisca dei problemi il sistema si fermi correttamente.
-
-Codice primo test:
-``` kotlin
-@Test  
-public void mainUseCaseTest(){  
-    //connect to port  
-    try{  
-        Socket client= new Socket("localhost", 8040);  
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));  
-        BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));  
-  
-        //send message  
-        out.write("msg(doJob,request,test,trasporttrolley,doJob(5),1)\n");  
-        out.flush();  
-        //wait for response  
-        String response= in.readLine();  
-        System.out.println(response);  
-        assertTrue(response.contains("jobdone"));  
-  
-  
-    }catch(Exception e){  
-        fail();  
-        System.out.println(e.getStackTrace());  
-    }  
 }
 ```
 

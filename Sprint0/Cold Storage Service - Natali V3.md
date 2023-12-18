@@ -130,6 +130,7 @@ GUI che permette ai driver di:
 - richiedere la generazione di un Ticket da presentare in un secondo momento.
 - presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port.
 - inviare la richiesta "LoadDone" quando il driver è pronto a scaricare.
+[[coldstorage0.qak]]
 ```
 QActor serviceaccessgui context ctxcoldstoragearea {
 	[#	
@@ -192,6 +193,7 @@ ColdStorageService si occupa di gestire le richieste di scarico merce, questo co
 - ricevere le richieste di permesso di scarico.
 - generare Ticket assegnati al singolo driver che ne ha fatto richiesta.
 - ricevere e verificare i Ticket nel momento in cui il driver arriva in INDOOR.
+[[coldstorage0.qak]]
 ```
 QActor coldstorageservice context ctxcoldstoragearea {
 	
@@ -299,7 +301,7 @@ Dispatch startToDoThings : startToDoThings( NO_PARAM )
 | WeightRequest  | ColdStorageService | ColdRoom           | Req/Resp | Risposta necessaria per proseguire: WeightOK/KO |
 | CheckMyTicket  | ServiceAccesGUI    | ColdStorageService | Req/Resp | Deve attendere la risposta: Ok/Rejected      |
 
->[!NOTE]- Tipi di messagg
+>[!NOTE]- Tipi di messaggi
 >in generale le ragioni per i vari tipi di messaggio sono:
 > - req/resp se ho bisogno di ricevere una risposta
 > - dispatch se è un messaggio per un componente specifico che conosco e non mi interessa la risposta
@@ -377,6 +379,7 @@ Durante la face di testing dovranno essere verificati i seguenti casi:
 - Una richiesta di peso eccessiva deve essere rifiutata
 
 Codice terzo test:
+[[Sprint0/Codice/ColdStorageService0/test/TestService.java|TestService]]
 ```kotlin
 @Test  
 public void mainUseCaseTest(){  

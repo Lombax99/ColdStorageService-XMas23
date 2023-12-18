@@ -171,6 +171,7 @@ Durante la face di testing dovranno essere verificati i seguenti casi:
 Ciascuno dei test deve essere superato con più utenti collegati contemporaneamente da uno stesso browser o da browser diversi.
 
 Codice secondo test:
+[[Sprint1.1/Codice/ColdStorageSprint2/test/TestService.java|TestService]]
 ```kotlin
 @Test  
 public void mainUseCaseTest(){  
@@ -234,6 +235,8 @@ Ticket = "T"+"_"+TIME+"_"+PESO+"_"+SEQ           #esempio di ticket: T_169764307
 
 > [!NOTE]- Domanda
 > Ci sono ottimi motivi per cui abbiamo deciso di farlo così, se vuole possiamo nascondere il tutto al cliente nell'html. 
+
+[[Sprint1.1/Codice/ColdStorageSprint2/src/coldstorage.qak|coldstorage qak]]
 ##### Definizione messaggi e contesti
 ```
 System coldstorage2
@@ -466,6 +469,7 @@ object DomainSystemConfig {
 }
 ```
 ##### Spring Server: socket e observer
+[[dinamic.js]]
 Il server si collegherà agli attori tramite socket o come coapObserver.
 Le richieste ajax provenienti dai client verranno inoltrate tramite socket.
 
@@ -538,6 +542,7 @@ function responsehandler(type, response){
 
 ```
 
+[[Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/MessageSender.java|MessageSender]]
 ```java
 public class MessageSender {  
     String COLDSTORAGESERVICEIPADDRESS = "127.0.0.1";  
@@ -569,6 +574,7 @@ public class MessageSender {
 }
 ```
 
+[[ApiController.java]]
 ``` java
 @RestController
 @RequestMapping("/api")  
@@ -603,6 +609,7 @@ public class ApiController {
 ```
 
 Gli eventi degli attori osservati tramite observer verranno inoltrati ai client tramite websocket, create all'inizio di ogni sessione.
+[[Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ColdRoomObserver.java|ColdRoomObserver]]
 ``` java
 @Component  
 public class ColdRoomObserver implements CoapHandler{  
