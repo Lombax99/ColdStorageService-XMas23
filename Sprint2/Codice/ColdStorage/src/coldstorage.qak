@@ -15,9 +15,6 @@ Request depositRequest : depositRequest(PESO)
 Reply accept : accept(TICKET) for depositRequest
 Reply reject : reject(NO_PARAM) for depositRequest
 
-Request depositRequestF : depositRequestF(PESO)
-Reply acceptF : acceptF(TICKET) for depositRequestF
-Reply rejectF : rejectF(NO_PARAM) for depositRequestF
 
 
 Request weightrequest : weightrequest(PESO)
@@ -27,20 +24,11 @@ Reply weightKO : weightKO( NO_PARAM ) for weightrequest
 Request checkmyticket : checkmyticket(TICKET)
 Reply	ticketchecked : ticketchecked(BOOL) for checkmyticket
 
-Request checkmyticketF : checkmyticketF(TICKET)
-Reply	ticketcheckedF : ticketcheckedF(BOOL) for checkmyticketF
-
 Request loaddone : loaddone(PESO)
 Reply 	chargetaken : chargetaken(NO_PARAM) for loaddone
 
-Request loaddoneF : loaddoneF(PESO)
-Reply 	chargetakenF : chargetakenF(NO_PARAM) for loaddoneF
-
 Request getweight : getweight(NO_PARAM)
 Reply 	currentweight : currentweight(PESO_EFF,PESO_PRO) for getweight
-
-Request getweightF : getweightF(NO_PARAM)
-Reply 	currentweightF : currentweightF(PESO_EFF,PESO_PRO) for getweightF
 
 Dispatch startToDoThings : startToDoThings( NO_PARAM )
 //-----------------------------------------------------------------------
@@ -395,107 +383,25 @@ QActor tickethandler context ctxcoldstoragearea {
 QActor facade context ctxcoldstoragearea {
 	[#
 		var Ticket = ""
+		var Peso = 0
 		var PesoEff = 0
 		var PesoProm = 0
 		var Valid = true
 		
 	#]
+	
 	State s0 initial{
-		println("ColdStorageFacade - in attesa") color blue
-		printCurrentMessage
-	} Goto work
+		delegate "depositRequest" to tickethandler
+		delegate "loaddone" to controller
+		delegate "checkmyticket" to tickethandler
+		delegate "getweight" to coldroom
+	} 
 	
-	
-	State work {
-	}Transition t0  whenRequest depositRequestF -> depositreqhandler
-					whenRequest loaddoneF -> loadcontroller
-					whenRequest checkmyticketF -> checktickethandler
-					whenRequest getweightF -> getweightcoldroom
-	
-	State depositreqhandler {
-		
-		onMsg(depositRequestF : depositRequestF(PESO)){
-			
-			[# var Peso = payloadArg(0).toInt() #]
-			println("send request to TicketHandler") color blue
-			request tickethandler -m depositRequest : depositRequest($Peso)
-		}
-	}Transition t1 whenReply accept -> returnticket
-					whenReply reject -> rejectticket
-					
-	State rejectticket {
-		println("facade - ticket reject") color blue
-		replyTo depositRequestF with rejectF : rejectF( reject )
-	} Goto work
-	
-	
-	
-	State returnticket {
-		onMsg(accept : accept(TICKET)){
-			
-			[# Ticket = payloadArg(0).toString() #]
-			}
-		println("facade - accettato") color blue
-		replyTo depositRequestF with acceptF : acceptF( $Ticket )
-	} Goto work
-	
-	State checktickethandler {
-		onMsg(checkmyticketF : checkmyticketF(TICKET)){
-			[#	var Ticket = payloadArg(0)		
-				#]
-			println("send check ticket to TicketHandler") color blue
-			request tickethandler -m checkmyticket : checkmyticket($Ticket)
-		}
-	}Transition tc whenReply ticketchecked -> checkresponse
-	
-	State checkresponse {
-		onMsg (ticketchecked : ticketchecked(BOOL)){
-			[# 
-				var Valid = payloadArg(0).toBoolean()
-				# ]
-				println("facade - biglietto accettato? : $Valid") color blue
-				replyTo checkmyticketF with ticketcheckedF : ticketcheckedF($Valid)
-		}
-	}Goto work
-	
-	State getweightcoldroom{
-		onMsg(getweight : getweight(NO_PARAM)){
-			println("send request getweight to ColdRoom") color blue
-			request coldroom -m getweight : getweight(NO_PARAM)
-		}
-	} Transition tg whenReply currentweight -> returnweight
-	
-	State returnweight{
-		onMsg (currentweight : currentweight(PESO_EFF,PESO_PRO)){
-			[# PesoEff = payloadArg(0).toInt()
-				PesoProm = payloadArg(1).toInt()
-			#]
-			println("facade - getweight : $PesoEff , $PesoProm") color blue
-			replyTo getweightF with currentweightF : currentweightF($PesoEff, $PesoProm)
-		}		
-	}Goto work
-	
-	State loadcontroller{
-		onMsg(loaddoneF : loaddoneF(PESO) ){
-			[# var Peso = payloadArg(0).toInt()
-				#]
-			println("send loaddone to Controller") color blue
-			request controller -m loaddone : loaddone($Peso)
-		}
-		
-	}Transition t0 whenReply chargetaken -> returnload
-	
-	State returnload{
-		onMsg (chargetaken : chargetaken( NO_PARAM )){
-			println("facade - loaddone") color blue
-			replyTo loaddoneF with chargetakenF : chargetakenF( NO_PARAM )
-		}	
-	}Goto work
 	
 }
 
-/*
-QActor serviceaccessgui context ctxcoldstoragearea {
+
+QActor serviceaccessguimock context ctxcoldstoragearea {
 	[#	var PESO = 0
 		var Ticket = ""
 		var Ticketok = false
@@ -513,10 +419,10 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 		[# PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
 			#]
 		println("SAG - chiedo $PESO") color yellow
-		request facade -m depositRequestF : depositRequestF($PESO)
+		request facade -m depositRequest : depositRequest($PESO)
 		
-	} Transition t0 whenReply acceptF -> gotoindoor
-					whenReply rejectF -> tryagainlater
+	} Transition t0 whenReply accept -> gotoindoor
+					whenReply reject -> tryagainlater
 					
 				
 					
@@ -527,7 +433,7 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	
 	
 	State gotoindoor{
-		onMsg( acceptF : accept(TICKET)){
+		onMsg( accept : accept(TICKET)){
 			[#	Ticket = payloadArg(0)
 				#]
 			println("SAG - accettato, Ticket: $Ticket") color yellow
@@ -537,11 +443,11 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	State giveticket{
 		println("SAG - consegno il biglietto") color yellow
 		
-		request facade -m checkmyticketF : checkmyticketF($Ticket)
-	}Transition tc whenReply ticketcheckedF -> checkresponse
+		request facade -m checkmyticket : checkmyticket($Ticket)
+	}Transition tc whenReply ticketchecked -> checkresponse
 	
 	State checkresponse {
-		onMsg (ticketcheckedF : ticketcheckedF(BOOL)){
+		onMsg (ticketchecked : ticketchecked(BOOL)){
 			[# Ticketok = payloadArg(0).toBoolean()
 				# ]
 		}
@@ -554,10 +460,10 @@ QActor serviceaccessgui context ctxcoldstoragearea {
 	}Transition t4 whenTime 3000 -> loaddone
 	
 	State loaddone {
-		request facade -m loaddoneF : loaddoneF($PESO)
+		request facade -m loaddone : loaddone($PESO)
 	} Transition t6 whenReply chargetaken -> work
 	
-} */
+}
 
 
 
@@ -629,116 +535,6 @@ QActor transporttrolley context ctxcoldstoragearea{
 
 
 
-/*
- * ------------------------------
- * basicrobot
- * ------------------------------
- */
- 
-QActor basicrobot context ctxcoldstoragearea{
-[#  
-  var StepTime      = 0L
-  var StartTime     = 0L     
-  var Duration      = 0L   
-  var RobotType     = "" 
-  var CurrentMove   = "unkknown"
-  var StepSynchRes  = false
-#]      
- 	State ss0 initial { 	
- 		//printCurrentMessage       
- 		discardMsg On  //In the intial phase ...
- 		
- 		
- 		delegate "doplan" to planexec
- 		
- 		delegate "getrobotstate" to robotpos
- 		delegate "setrobotstate" to robotpos
- 		delegate "moverobot" to robotpos
- 		delegate "setdirection" to robotpos
- 		
- 		
- 		[# uniborobots.robotSupport.create(myself,"basicrobotConfig.json")	
- 		
- 		 RobotType = uniborobots.robotSupport.robotKind #]  
- 		
- 		delay 3000
- 		
- 		println("basicrobot | STARTING ... ") color magenta	
-  		//run uniborobots.robotSupport.move( "a" )    //synch
- 		//run uniborobots.robotSupport.move( "d" )	//synch
-  		
- 	}  
- 	Goto work
- 
-  	
-	State work{ 
-		//printCurrentMessage   
-        updateResource [# "basicrobot(started)" #]
-		discardMsg Off 
-		println("basicrobot  | waiting ")  color magenta
-		forward transporttrolley -m robotready : robotready(TRUE) 
-	} 
-	Transition t0   whenRequest  step      -> doStep		
-					whenMsg     cmd        -> execcmd
-				  	whenMsg     end        -> endwork			  
-	                
-	
-	State execcmd{ 
-		printCurrentMessage
-		
-		onMsg( cmd : cmd(MOVE) ){  
-	  	  	[# CurrentMove = payloadArg(0) #] 
-			run uniborobots.robotSupport.move( payloadArg(0 ) )
-			updateResource [# "moveactivated(${payloadArg(0)})" #]
-		}
-		
-	}
-	Goto work   
-	
-   	State doStep{ 
-		onMsg( step : step( T ) ){  
-			
-			[#	StepTime     = payloadArg(0).toLong()  	
-				#]    
-			updateResource [# "step(${StepTime})" #]
-	  	}  
-	    memoCurrentTime StartTime  
-	    [# StepSynchRes = uniborobots.robotSupport.dostep( StepTime )
-	    	#]          
-	}  	
-	Goto stepok if [# StepSynchRes #] else stepKo 
- 
-     	 
-	State stepok{   
-		[# StepSynchRes = false #]
- 		run uniborobots.robotSupport.move( "h" )  //stop the (real) robot 
-		updateResource [# "stepDone($StepTime)" #]
-   		//emit info : info( stepdone($StepTime) )
-   		replyTo step with stepdone : stepdone($StepTime)
-		//println("basicrobot | stepDone reply done")
-  	}
-	Goto work  
- 
-	State stepKo{  
-		
-		setDuration Duration from StartTime
-		
-		run uniborobots.robotSupport.move( "h" )  //stop the (real) robot
-		[# var TunedDuration   = StepTime - ((Duration * 0.80)).toLong()   #]
-		println("basicrobot | stepKo $StepTime  duration=$Duration  TunedDuration=$TunedDuration") color magenta
-		replyTo step with stepfailed : stepfailed($Duration, obst)
-	 	
-    } 
-	Goto work 
-
-					
-	State endwork{ 
-		//printCurrentMessage
-		updateResource [# "basicrobot(end)" #]	 		
- 		//terminate 1
-	}   
-   
-} 
   
 /*
  * ------------------------------
@@ -1006,3 +802,114 @@ QActor robotpos context ctxcoldstoragearea{
 	Goto waitclientrequest
 	
 }
+
+/*
+ * ------------------------------
+ * basicrobot
+ * ------------------------------
+ */
+ 
+QActor basicrobot context ctxcoldstoragearea{
+[#  
+  var StepTime      = 0L
+  var StartTime     = 0L     
+  var Duration      = 0L   
+  var RobotType     = "" 
+  var CurrentMove   = "unkknown"
+  var StepSynchRes  = false
+#]      
+ 	State ss0 initial { 	
+ 		//printCurrentMessage       
+ 		discardMsg On  //In the intial phase ...
+ 		
+ 		
+ 		delegate "doplan" to planexec
+ 		
+ 		delegate "getrobotstate" to robotpos
+ 		delegate "setrobotstate" to robotpos
+ 		delegate "moverobot" to robotpos
+ 		delegate "setdirection" to robotpos
+ 		
+ 		
+ 		[# uniborobots.robotSupport.create(myself,"basicrobotConfig.json")	
+ 		
+ 		 RobotType = uniborobots.robotSupport.robotKind #]  
+ 		
+ 		delay 3000
+ 		
+ 		println("basicrobot | STARTING ... ") color magenta	
+  		//run uniborobots.robotSupport.move( "a" )    //synch
+ 		//run uniborobots.robotSupport.move( "d" )	//synch
+  		
+ 	}  
+ 	Goto work
+ 
+  	
+	State work{ 
+		//printCurrentMessage   
+        updateResource [# "basicrobot(started)" #]
+		discardMsg Off 
+		println("basicrobot  | waiting ")  color magenta
+		forward transporttrolley -m robotready : robotready(TRUE) 
+	} 
+	Transition t0   whenRequest  step      -> doStep		
+					whenMsg     cmd        -> execcmd
+				  	whenMsg     end        -> endwork			  
+	                
+	
+	State execcmd{ 
+		printCurrentMessage
+		
+		onMsg( cmd : cmd(MOVE) ){  
+	  	  	[# CurrentMove = payloadArg(0) #] 
+			run uniborobots.robotSupport.move( payloadArg(0 ) )
+			updateResource [# "moveactivated(${payloadArg(0)})" #]
+		}
+		
+	}
+	Goto work   
+	
+   	State doStep{ 
+		onMsg( step : step( T ) ){  
+			
+			[#	StepTime     = payloadArg(0).toLong()  	
+				#]    
+			updateResource [# "step(${StepTime})" #]
+	  	}  
+	    memoCurrentTime StartTime  
+	    [# StepSynchRes = uniborobots.robotSupport.dostep( StepTime )
+	    	#]          
+	}  	
+	Goto stepok if [# StepSynchRes #] else stepKo 
+ 
+     	 
+	State stepok{   
+		[# StepSynchRes = false #]
+ 		run uniborobots.robotSupport.move( "h" )  //stop the (real) robot 
+		updateResource [# "stepDone($StepTime)" #]
+   		//emit info : info( stepdone($StepTime) )
+   		replyTo step with stepdone : stepdone($StepTime)
+		//println("basicrobot | stepDone reply done")
+  	}
+	Goto work  
+ 
+	State stepKo{  
+		
+		setDuration Duration from StartTime
+		
+		run uniborobots.robotSupport.move( "h" )  //stop the (real) robot
+		[# var TunedDuration   = StepTime - ((Duration * 0.80)).toLong()   #]
+		println("basicrobot | stepKo $StepTime  duration=$Duration  TunedDuration=$TunedDuration") color magenta
+		replyTo step with stepfailed : stepfailed($Duration, obst)
+	 	
+    } 
+	Goto work 
+
+					
+	State endwork{ 
+		//printCurrentMessage
+		updateResource [# "basicrobot(end)" #]	 		
+ 		//terminate 1
+	}   
+   
+} 

@@ -11,6 +11,7 @@ CODICE
 - [ ] BasicRobot sempre nello stesso contesto (Sprint0,1,1.1) (Jack)
 	- [ ] aggiornare grafico arch sprint1.0
 	- [ ] aggiornare pdf Sprint1.0
+	- [ ] aggiornare grafico arch sprint 1.1
 - [ ] Crea cartella presentazione con la roba finale da eseguire
 
 PRESENTAZIONE

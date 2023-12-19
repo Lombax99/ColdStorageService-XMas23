@@ -6,9 +6,8 @@
 {"actor":"controller", "msgType":"dispatch", "curstate":"stoppedwhileworking", "nextstate":"waitingforreply", "msgId":"continue"}
 {"actor":"controller", "msgType":"dispatch", "curstate":"waitingforreply", "nextstate":"stoppedwhileworking", "msgId":"stop"}
 {"actor":"coldroom", "msgType":"dispatch", "curstate":"work", "nextstate":"updateWeight", "msgId":"updateWeight"}
+{"actor":"serviceaccessguimock", "msgType":"dispatch", "curstate":"s0", "nextstate":"work", "msgId":"startToDoThings"}
 {"actor":"transporttrolley", "msgType":"dispatch", "curstate":"s0", "nextstate":"work", "msgId":"robotready"}
-{"actor":"basicrobot", "msgType":"dispatch", "curstate":"work", "nextstate":"execcmd", "msgId":"cmd"}
-{"actor":"basicrobot", "msgType":"dispatch", "curstate":"work", "nextstate":"endwork", "msgId":"end"}
 {"actor":"planexec", "msgType":"dispatch", "curstate":"work", "nextstate":"stoppedwhilenothing", "msgId":"stopplan"}
 {"actor":"planexec", "msgType":"dispatch", "curstate":"work", "nextstate":"work", "msgId":"continueplan"}
 {"actor":"planexec", "msgType":"dispatch", "curstate":"stoppedwhilenothing", "nextstate":"stoppedwhilenothing", "msgId":"stopplan"}
@@ -22,3 +21,5 @@
 {"actor":"planexec", "msgType":"dispatch", "curstate":"moving", "nextstate":"nextMove", "msgId":"nextmove"}
 {"actor":"robotpos", "msgType":"dispatch", "curstate":"waitclientrequest", "nextstate":"setTheRobotState", "msgId":"setrobotstate"}
 {"actor":"robotpos", "msgType":"dispatch", "curstate":"waitclientrequest", "nextstate":"setTheDirection", "msgId":"setdirection"}
+{"actor":"basicrobot", "msgType":"dispatch", "curstate":"work", "nextstate":"execcmd", "msgId":"cmd"}
+{"actor":"basicrobot", "msgType":"dispatch", "curstate":"work", "nextstate":"endwork", "msgId":"end"}
