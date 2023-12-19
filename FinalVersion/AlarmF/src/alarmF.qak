@@ -1,0 +1,129 @@
+System alarmf
+
+
+
+Dispatch arrivedhome : arrivedhome(NO_PARAM)
+Dispatch moving : moving(NO_PARAM)
+Dispatch stopped : stopped(NO_PARAM)
+
+Dispatch stop : stop(NO_PARAM)
+Dispatch continue : continue(NO_PARAM)
+
+
+
+Context ctxalarm ip [host="localhost" port=8300]
+
+
+//-----------------------------------------------------------------------
+
+Context ctxcoldstoragearea ip [host="127.0.0.1" port=8040]
+
+ExternalQActor controller context ctxcoldstoragearea
+
+//-----------------------------------------------------------------------
+
+
+
+
+QActor sonar context ctxalarm{
+	
+	[# 	var Distanza = 20.0;
+		
+		#]
+	
+	State s0 initial {
+		
+		println("alarm - sonar started") color green
+	} Goto work
+	
+	
+	
+	State work{
+		[#    
+			while(SonarService.getDistance() > Distanza){}
+ 		#]
+ 		
+		forward controller -m stop : stop(1)
+		println("alarm - sent stop") color green
+	}Goto stopped
+	
+	State stopped  {
+		[#    
+			while(SonarService.getDistance() < Distanza){}
+ 		#]
+		forward controller -m continue : continue(1)
+		println("alarm - sent continue") color green
+	} Transition t0 whenTime 3000 -> work
+	
+}
+
+
+
+QActor led context ctxalarm{
+	
+	
+	State s0 initial {
+		
+	}Goto athome
+	
+	State athome {
+		
+		[#    
+			try{
+      			val p  = Runtime.getRuntime().exec("python3 ledOFF.py")
+      			
+    			}catch( e : Exception){
+      				println(e.message)
+    			}
+			#]
+		println("alarm - atHome -led off ") color yellow
+		
+	} Transition t1 whenMsg arrivedhome -> athome
+					whenMsg moving -> currmoving
+					whenMsg stopped -> arrested
+					
+					
+					
+	
+	State currmoving {
+		
+		[#    
+			try{
+      			val p  = Runtime.getRuntime().exec("python3 ledON.py")
+      			
+    			}catch( e : Exception){
+      				println(e.message)
+    			}
+			#]
+		println("alarm - moving - ledOn") color yellow
+		[# Thread.sleep(1000);
+			try{
+      			val p  = Runtime.getRuntime().exec("python3 ledOFF.py")
+      			
+    			}catch( e : Exception){
+      				println(e.message)
+    			}
+			
+			#]
+		println("alarm - moving - LedOff") color yellow
+	} Transition t2 whenTime 1000 -> currmoving
+					whenMsg moving -> currmoving
+					whenMsg arrivedhome -> athome
+					whenMsg stopped -> arrested
+	
+	State arrested {
+		[#    
+			try{
+      			val p  = Runtime.getRuntime().exec("python3 ledON.py")
+      			
+    			}catch( e : Exception){
+      				println(e.message)
+    			}
+			#]
+		println("alarm - arrested  - led on") color yellow
+	} Transition t3 whenMsg stopped -> arrested
+					whenMsg arrivedhome -> athome
+					whenMsg moving -> currmoving
+}
+
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+
+
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<title>ServiceAccessGui web page</title>
+	<link rel="stylesheet" href="/css/mystyle.css">
+</head>
+<body style="text-align:center;" onload="connect()">
+
+<h1 style="color:white; font-size:400%; background-color:#008CBA">Cold Storage Service</h1>
+<p style="font-size:150%;"/>Cold room Weight: <!--
+, current weight:
+<label style="font-size:120%;" id="cw" th:text="${cw}"></label>
+expected weight:-->
+<label style="font-size:120%;" id="ew" th:text="${ew}"></label>
+
+<br>
+
+<div class="row">
+  <div class="column" >
+  	<form id="depositsubmit">
+		<label style="font-size:150%;" for="foodweight">Ask for ticket here:</label>
+		<br/>
+		<input style="font-size:150%;" type="number" id="foodweight" name="foodweight" placeholder="set food weight" required>
+		<!--<input type="submit" class="buttonup"  value="Request">-->
+		<input type="submit" id="requestbutton" value="Request" >
+  	</form>
+
+
+  	<br/>
+	<br/>
+	  <form id="checksubmit">
+		  <label style="font-size:150%;" for="varticket">Ask for check and deposit here:</label>
+		  <br/>
+		  <input style="font-size:150%;" type="text" id="varticket" name="varticket" placeholder="insert ticket here" required>
+		  <input type="submit" id="checkbutton" value="Check Ticket" >
+	  </form>
+	<!--<input type="button" class="button" onclick="check()" id="check" value="Check Ticket">-->
+	<br/>
+	<br/>
+	  <form id="loadsubmit">
+		  <input type="submit" id="loadbutton" disabled="true" value="Load done" >
+	  </form>
+	<!--<input type="button" class="button" onclick="loadDone()" id="load" value="Load done">-->
+
+  </div>
+
+  <div class="column" >
+	  <p style="font-size:150%;">	<span id="maintext" text="XMAS Love"></span></p>
+	<!--<textarea style="font-size:150%;" id="outputText" rows=10 cols=40 wrap=on readonly>Welcome to Christmas's service.</textarea>-->
+
+  </div>
+</div>
+
+
+<script src="/js/dinamic.js"></script>
+<script src="/js/socket.js"></script>
+</body>
+</html>
+
