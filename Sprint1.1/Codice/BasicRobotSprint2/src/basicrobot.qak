@@ -1,9 +1,9 @@
-System /* -trace -msglog  */ basicrobot2
+System /* -trace -msglog  */ basicrobot11
 
 
 Request doJob : doJob(KG)
-Reply jobdone : jobdone(NO_PARAM)
-Reply robotDead : robotDead(NO_PARAM)
+Reply jobdone : jobdone(NO_PARAM) for doJob
+Reply robotDead : robotDead(NO_PARAM) for doJob
 
 
 /*basic robot */
@@ -11,17 +11,17 @@ Dispatch cmd       	: cmd(MOVE)
 Dispatch end       	: end(ARG)   
 
 Request step       : step(TIME)	
-Reply stepdone     : stepdone(V)  
-Reply stepfailed   : stepfailed(DURATION, CAUSE)	
+Reply stepdone     : stepdone(V)  for step
+Reply stepfailed   : stepfailed(DURATION, CAUSE)	for step
 
 /*planexec */
 Request  doplan     : doplan( PATH, STEPTIME )
-Reply doplandone    : doplandone( ARG ) 
-Reply doplanfailed  : doplanfailed( ARG )
+Reply doplandone    : doplandone( ARG ) for doplan
+Reply doplanfailed  : doplanfailed( ARG ) for doplan
 
 Event alarm           : alarm(X)
 Dispatch nextmove     : nextmove(M)
-Dispatch nomoremove   : nomoremove(M)
+Dispatch nomoremove   : nomoremove(M) 
 
 Dispatch robotready : robotready(BOOL)
 
@@ -31,11 +31,11 @@ Dispatch robotready : robotready(BOOL)
 Dispatch setdirection : dir( D )  //D =up|down!left|right
 
 Request moverobot    :  moverobot(TARGETX, TARGETY)  
-Reply moverobotdone  :  moverobotok(ARG)
-Reply moverobotfailed:  moverobotfailed(PLANDONE, PLANTODO)
+Reply moverobotdone  :  moverobotok(ARG) for moverobot
+Reply moverobotfailed:  moverobotfailed(PLANDONE, PLANTODO) for moverobot
 
 Request getrobotstate : getrobotstate(ARG)
-Reply robotstate      : robotstate(POS,DIR)
+Reply robotstate      : robotstate(POS,DIR) for getrobotstate
 
 Dispatch setrobotstate: setpos(X,Y,D)
 

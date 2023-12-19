@@ -38,14 +38,14 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 					action { //it:State
 						 PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
 						CommUtils.outyellow("SAG - chiedo $PESO")
-						request("depositRequestF", "depositRequestF($PESO)" ,"facade" )  
+						request("depositRequest", "depositRequest($PESO)" ,"tickethandler" )  
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t021",targetState="gotoindoor",cond=whenReply("acceptF"))
-					transition(edgeName="t022",targetState="tryagainlater",cond=whenReply("rejectF"))
+					 transition(edgeName="t021",targetState="gotoindoor",cond=whenReply("accept"))
+					transition(edgeName="t022",targetState="tryagainlater",cond=whenReply("reject"))
 				}	 
 				state("tryagainlater") { //this:State
 					action { //it:State
@@ -61,7 +61,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 				}	 
 				state("gotoindoor") { //this:State
 					action { //it:State
-						if( checkMsgContent( Term.createTerm("acceptF(TICKET)"), Term.createTerm("accept(TICKET)"), 
+						if( checkMsgContent( Term.createTerm("accept(TICKET)"), Term.createTerm("accept(TICKET)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
 									Ticket = payloadArg(0)
 								CommUtils.outyellow("SAG - accettato, Ticket: $Ticket")
@@ -78,17 +78,17 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 				state("giveticket") { //this:State
 					action { //it:State
 						CommUtils.outyellow("SAG - consegno il biglietto")
-						request("checkmyticketF", "checkmyticketF($Ticket)" ,"facade" )  
+						request("checkmyticket", "checkmyticket($Ticket)" ,"tickethandler" )  
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="tc25",targetState="checkresponse",cond=whenReply("ticketcheckedF"))
+					 transition(edgeName="tc25",targetState="checkresponse",cond=whenReply("ticketchecked"))
 				}	 
 				state("checkresponse") { //this:State
 					action { //it:State
-						if( checkMsgContent( Term.createTerm("ticketcheckedF(BOOL)"), Term.createTerm("ticketcheckedF(BOOL)"), 
+						if( checkMsgContent( Term.createTerm("ticketchecked(BOOL)"), Term.createTerm("ticketchecked(BOOL)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								 Ticketok = payloadArg(0).toBoolean()
 						}
@@ -117,7 +117,7 @@ class Serviceaccessgui ( name: String, scope: CoroutineScope, isconfined: Boolea
 				}	 
 				state("loaddone") { //this:State
 					action { //it:State
-						request("loaddoneF", "loaddoneF($PESO)" ,"facade" )  
+						request("loaddone", "loaddone($PESO)" ,"controller" )  
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002

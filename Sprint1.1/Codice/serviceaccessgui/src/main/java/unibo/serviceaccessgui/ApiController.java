@@ -18,25 +18,25 @@ public class ApiController {
 
     @PostMapping("/weightreq")
     public String weightreq(){
-        String msg = "msg(getweightF,request,accessgui,facade,getweight(NO_PARAM),1)\n";
+        String msg = "msg(getweight,request,accessgui,facade,getweight(NO_PARAM),1)\n";
         return sender.sendMessage(msg);
     }
 
     @PostMapping("/depositreq")
     public String depositreq(@RequestParam String fw){
-        String msg = "msg(depositRequestF,request,accessgui,facade,depositRequestF(" + fw + "),1)\n";
+        String msg = "msg(depositRequest,request,accessgui,facade,depositRequest(" + fw + "),1)\n";
         return sender.sendMessage(msg);
     }
 
     @PostMapping("/checkreq")
     public String checkreq(@RequestParam(name = "ticket") String ticket){
-        String msg = "msg(checkmyticketF,request,accessgui,facade,checkmyticketF(" + ticket + "),1)\n";
+        String msg = "msg(checkmyticket,request,accessgui,facade,checkmyticket(" + ticket + "),1)\n";
         return sender.sendMessage(msg);
     }
 
     @PostMapping("/loadreq")
     public String loadreq(@RequestParam(name = "weight") String weight){
-        String msg = "msg(loaddoneF,request,accessgui,facade,loaddoneF(" +weight + "),1)\n";
+        String msg = "msg(loaddone,request,accessgui,facade,loaddone(" +weight + "),1)\n";
         return sender.sendMessage(msg);
     }
 

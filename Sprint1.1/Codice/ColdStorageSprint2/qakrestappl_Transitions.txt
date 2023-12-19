@@ -1,2 +1,10 @@
 {"actor":"coldroom", "msgType":"dispatch", "curstate":"work", "nextstate":"updateWeight", "msgId":"updateWeight"}
-{"actor":"serviceaccessgui", "msgType":"dispatch", "curstate":"s0", "nextstate":"work", "msgId":"startToDoThings"}
+{"actor":"serviceaccessguimock", "msgType":"dispatch", "curstate":"s0", "nextstate":"work", "msgId":"startToDoThings"}
+{"actor":"transporttrolley", "msgType":"dispatch", "curstate":"s0", "nextstate":"work", "msgId":"robotready"}
+{"actor":"planexec", "msgType":"dispatch", "curstate":"nextMove", "nextstate":"doMove", "msgId":"nextmove"}
+{"actor":"planexec", "msgType":"dispatch", "curstate":"doMove", "nextstate":"planend", "msgId":"nomoremove"}
+{"actor":"planexec", "msgType":"dispatch", "curstate":"doMove", "nextstate":"nextMove", "msgId":"nextmove"}
+{"actor":"robotpos", "msgType":"dispatch", "curstate":"waitclientrequest", "nextstate":"setTheRobotState", "msgId":"setrobotstate"}
+{"actor":"robotpos", "msgType":"dispatch", "curstate":"waitclientrequest", "nextstate":"setTheDirection", "msgId":"setdirection"}
+{"actor":"basicrobot", "msgType":"dispatch", "curstate":"work", "nextstate":"execcmd", "msgId":"cmd"}
+{"actor":"basicrobot", "msgType":"dispatch", "curstate":"work", "nextstate":"endwork", "msgId":"end"}
