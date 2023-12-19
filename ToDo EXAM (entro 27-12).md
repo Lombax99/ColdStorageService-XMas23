@@ -1,17 +1,14 @@
 DOC
 - [ ] Sistema dettagliatamente deployment link ai file del codice da eseguire (Lisix)
 - [ ] Sostituisci codice nella doc con link ai file del codice (Luca)
-- [ ] Aggiornare grafico 1.1, 2, 3 dopo aver completato qak e rigenera tutti i grafici per sicurezza (Luca)
+- [ ] Aggiornare grafico 1.0, 1.1, 2, 3 dopo aver completato qak e rigenera tutti i grafici per sicurezza (Luca)
 - [ ] Verifica nella doc che contesto basicRobot uguale a contesto ColdRoom, e correggi (Lisix)
 - [x] Aggiungere collegamento in fondo a ogni doc il link alla repo git (Luca) ✅ 2023-12-17
 - [ ] RILEGGERE TUTTI TUTTE LE DOC E SEGNALARE EVENTUALI CORREZIONI
 
 CODICE
-- [ ] Aggiunta attori AccessGuiMock e StatusGuiMock, inviano richieste a facade che delega eliminando richieste con la F (Jack)
-- [ ] BasicRobot sempre nello stesso contesto (Sprint0,1,1.1) (Jack)
-	- [ ] aggiornare grafico arch sprint1.0
-	- [ ] aggiornare pdf Sprint1.0
-	- [ ] aggiornare grafico arch sprint 1.1
+- [x] Aggiunta attori AccessGuiMock e StatusGuiMock, inviano richieste a facade che delega eliminando richieste con la F (Jack)
+- [x] BasicRobot sempre nello stesso contesto (Sprint0,1,1.1) (Jack)
 - [ ] Crea cartella presentazione con la roba finale da eseguire
 
 PRESENTAZIONE

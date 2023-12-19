@@ -18,171 +18,20 @@ class Facade ( name: String, scope: CoroutineScope, isconfined: Boolean=false  )
 	}
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
 		val interruptedStateTransitions = mutableListOf<Transition>()
-		
-				var Ticket = ""
-				var PesoEff = 0
-				var PesoProm = 0
-				var Valid = true
-				
 				return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
 						delegate("getrejectedtickets", "tickethandler") 
 						delegate("getrobotstate", "robotpos") 
+						delegate("depositRequest", "tickethandler") 
+						delegate("loaddone", "controller") 
+						delegate("checkmyticket", "tickethandler") 
 						delegate("getweight", "coldroom") 
-						CommUtils.outblue("ColdStorageFacade - in attesa")
-						CommUtils.outcyan("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
-						 	   
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition( edgeName="goto",targetState="work", cond=doswitch() )
-				}	 
-				state("work") { //this:State
-					action { //it:State
-						//genTimer( actor, state )
-					}
-					//After Lenzi Aug2002
-					sysaction { //it:State
-					}	 	 
-					 transition(edgeName="t054",targetState="depositreqhandler",cond=whenRequest("depositRequestF"))
-					transition(edgeName="t055",targetState="loadcontroller",cond=whenRequest("loaddoneF"))
-					transition(edgeName="t056",targetState="checktickethandler",cond=whenRequest("checkmyticketF"))
-					transition(edgeName="t057",targetState="getweightcoldroom",cond=whenRequest("getweightF"))
-				}	 
-				state("depositreqhandler") { //this:State
-					action { //it:State
-						if( checkMsgContent( Term.createTerm("depositRequestF(PESO)"), Term.createTerm("depositRequestF(PESO)"), 
-						                        currentMsg.msgContent()) ) { //set msgArgList
-								 var Peso = payloadArg(0).toInt()  
-								CommUtils.outblue("send request to TicketHandler")
-								request("depositRequest", "depositRequest($Peso)" ,"tickethandler" )  
-						}
-						//genTimer( actor, state )
-					}
-					//After Lenzi Aug2002
-					sysaction { //it:State
-					}	 	 
-					 transition(edgeName="t158",targetState="returnticket",cond=whenReply("accept"))
-					transition(edgeName="t159",targetState="rejectticket",cond=whenReply("reject"))
-				}	 
-				state("rejectticket") { //this:State
-					action { //it:State
-						CommUtils.outblue("facade - ticket reject")
-						answer("depositRequestF", "rejectF", "rejectF(reject)"   )  
-						//genTimer( actor, state )
-					}
-					//After Lenzi Aug2002
-					sysaction { //it:State
-					}	 	 
-					 transition( edgeName="goto",targetState="work", cond=doswitch() )
-				}	 
-				state("returnticket") { //this:State
-					action { //it:State
-						if( checkMsgContent( Term.createTerm("accept(TICKET)"), Term.createTerm("accept(TICKET)"), 
-						                        currentMsg.msgContent()) ) { //set msgArgList
-								 Ticket = payloadArg(0).toString()  
-						}
-						CommUtils.outblue("facade - accettato")
-						answer("depositRequestF", "acceptF", "acceptF($Ticket)"   )  
-						//genTimer( actor, state )
-					}
-					//After Lenzi Aug2002
-					sysaction { //it:State
-					}	 	 
-					 transition( edgeName="goto",targetState="work", cond=doswitch() )
-				}	 
-				state("checktickethandler") { //this:State
-					action { //it:State
-						if( checkMsgContent( Term.createTerm("checkmyticketF(TICKET)"), Term.createTerm("checkmyticketF(TICKET)"), 
-						                        currentMsg.msgContent()) ) { //set msgArgList
-									var Ticket = payloadArg(0)		
-								CommUtils.outblue("send check ticket to TicketHandler")
-								request("checkmyticket", "checkmyticket($Ticket)" ,"tickethandler" )  
-						}
-						//genTimer( actor, state )
-					}
-					//After Lenzi Aug2002
-					sysaction { //it:State
-					}	 	 
-					 transition(edgeName="tc60",targetState="checkresponse",cond=whenReply("ticketchecked"))
-				}	 
-				state("checkresponse") { //this:State
-					action { //it:State
-						if( checkMsgContent( Term.createTerm("ticketchecked(BOOL)"), Term.createTerm("ticketchecked(BOOL)"), 
-						                        currentMsg.msgContent()) ) { //set msgArgList
-								 
-												var Valid = payloadArg(0).toBoolean()
-								CommUtils.outblue("facade - biglietto accettato? : $Valid")
-								answer("checkmyticketF", "ticketcheckedF", "ticketcheckedF($Valid)"   )  
-						}
-						//genTimer( actor, state )
-					}
-					//After Lenzi Aug2002
-					sysaction { //it:State
-					}	 	 
-					 transition( edgeName="goto",targetState="work", cond=doswitch() )
-				}	 
-				state("getweightcoldroom") { //this:State
-					action { //it:State
-						if( checkMsgContent( Term.createTerm("getweight(NO_PARAM)"), Term.createTerm("getweight(NO_PARAM)"), 
-						                        currentMsg.msgContent()) ) { //set msgArgList
-								CommUtils.outblue("send request getweight to ColdRoom")
-								request("getweight", "getweight(NO_PARAM)" ,"coldroom" )  
-						}
-						//genTimer( actor, state )
-					}
-					//After Lenzi Aug2002
-					sysaction { //it:State
-					}	 	 
-					 transition(edgeName="tg61",targetState="returnweight",cond=whenReply("currentweight"))
-				}	 
-				state("returnweight") { //this:State
-					action { //it:State
-						if( checkMsgContent( Term.createTerm("currentweight(PESO_EFF,PESO_PRO)"), Term.createTerm("currentweight(PESO_EFF,PESO_PRO)"), 
-						                        currentMsg.msgContent()) ) { //set msgArgList
-								 PesoEff = payloadArg(0).toInt()
-												PesoProm = payloadArg(1).toInt()
-								CommUtils.outblue("facade - getweight : $PesoEff , $PesoProm")
-								answer("getweightF", "currentweightF", "currentweightF($PesoEff,$PesoProm)"   )  
-						}
-						//genTimer( actor, state )
-					}
-					//After Lenzi Aug2002
-					sysaction { //it:State
-					}	 	 
-					 transition( edgeName="goto",targetState="work", cond=doswitch() )
-				}	 
-				state("loadcontroller") { //this:State
-					action { //it:State
-						if( checkMsgContent( Term.createTerm("loaddoneF(PESO)"), Term.createTerm("loaddoneF(PESO)"), 
-						                        currentMsg.msgContent()) ) { //set msgArgList
-								 var Peso = payloadArg(0).toInt()
-								CommUtils.outblue("send loaddone to Controller")
-								request("loaddone", "loaddone($Peso)" ,"controller" )  
-						}
-						//genTimer( actor, state )
-					}
-					//After Lenzi Aug2002
-					sysaction { //it:State
-					}	 	 
-					 transition(edgeName="t062",targetState="returnload",cond=whenReply("chargetaken"))
-				}	 
-				state("returnload") { //this:State
-					action { //it:State
-						if( checkMsgContent( Term.createTerm("chargetaken(NO_PARAM)"), Term.createTerm("chargetaken(NO_PARAM)"), 
-						                        currentMsg.msgContent()) ) { //set msgArgList
-								CommUtils.outblue("facade - loaddone")
-								answer("loaddoneF", "chargetakenF", "chargetakenF(NO_PARAM)"   )  
-						}
-						//genTimer( actor, state )
-					}
-					//After Lenzi Aug2002
-					sysaction { //it:State
-					}	 	 
-					 transition( edgeName="goto",targetState="work", cond=doswitch() )
 				}	 
 			}
 		}

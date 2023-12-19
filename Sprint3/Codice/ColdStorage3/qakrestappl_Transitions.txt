@@ -22,3 +22,5 @@
 {"actor":"robotpos", "msgType":"dispatch", "curstate":"waitclientrequest", "nextstate":"setTheDirection", "msgId":"setdirection"}
 {"actor":"basicrobot", "msgType":"dispatch", "curstate":"work", "nextstate":"execcmd", "msgId":"cmd"}
 {"actor":"basicrobot", "msgType":"dispatch", "curstate":"work", "nextstate":"endwork", "msgId":"end"}
+{"actor":"serviceaccessguimock", "msgType":"dispatch", "curstate":"s0", "nextstate":"work", "msgId":"startToDoThings"}
+{"actor":"servicestatusguimock", "msgType":"dispatch", "curstate":"s0", "nextstate":"work", "msgId":"startToDoThings"}

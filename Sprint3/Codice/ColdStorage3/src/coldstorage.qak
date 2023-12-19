@@ -15,10 +15,6 @@ Request depositRequest : depositRequest(PESO)
 Reply accept : accept(TICKET) for depositRequest
 Reply reject : reject(NO_PARAM) for depositRequest
 
-Request depositRequestF : depositRequestF(PESO)
-Reply acceptF : acceptF(TICKET) for depositRequestF
-Reply rejectF : rejectF(NO_PARAM) for depositRequestF
-
 
 Request weightrequest : weightrequest(PESO)
 Reply weightOK : weightOK( NO_PARAM ) for weightrequest
@@ -27,8 +23,6 @@ Reply weightKO : weightKO( NO_PARAM ) for weightrequest
 Request checkmyticket : checkmyticket(TICKET)
 Reply	ticketchecked : ticketchecked(BOOL) for checkmyticket
 
-Request checkmyticketF : checkmyticketF(TICKET)
-Reply	ticketcheckedF : ticketcheckedF(BOOL) for checkmyticketF
 
 Request getrejectedtickets : getrejectedtickets(NO_PARAMS)
 Reply	rejectedtickets : rejectedtickets(INT) for getrejectedtickets
@@ -36,14 +30,9 @@ Reply	rejectedtickets : rejectedtickets(INT) for getrejectedtickets
 Request loaddone : loaddone(PESO)
 Reply 	chargetaken : chargetaken(NO_PARAM) for loaddone
 
-Request loaddoneF : loaddoneF(PESO)
-Reply 	chargetakenF : chargetakenF(NO_PARAM) for loaddoneF
 
 Request getweight : getweight(NO_PARAM)
 Reply 	currentweight : currentweight(PESO_EFF,PESO_PRO) for getweight
-
-Request getweightF : getweightF(NO_PARAM)
-Reply 	currentweightF : currentweightF(PESO_EFF,PESO_PRO) for getweightF
 
 Dispatch startToDoThings : startToDoThings( NO_PARAM )
 //-----------------------------------------------------------------------
@@ -410,72 +399,6 @@ QActor tickethandler context ctxcoldstoragearea {
 		}
 	}Goto work
 }
-
-
-/*
-QActor serviceaccessgui context ctxcoldstoragearea {
-	[#	var PESO = 0
-		var Ticket = ""
-		var Ticketok = false
-		#]
-	
-	State s0 initial {
-		printCurrentMessage
-		println("SAG - in attesa") color yellow
-	} Transition t0 whenMsg startToDoThings -> work
-					
-	
-	
-	State work {
-		//random tra 10 e 20
-		[# PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
-			#]
-		println("SAG - chiedo $PESO") color yellow
-		request facade -m depositRequestF : depositRequestF($PESO)
-		
-	} Transition t0 whenReply acceptF -> gotoindoor
-					whenReply rejectF -> tryagainlater
-					
-				
-					
-	State tryagainlater{
-		println("SAG - rifiutato") color yellow
-	}Transition wait whenTime 5000 -> work
-	
-	
-	
-	State gotoindoor{
-		onMsg( acceptF : accept(TICKET)){
-			[#	Ticket = payloadArg(0)
-				#]
-			println("SAG - accettato, Ticket: $Ticket") color yellow
-		}
-	}Transition t2 whenTime 3000 -> giveticket
-	
-	State giveticket{
-		println("SAG - consegno il biglietto") color yellow
-		
-		request facade -m checkmyticketF : checkmyticketF($Ticket)
-	}Transition tc whenReply ticketcheckedF -> checkresponse
-	
-	State checkresponse {
-		onMsg (ticketcheckedF : ticketcheckedF(BOOL)){
-			[# Ticketok = payloadArg(0).toBoolean()
-				# ]
-		}
-		println("SAG - biglietto accettato? : $Ticketok") color yellow
-	} Goto work if [# !Ticketok #] else unloading
-
-
-	State unloading{
-		println("SAG - scarico") color yellow
-	}Transition t4 whenTime 3000 -> loaddone
-	
-	State loaddone {
-		request facade -m loaddoneF : loaddoneF($PESO)
-	} Transition t6 whenReply chargetaken -> work
-	
-} */
 
 
 
@@ -922,115 +845,105 @@ QActor basicrobot context ctxcoldstoragearea{
 } 
 
 
-
-
 QActor facade context ctxcoldstoragearea {
-	[#
-		var Ticket = ""
-		var PesoEff = 0
-		var PesoProm = 0
-		var Valid = true
-		
-	#]
-	
+
 	State s0 initial{
-		
 		delegate "getrejectedtickets" to tickethandler
 		delegate "getrobotstate" to robotpos
+		delegate "depositRequest" to tickethandler
+		delegate "loaddone" to controller
+		delegate "checkmyticket" to tickethandler
 		delegate "getweight" to coldroom
-		
-		
-		
-		println("ColdStorageFacade - in attesa") color blue
+	} 
+}
+
+QActor serviceaccessguimock context ctxcoldstoragearea {
+	[#	var PESO = 0
+		var Ticket = ""
+		var Ticketok = false
+		#]
+	
+	State s0 initial {
 		printCurrentMessage
-	} Goto work
+		println("SAG - in attesa") color yellow
+	} Transition t0 whenMsg startToDoThings -> work
+					
 	
 	
 	State work {
-	}Transition t0  whenRequest depositRequestF -> depositreqhandler
-					whenRequest loaddoneF -> loadcontroller
-					whenRequest checkmyticketF -> checktickethandler
-					whenRequest getweightF -> getweightcoldroom
-	
-	State depositreqhandler {
+		//random tra 10 e 20
+		[# PESO = Math.floor(Math.random() *(20 - 10 + 1) + 10).toInt()
+			#]
+		println("SAG - chiedo $PESO") color yellow
+		request facade -m depositRequest : depositRequest($PESO)
 		
-		onMsg(depositRequestF : depositRequestF(PESO)){
-			
-			[# var Peso = payloadArg(0).toInt() #]
-			println("send request to TicketHandler") color blue
-			request tickethandler -m depositRequest : depositRequest($Peso)
-		}
-	}Transition t1 whenReply accept -> returnticket
-					whenReply reject -> rejectticket
+	} Transition t0 whenReply accept -> gotoindoor
+					whenReply reject -> tryagainlater
 					
-	State rejectticket {
-		println("facade - ticket reject") color blue
-		replyTo depositRequestF with rejectF : rejectF( reject )
-	} Goto work
+				
+					
+	State tryagainlater{
+		println("SAG - rifiutato") color yellow
+	}Transition wait whenTime 5000 -> work
 	
 	
 	
-	State returnticket {
-		onMsg(accept : accept(TICKET)){
-			
-			[# Ticket = payloadArg(0).toString() #]
-			}
-		println("facade - accettato") color blue
-		replyTo depositRequestF with acceptF : acceptF( $Ticket )
-	} Goto work
-	
-	State checktickethandler {
-		onMsg(checkmyticketF : checkmyticketF(TICKET)){
-			[#	var Ticket = payloadArg(0)		
+	State gotoindoor{
+		onMsg( accept : accept(TICKET)){
+			[#	Ticket = payloadArg(0)
 				#]
-			println("send check ticket to TicketHandler") color blue
-			request tickethandler -m checkmyticket : checkmyticket($Ticket)
+			println("SAG - accettato, Ticket: $Ticket") color yellow
 		}
+	}Transition t2 whenTime 3000 -> giveticket
+	
+	State giveticket{
+		println("SAG - consegno il biglietto") color yellow
+		
+		request facade -m checkmyticket : checkmyticket($Ticket)
 	}Transition tc whenReply ticketchecked -> checkresponse
 	
 	State checkresponse {
 		onMsg (ticketchecked : ticketchecked(BOOL)){
-			[# 
-				var Valid = payloadArg(0).toBoolean()
+			[# Ticketok = payloadArg(0).toBoolean()
 				# ]
-				println("facade - biglietto accettato? : $Valid") color blue
-				replyTo checkmyticketF with ticketcheckedF : ticketcheckedF($Valid)
 		}
-	}Goto work
+		println("SAG - biglietto accettato? : $Ticketok") color yellow
+	} Goto work if [# !Ticketok #] else unloading
+
+
+	State unloading{
+		println("SAG - scarico") color yellow
+	}Transition t4 whenTime 3000 -> loaddone
 	
-	State getweightcoldroom{
-		onMsg(getweight : getweight(NO_PARAM)){
-			println("send request getweight to ColdRoom") color blue
-			request coldroom -m getweight : getweight(NO_PARAM)
-		}
-	} Transition tg whenReply currentweight -> returnweight
-	
-	State returnweight{
-		onMsg (currentweight : currentweight(PESO_EFF,PESO_PRO)){
-			[# PesoEff = payloadArg(0).toInt()
-				PesoProm = payloadArg(1).toInt()
-			#]
-			println("facade - getweight : $PesoEff , $PesoProm") color blue
-			replyTo getweightF with currentweightF : currentweightF($PesoEff, $PesoProm)
-		}		
-	}Goto work
-	
-	State loadcontroller{
-		onMsg(loaddoneF : loaddoneF(PESO) ){
-			[# var Peso = payloadArg(0).toInt()
-				#]
-			println("send loaddone to Controller") color blue
-			request controller -m loaddone : loaddone($Peso)
-		}
-		
-	}Transition t0 whenReply chargetaken -> returnload
-	
-	State returnload{
-		onMsg (chargetaken : chargetaken( NO_PARAM )){
-			println("facade - loaddone") color blue
-			replyTo loaddoneF with chargetakenF : chargetakenF( NO_PARAM )
-		}	
-	}Goto work
+	State loaddone {
+		request facade -m loaddone : loaddone($PESO)
+	} Transition t6 whenReply chargetaken -> work
 	
 }
 
+
+QActor servicestatusguimock context ctxcoldstoragearea {
+	
+	State s0 initial {
+		printCurrentMessage
+		println("SAG - in attesa") color yellow
+	} Transition t0 whenMsg startToDoThings -> work
+					
+	
+	
+	State work {
+		request facade -m getweight : getweight(1)
+	} Transition t0 whenReply currentweight -> getrobotstate
+					
+					
+	State getrobotstate{
+		request facade -m getrobotstate : robotstate(1)
+	} Transition t0 whenReply robotstate -> getrejectedtickets
+	
+	
+	State getrejectedtickets{
+		request facade -m getrejectedtickets : rejectedtickets(1)
+	} Transition t0 whenReply robotstate -> s0
+	
+	
+}
