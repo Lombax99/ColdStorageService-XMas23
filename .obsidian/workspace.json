@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md",
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
                 "mode": "source",
                 "source": false
               }
@@ -80,15 +80,19 @@
             }
           },
           {
-            "id": "8d5c0dba1b019076",
+            "id": "717e9e4e54fb3a5d",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Sprint3/Doc/Sprint 3.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -154,7 +158,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md",
+                "file": "ToDo EXAM (entro 27-12).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -171,7 +175,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md",
+                "file": "ToDo EXAM (entro 27-12).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -204,7 +208,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md"
+                "file": "ToDo EXAM (entro 27-12).md"
               }
             }
           },
@@ -235,41 +239,41 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "d4be7a5636e32724",
+  "active": "d5f298100c11fe8c",
   "lastOpenFiles": [
-    "Sprint2/Doc/Sprint 2.md",
-    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
-    "ToDo EXAM (entro 27-12).md",
-    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
+    "Sprint3/Doc/Sprint 3.md",
     "Sprint0/Cold Storage Service - Natali V3.md",
+    "Sprint3/Codice/ColdStorage3/coldstorage3arch",
+    "Sprint3/Codice/ColdStorage3/Arch_coldstorage3Modificato.py",
+    "Sprint3/Codice/ColdStorage3/Arch_coldstorage3 - Copia.py",
+    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+    "Sprint2/Doc/Sprint 2.md",
+    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
+    "Sprint1.0/Codice/ColdStorage/coldstorage10arch",
+    "Sprint1.0/Codice/ColdStorage/coldstorage10arch.png",
+    "Sprint1.1/Codice/ColdStorageSprint2/coldstorage11arch",
+    "Sprint2/Codice/ColdStorage/coldstorage2arch",
+    "Sprint2/Codice/ColdStorage/Arch_coldstorage2Modificato.py",
+    "Sprint2/Codice/ColdStorage/Arch_coldstorage2 - Copia.py",
+    "Sprint1.0/Codice/ColdStorage/Arch_coldstorage10Modificato.py",
+    "Sprint1.0/Codice/ColdStorage/Arch_coldstorage10 - Copia.py",
+    "Sprint1.0/Codice/ColdStorage/qakicons/system.PNG",
+    "Sprint1.0/Codice/ColdStorage/qakicons/symActorSmall.png",
+    "Sprint1.0/Codice/ColdStorage/qakicons/symActor.png",
+    "Sprint1.0/Codice/ColdStorage/qakicons/externalQActor.png",
+    "Sprint1.0/Codice/ColdStorage/qakicons/codedQActor.png",
+    "ToDo EXAM (entro 27-12).md",
     "PRESENTAZIONE DEMO.md",
     "PRESENTAZIONE CON SLIDE.md",
     "README.md",
     "tofo.md",
-    "Sprint3/Doc/Sprint 3.md",
-    "Sprint3/Codice/userDoc/Sprint 3.pdf",
-    "Sprint3/Codice/userDoc",
-    "Sprint3/Codice/Nuova cartella",
     "Sprint3/Doc/ArchitetturaWebSprint3.png",
-    "Sprint3/Codice/ColdStorage3/coldstorage3arch",
     "Sprint3/Doc/coldstorage3arch.png",
-    "Sprint2/Codice/ColdStorage/coldstorage2arch",
-    "Sprint2/Codice/ColdStorage/Arch_coldstorage2New.py",
-    "Sprint2/Codice/ColdStorage/Arch_coldstorage2 - Copia.py",
-    "Sprint3/Codice/ColdStorage3/Arch_coldstorage3.py",
-    "Sprint3/Codice/ColdStorage3/Arch_coldstorage2.py",
     "Sprint3/Codice/ColdStorage3/coldstorage2arch.png",
-    "Sprint3/Codice/ColdStorage3/coldstorage2arch",
     "Sprint3/Codice/ColdStorage/coldstorage2arch.png.md",
     "Sprint1.0/Doc/coldstorage2arch.png",
-    "LucaLombardi.jpg",
-    "LisaUccini.png",
-    "GiacomoRomanini.jpg",
-    "Sprint2/Codice/ColdStorage/coldstorage2arch.png",
     "Sprint1.0/Doc/Sprint 1.0.md",
     "Sprint0/Cold Storage Service - Natali V2.md",
-    "Sprint2/Codice/Alarm/qakicons/system.PNG",
-    "Sprint2/Codice/Alarm/qakicons/symActorSmall.png",
     "Sprint1.1/Doc/Sprint 1.1 - V2.md",
     "GiacomoRomanini.jpg{size = 100}.md",
     "Untitled.md",

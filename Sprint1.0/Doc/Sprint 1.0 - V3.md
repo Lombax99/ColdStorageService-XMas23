@@ -62,7 +62,7 @@ Il [TransportTrolley](https://github.com/anatali/issLab23/blob/main/iss23Materia
 ##### Peso massimo trasportabile
 Dopo discussioni con il committente è stato decretato che il peso da scaricare non sarà mai maggiore del peso trasportabile del robot fisico. 
 ##### Architettura logica dopo l'analisi del problema
-![[Sprint1.1/Doc/coldstorage2arch.png]]
+![[coldstorage10arch.png]]
 
 ### TestPlan
 Durante la face di testing dovranno essere verificati i seguenti casi:

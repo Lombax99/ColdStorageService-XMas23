@@ -159,10 +159,10 @@ In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
 __PROBLEMA:__ Usando pagine html statiche, anche mantenendo aggiornato il peso corrente nel server spring l'utente deve ricaricare la pagina per visualizzare il nuovo peso.
 Si tratta di un problema di poco conto che non giustifica un cambiamento verso pagine html dinamiche e non verrà trattato.
 ##### Architettura logica dopo l'analisi del problema
-![[Sprint1.1/Doc/coldstorage2arch.png]]
+![[coldstorage11arch.png]]
 
 ### Test Plan
-Durante la face di testing dovranno essere verificati i seguenti casi:
+Durante la fase di testing dovranno essere verificati i seguenti casi:
 1) Test del processo in condizioni normali
 2) Test con ticket scaduto (facciamo questo) 
 3) Test con ticket ripetuto
