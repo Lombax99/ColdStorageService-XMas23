@@ -855,6 +855,15 @@ QActor facade context ctxcoldstoragearea {
 		delegate "checkmyticket" to tickethandler
 		delegate "getweight" to coldroom
 	} 
+	
+	State s1 {
+		request tickethandler -m depositRequest : depositRequest(1)
+		request controller -m loaddone : loaddone(1)
+		request tickethandler -m checkmyticket : checkmyticket(1)
+		request coldroom -m getweight : getweight(1)
+		request tickethandler -m getrejectedtickets : getrejectedtickets(1)
+		request robotpos -m getrobotstate : getrobotstate(1)
+	}
 }
 
 QActor serviceaccessguimock context ctxcoldstoragearea {

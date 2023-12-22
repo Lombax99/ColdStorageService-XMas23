@@ -397,6 +397,13 @@ QActor facade context ctxcoldstoragearea {
 		delegate "getweight" to coldroom
 	} 
 	
+	State s1 {
+		request tickethandler -m depositRequest : depositRequest(1)
+		request controller -m loaddone : loaddone(1)
+		request tickethandler -m checkmyticket : checkmyticket(1)
+		request coldroom -m getweight : getweight(1)
+	}
+	
 	
 }
 
