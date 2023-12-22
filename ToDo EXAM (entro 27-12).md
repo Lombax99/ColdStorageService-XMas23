@@ -9,7 +9,7 @@ DOC
 CODICE
 - [x] Aggiunta attori AccessGuiMock e StatusGuiMock, inviano richieste a facade che delega eliminando richieste con la F (Jack)
 - [x] BasicRobot sempre nello stesso contesto (Sprint0,1,1.1) (Jack)
-- [ ] Crea cartella presentazione con la roba finale da eseguire
+- [x] Crea cartella presentazione con la roba finale da eseguire
 
 PRESENTAZIONE
 - [ ] *Portare la Doc in un bel formato html che il prof possa navigare per bene (Luca)* 

@@ -38,6 +38,18 @@ class Facade ( name: String, scope: CoroutineScope, isconfined: Boolean=false  )
 					sysaction { //it:State
 					}	 	 
 				}	 
+				state("s1") { //this:State
+					action { //it:State
+						request("depositRequest", "depositRequest(1)" ,"tickethandler" )  
+						request("loaddone", "loaddone(1)" ,"controller" )  
+						request("checkmyticket", "checkmyticket(1)" ,"tickethandler" )  
+						request("getweight", "getweight(1)" ,"coldroom" )  
+						//genTimer( actor, state )
+					}
+					//After Lenzi Aug2002
+					sysaction { //it:State
+					}	 	 
+				}	 
 			}
 		}
 } 
