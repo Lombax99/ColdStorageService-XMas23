@@ -30,8 +30,7 @@ function responsehandler(type, response){
     switch (type){
         case "weightreq":
             var weights=getMsgValue(response).split(",");
-            //document.getElementById("cw").innerHTML=weights[0];
-            document.getElementById("ew").innerHTML=weights[1];
+            document.getElementById("ew").innerHTML=weights[1]+weights[0];
             break;
         case "depositreq":
             var responsebutton = getMsgType(response);

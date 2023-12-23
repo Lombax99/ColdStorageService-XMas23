@@ -21,7 +21,7 @@ TicketHandler si occuperà di:
 3) verificare se il Ticket ricevuto è scaduto o meno.
 > [!NOTE]- motivazioni
 > 1) Principio di singola responsabilità: Il TicketHandler ha la responsabilità di gestire i Ticket, di conseguenza è corretto che sia quest'ultimo ad occuparsi sia di generare i Ticket richiesti sia di verificarne la validità.
->2) Motivi disicurezza: si preferisce assegnare la verifica al TicketHandler, avendo lui tutte le informazioni del driver necessarie per generare e verificare i Ticket stessi (ad esempio l'istante di emissione o l'id del driver associato al ticket).
+>2) Motivi di sicurezza: si preferisce assegnare la verifica al TicketHandler, avendo lui tutte le informazioni del driver necessarie per generare e verificare i Ticket stessi (ad esempio l'istante di emissione o l'id del driver associato al ticket).
 
 La separazione di TicketHandler e Controller porta l'utente a dover potenzialmente interagire con due entità diverse del sistema. Decidiamo di introdurre un componente intermedio per nascondere questa complessità dal lato dell'utente secondo il modello del __pattern facade__.
 
@@ -101,16 +101,16 @@ QActor coldroom context ctxcoldstoragearea {
 }
 ```
 ##### Problema del peso fantasma
-A seguito della scadenza di un Ticket, il Transport Trolley non si farà carico della richiesta e il peso promesso del ticket rimarrà considerato il Cold Room.
+A seguito della scadenza di un Ticket, il Transport Trolley non si farà carico della richiesta e il peso promesso del ticket rimarrà considerato in Cold Room.
 ##### Gestione dei Ticket scaduti
 L'eliminazione dei ticket scaduti viene fatta per necessità.
 
 All'arrivo di una richiesta di emissione del Ticket, se lo spazio calcolato non fosse sufficiente si verifica il TICKETTIME associato ai Ticket generati e non ancora scaricati.
 
-In presenza di Ticket scaduti allora il TicketHandler procederà ad aggiornare il peso.
+In presenza di Ticket scaduti allora il TicketHandler procederà ad aggiornare il peso promesso tramite dispatch "updateWeight".
 In questo modo risolviamo anche il [[Sprint 1.1 - V3#Problema del peso fantasma|problema del peso fantasma]].
 ##### Quando e da chi vengono aggiornati i pesi in ColdRoom?
-1) Terminata l'azione del Transport Trolley, Controller aggiorna i due pesi tramite dispatch. Viene passata la quantità da decrementare dal peso promesso e la quantità da incrementare al peso effettivo (i due valori possono essere diversi a causa del problema del [[Cold Storage Service - Natali V3#Il problema del driver distratto |Driver Distratto]]).
+1) Terminata l'azione del Transport Trolley, Controller aggiorna i due pesi tramite dispatch. Viene passata la quantità da decrementare dal peso promesso e la quantità da incrementare al peso effettivo.
 
 2) Caso particolare: i pesi sono aggiornati da TicketHandler tramite dispatch "updateWeight" nella [[Sprint 1.1 - V3#Gestione dei Ticket scaduti|gestione dei ticket scaduti]].
 ##### Sicurezza dei Ticket
@@ -157,7 +157,7 @@ In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in
 In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.
 
 __PROBLEMA:__ Usando pagine html statiche, anche mantenendo aggiornato il peso corrente nel server spring l'utente deve ricaricare la pagina per visualizzare il nuovo peso.
-Si tratta di un problema di poco conto che non giustifica un cambiamento verso pagine html dinamiche e non verrà trattato.
+Motivo per il quale abbiamo deciso di cambiare verso pagine html dinamiche.
 ##### Architettura logica dopo l'analisi del problema
 ![[coldstorage11arch.png]]
 

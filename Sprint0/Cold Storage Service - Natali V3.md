@@ -314,7 +314,7 @@ Context ctxLedSonar ip [host="127.0.0.1" port=8088]
 ```
 
 ### Keypoints
-##### 1) Aggiornamento di ServiceStutusGUI
+##### 1) Aggiornamento di ServiceStatusGUI
 SSG dovrà presentare i dati aggiornati del sistema ad ogni istante, dovrà quindi comportarsi come un __Observer__, sfruttiamo la tecnologia degli [StreamQActor](https://github.com/anatali/issLab23/blob/main/iss23Material/html/QakActors23.html).
 ##### 2) Carico di lavoro di ColdStorageService
 Tutto il lavoro del sistema al momento passa attraverso ColdStorageService, dalla gestione dei Ticket all'interazione con il TransportTrolley --> __Da valutare una divisione in più componenti__

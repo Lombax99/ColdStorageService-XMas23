@@ -1,23 +1,32 @@
 Scaletta con divisione: 
 (buttate giù ogni cosa che vi viene in mente)
 
-Slide durante Presentazione Demo:
-quello che gli stiamo facendo vedere oppure mini descrizione dei requisiti?
+Slide1:  (Luca)
+Analisi del problema (Sprint 0)
+- Motivare divisione Sprint
+- Prima architettura
+	- spiega divisione contesti e identificazione attori
+	- in particolare ColdRoom attore
+- ServiceArea come griglia (abbiamo richiesto al committente tutte le varie misure)
 
-Come è stata fatta la divisione degli Sprint (Introduzione):
-- [ ] bla
+Slide2: (Luca)
+- Motivazione divisione Sprint1.0 e 1.1
+- Da "doJob" a comandi per TransportTrolley
 
-Sprint0:
-- [ ] bla
+Slide3: (Lisix)
+- Presentazione protocollo di richiesta e generazione del ticket e vari reject
+- Pesi ipotetici
 
-Sprint1.0:
-- [ ] bla
+Slide4:
+Sprint 1.0 e 1.1
+- Facade (Lisix)
+- Spring (Lisix)
+- Observer (J)
+- Test (J)
 
-Sprint1.1:
-- [ ] bla
+Slide 5 (J)
+Sprint 2 e 3
+- Led e Sonar come attori: problema era far in modo che script con basso livello che interagiscono con l'hw riuscissero ad interagire con il resto del sistema. La soluzione era fare gli attori wrapper
+- Logica quale stato fa cosa è nell'attore non nello script (scritto nella business logic)
+- Sfruttando stessa facade definiamo nuova gui (StatusGui), all'avvio i dati iniziali vengono richiesti poi per il resto del tempo observer 
 
-Sprint2:
-- [ ] bla
-
-Sprint3:
-- [ ] bla
