@@ -80,7 +80,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -146,7 +146,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md",
+                "file": "Sprint0/Cold Storage Service - Natali V3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -163,7 +163,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md",
+                "file": "Sprint0/Cold Storage Service - Natali V3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -196,7 +196,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md"
+                "file": "Sprint0/Cold Storage Service - Natali V3.md"
               }
             }
           },
@@ -227,13 +227,13 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "717e9e4e54fb3a5d",
+  "active": "5dff4cd59ff17530",
   "lastOpenFiles": [
-    "Sprint0/Cold Storage Service - Natali V3.md",
     "Sprint1.0/Doc/Sprint 1.0 - V3.md",
     "Sprint1.1/Doc/Sprint 1.1 - V3.md",
     "Sprint2/Doc/Sprint 2.md",
     "Sprint3/Doc/Sprint 3.md",
+    "Sprint0/Cold Storage Service - Natali V3.md",
     "ToDo EXAM (entro 27-12).md",
     "PRESENTAZIONE CON SLIDE.md",
     "Sprint3/Codice/ColdStorage3/coldstorage3arch",
