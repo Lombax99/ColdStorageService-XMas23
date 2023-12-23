@@ -37,7 +37,7 @@ Reply robotDead : robotDead(NO_PARAM)
 ```
 
 > [!NOTE]- motivazioni
-> Definiamo il seganle come un req/res poichè vogliamo sapere se il servizio richiesto è andato a buon fine oppure se il DDR robot ha avuto problematiche che lo hanno interrotto prima di proseguire con una seconda doJob.
+> Definiamo il segnale come un req/res poichè vogliamo sapere se il servizio richiesto è andato a buon fine oppure se il DDR robot ha avuto problematiche che lo hanno interrotto prima di proseguire con una seconda doJob.
 > 
 > Limitiamo il controller ad un semplice comando di doJob, non è compito suo sapere quali operazioni deve compiere il robot per portare a termine il lavoro, è compito del robot stesso.
 
@@ -65,7 +65,7 @@ Dopo discussioni con il committente è stato decretato che il peso da scaricare 
 ![[coldstorage10arch.png]]
 
 ### TestPlan
-Durante la face di testing dovranno essere verificati i seguenti casi:
+Durante la fase di testing dovranno essere verificati i seguenti casi:
 - Verifichiamo che a seguito di richieste ben formate il robot ritorni nella HOME inviando il messaggio corretto (jobdone).
 - Verifichiamo che richieste con peso superiore al disponibile vengano scartate correttamente.
 - Verifichiamo che in caso il robot subisca dei problemi il sistema si fermi correttamente.
@@ -218,8 +218,8 @@ QActor transporttrolley context ctxcoldstoragearea {
 ### Deployment
 1) Avviare il container itunibovirtualrobot23 su docker
 	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
-2) In intellij avviare il file MainCtxbasicrobot.kt del progetto BasicRobot
-3) In intellij avviare il file MainCtxColdStorageArea.kt del progetto coldStorage
+2) In intellij avviare il file [[Sprint1.0/Codice/BasicRobot/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt|MainCtxbasicrobot.kt]] del progetto BasicRobot
+3) In intellij avviare il file [[Sprint1.0/Codice/ColdStorage/src/it/unibo/ctxColdStorageArea/MainCtxColdStorageArea.kt|MainCtxColdStorageArea.kt]] del progetto ColdStorage
 
 
 # 

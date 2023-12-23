@@ -417,8 +417,10 @@ QActor controller context ctxcoldstoragearea {
 #### Main system deployment
 1) Avviare il container itunibovirtualrobot23 su docker
 	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
-3) In intellij avviare il file MainCtxColdStorageArea.kt del progetto coldStorage
-4) Avviare la parte web
+2) In intellij avviare il file [[Sprint1.1/Codice/BasicRobotSprint2/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt|MainCtxbasicrobot.kt]] del progetto BasicRobot
+3) In intellij avviare il file [[Sprint2/Codice/ColdStorage/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt|MainCtxcoldstoragearea.kt]] del progetto ColdStorage
+4) In intellij avviare il file [[Sprint2/Codice/Alarm/src/it/unibo/ctxalarm/MainCtxalarm.kt|MainCtxalarm.kt]] del progetto Alarm
+5) In intellij avviare il file [[Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java|ServiceaccessguiApplication.java]] del progetto serviceaccessgui. Aprire il client all'indirizzo http://localhost:8085/
 # 
 ----------------
 [Repo Github](https://github.com/Lombax99/ColdStorageService-XMas23)

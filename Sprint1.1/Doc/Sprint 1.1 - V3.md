@@ -23,7 +23,7 @@ TicketHandler si occuperà di:
 > 1) Principio di singola responsabilità: Il TicketHandler ha la responsabilità di gestire i Ticket, di conseguenza è corretto che sia quest'ultimo ad occuparsi sia di generare i Ticket richiesti sia di verificarne la validità.
 >2) Motivi disicurezza: si preferisce assegnare la verifica al TicketHandler, avendo lui tutte le informazioni del driver necessarie per generare e verificare i Ticket stessi (ad esempio l'istante di emissione o l'id del driver associato al ticket).
 
-La separazione di TicketHandler e Controller porta l'utente a dover potenzialmente interagire con due entità diverse del sistema. Decidiamo di introdurre un componente intermedio per nascondere questa complessità dal lato dell'utente secondo il modello del __patter facade__.
+La separazione di TicketHandler e Controller porta l'utente a dover potenzialmente interagire con due entità diverse del sistema. Decidiamo di introdurre un componente intermedio per nascondere questa complessità dal lato dell'utente secondo il modello del __pattern facade__.
 
 Il sistema sarà dunque ampliato secondo la seguente __Architettura logica__: 
 ![[ArchitetturaLogica_Sprint1.1.png]]
@@ -164,7 +164,7 @@ Si tratta di un problema di poco conto che non giustifica un cambiamento verso p
 ### Test Plan
 Durante la fase di testing dovranno essere verificati i seguenti casi:
 1) Test del processo in condizioni normali
-2) Test con ticket scaduto (facciamo questo) 
+2) Test con ticket scaduto 
 3) Test con ticket ripetuto
 4) Test con peso superiore al disponibile
 5) Controllare che quando il controller aggiorna la ColdRoom il cambiamento di peso risulti nella service access gui.
@@ -680,9 +680,9 @@ function connect(){
 ### Deployment
 1) Avviare il container itunibovirtualrobot23 su docker
 	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
-2) In intellij avviare il file MainCtxbasicrobot.kt del progetto BasicRobot
-3) In intellij avviare il file MainCtxColdStorageArea.kt del progetto coldStorage
-4) In intellij avviare il file ServiceaccessguiApplication.java del progetto serviceaccessgui. Aprire il client all'indirizzo http://localhost:8085/
+2) In intellij avviare il file [[Sprint1.1/Codice/BasicRobotSprint2/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt|MainCtxbasicrobot.kt]] del progetto BasicRobot
+3) In intellij avviare il file [[Sprint1.1/Codice/ColdStorageSprint2/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt|MainCtxcoldstoragearea.kt]] del progetto ColdStorage
+4) In intellij avviare il file [[Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java|ServiceaccessguiApplication.java]] del progetto serviceaccessgui. Aprire il client all'indirizzo http://localhost:8085/
 
 # 
 ----------------
