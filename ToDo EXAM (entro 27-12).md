@@ -1,6 +1,7 @@
 DOC
-- [ ] Sostituisci codice nella doc con link ai file del codice (Luca)
+- [x] Sostituisci codice nella doc con link ai file del codice (Luca) ✅ 2023-12-24
 - [ ] Aggiornare grafico 1.0, 1.1, 2, 3 dopo aver completato qak e rigenera tutti i grafici per sicurezza (Luca)
+- [ ] riscrivi codice nella doc mettendo solo il minimo interessante
 - [ ] Doc in HTML
 - [ ] RILEGGERE TUTTI TUTTE LE DOC E SEGNALARE EVENTUALI CORREZIONI
 
