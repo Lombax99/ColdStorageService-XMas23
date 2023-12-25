@@ -1,4 +1,4 @@
-
+</div>
 <div align="center">
   <img align="center" width="25%" src="Other/RobotIcon.jpg"/>
   
@@ -51,6 +51,7 @@ Distributed software system for an _**autonomous forklift robot**_. The project
     <td><img src="./commons/resources/imgs/gifs/Demo_WasteServiceGUI.gif"/></td>
   </tr>
 </table>
+
 ### Roadmap
 - [x] **Sprint0** - Requirements analysis and system basic structure: 
   - Latest Release (.md format): [[Cold Storage Service - Natali V3]]
