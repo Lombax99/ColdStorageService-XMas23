@@ -1,12 +1,11 @@
-### Prodotto dello Sprint 0
-È stata individuata un'architettura logica iniziale che definisca le macro-entità del sistema e le loro interazioni, [[Cold Storage Service - Natali V3|link al modello precedente]].
-![[Architettura_Sprint0_V2.png]]
 ### Goal Sprint 1
-1) Transport Trolley + ColdStorageService
+1) Transport Trolley + ColdStorageService.
 > [!NOTE]- Descrizione
 > Lo scopo del primo sprint è produrre una prima versione funzionante del core dell'applicazione. Questo comprende ColdStorageService con la logica di gestione dei Ticket e il TransportTrolley funzionante.
 > A questa parte deve essere affiancata una mock version della ServiceAccessGUI per la fase di testing.
 
+Modello dello [[Cold Storage Service - Natali V3|sprint precedente]].
+![[Architettura_Sprint0_V2.png]]
 ### Requisiti relativi allo sprint corrente
 
 ![[ColdStorageServiceRoomAnnoted.png]]

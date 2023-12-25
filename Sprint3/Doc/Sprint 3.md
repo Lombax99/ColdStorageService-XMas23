@@ -1,5 +1,5 @@
 ### Goal Sprint 3
-ServiceStatusGui e grafiche migliorate [[Sprint 3]]
+ServiceStatusGui e grafiche migliorate.
 > [!NOTE]- Descrizione
 > Nel terzo sprint ci occuperemo della ServiceStatusGUI e delle interfacce grafiche finali.
 

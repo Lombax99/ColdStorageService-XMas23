@@ -3,6 +3,7 @@ Implementazione di Led e Sonar su RaspberryPi.
 > [!NOTE]- Descrizione
 > Nel secondo sprint verranno implementati il sistema di led e sonar con la logica ad essi associata. I due componenti si troveranno su un dispositivo esterno e dovranno interagire con il sistema remotamente.
 
+Modello dello [[Sprint 1.1 - V3|sprint precedente]].
 ![[coldstorage11arch.png]]
 
 ### Requisiti

@@ -1,5 +1,5 @@
 ### Goal Sprint 1.1
-TicketHandler + ServiceAccessGUI
+TicketHandler + ServiceAccessGUI.
 > [!NOTE]- Descrizione
 > In questa seconda parte del primo sprint verrà trattata la logica dei ticket, i componenti e la sicurezza associati.
 
