@@ -1,4 +1,4 @@
-</div>
+
 <div align="center">
   <img align="center" width="25%" src="Other/RobotIcon.jpg"/>
   
