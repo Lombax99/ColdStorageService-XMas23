@@ -50,6 +50,8 @@ Dispatch stop : stop(NO_PARAM)
 Dispatch continue : continue(NO_PARAM)
 ```
 
+- [ ] Siamo sicuri che non sia meglio definire il sonar signal come un evento?
+
 > [!NOTE]- Perché Dispatch?
 > In entrambi i casi i segnali sono destinati ad un attore specifico conosciuto.
 > Nel caso del sonar, anche trattandosi di uno stop d'emergenza non è stato usato Req/Resp poiché il raspberry non mi permette comunque di visualizzare facilmente una risposta (solo un led come output) inoltre da requisiti non è richiesto e la buona riuscita del comando può essere visualizzato nella ServiceStatusGUI.
