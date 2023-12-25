@@ -41,12 +41,12 @@ I due nodi di elaborazione devono potersi scambiare informazione via rete.
 Incapsuliamo in due attori i componenti che si occuperanno di gestire Led e Sonar e sfruttiamo questi per scambiare i messaggi.
 ##### Messaggi
 ```
-#segnali per il led
+#messaggi per il led
 Dispatch arrivedhome : arrivedhome(NO_PARAM)
 Dispatch moving : moving(NO_PARAM)
 Dispatch stopped : stopped(NO_PARAM)
 
-#segnali per il sonar
+#messaggi per il sonar
 Dispatch stop : stop(NO_PARAM)
 Dispatch continue : continue(NO_PARAM)
 ```
@@ -54,12 +54,12 @@ Dispatch continue : continue(NO_PARAM)
 - [ ] Siamo sicuri che non sia meglio definire il sonar signal come un evento?
 
 > [!NOTE]- Perché Dispatch?
-> In entrambi i casi i segnali sono destinati ad un attore specifico conosciuto.
+> In entrambi i casi i messaggi sono destinati ad un attore specifico conosciuto.
 > Nel caso del sonar, anche trattandosi di uno stop d'emergenza non è stato usato Req/Resp poiché il raspberry non mi permette comunque di visualizzare facilmente una risposta (solo un led come output) inoltre da requisiti non è richiesto e la buona riuscita del comando può essere visualizzato nella ServiceStatusGUI.
 > Inoltre il sistema non è business/safety critical. Nel peggiore dei casi un utente potrebbe interagire una seconda volta con il sonar se la prima volta non avesse funzionato correttamente.
 ##### Business Logic
 **Led:** La logica di accensione e spegnimento del led verrà gestita dall'attore associato in base allo stato comunicato dal controller. Il componente di basso livello deve solo essere in grado di accendere/spegnere il led.
-**Sonar:** Sfruttiamo l'attore associato al sonar per elaborare i dati emessi dal sonar e decidere se lanciare al controller il segnale di allarme.
+**Sonar:** Sfruttiamo l'attore associato al sonar per elaborare i dati emessi dal sonar e decidere se lanciare al controller il messaggio di allarme.
 - PRO: alleggerisco il carico di dati nella rete, semplifico il controller, principio di singola responsabilità.
 - CONTRO: difficoltà maggiore nel caso di DLIMIT variabile, il file di config sarebbe diverso dal precedente e posto sul raspberry.
 ##### Problema del messaggio duplicato
@@ -70,7 +70,7 @@ Dobbiamo gestire il caso in cui arrivano più volte gli stessi messaggi (ottengo
 
 ### Test Plan
 Stato del led che si aggiorna correttamente.
-Controller che modifica correttamente lo stato dopo aver ricevuto un segnale dal sonar.
+Controller che modifica correttamente lo stato dopo aver ricevuto un messaggio dal sonar.
 
 Il testing di un sonar riguarda due aspetti distinti:
 1) il test sul corretto funzionamento del dispositivo in quanto tale. Supponendo di porre di fronte al Sonar un ostacolo a distanza D, il Sonar deve emettere dati di valore D +/- epsilon.

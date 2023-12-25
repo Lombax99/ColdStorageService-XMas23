@@ -25,7 +25,7 @@ Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione d
 Cerchiamo quindi di realizzare solo la parte corrispondente a Controller, ColdRoom e TransportTrolley della seguente __Architettura logica__: 
 ![[ArchitetturaLogica_Sprint1.0-V2.png]]
 
-Che si traduce con la seguente;
+Ovvero la seguente:
 ![[ArchitetturaLogica_Sprint1.0.png]]
 ##### Messaggio per Transport Trolley
 Introduciamo un nuovo messaggio "doJob" di tipo Req/Res inviato dal controller.
@@ -36,7 +36,7 @@ Reply robotDead : robotDead(NO_PARAM)
 ```
 
 > [!NOTE]- motivazioni
-> Definiamo il segnale come un req/res poichè vogliamo sapere se il servizio richiesto è andato a buon fine oppure se il DDR robot ha avuto problematiche che lo hanno interrotto prima di proseguire con una seconda doJob.
+> Definiamo il messaggio come un req/res poichè vogliamo sapere se il servizio richiesto è andato a buon fine oppure se il DDR robot ha avuto problematiche che lo hanno interrotto prima di proseguire con una seconda doJob.
 > 
 > Limitiamo il controller ad un semplice comando di doJob, non è compito suo sapere quali operazioni deve compiere il robot per portare a termine il lavoro, è compito del robot stesso.
 
@@ -69,35 +69,10 @@ Durante la fase di testing dovranno essere verificati i seguenti casi:
 - Verifichiamo che richieste con peso superiore al disponibile vengano scartate correttamente.
 - Verifichiamo che in caso il robot subisca dei problemi il sistema si fermi correttamente.
 
-Codice primo test:
-[[Sprint1.0/Codice/ColdStorage/test/TestService.java|TestService]]
-``` kotlin
-@Test  
-public void mainUseCaseTest(){  
-    //connect to port  
-    try{  
-        Socket client= new Socket("localhost", 8040);  
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));  
-        BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));  
-  
-        //send message  
-        out.write("msg(doJob,request,test,trasporttrolley,doJob(5),1)\n");  
-        out.flush();  
-        //wait for response  
-        String response= in.readLine();  
-        System.out.println(response);  
-        assertTrue(response.contains("jobdone"));  
-  
-  
-    }catch(Exception e){  
-        fail();  
-        System.out.println(e.getStackTrace());  
-    }  
-}
-```
+Codice primo test: [[Sprint1.0/Codice/ColdStorage/test/TestService.java|TestService]]
 
 ### Progettazione
-[[Sprint1.0/Codice/ColdStorage/src/coldstorage.qak|coldstorage]]
+[[Sprint1.0/Codice/ColdStorage/src/coldstorage.qak|coldstorage.qak]]
 ##### Sistema di coordinate
 Sia RD l'unità di misura
 ``` kotlin
@@ -130,96 +105,12 @@ Context ctxcoldstoragearea ip [host="localhost" port=8040]
 //-----------------------------------------------------------------------
 ```
 __NOTA:__ in questo momento ColdRoom è definita nello stesso contesto di Controller, in futuro potrebbe non essere così (dipende dall'implementazione fisica della ColdRoom).
-##### Controller
-``` qak
-QActor controller context ctxcoldstoragearea {
-
-	[# var KG = 0 #]
-	
-	State s0 initial { printCurrentMessage }
-	Goto mockRequest
-	
-	# generiamo una richiesta casuale per il testing
-	State mockRequest {
-		[# KG = Math.random() #]
-		request transporttrolley -m doJob : doJob($KG)
-	} Transition endjob whenReply robotDead -> handlerobotdead
-						whenReply jobdone -> jobdone
-	
-	State jobdone{
-		forward coldroom -m updateWeight : updateWeight($KG)
-	} Transition repeat whenTime 15000 -> mockRequest
-	
-	State handlerobotdead{
-		printCurrentMessage
-	}
-}
-```
-##### ColdRoom
-``` qak
-QActor coldroom context ctxcoldstoragearea {
-	[# var PesoEffettivo = 0 #]
-	
-	State s0 initial { printCurrentMessage }
-	Transition update whenMsg updateWeight -> updateWeight
-	
-	State updateWeight {
-		printCurrentMessage
-		onMsg ( updateWeight : updateWeight(PESO) ) {
-			[# PesoEffettivo += payloadArg(0).toInt() #]
-		}
-	} Transition update whenMsg updateWeight -> updateWeight
-}
-```
-##### TransportTrolley
-```
-QActor transporttrolley context ctxcoldstoragearea {
-	[# var Peso = 0 #]
-	
-	State s0 initial{
-		forward robotpos -m setrobotstate : setpos(0,0,down)         //set Home pos
-	} Transition ready whenMsg robotready -> work
-	
-	State work{
-		println("robot waiting") color green
-	} Transition startworking whenRequest doJob -> startjob          //wait for doJob
-	
-	State startjob{
-		onMsg(doJob : doJob( KG )){
-			[# Peso = payloadArg(0).toInt()	#]
-			println("peso ricevuto: $Peso") color green
-		}
-	} Goto movingtoarrival
-	
-	State movingtoarrival{
-		request robotpos -m moverobot : moverobot(0,4)                //move to indoor	
-	} Transition gofetch whenReply moverobotdone -> movingtocoldroom
-	
-	State movingtocoldroom{
-		request robotpos -m moverobot : moverobot(5,3)                //move to coldroom
-	} Transition godrop whenReply moverobotdone -> waitforjob
-	
-//alla fine di waitforjob mandiamo la risposta "jobdone" e attendiamo per verificare //che non ci siano altre richieste "doJob" da portare avanti prima di tornare alla Home
-	State waitforjob {
-		replyTo doJob with jobdone : jobdone( 1 )
-		println("transporttrolley ! aspetto") color green
-	} Transition gofetchagain 
-			whenTime 3000 -> goinghome                               //torna alla Home
-			whenRequest doJob -> startjob                            //torna a scaricare
-	
-	State goinghome{
-		request robotpos -m moverobot : moverobot(0,0)               // Home pos
-		forward robotpos -m setdirection : dir(down)
-	}	Goto work
-}
-```
 
 ### Deployment
 1) Avviare il container itunibovirtualrobot23 su docker
 	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
 2) In intellij avviare il file [[Sprint1.0/Codice/BasicRobot/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt|MainCtxbasicrobot.kt]] del progetto BasicRobot
 3) In intellij avviare il file [[Sprint1.0/Codice/ColdStorage/src/it/unibo/ctxColdStorageArea/MainCtxColdStorageArea.kt|MainCtxColdStorageArea.kt]] del progetto ColdStorage
-
 
 # 
 ----------------

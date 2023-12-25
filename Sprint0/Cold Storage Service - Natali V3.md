@@ -215,8 +215,7 @@ Durante la face di testing dovranno essere verificati i seguenti casi:
 - Un ticket deve essere rifiutato per timeout (il peso non deve cambiare)
 - Una richiesta di peso eccessiva deve essere rifiutata
 
-Codice terzo test:
-[[Sprint0/Codice/ColdStorageService0/test/TestService.java|TestService]]
+Codice terzo test: [[Sprint0/Codice/ColdStorageService0/test/TestService.java|TestService]]
 
 ### Progettazione
 Codice sprint0: [[coldstorage0.qak]]
