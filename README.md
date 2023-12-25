@@ -1,11 +1,11 @@
 </div>
 
 <div align="center">
-  <img align="center" width="25%" src="commons/resources/imgs/walle.jpg"/>
+  <img align="center" width="25%" src="Other/RobotIcon.jpg"/>
   
   <h1>ColdStorage Service</h1>
   
-Descrizione Descrizione Descrizione
+Distributed software system for an _**autonomous forklift robot**_. The project had been developed for the course of [Software Systems Engineering M](https://www.unibo.it/en/teaching/course-unit-catalogue/course-unit/2023/468003) of the University of Bologna, using the [SCRUM agile framework](https://www.scrum.org/resources/what-is-scrum).
   
 </div>
 

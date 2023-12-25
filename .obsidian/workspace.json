@@ -73,7 +73,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -170,7 +170,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -187,7 +187,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -220,7 +220,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md"
+                "file": "README.md"
               }
             }
           },
@@ -253,36 +253,36 @@
   },
   "active": "a1e0c290965c3c74",
   "lastOpenFiles": [
+    "Other/RobotIcon.jpg",
+    "README.md",
+    "Resources",
+    "~$SlidePresentazione.pptx",
+    "PRESENTAZIONE DEMO.md",
+    "PRESENTAZIONE CON SLIDE.md",
+    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
     "Sprint3/Codice/ColdStorage3/coldstorage3arch",
     "Sprint1.1/Codice/ColdStorageSprint2/coldstorage11arch",
     "Sprint1.1/Codice/ColdStorageSprint2/coldstorage11arch.png",
     "Sprint2/Codice/ColdStorage/coldstorage2arch",
     "Sprint2/Codice/ColdStorage/coldstorage2arch.png",
     "Sprint1.0/Doc/Sprint 1.0 - V3.md",
-    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
     "Sprint2/Doc/Sprint 2.md",
     "Sprint3/Doc/Sprint 3.md",
-    "PRESENTAZIONE CON SLIDE.md",
     "SlidePresentazione.pptx",
     "Data Migration Project Proposal by Slidesgo.pptx",
-    "PRESENTAZIONE DEMO.md",
     "Sprint0/Cold Storage Service - Natali V3.md",
     "ToDo EXAM (entro 27-12).md",
     "Sprint3/Doc/ArchitetturaWebSprint3.png",
     "Sprint1.1/Codice/serviceaccessgui/src/main/resources/static/js/dinamic.js~",
     "Sprint3/Codice/ColdStorage3/Arch_coldstorage3Modificato.py",
     "Sprint3/Codice/ColdStorage3/Arch_coldstorage3 - Copia.py",
-    "Sprint1.0/Codice/ColdStorage/coldstorage10arch",
     "Sprint1.0/Codice/ColdStorage/coldstorage10arch.png",
-    "Sprint2/Codice/ColdStorage/Arch_coldstorage2Modificato.py",
     "Sprint1.0/Codice/ColdStorage/qakicons/system.PNG",
     "Sprint1.0/Codice/ColdStorage/qakicons/symActorSmall.png",
     "Sprint1.0/Codice/ColdStorage/qakicons/symActor.png",
     "Sprint1.0/Codice/ColdStorage/qakicons/externalQActor.png",
     "Sprint1.0/Codice/ColdStorage/qakicons/codedQActor.png",
-    "README.md",
     "tofo.md",
-    "Sprint3/Doc/coldstorage3arch.png",
     "Sprint3/Codice/ColdStorage/coldstorage2arch.png.md",
     "Sprint1.0/Doc/Sprint 1.0.md",
     "Sprint0/Cold Storage Service - Natali V2.md",
