@@ -31,10 +31,11 @@ function connect(){
     };
 
     function updateWeightField(msg){
-        if(msg.split("_").length == 2){
-            document.getElementById("ew").innerHTML=msg.split("_")[1];
+        var weights = msg.split("_");
+        console.log(weights);
+        if(weights.length == 2){
+            document.getElementById("ew").innerHTML= parseInt(weights[1]) + parseInt(weights[0]);
         }
-
     }
 
 }//connect

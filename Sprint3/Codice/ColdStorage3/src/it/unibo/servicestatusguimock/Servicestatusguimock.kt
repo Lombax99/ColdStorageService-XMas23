@@ -29,7 +29,7 @@ class Servicestatusguimock ( name: String, scope: CoroutineScope, isconfined: Bo
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t062",targetState="work",cond=whenDispatch("startToDoThings"))
+					 transition(edgeName="t063",targetState="work",cond=whenDispatch("startToDoThings"))
 				}	 
 				state("work") { //this:State
 					action { //it:State
@@ -39,7 +39,7 @@ class Servicestatusguimock ( name: String, scope: CoroutineScope, isconfined: Bo
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t063",targetState="getrobotstate",cond=whenReply("currentweight"))
+					 transition(edgeName="t064",targetState="getrobotstate",cond=whenReply("currentweight"))
 				}	 
 				state("getrobotstate") { //this:State
 					action { //it:State
@@ -49,7 +49,7 @@ class Servicestatusguimock ( name: String, scope: CoroutineScope, isconfined: Bo
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t064",targetState="getrejectedtickets",cond=whenReply("robotstate"))
+					 transition(edgeName="t065",targetState="getrejectedtickets",cond=whenReply("robotstate"))
 				}	 
 				state("getrejectedtickets") { //this:State
 					action { //it:State
@@ -59,7 +59,7 @@ class Servicestatusguimock ( name: String, scope: CoroutineScope, isconfined: Bo
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t065",targetState="s0",cond=whenReply("robotstate"))
+					 transition(edgeName="t066",targetState="s0",cond=whenReply("robotstate"))
 				}	 
 			}
 		}

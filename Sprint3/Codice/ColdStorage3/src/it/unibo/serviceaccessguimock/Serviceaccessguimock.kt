@@ -32,7 +32,7 @@ class Serviceaccessguimock ( name: String, scope: CoroutineScope, isconfined: Bo
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t054",targetState="work",cond=whenDispatch("startToDoThings"))
+					 transition(edgeName="t055",targetState="work",cond=whenDispatch("startToDoThings"))
 				}	 
 				state("work") { //this:State
 					action { //it:State
@@ -44,8 +44,8 @@ class Serviceaccessguimock ( name: String, scope: CoroutineScope, isconfined: Bo
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t055",targetState="gotoindoor",cond=whenReply("accept"))
-					transition(edgeName="t056",targetState="tryagainlater",cond=whenReply("reject"))
+					 transition(edgeName="t056",targetState="gotoindoor",cond=whenReply("accept"))
+					transition(edgeName="t057",targetState="tryagainlater",cond=whenReply("reject"))
 				}	 
 				state("tryagainlater") { //this:State
 					action { //it:State
@@ -57,7 +57,7 @@ class Serviceaccessguimock ( name: String, scope: CoroutineScope, isconfined: Bo
 				 	 		stateTimer = TimerActor("timer_tryagainlater", 
 				 	 					  scope, context!!, "local_tout_serviceaccessguimock_tryagainlater", 5000.toLong() )
 					}	 	 
-					 transition(edgeName="wait57",targetState="work",cond=whenTimeout("local_tout_serviceaccessguimock_tryagainlater"))   
+					 transition(edgeName="wait58",targetState="work",cond=whenTimeout("local_tout_serviceaccessguimock_tryagainlater"))   
 				}	 
 				state("gotoindoor") { //this:State
 					action { //it:State
@@ -73,7 +73,7 @@ class Serviceaccessguimock ( name: String, scope: CoroutineScope, isconfined: Bo
 				 	 		stateTimer = TimerActor("timer_gotoindoor", 
 				 	 					  scope, context!!, "local_tout_serviceaccessguimock_gotoindoor", 3000.toLong() )
 					}	 	 
-					 transition(edgeName="t258",targetState="giveticket",cond=whenTimeout("local_tout_serviceaccessguimock_gotoindoor"))   
+					 transition(edgeName="t259",targetState="giveticket",cond=whenTimeout("local_tout_serviceaccessguimock_gotoindoor"))   
 				}	 
 				state("giveticket") { //this:State
 					action { //it:State
@@ -84,7 +84,7 @@ class Serviceaccessguimock ( name: String, scope: CoroutineScope, isconfined: Bo
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="tc59",targetState="checkresponse",cond=whenReply("ticketchecked"))
+					 transition(edgeName="tc60",targetState="checkresponse",cond=whenReply("ticketchecked"))
 				}	 
 				state("checkresponse") { //this:State
 					action { //it:State
@@ -113,7 +113,7 @@ class Serviceaccessguimock ( name: String, scope: CoroutineScope, isconfined: Bo
 				 	 		stateTimer = TimerActor("timer_unloading", 
 				 	 					  scope, context!!, "local_tout_serviceaccessguimock_unloading", 3000.toLong() )
 					}	 	 
-					 transition(edgeName="t460",targetState="loaddone",cond=whenTimeout("local_tout_serviceaccessguimock_unloading"))   
+					 transition(edgeName="t461",targetState="loaddone",cond=whenTimeout("local_tout_serviceaccessguimock_unloading"))   
 				}	 
 				state("loaddone") { //this:State
 					action { //it:State
@@ -123,7 +123,7 @@ class Serviceaccessguimock ( name: String, scope: CoroutineScope, isconfined: Bo
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t661",targetState="work",cond=whenReply("chargetaken"))
+					 transition(edgeName="t662",targetState="work",cond=whenReply("chargetaken"))
 				}	 
 			}
 		}

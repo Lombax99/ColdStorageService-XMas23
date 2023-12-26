@@ -129,7 +129,7 @@ class Controller ( name: String, scope: CoroutineScope, isconfined: Boolean=fals
 						CommUtils.outgreen("jobdone")
 						forward("updateWeight", "updateWeight($PESO,$PESO)" ,"coldroom" ) 
 						forward("arrivedhome", "arrivedhome(1)" ,"led" ) 
-						updateResourceRep( "In home" 
+						updateResourceRep( "In Home" 
 						)
 						//genTimer( actor, state )
 					}

@@ -35,7 +35,7 @@ public class ControllerAccessGui {
         String response = sender.sendMessage(msg);
         String[] weights = response.split("\\(|\\)")[2].split(",");
         //model.addAttribute("cw", weights[0]);
-        model.addAttribute("ew", weights[1]);
+        model.addAttribute("ew", Integer.valueOf(weights[1])+ Integer.valueOf(weights[0]));
     }
 
 }

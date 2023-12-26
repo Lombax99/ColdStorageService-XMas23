@@ -191,7 +191,7 @@ QActor controller context ctxcoldstoragearea {
 		println("jobdone") color green
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 		forward led -m arrivedhome : arrivedhome(1)
-		updateResource[# "In home"#]
+		updateResource[# "In Home"#]
 	} Goto work
 	
 	
@@ -423,7 +423,9 @@ QActor transporttrolley context ctxcoldstoragearea{
 	
 	State work{
 		println("robot ! waiting") color green
-	}Transition startworking whenRequest doJob -> startjob
+	}Transition startworking whenReply moverobotdone -> work
+							whenRequest doJob -> startjob
+
 
 
 
