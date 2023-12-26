@@ -6,9 +6,9 @@ DOC
 - [ ] RILEGGERE TUTTI TUTTE LE DOC E SEGNALARE EVENTUALI CORREZIONI
 
 Codice
-- [ ] observed stato (moved, stopped)
-- [ ] incrementa observer reject n° regetti a causa del ticketime
-- [ ] controlla che in access si presenti sempre la somma e non solo il promesso (anche nella richiesta iniziale)
+- [x] observed stato (moved, stopped)
+- [x] incrementa observer reject n° regetti a causa del ticketime
+- [x] controlla che in access si presenti sempre la somma e non solo il promesso (anche nella richiesta iniziale)
 - [ ] risistema tutte le interfacce
 
 
