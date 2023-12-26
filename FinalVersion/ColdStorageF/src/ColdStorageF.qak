@@ -125,6 +125,7 @@ QActor controller context ctxcoldstoragearea {
 		println("controller - stopped") color green
 		forward led -m stopped : stopped(1)
 		forward planexec -m stopplan : stopplan(1)
+		updateResource[# "Stopped"#]
 	}Transition t0 whenMsg stop -> stopped
 					whenMsg continue -> continueworking
 	
@@ -132,6 +133,7 @@ QActor controller context ctxcoldstoragearea {
 		println("controller - continue") color green
 		forward led -m arrivedhome : arrivedhome(1)
 		forward planexec -m continueplan : continueplan(1)
+		updateResource[# "In Home"#]
 	}Goto work
 	
 	//senza robot
@@ -152,7 +154,8 @@ QActor controller context ctxcoldstoragearea {
 	//col robot
 	
 	State startjob  {
-		//forward led -m moving : moving(1)
+		forward led -m moving : moving(1)
+		updateResource[# "Moving"#]
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
 				#]
@@ -170,13 +173,14 @@ QActor controller context ctxcoldstoragearea {
 		forward planexec -m stopplan : stopplan(1)
 		println("stopped while working") color magenta
 		forward led -m stopped : stopped(1)
-		
+		updateResource[# "Stopped"#]
 	}Transition t0 whenMsg continue -> waitingforreply
 	
 	State waitingforreply{
 		forward planexec -m continueplan : continueplan(1)
 		println("continued") color green
 		forward led -m moving : moving(1)
+		updateResource[# "Moving"#]
 	}Transition endjob whenMsg stop -> stoppedwhileworking
 						whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
@@ -187,6 +191,7 @@ QActor controller context ctxcoldstoragearea {
 		println("jobdone") color green
 		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
 		forward led -m arrivedhome : arrivedhome(1)
+		updateResource[# "In home"#]
 	} Goto work
 	
 	

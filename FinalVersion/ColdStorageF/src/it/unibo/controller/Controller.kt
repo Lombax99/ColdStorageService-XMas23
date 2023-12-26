@@ -49,6 +49,8 @@ class Controller ( name: String, scope: CoroutineScope, isconfined: Boolean=fals
 						CommUtils.outgreen("controller - stopped")
 						forward("stopped", "stopped(1)" ,"led" ) 
 						forward("stopplan", "stopplan(1)" ,"planexec" ) 
+						updateResourceRep( "Stopped" 
+						)
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
@@ -62,6 +64,8 @@ class Controller ( name: String, scope: CoroutineScope, isconfined: Boolean=fals
 						CommUtils.outgreen("controller - continue")
 						forward("arrivedhome", "arrivedhome(1)" ,"led" ) 
 						forward("continueplan", "continueplan(1)" ,"planexec" ) 
+						updateResourceRep( "In Home" 
+						)
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
@@ -71,6 +75,9 @@ class Controller ( name: String, scope: CoroutineScope, isconfined: Boolean=fals
 				}	 
 				state("startjob") { //this:State
 					action { //it:State
+						forward("moving", "moving(1)" ,"led" ) 
+						updateResourceRep( "Moving" 
+						)
 						if( checkMsgContent( Term.createTerm("loaddone(PESO)"), Term.createTerm("loaddone(PESO)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								 PESO = payloadArg(0).toInt()
@@ -92,6 +99,8 @@ class Controller ( name: String, scope: CoroutineScope, isconfined: Boolean=fals
 						forward("stopplan", "stopplan(1)" ,"planexec" ) 
 						CommUtils.outmagenta("stopped while working")
 						forward("stopped", "stopped(1)" ,"led" ) 
+						updateResourceRep( "Stopped" 
+						)
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
@@ -104,6 +113,8 @@ class Controller ( name: String, scope: CoroutineScope, isconfined: Boolean=fals
 						forward("continueplan", "continueplan(1)" ,"planexec" ) 
 						CommUtils.outgreen("continued")
 						forward("moving", "moving(1)" ,"led" ) 
+						updateResourceRep( "Moving" 
+						)
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002
@@ -118,6 +129,8 @@ class Controller ( name: String, scope: CoroutineScope, isconfined: Boolean=fals
 						CommUtils.outgreen("jobdone")
 						forward("updateWeight", "updateWeight($PESO,$PESO)" ,"coldroom" ) 
 						forward("arrivedhome", "arrivedhome(1)" ,"led" ) 
+						updateResourceRep( "In home" 
+						)
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002

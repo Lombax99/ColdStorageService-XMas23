@@ -47,6 +47,10 @@ function connect(){
                 console.log(splittedmsg[1]);
                 document.getElementById("maintext").innerHTML=splittedmsg[1];
                 break
+            case "con":
+                console.log(splittedmsg[1]);
+                document.getElementById("rs").innerHTML = splittedmsg[1];
+
             default:
                 //console.log("default");
         }
