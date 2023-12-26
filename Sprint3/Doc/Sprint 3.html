@@ -1,0 +1,533 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Sprint 3</title>
+        <meta charset='utf-8'/>
+    </head>
+    <body>
+<h3 data-heading="Goal Sprint 3">Goal Sprint 3</h3>
+<p>ServiceStatusGui e grafiche migliorate.</p>
+<div data-callout-metadata="" data-callout-fold="-" data-callout="note" class="callout is-collapsible is-collapsed"><div class="callout-title"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path><style>
+:root {
+  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
+  --font-monospace: 'Source Code Pro', monospace;
+  --background-primary: #ffffff;
+  --background-modifier-border: #ddd;
+  --text-accent: #705dcf;
+  --text-accent-hover: #7a6ae6;
+  --text-normal: #2e3338;
+  --background-secondary: #f2f3f5;
+  --background-secondary-alt: #e3e5e8;
+  --text-muted: #888888;
+}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div><div class="callout-title-inner">Descrizione</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path><style>
+:root {
+  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
+  --font-monospace: 'Source Code Pro', monospace;
+  --background-primary: #ffffff;
+  --background-modifier-border: #ddd;
+  --text-accent: #705dcf;
+  --text-accent-hover: #7a6ae6;
+  --text-normal: #2e3338;
+  --background-secondary: #f2f3f5;
+  --background-secondary-alt: #e3e5e8;
+  --text-muted: #888888;
+}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div></div><div class="callout-content" style="display: none;">
+<p>Nel terzo sprint ci occuperemo della ServiceStatusGUI e delle interfacce grafiche finali.</p>
+</div></div>
+<p>Modello dello <a data-tooltip-position="top" aria-label="Sprint 2" data-href="Sprint 2" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint%202.html" class="internal-link" target="_blank" rel="noopener">sprint precedente</a>.<br>
+<img alt="Sprint2/Codice/ColdStorage/coldstorage2arch.png" src="Sprint2/Codice/ColdStorage/coldstorage2arch.png" class="internal-embed"></p>
+<h3 data-heading="Requisiti">Requisiti</h3>
+<p><img alt="ColdStorageServiceRoomAnnoted.png" src="ColdStorageServiceRoomAnnoted.png" class="internal-embed"><br>
+<a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Requisiti" data-href="Cold Storage Service - Natali V3#Requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Requisiti" class="internal-link" target="_blank" rel="noopener">Requisiti</a></p>
+<h3 data-heading="Analisi dei Requisiti">Analisi dei Requisiti</h3>
+<p><a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Analisi preliminare dei requisiti" data-href="Cold Storage Service - Natali V3#Analisi preliminare dei requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Analisi%20preliminare%20dei%20requisiti" class="internal-link" target="_blank" rel="noopener">requisiti sprint 0</a></p>
+<h3 data-heading="Domande al committente:">Domande al committente:</h3>
+<p>Per la posizione quanto dobbiamo essere precisi? Serve sapere la posizione corrente ad ogni step? per il cliente non è necessario quest'ultimo punto dipende da noi. --&gt; per semplicità forniamo le coordinate ad ogni cambiamento del macrostato (in home, fase di load, fase di unload, posizione in caso di errore)</p>
+<h3 data-heading="Analisi del Problema">Analisi del Problema</h3>
+<h5 data-heading="Cosa implica lo stato del servizio?">Cosa implica lo stato del servizio?</h5>
+<p>Lo stato del servizio comprende:</p>
+<ul>
+<li>Lo stato e la posizione del TransportTrolley.</li>
+<li>Lo stato della ColdRoom (peso corrente su totale).</li>
+<li>Il numero di richieste negate dall'inizio del servizio.</li>
+</ul>
+<h5 data-heading="Numero di richieste negate">Numero di richieste negate</h5>
+<p>Aggiorniamo il ticket handler per tener traccia delle richieste negate</p>
+<pre><code>QActor tickethandler context ctxcoldstoragearea {
+	[# var Rejected = 0	#]
+	...
+	
+	State reject {
+		[# Rejected++ #]
+		...
+}
+</code><button class="copy-code-button">Copy</button></pre>
+<h5 data-heading="Rendo tutti i componenti observable">Rendo tutti i componenti observable</h5>
+<p>Stato del TransportTrolley (sfruttiamo RobotPos):</p>
+<pre><code>updateResource [# planner.robotOnMap() #]
+</code><button class="copy-code-button">Copy</button></pre>
+<p>ColdRoom:</p>
+<pre><code>updateResource[# "" + PesoEffettivo + "_" + PesoPromesso + ""#]
+</code><button class="copy-code-button">Copy</button></pre>
+<p>TicketHandler:</p>
+<pre><code>updateResource [# "" + Rejected #]
+</code><button class="copy-code-button">Copy</button></pre>
+<h5 data-heading="Caricare i dati iniziali nella GUI">Caricare i dati iniziali nella GUI</h5>
+<p>All'avvio della ServiceStatusGui per visualizzare i valori possiamo:</p>
+<ul>
+<li>Aspettare che i componenti aggiornino i propri valori normalmente</li>
+<li>Richiedere esplicitamente il valore corrente<br>
+Decidiamo di fare richiesta esplicita poiché in mancanza di richieste da parte degli utenti potrei dover aspettare un tempo indefinito prima di vedere lo stato del sistema.</li>
+</ul>
+<h5 data-heading="Come mandare le richieste">Come mandare le richieste</h5>
+<p>Sfruttiamo la facade già creata in precedenza per richiedere al sistema i valori iniziali per la ServiceStatusGui.</p>
+<h5 data-heading="Architettura logica dopo l'analisi del problema">Architettura logica dopo l'analisi del problema</h5>
+<ul class="contains-task-list">
+<li data-task="" class="task-list-item"><input type="checkbox" class="task-list-item-checkbox">Problema del grafico che non mostra i delegate<br>
+Possiamo definire la gui come un attore (mock GUI) che poi verrà sostituito<br>
+<img alt="Sprint3/Codice/ColdStorage3/coldstorage3arch.png" src="Sprint3/Codice/ColdStorage3/coldstorage3arch.png" class="internal-embed"><br>
+<img alt="ArchitetturaWebSprint3.png" src="ArchitetturaWebSprint3.png" class="internal-embed"></li>
+</ul>
+<h3 data-heading="Test Plan">Test Plan</h3>
+<ol>
+<li>A seguito di una richiesta rifiutata devono aumentare le richieste rifiutate.</li>
+<li>Nel caso di loadDone fallita la posizione stampata deve essere diversa da home.</li>
+<li>All'avvio della Gui devono essere caricati i parametri attuali del sistema.</li>
+</ol>
+<h3 data-heading="Progettazione">Progettazione</h3>
+<h5 data-heading="Facade aggiornato">Facade aggiornato</h5>
+<p><a data-tooltip-position="top" aria-label="Sprint3/Codice/ColdStorage3/src/coldstorage.qak" data-href="Sprint3/Codice/ColdStorage3/src/coldstorage.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\ColdStorage3\src\coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage</a></p>
+<pre><code>QActor facade context ctxcoldstoragearea {
+	[#
+		var Ticket = ""
+		var PesoEff = 0
+		var PesoProm = 0
+		var Valid = true
+	#]
+	
+	State s0 initial{
+		delegate "getrejectedtickets" to tickethandler
+		delegate "getrobotstate" to robotpos
+		delegate "getweight" to coldroom
+		
+		println("ColdStorageFacade - in attesa") color blue
+		printCurrentMessage
+	} Goto work
+	
+	
+	State work {
+	}Transition t0  whenRequest depositRequestF-&gt; depositreqhandler
+				whenRequest loaddoneF -&gt; loadcontroller
+				whenRequest checkmyticketF -&gt; checktickethandler
+				whenRequest getweightF -&gt; getweightcoldroom
+	
+	State depositreqhandler {
+		...
+	}Transition t1 whenReply accept -&gt; returnticket
+					whenReply reject -&gt; rejectticket
+	
+	State rejectticket {
+		...
+	} Goto work
+	
+	State returnticket {
+		...
+	} Goto work
+	
+	State checktickethandler {
+		...
+	}Transition tc whenReply ticketchecked -&gt; checkresponse
+	
+	State checkresponse {
+		...
+	}Goto work
+	
+	State getweightcoldroom{
+		...
+	} Transition tg whenReply currentweight -&gt; returnweight
+	
+	State returnweight{
+		...		
+	}Goto work
+	
+	State loadcontroller{
+		...
+	}Transition t0 whenReply chargetaken -&gt; returnload
+	
+	State returnload{
+		...	
+	}Goto work
+}
+</code><button class="copy-code-button">Copy</button></pre>
+<h5 data-heading="La classe per la parte web">La classe per la parte web</h5>
+<p><a data-href="ControllerStatusGui.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\ControllerStatusGui.java" class="internal-link" target="_blank" rel="noopener">ControllerStatusGui.java</a></p>
+<pre class="language-java" tabindex="0"><code class="language-java is-loaded"><span class="token keyword">package</span> <span class="token namespace">unibo<span class="token punctuation">.</span>statusgui</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Value</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">HttpHeaders</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">HttpStatus</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">ResponseEntity</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>scheduling<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">EnableScheduling</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span></span><span class="token class-name">Controller</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>ui<span class="token punctuation">.</span></span><span class="token class-name">Model</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">CrossOrigin</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">ExceptionHandler</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">GetMapping</span></span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@CrossOrigin</span>
+<span class="token annotation punctuation">@Controller</span>
+<span class="token annotation punctuation">@EnableScheduling</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ControllerStatusGui</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${spring.application.name}"</span><span class="token punctuation">)</span>
+    <span class="token class-name">String</span> appName<span class="token punctuation">;</span>
+    <span class="token class-name">MessageSender</span> sender <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MessageSender</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">homePage</span><span class="token punctuation">(</span><span class="token class-name">Model</span> model<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">aggiornaPesoCorrente</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">aggiornaBigliettiRifiutati</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">aggiornaRobotPos</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token string">"/static/ServiceStatusGui"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@ExceptionHandler</span>
+    <span class="token keyword">public</span> <span class="token class-name">ResponseEntity</span> <span class="token function">handle</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">HttpHeaders</span> responseHeaders <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HttpHeaders</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ResponseEntity</span><span class="token punctuation">(</span>
+                <span class="token string">"HIControllerDemo ERROR "</span> <span class="token operator">+</span> ex<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                responseHeaders<span class="token punctuation">,</span> <span class="token class-name">HttpStatus</span><span class="token punctuation">.</span>CREATED<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">aggiornaPesoCorrente</span><span class="token punctuation">(</span><span class="token class-name">Model</span> model<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">String</span> msg <span class="token operator">=</span> <span class="token string">"msg(getweight,request,statusgui,facade,getweight(NO_PARAM),1)\n"</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> response <span class="token operator">=</span> sender<span class="token punctuation">.</span><span class="token function">sendMessage</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> weights <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"\\(|\\)"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        model<span class="token punctuation">.</span><span class="token function">addAttribute</span><span class="token punctuation">(</span><span class="token string">"ew"</span><span class="token punctuation">,</span> weights<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        model<span class="token punctuation">.</span><span class="token function">addAttribute</span><span class="token punctuation">(</span><span class="token string">"pw"</span><span class="token punctuation">,</span> weights<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">aggiornaBigliettiRifiutati</span><span class="token punctuation">(</span><span class="token class-name">Model</span> model<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">String</span> msg <span class="token operator">=</span> <span class="token string">"msg(getrejectedtickets,request,statusgui,facade,getrejectedtickets(NO_PARAM),1)\n"</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> response <span class="token operator">=</span> sender<span class="token punctuation">.</span><span class="token function">sendMessage</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> rejectednum <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"\\(|\\)"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        model<span class="token punctuation">.</span><span class="token function">addAttribute</span><span class="token punctuation">(</span><span class="token string">"rt"</span><span class="token punctuation">,</span> rejectednum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">aggiornaRobotPos</span><span class="token punctuation">(</span><span class="token class-name">Model</span> model<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">String</span> msg <span class="token operator">=</span> <span class="token string">"msg(getrobotstate,request,statusgui,facade,getrobotstate(NO_PARAM),1)\n"</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> response <span class="token operator">=</span> sender<span class="token punctuation">.</span><span class="token function">sendMessage</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> robotpos <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"\\(|\\)|,"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        model<span class="token punctuation">.</span><span class="token function">addAttribute</span><span class="token punctuation">(</span><span class="token string">"maintext"</span><span class="token punctuation">,</span> <span class="token string">"RobotPos=("</span><span class="token operator">+</span> robotpos<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">+</span><span class="token string">","</span> <span class="token operator">+</span> robotpos<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">+</span><span class="token string">") direction="</span><span class="token operator">+</span>robotpos<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code><button class="copy-code-button">Copy</button></pre>
+<h5 data-heading="Gli observer">Gli observer</h5>
+<p><a data-tooltip-position="top" aria-label="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/ColdRoomObserver.java" data-href="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/ColdRoomObserver.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\statusgui\src\main\java\unibo\statusgui\ColdRoomObserver.java" class="internal-link" target="_blank" rel="noopener">ColdRoomObserver</a><br>
+<a data-href="RobotPosObserver.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\RobotPosObserver.java" class="internal-link" target="_blank" rel="noopener">RobotPosObserver.java</a><br>
+<a data-href="TicketHandlerObserver.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\TicketHandlerObserver.java" class="internal-link" target="_blank" rel="noopener">TicketHandlerObserver.java</a></p>
+<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">package</span> unibo<span class="token punctuation">.</span>statusgui<span class="token punctuation">;</span>  
+  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>eclipse<span class="token punctuation">.</span>californium<span class="token punctuation">.</span>core<span class="token punctuation">.</span>CoapHandler<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>eclipse<span class="token punctuation">.</span>californium<span class="token punctuation">.</span>core<span class="token punctuation">.</span>CoapResponse<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span>Component<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> unibo<span class="token punctuation">.</span>basicomm23<span class="token punctuation">.</span>coap<span class="token punctuation">.</span>CoapConnection<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> unibo<span class="token punctuation">.</span>basicomm23<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>CommUtils<span class="token punctuation">;</span>  
+  
+<span class="token annotation builtin">@Component</span>  
+<span class="token keyword">public</span> <span class="token keyword">class</span> ColdRoomObserver implements CoapHandler<span class="token punctuation">{</span>  
+    String CSIPADDRESS <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"127.0.0.1"</span></span><span class="token punctuation">;</span>  
+    int CSPORT <span class="token operator">=</span> <span class="token number">8040</span><span class="token punctuation">;</span>  
+    String ctxqakdest <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"ctxcoldstoragearea"</span></span><span class="token punctuation">;</span>  
+  
+    <span class="token keyword">public</span> <span class="token function">ColdRoomObserver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"crobserver started"</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  
+        CoapConnection coldroomconn <span class="token operator">=</span> new <span class="token function">CoapConnection</span><span class="token punctuation">(</span>CSIPADDRESS<span class="token operator">+</span><span class="token string-literal singleline"><span class="token string">":"</span></span><span class="token operator">+</span>CSPORT<span class="token punctuation">,</span> ctxqakdest<span class="token operator">+</span><span class="token string-literal singleline"><span class="token string">"/coldroom"</span></span> <span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        coldroomconn<span class="token punctuation">.</span><span class="token function">observeResource</span><span class="token punctuation">(</span> <span class="token keyword">this</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>  
+  
+  
+    <span class="token annotation builtin">@Override</span>  
+    <span class="token keyword">public</span> void <span class="token function">onLoad</span><span class="token punctuation">(</span>CoapResponse response<span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+        CommUtils<span class="token punctuation">.</span><span class="token function">outcyan</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"ColdRoomObserver changed! "</span></span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getResponseText</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        WebSocketConfiguration<span class="token punctuation">.</span>wshandler<span class="token punctuation">.</span><span class="token function">sendToAll</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"cr_"</span></span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getResponseText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>  
+  
+    <span class="token annotation builtin">@Override</span>  
+    <span class="token keyword">public</span> void <span class="token function">onError</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"ColdRoomObserver observe error!"</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>  
+<span class="token punctuation">}</span>
+</code><button class="copy-code-button">Copy</button></pre>
+<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">package</span> unibo<span class="token punctuation">.</span>statusgui<span class="token punctuation">;</span>  
+  
+  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>eclipse<span class="token punctuation">.</span>californium<span class="token punctuation">.</span>core<span class="token punctuation">.</span>CoapHandler<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>eclipse<span class="token punctuation">.</span>californium<span class="token punctuation">.</span>core<span class="token punctuation">.</span>CoapResponse<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span>Component<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> unibo<span class="token punctuation">.</span>basicomm23<span class="token punctuation">.</span>coap<span class="token punctuation">.</span>CoapConnection<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> unibo<span class="token punctuation">.</span>basicomm23<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>CommUtils<span class="token punctuation">;</span>  
+  
+<span class="token annotation builtin">@Component</span>  
+<span class="token keyword">public</span> <span class="token keyword">class</span> RobotPosObserver implements CoapHandler<span class="token punctuation">{</span>  
+    String CSIPADDRESS <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"127.0.0.1"</span></span><span class="token punctuation">;</span>  
+    int CSPORT <span class="token operator">=</span> <span class="token number">8040</span><span class="token punctuation">;</span>  
+    String ctxqakdest <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"ctxcoldstoragearea"</span></span><span class="token punctuation">;</span>  
+  
+    <span class="token keyword">public</span> <span class="token function">RobotPosObserver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"rpobserver started"</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  
+        CoapConnection robotposconn <span class="token operator">=</span> new <span class="token function">CoapConnection</span><span class="token punctuation">(</span>CSIPADDRESS<span class="token operator">+</span><span class="token string-literal singleline"><span class="token string">":"</span></span><span class="token operator">+</span>CSPORT<span class="token punctuation">,</span> ctxqakdest<span class="token operator">+</span><span class="token string-literal singleline"><span class="token string">"/robotpos"</span></span> <span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        robotposconn<span class="token punctuation">.</span><span class="token function">observeResource</span><span class="token punctuation">(</span> <span class="token keyword">this</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>  
+  
+  
+    <span class="token annotation builtin">@Override</span>  
+    <span class="token keyword">public</span> void <span class="token function">onLoad</span><span class="token punctuation">(</span>CoapResponse response<span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+        CommUtils<span class="token punctuation">.</span><span class="token function">outcyan</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"RobotPosObserver changed! "</span></span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getResponseText</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        WebSocketConfiguration<span class="token punctuation">.</span>wshandler<span class="token punctuation">.</span><span class="token function">sendToAll</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"rp_"</span></span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getResponseText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>  
+  
+    <span class="token annotation builtin">@Override</span>  
+    <span class="token keyword">public</span> void <span class="token function">onError</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"RobotPosObserver observe error!"</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>  
+<span class="token punctuation">}</span>
+</code><button class="copy-code-button">Copy</button></pre>
+<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">package</span> unibo<span class="token punctuation">.</span>statusgui<span class="token punctuation">;</span>  
+  
+  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>eclipse<span class="token punctuation">.</span>californium<span class="token punctuation">.</span>core<span class="token punctuation">.</span>CoapHandler<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>eclipse<span class="token punctuation">.</span>californium<span class="token punctuation">.</span>core<span class="token punctuation">.</span>CoapResponse<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span>Component<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> unibo<span class="token punctuation">.</span>basicomm23<span class="token punctuation">.</span>coap<span class="token punctuation">.</span>CoapConnection<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> unibo<span class="token punctuation">.</span>basicomm23<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>CommUtils<span class="token punctuation">;</span>  
+  
+<span class="token annotation builtin">@Component</span>  
+<span class="token keyword">public</span> <span class="token keyword">class</span> TicketHandlerObserver implements CoapHandler<span class="token punctuation">{</span>  
+    String CSIPADDRESS <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"127.0.0.1"</span></span><span class="token punctuation">;</span>  
+    int CSPORT <span class="token operator">=</span> <span class="token number">8040</span><span class="token punctuation">;</span>  
+    String ctxqakdest <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"ctxcoldstoragearea"</span></span><span class="token punctuation">;</span>  
+  
+    <span class="token keyword">public</span> <span class="token function">TicketHandlerObserver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"thobserver started"</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  
+        CoapConnection tickethandlerconn <span class="token operator">=</span> new <span class="token function">CoapConnection</span><span class="token punctuation">(</span>CSIPADDRESS<span class="token operator">+</span><span class="token string-literal singleline"><span class="token string">":"</span></span><span class="token operator">+</span>CSPORT<span class="token punctuation">,</span> ctxqakdest<span class="token operator">+</span><span class="token string-literal singleline"><span class="token string">"/tickethandler"</span></span> <span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        tickethandlerconn<span class="token punctuation">.</span><span class="token function">observeResource</span><span class="token punctuation">(</span> <span class="token keyword">this</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>  
+  
+  
+    <span class="token annotation builtin">@Override</span>  
+    <span class="token keyword">public</span> void <span class="token function">onLoad</span><span class="token punctuation">(</span>CoapResponse response<span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+        CommUtils<span class="token punctuation">.</span><span class="token function">outcyan</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"TicketHandlerObserver changed! "</span></span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getResponseText</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        WebSocketConfiguration<span class="token punctuation">.</span>wshandler<span class="token punctuation">.</span><span class="token function">sendToAll</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"th_"</span></span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getResponseText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>  
+  
+    <span class="token annotation builtin">@Override</span>  
+    <span class="token keyword">public</span> void <span class="token function">onError</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"TicketHandlerObserver observe error!"</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>  
+<span class="token punctuation">}</span>
+</code><button class="copy-code-button">Copy</button></pre>
+<h5 data-heading="Socket Handler">Socket Handler</h5>
+<p><a data-tooltip-position="top" aria-label="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/WebSocketHandler.java" data-href="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/WebSocketHandler.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\statusgui\src\main\java\unibo\statusgui\WebSocketHandler.java" class="internal-link" target="_blank" rel="noopener">WebSocketHandler</a></p>
+<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">package</span> unibo<span class="token punctuation">.</span>statusgui<span class="token punctuation">;</span>  
+  
+  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>json<span class="token punctuation">.</span>simple<span class="token punctuation">.</span>JSONObject<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>json<span class="token punctuation">.</span>simple<span class="token punctuation">.</span>parser<span class="token punctuation">.</span>JSONParser<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>socket<span class="token punctuation">.</span>BinaryMessage<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>socket<span class="token punctuation">.</span>CloseStatus<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>socket<span class="token punctuation">.</span>TextMessage<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>socket<span class="token punctuation">.</span>WebSocketSession<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>socket<span class="token punctuation">.</span>handler<span class="token punctuation">.</span>AbstractWebSocketHandler<span class="token punctuation">;</span>  
+  
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>IOException<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Iterator<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>List<span class="token punctuation">;</span>  
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span>CopyOnWriteArrayList<span class="token punctuation">;</span>  
+  
+<span class="token keyword">public</span> <span class="token keyword">class</span> WebSocketHandler extends AbstractWebSocketHandler <span class="token punctuation">{</span>  
+    <span class="token keyword">private</span> <span class="token keyword">final</span> List<span class="token operator">&lt;</span>WebSocketSession<span class="token operator">&gt;</span> sessions <span class="token operator">=</span> new CopyOnWriteArrayList<span class="token operator">&lt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token keyword">private</span> JSONParser jsonparser <span class="token operator">=</span> new <span class="token function">JSONParser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  
+    <span class="token annotation builtin">@Override</span>  
+    <span class="token keyword">public</span> void <span class="token function">afterConnectionEstablished</span><span class="token punctuation">(</span>WebSocketSession session<span class="token punctuation">)</span> throws Exception <span class="token punctuation">{</span>  
+        sessions<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>session<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"WebSocketHandler | Added the session: "</span></span> <span class="token operator">+</span> session<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">afterConnectionEstablished</span><span class="token punctuation">(</span>session<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>  
+  
+    <span class="token annotation builtin">@Override</span>  
+    <span class="token keyword">public</span> void <span class="token function">afterConnectionClosed</span><span class="token punctuation">(</span>WebSocketSession session<span class="token punctuation">,</span> CloseStatus status<span class="token punctuation">)</span> throws Exception <span class="token punctuation">{</span>  
+        sessions<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>session<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"WebSocketHandler | afterConnectionClosed:"</span></span> <span class="token operator">+</span> session<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">afterConnectionClosed</span><span class="token punctuation">(</span>session<span class="token punctuation">,</span> status<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>  
+  
+    <span class="token annotation builtin">@Override</span>  
+    <span class="token keyword">protected</span> void <span class="token function">handleTextMessage</span><span class="token punctuation">(</span>WebSocketSession session<span class="token punctuation">,</span> TextMessage message<span class="token punctuation">)</span> throws IOException <span class="token punctuation">{</span>  
+        String movecmd <span class="token operator">=</span> message<span class="token punctuation">.</span><span class="token function">getPayload</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"WebSocketHandler | handleTextMessage Received: "</span></span> <span class="token operator">+</span> movecmd<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>  
+  
+            JSONObject json <span class="token operator">=</span> <span class="token punctuation">(</span>JSONObject<span class="token punctuation">)</span> jsonparser<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>movecmd<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+            String move <span class="token operator">=</span> json<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"robotmove"</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"WebSocketHandler | handleTextMessage doing: "</span></span> <span class="token operator">+</span> move<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+            <span class="token comment">//RobotUtils.sendMsg(RobotController.robotName,move);  </span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>Exception e<span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"WebSocketHandler | handleTextMessage ERROR:"</span></span><span class="token operator">+</span>e<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        <span class="token punctuation">}</span>  
+  
+    <span class="token punctuation">}</span>  
+    <span class="token annotation builtin">@Override</span>  
+    <span class="token keyword">protected</span> void <span class="token function">handleBinaryMessage</span><span class="token punctuation">(</span>WebSocketSession session<span class="token punctuation">,</span> BinaryMessage message<span class="token punctuation">)</span> throws IOException <span class="token punctuation">{</span>  
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"WebSocketHandler | handleBinaryMessage Received "</span></span> <span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        <span class="token comment">//session.sendMessage(message);  </span>
+        <span class="token comment">//Send to all the connected clients</span>
+		Iterator<span class="token operator">&lt;</span>WebSocketSession<span class="token operator">&gt;</span> iter <span class="token operator">=</span> sessions<span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        <span class="token keyword">while</span><span class="token punctuation">(</span> iter<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>  
+            iter<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sendMessage</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        <span class="token punctuation">}</span>  
+    <span class="token punctuation">}</span>  
+  
+    <span class="token keyword">public</span> void <span class="token function">sendToAll</span><span class="token punctuation">(</span>String message<span class="token punctuation">)</span>  <span class="token punctuation">{</span>  
+        <span class="token keyword">try</span><span class="token punctuation">{</span>
+			<span class="token comment">//CommUtils.outblue("WebSocketHandler | sendToAll String: " + message);  </span>
+			<span class="token comment">//JSONObject jsm = new JSONObject(message);  </span>
+			<span class="token comment">//IApplMessage mm = new ApplMessage(message);  </span>
+			<span class="token comment">//String mstr    = mm.msgContent();//.replace("'","");</span>
+            <span class="token function">sendToAll</span><span class="token punctuation">(</span> new <span class="token function">TextMessage</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>  
+        <span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span> Exception e <span class="token punctuation">)</span><span class="token punctuation">{</span>  
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"WebSocketHandler | sendToAll String ERROR:"</span></span><span class="token operator">+</span>e<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        <span class="token punctuation">}</span>  
+    <span class="token punctuation">}</span>  
+    <span class="token keyword">public</span> void <span class="token function">sendToAll</span><span class="token punctuation">(</span>TextMessage message<span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+        <span class="token comment">//CommUtils.outblue("WebSocketHandler | sendToAll " + message.getPayload() + " TextMessage sessions:" + sessions.size());  </span>
+        Iterator<span class="token operator">&lt;</span>WebSocketSession<span class="token operator">&gt;</span> iter <span class="token operator">=</span> sessions<span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        <span class="token comment">//CommUtils.outyellow("WebSocketHandler | sendToAll TextMessage " );  </span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span> iter<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>  
+            <span class="token keyword">try</span><span class="token punctuation">{</span>  
+                WebSocketSession session <span class="token operator">=</span> iter<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+                <span class="token comment">// + message.getPayload() + " for session " + session.getRemoteAddress() );  </span>
+                <span class="token function">synchronized</span><span class="token punctuation">(</span>session<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token comment">//CommUtils.delay(5000);</span>
+                <span class="token comment">//CommUtils.outyellow("WebSocketHandler | sendToAll session " );</span>
+				session<span class="token punctuation">.</span><span class="token function">sendMessage</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+                <span class="token punctuation">}</span>  
+            <span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span>Exception e<span class="token punctuation">)</span><span class="token punctuation">{</span>  
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"WebSocketHandler | TextMessage "</span></span> <span class="token operator">+</span> message <span class="token operator">+</span> <span class="token string-literal singleline"><span class="token string">" ERROR:"</span></span><span class="token operator">+</span>e<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+            <span class="token punctuation">}</span>  
+        <span class="token punctuation">}</span>  
+    <span class="token punctuation">}</span>  
+<span class="token punctuation">}</span>
+</code><button class="copy-code-button">Copy</button></pre>
+<h5 data-heading="Ticket Handler per contare quanti ticket vengono rifiutati">Ticket Handler per contare quanti ticket vengono rifiutati</h5>
+<p><a data-tooltip-position="top" aria-label="Sprint3/Codice/ColdStorage3/src/coldstorage.qak" data-href="Sprint3/Codice/ColdStorage3/src/coldstorage.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\ColdStorage3\src\coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage</a></p>
+<pre><code>QActor tickethandler context ctxcoldstoragearea {
+	
+	[#	
+		...		
+		var Rejected = 0
+	#]
+		
+	State s0 initial{
+		...
+		updateResource [# "" + Rejected #]
+	} Goto work
+	
+	
+	State work {
+	}Transition t0  whenRequest depositRequest -&gt; checkforweight
+					whenRequest checkmyticket -&gt; checktheticket
+					whenRequest getrejectedtickets -&gt; sendrejectedticketnumber
+	
+	State checkforweight {
+		...
+	}Transition t1 whenReply weightKO -&gt; checkdeadlines
+					whenReply weightOK -&gt; returnticket
+	
+	State checkdeadlines{
+		...
+	} Goto returnticket if [# Accepted #] else reject
+	
+	State reject {
+		
+		[# Rejected++ #]
+		updateResource [# "" + Rejected #]
+		println("tickethandler - non c'è comunque posto, vai a casa") color blue
+		replyTo depositRequest with reject : reject( reject )
+	} Goto work
+	
+	State returnticket {
+		...
+	} Goto work
+	
+	State checktheticket {
+		...
+	} Goto work
+	
+	State sendrejectedticketnumber{
+		onMsg(getrejectedtickets : getrejectedtickets(NO_PARAM)){
+			replyTo getrejectedtickets with rejectedtickets : rejectedtickets($Rejected)
+		}
+	}Goto work
+}
+</code><button class="copy-code-button">Copy</button></pre>
+<h3 data-heading="Deployment">Deployment</h3>
+<h4 data-heading="Deployment on RaspberryPi 3B/3B+">Deployment on RaspberryPi 3B/3B+</h4>
+<p><img alt="RaspPin.png" src="RaspPin.png" class="internal-embed"></p>
+<h5 data-heading="Led">Led</h5>
+<ul>
+<li>braccino corto: pin fisico 39 (GND)</li>
+<li>braccino lungo: pin fisico 40 (GPIO21)</li>
+</ul>
+<h5 data-heading="Sonar">Sonar</h5>
+<ul>
+<li>VCC : pin fisico 4 (+5v)</li>
+<li>GND : pin fisico 6 (GND)</li>
+<li>TRIG: pin fisico 11 (GPIO 17)</li>
+<li>ECHO: pin fisico 13 (GPIO 27)</li>
+</ul>
+<ol>
+<li>Avvia main alarm</li>
+</ol>
+<h4 data-heading="Main system deployment">Main system deployment</h4>
+<ol>
+<li>Avviare il container itunibovirtualrobot23 su docker<br>
+Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/</li>
+<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/BasicRobotSprint2/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" data-href="Sprint1.1/Codice/BasicRobotSprint2/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint1.1\Codice\BasicRobotSprint2\src\it\unibo\ctxbasicrobot\MainCtxbasicrobot.kt" class="internal-link" target="_blank" rel="noopener">MainCtxbasicrobot.kt</a> del progetto BasicRobot</li>
+<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint3/Codice/ColdStorage3/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt" data-href="Sprint3/Codice/ColdStorage3/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\ColdStorage3\src\it\unibo\ctxcoldstoragearea\MainCtxcoldstoragearea.kt" class="internal-link" target="_blank" rel="noopener">MainCtxcoldstoragearea.kt</a> del progetto ColdStorage</li>
+<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint2/Codice/Alarm/src/it/unibo/ctxalarm/MainCtxalarm.kt" data-href="Sprint2/Codice/Alarm/src/it/unibo/ctxalarm/MainCtxalarm.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint2\Codice\Alarm\src\it\unibo\ctxalarm\MainCtxalarm.kt" class="internal-link" target="_blank" rel="noopener">MainCtxalarm.kt</a> del progetto Alarm</li>
+<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java" data-href="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint1.1\Codice\serviceaccessgui\src\main\java\unibo\serviceaccessgui\ServiceaccessguiApplication.java" class="internal-link" target="_blank" rel="noopener">ServiceaccessguiApplication.java</a> del progetto serviceaccessgui. Aprire il client all'indirizzo http://localhost:8085/</li>
+<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/StatusguiApplication.java" data-href="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/StatusguiApplication.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\statusgui\src\main\java\unibo\statusgui\StatusguiApplication.java" class="internal-link" target="_blank" rel="noopener">ServiceaccessguiApplication.java</a> del progetto statusgui. Aprire il client all'indirizzo http://localhost:8075/</li>
+</ol>
+<h1 data-heading=""></h1>
+<hr>
+<p><a data-tooltip-position="top" aria-label="https://github.com/Lombax99/ColdStorageService-XMas23" rel="noopener" class="external-link" href="https://github.com/Lombax99/ColdStorageService-XMas23" target="_blank">Repo Github</a></p>
+<table>
+<thead>
+<tr>
+<th>Lisa Innocenti Uccini</th>
+<th>Luca Lombardi</th>
+<th>Giacomo Romanini</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img width="180" alt="LisaUccini.png" src="LisaUccini.png" class="internal-embed"></td>
+<td><img width="245" alt="LucaLombardi.jpg" src="LucaLombardi.jpg" class="internal-embed"></td>
+<td><img width="180" alt="GiacomoRomanini.jpg" src="GiacomoRomanini.jpg" class="internal-embed"></td>
+</tr>
+<tr>
+<td><a data-tooltip-position="top" aria-label="https://github.com/LisaIU00" rel="noopener" class="external-link" href="https://github.com/LisaIU00" target="_blank">github: LisaIU00</a></td>
+<td><a data-tooltip-position="top" aria-label="https://github.com/Lombax99" rel="noopener" class="external-link" href="https://github.com/Lombax99" target="_blank">github: Lombax99</a></td>
+<td><a data-tooltip-position="top" aria-label="https://github.com/RedDuality" rel="noopener" class="external-link" href="https://github.com/RedDuality" target="_blank">github: RedDuality</a></td>
+</tr>
+</tbody>
+</table>
+    </body>
+</html>
