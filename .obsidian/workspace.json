@@ -116,7 +116,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -222,7 +222,9 @@
             "state": {
               "type": "all-properties",
               "state": {
-                "sortOrder": "frequency"
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
               }
             }
           },
@@ -265,10 +267,10 @@
   },
   "active": "3cbb87e3cf673c7d",
   "lastOpenFiles": [
-    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
-    "Sprint3/Doc/Sprint 3.md",
-    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
     "Sprint2/Doc/Sprint 2.md",
+    "Sprint3/Doc/Sprint 3.md",
+    "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
     "Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/ControllerObserver.java",
     "FinalVersion/servicestatusguiF/src/main/java/unibo/statusgui/ControllerObserver.java",
     "Sprint0/Cold Storage Service - Natali V3.md",

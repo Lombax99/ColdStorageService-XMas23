@@ -134,7 +134,9 @@ QActor controller context ctxcoldstoragearea {
 - TRIG: pin fisico 11 (GPIO 17)
 - ECHO: pin fisico 13 (GPIO 27)
 
-1) Avvia main alarm
+1) Genera eseguibile con il Plugin Distribution di gradle (create Zip)
+2) Deploy della cartella generata sul rasp con python script
+3) Avvia main alarm (projectDir/bin/projectName) (il .bat è per windows)
 #### Main system deployment
 1) Avviare il container itunibovirtualrobot23 su docker
 	Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/
