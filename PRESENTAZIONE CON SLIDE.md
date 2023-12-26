@@ -3,7 +3,7 @@ Scaletta con divisione:
 
 Slide1:  (Luca)
 Analisi del problema (Sprint 0)
-- Motivare divisione Sprint
+- Motivare divisione Sprint (mm forse solo accennato molto lontanamente)
 - Prima architettura
 	- spiega divisione contesti e identificazione attori
 	- in particolare ColdRoom attore
@@ -14,7 +14,7 @@ Slide2: (Luca)
 - Da "doJob" a comandi per TransportTrolley
 
 Slide3: (Lisix)
-- Presentazione protocollo di richiesta e generazione del ticket e vari reject
+- Presentazione protocollo di richiesta e generazione del ticket e vari reject (mm solo accenno per poi passare ai pesi ipotetici)
 - Pesi ipotetici
 
 Slide4:
@@ -22,7 +22,7 @@ Sprint 1.0 e 1.1
 - Facade (Lisix)
 - Spring (Lisix)
 - Observer (J)
-- Test (J)
+- Test (J) (secondo me NO)
 
 Slide 5 (J)
 Sprint 2 e 3

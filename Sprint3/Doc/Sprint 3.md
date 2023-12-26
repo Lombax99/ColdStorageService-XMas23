@@ -57,7 +57,6 @@ Decidiamo di fare richiesta esplicita poiché in mancanza di richieste da parte 
 ##### Come mandare le richieste
 Sfruttiamo la facade già creata in precedenza per richiedere al sistema i valori iniziali per la ServiceStatusGui.
 ##### Architettura logica dopo l'analisi del problema
-- [ ] Problema del grafico che non mostra i delegate 
 Possiamo definire la gui come un attore (mock GUI) che poi verrà sostituito
 ![[Sprint3/Codice/ColdStorage3/coldstorage3arch.png]]
 ![[ArchitetturaWebSprint3.png]]
@@ -68,6 +67,7 @@ Possiamo definire la gui come un attore (mock GUI) che poi verrà sostituito
 
 ### Progettazione
 ##### Facade aggiornato
+L'attore facade funge da componente intermedio anche tra l'utente che accede alla StatusGui ed il resto del sistema.
 [[Sprint3/Codice/ColdStorage3/src/coldstorage.qak|coldstorage]]
 ```
 QActor facade context ctxcoldstoragearea {
@@ -200,6 +200,7 @@ public class ControllerStatusGui {
 ```
 
 ##### Gli observer
+Per implementare il pattern observer vengono definite le seguenti classi:
 [[Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/ColdRoomObserver.java|ColdRoomObserver]]
 [[RobotPosObserver.java]]
 [[TicketHandlerObserver.java]]
@@ -408,6 +409,7 @@ public class WebSocketHandler extends AbstractWebSocketHandler {
 }
 ```
 ##### Ticket Handler per contare quanti ticket vengono rifiutati
+E' necessaria una modifica all'attore TicketHandler, in quanto è stato richiesto di contare il numero di ticket che vengono rifiutati.
 [[Sprint3/Codice/ColdStorage3/src/coldstorage.qak|coldstorage]]
 ```
 QActor tickethandler context ctxcoldstoragearea {
