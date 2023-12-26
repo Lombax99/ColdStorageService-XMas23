@@ -1,0 +1,349 @@
+<h3 id="goal-dello-sprint-0">Goal dello Sprint 0</h3>
+<ul>
+<li>individuare la struttura principale e le macro-entità del sistema e le loro interazioni.</li>
+<li><p>definire un piano di lavoro.</p>
+<h3 id="requisiti">Requisiti</h3>
+<p>A company intends to build a ColdStorageService, composed of a set of elements:</p>
+</li>
+<li><p>a service area (rectangular, flat) that includes:</p>
+<ul>
+<li>an INDOOR port, to enter food (fruits, vegetables, etc. )</li>
+<li>a ColdRoom container, devoted to store food, up to <strong>MAXW</strong> kg.
+The ColdRoom is positioned within the service area, as shown in the following picture:</li>
+</ul>
+</li>
+</ul>
+<p>![[ColdStorageServiceRoomAnnoted.png]]</p>
+<ol>
+<li><p>a DDR robot working as a transport trolley, that is intially situated in its HOME location. The transport trolley has the form of a square of side length <strong>RD</strong>.
+ The transport trolley is used to perform a deposit action that consists in the following phases:</p>
+<ol>
+<li>pick up a food-load from a Fridge truck located on the INDOOR</li>
+<li>go from the INDOOR to the PORT of the ColdRoom</li>
+<li>deposit the food-load in the ColdRoom</li>
+</ol>
+</li>
+<li><p>a ServiceAcessGUI that allows an human being to see the current weigth of the material stored in the ColdRoom and to send to the ColdStorageService a request to store new <strong>FW</strong> kg of food. If the request is accepted, the services return a ticket that expires after a prefixed amount of time (<strong>TICKETTIME</strong> secs) and provides a field to enter the ticket number when a Fridge truck is at the INDOOR of the service.</p>
+</li>
+<li><p>a ServiceStatusGUI that allows a Service-manager (an human being) to supervises the state of the service.</p>
+<h4 id="alarm-requirements">Alarm requirements</h4>
+</li>
+</ol>
+<p>The system includes a Sonar and a Led connected to a RaspberryPi.
+The Sonar is used as an ‘alarm device’: when it measures a distance less that a prefixed value <strong>DLIMT</strong>, the transport trolley must be stopped; it will be resumed when Sonar detects again a distance higher than <strong>DLIMT</strong>.</p>
+<p>The Led is used as a <em>warning devices</em>, according to the following scheme:</p>
+<ul>
+<li>the Led is <strong>off</strong> when the transport trolley is at HOME</li>
+<li>the Led <strong>blinks</strong> while the transport trolley is moving</li>
+<li>the Led is <strong>on</strong> when transport trolley is stopped</li>
+</ul>
+<h3 id="service-users-story">Service users story</h3>
+<p>The story of the ColdStorageService can be summarized as follows:</p>
+<ol>
+<li><p>A Fridge truck driver uses the <em>ServiceAcessGUI</em> to send a request to store its load of <strong>FW</strong> kg. If the request is accepted, the driver drives its truck to the INDOOR of the service, before the ticket exipration time <strong>TICKETTIME</strong>.</p>
+</li>
+<li><p>When the truck is at the INDOOR of the service, the driver uses the <em>ServiceAcessGUI</em> to enter the ticket number and waits until the message <strong>charge taken</strong> (sent by the ColdStorageService) appears on the <em>ServiceAcessGUI</em>. At this point, the truck should leave the INDOOR.</p>
+</li>
+<li><p>When the service accepts a ticket, the transport trolley reaches the INDOOR, picks up the food, sends the <strong>charge taken</strong> message and then goes to the ColdRoom to store the food.</p>
+</li>
+<li><p>When the deposit action is terminated, the transport trolley accepts another ticket (if any) or returns to HOME.</p>
+</li>
+<li><p>While the transport trolley is moving, the Alarm requirements should be satisfied. However, the transport trolley should not be stopped if some prefixed amount of time (<strong>MINT</strong> msecs) is not passed from the previous stop.</p>
+</li>
+<li><p>A <em>Service-manager</em> migtht use the ServiceStatusGUI to see:</p>
+<ul>
+<li>the <strong>current state</strong> of the transport trolley and it <strong>position</strong> in the room;</li>
+<li>the <strong>current weigth</strong> of the material stored in the ColdRoom;</li>
+<li>the <strong>number of store-requests rejected</strong> since the start of the service.</li>
+</ul>
+</li>
+</ol>
+<h3 id="analisi-del-tf23">Analisi del TF23</h3>
+<p>Nelle discussioni con il committente, sono emerse alcune problematiche:</p>
+<ul>
+<li>Il problema del load-time lungo.</li>
+<li>Il problema del driver distratto (non coerente, rispetto alle due fasi: scarico preceduto da prenotazione).</li>
+<li>Il problema del driver malevolo.</li>
+<li>Il problema di garantire che una risposta venga sempre inviata sempre solo a chi ha fatto la richiesta, anche quando la richiesta è inviata da un ‘alieno’ come una pagine HTML<h4 id="il-problema-del-load-time-lungo">Il problema del load-time lungo</h4>
+Il problema del load-time lungo è stato affrontato da Arnaudo/Munari con l’idea di inviare due messaggi di ‘risposta’ (una per dire al driver che il ticket inviato è valido e una per inviare <code>chargeTaken</code>). A questo fine hanno fatto uso diretto della connessione TCP stabilita da una versione prototipale dell’accessGui fatta come GUI JAVA.
+Per consentire questa possibilità anche a livello di modellazione qak, in <em>ActorBasicFsm</em> è stato introdotto il metodo storeCurrentRequest() che permette di ricordare la richiesta corrente (cancellata da una <strong>replyTo</strong>). Questo però è un trucco/meccanismo che potrebbe risultare pericoloso.
+Meglio affrontare il problema dal punto di vista logico, impostando una interazione a DUE-FASI tra driver e service (compito che può svolgere la <em>serviceAcessGui</em>).</li>
+<li>FASE1: il driver invia il ticket e attenda una risposta (immediata) come ad esempio <code>ticketaccepted/ticketrejected</code></li>
+<li>FASE2: il driver invia la richiesta <code>loaddone</code> e attenda la risposta (<code>chargeTaken</code> o fallimento per cause legate al servizio)<h4 id="il-problema-del-driver-distratto">Il problema del driver distratto</h4>
+Questo problema ha indotto il committente ad affermare che:
+quando un agente esterno (driver) invia il ticket per indurre il servizio a scaricare il truck, si SUPPPONE GARANTITO che il carico del truck sia UGUALE al carico indicato nella prenotazione.
+Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore del carico effettivo sul Truck.</li>
+</ul>
+<h3 id="analisi-preliminare-dei-requisiti">Analisi preliminare dei requisiti</h3>
+<p>![[Architettura_Sprint0_V2.png]]</p>
+<h5 id="service-area">Service Area</h5>
+<pre><code class="lang-kotlin">val ServiceArea = <span class="hljs-keyword">object</span> {
+    <span class="hljs-keyword">int</span> LatoLungo             <span class="hljs-meta"># valore maggiore di 0</span>
+    <span class="hljs-keyword">int</span> LatoCorto             <span class="hljs-meta"># valore maggiore di 0</span>
+}
+</code></pre>
+<h5 id="home">HOME</h5>
+<pre><code class="lang-kotlin"><span class="hljs-keyword">val</span> <span class="hljs-type">Home</span> = <span class="hljs-keyword">object</span> {
+    <span class="hljs-built_in">int</span> x = <span class="hljs-number">0</span>
+    <span class="hljs-built_in">int</span> y = <span class="hljs-number">0</span>
+}
+</code></pre>
+<h5 id="indoor-port">INDOOR port</h5>
+<pre><code class="lang-kotlin"><span class="hljs-keyword">val</span> <span class="hljs-type">IndoorPort</span> = <span class="hljs-keyword">object</span> {
+    <span class="hljs-built_in">int</span> x = <span class="hljs-number">0</span>
+    <span class="hljs-built_in">int</span> y = <span class="hljs-type">MAX_Y</span>
+}
+</code></pre>
+<h5 id="porta-della-coldroom">Porta della ColdRoom</h5>
+<p>Lato sud del ColdRoom Container. Transport Trolley potrà interagire con ColdRoom attraverso questa.</p>
+<h5 id="coldroom-container">ColdRoom Container</h5>
+<p>Contenitore in posizione fissa in Service Area, il cui punto di accesso è la [[Cold Storage Service - Natali V3#Porta della ColdRoom|Porta della ColdRoom]], in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.</p>
+<pre><code class="lang-kotlin"><span class="hljs-keyword">var</span> ColdRoom = <span class="hljs-keyword">object</span> {
+    <span class="hljs-keyword">int</span> MAXW                  <span class="hljs-meta"># valore maggiore di 0</span>
+    <span class="hljs-keyword">int</span> CurrentWeight = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">int</span> x                     <span class="hljs-meta"># valore non negativo</span>
+    <span class="hljs-keyword">int</span> y                     <span class="hljs-meta"># valore non negativo</span>
+}
+</code></pre>
+<h5 id="ddr-robot">DDR robot</h5>
+<p><em>Differential Drive Robot</em>, vedi <a href="https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html">robot</a>.</p>
+<h5 id="transport-trolley">Transport trolley</h5>
+<p>Transport trolley è un DDR robot capace di spostarsi all&#39;interno di [[Cold Storage Service - Natali V3#Service Area|Service Area]]. 
+I comandi che è in grado di compiere sono descritti nell&#39;apposita <a href="https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html">documentazione</a> .</p>
+<pre><code class="lang-java">int RD                        <span class="hljs-selector-id">#lunghezza</span> <span class="hljs-selector-tag">del</span> lato <span class="hljs-selector-tag">del</span> quadrato
+</code></pre>
+<h5 id="food-load">Food-load</h5>
+<p>Carico (in kg) che il robot preleverà da Indoor e depositerà in ColdRoom Container.</p>
+<pre><code class="lang-java"><span class="hljs-keyword">int</span> FoodLoad                  <span class="hljs-meta"># valore non negativo</span>
+</code></pre>
+<h5 id="tickettime">TicketTime</h5>
+<pre><code class="lang-java">long TicketTime               <span class="hljs-selector-id">#tempo</span> esperesso <span class="hljs-keyword">in</span> secondi
+</code></pre>
+<h5 id="ticket">Ticket</h5>
+<pre><code class="lang-java"><span class="hljs-keyword">int</span> TicketNumber
+</code></pre>
+<h5 id="serviceaccesgui">ServiceAccesGUI</h5>
+<p>GUI che permette ai driver di:</p>
+<ul>
+<li>visualizzare la quantità di cibo (in peso) contenuta all&#39;interno di ColdRoom.</li>
+<li>richiedere la generazione di un Ticket da presentare in un secondo momento.</li>
+<li>presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port.</li>
+<li>inviare la richiesta &quot;LoadDone&quot; quando il driver è pronto a scaricare.
+[[coldstorage0.qak|See qak file]]<h5 id="coldstorageservice">ColdStorageService</h5>
+ColdStorageService si occupa di gestire le richieste di scarico merce, questo comprende:</li>
+<li>ricevere le richieste di permesso di scarico.</li>
+<li>generare Ticket assegnati al singolo driver che ne ha fatto richiesta.</li>
+<li>ricevere e verificare i Ticket nel momento in cui il driver arriva in INDOOR.
+[[coldstorage0.qak|See qak file]]<h5 id="servicestatusgui">ServiceStatusGUI</h5>
+Componente che permette al Service-manager (persona fisica) di supervisionare lo [[Cold Storage Service - Natali V3#Stato del Servizio|Stato del servizio]]<h5 id="stato-del-servizio">Stato del Servizio</h5>
+Lo stato del servizio comprende:</li>
+<li>Lo stato e la posizione del TransportTrolley.</li>
+<li>Lo stato della ColdRoom (peso corrente su totale).</li>
+<li>Il numero di richieste negate dall&#39;inizio del servizio.<h5 id="messaggi">Messaggi</h5>
+```
+Request depositRequest : depositRequest(PESO)
+Reply accept : accept(TICKET)
+Reply reject : reject(NO_PARAM)</li>
+</ul>
+<p>Request weightrequest : weightrequest(PESO)
+Reply weightOK : weightOK( NO_PARAM )
+Reply weightKO : weightKO( NO_PARAM )</p>
+<p>Request checkmyticket : checkmyticket(TICKET)
+Reply    ticketchecked : ticketchecked(BOOL)</p>
+<p>Request loaddone : loaddone(PESO)
+Reply     chargetaken : chargetaken(NO_PARAM)</p>
+<p>Dispatch startToDoThings : startToDoThings( NO_PARAM )</p>
+<pre><code>
+|<span class="hljs-string"> Name           </span>|<span class="hljs-string"> Sender             </span>|<span class="hljs-string"> Receiver           </span>|<span class="hljs-string"> Type     </span>|<span class="hljs-string"> Motivazioni                             </span>|
+|<span class="hljs-string"> -------------- </span>|<span class="hljs-string"> ------------------ </span>|<span class="hljs-string"> ------------------ </span>|<span class="hljs-string"> -------- </span>|<span class="hljs-string"> --------------------------------------- </span>|
+|<span class="hljs-string"> DepositRequest </span>|<span class="hljs-string"> ServiceAccesGUI    </span>|<span class="hljs-string"> ColdStorageService </span>|<span class="hljs-string"> Req/Resp </span>|<span class="hljs-string"> Deve attendere la risposta: Accepted/Rejected </span>|
+|<span class="hljs-string"> LoadDone       </span>|<span class="hljs-string"> ServiceAccesGUI    </span>|<span class="hljs-string"> ColdStorageService </span>|<span class="hljs-string"> Req/Resp </span>|<span class="hljs-string"> Deve attendere la risposta: ChargeTaken      </span>|
+|<span class="hljs-string"> WeightRequest  </span>|<span class="hljs-string"> ColdStorageService </span>|<span class="hljs-string"> ColdRoom           </span>|<span class="hljs-string"> Req/Resp </span>|<span class="hljs-string"> Risposta necessaria per proseguire: WeightOK/KO </span>|
+|<span class="hljs-string"> CheckMyTicket  </span>|<span class="hljs-string"> ServiceAccesGUI    </span>|<span class="hljs-string"> ColdStorageService </span>|<span class="hljs-string"> Req/Resp </span>|<span class="hljs-string"> Deve attendere la risposta: Ok/Rejected      </span>|
+
+&gt;[!NOTE]- Tipi di messaggi
+&gt;in generale le ragioni per i vari tipi di messaggio sono:
+&gt; - req/resp se ho bisogno di ricevere una risposta
+&gt; - dispatch se è un messaggio per un componente specifico che conosco e non mi interessa la risposta
+&gt; - event se è per uno o più componenti che non conosco direttamente (io emetto e chi è interessato riceve)
+
+<span class="hljs-comment">##### Contesti</span>
+</code></pre><p>Context ctxcoldstoragearea ip [host=&quot;localhost&quot; port=8040]
+Context ctxLedSonar ip [host=&quot;127.0.0.1&quot; port=8088]
+```</p>
+<h3 id="keypoints">Keypoints</h3>
+<h5 id="1-aggiornamento-di-servicestatusgui">1) Aggiornamento di ServiceStatusGUI</h5>
+<p>SSG dovrà presentare i dati aggiornati del sistema ad ogni istante, dovrà quindi comportarsi come un <strong>Observer</strong>, sfruttiamo la tecnologia degli <a href="https://github.com/anatali/issLab23/blob/main/iss23Material/html/QakActors23.html">StreamQActor</a>.</p>
+<h5 id="2-carico-di-lavoro-di-coldstorageservice">2) Carico di lavoro di ColdStorageService</h5>
+<p>Tutto il lavoro del sistema al momento passa attraverso ColdStorageService, dalla gestione dei Ticket all&#39;interazione con il TransportTrolley --&gt; <strong>Da valutare una divisione in più componenti</strong></p>
+<h5 id="3-coldroom-attore-o-pojo-">3) ColdRoom, Attore o POJO?</h5>
+<p>Per requisiti il sistema deve essere distribuito, tutte le entità definite finora saranno quindi modellate come <strong>Attori</strong>, in particolare <strong>ColdRoom</strong> decidiamo di modellarla come attore e non come POJO per i seguenti motivi:</p>
+<ul>
+<li>Nonostante non sia nei requisiti è logico pensare che in futuro il sistema debba essere esteso con funzionalità per diminuire il peso contenuto in ColdRoom. Definire il componente come attore faciliterà questa aggiunta.</li>
+<li>Inoltre definire ColdRoom come attore esterno è in linea con il principio di singola responsabilità e alleggerisce il carico di lavoro di ColdStorageService.
+[[coldstorage0.qak|See qak file]]<h5 id="posizione-del-robot-">Posizione del robot?</h5>
+Sarà necessario per il sistema riuscire ad identificare la posizione corrente del robot in ogni istante per pianificare il percorso da intraprendere.
+Per risolvere il problema assoceremo alla <strong>Service Area</strong> un sistema di coordinate da definire in seguito.</li>
+</ul>
+<h3 id="discussioni-col-committente">Discussioni col committente</h3>
+<blockquote>
+<p>Richiesta al committente:
+Dimensione della Service Area: 7m * 5m.</p>
+<p>Richiesta al committente:</p>
+<ul>
+<li>Capienza massima (MAXW) corrisponde a 50 kg</li>
+<li>La grandezza di ColdRoom Container è 1m * 1m</li>
+<li>Posizione in Service Area come da figura iniziale</li>
+<li>Sarà possibile per il robot muoversi attorno alla ColdRoom</li>
+</ul>
+<p>Richiesta al committente:</p>
+<ul>
+<li>dimensione del transport trolley corrisponde ad un quadrato di lunghezza RD = 1 m.</li>
+</ul>
+</blockquote>
+<h3 id="test-plan">Test Plan</h3>
+<p>Durante la face di testing dovranno essere verificati i seguenti casi:</p>
+<ul>
+<li>Inserendo un ticket valido il peso in ColdRoom deve aggiornarsi correttamente.</li>
+<li>Un ticket deve essere rifiutato per timeout (il peso non deve cambiare)</li>
+<li>Una richiesta di peso eccessiva deve essere rifiutata</li>
+</ul>
+<p>Codice terzo test: [[Sprint0/Codice/ColdStorageService0/test/TestService.java|TestService]]</p>
+<h3 id="progettazione">Progettazione</h3>
+<p>Codice sprint0: [[coldstorage0.qak]]</p>
+<h3 id="divisione-in-sprint">Divisione in Sprint</h3>
+<p>1) Transport Trolley + ColdStorageService [[Sprint 1.0 - V3]]</p>
+<blockquote>
+<p>[!NOTE]- Descrizione
+Lo scopo del primo sprint è produrre una prima versione funzionante del core dell&#39;applicazione. Questo comprende ColdStorageService con la logica di gestione dei Ticket e il TransportTrolley funzionante.
+A questa parte deve essere affiancata una mock version della ServiceAccessGUI per la fase di testing.</p>
+</blockquote>
+<p>2) Led e Sonar [[Sprint 2]]</p>
+<blockquote>
+<p>[!NOTE]- Descrizione
+Nel secondo sprint verranno implementati il sistema di led e sonar con la logica ad essi associata.</p>
+</blockquote>
+<p>3) ServiceStatusGui e grafiche migliorate [[Sprint 3]]</p>
+<blockquote>
+<p>[!NOTE]- Descrizione
+Nel terzo sprint ci occuperemo della ServiceStatusGUI e delle interfacce grafiche finali.</p>
+</blockquote>
+<h3 id="divisione-dei-compiti">Divisione dei compiti</h3>
+<p>Ogni Sprint verrà affrontato insieme con divisione dei compiti specifica valutata di volta in volta.</p>
+<h3 id="piano-di-lavoro">Piano di Lavoro</h3>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>GOAL</th>
+<th>Tempo Stimato</th>
+<th>Divisione del Lavoro</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SPRINT 1</td>
+<td>Sviluppo del primo prototipo</td>
+<td>2 man-days</td>
+<td>3 persone</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Sviluppo della ServiceAccessGUI</td>
+<td>1 man-day</td>
+<td>2 persone</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Testing</td>
+<td>2 man-hours</td>
+<td>1 persona</td>
+<td></td>
+</tr>
+<tr>
+<td>SPRINT 2</td>
+<td>Sviluppo di Led e Sonar</td>
+<td>4 man-hours</td>
+<td>3 persone</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Testing di Led e sonar</td>
+<td>1 man-hour</td>
+<td>1 persona</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Implementazione con il resto del sistema</td>
+<td>1 man-hour</td>
+<td>1 persona</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Testing completo</td>
+<td>1 man-hour</td>
+<td>1 persona</td>
+<td></td>
+</tr>
+<tr>
+<td>SPRINT 3</td>
+<td>Sviluppo della ServiceStatusGui</td>
+<td>1 man-day</td>
+<td>2 persone</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Testing del sistema completo</td>
+<td>2 man-hour</td>
+<td>1 persona</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Refactoring della user interface</td>
+<td>1 man-hour</td>
+<td>1 persona</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Testing finale dell&#39;intera applicazione</td>
+<td>3 man-hour</td>
+<td>3 persone</td>
+<td>Il testing finale deve essere condiviso da tutti i membri del gruppo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="-"># </h2>
+<p><a href="https://github.com/Lombax99/ColdStorageService-XMas23">Repo Github</a></p>
+<table>
+<thead>
+<tr>
+<th>Lisa Innocenti Uccini</th>
+<th>Luca Lombardi</th>
+<th>Giacomo Romanini</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>![[LisaUccini.png\</td>
+<td>180]]</td>
+<td>![[LucaLombardi.jpg\</td>
+<td>245]]</td>
+<td>![[GiacomoRomanini.jpg\</td>
+<td>180]]</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LisaIU00">github: LisaIU00</a></td>
+<td><a href="https://github.com/Lombax99">github: Lombax99</a></td>
+<td><a href="https://github.com/RedDuality">github: RedDuality</a></td>
+</tr>
+</tbody>
+</table>

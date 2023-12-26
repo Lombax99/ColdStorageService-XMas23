@@ -116,7 +116,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -182,7 +182,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint0/Cold Storage Service - Natali V3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -199,7 +199,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md",
+                "file": "Sprint0/Cold Storage Service - Natali V3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -222,7 +222,9 @@
             "state": {
               "type": "all-properties",
               "state": {
-                "sortOrder": "frequency"
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
               }
             }
           },
@@ -232,7 +234,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint2/Doc/Sprint 2.md"
+                "file": "Sprint0/Cold Storage Service - Natali V3.md"
               }
             }
           },
@@ -254,25 +256,28 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Apri selezione rapida": false,
-      "graph:Apri vista grafo": false,
-      "canvas:Crea nuova lavagna": false,
-      "daily-notes:Apri nota del giorno": false,
-      "templates:Inserisci modello": false,
-      "command-palette:Apri riquadro comandi": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "5131fe5b1f24664a",
+  "active": "5dff4cd59ff17530",
   "lastOpenFiles": [
+    "Sprint0/Cold Storage Service - Natali V3.html",
+    "Sprint0/coldstorage0arch.png",
+    "Sprint0/PrimaArchitettura.pdf",
+    "Sprint0/Cold Storage Service - Natali V3.md",
+    "Sprint2/Doc/Sprint 2.md",
     "Sprint1.1/Doc/Sprint 1.1 - V3.md",
     "Sprint1.0/Doc/Sprint 1.0 - V3.md",
-    "Sprint0/Cold Storage Service - Natali V3.md",
     "README.md",
     "PRESENTAZIONE CON SLIDE.md",
     "ToDo EXAM (entro 27-12).md",
     "Sprint3/Doc/Sprint 3.md",
-    "Sprint2/Doc/Sprint 2.md",
     "Sprint3/Codice/statusgui/src/main/resources/templates/static/ServiceStatusGui.html~",
     "Sprint3/Codice/statusgui/src/main/resources/static/css/mystyle.css~",
     "Sprint3/Codice/ColdStorage3/logs/ctxcoldstoragearea/servicestatusguimock_MsLog.txt",
@@ -281,8 +286,6 @@
     "Sprint3/Codice/ColdStorage3/logs/noctx/coldroom_MsLog.txt",
     "Sprint3/Codice/ColdStorage3/logs/noctx/controller_MsLog.txt",
     "Sprint3/Codice/ColdStorage3/build/tmp/compileJava/previous-compilation-data.bin",
-    "Sprint3/Codice/ColdStorage3/build/classes/java/main/uniborobots/WsServer.class",
-    "Sprint3/Codice/ColdStorage3/build/classes/java/main/uniborobots/WsServer$1.class",
     "Other/Demo_VirtualRobot.gif",
     "Other/RobotIcon.jpg",
     "PRESENTAZIONE DEMO.md",
@@ -293,7 +296,6 @@
     "Sprint1.0/Codice/ColdStorage/qakicons/system.PNG",
     "Sprint1.0/Codice/ColdStorage/qakicons/symActorSmall.png",
     "Sprint1.0/Codice/ColdStorage/qakicons/symActor.png",
-    "Sprint1.0/Codice/ColdStorage/qakicons/externalQActor.png",
     "tofo.md",
     "Sprint3/Codice/ColdStorage/coldstorage2arch.png.md",
     "Sprint1.0/Doc/Sprint 1.0.md",
