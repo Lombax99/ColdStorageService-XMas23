@@ -93,8 +93,8 @@ System coldstorage
 //-----------------------------------------------------------------------
 
 Request doJob : doJob(KG)
-Reply jobdone : jobdone(NO_PARAM)
-Reply robotDead : robotDead(NO_PARAM)
+Reply jobdone : jobdone(NO_PARAM) for doJob
+Reply robotDead : robotDead(NO_PARAM) for doJob
 
 Dispatch updateWeight : updateWeight(PESO)
 
