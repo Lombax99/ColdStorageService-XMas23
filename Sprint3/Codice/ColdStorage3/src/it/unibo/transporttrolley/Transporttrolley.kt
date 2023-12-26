@@ -82,7 +82,7 @@ class Transporttrolley ( name: String, scope: CoroutineScope, isconfined: Boolea
 				state("checkforjob") { //this:State
 					action { //it:State
 							Giridafare -= 1
-						CommUtils.outgreen("giro completato, mancano $Giridafare giri")
+						CommUtils.outblack("giro completato, mancano $Giridafare giri")
 						//genTimer( actor, state )
 					}
 					//After Lenzi Aug2002

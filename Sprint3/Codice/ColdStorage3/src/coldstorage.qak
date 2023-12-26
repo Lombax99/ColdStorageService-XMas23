@@ -326,7 +326,6 @@ QActor tickethandler context ctxcoldstoragearea {
 				if( Now > StartTime + TICKETTIME){ //scaduto
 					var PesoTicket = TicketTokens.get(2).toInt()
 					SpazioLiberato += PesoTicket
-					
 					it.remove()
 				}
         		
@@ -379,7 +378,7 @@ QActor tickethandler context ctxcoldstoragearea {
 		onMsg(checkmyticket : checkmyticket(TICKET)){
 			[#	var Ticket = payloadArg(0)
 				var Ticketvalid = false;
-				
+				Rejected++
 				if(Tickets.contains(Ticket)){
 					var StartTime = Ticket.split(Token, ignoreCase = true, limit = 0).get(1).toInt()
 					
@@ -387,11 +386,13 @@ QActor tickethandler context ctxcoldstoragearea {
 					if( Now < StartTime + TICKETTIME){
 						Tickets.remove(Ticket)
 						Ticketvalid = true
+						Rejected--
 					}
 						
 				}
 				
 				#]
+			updateResource [# "" + Rejected #]
 			println("tickethandler - il biglietto è valido? $Ticketvalid") color blue
 			replyTo checkmyticket with ticketchecked : ticketchecked($Ticketvalid)
 		}

@@ -161,7 +161,7 @@ class Tickethandler ( name: String, scope: CoroutineScope, isconfined: Boolean=f
 						                        currentMsg.msgContent()) ) { //set msgArgList
 									var Ticket = payloadArg(0)
 												var Ticketvalid = false;
-												
+												Rejected++
 												if(Tickets.contains(Ticket)){
 													var StartTime = Ticket.split(Token, ignoreCase = true, limit = 0).get(1).toInt()
 													
@@ -169,10 +169,13 @@ class Tickethandler ( name: String, scope: CoroutineScope, isconfined: Boolean=f
 													if( Now < StartTime + TICKETTIME){
 														Tickets.remove(Ticket)
 														Ticketvalid = true
+														Rejected--
 													}
 														
 												}
 												
+								updateResourceRep( "" + Rejected  
+								)
 								CommUtils.outblue("tickethandler - il biglietto è valido? $Ticketvalid")
 								answer("checkmyticket", "ticketchecked", "ticketchecked($Ticketvalid)"   )  
 						}
