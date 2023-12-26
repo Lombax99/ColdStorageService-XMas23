@@ -44,18 +44,6 @@
             }
           },
           {
-            "id": "a1e0c290965c3c74",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "5dff4cd59ff17530",
             "type": "leaf",
             "state": {
@@ -114,9 +102,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "d994b9e834719f9e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ToDo EXAM (entro 27-12).md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 8
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -166,7 +166,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 502.51103591918945
+    "width": 426.5
   },
   "right": {
     "id": "b7d0927a7144a728",
@@ -182,7 +182,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md",
+                "file": "Sprint2/Doc/Sprint 2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -199,7 +199,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md",
+                "file": "Sprint2/Doc/Sprint 2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -222,9 +222,7 @@
             "state": {
               "type": "all-properties",
               "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
+                "sortOrder": "frequency"
               }
             }
           },
@@ -234,7 +232,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md"
+                "file": "Sprint2/Doc/Sprint 2.md"
               }
             }
           },
@@ -256,41 +254,41 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
+      "switcher:Apri selezione rapida": false,
+      "graph:Apri vista grafo": false,
+      "canvas:Crea nuova lavagna": false,
+      "daily-notes:Apri nota del giorno": false,
+      "templates:Inserisci modello": false,
+      "command-palette:Apri riquadro comandi": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "3cbb87e3cf673c7d",
+  "active": "5131fe5b1f24664a",
   "lastOpenFiles": [
-    "Sprint2/Doc/Sprint 2.md",
-    "Sprint3/Doc/Sprint 3.md",
     "Sprint1.1/Doc/Sprint 1.1 - V3.md",
     "Sprint1.0/Doc/Sprint 1.0 - V3.md",
-    "Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/ControllerObserver.java",
-    "FinalVersion/servicestatusguiF/src/main/java/unibo/statusgui/ControllerObserver.java",
     "Sprint0/Cold Storage Service - Natali V3.md",
     "README.md",
+    "PRESENTAZIONE CON SLIDE.md",
     "ToDo EXAM (entro 27-12).md",
+    "Sprint3/Doc/Sprint 3.md",
+    "Sprint2/Doc/Sprint 2.md",
+    "Sprint3/Codice/statusgui/src/main/resources/templates/static/ServiceStatusGui.html~",
+    "Sprint3/Codice/statusgui/src/main/resources/static/css/mystyle.css~",
+    "Sprint3/Codice/ColdStorage3/logs/ctxcoldstoragearea/servicestatusguimock_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/logs/ctxcoldstoragearea/serviceaccessguimock_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/logs/noctx/tickethandler_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/logs/noctx/coldroom_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/logs/noctx/controller_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/build/tmp/compileJava/previous-compilation-data.bin",
+    "Sprint3/Codice/ColdStorage3/build/classes/java/main/uniborobots/WsServer.class",
+    "Sprint3/Codice/ColdStorage3/build/classes/java/main/uniborobots/WsServer$1.class",
     "Other/Demo_VirtualRobot.gif",
     "Other/RobotIcon.jpg",
-    "Resources",
-    "~$SlidePresentazione.pptx",
     "PRESENTAZIONE DEMO.md",
-    "PRESENTAZIONE CON SLIDE.md",
-    "Sprint3/Codice/ColdStorage3/coldstorage3arch",
-    "Sprint1.1/Codice/ColdStorageSprint2/coldstorage11arch",
     "Sprint1.1/Codice/ColdStorageSprint2/coldstorage11arch.png",
-    "Sprint2/Codice/ColdStorage/coldstorage2arch",
     "Sprint2/Codice/ColdStorage/coldstorage2arch.png",
-    "SlidePresentazione.pptx",
-    "Data Migration Project Proposal by Slidesgo.pptx",
     "Sprint3/Doc/ArchitetturaWebSprint3.png",
-    "Sprint1.1/Codice/serviceaccessgui/src/main/resources/static/js/dinamic.js~",
     "Sprint1.0/Codice/ColdStorage/coldstorage10arch.png",
     "Sprint1.0/Codice/ColdStorage/qakicons/system.PNG",
     "Sprint1.0/Codice/ColdStorage/qakicons/symActorSmall.png",

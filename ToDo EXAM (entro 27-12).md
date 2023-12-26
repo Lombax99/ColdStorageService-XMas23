@@ -1,18 +1,9 @@
 DOC
-- [x] Sostituisci codice nella doc con link ai file del codice (Luca) ✅ 2023-12-24
-- [x] Aggiornare grafico 1.0, 1.1, 2, 3 dopo aver completato qak e rigenera tutti i grafici per sicurezza (Luca) ✅ 2023-12-25
 - [ ] riscrivi codice nella doc mettendo solo il minimo interessante
 - [ ] Doc in HTML
 - [ ] RILEGGERE TUTTI TUTTE LE DOC E SEGNALARE EVENTUALI CORREZIONI
 
-Codice
-- [x] observed stato (moved, stopped)
-- [x] incrementa observer reject n° regetti a causa del ticketime
-- [x] controlla che in access si presenti sempre la somma e non solo il promesso (anche nella richiesta iniziale)
-- [ ] risistema tutte le interfacce
 
-
- - [ ] PREPARA SLIDE (Lisix)
 
 PER 27/12 (da definire orario)
  - [ ] Doc e Codice perfetti (guardare sopra compiti di ognuno)

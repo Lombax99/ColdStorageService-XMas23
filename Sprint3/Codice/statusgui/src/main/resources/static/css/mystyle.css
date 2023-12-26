@@ -3,27 +3,32 @@
     font-family: 'Times New Roman', serif;
 }
 
-.row {
-    display: flex;
-}
 
 table {
-  border-collapse: collapse;
+
+    line-height: center;
   width: 100%;
 }
 
 td, th {
-  border: 2px solid #d2ebf1;
+
   text-align: center;
   padding: 12px;
+    line-height: center;
+}
+
+.row {
+    display: flex;
 }
 
 /* Create two equal columns that sits next to each other */
 .column {
+    border: 2px solid #d2ebf1;
     float: left;
     width: 50%;
-    padding: 10px;
-    text-align: center
+    padding: 12px;
+    text-align: center;
+    line-height: center;
 }
 
 @media screen and (max-width: 600px) {

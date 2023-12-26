@@ -285,10 +285,10 @@ QActor coldroom context ctxcoldstoragearea {
 Il server si collegherà agli attori tramite socket o come coapObserver.
 Le richieste ajax provenienti dai client verranno inoltrate tramite socket.
 
-Il server è composto di un [[ApiController.java]] che sfrutta la classe [[Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/MessageSender.java|MessageSender]] per inviare messaggi.
-Lato client rendiamo le pagine dinamiche tramite [[dinamic.js]] 
+Il server è composto di un [[Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ApiController.java|ApiController.java]] che sfrutta la classe [[Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/MessageSender.java|MessageSender]] per inviare messaggi.
+Lato client rendiamo le pagine dinamiche tramite [[Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ApiController.java|ApiController.java]] 
 
-Gli eventi degli attori osservati tramite observer verranno inoltrati ai client tramite websocket, create all'inizio di ogni sessione. Vedi [[Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ColdRoomObserver.java|ColdRoomObserver]].
+Gli eventi degli attori osservati tramite observer verranno inoltrati ai client tramite websocket, create all'inizio di ogni sessione. Vedi [[Sprint1.1/Codice/serviceaccessgui/src/main/resources/static/js/dinamic.js|dinamic.js]].
 ##### HTML page
 [[Sprint1.1/ServiceAccessGuiWebPage.html|ServiceAccessGuiWebPage.html]]
 
