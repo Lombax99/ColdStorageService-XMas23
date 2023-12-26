@@ -4,24 +4,6 @@
     "type": "split",
     "children": [
       {
-        "id": "362e27c2256f7fa0",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "d4be7a5636e32724",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          }
-        ]
-      },
-      {
         "id": "5ddce5631bb8fc48",
         "type": "tabs",
         "children": [
@@ -86,6 +68,18 @@
             }
           },
           {
+            "id": "d4be7a5636e32724",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "47c6cf1d0cb28d7e",
             "type": "leaf",
             "state": {
@@ -122,7 +116,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -188,7 +182,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+                "file": "Sprint3/Doc/Sprint 3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -205,7 +199,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+                "file": "Sprint3/Doc/Sprint 3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -238,7 +232,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md"
+                "file": "Sprint3/Doc/Sprint 3.md"
               }
             }
           },
@@ -269,13 +263,15 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "47c6cf1d0cb28d7e",
+  "active": "3cbb87e3cf673c7d",
   "lastOpenFiles": [
-    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
     "Sprint1.1/Doc/Sprint 1.1 - V3.md",
     "Sprint3/Doc/Sprint 3.md",
-    "Sprint0/Cold Storage Service - Natali V3.md",
+    "Sprint1.0/Doc/Sprint 1.0 - V3.md",
     "Sprint2/Doc/Sprint 2.md",
+    "Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/ControllerObserver.java",
+    "FinalVersion/servicestatusguiF/src/main/java/unibo/statusgui/ControllerObserver.java",
+    "Sprint0/Cold Storage Service - Natali V3.md",
     "README.md",
     "ToDo EXAM (entro 27-12).md",
     "Other/Demo_VirtualRobot.gif",
@@ -293,8 +289,6 @@
     "Data Migration Project Proposal by Slidesgo.pptx",
     "Sprint3/Doc/ArchitetturaWebSprint3.png",
     "Sprint1.1/Codice/serviceaccessgui/src/main/resources/static/js/dinamic.js~",
-    "Sprint3/Codice/ColdStorage3/Arch_coldstorage3Modificato.py",
-    "Sprint3/Codice/ColdStorage3/Arch_coldstorage3 - Copia.py",
     "Sprint1.0/Codice/ColdStorage/coldstorage10arch.png",
     "Sprint1.0/Codice/ColdStorage/qakicons/system.PNG",
     "Sprint1.0/Codice/ColdStorage/qakicons/symActorSmall.png",
