@@ -38,20 +38,18 @@ ExternalQActor controller context ctxcoldstoragearea
 ```
 Rispetto al resto del sistema Sonar e Led si trovano da requisiti su un RaspberryPi esterno.
 I due nodi di elaborazione devono potersi scambiare informazione via rete.
-Incapsuliamo in due attori i componenti che si occuperanno di gestire Led e Sonar e sfruttiamo questi per scambiare i messaggi.
+Incapsuliamo in due attori in componenti che si occuperanno di gestire Led e Sonar e sfruttiamo questi per scambiare i messaggi.
 ##### Messaggi
 ```
-#messaggi per il led
+# messaggi per il led
 Dispatch arrivedhome : arrivedhome(NO_PARAM)
 Dispatch moving : moving(NO_PARAM)
 Dispatch stopped : stopped(NO_PARAM)
 
-#messaggi per il sonar
+# messaggi per il sonar
 Dispatch stop : stop(NO_PARAM)
 Dispatch continue : continue(NO_PARAM)
 ```
-
-- [ ] Siamo sicuri che non sia meglio definire il sonar signal come un evento?
 
 > [!NOTE]- Perché Dispatch?
 > In entrambi i casi i messaggi sono destinati ad un attore specifico conosciuto.
@@ -67,7 +65,6 @@ Dobbiamo gestire il caso in cui arrivano più volte gli stessi messaggi (ottengo
 ##### Architettura logica dopo l'analisi del problema
 ![[Sprint2/Codice/ColdStorage/coldstorage2arch.png]]
 
-
 ### Test Plan
 Stato del led che si aggiorna correttamente.
 Controller che modifica correttamente lo stato dopo aver ricevuto un messaggio dal sonar.
@@ -77,331 +74,52 @@ Il testing di un sonar riguarda due aspetti distinti:
 2) il test sul corretto funzionamento del componente software responsabile della trasformazione del dispositivo in un produttore di dati consumabili da un altro componente.
 
 Test implementato: 
-Supponendo di porre di fronte al Sonar un ostacolo a distanza D, il BasicRobot deve fermarsi e riparte solo dopo che l'ostacolo è rimosso.
-[[Sprint2/Codice/ColdStorage/test/TestService.java|TestService]]
-``` kotlin
-@Test  
-public void mainUseCaseTest(){  
-    //connect to port  
-    try{  
-        Socket client= new Socket("localhost", 8040);  
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));  
-        BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));  
-		
-        out.write("msg(depositRequestF,request,test2,facade,depositRequestF(1),1)\n");  
-        out.flush();  
-        //wait for response  
-        String response= in.readLine();  
-        response = response.split(",")[4];  
-        String ticket = response.replace("acceptF(","");  
-        ticket = ticket.replace(")","");  
-		
-        out.write("msg(checkmyticketF,request,test2,facade,checkmyticketF(" + ticket + "),1)\n");  
-        out.flush();  
-        String responseC= in.readLine();  
-		
-        out.write("msg(loaddoneF,request,test2,facade,loaddoneF(1),1)\n");  
-        out.flush();  
-        String responseL= in.readLine();  
-		
-		
-        System.out.println("sleep 2 seconds");  
-        TimeUnit.SECONDS.sleep(4);  
-		
-        out.write("msg(stop,dispatch,test2,controller,stop(),1)\n");  
-		
-		
-        System.out.println("sleep 1 seconds");  
-        TimeUnit.SECONDS.sleep(1);  
-		
-        out.write("msg(getrobotstate,request,test2,robotpos,getrobotstate(ARG),1)\n");  
-        out.flush();  
-        String responsePos1= in.readLine();  
-        responsePos1 = responsePos1.split(",")[4];  
-        System.out.println("pos1: "+responsePos1); //robotstate(pos(0,4),DOWN)  
-		
-        System.out.println("sleep 1 seconds for pos");  
-        TimeUnit.SECONDS.sleep(1);  
-		
-        out.write("msg(getrobotstate,request,test2,robotpos,getrobotstate(ARG),1)\n");  
-        out.flush();  
-        String responsePos2= in.readLine();  
-        responsePos2 = responsePos2.split(",")[4];  
-        System.out.println("pos2: "+responsePos2);   //robotstate(pos(0,4),DOWN)  
-		
-        assertTrue(responsePos1.equalsIgnoreCase(responsePos2));  
-		
-        out.write("msg(continue,dispatch,test2,controller,continue(),1)\n");  
-		
-		
-        System.out.println("sleep 1 seconds for pos");  
-        TimeUnit.SECONDS.sleep(1);  
-		
-        out.write("msg(getrobotstate,request,test2,robotpos,getrobotstate(ARG),1)\n");  
-        out.flush();  
-        String responsePos3= in.readLine();  
-		
-        System.out.println("pos3: "+responsePos3);  
-		
-        assertFalse(responsePos1.equalsIgnoreCase(responsePos3));  
-		
-    }catch(Exception e){  
-        fail();  
-        System.out.println(e.getStackTrace());  
-    }  
-}
-```
+Supponendo di porre di fronte al Sonar un ostacolo a distanza D, il BasicRobot deve fermarsi e riparte solo dopo che l'ostacolo è rimosso: [[Sprint2/Codice/ColdStorage/test/TestService.java|TestService]]
 
 ### Progettazione
-##### SonarActor
-[[alarm.qak]]
-```
-QActor sonar context ctxalarm{
-	
-	[# 	var Distanza = 20.0; #]
-	
-	State s0 initial {
-		println("alarm - sonar started") color green
-	} Goto work
-	
-	State work{
-		[# while(SonarService.getDistance() > Distanza){} #]
-		
-		forward controller -m stop : stop(1)
-		println("alarm - sent stop") color green
-	}Goto stopped
-	
-	State stopped  {
-		[# while(SonarService.getDistance() < Distanza){} #]
-		
-		forward controller -m continue : continue(1)
-		println("alarm - sent continue") color green
-	} Transition t0 whenTime 3000 -> work         #wait before next signal da requisiti
-}
-```
+##### SonarActor e LedActor
+Codice: [[alarm.qak]]
 ##### SonarService
-Legge i dati rilevato dal sonar da stdin
-[[SonarService.kt]]
-``` kotlin
-import java.io.BufferedReader
-import java.io.InputStreamReader
-
-object SonarService {
-    var reader: BufferedReader? = null
-	
-    init {
-        try {
-            var p  = Runtime.getRuntime().exec("python3 -u sonar.py")
-            reader = BufferedReader( InputStreamReader(p.inputStream))
-        } catch (e : Exception) {
-            println(e.message)
-        }
-    }
-	
-    fun getDistance() : Double {
-        var distance = reader!!.readLine().toDouble()
-        println(distance)
-        return distance
-    }
-}
-```
-##### Sonar
-sonar in python: dopo l'avvio scrive la distanza calcolata su stdout 4 volte al secondo
+Per interagire con lo script di basso livello relativo al sonar usiamo [[SonarService.kt]] che legge da inputStream i dati generati da [[Sprint2/Codice/ColdStorage/resources/robotNano/sonar.py|sonar.py]]
+##### Sonar Script
+sonar in python: dopo l'avvio scrive la distanza calcolata su stdout 4 volte al secondo:
 [[sonarRasp.py]]
-```python
-import RPi.GPIO as GPIO
-import time
-import sys
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-TRIG = 17
-ECHO = 27
-
-GPIO.setup(TRIG,GPIO.OUT)
-GPIO.setup(ECHO,GPIO.IN)
-
-GPIO.output(TRIG, False)   #TRIG parte LOW
-print ('Waiting a few seconds for the sensor to settle')
-time.sleep(2)
-
-while True:
-   GPIO.output(TRIG, True)    #invia impulsoTRIG
-   time.sleep(0.00001)
-   GPIO.output(TRIG, False)
-
-   #attendi che ECHO parta e memorizza tempo
-   while GPIO.input(ECHO)==0:
-      pulse_start = time.time()
-
-   # register the last timestamp at which the receiver detects the signal.
-   while GPIO.input(ECHO)==1:
-      pulse_end = time.time()
-
-   pulse_duration = pulse_end - pulse_start
-   distance = pulse_duration * 17165   #distance = vt/2
-   distance = round(distance, 1)
-   print ( distance )
-   sys.stdout.flush()   #Importante!
-   time.sleep(0.25)
-```
-##### LedActor
-[[SonarService.kt]]
-```
-QActor led context ctxalarm{
-	State s0 initial {
-		
-	}Goto athome
-	
-	State athome {
-		[#    
-			try{
-    			val p  = Runtime.getRuntime().exec("python3 ledOFF.py")
-    		}catch( e : Exception){
-    			println(e.message)
-    		}
-		#]
-		println("alarm - atHome -led off ") color yellow
-		
-	} Transition t1 whenMsg arrivedhome -> athome
-					whenMsg moving -> currmoving
-					whenMsg stopped -> arrested
-	
-	State currmoving {
-		[#    
-			try{
-    			val p  = Runtime.getRuntime().exec("python3 ledON.py")
-    		}catch( e : Exception){
-    			println(e.message)
-    		}
-		#]
-		
-		println("alarm - moving - ledOn") color yellow
-		
-		[# Thread.sleep(1000);
-			try{
-    			val p  = Runtime.getRuntime().exec("python3 ledOFF.py")
-    		}catch( e : Exception){
-    			println(e.message)
-    		}
-		#]
-		
-		println("alarm - moving - LedOff") color yellow
-	} Transition t2 whenTime 1000 -> currmoving
-					whenMsg moving -> currmoving
-					whenMsg arrivedhome -> athome
-					whenMsg stopped -> arrested
-	
-	State arrested {
-		[#    
-			try{
-    			val p  = Runtime.getRuntime().exec("python3 ledON.py")
-			}catch( e : Exception){
-				println(e.message)
-			}
-		#]
-		println("alarm - arrested  - led on") color yellow
-	} Transition t3 whenMsg stopped -> arrested
-					whenMsg arrivedhome -> athome
-					whenMsg moving -> currmoving
-}
-```
-##### Led
+##### Led Script
 facciamo solo uno script che accende e uno script che spegne e ci pensa l'attore ad invocare lo script secondo bisogno per mostrare lo stato corrente, la logica di lampeggiamento è lasciata all'attore led da gestire e non allo script.
-
-ledOn in python
-[[ledOnRasp.py]]
-``` python
-import RPi.GPIO as GPIO
-
-LED_PIN = 21
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(LED_PIN,GPIO.OUT)
-GPIO.setwarnings(False)
-
-GPIO.output(LED_PIN, GPIO.HIGH)
-```
-
-ledOff in python
-[[ledOffRasp.py]]
-``` python
-import RPi.GPIO as GPIO
-
-LED_PIN = 21
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(LED_PIN,GPIO.OUT)
-GPIO.setwarnings(False)
-
-GPIO.output(LED_PIN, GPIO.LOW)
-```
+- ledOn in python: [[ledOnRasp.py]]
+- ledOff in python: [[ledOffRasp.py]]
 ##### Controller
-[[Sprint2/Codice/ColdStorage/src/coldstorage.qak|coldstorage]]
+Aggiungiamo al controller la nuova logica: [[Sprint2/Codice/ColdStorage/src/coldstorage.qak|coldstorage.qak]]
 ```
 QActor controller context ctxcoldstoragearea {
-
-	[# var PESO = 0	#]
-	
-	State s0 initial {
-		printCurrentMessage
-	} Goto work
-	
-	State work{ //inHome
-		println("controller - work") color green
-	} Transition t0 whenMsg stop -> stopped
-					whenMsg continue -> work
-					whenRequest loaddone -> startjob
+	...
 	
 	State stopped{
-		println("controller - stopped") color green
 		forward led -m stopped : stopped(1)
 		forward planexec -m stopplan : stopplan(1)
 	}Transition t0 whenMsg stop -> stopped
-					whenMsg continue -> continueworking
+				   whenMsg continue -> continueworking
 	
 	State continueworking{
-		println("controller - continue") color green
 		forward led -m arrivedhome : arrivedhome(1)
 		forward planexec -m continueplan : continueplan(1)
 	}Goto work
 	
-	State startjob  {
-		forward led -m moving : moving(1)
-		onMsg(loaddone : loaddone(PESO) ){
-			[# PESO = payloadArg(0).toInt()	#]
-			println("controller - startjob dichiarato: $PESO") color green
-		}
-		replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
-		request transporttrolley -m doJob : doJob($PESO)
-	} Transition endjob whenMsg stop -> stoppedwhileworking
-						whenReply robotDead -> handlerobotdead
-						whenReply jobdone -> jobdone
+	...
 	
 	State stoppedwhileworking {
 		forward planexec -m stopplan : stopplan(1)
-		println("stopped while working") color magenta
 		forward led -m stopped : stopped(1)
 	}Transition t0 whenMsg continue -> waitingforreply
 	
 	State waitingforreply{
 		forward planexec -m continueplan : continueplan(1)
-		println("continued") color green
 		forward led -m moving : moving(1)
 	}Transition endjob whenMsg stop -> stoppedwhileworking
 						whenReply robotDead -> handlerobotdead
 						whenReply jobdone -> jobdone
 	
-	State jobdone{
-		println("jobdone") color green
-		forward coldroom -m updateWeight : updateWeight($PESO, $PESO)
-		forward led -m arrivedhome : arrivedhome(1)
-	} Goto work
-	
-	State handlerobotdead{
-		println("robotdead") color red
-		printCurrentMessage
-	}
+	...
 }
 ```
 ### Deployment
