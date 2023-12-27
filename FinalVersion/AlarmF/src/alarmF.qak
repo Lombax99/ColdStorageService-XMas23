@@ -41,6 +41,7 @@ QActor sonar context ctxalarm{
 	State work{
 		[#    
 			while(SonarService.getDistance() > Distanza){}
+			
  		#]
  		
 		forward controller -m stop : stop(1)

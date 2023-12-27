@@ -22,6 +22,7 @@ public class ControllerAccessGui {
         this.aggiornaPesoCorrente(model);
         return "/static/ServiceAccessGuiWebPage";
     }
+
     @ExceptionHandler
     public ResponseEntity handle(Exception ex) {
         HttpHeaders responseHeaders = new HttpHeaders();

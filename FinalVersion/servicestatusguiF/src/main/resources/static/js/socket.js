@@ -28,11 +28,11 @@ function connect(){
         //alert(`Got Message: ${msg}`);
         console.log(msg);
         if(!msg.includes("created") && msg.toString().length != 3){
-            updateWeightField(msg);
+            updateField(msg);
         }
     };
 
-    function updateWeightField(msg){
+    function updateField(msg){
 
         let splittedmsg = msg.split("_");
         switch(splittedmsg[0]){

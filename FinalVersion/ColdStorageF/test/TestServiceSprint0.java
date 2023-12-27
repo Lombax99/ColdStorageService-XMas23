@@ -16,7 +16,7 @@ public class TestServiceSprint0{
             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
             //send message
-            out.write("msg(depositRequest,request,test,coldstorageservice,depositRequest(100),1)\n");
+            out.write("msg(depositRequest,request,test,facade,depositRequest(100),1)\n");
             out.flush();
             //wait for response
             String response= in.readLine();

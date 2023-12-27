@@ -156,6 +156,7 @@ QActor controller context ctxcoldstoragearea {
 	State startjob  {
 		forward led -m moving : moving(1)
 		updateResource[# "Moving"#]
+		
 		onMsg(loaddone : loaddone(PESO) ){
 			[# PESO = payloadArg(0).toInt()
 				#]
