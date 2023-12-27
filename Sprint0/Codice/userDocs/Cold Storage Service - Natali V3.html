@@ -125,22 +125,22 @@
 			<p><img alt="Architettura_Sprint0_V2.png" src="../../Architettura_Sprint0_V2.png" class="internal-embed"></p>
 			<h5 data-heading="Service Area" id="Service Area">Service Area</h5>
 			<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">val</span> ServiceArea <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
-				int LatoLungo             # valore maggiore di <span class="token number">0</span>
-				int LatoCorto             # valore maggiore di <span class="token number">0</span>
+				&emsp;int LatoLungo             # valore maggiore di <span class="token number">0</span>
+				&emsp;int LatoCorto             # valore maggiore di <span class="token number">0</span>
 			<span class="token punctuation">}</span>
 			</code></pre>
 			<br/>
 			<h5 data-heading="HOME" id="HOME">HOME</h5>
 			<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">val</span> Home <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
-				int x <span class="token operator">=</span> <span class="token number">0</span>
-				int y <span class="token operator">=</span> <span class="token number">0</span>
+				&emsp;int x <span class="token operator">=</span> <span class="token number">0</span>
+				&emsp;int y <span class="token operator">=</span> <span class="token number">0</span>
 			<span class="token punctuation">}</span>
 			</code></pre>
 			<br/>
 			<h5 data-heading="INDOOR port">INDOOR port</h5>
 			<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">val</span> IndoorPort <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
-				int x <span class="token operator">=</span> <span class="token number">0</span>
-				int y <span class="token operator">=</span> MAX_Y
+				&emsp;int x <span class="token operator">=</span> <span class="token number">0</span>
+				&emsp;int y <span class="token operator">=</span> MAX_Y
 			<span class="token punctuation">}</span>
 			</code></pre>
 			<br/>
@@ -149,10 +149,10 @@
 			<h5 data-heading="ColdRoom Container">ColdRoom Container</h5>
 			<p>Contenitore in posizione fissa in Service Area, il cui punto di accesso è la <a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Porta della ColdRoom" data-href="Cold Storage Service - Natali V3#Porta della ColdRoom" href="Cold%20Storage%20Service%20-%20Natali%20V3.html#Porta%20della%20ColdRoom" class="internal-link" target="_blank" rel="noopener">Porta della ColdRoom</a>, in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.</p>
 			<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">var</span> ColdRoom <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
-				int MAXW                  # valore maggiore di <span class="token number">0</span>
-				int CurrentWeight <span class="token operator">=</span> <span class="token number">0</span>
-				int x                     # valore non negativo
-				int y                     # valore non negativo
+				&emsp;int MAXW                  # valore maggiore di <span class="token number">0</span>
+				&emsp;int CurrentWeight <span class="token operator">=</span> <span class="token number">0</span>
+				&emsp;int x                     # valore non negativo
+				&emsp;int y                     # valore non negativo
 			<span class="token punctuation">}</span>
 			</code></pre>
 			<h5 data-heading="DDR robot">DDR robot</h5>
@@ -204,20 +204,20 @@
 			</ul>
 			<h5 data-heading="Messaggi">Messaggi</h5>
 			<pre><code>Request depositRequest : depositRequest(PESO)
-			Reply accept : accept(TICKET)
-			Reply reject : reject(NO_PARAM)
+			&nbsp;Reply accept : accept(TICKET)
+			&nbsp;Reply reject : reject(NO_PARAM)
 
-			Request weightrequest : weightrequest(PESO)
-			Reply weightOK : weightOK( NO_PARAM )
-			Reply weightKO : weightKO( NO_PARAM )
+			&nbsp;Request weightrequest : weightrequest(PESO)
+			&nbsp;Reply weightOK : weightOK( NO_PARAM )
+			&nbsp;Reply weightKO : weightKO( NO_PARAM )
 
-			Request checkmyticket : checkmyticket(TICKET)
-			Reply	ticketchecked : ticketchecked(BOOL)
+			&nbsp;Request checkmyticket : checkmyticket(TICKET)
+			&nbsp;Reply	ticketchecked : ticketchecked(BOOL)
 
-			Request loaddone : loaddone(PESO)
-			Reply 	chargetaken : chargetaken(NO_PARAM)
+			&nbsp;Request loaddone : loaddone(PESO)
+			&nbsp;Reply 	chargetaken : chargetaken(NO_PARAM)
 
-			Dispatch startToDoThings : startToDoThings( NO_PARAM )
+			&nbsp;Dispatch startToDoThings : startToDoThings( NO_PARAM )
 			</code></pre>
 			<br/>
 			<table>
@@ -272,7 +272,7 @@
 			</div>
 			<h5 data-heading="Contesti">Contesti</h5>
 			<pre><code>Context ctxcoldstoragearea ip [host="localhost" port=8040]
-			Context ctxLedSonar ip [host="127.0.0.1" port=8088]
+			&nbsp;Context ctxLedSonar ip [host="127.0.0.1" port=8088]
 			</code></pre>
 			<br/>
 			<h3 id="Keypoints">Keypoints</h3>

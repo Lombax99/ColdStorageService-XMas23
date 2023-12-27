@@ -68,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -134,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "ToDo EXAM (entro 27-12).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "ToDo EXAM (entro 27-12).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -186,7 +186,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "ToDo EXAM (entro 27-12).md"
               }
             }
           },
@@ -217,8 +217,9 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "3cbb87e3cf673c7d",
+  "active": "3c241c180c9399a2",
   "lastOpenFiles": [
+    "README.md",
     "PRESENTAZIONE DEMO.md",
     "pptB057.tmp",
     "pptAE91.tmp",
@@ -237,7 +238,6 @@
     "Sprint1.0/Doc/Sprint 1.0 - V3.md",
     "ToDo EXAM (entro 27-12).md",
     "Other/ColdStorageServiceRoomAnnoted.png",
-    "README.md",
     "commons/resources/Images/RaspImage.jpeg",
     "commons/resources/Images/ServiceStatusGuiImage.png",
     "commons/resources/Images/ServiceAccessGuiImage.png",
