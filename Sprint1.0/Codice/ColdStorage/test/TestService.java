@@ -16,7 +16,7 @@ public class TestService{
             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
             //send message
-            out.write("msg(doJob,request,test,trasporttrolley,doJob(5),1)\n");
+            out.write("msg(doJob,request,test,transporttrolley,doJob(5),12)\n");
             out.flush();
             //wait for response
             String response= in.readLine();

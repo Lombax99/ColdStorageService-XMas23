@@ -17,19 +17,19 @@ public class TestService{
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
-            out.write("msg(depositRequestF,request,test2,facade,depositRequestF(1),1)\n");
+            out.write("msg(depositRequest,request,test2,facade,depositRequest(1),1)\n");
             out.flush();
             //wait for response
             String response= in.readLine();
             response = response.split(",")[4];
-            String ticket = response.replace("acceptF(","");
+            String ticket = response.replace("accept(","");
             ticket = ticket.replace(")","");
 
-            out.write("msg(checkmyticketF,request,test2,facade,checkmyticketF(" + ticket + "),1)\n");
+            out.write("msg(checkmyticket,request,test2,facade,checkmyticket(" + ticket + "),1)\n");
             out.flush();
             String responseC= in.readLine();
 
-            out.write("msg(loaddoneF,request,test2,facade,loaddoneF(1),1)\n");
+            out.write("msg(loaddone,request,test2,facade,loaddone(1),1)\n");
             out.flush();
             String responseL= in.readLine();
 
@@ -44,6 +44,7 @@ public class TestService{
             TimeUnit.SECONDS.sleep(1);
 
             out.write("msg(getrobotstate,request,test2,robotpos,getrobotstate(ARG),1)\n");
+            System.out.println("attendo il flush");
             out.flush();
             String responsePos1= in.readLine();
             responsePos1 = responsePos1.split(",")[4];
