@@ -27,7 +27,7 @@ Distributed software system for an _**autonomous forklift robot**_. The project
     <td>
       Main component of the system. It <b>manages the ColdStorage Service</b>. It receives Store Requests from the users, process them and delegates a <i>Transport Trolley</i> for the material pick up and deposit, in case there is enough space in the ColdRoom container.
     </td>
-    <td><img src="Sprint1.0/Doc/Architettura_Sprint0_V2.png"/></td>
+    <td><img src="Sprint0/Architettura_Sprint0_V2.png"/></td>
   </tr>
   <tr align="center">
     <td><b>ColdStorage&nbsp;RaspPi</b></td>
