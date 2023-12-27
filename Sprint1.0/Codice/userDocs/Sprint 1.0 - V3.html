@@ -48,54 +48,56 @@
 			</div>
 			</li>
 			</ol>
-			<p>Modello dello <a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3" data-href="Cold Storage Service - Natali V3" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.0\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html" class="internal-link" target="_blank" rel="noopener">sprint precedente</a>.<br>
-			<img alt="Architettura_Sprint0_V2.png" src="Architettura_Sprint0_V2.png" class="internal-embed"></p>
+			<p>Modello dello <a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3" data-href="Cold Storage Service - Natali V3" href="../../../Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html" class="internal-link" target="_blank" rel="noopener">sprint precedente</a>.<br>
+			<img alt="Architettura_Sprint0_V2.png" src="../../../Sprint0/Architettura_Sprint0_V2.png" class="internal-embed"></p>
 			<h3 id="Requisiti relativi allo sprint corrente">Requisiti</h3>
-			<p><img alt="ColdStorageServiceRoomAnnoted.png" src="ColdStorageServiceRoomAnnoted.png" class="internal-embed"><br>
-			<a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Requisiti" data-href="Cold Storage Service - Natali V3#Requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.0\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Requisiti" class="internal-link" target="_blank" rel="noopener">Requisiti</a></p>
+			<p><img alt="ColdStorageServiceRoomAnnoted.png" src="../../../Other/ColdStorageServiceRoomAnnoted.png" class="internal-embed"><br>
+			<a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Requisiti" data-href="Cold Storage Service - Natali V3#Requisiti" href="../../../Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html#Requisiti" class="internal-link" target="_blank" rel="noopener">Requisiti</a></p>
 			<h3 id="Analisi dei Requisiti">Analisi dei Requisiti</h3>
-			<p><a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Analisi preliminare dei requisiti" data-href="Cold Storage Service - Natali V3#Analisi preliminare dei requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.0\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Analisi%20preliminare%20dei%20requisiti" class="internal-link" target="_blank" rel="noopener">analisi requisiti sprint 0</a></p>
+			<p><a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Analisi preliminare dei requisiti" data-href="Cold Storage Service - Natali V3#Analisi preliminare dei requisiti" href="../../../Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html#Analisi%20preliminare%20dei%20requisiti" class="internal-link" target="_blank" rel="noopener">analisi requisiti sprint 0</a></p>
 			<h3 id="Analisi del Problema">Analisi del Problema</h3>
 			<h5 data-heading="Responsabilità di ColdStorageService">Responsabilità di ColdStorageService</h5>
 			<p>ColdStorageService è un componente caratterizzato da troppe responsabilità, l'analista ritiene opportuno suddividerlo in 2 attori:<br>
 			- Controller: si occupa di gestire il robot ed aggiornare il peso di ColdRoom.<br>
 			- TicketHandler: si occupa di gestire il ciclo di vita dei Ticket.</p>
-			<p>Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione dei ticket è rimandata allo sprint successivo (<a data-href="Sprint 1.1 - V3" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.0\Doc\Sprint%201.1%20-%20V3" class="internal-link" target="_blank" rel="noopener">Sprint 1.1 - V3</a>)</p>
-			<p>Cerchiamo quindi di realizzare solo la parte corrispondente a Controller, ColdRoom e TransportTrolley della seguente <strong>Architettura logica</strong>:<br>
-			<img alt="ArchitetturaLogica_Sprint1.0-V2.png" src="ArchitetturaLogica_Sprint1.0-V2.png" class="internal-embed"></p>
+			<p>Nello sprint corrente ci occuperemo solo del Controller. La logica di gestione dei ticket è rimandata allo sprint successivo (<a data-href="Sprint 1.1 - V3" href="../../../Sprint1.1/Codice/userDocs/Sprint%201.1%20-%20V3.html" class="internal-link" target="_blank" rel="noopener">Sprint 1.1 - V3</a>)</p>
+			<p>Cerchiamo quindi di realizzare solo la parte corrispondente a Controller, ColdRoom e TransportTrolley della seguente <strong style="color:#ef7089">Architettura logica</strong>:<br>
+			<img alt="ArchitetturaLogica_Sprint1.0-V2.png" src="../../Doc/ArchitetturaLogica_Sprint1.0-V2.png" class="internal-embed"></p>
 			<p>Ovvero la seguente:<br>
-			<img alt="ArchitetturaLogica_Sprint1.0.png" src="ArchitetturaLogica_Sprint1.0.png" class="internal-embed"></p>
+			<img alt="ArchitetturaLogica_Sprint1.0.png" src="../../Doc/ArchitetturaLogica_Sprint1.0.png" class="internal-embed"></p>
 			<h5 data-heading="Messaggio per Transport Trolley">Messaggio per Transport Trolley</h5>
 			<p>Introduciamo un nuovo messaggio "doJob" di tipo Req/Res inviato dal controller.</p>
 			<pre><code>Request doJob : doJob(KG)
 			Reply jobdone : jobdone(NO_PARAM)
 			Reply robotDead : robotDead(NO_PARAM)
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<div class="callout primary"> 
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg> motivazioni <br/> 
 				<p>Definiamo il messaggio come un req/res poichè vogliamo sapere se il servizio richiesto è andato a buon fine oppure se il DDR robot ha avuto problematiche che lo hanno interrotto prima di proseguire con una seconda doJob.</p>
 				<p>Limitiamo il controller ad un semplice comando di doJob, non è compito suo sapere quali operazioni deve compiere il robot per portare a termine il lavoro, è compito del robot stesso.</p>
 			</div>
-			<p><strong>ATTENZIONE</strong>: la risposta deve essere inviata appena il carico è rilasciato nella ColdRoom e non quando il robot torna alla home per requisiti.</p>
+			<p><strong style="color:#ef7089">ATTENZIONE</strong>: la risposta deve essere inviata appena il carico è rilasciato nella ColdRoom e non quando il robot torna alla home per requisiti.</p>
 			<h5 data-heading="Aggiornamento peso ColdRoom">Aggiornamento peso ColdRoom</h5>
 			<p>Se il servizio è andato a buon fine e viene restituita una "jobdone" allora il Controller aggiorna il peso della ColdRoom tramite Dispatch.</p>
 			<pre><code>Dispatch updateWeight : updateWeight(PESO)
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<h5 data-heading="Da &quot;doJob&quot; a comandi per TransportTrolley">Da "doJob" a comandi per TransportTrolley</h5>
 			<p>Dalla <a data-tooltip-position="top" aria-label="https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html" rel="noopener" class="external-link" href="https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html" target="_blank">documentazione</a> fornita è chiaro che il basicRobot non possa ricevere il comando "doJob".<br>
 			Risulta necessario aggiungere un componente intermedio che traduca la "doJob" in una serie di comandi, TransportTrolley si occuperà di quello.<br>
 			Allo stesso modo è anche evidente la mancanza di un comando per caricare e scaricare i materiali trattati in basicRobot, non sarebbe quindi sufficiente in un caso reale.</p>
 			<h5 data-heading="Posizione nella Service Area">Posizione nella Service Area</h5>
 			<p>Per definire la posizione del TransportTrolley e permettere il movimento autonomo dividiamo la stanza in una griglia di quadrati di lato RD (lunghezza del DDR robot).<br>
-			La <a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > HOME" data-href="Cold Storage Service - Natali V3#HOME" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.0\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#HOME" class="internal-link" target="_blank" rel="noopener">Home</a> corrisponderà all'origine (0, 0). Useremo coordinate crescenti verso il basso e verso destra.<br>
-			<img alt="ImmagineGrigliaConCoordinate.png" src="ImmagineGrigliaConCoordinate.png" class="internal-embed"><br>
+			La <a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > HOME" data-href="Cold Storage Service - Natali V3#HOME" href="../../../Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html#HOME" class="internal-link" target="_blank" rel="noopener">Home</a> corrisponderà all'origine (0, 0). Useremo coordinate crescenti verso il basso e verso destra.<br>
+			<img alt="ImmagineGrigliaConCoordinate.png" src="../../Doc/ImmagineGrigliaConCoordinate.png" class="internal-embed"><br>
 			Date le dimensioni dell'area, Service Area sarà divisa in una griglia 4 x 6.<br>
 			ColdRoom si troverà in posizione (5, 2).</p>
 			<p>Il <a data-tooltip-position="top" aria-label="https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html" rel="noopener" class="external-link" href="https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html" target="_blank">TransportTrolley</a> fornito possiede già il supporto a questo tipo di tecnologia. La mappatura della stanza deve essere fatta a priori e fornita tramite file all'avvio.</p>
 			<h5 data-heading="Peso massimo trasportabile">Peso massimo trasportabile</h5>
 			<p>Dopo discussioni con il committente è stato decretato che il peso da scaricare non sarà mai maggiore del peso trasportabile del robot fisico. </p>
 			<h5 data-heading="Architettura logica dopo l'analisi del problema">Architettura logica dopo l'analisi del problema</h5>
-			<p><img alt="coldstorage10arch.png" src="coldstorage10arch.png" class="internal-embed"></p>
+			<p><img alt="coldstorage10arch.png" src="../ColdStorage/coldstorage10arch.png" class="internal-embed"></p>
 			<h3 id="TestPlan">TestPlan</h3>
 			<p>Durante la fase di testing dovranno essere verificati i seguenti casi:</p>
 			<ul>
@@ -103,9 +105,9 @@
 			<li>Verifichiamo che richieste con peso superiore al disponibile vengano scartate correttamente.</li>
 			<li>Verifichiamo che in caso il robot subisca dei problemi il sistema si fermi correttamente.</li>
 			</ul>
-			<p>Codice primo test: <a data-tooltip-position="top" aria-label="Sprint1.0/Codice/ColdStorage/test/TestService.java" data-href="Sprint1.0/Codice/ColdStorage/test/TestService.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.0\Doc\Sprint1.0\Codice\ColdStorage\test\TestService.java" class="internal-link" target="_blank" rel="noopener">TestService</a></p>
+			<p>Codice primo test: <a data-tooltip-position="top" aria-label="TestService.java" data-href="TestService.java" href="../ColdStorage/test/TestService.java" class="internal-link" target="_blank" rel="noopener">TestService</a></p>
 			<h3 id="Progettazione">Progettazione</h3>
-			<p><a data-tooltip-position="top" aria-label="Sprint1.0/Codice/ColdStorage/src/coldstorage.qak" data-href="Sprint1.0/Codice/ColdStorage/src/coldstorage.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.0\Doc\Sprint1.0\Codice\ColdStorage\src\coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage.qak</a></p>
+			<p><a data-tooltip-position="top" aria-label="coldstorage.qak" data-href="coldstorage.qak" href="../ColdStorage/src/coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage.qak</a></p>
 			<h5 data-heading="Sistema di coordinate">Sistema di coordinate</h5>
 			<p>Sia RD l'unità di misura</p>
 			<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded">Home <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
@@ -117,7 +119,8 @@
 				lenght <span class="token operator">=</span> <span class="token number">7</span>             # asse <span class="token function">y</span> <span class="token punctuation">(</span><span class="token number">0</span> <span class="token operator">-&gt;</span> <span class="token number">6</span><span class="token punctuation">)</span>
 			<span class="token punctuation">}</span>
 			</code><button class="copy-code-button">Copy</button></pre>
-			<p><img alt="ImmagineGrigliaCorrectSize.png" src="ImmagineGrigliaCorrectSize.png" class="internal-embed"></p>
+			<br/>
+			<p><img alt="ImmagineGrigliaCorrectSize.png" src="../../Doc/ImmagineGrigliaCorrectSize.png" class="internal-embed"></p>
 			<h5 data-heading="Definizione messaggi e contesti">Definizione messaggi e contesti</h5>
 			<pre class="language-qak" tabindex="0"><code class="language-qak is-loaded">System coldstorage
 
@@ -135,37 +138,38 @@
 
 			//-----------------------------------------------------------------------
 			</code><button class="copy-code-button">Copy</button></pre>
-			<p><strong>NOTA:</strong> in questo momento ColdRoom è definita nello stesso contesto di Controller, in futuro potrebbe non essere così (dipende dall'implementazione fisica della ColdRoom).</p>
+			<br/>
+			<p><strong style="color:#ef7089">NOTA:</strong> in questo momento ColdRoom è definita nello stesso contesto di Controller, in futuro potrebbe non essere così (dipende dall'implementazione fisica della ColdRoom).</p>
 			<h3 id="Deployment">Deployment</h3>
 			<ol>
 			<li>Avviare il container itunibovirtualrobot23 su docker<br>
 			Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint1.0/Codice/BasicRobot/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" data-href="Sprint1.0/Codice/BasicRobot/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.0\Doc\Sprint1.0\Codice\BasicRobot\src\it\unibo\ctxbasicrobot\MainCtxbasicrobot.kt" class="internal-link" target="_blank" rel="noopener">MainCtxbasicrobot.kt</a> del progetto BasicRobot</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint1.0/Codice/ColdStorage/src/it/unibo/ctxColdStorageArea/MainCtxColdStorageArea.kt" data-href="Sprint1.0/Codice/ColdStorage/src/it/unibo/ctxColdStorageArea/MainCtxColdStorageArea.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.0\Doc\Sprint1.0\Codice\ColdStorage\src\it\unibo\ctxColdStorageArea\MainCtxColdStorageArea.kt" class="internal-link" target="_blank" rel="noopener">MainCtxColdStorageArea.kt</a> del progetto ColdStorage</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="MainCtxbasicrobot.kt" data-href="MainCtxbasicrobot.kt" href="../BasicRobot/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" class="internal-link" target="_blank" rel="noopener">MainCtxbasicrobot.kt</a> del progetto BasicRobot</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="MainCtxColdStorageArea.kt" data-href="MainCtxColdStorageArea.kt" href="../ColdStorage/src/it/unibo/ctxColdStorageArea/MainCtxColdStorageArea.kt" class="internal-link" target="_blank" rel="noopener">MainCtxColdStorageArea.kt</a> del progetto ColdStorage</li>
 			</ol>
 			<hr>
 			<p><a data-tooltip-position="top" aria-label="https://github.com/Lombax99/ColdStorageService-XMas23" rel="noopener" class="external-link" href="https://github.com/Lombax99/ColdStorageService-XMas23" target="_blank">Repo Github</a></p>
 			<table>
-			<thead>
-			<tr>
-			<th>Lisa Innocenti Uccini</th>
-			<th>Luca Lombardi</th>
-			<th>Giacomo Romanini</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-			<td><img width="180" alt="LisaUccini.png" src="LisaUccini.png" class="internal-embed"></td>
-			<td><img width="245" alt="LucaLombardi.jpg" src="LucaLombardi.jpg" class="internal-embed"></td>
-			<td><img width="180" alt="GiacomoRomanini.jpg" src="GiacomoRomanini.jpg" class="internal-embed"></td>
-			</tr>
-			<tr>
-			<td><a data-tooltip-position="top" aria-label="https://github.com/LisaIU00" rel="noopener" class="external-link" href="https://github.com/LisaIU00" target="_blank">github: LisaIU00</a></td>
-			<td><a data-tooltip-position="top" aria-label="https://github.com/Lombax99" rel="noopener" class="external-link" href="https://github.com/Lombax99" target="_blank">github: Lombax99</a></td>
-			<td><a data-tooltip-position="top" aria-label="https://github.com/RedDuality" rel="noopener" class="external-link" href="https://github.com/RedDuality" target="_blank">github: RedDuality</a></td>
-			</tr>
-			</tbody>
-			</table>
+				<thead>
+				<tr>
+				<th>Lisa Innocenti Uccini</th>
+				<th>Luca Lombardi</th>
+				<th>Giacomo Romanini</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td><img width="180" alt="LisaUccini.png" src="../../../LisaUccini.png" class="internal-embed"></td>
+				<td><img width="245" alt="LucaLombardi.jpg" src="../../../LucaLombardi.jpg" class="internal-embed"></td>
+				<td><img width="180" alt="GiacomoRomanini.jpg" src="../../../GiacomoRomanini.jpg" class="internal-embed"></td>
+				</tr>
+				<tr>
+				<td><a data-tooltip-position="top" aria-label="https://github.com/LisaIU00" rel="noopener" class="external-link" href="https://github.com/LisaIU00" target="_blank">github: LisaIU00</a></td>
+				<td><a data-tooltip-position="top" aria-label="https://github.com/Lombax99" rel="noopener" class="external-link" href="https://github.com/Lombax99" target="_blank">github: Lombax99</a></td>
+				<td><a data-tooltip-position="top" aria-label="https://github.com/RedDuality" rel="noopener" class="external-link" href="https://github.com/RedDuality" target="_blank">github: RedDuality</a></td>
+				</tr>
+				</tbody>
+				</table>
 		</div>
     </body>
 </html>
