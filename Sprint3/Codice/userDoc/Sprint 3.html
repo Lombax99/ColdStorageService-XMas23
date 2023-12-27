@@ -15,29 +15,29 @@
 		<div id="openButton" class="openButton" onclick="openNav(true)">&#9776; Menu</div>
 		<div id="sidenav" class="sidenav">
 			<a class="closeButton" href="javascript:void(0)" onclick="closeNav(true)">&times;</a>
-			<a id="currentSprint" class="sprint" href="#">&#8211;&#8212; Sprint0 &#8212;&#8211;</a>
-			<a class="selected" href="#">Index</a>
+			<a href="../../../README.html">ReadMe</a>
+			<a class="sprint" href="../../../Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html">Sprint0</a>
+			<a class="sprint" href="../../../Sprint1.0/Codice/userDocs/Sprint%201.0%20-%20V3.html">Sprint1.0</a>
+			<a class="sprint" href="../../../Sprint1.1/Codice/userDocs/Sprint%201.1%20-%20V3.html">Sprint1.1</a>
+			<a class="sprint" href="../../../Sprint2/Codice/userDocs/Sprint%202.html">Sprint2</a>
+			<a id="currentSprint" class="sprint" href="#">&#8211;&#8212; Sprint3 &#8212;&#8211;</a>
 			<div class="sidenavSection">
-				<a href="#Introduction">Introduction</a>
-				<a href="#Motto">Motto</a>
-				<a href="#Resources">Resources</a>
+				<a href="#Goal Sprint 3">Goal Sprint 3</a>
+				<a href="#Requisiti">Requisiti</a>
+				<a href="#Analisi dei Requisiti">Analisi dei Requisiti</a>
+				<a href="#Analisi del Problema">Analisi del Problema</a>
+				<a href="#Test Plan">Test Plan</a>
+				<a href="#Progettazione">Progettazione</a>
+				<a href="#Deployment">Deployment</a>
 			</div>
-			<a href="resources/userDocs/final_theme.html">Final Theme</a>
-			<a href="resources/userDocs/requirement_analysis.html">Requirement<br/>Analysis</a>
-			<a href="resources/userDocs/legend.html">Legend</a>
-			<a href="resources/userDocs/conclusions.html">Conclusions</a>
-			<a href="resources/userDocs/team.html">Team</a>
 			<p class="separator">&mdash;&mdash;&mdash;&ndash;&ndash;&mdash;&mdash;&mdash;</p>
-			<a class="sprint" href="../Sprint1/index.html">Sprint1</a>
-			<a class="sprint" href="../Sprint2/index.html">Sprint2</a>
-			<a class="sprint" href="../Sprint3/index.html">Sprint3</a>
 			<bottom-spacer/>
 		</div>
 		
 		<div id="main">
 			<h1 align="center">Sprint 3</h1>
 			
-			<h3 data-heading="Goal Sprint 3">Goal Sprint 3</h3>
+			<h3 id="Goal Sprint 3">Goal Sprint 3</h3>
 			<p>ServiceStatusGui e grafiche migliorate.</p>
 			<div data-callout-metadata="" data-callout-fold="-" data-callout="note" class="callout is-collapsible is-collapsed"><div class="callout-title"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path><style>
 			:root {
@@ -68,14 +68,14 @@
 			</div></div>
 			<p>Modello dello <a data-tooltip-position="top" aria-label="Sprint 2" data-href="Sprint 2" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint%202.html" class="internal-link" target="_blank" rel="noopener">sprint precedente</a>.<br>
 			<img alt="Sprint2/Codice/ColdStorage/coldstorage2arch.png" src="Sprint2/Codice/ColdStorage/coldstorage2arch.png" class="internal-embed"></p>
-			<h3 data-heading="Requisiti">Requisiti</h3>
+			<h3 id="Requisiti">Requisiti</h3>
 			<p><img alt="ColdStorageServiceRoomAnnoted.png" src="ColdStorageServiceRoomAnnoted.png" class="internal-embed"><br>
 			<a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Requisiti" data-href="Cold Storage Service - Natali V3#Requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Requisiti" class="internal-link" target="_blank" rel="noopener">Requisiti</a></p>
-			<h3 data-heading="Analisi dei Requisiti">Analisi dei Requisiti</h3>
+			<h3 id="Analisi dei Requisiti">Analisi dei Requisiti</h3>
 			<p><a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Analisi preliminare dei requisiti" data-href="Cold Storage Service - Natali V3#Analisi preliminare dei requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Analisi%20preliminare%20dei%20requisiti" class="internal-link" target="_blank" rel="noopener">requisiti sprint 0</a></p>
-			<h3 data-heading="Domande al committente:">Domande al committente:</h3>
+			<h3 id="Domande al committente:">Domande al committente:</h3>
 			<p>Per la posizione quanto dobbiamo essere precisi? Serve sapere la posizione corrente ad ogni step? per il cliente non è necessario quest'ultimo punto dipende da noi. --&gt; per semplicità forniamo le coordinate ad ogni cambiamento del macrostato (in home, fase di load, fase di unload, posizione in caso di errore)</p>
-			<h3 data-heading="Analisi del Problema">Analisi del Problema</h3>
+			<h3 id="Analisi del Problema">Analisi del Problema</h3>
 			<h5 data-heading="Cosa implica lo stato del servizio?">Cosa implica lo stato del servizio?</h5>
 			<p>Lo stato del servizio comprende:</p>
 			<ul>
@@ -117,13 +117,13 @@
 			<p>Possiamo definire la gui come un attore (mock GUI) che poi verrà sostituito<br>
 			<img alt="Sprint3/Codice/ColdStorage3/coldstorage3arch.png" src="Sprint3/Codice/ColdStorage3/coldstorage3arch.png" class="internal-embed"><br>
 			<img alt="ArchitetturaWebSprint3.png" src="ArchitetturaWebSprint3.png" class="internal-embed"></p>
-			<h3 data-heading="Test Plan">Test Plan</h3>
+			<h3 id="Test Plan">Test Plan</h3>
 			<ol>
 			<li>A seguito di una richiesta rifiutata devono aumentare le richieste rifiutate.</li>
 			<li>Nel caso di loadDone fallita la posizione stampata deve essere diversa da home.</li>
 			<li>All'avvio della Gui devono essere caricati i parametri attuali del sistema.</li>
 			</ol>
-			<h3 data-heading="Progettazione">Progettazione</h3>
+			<h3 id="Progettazione">Progettazione</h3>
 			<p><a data-tooltip-position="top" aria-label="Sprint3/Codice/ColdStorage3/src/coldstorage.qak" data-href="Sprint3/Codice/ColdStorage3/src/coldstorage.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\ColdStorage3\src\coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage.qak</a></p>
 			<h5 data-heading="Facade aggiornato">Facade aggiornato</h5>
 			<pre><code>QActor facade context ctxcoldstoragearea {
@@ -192,7 +192,7 @@
 			</code><button class="copy-code-button">Copy</button></pre>
 			<h5 data-heading="HTML page">HTML page</h5>
 			<p><a data-tooltip-position="top" aria-label="Sprint3/Codice/statusgui/src/main/resources/templates/static/ServiceStatusGui.html" data-href="Sprint3/Codice/statusgui/src/main/resources/templates/static/ServiceStatusGui.html" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\statusgui\src\main\resources\templates\static\ServiceStatusGui.html" class="internal-link" target="_blank" rel="noopener">ServiceStatusGui.html</a> </p>
-			<h3 data-heading="Deployment">Deployment</h3>
+			<h3 id="Deployment">Deployment</h3>
 			<h4 data-heading="Deployment on RaspberryPi 3B/3B+">Deployment on RaspberryPi 3B/3B+</h4>
 			<p><img alt="RaspPin.png" src="RaspPin.png" class="internal-embed"></p>
 			<h5 data-heading="Led">Led</h5>

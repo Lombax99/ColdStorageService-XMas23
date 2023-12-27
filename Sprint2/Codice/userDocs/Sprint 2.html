@@ -15,29 +15,29 @@
 		<div id="openButton" class="openButton" onclick="openNav(true)">&#9776; Menu</div>
 		<div id="sidenav" class="sidenav">
 			<a class="closeButton" href="javascript:void(0)" onclick="closeNav(true)">&times;</a>
-			<a id="currentSprint" class="sprint" href="#">&#8211;&#8212; Sprint0 &#8212;&#8211;</a>
-			<a class="selected" href="#">Index</a>
+			<a href="../../../README.html">ReadMe</a>
+			<a class="sprint" href="../../../Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html">Sprint0</a>
+			<a class="sprint" href="../../../Sprint1.0/Codice/userDocs/Sprint%201.0%20-%20V3.html">Sprint1.0</a>
+			<a class="sprint" href="../../../Sprint1.1/Codice/userDocs/Sprint%201.1%20-%20V3.html">Sprint1.1</a>
+			<a id="currentSprint" class="sprint" href="#">&#8211;&#8212; Sprint2 &#8212;&#8211;</a>
 			<div class="sidenavSection">
-				<a href="#Introduction">Introduction</a>
-				<a href="#Motto">Motto</a>
-				<a href="#Resources">Resources</a>
+				<a href="#Goal Sprint 2">Goal Sprint 2</a>
+				<a href="#Requisiti">Requisiti</a>
+				<a href="#Analisi dei Requisiti">Analisi dei Requisiti</a>
+				<a href="#Analisi del Problema">Analisi del Problema</a>
+				<a href="#Test Plan">Test Plan</a>
+				<a href="#Progettazione">Progettazione</a>
+				<a href="#Deployment">Deployment</a>
 			</div>
-			<a href="resources/userDocs/final_theme.html">Final Theme</a>
-			<a href="resources/userDocs/requirement_analysis.html">Requirement<br/>Analysis</a>
-			<a href="resources/userDocs/legend.html">Legend</a>
-			<a href="resources/userDocs/conclusions.html">Conclusions</a>
-			<a href="resources/userDocs/team.html">Team</a>
 			<p class="separator">&mdash;&mdash;&mdash;&ndash;&ndash;&mdash;&mdash;&mdash;</p>
-			<a class="sprint" href="../Sprint1/index.html">Sprint1</a>
-			<a class="sprint" href="../Sprint2/index.html">Sprint2</a>
-			<a class="sprint" href="../Sprint3/index.html">Sprint3</a>
+			<a class="sprint" href="../../../Sprint3/Codice/userDoc/Sprint%203.html">Sprint3</a>
 			<bottom-spacer/>
 		</div>
 		
 		<div id="main">
 			<h1 align="center">Sprint 2</h1>
 			
-			<h3 data-heading="Goal dello Sprint 2">Goal dello Sprint 2</h3>
+			<h3 id="Goal Sprint 2">Goal Sprint 2</h3>
 			<p>Implementazione di Led e Sonar su RaspberryPi.</p>
 			<div data-callout-metadata="" data-callout-fold="-" data-callout="note" class="callout is-collapsible is-collapsed"><div class="callout-title"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path><style>
 			:root {
@@ -68,7 +68,7 @@
 			</div></div>
 			<p>Modello dello <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3" data-href="Sprint 1.1 - V3" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Sprint%201.1%20-%20V3" class="internal-link" target="_blank" rel="noopener">sprint precedente</a>.<br>
 			<img alt="coldstorage11arch.png" src="coldstorage11arch.png" class="internal-embed"></p>
-			<h3 data-heading="Requisiti">Requisiti</h3>
+			<h3 id="Requisiti">Requisiti</h3>
 			<p><img alt="ColdStorageServiceRoomAnnoted.png" src="ColdStorageServiceRoomAnnoted.png" class="internal-embed"><br>
 			<a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Requisiti" data-href="Cold Storage Service - Natali V3#Requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Requisiti" class="internal-link" target="_blank" rel="noopener">Requisiti</a></p>
 			<h4 data-heading="Alarm requirements">Alarm requirements</h4>
@@ -80,13 +80,13 @@
 			<li>the&nbsp;Led&nbsp;<strong>blinks</strong>&nbsp;while the&nbsp;transport trolley&nbsp;is moving</li>
 			<li>the&nbsp;Led&nbsp;is&nbsp;<strong>on</strong>&nbsp;when&nbsp;transport trolley&nbsp;is stopped</li>
 			</ul>
-			<h3 data-heading="Analisi dei Requisiti">Analisi dei Requisiti</h3>
+			<h3 id="Analisi dei Requisiti">Analisi dei Requisiti</h3>
 			<p><a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Analisi preliminare dei requisiti" data-href="Cold Storage Service - Natali V3#Analisi preliminare dei requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Analisi%20preliminare%20dei%20requisiti" class="internal-link" target="_blank" rel="noopener">requisiti sprint 0</a></p>
-			<h3 data-heading="Domande al Committente">Domande al Committente</h3>
+			<h3 id="Domande al Committente">Domande al Committente</h3>
 			<p>Il committente fornisce software relativo al Led e al Sonar? NO<br>
 			Il LED può/deve essere connesso allo stesso RaspberryPi del sonar? SI<br>
 			Il valore&nbsp;<code>DLIMIT</code>&nbsp;deve essere cablato nel sistema o è bene sia definibile in modo configurabile dall’utente finale? Non deve cambiare</p>
-			<h3 data-heading="Analisi del Problema">Analisi del Problema</h3>
+			<h3 id="Analisi del Problema">Analisi del Problema</h3>
 			<h5 data-heading="Sistema distribuito - Come implementiamo la comunicazione?">Sistema distribuito - Come implementiamo la comunicazione?</h5>
 			<pre><code>Context ctxalarm ip [host="localhost" port=8300]
 			Context ctxcoldstoragearea ip [host="127.0.0.1" port=8040]
@@ -146,7 +146,7 @@
 			<p>Dobbiamo gestire il caso in cui arrivano più volte gli stessi messaggi (ottengo 2 stop di fila ad esempio perdendo il "continue" intermedio)</p>
 			<h5 data-heading="Architettura logica dopo l'analisi del problema">Architettura logica dopo l'analisi del problema</h5>
 			<p><img alt="Sprint2/Codice/ColdStorage/coldstorage2arch.png" src="Sprint2/Codice/ColdStorage/coldstorage2arch.png" class="internal-embed"></p>
-			<h3 data-heading="Test Plan">Test Plan</h3>
+			<h3 id="Test Plan">Test Plan</h3>
 			<p>Stato del led che si aggiorna correttamente.<br>
 			Controller che modifica correttamente lo stato dopo aver ricevuto un messaggio dal sonar.</p>
 			<p>Il testing di un sonar riguarda due aspetti distinti:</p>
@@ -156,7 +156,7 @@
 			</ol>
 			<p>Test implementato:<br>
 			Supponendo di porre di fronte al Sonar un ostacolo a distanza D, il BasicRobot deve fermarsi e riparte solo dopo che l'ostacolo è rimosso: <a data-tooltip-position="top" aria-label="Sprint2/Codice/ColdStorage/test/TestService.java" data-href="Sprint2/Codice/ColdStorage/test/TestService.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Sprint2\Codice\ColdStorage\test\TestService.java" class="internal-link" target="_blank" rel="noopener">TestService</a></p>
-			<h3 data-heading="Progettazione">Progettazione</h3>
+			<h3 id="Progettazione">Progettazione</h3>
 			<h5 data-heading="SonarActor e LedActor">SonarActor e LedActor</h5>
 			<p>Codice: <a data-href="alarm.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\alarm.qak" class="internal-link" target="_blank" rel="noopener">alarm.qak</a></p>
 			<h5 data-heading="SonarService">SonarService</h5>
@@ -203,7 +203,7 @@
 				...
 			}
 			</code><button class="copy-code-button">Copy</button></pre>
-			<h3 data-heading="Deployment">Deployment</h3>
+			<h3 id="Deployment">Deployment</h3>
 			<h4 data-heading="Deployment on RaspberryPi 3B/3B+">Deployment on RaspberryPi 3B/3B+</h4>
 			<p><img alt="RaspPin.png" src="RaspPin.png" class="internal-embed"></p>
 			<h5 data-heading="Led">Led</h5>
