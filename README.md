@@ -59,15 +59,15 @@ Distributed software system for an _**autonomous forklift robot**_. The project
   - Sprint Review: 10/11/2023
 - [x] **Sprint1** - Transport Trolley + ColdStorageService: 
   - Latest Release (.md format): [[Sprint 1.0 - V3]], [[Sprint 1.1 - V3]]
-  - Latest Release (html format): [[Sprint 1.0 - V3.html]], [[Sprint 1.1 - V3.html]]
+  - Latest Release (html format): [Sprint 1.0 - V3.html](Sprint1.0/Codice/userDocs/Sprint%201.0%20-%20V3.html), [Sprint 1.1 - V3.html](Sprint1.1/Codice/userDocs/Sprint%201.1%20-%20V3.html)
   - Sprint Review: 17/11/2023
 - [x] **Sprint2** - Led e Sonar: ✅ 2023-12-09
   - Latest Release (.md format): [[Sprint 2]]
-  - Latest Release (html format): [[Sprint 2.html]]
+  - Latest Release (html format): [Sprint 2.html](Sprint2/Codice/userDocs/Sprint%202.html)
   - Sprint Review: 01/12/2023
 - [x] **Sprint3** - ServiceStatusGui: ✅ 2023-12-17
   - Latest Release (.md format): [[Sprint 3]]
-  - Latest Release (html format): [[Sprint 3.html]]
+  - Latest Release (html format): [Sprint 3.html](Sprint3/Codice/userDoc/Sprint%203.html)
   - Final Exam: 29/12/2023
 
 ## Team
