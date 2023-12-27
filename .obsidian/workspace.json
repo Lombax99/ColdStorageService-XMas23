@@ -154,8 +154,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 426.5,
-    "collapsed": true
+    "width": 426.5
   },
   "right": {
     "id": "b7d0927a7144a728",
@@ -256,8 +255,9 @@
   },
   "active": "3cbb87e3cf673c7d",
   "lastOpenFiles": [
-    "Sprint0/Cold Storage Service - Natali V3.md",
+    "Sprint0/Codice/userDocs/Cold.md",
     "README.md",
+    "Sprint0/Cold Storage Service - Natali V3.md",
     "Sprint3/Doc/Sprint 3.md",
     "Sprint3/Codice/userDoc/Sprint 3.html",
     "Sprint2/Codice/userDocs/Sprint 2.html",

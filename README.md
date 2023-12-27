@@ -55,7 +55,7 @@ Distributed software system for an _**autonomous forklift robot**_. The project
 ### Roadmap
 - [x] **Sprint0** - Requirements analysis and system basic structure: 
   - Latest Release (.md format): [[Cold Storage Service - Natali V3]]
-  - Latest Release (html format): [[Cold Storage Service - Natali V3.html]]
+  - Latest Release (html format): [Cold Storage Service - Natali V3.html](Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html)
   - Sprint Review: 10/11/2023
 - [x] **Sprint1** - Transport Trolley + ColdStorageService: 
   - Latest Release (.md format): [[Sprint 1.0 - V3]], [[Sprint 1.1 - V3]]
