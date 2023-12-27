@@ -1,0 +1,32 @@
+.dictionary {
+    margin-top: 10px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid black;
+}
+.dictionary tr {
+    text-align: center;
+}
+.dictionary th {
+    border: 1px solid black;
+    padding: 5px 5px 5px 5px;
+    font-weight: bold;
+    cursor: pointer;
+    position: sticky;
+    z-index: 1;
+    top: 0px;
+    background-color: white;
+}
+.dictionary td {
+    padding: 5px 5px 15px 5px;
+}
+td ol, td ul {
+    text-align: left;
+}
+
+.dictionary td:first-child {
+    font-family: "Arial";
+	font-weight: bold;
+    color: #0000CD	;
+}

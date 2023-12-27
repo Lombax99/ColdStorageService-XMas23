@@ -1,0 +1,72 @@
+body {
+  font-family: "Lato", sans-serif;
+}
+.footnote:link, .footnote:visited {
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+.footnote:hover {
+  font-size: 30px;
+  background-color: yellow;
+  text-decoration: none;
+}
+
+h3, h4, h5, h6 {
+  margin-bottom: 15px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+}
+footer a:link, footer a:visited, footer a:hover {
+  color: black;
+}
+
+/* img overlay */
+.image-container {
+  position: relative;
+  width: 100%;
+}
+.base-image {
+  width: 100%;
+}
+.overlay-image1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  visibility: visible;
+  z-index: 1;
+}
+.overlay-image2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  visibility: visible;
+  z-index: 2;
+}
+
+/* List */
+.summary li {
+  margin-bottom: 5px;
+}
+
+/* Extra */
+highlight1 {
+  background-color: yellow;
+}
+highlight2 {
+  background-color: orange;
+}
+highlight3 {
+  background-color: lime;
+}
+highlight4 {
+  background-color: cyan;
+}

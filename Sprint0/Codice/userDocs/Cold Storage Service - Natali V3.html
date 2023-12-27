@@ -1,0 +1,548 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Cold Storage Service - Natali V3</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="../../../commons/resources/styles/templateISS.css">
+        <link rel="stylesheet" type="text/css" href="../../../commons/resources/styles/main.css">
+        <link rel="stylesheet" type="text/css" href="../../../commons/resources/styles/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../../../commons/resources/styles/table.css">
+        <link rel="stylesheet" type="text/css" href="../../../commons/resources/styles/code.css">
+        <script type="text/javascript" src="../../../commons/resources/scripts/myScripts.js"></script>
+    </head>
+	
+	<body onload="loadNav();">
+		<div id="openButton" class="openButton" onclick="openNav(true)">&#9776; Menu</div>
+		<div id="sidenav" class="sidenav">
+			<a class="closeButton" href="javascript:void(0)" onclick="closeNav(true)">&times;</a>
+			<a href="resources/userDocs/final_theme.html">ReadMe</a>
+			<a id="currentSprint" class="sprint" href="#">&#8211;&#8212; Sprint0 &#8212;&#8211;</a>
+			<div class="sidenavSection">
+				<a href="#Goal dello Sprint 0">Goal dello sprint 0</a>
+				<a href="#Requisiti">Requisiti</a>
+				<a href="#Service users story">Service users story</a>
+				<a href="#Analisi del TF23">Analisi del TF23</a>
+				<a href="#Analisi preliminare dei requisiti">Analisi preliminare<br/>dei requisiti</a>
+				<a href="#Keypoints">Keypoints</a>
+				<a href="#Discussioni col committente">Discussioni col<br/>committente</a>
+				<a href="#Test Plan">Test Plan</a>
+				<a href="#Progettazione">Progettazione</a>
+				<a href="#Divisione in Sprint">Divisione in Sprint</a>
+				<a href="#Piano di Lavoro">Piano di Lavoro</a>
+			</div>
+			<p class="separator">&mdash;&mdash;&mdash;&ndash;&ndash;&mdash;&mdash;&mdash;</p>
+			<a class="sprint" href="../Sprint1/index.html">Sprint1.0</a>
+			<a class="sprint" href="../Sprint1/index.html">Sprint1.1</a>
+			<a class="sprint" href="../Sprint2/index.html">Sprint2</a>
+			<a class="sprint" href="../Sprint3/index.html">Sprint3</a>
+			<bottom-spacer/>
+		</div>
+		
+		<div id="main">
+			<h1 align="center">Cold Storage Service - Natali V3</h1>
+			<h3 id="Goal dello Sprint 0">Goal dello Sprint 0</h3>
+			<ul>
+			<li>individuare la struttura principale e le macro-entità del sistema e le loro interazioni.</li>
+			<li>definire un piano di lavoro.</li>
+			</ul>
+			<h3 id="Requisiti">Requisiti</h3>
+			<p>A company intends to build a&nbsp;ColdStorageService, composed of a set of elements:</p>
+			<ol>
+			<li>a service area (rectangular, flat) that includes:
+			<ul>
+			<li>an&nbsp;INDOOR&nbsp;port, to enter food (fruits, vegetables, etc. )</li>
+			<li>a&nbsp;ColdRoom&nbsp;container, devoted to store food, up to&nbsp;<strong>MAXW</strong>&nbsp;kg.<br>
+			The&nbsp;ColdRoom&nbsp;is positioned within the service area, as shown in the following picture:</li>
+			</ul>
+			</li>
+			</ol>
+			<p><img alt="ColdStorageServiceRoomAnnoted.png" src="ColdStorageServiceRoomAnnoted.png" class="internal-embed"></p>
+			<ol start="2">
+			<li>
+			<p>a DDR robot working as a&nbsp;transport trolley, that is intially situated in its&nbsp;HOME&nbsp;location. The transport trolley has the form of a square of side length&nbsp;<strong>RD</strong>.<br>
+			The&nbsp;transport trolley&nbsp;is used to perform a&nbsp;deposit action&nbsp;that consists in the following phases:</p>
+			<ol>
+			<li>pick up a food-load from a&nbsp;Fridge truck&nbsp;located on the&nbsp;INDOOR</li>
+			<li>go from the&nbsp;INDOOR&nbsp;to the&nbsp;PORT&nbsp;of the&nbsp;ColdRoom</li>
+			<li>deposit the food-load in the&nbsp;ColdRoom</li>
+			</ol>
+			</li>
+			<li>
+			<p>a&nbsp;ServiceAcessGUI&nbsp;that allows an human being to see the current weigth of the material stored in the ColdRoom and to send to the&nbsp;ColdStorageService&nbsp;a request to store new&nbsp;<strong>FW</strong>&nbsp;kg of food. If the request is accepted, the services return a ticket that expires after a prefixed amount of time (<strong>TICKETTIME</strong>&nbsp;secs) and provides a field to enter the ticket number when a&nbsp;Fridge truck&nbsp;is at the&nbsp;INDOOR&nbsp;of the service.</p>
+			</li>
+			<li>
+			<p>a&nbsp;ServiceStatusGUI&nbsp;that allows a&nbsp;Service-manager&nbsp;(an human being) to supervises the state of the service.</p>
+			</li>
+			</ol>
+			<h4 data-heading="Alarm requirements">Alarm requirements</h4>
+			<p>The system includes a&nbsp;Sonar&nbsp;and a&nbsp;Led&nbsp;connected to a RaspberryPi.<br>
+			The&nbsp;Sonar&nbsp;is used as an ‘alarm device’: when it measures a distance less that a prefixed value&nbsp;<strong>DLIMT</strong>, the&nbsp;transport trolley&nbsp;must be stopped; it will be resumed when&nbsp;Sonar&nbsp;detects again a distance higher than&nbsp;<strong>DLIMT</strong>.</p>
+			<p>The&nbsp;Led&nbsp;is used as a&nbsp;<em>warning devices</em>, according to the following scheme:</p>
+			<ul>
+			<li>the&nbsp;Led&nbsp;is&nbsp;<strong>off</strong>&nbsp;when the&nbsp;transport trolley&nbsp;is at&nbsp;HOME</li>
+			<li>the&nbsp;Led&nbsp;<strong>blinks</strong>&nbsp;while the&nbsp;transport trolley&nbsp;is moving</li>
+			<li>the&nbsp;Led&nbsp;is&nbsp;<strong>on</strong>&nbsp;when&nbsp;transport trolley&nbsp;is stopped</li>
+			</ul>
+			<h3 id="Service users story">Service users story</h3>
+			<p>The story of the&nbsp;ColdStorageService&nbsp;can be summarized as follows:</p>
+			<ol>
+			<li>A&nbsp;Fridge truck&nbsp;driver uses the&nbsp;<em>ServiceAcessGUI</em>&nbsp;to send a request to store its load of&nbsp;<strong>FW</strong>&nbsp;kg. If the request is accepted, the driver drives its truck to the&nbsp;INDOOR&nbsp;of the service, before the ticket exipration time&nbsp;<strong>TICKETTIME</strong>.</li>
+			<li>When the truck is at the&nbsp;INDOOR&nbsp;of the service, the driver uses the&nbsp;<em>ServiceAcessGUI</em>&nbsp;to enter the ticket number and waits until the message&nbsp;<strong>charge taken</strong>&nbsp;(sent by the&nbsp;ColdStorageService) appears on the&nbsp;<em>ServiceAcessGUI</em>. At this point, the truck should leave the&nbsp;INDOOR.</li>
+			<li>When the service accepts a ticket, the&nbsp;transport trolley&nbsp;reaches the&nbsp;INDOOR, picks up the food, sends the&nbsp;<strong>charge taken</strong>&nbsp;message and then goes to the&nbsp;ColdRoom&nbsp;to store the food.</li>
+			<li>When the deposit action is terminated, the&nbsp;transport trolley&nbsp;accepts another ticket (if any) or returns to&nbsp;HOME.</li>
+			<li>While the&nbsp;transport trolley&nbsp;is moving, the&nbsp;Alarm requirements should be satisfied. However, the&nbsp;transport trolley&nbsp;should not be stopped if some prefixed amount of time (<strong>MINT</strong>&nbsp;msecs) is not passed from the previous stop.</li>
+			<li>A&nbsp;<em>Service-manager</em>&nbsp;migtht use the&nbsp;ServiceStatusGUI&nbsp;to see:
+			<ul>
+			<li>the&nbsp;<strong>current state</strong>&nbsp;of the&nbsp;transport trolley&nbsp;and it&nbsp;<strong>position</strong>&nbsp;in the room;</li>
+			<li>the&nbsp;<strong>current weigth</strong>&nbsp;of the material stored in the&nbsp;ColdRoom;</li>
+			<li>the&nbsp;<strong>number of store-requests rejected</strong>&nbsp;since the start of the service.</li>
+			</ul>
+			</li>
+			</ol>
+			<h3 id="Analisi del TF23">Analisi del TF23</h3>
+			<p>Nelle discussioni con il committente, sono emerse alcune problematiche:</p>
+			<ul>
+			<li>Il problema del load-time lungo.</li>
+			<li>Il problema del driver distratto (non coerente, rispetto alle due fasi: scarico preceduto da prenotazione).</li>
+			<li>Il problema del driver malevolo.</li>
+			<li>Il problema di garantire che una risposta venga sempre inviata sempre solo a chi ha fatto la richiesta, anche quando la richiesta è inviata da un ‘alieno’ come una pagine HTML</li>
+			</ul>
+			<h4 data-heading="Il problema del load-time lungo">Il problema del load-time lungo</h4>
+			<p>Il problema del load-time lungo è stato affrontato da Arnaudo/Munari con l’idea di inviare due messaggi di ‘risposta’ (una per dire al driver che il ticket inviato è valido e una per inviare&nbsp;<code>chargeTaken</code>). A questo fine hanno fatto uso diretto della connessione TCP stabilita da una versione prototipale dell’accessGui fatta come GUI JAVA.<br>
+			Per consentire questa possibilità anche a livello di modellazione qak, in&nbsp;<em>ActorBasicFsm</em>&nbsp;è stato introdotto il metodo&nbsp;storeCurrentRequest()&nbsp;che permette di ricordare la richiesta corrente (cancellata da una&nbsp;<strong>replyTo</strong>). Questo però è un trucco/meccanismo che potrebbe risultare pericoloso.<br>
+			Meglio&nbsp;affrontare il problema dal punto di vista logico, impostando una interazione a DUE-FASI tra driver e service (compito che può svolgere la&nbsp;<em>serviceAcessGui</em>).</p>
+			<ul>
+			<li>FASE1: il driver invia il ticket e attenda una risposta (immediata) come ad esempio&nbsp;<code>ticketaccepted/ticketrejected</code></li>
+			<li>FASE2: il driver invia la richiesta&nbsp;<code>loaddone</code>&nbsp;e attenda la risposta (<code>chargeTaken</code>&nbsp;o fallimento per cause legate al servizio)</li>
+			</ul>
+			<h4 data-heading="Il problema del driver distratto">Il problema del driver distratto</h4>
+			<p>Questo problema ha indotto il committente ad affermare che:<br>
+			quando un agente esterno (driver) invia il ticket per indurre il servizio a scaricare il truck, si&nbsp;SUPPPONE GARANTITO&nbsp;che il carico del truck sia UGUALE al carico indicato nella prenotazione.<br>
+			Ciò in quanto non vi sono sensori (bilance , etc) che possano fornire il valore del carico effettivo sul Truck.</p>
+			<h3 id="Analisi preliminare dei requisiti">Analisi preliminare dei requisiti</h3>
+			<p><img alt="Architettura_Sprint0_V2.png" src="Architettura_Sprint0_V2.png" class="internal-embed"></p>
+			<h5 data-heading="Service Area">Service Area</h5>
+			<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">val</span> ServiceArea <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
+				int LatoLungo             # valore maggiore di <span class="token number">0</span>
+				int LatoCorto             # valore maggiore di <span class="token number">0</span>
+			<span class="token punctuation">}</span>
+			</code><button class="copy-code-button">Copy</button></pre>
+			<h5 data-heading="HOME">HOME</h5>
+			<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">val</span> Home <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
+				int x <span class="token operator">=</span> <span class="token number">0</span>
+				int y <span class="token operator">=</span> <span class="token number">0</span>
+			<span class="token punctuation">}</span>
+			</code><button class="copy-code-button">Copy</button></pre>
+			<h5 data-heading="INDOOR port">INDOOR port</h5>
+			<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">val</span> IndoorPort <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
+				int x <span class="token operator">=</span> <span class="token number">0</span>
+				int y <span class="token operator">=</span> MAX_Y
+			<span class="token punctuation">}</span>
+			</code><button class="copy-code-button">Copy</button></pre>
+			<h5 data-heading="Porta della ColdRoom">Porta della ColdRoom</h5>
+			<p>Lato sud del ColdRoom Container. Transport Trolley potrà interagire con ColdRoom attraverso questa.</p>
+			<h5 data-heading="ColdRoom Container">ColdRoom Container</h5>
+			<p>Contenitore in posizione fissa in Service Area, il cui punto di accesso è la <a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Porta della ColdRoom" data-href="Cold Storage Service - Natali V3#Porta della ColdRoom" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\Cold%20Storage%20Service%20-%20Natali%20V3.html#Porta%20della%20ColdRoom" class="internal-link" target="_blank" rel="noopener">Porta della ColdRoom</a>, in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.</p>
+			<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">var</span> ColdRoom <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
+				int MAXW                  # valore maggiore di <span class="token number">0</span>
+				int CurrentWeight <span class="token operator">=</span> <span class="token number">0</span>
+				int x                     # valore non negativo
+				int y                     # valore non negativo
+			<span class="token punctuation">}</span>
+			</code><button class="copy-code-button">Copy</button></pre>
+			<h5 data-heading="DDR robot">DDR robot</h5>
+			<p><em>Differential Drive Robot</em>, vedi <a data-tooltip-position="top" aria-label="https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html" rel="noopener" class="external-link" href="https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html" target="_blank">robot</a>.</p>
+			<h5 data-heading="Transport trolley">Transport trolley</h5>
+			<p>Transport trolley è un DDR robot capace di spostarsi all'interno di <a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Service Area" data-href="Cold Storage Service - Natali V3#Service Area" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\Cold%20Storage%20Service%20-%20Natali%20V3.html#Service%20Area" class="internal-link" target="_blank" rel="noopener">Service Area</a>.<br>
+			I comandi che è in grado di compiere sono descritti nell'apposita <a data-tooltip-position="top" aria-label="https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html" rel="noopener" class="external-link" href="https://github.com/anatali/issLab23/blob/main/iss23Material/html/BasicRobot23.html" target="_blank">documentazione</a> .</p>
+			<pre class="language-java" tabindex="0"><code class="language-java is-loaded"><span class="token keyword">int</span> RD                        #lunghezza del lato del quadrato
+			</code><button class="copy-code-button">Copy</button></pre>
+			<h5 data-heading="Food-load">Food-load</h5>
+			<p>Carico (in kg) che il robot preleverà da Indoor e depositerà in ColdRoom Container.</p>
+			<pre class="language-java" tabindex="0"><code class="language-java is-loaded"><span class="token keyword">int</span> <span class="token class-name">FoodLoad</span>                  # valore non negativo
+			</code><button class="copy-code-button">Copy</button></pre>
+			<h5 data-heading="TicketTime">TicketTime</h5>
+			<pre class="language-java" tabindex="0"><code class="language-java is-loaded"><span class="token keyword">long</span> <span class="token class-name">TicketTime</span>               #tempo esperesso in secondi
+			</code><button class="copy-code-button">Copy</button></pre>
+			<h5 data-heading="Ticket">Ticket</h5>
+			<pre class="language-java" tabindex="0"><code class="language-java is-loaded"><span class="token keyword">int</span> <span class="token class-name">TicketNumber</span>
+			</code><button class="copy-code-button">Copy</button></pre>
+			<h5 data-heading="ServiceAccesGUI">ServiceAccesGUI</h5>
+			<p>GUI che permette ai driver di:</p>
+			<ul>
+			<li>visualizzare la quantità di cibo (in peso) contenuta all'interno di ColdRoom.</li>
+			<li>richiedere la generazione di un Ticket da presentare in un secondo momento.</li>
+			<li>presentare il Ticket assegnatogli in precedenza nel momento in cui il driver arriva in INDOOR port.</li>
+			<li>inviare la richiesta "LoadDone" quando il driver è pronto a scaricare.<br>
+			<a data-tooltip-position="top" aria-label="coldstorage0.qak" data-href="coldstorage0.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\coldstorage0.qak" class="internal-link" target="_blank" rel="noopener">See qak file</a></li>
+			</ul>
+			<h5 data-heading="ColdStorageService">ColdStorageService</h5>
+			<p>ColdStorageService si occupa di gestire le richieste di scarico merce, questo comprende:</p>
+			<ul>
+			<li>ricevere le richieste di permesso di scarico.</li>
+			<li>generare Ticket assegnati al singolo driver che ne ha fatto richiesta.</li>
+			<li>ricevere e verificare i Ticket nel momento in cui il driver arriva in INDOOR.<br>
+			<a data-tooltip-position="top" aria-label="coldstorage0.qak" data-href="coldstorage0.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\coldstorage0.qak" class="internal-link" target="_blank" rel="noopener">See qak file</a></li>
+			</ul>
+			<h5 data-heading="ServiceStatusGUI">ServiceStatusGUI</h5>
+			<p>Componente che permette al Service-manager (persona fisica) di supervisionare lo <a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Stato del Servizio" data-href="Cold Storage Service - Natali V3#Stato del Servizio" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\Cold%20Storage%20Service%20-%20Natali%20V3.html#Stato%20del%20Servizio" class="internal-link" target="_blank" rel="noopener">Stato del servizio</a></p>
+			<h5 data-heading="Stato del Servizio">Stato del Servizio</h5>
+			<p>Lo stato del servizio comprende:</p>
+			<ul>
+			<li>Lo stato e la posizione del TransportTrolley.</li>
+			<li>Lo stato della ColdRoom (peso corrente su totale).</li>
+			<li>Il numero di richieste negate dall'inizio del servizio.</li>
+			</ul>
+			<h5 data-heading="Messaggi">Messaggi</h5>
+			<pre><code>Request depositRequest : depositRequest(PESO)
+			Reply accept : accept(TICKET)
+			Reply reject : reject(NO_PARAM)
+
+			Request weightrequest : weightrequest(PESO)
+			Reply weightOK : weightOK( NO_PARAM )
+			Reply weightKO : weightKO( NO_PARAM )
+
+			Request checkmyticket : checkmyticket(TICKET)
+			Reply	ticketchecked : ticketchecked(BOOL)
+
+			Request loaddone : loaddone(PESO)
+			Reply 	chargetaken : chargetaken(NO_PARAM)
+
+			Dispatch startToDoThings : startToDoThings( NO_PARAM )
+			</code><button class="copy-code-button">Copy</button></pre>
+			<table>
+			<thead>
+			<tr>
+			<th>Name</th>
+			<th>Sender</th>
+			<th>Receiver</th>
+			<th>Type</th>
+			<th>Motivazioni</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+			<td>DepositRequest</td>
+			<td>ServiceAccesGUI</td>
+			<td>ColdStorageService</td>
+			<td>Req/Resp</td>
+			<td>Deve attendere la risposta: Accepted/Rejected</td>
+			</tr>
+			<tr>
+			<td>LoadDone</td>
+			<td>ServiceAccesGUI</td>
+			<td>ColdStorageService</td>
+			<td>Req/Resp</td>
+			<td>Deve attendere la risposta: ChargeTaken</td>
+			</tr>
+			<tr>
+			<td>WeightRequest</td>
+			<td>ColdStorageService</td>
+			<td>ColdRoom</td>
+			<td>Req/Resp</td>
+			<td>Risposta necessaria per proseguire: WeightOK/KO</td>
+			</tr>
+			<tr>
+			<td>CheckMyTicket</td>
+			<td>ServiceAccesGUI</td>
+			<td>ColdStorageService</td>
+			<td>Req/Resp</td>
+			<td>Deve attendere la risposta: Ok/Rejected</td>
+			</tr>
+			</tbody>
+			</table>
+			<div data-callout-metadata="" data-callout-fold="-" data-callout="note" class="callout is-collapsible is-collapsed"><div class="callout-title"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path><style>
+			:root {
+			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
+			  --font-monospace: 'Source Code Pro', monospace;
+			  --background-primary: #ffffff;
+			  --background-modifier-border: #ddd;
+			  --text-accent: #705dcf;
+			  --text-accent-hover: #7a6ae6;
+			  --text-normal: #2e3338;
+			  --background-secondary: #f2f3f5;
+			  --background-secondary-alt: #e3e5e8;
+			  --text-muted: #888888;
+			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div><div class="callout-title-inner">Tipi di messaggi</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path><style>
+			:root {
+			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
+			  --font-monospace: 'Source Code Pro', monospace;
+			  --background-primary: #ffffff;
+			  --background-modifier-border: #ddd;
+			  --text-accent: #705dcf;
+			  --text-accent-hover: #7a6ae6;
+			  --text-normal: #2e3338;
+			  --background-secondary: #f2f3f5;
+			  --background-secondary-alt: #e3e5e8;
+			  --text-muted: #888888;
+			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div></div><div class="callout-content" style="display: none;">
+			<p>in generale le ragioni per i vari tipi di messaggio sono:</p>
+			<ul>
+			<li>req/resp se ho bisogno di ricevere una risposta</li>
+			<li>dispatch se è un messaggio per un componente specifico che conosco e non mi interessa la risposta</li>
+			<li>event se è per uno o più componenti che non conosco direttamente (io emetto e chi è interessato riceve)</li>
+			</ul>
+			</div></div>
+			<h5 data-heading="Contesti">Contesti</h5>
+			<pre><code>Context ctxcoldstoragearea ip [host="localhost" port=8040]
+			Context ctxLedSonar ip [host="127.0.0.1" port=8088]
+			</code><button class="copy-code-button">Copy</button></pre>
+			<h3 id="Keypoints">Keypoints</h3>
+			<h5 data-heading="1) Aggiornamento di ServiceStatusGUI">1) Aggiornamento di ServiceStatusGUI</h5>
+			<p>SSG dovrà presentare i dati aggiornati del sistema ad ogni istante, dovrà quindi comportarsi come un <strong>Observer</strong>, sfruttiamo la tecnologia degli <a data-tooltip-position="top" aria-label="https://github.com/anatali/issLab23/blob/main/iss23Material/html/QakActors23.html" rel="noopener" class="external-link" href="https://github.com/anatali/issLab23/blob/main/iss23Material/html/QakActors23.html" target="_blank">StreamQActor</a>.</p>
+			<h5 data-heading="2) Carico di lavoro di ColdStorageService">2) Carico di lavoro di ColdStorageService</h5>
+			<p>Tutto il lavoro del sistema al momento passa attraverso ColdStorageService, dalla gestione dei Ticket all'interazione con il TransportTrolley --&gt; <strong>Da valutare una divisione in più componenti</strong></p>
+			<h5 data-heading="3) ColdRoom, Attore o POJO?">3) ColdRoom, Attore o POJO?</h5>
+			<p>Per requisiti il sistema deve essere distribuito, tutte le entità definite finora saranno quindi modellate come <strong>Attori</strong>, in particolare <strong>ColdRoom</strong> decidiamo di modellarla come attore e non come POJO per i seguenti motivi:</p>
+			<ul>
+			<li>Nonostante non sia nei requisiti è logico pensare che in futuro il sistema debba essere esteso con funzionalità per diminuire il peso contenuto in ColdRoom. Definire il componente come attore faciliterà questa aggiunta.</li>
+			<li>Inoltre definire ColdRoom come attore esterno è in linea con il principio di singola responsabilità e alleggerisce il carico di lavoro di ColdStorageService.<br>
+			<a data-tooltip-position="top" aria-label="coldstorage0.qak" data-href="coldstorage0.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\coldstorage0.qak" class="internal-link" target="_blank" rel="noopener">See qak file</a></li>
+			</ul>
+			<h5 data-heading="Posizione del robot?">Posizione del robot?</h5>
+			<p>Sarà necessario per il sistema riuscire ad identificare la posizione corrente del robot in ogni istante per pianificare il percorso da intraprendere.<br>
+			Per risolvere il problema assoceremo alla <strong>Service Area</strong> un sistema di coordinate da definire in seguito.</p>
+			<h3 id="Discussioni col committente">Discussioni col committente</h3>
+			<blockquote>
+			<p>Richiesta al committente:<br>
+			Dimensione della Service Area: 7m * 5m.</p>
+			</blockquote>
+			<blockquote>
+			<p>Richiesta al committente:</p>
+			<ul>
+			<li>Capienza massima (MAXW) corrisponde a 50 kg</li>
+			<li>La grandezza di ColdRoom Container è 1m * 1m</li>
+			<li>Posizione in Service Area come da figura iniziale</li>
+			<li>Sarà possibile per il robot muoversi attorno alla ColdRoom</li>
+			</ul>
+			</blockquote>
+			<blockquote>
+			<p>Richiesta al committente:</p>
+			<ul>
+			<li>dimensione del transport trolley corrisponde ad un quadrato di lunghezza RD = 1 m.</li>
+			</ul>
+			</blockquote>
+			<h3 id="Test Plan">Test Plan</h3>
+			<p>Durante la face di testing dovranno essere verificati i seguenti casi:</p>
+			<ul>
+			<li>Inserendo un ticket valido il peso in ColdRoom deve aggiornarsi correttamente.</li>
+			<li>Un ticket deve essere rifiutato per timeout (il peso non deve cambiare)</li>
+			<li>Una richiesta di peso eccessiva deve essere rifiutata</li>
+			</ul>
+			<p>Codice terzo test: <a data-tooltip-position="top" aria-label="Sprint0/Codice/ColdStorageService0/test/TestService.java" data-href="Sprint0/Codice/ColdStorageService0/test/TestService.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\Sprint0\Codice\ColdStorageService0\test\TestService.java" class="internal-link" target="_blank" rel="noopener">TestService</a></p>
+			<h3 id="Progettazione">Progettazione</h3>
+			<p>Codice sprint0: <a data-href="coldstorage0.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\coldstorage0.qak" class="internal-link" target="_blank" rel="noopener">coldstorage0.qak</a></p>
+			<h3 id="Divisione in Sprint">Divisione in Sprint</h3>
+			<ol>
+			<li>
+			<p>Transport Trolley + ColdStorageService <a data-href="Sprint 1.0 - V3" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\Sprint%201.0%20-%20V3" class="internal-link" target="_blank" rel="noopener">Sprint 1.0 - V3</a></p>
+			<div data-callout-metadata="" data-callout-fold="-" data-callout="note" class="callout is-collapsible is-collapsed"><div class="callout-title"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path><style>
+			:root {
+			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
+			  --font-monospace: 'Source Code Pro', monospace;
+			  --background-primary: #ffffff;
+			  --background-modifier-border: #ddd;
+			  --text-accent: #705dcf;
+			  --text-accent-hover: #7a6ae6;
+			  --text-normal: #2e3338;
+			  --background-secondary: #f2f3f5;
+			  --background-secondary-alt: #e3e5e8;
+			  --text-muted: #888888;
+			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div><div class="callout-title-inner">Descrizione</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path><style>
+			:root {
+			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
+			  --font-monospace: 'Source Code Pro', monospace;
+			  --background-primary: #ffffff;
+			  --background-modifier-border: #ddd;
+			  --text-accent: #705dcf;
+			  --text-accent-hover: #7a6ae6;
+			  --text-normal: #2e3338;
+			  --background-secondary: #f2f3f5;
+			  --background-secondary-alt: #e3e5e8;
+			  --text-muted: #888888;
+			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div></div><div class="callout-content" style="display: none;">
+			<p>Lo scopo del primo sprint è produrre una prima versione funzionante del core dell'applicazione. Questo comprende ColdStorageService con la logica di gestione dei Ticket e il TransportTrolley funzionante.<br>
+			A questa parte deve essere affiancata una mock version della ServiceAccessGUI per la fase di testing.</p>
+			</div></div>
+			</li>
+			<li>
+			<p>Led e Sonar <a data-href="Sprint 2" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\Sprint%202.html" class="internal-link" target="_blank" rel="noopener">Sprint 2</a></p>
+			<div data-callout-metadata="" data-callout-fold="-" data-callout="note" class="callout is-collapsible is-collapsed"><div class="callout-title"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path><style>
+			:root {
+			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
+			  --font-monospace: 'Source Code Pro', monospace;
+			  --background-primary: #ffffff;
+			  --background-modifier-border: #ddd;
+			  --text-accent: #705dcf;
+			  --text-accent-hover: #7a6ae6;
+			  --text-normal: #2e3338;
+			  --background-secondary: #f2f3f5;
+			  --background-secondary-alt: #e3e5e8;
+			  --text-muted: #888888;
+			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div><div class="callout-title-inner">Descrizione</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path><style>
+			:root {
+			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
+			  --font-monospace: 'Source Code Pro', monospace;
+			  --background-primary: #ffffff;
+			  --background-modifier-border: #ddd;
+			  --text-accent: #705dcf;
+			  --text-accent-hover: #7a6ae6;
+			  --text-normal: #2e3338;
+			  --background-secondary: #f2f3f5;
+			  --background-secondary-alt: #e3e5e8;
+			  --text-muted: #888888;
+			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div></div><div class="callout-content" style="display: none;">
+			<p>Nel secondo sprint verranno implementati il sistema di led e sonar con la logica ad essi associata.</p>
+			</div></div>
+			</li>
+			<li>
+			<p>ServiceStatusGui e grafiche migliorate <a data-href="Sprint 3" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\Sprint%203.html" class="internal-link" target="_blank" rel="noopener">Sprint 3</a></p>
+			<div data-callout-metadata="" data-callout-fold="-" data-callout="note" class="callout is-collapsible is-collapsed"><div class="callout-title"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path><style>
+			:root {
+			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
+			  --font-monospace: 'Source Code Pro', monospace;
+			  --background-primary: #ffffff;
+			  --background-modifier-border: #ddd;
+			  --text-accent: #705dcf;
+			  --text-accent-hover: #7a6ae6;
+			  --text-normal: #2e3338;
+			  --background-secondary: #f2f3f5;
+			  --background-secondary-alt: #e3e5e8;
+			  --text-muted: #888888;
+			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div><div class="callout-title-inner">Descrizione</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path><style>
+			:root {
+			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
+			  --font-monospace: 'Source Code Pro', monospace;
+			  --background-primary: #ffffff;
+			  --background-modifier-border: #ddd;
+			  --text-accent: #705dcf;
+			  --text-accent-hover: #7a6ae6;
+			  --text-normal: #2e3338;
+			  --background-secondary: #f2f3f5;
+			  --background-secondary-alt: #e3e5e8;
+			  --text-muted: #888888;
+			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div></div><div class="callout-content" style="display: none;">
+			<p>Nel terzo sprint ci occuperemo della ServiceStatusGUI e delle interfacce grafiche finali.</p>
+			</div></div>
+			</li>
+			</ol>
+			<h3 id="Divisione dei compiti">Divisione dei compiti</h3>
+			<p>Ogni Sprint verrà affrontato insieme con divisione dei compiti specifica valutata di volta in volta.</p>
+			<h3 id="Piano di Lavoro">Piano di Lavoro</h3>
+			<table>
+			<thead>
+			<tr>
+			<th>Sprint</th>
+			<th>GOAL</th>
+			<th>Tempo Stimato</th>
+			<th>Divisione del Lavoro</th>
+			<th>Note</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+			<td>SPRINT 1</td>
+			<td>Sviluppo del primo prototipo</td>
+			<td>2 man-days</td>
+			<td>3 persone</td>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			<td>Sviluppo della ServiceAccessGUI</td>
+			<td>1 man-day</td>
+			<td>2 persone</td>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			<td>Testing</td>
+			<td>2 man-hours</td>
+			<td>1 persona</td>
+			<td></td>
+			</tr>
+			<tr>
+			<td>SPRINT 2</td>
+			<td>Sviluppo di Led e Sonar</td>
+			<td>4 man-hours</td>
+			<td>3 persone</td>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			<td>Testing di Led e sonar</td>
+			<td>1 man-hour</td>
+			<td>1 persona</td>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			<td>Implementazione con il resto del sistema</td>
+			<td>1 man-hour</td>
+			<td>1 persona</td>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			<td>Testing completo</td>
+			<td>1 man-hour</td>
+			<td>1 persona</td>
+			<td></td>
+			</tr>
+			<tr>
+			<td>SPRINT 3</td>
+			<td>Sviluppo della ServiceStatusGui</td>
+			<td>1 man-day</td>
+			<td>2 persone</td>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			<td>Testing del sistema completo</td>
+			<td>2 man-hour</td>
+			<td>1 persona</td>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			<td>Refactoring della user interface</td>
+			<td>1 man-hour</td>
+			<td>1 persona</td>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			<td>Testing finale dell'intera applicazione</td>
+			<td>3 man-hour</td>
+			<td>3 persone</td>
+			<td>Il testing finale deve essere condiviso da tutti i membri del gruppo</td>
+			</tr>
+			</tbody>
+			</table>
+			<h1 data-heading=""></h1>
+			<hr>
+			<p><a data-tooltip-position="top" aria-label="https://github.com/Lombax99/ColdStorageService-XMas23" rel="noopener" class="external-link" href="https://github.com/Lombax99/ColdStorageService-XMas23" target="_blank">Repo Github</a></p>
+			<table>
+			<thead>
+			<tr>
+			<th>Lisa Innocenti Uccini</th>
+			<th>Luca Lombardi</th>
+			<th>Giacomo Romanini</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+			<td><img width="180" alt="LisaUccini.png" src="LisaUccini.png" class="internal-embed"></td>
+			<td><img width="245" alt="LucaLombardi.jpg" src="LucaLombardi.jpg" class="internal-embed"></td>
+			<td><img width="180" alt="GiacomoRomanini.jpg" src="GiacomoRomanini.jpg" class="internal-embed"></td>
+			</tr>
+			<tr>
+			<td><a data-tooltip-position="top" aria-label="https://github.com/LisaIU00" rel="noopener" class="external-link" href="https://github.com/LisaIU00" target="_blank">github: LisaIU00</a></td>
+			<td><a data-tooltip-position="top" aria-label="https://github.com/Lombax99" rel="noopener" class="external-link" href="https://github.com/Lombax99" target="_blank">github: Lombax99</a></td>
+			<td><a data-tooltip-position="top" aria-label="https://github.com/RedDuality" rel="noopener" class="external-link" href="https://github.com/RedDuality" target="_blank">github: RedDuality</a></td>
+			</tr>
+			</tbody>
+			</table>
+		</div>
+    </body>
+</html>

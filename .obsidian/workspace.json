@@ -97,14 +97,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -154,7 +154,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 426.5
+    "width": 426.5,
+    "collapsed": true
   },
   "right": {
     "id": "b7d0927a7144a728",
@@ -170,7 +171,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md",
+                "file": "Sprint0/Cold Storage Service - Natali V3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -187,7 +188,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md",
+                "file": "Sprint0/Cold Storage Service - Natali V3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -222,7 +223,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint3/Doc/Sprint 3.md"
+                "file": "Sprint0/Cold Storage Service - Natali V3.md"
               }
             }
           },
@@ -253,37 +254,37 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "3cbb87e3cf673c7d",
+  "active": "5dff4cd59ff17530",
   "lastOpenFiles": [
-    "Sprint3/Doc/Sprint 3.html",
-    "Sprint2/Doc/Sprint 2.md",
+    "README.md",
     "Sprint3/Doc/Sprint 3.md",
-    "Sprint2/Doc/Sprint 2.html",
-    "Sprint1.1/Doc/Sprint 1.1 - V3.html",
-    "Sprint0/Cold Storage Service - Natali V3.html",
+    "Sprint3/Codice/userDoc/Sprint 3.html",
+    "Sprint2/Codice/userDocs/Sprint 2.html",
+    "Sprint1.1/Codice/userDocs/Sprint 1.1 - V3.html",
+    "Sprint1.0/Codice/userDocs/Sprint 1.0 - V3.html",
+    "Sprint0/Codice/userDocs/Cold Storage Service - Natali V3.html",
+    "commons/temaFinale/_static/pygments.css",
+    "commons/temaFinale/_static/custom.css",
+    "commons/temaFinale/_static/basic.css",
+    "commons/temaFinale/_static/alabaster.css",
+    "commons/temaFinale/_images/WasteServiceRoom.PNG",
+    "commons/temaFinale/_static",
+    "commons/resources/imgs/team/Raffaele_Battipaglia.jpg",
+    "commons/resources/imgs/team/Michele_Righi.png",
+    "commons/resources/imgs/team/Karina_Chichifoi.jpg",
+    "commons/resources/imgs/team/avatar_Raffaele_Battipaglia.jpg",
+    "commons/resources/imgs/team/avatar_Michele_Righi.png",
+    "commons/resources/imgs/team/avatar_Karina_Chichifoi.jpg",
+    "commons/resources/imgs/gifs/Demo_WasteServiceRPi_Simulated.gif",
+    "commons/resources/imgs/gifs/Demo_WasteServiceGUI.gif",
+    "commons/resources/imgs/gifs/Demo_WasteServiceCore.gif",
+    "Sprint2/Doc/Sprint 2.md",
     "ToDo EXAM (entro 27-12).md",
     "Sprint0/Cold Storage Service - Natali V3.md",
-    "Sprint0/coldstorage0arch.png",
-    "Sprint0/PrimaArchitettura.pdf",
     "Sprint1.1/Doc/Sprint 1.1 - V3.md",
     "Sprint1.0/Doc/Sprint 1.0 - V3.md",
-    "README.md",
     "PRESENTAZIONE CON SLIDE.md",
-    "Sprint3/Codice/statusgui/src/main/resources/templates/static/ServiceStatusGui.html~",
-    "Sprint3/Codice/statusgui/src/main/resources/static/css/mystyle.css~",
-    "Sprint3/Codice/ColdStorage3/logs/ctxcoldstoragearea/servicestatusguimock_MsLog.txt",
-    "Sprint3/Codice/ColdStorage3/logs/ctxcoldstoragearea/serviceaccessguimock_MsLog.txt",
-    "Sprint3/Codice/ColdStorage3/logs/noctx/tickethandler_MsLog.txt",
-    "Other/Demo_VirtualRobot.gif",
-    "Other/RobotIcon.jpg",
     "PRESENTAZIONE DEMO.md",
-    "Sprint1.1/Codice/ColdStorageSprint2/coldstorage11arch.png",
-    "Sprint2/Codice/ColdStorage/coldstorage2arch.png",
-    "Sprint3/Doc/ArchitetturaWebSprint3.png",
-    "Sprint1.0/Codice/ColdStorage/coldstorage10arch.png",
-    "Sprint1.0/Codice/ColdStorage/qakicons/system.PNG",
-    "Sprint1.0/Codice/ColdStorage/qakicons/symActorSmall.png",
-    "Sprint1.0/Codice/ColdStorage/qakicons/symActor.png",
     "tofo.md",
     "Sprint3/Codice/ColdStorage/coldstorage2arch.png.md",
     "Sprint1.0/Doc/Sprint 1.0.md",

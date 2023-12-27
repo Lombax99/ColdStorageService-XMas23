@@ -1,0 +1,43 @@
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0px;
+    border-radius: 25px;
+    border: solid #4ea2d3 2px;
+    background-color: #9ed8ff;
+    color: black;
+}
+td, th {
+    border: solid #4ea2d3 1px;
+    padding: 15px;
+}
+tr {
+    text-align: center;
+}
+tr:last-child td {
+    border-bottom: none;
+}
+th {
+    border-top: none;
+    width: 30%;
+    padding: 15px;
+}
+td:first-child, th:first-child {
+    border-left: none;
+}
+td:last-child, th:last-child {
+    border-right: none;
+}
+table img {
+    width: 90%;
+}
+table a:link, table a:visited {
+    color: black;
+}
+table a:hover {
+    background-color: yellow;
+}
+
+.repository a:link, .repository a:visited, .repository a:hover {
+    color: black;
+}

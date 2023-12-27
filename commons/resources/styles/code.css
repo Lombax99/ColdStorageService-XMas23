@@ -1,0 +1,70 @@
+pre {
+    text-align: left;
+    white-space: pre-line;
+}
+
+code {
+    font-family: "Consolas";
+    font-size: 100%;
+}
+
+/* Colors */
+red {
+    color: #FF0000;
+    font-family: "Consolas";
+    font-size: 110%;
+    font-weight: bold;
+}
+cyan {
+    color: #0094FF;
+    font-family: "Consolas";
+    font-size: 110%;
+    font-weight: bold;
+}
+green {
+    color: #007F0E;
+    font-family: "Consolas";
+    font-size: 110%;
+    font-weight: bold;
+}
+yellow {
+    color: #E5BF00;
+    font-family: "Consolas";
+    font-size: 110%;
+    font-weight: bold;
+}
+darkred {
+    color: darkred;
+    font-weight: bold;
+    font-style: italic;
+}
+darkgreen {
+    color: darkgreen;
+    font-weight: bold;
+    font-style: italic;
+}
+
+ol .fixes  {
+    counter-reset: number;
+}
+ol.fixes li a,
+ol.fixes li a:link,
+ol.fixes li a:visited,
+ol.fixes li a:active,
+ol.fixes li a:hover {
+    text-decoration: none;
+    color: black;
+}
+.fixes li {
+    list-style: none;
+    counter-increment: number;
+}
+.fixes li::before {
+    content: "Fix #" counter(number) ":";
+    position: relative;
+    left: -10px;
+    font-family: "Arial";
+    font-style: italic;
+	font-weight: bold;
+    color: #0000CD	;
+}

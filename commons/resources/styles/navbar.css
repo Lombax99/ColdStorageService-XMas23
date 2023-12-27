@@ -1,0 +1,109 @@
+/* Open Button */
+.openButton {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  align-content: center;
+  padding: 10px 20px;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+  background-color: rgba(0,0,0,0.1); /*rgba(255,255,255,0.6);*/
+  border-radius: 0 0 10px 0;
+}
+
+/* Side NavBar */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 26px;
+  color: #818181;
+  display: block;
+  white-space: nowrap;
+  outline: none;
+}
+
+.sidenavSection {
+  margin-left: 14px;
+}
+.sidenavSection a {
+  font-size: 20px;
+}
+
+.sidenavSubSection {
+  margin-left: 10px;
+}
+.sidenavSubSection a {
+  font-size: 16px;
+}
+
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .selected {
+  color: #f1f1f1;
+}
+
+.sidenav .closeButton {
+  display: block;
+  position: fixed;
+  z-index: 5;
+  width: 40px;
+  height: 40px;
+  top: 10px;
+  backdrop-filter: blur(2px);
+  font-size: 36px;
+  padding: 0px;
+  text-align: center;
+}
+
+
+.sprint {
+  margin-right: 32px;
+  text-align: center;
+}
+#currentSprint {
+  font-weight: bold;
+  color: #f1f1f1;
+  text-align: center;
+}
+
+.separator {
+  display: block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #f1f1f1;
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
+  user-select: none;
+  white-space: nowrap;
+  padding: 0px 32px 0px 32px;
+}
+
+bottom-spacer {
+  display: block;
+  background-color: transparent;
+  height: 200px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
