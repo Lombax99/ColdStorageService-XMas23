@@ -14,8 +14,9 @@ Slide2: (Luca)
 - Da "doJob" a comandi per TransportTrolley
 
 Slide3: (Lisix)
-- Presentazione protocollo di richiesta e generazione del ticket e vari reject (accenna a mala pena)
 - Pesi ipotetici
+- Presentazione protocollo di richiesta e generazione del ticket e vari reject (accenna a mala pena)
+	- Discorso principalmente concentrato sui pesi e sul momento in cui viene inviata la charge taken
 
 Slide4:
 Sprint 1.0 e 1.1
