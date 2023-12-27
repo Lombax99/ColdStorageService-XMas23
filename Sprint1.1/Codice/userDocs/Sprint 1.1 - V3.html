@@ -77,15 +77,15 @@
 			<li>Inizia con una request/response dal driver verso TicketHandler</li>
 			</ol>
 			<pre><code>Request depositRequest : depositRequest(PESO)
-			Reply accept : accept(TICKET)
-			Reply reject : reject(NO_PARAM)
+			&nbsp;Reply accept : accept(TICKET)
+			&nbsp;Reply reject : reject(NO_PARAM)
 			</code></pre>
 			<ol start="2">
 			<li>TicketHandler chiede a ColdRoom se c'è abbastanza spazio;</li>
 			</ol>
 			<pre><code>Request weightrequest : weightrequest(PESO)
-			Reply weightOK : weightOK( NO_PARAM )
-			Reply weightKO : weightKO( NO_PARAM )
+			&nbsp;Reply weightOK : weightOK( NO_PARAM )
+			&nbsp;Reply weightKO : weightKO( NO_PARAM )
 			</code></pre>
 			<ol start="3">
 			<li>Se c'è abbastanza spazio, ColdRoom aggiorna i propri attributi;</li>
@@ -93,13 +93,13 @@
 			<li>Arrivato in INDOOR, il driver, invia il Ticket a TicketHandler. Il TicketHandler verifica il <strong style="color:#ef7089">TICKETTIME</strong> e restituisce Ok / Rejected;</li>
 			</ol>
 			<pre><code>Request checkmyticket : checkmyticket(TICKET)
-			Reply	ticketchecked : ticketchecked(BOOL)
+			&nbsp;Reply	ticketchecked : ticketchecked(BOOL)
 			</code></pre>
 			<ol start="6">
 			<li>Se la richiesta viene approvata ServiceAccessGUI invia "loaddone" al Controller per notificare che il FridgeTruck è pronto, col peso da scaricare. Il Controller risponderà con "chargetaken".</li>
 			</ol>
 			<pre><code>Request loaddone : loaddone(PESO)
-			Reply 	chargetaken : chargetaken(NO_PARAM)
+			&nbsp;Reply 	chargetaken : chargetaken(NO_PARAM)
 			</code></pre>
 			<h5 data-heading="Quando viene inviato il &quot;charge taken&quot;?">Quando viene inviato il "charge taken"?</h5>
 			<p>"chargetaken" viene inviato dal Controller subito dopo la "doJob" associata alla richiesta.</p>
@@ -121,32 +121,32 @@
 			</ol>
 			<p>Useremo la somma dei due pesi per validare o meno una richiesta di emissione ticket.</p>
 			<pre><code>QActor coldroom context ctxcoldstoragearea {
-				[#
-					var PesoEffettivo = 0
-					var PesoPromesso = 0 
-					var MAXW = 50
-				#]
+				&emsp;&emsp;[#
+					&emsp;&emsp;&emsp;&emsp;var PesoEffettivo = 0
+					&emsp;&emsp;&emsp;&emsp;var PesoPromesso = 0 
+					&emsp;&emsp;&emsp;&emsp;var MAXW = 50
+				&emsp;&emsp;#]
 				
-				State updateWeight {
-					onMsg ( updateWeight : updateWeight(P_EFF, P_PRO) ) {
-						[# PesoEffettivo += P_EFF 
-						   PesoPromesso -= P_PRO
-						#]
-					}
-				}
+				&emsp;&emsp;State updateWeight {
+					&emsp;&emsp;&emsp;&emsp;onMsg ( updateWeight : updateWeight(P_EFF, P_PRO) ) {
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[# PesoEffettivo += P_EFF 
+						   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;PesoPromesso -= P_PRO
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#]
+					&emsp;&emsp;&emsp;&emsp;}
+				&emsp;&emsp;}
 				
-				State checkweight {
-					onMsg(weightrequest : weightrequest(PESO)){
-						[# var PesoRichiesto = PESO #]
+				&emsp;&emsp;State checkweight {
+					&emsp;&emsp;&emsp;&emsp;onMsg(weightrequest : weightrequest(PESO)){
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[# var PesoRichiesto = PESO #]
 						
-						if [# PesoEffettivo + PesoPromesso + PesoRichiesto  &lt;= MAXW #]	{
-							[# PesoPromesso += PesoRichiesto #]
-							replyTo weightrequest with weightOK : weightOK( NO_PARAM)
-						} else {
-							replyTo weightrequest with weightKO : weightKO( NO_PARAM )
-						}
-					}
-				}
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if [# PesoEffettivo + PesoPromesso + PesoRichiesto  &lt;= MAXW #]	{
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[# PesoPromesso += PesoRichiesto #]
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;replyTo weightrequest with weightOK : weightOK( NO_PARAM)
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;} else {
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;replyTo weightrequest with weightKO : weightKO( NO_PARAM )
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}
+					&emsp;&emsp;&emsp;&emsp;}
+				&emsp;&emsp;}
 			}
 			</code></pre>
 			<br/>
@@ -190,13 +190,13 @@
 			<h5 data-heading="Gestione dei parametri di sistema">Gestione dei parametri di sistema</h5>
 			<p>TICKETTIME è un parametro variabile al lancio del sistema. Definiamo un file di configurazione con i valori da caricare al lancio (AppConfig.json):</p>
 			<pre class="language-json" tabindex="0"><code class="language-json is-loaded"><span class="token punctuation">{</span>  
-			 <span class="token property">"TicketTime"</span><span class="token operator">:</span> <span class="token string">"600"</span>  
+			 <span class="token property">&emsp;&emsp;"TicketTime"</span><span class="token operator">:</span> <span class="token string">"600"</span>  
 			<span class="token punctuation">}</span>
 			</code></pre>
 			<br/>
 			<pre><code>QActor tickethandler context ctxcoldstoragearea {
-				[# var TICKETTIME = GetTicketTimeFromConfigFile(); #]
-				...
+				&emsp;&emsp;[# var TICKETTIME = GetTicketTimeFromConfigFile(); #]
+				&emsp;&emsp;...
 			}
 			</code></pre>
 			<br/>
@@ -229,10 +229,10 @@
 			<h5 data-heading="Ticket">Ticket</h5>
 			<p>Ticket conterrà TIME, PESO e SEQ. La stringa sarà composta da questi 3 valori separati da "_" ed inizierà con "T":</p>
 			<pre class="language-java" tabindex="0"><code class="language-java is-loaded"><span class="token keyword">int</span> TIME
-			<span class="token keyword">int</span> PESO
-			<span class="token keyword">int</span> SEQ
+			<span class="token keyword">&nbsp;int</span> PESO
+			<span class="token keyword">&nbsp;int</span> SEQ
 
-			<span class="token class-name">Ticket</span> <span class="token operator">=</span> <span class="token string">"T"</span><span class="token operator">+</span><span class="token string">"_"</span><span class="token operator">+</span>TIME<span class="token operator">+</span><span class="token string">"_"</span><span class="token operator">+</span>PESO<span class="token operator">+</span><span class="token string">"_"</span><span class="token operator">+</span>SEQ           #esempio di ticket<span class="token operator">:</span> T_1697643071_15_0
+			<span class="token class-name">&nbsp;Ticket</span> <span class="token operator">=</span> <span class="token string">"T"</span><span class="token operator">+</span><span class="token string">"_"</span><span class="token operator">+</span>TIME<span class="token operator">+</span><span class="token string">"_"</span><span class="token operator">+</span>PESO<span class="token operator">+</span><span class="token string">"_"</span><span class="token operator">+</span>SEQ           #esempio di ticket<span class="token operator">:</span> T_1697643071_15_0
 			</code></pre>
 			<br/>
 			<h5 data-heading="Definizione messaggi e contesti">Definizione messaggi e contesti</h5>
@@ -274,28 +274,28 @@
 			<p>Rispetto allo sprint 1 non abbiamo più bisogno della mockRequest e gestiamo il <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3 > Problema del peso ipotetico" data-href="Sprint 1.1 - V3#Problema del peso ipotetico" href="Sprint%201.1%20-%20V3.html#Problema%20del%20peso%20ipotetico" class="internal-link" target="_blank" rel="noopener">problema del peso ipotetico</a>.</p>
 			<pre><code>QActor controller context ctxcoldstoragearea {
 
-				[# var P_EFF = 0
-				   var P_DIC = 0 
-				#]
+				&emsp;&emsp;[# var P_EFF = 0
+				   &emsp;&emsp;&emsp;&emsp;var P_DIC = 0 
+				&emsp;&emsp;#]
 				
-				State s0 initial { printCurrentMessage } Goto work
+				&emsp;&emsp;State s0 initial { printCurrentMessage } Goto work
 				
-				State work{
-					println("controller - in attesa") color green
-				} Transition t0 whenRequest loaddone -&gt; startjob
+				&emsp;&emsp;State work{
+					&emsp;&emsp;&emsp;&emsp;println("controller - in attesa") color green
+				&emsp;&emsp;} Transition t0 whenRequest loaddone -&gt; startjob
 				
-				State startjob  {
-					onMsg(loaddone : loaddone(PESO) ){
-						[# PESO = payloadArg(0).toInt()	#]
-					}
-					replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
-					request transporttrolley -m doJob : doJob($P_EFF)
-				} Transition endjob whenReply robotDead -&gt; handlerobotdead
-									whenReply jobdone -&gt; jobdone
+				&emsp;&emsp;State startjob  {
+					&emsp;&emsp;&emsp;&emsp;onMsg(loaddone : loaddone(PESO) ){
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[# PESO = payloadArg(0).toInt()	#]
+					&emsp;&emsp;&emsp;&emsp;}
+					&emsp;&emsp;&emsp;&emsp;replyTo loaddone with chargetaken : chargetaken( NO_PARAM )
+					&emsp;&emsp;&emsp;&emsp;request transporttrolley -m doJob : doJob($P_EFF)
+				&emsp;&emsp;} Transition endjob whenReply robotDead -&gt; handlerobotdead
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;whenReply jobdone -&gt; jobdone
 				
-				State jobdone{
-					forward coldroom -m updateWeight : updateWeight($P_EFF, $P_PROM)
-				} Transition repeat -&gt; work
+				&emsp;&emsp;State jobdone{
+					&emsp;&emsp;&emsp;&emsp;forward coldroom -m updateWeight : updateWeight($P_EFF, $P_PROM)
+				&emsp;&emsp;} Transition repeat -&gt; work
 			</code></pre>
 			<br/>
 			<h5 data-heading="ColdRoom">ColdRoom</h5>
@@ -303,33 +303,33 @@
 			UpdateWeight inoltre deve essere aggiornato per gestire il <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3 > Problema del peso ipotetico" data-href="Sprint 1.1 - V3#Problema del peso ipotetico" href="Sprint%201.1%20-%20V3.html#Problema%20del%20peso%20ipotetico" class="internal-link" target="_blank" rel="noopener">problema del peso ipotetico</a>.<br>
 			Il peso promesso viene sottratto, se va aumentato fornire <strong style="color:#ef7089">P_PRO negativo</strong>.</p>
 			<pre><code>QActor coldroom context ctxcoldstoragearea {
-				...
+				&emsp;&emsp;...
 				
-				State checkweight {
-					onMsg(weightrequest : weightrequest(PESO)){
-						[# var PesoRichiesto = payloadArg(0).toInt() #]
-						if [# PesoEffettivo + PesoPromesso + PesoRichiesto  &lt;= MAXW #]	{
-							[# PesoPromesso += PesoRichiesto #]
-							replyTo weightrequest with weightOK : weightOK( NO_PARAM)
-						} else {
-							replyTo weightrequest with weightKO : weightKO( NO_PARAM )
-						}
-					}
-				} Goto work
+				&emsp;&emsp;State checkweight {
+					&emsp;&emsp;&emsp;&emsp;onMsg(weightrequest : weightrequest(PESO)){
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[# var PesoRichiesto = payloadArg(0).toInt() #]
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if [# PesoEffettivo + PesoPromesso + PesoRichiesto  &lt;= MAXW #]	{
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[# PesoPromesso += PesoRichiesto #]
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;replyTo weightrequest with weightOK : weightOK( NO_PARAM)
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;} else {
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;replyTo weightrequest with weightKO : weightKO( NO_PARAM )
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}
+					&emsp;&emsp;&emsp;&emsp;}
+				&emsp;&emsp;} Goto work
 				
-				State returnweight{
-					onMsg(getweight : getweight(NO_PARAM)){
-						replyTo getweight with currentweight : currentweight($PesoEffettivo, $PesoPromesso)
-					}
-				} Goto work	
+				&emsp;&emsp;State returnweight{
+					&emsp;&emsp;&emsp;&emsp;onMsg(getweight : getweight(NO_PARAM)){
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;replyTo getweight with currentweight : currentweight($PesoEffettivo, $PesoPromesso)
+					&emsp;&emsp;&emsp;&emsp;}
+				&emsp;&emsp;} Goto work	
 			   
-				State updateWeight {
-					onMsg ( updateWeight : updateWeight(P_EFF, P_PRO) ) {
-						[#  PesoEffettivo += payloadArg(0).toInt()
-							PesoPromesso -= payloadArg(1).toInt()
-						#]
-					}
-				} Goto work
+				&emsp;&emsp;State updateWeight {
+					&emsp;&emsp;&emsp;&emsp;onMsg ( updateWeight : updateWeight(P_EFF, P_PRO) ) {
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[#  PesoEffettivo += payloadArg(0).toInt()
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;PesoPromesso -= payloadArg(1).toInt()
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#]
+					&emsp;&emsp;&emsp;&emsp;}
+				&emsp;&emsp;} Goto work
 			}
 			</code></pre>
 			<br/>
