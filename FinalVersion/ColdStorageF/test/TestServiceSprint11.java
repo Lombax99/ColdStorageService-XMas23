@@ -16,22 +16,19 @@ public class TestServiceSprint11{
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
-            //send message first client request ticket
-            out.write("msg(depositRequest,request,test2,facade,depositRequest(1),1)\n");
 
-            //send message second client request ticket
             out.write("msg(depositRequest,request,test2,facade,depositRequest(1),1)\n");
             out.flush();
             //wait for response
             String response= in.readLine();
             response = response.split(",")[4];
-            System.out.println(response);
 
             String result = response.split("T")[0];
             assertTrue(result.equalsIgnoreCase("accept("));
 
             String ticket = response.replace("accept(","");
             ticket = ticket.replace(")","");
+            System.out.println("ticket: "+ticket);
 
 
             //Thread.sleep(800);
@@ -43,7 +40,7 @@ public class TestServiceSprint11{
             out.flush();
             //wait for response
             String response1 = in.readLine();
-            System.out.println(response1);
+            System.out.println("response check: "+response1);
 
             response1 = response1.split(",")[4];
             String checked = response1.replace("ticketchecked(","");
