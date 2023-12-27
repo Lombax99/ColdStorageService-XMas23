@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+    <head>
+        <title>README</title>
+        <meta charset='utf-8'/>
+		<link rel="stylesheet" type="text/css" href="commons/resources/styles/templateISS.css">
+        <link rel="stylesheet" type="text/css" href="commons/resources/styles/main.css">
+        <link rel="stylesheet" type="text/css" href="commons/resources/styles/navbar.css">
+        <link rel="stylesheet" type="text/css" href="commons/resources/styles/table.css">
+        <link rel="stylesheet" type="text/css" href="commons/resources/styles/code.css">
+    </head>
+    <body>
+<div align="center">
+  <img src="Other/RobotIcon.jpg" width="25%" align="center" referrerpolicy="no-referrer">
+  
+  <h1>ColdStorage Service</h1>
+  
+Distributed software system for an <b>autonomous forklift robot</b>. The project had been developed for the course of&nbsp;<a href="https://www.unibo.it/en/teaching/course-unit-catalogue/course-unit/2023/468003" target="_blank" rel="noopener">Software Systems Engineering M</a></td>&nbsp;of the University of Bologna, using the <a href="https://www.scrum.org/resources/what-is-scrum" target="_blank" rel="noopener">SCRUM agile framework</a>.
+<br/>Move to <a href="README.md" target="_blank" rel="noopener">.md version</a>
+</div>
+<h3 data-heading="Components">Components</h3>
+<table>
+  <tbody><tr align="center">
+    <th width="15%">Name</th>
+    <th width="35%">Description</th>
+    <th width="50%">Demo</th>
+  </tr>
+  <tr align="center">
+    <td><b>Virtual&nbsp;Robot</b></td>
+    <td>
+      Web application that simulates a Robot. The robot is confined in a <b>virtual environment</b> (a rectangular room) and can <b>receive commands to perform some actions</b>, such as moving forward/backwards for a certain amount of time and to rotate.
+    </td>
+    <td><img width="100%" src="Other/ColdStorageServiceRoomAnnoted.png" referrerpolicy="no-referrer"></td>
+  </tr>
+  <tr align="center">
+    <td><b>ColdStorage&nbsp;Core</b></td>
+    <td>
+      Main component of the system. It <b>manages the ColdStorage Service</b>. It receives Store Requests from the users, process them and delegates a <i>Transport Trolley</i> for the material pick up and deposit, in case there is enough space in the ColdRoom container.
+    </td>
+    <td><img width="100%" src="Sprint0/Architettura_Sprint0_V2.png" referrerpolicy="no-referrer"></td>
+  </tr>
+  <tr align="center">
+    <td><b>ColdStorage&nbsp;RaspPi</b></td>
+    <td>
+			Component that can run on a Raspberry Pi. It implements an <b>alarm/warning device</b>: when a ultrasonic sonar detects a distance that is lower/greater than a threshold, it sends a signal to the system, that will stop/resume the Transport Trolley activity; ColdStorage RaspPi also shows information about the system current state through a led.
+	</td>
+    <td><img width="100%" src="commons/resources/Images/RaspImage.jpeg" referrerpolicy="no-referrer"></td>
+  </tr>
+  <tr align="center">
+    <td><b>Service&nbsp;Access&nbsp;GUI</b></td>
+    <td>
+			Web application for the client to interact with the system and <b>send service request</b>. It allows to send a request, check the validation of the ticket received and check the current weight in the system.
+		</td>
+    <td><img width="100%" src="commons/resources/Images/ServiceAccessGuiImage.png" referrerpolicy="no-referrer"></td>
+  </tr>
+  <tr align="center">
+    <td><b>Service&nbsp;Status&nbsp;GUI</b></td>
+    <td>
+			Web application to <b>monitor the Service status</b>. It displays any useful information about the current state of the system, including the number of discarded requests, the weight of items stored in the system and the robot position inside of it.
+		</td>
+    <td><img width="100%" src="commons/resources/Images/ServiceStatusGuiImage.png" referrerpolicy="no-referrer"></td>
+  </tr>
+</tbody></table>
+<h3 data-heading="Roadmap">Roadmap</h3>
+<ul class="contains-task-list">
+<li data-task="x" class="task-list-item is-checked"><input checked="" type="checkbox" class="task-list-item-checkbox"><strong>Sprint0</strong> - Requirements analysis and system basic structure: 
+<ul>
+<li>Latest Release (.md format): <a data-href="Cold Storage Service - Natali V3" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Cold%20Storage%20Service%20-%20Natali%20V3.html" class="internal-link" target="_blank" rel="noopener">Cold Storage Service - Natali V3</a></li>
+<li>Latest Release (html format): <a class="internal-link" data-href="Sprint0/Codice/userDocs/Cold Storage Service - Natali V3.html" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\Codice\userDocs\Cold%20Storage%20Service%20-%20Natali%20V3.html" target="_blank" rel="noopener">Cold Storage Service - Natali V3.html</a></li>
+<li>Sprint Review: 10/11/2023</li>
+</ul>
+</li>
+<li data-task="x" class="task-list-item is-checked"><input checked="" type="checkbox" class="task-list-item-checkbox"><strong>Sprint1</strong> - Transport Trolley + ColdStorageService: 
+<ul>
+<li>Latest Release (.md format): <a data-href="Sprint 1.0 - V3" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint%201.0%20-%20V3" class="internal-link" target="_blank" rel="noopener">Sprint 1.0 - V3</a>, <a data-href="Sprint 1.1 - V3" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint%201.1%20-%20V3" class="internal-link" target="_blank" rel="noopener">Sprint 1.1 - V3</a></li>
+<li>Latest Release (html format): <a class="internal-link" data-href="Sprint1.0/Codice/userDocs/Sprint 1.0 - V3.html" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.0\Codice\userDocs\Sprint%201.0%20-%20V3.html" target="_blank" rel="noopener">Sprint 1.0 - V3.html</a>, <a class="internal-link" data-href="Sprint1.1/Codice/userDocs/Sprint 1.1 - V3.html" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Codice\userDocs\Sprint%201.1%20-%20V3.html" target="_blank" rel="noopener">Sprint 1.1 - V3.html</a></li>
+<li>Sprint Review: 17/11/2023</li>
+</ul>
+</li>
+<li data-task="x" class="task-list-item is-checked"><input checked="" type="checkbox" class="task-list-item-checkbox"><strong>Sprint2</strong> - Led e Sonar: ✅ 2023-12-09
+<ul>
+<li>Latest Release (.md format): <a data-href="Sprint 2" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint%202.html" class="internal-link" target="_blank" rel="noopener">Sprint 2</a></li>
+<li>Latest Release (html format): <a class="internal-link" data-href="Sprint2/Codice/userDocs/Sprint 2.html" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Codice\userDocs\Sprint%202.html" target="_blank" rel="noopener">Sprint 2.html</a></li>
+<li>Sprint Review: 01/12/2023</li>
+</ul>
+</li>
+<li data-task="x" class="task-list-item is-checked"><input checked="" type="checkbox" class="task-list-item-checkbox"><strong>Sprint3</strong> - ServiceStatusGui: ✅ 2023-12-17
+<ul>
+<li>Latest Release (.md format): <a data-href="Sprint 3" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint%203.html" class="internal-link" target="_blank" rel="noopener">Sprint 3</a></li>
+<li>Latest Release (html format): <a class="internal-link" data-href="Sprint3/Codice/userDoc/Sprint 3.html" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Codice\userDoc\Sprint%203.html" target="_blank" rel="noopener">Sprint 3.html</a></li>
+<li>Final Exam: 29/12/2023</li>
+</ul>
+</li>
+</ul>
+<h2 data-heading="Team">Team</h2>
+<table>
+  
+  <tbody><tr align="center">
+    <td><a href="https://github.com/LisaIU00" target="_blank" rel="noopener">LisalU00</a></td>
+    <td><a href="https://github.com/Lombax99" target="_blank" rel="noopener">Lombax99</a></td>
+    <td><a href="https://github.com/RedDuality" target="_blank" rel="noopener">RedDuality</a></td>
+  </tr>
+    <tr align="center">
+    <td><img src=".\LisaUccini.png" width="75%" referrerpolicy="no-referrer"></td>
+    <td><img src=".\LucaLombardi.jpg" width="75%" referrerpolicy="no-referrer"></td>
+    <td><img src=".\GiacomoRomanini.jpg" width="75%" referrerpolicy="no-referrer"></td>
+  </tr>
+  <tr align="center">
+    <td><b>Lisa Uccini</b></td>
+    <td><b>Luca Lombardi</b></td>
+    <td><b>Giacomo Romanini</b></td>
+  </tr>
+</tbody></table>
+    </body>
+</html>

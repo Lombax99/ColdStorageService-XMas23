@@ -5,7 +5,7 @@
   <h1>ColdStorage Service</h1>
   
 Distributed software system for an _**autonomous forklift robot**_. The project had been developed for the course of [Software Systems Engineering M](https://www.unibo.it/en/teaching/course-unit-catalogue/course-unit/2023/468003) of the University of Bologna, using the [SCRUM agile framework](https://www.scrum.org/resources/what-is-scrum).
-  
+<br/>Move to <a href="README.html" target="_blank" rel="noopener">.html version</a>
 </div>
 
 ### Components
