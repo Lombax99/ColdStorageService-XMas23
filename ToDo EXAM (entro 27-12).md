@@ -1,13 +1,13 @@
 DOC
-- [ ] riscrivi codice nella doc mettendo solo il minimo interessante
-- [ ] Doc in HTML
-- [ ] RILEGGERE TUTTI TUTTE LE DOC E SEGNALARE EVENTUALI CORREZIONI
+- [x] riscrivi codice nella doc mettendo solo il minimo interessante ✅ 2023-12-27
+- [x] Doc in HTML ✅ 2023-12-27
+- [x] RILEGGERE TUTTI TUTTE LE DOC E SEGNALARE EVENTUALI CORREZIONI ✅ 2023-12-27
 
 
 
 PER 27/12 (da definire orario)
  - [ ] Doc e Codice perfetti (guardare sopra compiti di ognuno)
- - [ ] Prepara scaletta/discorso su presentazione
+ - [x] Prepara scaletta/discorso su presentazione ✅ 2023-12-27
 
 Cose da fare il 27/12
  - [ ] dubbi su doc?
