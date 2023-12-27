@@ -44,36 +44,12 @@
             }
           },
           {
-            "id": "d4be7a5636e32724",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint0/Cold Storage Service - Natali V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "47c6cf1d0cb28d7e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Sprint1.0/Doc/Sprint 1.0 - V3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "bff1e7c8cc749e95",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+                "file": "Sprint3/Doc/Sprint 3.md",
                 "mode": "source",
                 "source": false
               }
@@ -92,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -159,7 +135,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -176,7 +152,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -211,7 +187,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sprint1.1/Doc/Sprint 1.1 - V3.md"
+                "file": "README.md"
               }
             }
           },
@@ -242,31 +218,31 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "bff1e7c8cc749e95",
+  "active": "3cbb87e3cf673c7d",
   "lastOpenFiles": [
+    "Sprint3/Doc/Sprint 3.md",
+    "Sprint3/Codice/ColdStorage3/logs/noctx/servicestatusguimock_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/logs/noctx/serviceaccessguimock_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/logs/noctx/facade_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/logs/noctx/basicrobot_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/logs/noctx/robotpos_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/logs/noctx/planexec_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/logs/noctx/transporttrolley_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/logs/noctx/tickethandler_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/logs/noctx/coldroom_MsLog.txt",
+    "Sprint3/Codice/ColdStorage3/logs/noctx/controller_MsLog.txt",
+    "Sprint2/Doc/Sprint 2.md",
     "Sprint0/Cold Storage Service - Natali V3.md",
     "Sprint1.1/Doc/Sprint 1.1 - V3.md",
-    "Sprint3/Doc/Sprint 3.md",
     "Sprint1.0/Doc/Sprint 1.0 - V3.md",
     "ToDo EXAM (entro 27-12).md",
     "Other/ColdStorageServiceRoomAnnoted.png",
     "README.md",
-    "README.html",
-    "Sprint2/Doc/Sprint 2.md",
     "commons/resources/Images/RaspImage.jpeg",
     "commons/resources/Images/ServiceStatusGuiImage.png",
     "commons/resources/Images/ServiceAccessGuiImage.png",
-    "commons/resources/Images",
     "Sprint3/Codice/userDocs/Sprint 3.html.md",
-    "Sprint3/Codice/userDocs",
     "Sprint0/Codice/userDocs/Cold.md",
-    "Sprint3/Codice/userDoc/Sprint 3.html",
-    "Sprint2/Codice/userDocs/Sprint 2.html",
-    "Sprint1.1/Codice/userDocs/Sprint 1.1 - V3.html",
-    "Sprint1.0/Codice/userDocs/Sprint 1.0 - V3.html",
-    "Sprint0/Codice/userDocs/Cold Storage Service - Natali V3.html",
-    "commons/temaFinale/_static/pygments.css",
-    "commons/temaFinale/_static/custom.css",
     "commons/temaFinale/_images/WasteServiceRoom.PNG",
     "commons/resources/imgs/team/Raffaele_Battipaglia.jpg",
     "commons/resources/imgs/team/Michele_Righi.png",

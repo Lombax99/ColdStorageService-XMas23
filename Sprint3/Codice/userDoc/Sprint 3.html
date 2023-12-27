@@ -45,13 +45,13 @@
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg> Descrizione <br/> 
 				Nel terzo sprint ci occuperemo della ServiceStatusGUI e delle interfacce grafiche finali. 
 			</div>
-			<p>Modello dello <a data-tooltip-position="top" aria-label="Sprint 2" data-href="Sprint 2" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint%202.html" class="internal-link" target="_blank" rel="noopener">sprint precedente</a>.<br>
-			<img alt="Sprint2/Codice/ColdStorage/coldstorage2arch.png" src="Sprint2/Codice/ColdStorage/coldstorage2arch.png" class="internal-embed"></p>
+			<p>Modello dello <a data-tooltip-position="top" aria-label="Sprint 2" data-href="Sprint 2" href="../../../Sprint2/Codice/userDocs/Sprint 2.html" class="internal-link" target="_blank" rel="noopener">sprint precedente</a>.<br>
+			<img alt="Sprint2/Codice/ColdStorage/coldstorage2arch.png" src="../../../Sprint2/Codice/ColdStorage/coldstorage2arch.png" class="internal-embed"></p>
 			<h3 id="Requisiti">Requisiti</h3>
-			<p><img alt="ColdStorageServiceRoomAnnoted.png" src="ColdStorageServiceRoomAnnoted.png" class="internal-embed"><br>
-			<a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Requisiti" data-href="Cold Storage Service - Natali V3#Requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Requisiti" class="internal-link" target="_blank" rel="noopener">Requisiti</a></p>
+			<p><img alt="ColdStorageServiceRoomAnnoted.png" src="../../../Other/ColdStorageServiceRoomAnnoted.png" class="internal-embed"><br>
+			<a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Requisiti" data-href="Cold Storage Service - Natali V3#Requisiti" href="../../../Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html#Requisiti" class="internal-link" target="_blank" rel="noopener">Requisiti</a></p>			
 			<h3 id="Analisi dei Requisiti">Analisi dei Requisiti</h3>
-			<p><a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Analisi preliminare dei requisiti" data-href="Cold Storage Service - Natali V3#Analisi preliminare dei requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Analisi%20preliminare%20dei%20requisiti" class="internal-link" target="_blank" rel="noopener">requisiti sprint 0</a></p>
+			<p><a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Analisi preliminare dei requisiti" data-href="Cold Storage Service - Natali V3#Analisi preliminare dei requisiti" href="../../../Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html#Analisi%20preliminare%20dei%20requisiti" class="internal-link" target="_blank" rel="noopener">requisiti sprint 0</a></p>
 			<h3 id="Domande al committente:">Domande al committente:</h3>
 			<p>Per la posizione quanto dobbiamo essere precisi? Serve sapere la posizione corrente ad ogni step? per il cliente non è necessario quest'ultimo punto dipende da noi. --&gt; per semplicità forniamo le coordinate ad ogni cambiamento del macrostato (in home, fase di load, fase di unload, posizione in caso di errore)</p>
 			<h3 id="Analisi del Problema">Analisi del Problema</h3>
@@ -73,16 +73,20 @@
 					...
 			}
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<h5 data-heading="Rendo tutti i componenti observable">Rendo tutti i componenti observable</h5>
 			<p>Stato del TransportTrolley (sfruttiamo RobotPos):</p>
 			<pre><code>updateResource [# planner.robotOnMap() #]
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<p>ColdRoom:</p>
 			<pre><code>updateResource[# "" + PesoEffettivo + "_" + PesoPromesso + ""#]
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<p>TicketHandler:</p>
 			<pre><code>updateResource [# "" + Rejected #]
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<h5 data-heading="Caricare i dati iniziali nella GUI">Caricare i dati iniziali nella GUI</h5>
 			<p>All'avvio della ServiceStatusGui per visualizzare i valori possiamo:</p>
 			<ul>
@@ -94,8 +98,8 @@
 			<p>Sfruttiamo la facade già creata in precedenza per richiedere al sistema i valori iniziali per la ServiceStatusGui.</p>
 			<h5 data-heading="Architettura logica dopo l'analisi del problema">Architettura logica dopo l'analisi del problema</h5>
 			<p>Possiamo definire la gui come un attore (mock GUI) che poi verrà sostituito<br>
-			<img alt="Sprint3/Codice/ColdStorage3/coldstorage3arch.png" src="Sprint3/Codice/ColdStorage3/coldstorage3arch.png" class="internal-embed"><br>
-			<img alt="ArchitetturaWebSprint3.png" src="ArchitetturaWebSprint3.png" class="internal-embed"></p>
+			<img alt="coldstorage3arch.png" src="../ColdStorage3/coldstorage3arch.png" class="internal-embed"><br>
+			<img alt="ArchitetturaWebSprint3.png" src="../../Doc/ArchitetturaWebSprint3.png" class="internal-embed"></p>
 			<h3 id="Test Plan">Test Plan</h3>
 			<ol>
 			<li>A seguito di una richiesta rifiutata devono aumentare le richieste rifiutate.</li>
@@ -103,7 +107,7 @@
 			<li>All'avvio della Gui devono essere caricati i parametri attuali del sistema.</li>
 			</ol>
 			<h3 id="Progettazione">Progettazione</h3>
-			<p><a data-tooltip-position="top" aria-label="Sprint3/Codice/ColdStorage3/src/coldstorage.qak" data-href="Sprint3/Codice/ColdStorage3/src/coldstorage.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\ColdStorage3\src\coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage.qak</a></p>
+			<p><a data-tooltip-position="top" aria-label="coldstorage.qak" data-href="coldstorage.qak" href="../ColdStorage3/src/coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage.qak</a></p>
 			<h5 data-heading="Facade aggiornato">Facade aggiornato</h5>
 			<pre><code>QActor facade context ctxcoldstoragearea {
 				[#
@@ -131,14 +135,15 @@
 				...
 			}
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<h5 data-heading="La classe per la parte web">La classe per la parte web</h5>
-			<p>Il server spring della ServiceStatusGUI è composto da un <a data-href="ControllerStatusGui.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\ControllerStatusGui.java" class="internal-link" target="_blank" rel="noopener">ControllerStatusGui.java</a> e una serie di observer per i parametri da monitorare:</p>
+			<p>Il server spring della ServiceStatusGUI è composto da un <a data-href="ControllerStatusGui.java" href="../statusgui/src/main/java/unibo/statusgui/ControllerStatusGui.java" class="internal-link" target="_blank" rel="noopener">ControllerStatusGui.java</a> e una serie di observer per i parametri da monitorare:</p>
 			<ul>
-			<li><a data-tooltip-position="top" aria-label="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/ColdRoomObserver.java" data-href="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/ColdRoomObserver.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\statusgui\src\main\java\unibo\statusgui\ColdRoomObserver.java" class="internal-link" target="_blank" rel="noopener">ColdRoomObserver</a></li>
-			<li><a data-href="RobotPosObserver.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\RobotPosObserver.java" class="internal-link" target="_blank" rel="noopener">RobotPosObserver.java</a></li>
-			<li><a data-href="TicketHandlerObserver.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\TicketHandlerObserver.java" class="internal-link" target="_blank" rel="noopener">TicketHandlerObserver.java</a></li>
+			<li><a data-tooltip-position="top" aria-label="ColdRoomObserver.java" data-href="ColdRoomObserver.java" href="../statusgui/src/main/java/unibo/statusgui/ColdRoomObserver.java" class="internal-link" target="_blank" rel="noopener">ColdRoomObserver</a></li>
+			<li><a data-href="RobotPosObserver.java" href="../statusgui/src/main/java/unibo/statusgui/RobotPosObserver.java" class="internal-link" target="_blank" rel="noopener">RobotPosObserver.java</a></li>
+			<li><a data-href="TicketHandlerObserver.java" href="../statusgui/src/main/java/unibo/statusgui/TicketHandlerObserver.java" class="internal-link" target="_blank" rel="noopener">TicketHandlerObserver.java</a></li>
 			</ul>
-			<p>Socket Handler: <a data-tooltip-position="top" aria-label="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/WebSocketHandler.java" data-href="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/WebSocketHandler.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\statusgui\src\main\java\unibo\statusgui\WebSocketHandler.java" class="internal-link" target="_blank" rel="noopener">WebSocketHandler.java</a></p>
+			<p>Socket Handler: <a data-tooltip-position="top" aria-label="WebSocketHandler.java" data-href="WebSocketHandler.java" href="../statusgui/src/main/java/unibo/statusgui/WebSocketHandler.java" class="internal-link" target="_blank" rel="noopener">WebSocketHandler.java</a></p>
 			<h5 data-heading="Ticket Handler si aggiorna per contare quanti ticket vengono rifiutati">Ticket Handler si aggiorna per contare quanti ticket vengono rifiutati</h5>
 			<pre><code>QActor tickethandler context ctxcoldstoragearea {
 				
@@ -169,11 +174,12 @@
 				}Goto work
 			}
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<h5 data-heading="HTML page">HTML page</h5>
-			<p><a data-tooltip-position="top" aria-label="Sprint3/Codice/statusgui/src/main/resources/templates/static/ServiceStatusGui.html" data-href="Sprint3/Codice/statusgui/src/main/resources/templates/static/ServiceStatusGui.html" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\statusgui\src\main\resources\templates\static\ServiceStatusGui.html" class="internal-link" target="_blank" rel="noopener">ServiceStatusGui.html</a> </p>
+			<p><a data-tooltip-position="top" aria-label="ServiceStatusGui.html" data-href="ServiceStatusGui.html" href="../statusgui/src/main/resources/templates/static/ServiceStatusGui.html" class="internal-link" target="_blank" rel="noopener">ServiceStatusGui.html</a> </p>
 			<h3 id="Deployment">Deployment</h3>
 			<h4 data-heading="Deployment on RaspberryPi 3B/3B+">Deployment on RaspberryPi 3B/3B+</h4>
-			<p><img alt="RaspPin.png" src="RaspPin.png" class="internal-embed"></p>
+			<p><img alt="RaspPin.png" src="../../../Sprint2/Doc/RaspPin.png" class="internal-embed"></p>
 			<h5 data-heading="Led">Led</h5>
 			<ul>
 			<li>braccino corto: pin fisico 39 (GND)</li>
@@ -195,35 +201,35 @@
 			<ol>
 			<li>Avviare il container itunibovirtualrobot23 su docker<br>
 			Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/BasicRobotSprint2/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" data-href="Sprint1.1/Codice/BasicRobotSprint2/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint1.1\Codice\BasicRobotSprint2\src\it\unibo\ctxbasicrobot\MainCtxbasicrobot.kt" class="internal-link" target="_blank" rel="noopener">MainCtxbasicrobot.kt</a> del progetto BasicRobot</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint3/Codice/ColdStorage3/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt" data-href="Sprint3/Codice/ColdStorage3/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\ColdStorage3\src\it\unibo\ctxcoldstoragearea\MainCtxcoldstoragearea.kt" class="internal-link" target="_blank" rel="noopener">MainCtxcoldstoragearea.kt</a> del progetto ColdStorage</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint2/Codice/Alarm/src/it/unibo/ctxalarm/MainCtxalarm.kt" data-href="Sprint2/Codice/Alarm/src/it/unibo/ctxalarm/MainCtxalarm.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint2\Codice\Alarm\src\it\unibo\ctxalarm\MainCtxalarm.kt" class="internal-link" target="_blank" rel="noopener">MainCtxalarm.kt</a> del progetto Alarm</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java" data-href="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint1.1\Codice\serviceaccessgui\src\main\java\unibo\serviceaccessgui\ServiceaccessguiApplication.java" class="internal-link" target="_blank" rel="noopener">ServiceaccessguiApplication.java</a> del progetto serviceaccessgui. Aprire il client all'indirizzo http://localhost:8085/</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/StatusguiApplication.java" data-href="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/StatusguiApplication.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\statusgui\src\main\java\unibo\statusgui\StatusguiApplication.java" class="internal-link" target="_blank" rel="noopener">ServiceaccessguiApplication.java</a> del progetto statusgui. Aprire il client all'indirizzo http://localhost:8075/</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="MainCtxbasicrobot.kt" data-href="MainCtxbasicrobot.kt" href="../../../Sprint1.1/Codice/BasicRobotSprint2/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" class="internal-link" target="_blank" rel="noopener">MainCtxbasicrobot.kt</a> del progetto BasicRobot</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="MainCtxcoldstoragearea.kt" data-href="MainCtxcoldstoragearea.kt" href="../ColdStorage3/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt" class="internal-link" target="_blank" rel="noopener">MainCtxcoldstoragearea.kt</a> del progetto ColdStorage</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="MainCtxalarm.kt" data-href="MainCtxalarm.kt" href="../../../Sprint2/Codice/Alarm/src/it/unibo/ctxalarm/MainCtxalarm.kt" class="internal-link" target="_blank" rel="noopener">MainCtxalarm.kt</a> del progetto Alarm</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="ServiceaccessguiApplication.java" data-href="ServiceaccessguiApplication.java" href="../../../Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java" class="internal-link" target="_blank" rel="noopener">ServiceaccessguiApplication.java</a> del progetto serviceaccessgui. Aprire il client all'indirizzo http://localhost:8085/</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="StatusguiApplication.java" data-href="StatusguiApplication.java" href="../statusgui/src/main/java/unibo/statusgui/StatusguiApplication.java" class="internal-link" target="_blank" rel="noopener">ServiceaccessguiApplication.java</a> del progetto statusgui. Aprire il client all'indirizzo http://localhost:8075/</li>
 			</ol>
 			<hr>
 			<p><a data-tooltip-position="top" aria-label="https://github.com/Lombax99/ColdStorageService-XMas23" rel="noopener" class="external-link" href="https://github.com/Lombax99/ColdStorageService-XMas23" target="_blank">Repo Github</a></p>
 			<table>
-			<thead>
-			<tr>
-			<th>Lisa Innocenti Uccini</th>
-			<th>Luca Lombardi</th>
-			<th>Giacomo Romanini</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-			<td><img width="180" alt="LisaUccini.png" src="LisaUccini.png" class="internal-embed"></td>
-			<td><img width="245" alt="LucaLombardi.jpg" src="LucaLombardi.jpg" class="internal-embed"></td>
-			<td><img width="180" alt="GiacomoRomanini.jpg" src="GiacomoRomanini.jpg" class="internal-embed"></td>
-			</tr>
-			<tr>
-			<td><a data-tooltip-position="top" aria-label="https://github.com/LisaIU00" rel="noopener" class="external-link" href="https://github.com/LisaIU00" target="_blank">github: LisaIU00</a></td>
-			<td><a data-tooltip-position="top" aria-label="https://github.com/Lombax99" rel="noopener" class="external-link" href="https://github.com/Lombax99" target="_blank">github: Lombax99</a></td>
-			<td><a data-tooltip-position="top" aria-label="https://github.com/RedDuality" rel="noopener" class="external-link" href="https://github.com/RedDuality" target="_blank">github: RedDuality</a></td>
-			</tr>
-			</tbody>
-			</table>
+				<thead>
+				<tr>
+				<th>Lisa Innocenti Uccini</th>
+				<th>Luca Lombardi</th>
+				<th>Giacomo Romanini</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td><img width="180" alt="LisaUccini.png" src="../../../LisaUccini.png" class="internal-embed"></td>
+				<td><img width="245" alt="LucaLombardi.jpg" src="../../../LucaLombardi.jpg" class="internal-embed"></td>
+				<td><img width="180" alt="GiacomoRomanini.jpg" src="../../../GiacomoRomanini.jpg" class="internal-embed"></td>
+				</tr>
+				<tr>
+				<td><a data-tooltip-position="top" aria-label="https://github.com/LisaIU00" rel="noopener" class="external-link" href="https://github.com/LisaIU00" target="_blank">github: LisaIU00</a></td>
+				<td><a data-tooltip-position="top" aria-label="https://github.com/Lombax99" rel="noopener" class="external-link" href="https://github.com/Lombax99" target="_blank">github: Lombax99</a></td>
+				<td><a data-tooltip-position="top" aria-label="https://github.com/RedDuality" rel="noopener" class="external-link" href="https://github.com/RedDuality" target="_blank">github: RedDuality</a></td>
+				</tr>
+				</tbody>
+				</table>
 		</div>
     </body>
 </html>
