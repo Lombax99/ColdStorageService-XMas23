@@ -27,7 +27,7 @@ Distributed software system for an _**autonomous forklift robot**_. The project
     <td>
       Main component of the system. It <b>manages the ColdStorage Service</b>. It receives Store Requests from the users, process them and delegates a <i>Transport Trolley</i> for the material pick up and deposit, in case there is enough space in the ColdRoom container.
     </td>
-    <td><img src="commons/Images/ServiceAccessGuiImage.png"/></td>
+    <td><img src="commons/resources/Images/ServiceAccessGuiImage.png"/></td>
   </tr>
   <tr align="center">
     <td><b>ColdStorage&nbsp;RaspPi</b></td>
@@ -41,14 +41,14 @@ Distributed software system for an _**autonomous forklift robot**_. The project
     <td>
 			Web application for the client to interact with the system and <b>send service request</b>. It allows to send a request, check the validation of the ticket received and check the current weight in the system.
 		</td>
-    <td><img width="80%" src="./commons/resources/imgs/gifs/Demo_WasteServiceRPi_Simulated.gif"/></td>
+    <td><img width="80%" src="commons/resources/Images/ServiceAccessGuiImage.png"/></td>
   </tr>
   <tr align="center">
     <td><b>Service&nbsp;Status&nbsp;GUI</b></td>
     <td>
 			Web application to <b>monitor the Service status</b>. It displays any useful information about the current state of the system, including the number of discarded requests, the weight of items stored in the system and the robot position inside of it.
 		</td>
-    <td><img src="./commons/resources/imgs/gifs/Demo_WasteServiceGUI.gif"/></td>
+    <td><img src="commons/resources/Images/ServiceStatusGuiImage.png"/></td>
   </tr>
 </table>
 
