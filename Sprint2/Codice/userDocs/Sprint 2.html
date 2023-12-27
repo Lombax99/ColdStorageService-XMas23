@@ -45,22 +45,22 @@
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg> Descrizione <br/> 
 				<p>Nel secondo sprint verranno implementati il sistema di led e sonar con la logica ad essi associata. I due componenti si troveranno su un dispositivo esterno e dovranno interagire con il sistema remotamente.</p>
 			</div>
-			<p>Modello dello <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3" data-href="Sprint 1.1 - V3" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Sprint%201.1%20-%20V3" class="internal-link" target="_blank" rel="noopener">sprint precedente</a>.<br>
-			<img alt="coldstorage11arch.png" src="coldstorage11arch.png" class="internal-embed"></p>
+			<p>Modello dello <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3" data-href="Sprint 1.1 - V3" href="../../../Sprint1.1/Codice/userDocs/Sprint%201.1%20-%20V3.html" class="internal-link" target="_blank" rel="noopener">sprint precedente</a>.<br>
+			<img alt="coldstorage11arch.png" src="../../../Sprint1.1/Codice/ColdStorageSprint2/coldstorage11arch.png" class="internal-embed"></p>
 			<h3 id="Requisiti">Requisiti</h3>
-			<p><img alt="ColdStorageServiceRoomAnnoted.png" src="ColdStorageServiceRoomAnnoted.png" class="internal-embed"><br>
-			<a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Requisiti" data-href="Cold Storage Service - Natali V3#Requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Requisiti" class="internal-link" target="_blank" rel="noopener">Requisiti</a></p>
+			<p><img alt="ColdStorageServiceRoomAnnoted.png" src="../../../Other/ColdStorageServiceRoomAnnoted.png" class="internal-embed"><br>
+			<a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Requisiti" data-href="Cold Storage Service - Natali V3#Requisiti" href="../../../Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html#Requisiti" class="internal-link" target="_blank" rel="noopener">Requisiti</a></p>			
 			<h4 data-heading="Alarm requirements">Alarm requirements</h4>
 			<p>The system includes a&nbsp;Sonar&nbsp;and a&nbsp;Led&nbsp;connected to a RaspberryPi.<br>
-			The&nbsp;Sonar&nbsp;is used as an ‘alarm device’: when it measures a distance less that a prefixed value&nbsp;<strong>DLIMT</strong>, the&nbsp;transport trolley&nbsp;must be stopped; it will be resumed when&nbsp;Sonar&nbsp;detects again a distance higher than&nbsp;<strong>DLIMT</strong>.</p>
+			The&nbsp;Sonar&nbsp;is used as an ‘alarm device’: when it measures a distance less that a prefixed value&nbsp;<strong style="color:#ef7089">DLIMT</strong>, the&nbsp;transport trolley&nbsp;must be stopped; it will be resumed when&nbsp;Sonar&nbsp;detects again a distance higher than&nbsp;<strong style="color:#ef7089">DLIMT</strong>.</p>
 			<p>The&nbsp;Led&nbsp;is used as a&nbsp;<em>warning devices</em>, according to the following scheme:</p>
 			<ul>
-			<li>the&nbsp;Led&nbsp;is&nbsp;<strong>off</strong>&nbsp;when the&nbsp;transport trolley&nbsp;is at&nbsp;HOME</li>
-			<li>the&nbsp;Led&nbsp;<strong>blinks</strong>&nbsp;while the&nbsp;transport trolley&nbsp;is moving</li>
-			<li>the&nbsp;Led&nbsp;is&nbsp;<strong>on</strong>&nbsp;when&nbsp;transport trolley&nbsp;is stopped</li>
+			<li>the&nbsp;Led&nbsp;is&nbsp;<strong style="color:#ef7089">off</strong>&nbsp;when the&nbsp;transport trolley&nbsp;is at&nbsp;HOME</li>
+			<li>the&nbsp;Led&nbsp;<strong style="color:#ef7089">blinks</strong>&nbsp;while the&nbsp;transport trolley&nbsp;is moving</li>
+			<li>the&nbsp;Led&nbsp;is&nbsp;<strong style="color:#ef7089">on</strong>&nbsp;when&nbsp;transport trolley&nbsp;is stopped</li>
 			</ul>
 			<h3 id="Analisi dei Requisiti">Analisi dei Requisiti</h3>
-			<p><a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Analisi preliminare dei requisiti" data-href="Cold Storage Service - Natali V3#Analisi preliminare dei requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Analisi%20preliminare%20dei%20requisiti" class="internal-link" target="_blank" rel="noopener">requisiti sprint 0</a></p>
+			<p><a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Analisi preliminare dei requisiti" data-href="Cold Storage Service - Natali V3#Analisi preliminare dei requisiti" href="../../../Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html#Analisi%20preliminare%20dei%20requisiti" class="internal-link" target="_blank" rel="noopener">requisiti sprint 0</a></p>
 			<h3 id="Domande al Committente">Domande al Committente</h3>
 			<p>Il committente fornisce software relativo al Led e al Sonar? NO<br>
 			Il LED può/deve essere connesso allo stesso RaspberryPi del sonar? SI<br>
@@ -85,6 +85,7 @@
 			Dispatch stop : stop(NO_PARAM)
 			Dispatch continue : continue(NO_PARAM)
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<div class="callout primary"> 
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg> Perché Dispatch? <br/> 
 				<p>In entrambi i casi i messaggi sono destinati ad un attore specifico conosciuto.<br>
@@ -92,8 +93,8 @@
 				Inoltre il sistema non è business/safety critical. Nel peggiore dei casi un utente potrebbe interagire una seconda volta con il sonar se la prima volta non avesse funzionato correttamente.</p>
 			</div>
 			<h5 data-heading="Business Logic">Business Logic</h5>
-			<p><strong>Led:</strong> La logica di accensione e spegnimento del led verrà gestita dall'attore associato in base allo stato comunicato dal controller. Il componente di basso livello deve solo essere in grado di accendere/spegnere il led.<br>
-			<strong>Sonar:</strong> Sfruttiamo l'attore associato al sonar per elaborare i dati emessi dal sonar e decidere se lanciare al controller il messaggio di allarme.</p>
+			<p><strong style="color:#ef7089">Led:</strong> La logica di accensione e spegnimento del led verrà gestita dall'attore associato in base allo stato comunicato dal controller. Il componente di basso livello deve solo essere in grado di accendere/spegnere il led.<br>
+			<strong style="color:#ef7089">Sonar:</strong> Sfruttiamo l'attore associato al sonar per elaborare i dati emessi dal sonar e decidere se lanciare al controller il messaggio di allarme.</p>
 			<ul>
 			<li>PRO: alleggerisco il carico di dati nella rete, semplifico il controller, principio di singola responsabilità.</li>
 			<li>CONTRO: difficoltà maggiore nel caso di DLIMIT variabile, il file di config sarebbe diverso dal precedente e posto sul raspberry.</li>
@@ -101,7 +102,7 @@
 			<h5 data-heading="Problema del messaggio duplicato">Problema del messaggio duplicato</h5>
 			<p>Dobbiamo gestire il caso in cui arrivano più volte gli stessi messaggi (ottengo 2 stop di fila ad esempio perdendo il "continue" intermedio)</p>
 			<h5 data-heading="Architettura logica dopo l'analisi del problema">Architettura logica dopo l'analisi del problema</h5>
-			<p><img alt="Sprint2/Codice/ColdStorage/coldstorage2arch.png" src="Sprint2/Codice/ColdStorage/coldstorage2arch.png" class="internal-embed"></p>
+			<p><img alt="coldstorage2arch.png" src="../ColdStorage/coldstorage2arch.png" class="internal-embed"></p>
 			<h3 id="Test Plan">Test Plan</h3>
 			<p>Stato del led che si aggiorna correttamente.<br>
 			Controller che modifica correttamente lo stato dopo aver ricevuto un messaggio dal sonar.</p>
@@ -114,20 +115,20 @@
 			Supponendo di porre di fronte al Sonar un ostacolo a distanza D, il BasicRobot deve fermarsi e riparte solo dopo che l'ostacolo è rimosso: <a data-tooltip-position="top" aria-label="Sprint2/Codice/ColdStorage/test/TestService.java" data-href="Sprint2/Codice/ColdStorage/test/TestService.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Sprint2\Codice\ColdStorage\test\TestService.java" class="internal-link" target="_blank" rel="noopener">TestService</a></p>
 			<h3 id="Progettazione">Progettazione</h3>
 			<h5 data-heading="SonarActor e LedActor">SonarActor e LedActor</h5>
-			<p>Codice: <a data-href="alarm.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\alarm.qak" class="internal-link" target="_blank" rel="noopener">alarm.qak</a></p>
+			<p>Codice: <a data-href="alarm.qak" href="../Alarm/src/alarm.qak" class="internal-link" target="_blank" rel="noopener">alarm.qak</a></p>
 			<h5 data-heading="SonarService">SonarService</h5>
-			<p>Per interagire con lo script di basso livello relativo al sonar usiamo <a data-href="SonarService.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\SonarService.kt" class="internal-link" target="_blank" rel="noopener">SonarService.kt</a> che legge da inputStream i dati generati da <a data-tooltip-position="top" aria-label="Sprint2/Codice/ColdStorage/resources/robotNano/sonar.py" data-href="Sprint2/Codice/ColdStorage/resources/robotNano/sonar.py" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Sprint2\Codice\ColdStorage\resources\robotNano\sonar.py" class="internal-link" target="_blank" rel="noopener">sonar.py</a></p>
+			<p>Per interagire con lo script di basso livello relativo al sonar usiamo <a data-href="SonarService.kt" href="../Alarm/resources/SonarService.kt" class="internal-link" target="_blank" rel="noopener">SonarService.kt</a> che legge da inputStream i dati generati da <a data-tooltip-position="top" aria-label="sonar.py" data-href="sonar.py" href="../Alarm/sonar.py" class="internal-link" target="_blank" rel="noopener">sonar.py</a></p>
 			<h5 data-heading="Sonar Script">Sonar Script</h5>
 			<p>sonar in python: dopo l'avvio scrive la distanza calcolata su stdout 4 volte al secondo:<br>
-			<a data-href="sonarRasp.py" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\sonarRasp.py" class="internal-link" target="_blank" rel="noopener">sonarRasp.py</a></p>
+			<a data-href="sonarRasp.py" href="../Alarm/sonarRasp.py" class="internal-link" target="_blank" rel="noopener">sonarRasp.py</a></p>
 			<h5 data-heading="Led Script">Led Script</h5>
 			<p>facciamo solo uno script che accende e uno script che spegne e ci pensa l'attore ad invocare lo script secondo bisogno per mostrare lo stato corrente, la logica di lampeggiamento è lasciata all'attore led da gestire e non allo script.</p>
 			<ul>
-			<li>ledOn in python: <a data-href="ledOnRasp.py" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\ledOnRasp.py" class="internal-link" target="_blank" rel="noopener">ledOnRasp.py</a></li>
-			<li>ledOff in python: <a data-href="ledOffRasp.py" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\ledOffRasp.py" class="internal-link" target="_blank" rel="noopener">ledOffRasp.py</a></li>
+			<li>ledOn in python: <a data-href="ledOnRasp.py" href="../Alarm/ledOnRasp.py" class="internal-link" target="_blank" rel="noopener">ledOnRasp.py</a></li>
+			<li>ledOff in python: <a data-href="ledOffRasp.py" href="../Alarm/ledOffRasp.py" class="internal-link" target="_blank" rel="noopener">ledOffRasp.py</a></li>
 			</ul>
 			<h5 data-heading="Controller">Controller</h5>
-			<p>Aggiungiamo al controller la nuova logica: <a data-tooltip-position="top" aria-label="Sprint2/Codice/ColdStorage/src/coldstorage.qak" data-href="Sprint2/Codice/ColdStorage/src/coldstorage.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Sprint2\Codice\ColdStorage\src\coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage.qak</a></p>
+			<p>Aggiungiamo al controller la nuova logica: <a data-tooltip-position="top" aria-label="coldstorage.qak" data-href="coldstorage.qak" href="../ColdStorage/src/coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage.qak</a></p>
 			<pre><code>QActor controller context ctxcoldstoragearea {
 				...
 				
@@ -159,9 +160,10 @@
 				...
 			}
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<h3 id="Deployment">Deployment</h3>
 			<h4 data-heading="Deployment on RaspberryPi 3B/3B+">Deployment on RaspberryPi 3B/3B+</h4>
-			<p><img alt="RaspPin.png" src="RaspPin.png" class="internal-embed"></p>
+			<p><img alt="RaspPin.png" src="../../Doc/RaspPin.png" class="internal-embed"></p>
 			<h5 data-heading="Led">Led</h5>
 			<ul>
 			<li>braccino corto: pin fisico 39 (GND)</li>
@@ -183,34 +185,34 @@
 			<ol>
 			<li>Avviare il container itunibovirtualrobot23 su docker<br>
 			Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/BasicRobotSprint2/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" data-href="Sprint1.1/Codice/BasicRobotSprint2/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Sprint1.1\Codice\BasicRobotSprint2\src\it\unibo\ctxbasicrobot\MainCtxbasicrobot.kt" class="internal-link" target="_blank" rel="noopener">MainCtxbasicrobot.kt</a> del progetto BasicRobot</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint2/Codice/ColdStorage/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt" data-href="Sprint2/Codice/ColdStorage/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Sprint2\Codice\ColdStorage\src\it\unibo\ctxcoldstoragearea\MainCtxcoldstoragearea.kt" class="internal-link" target="_blank" rel="noopener">MainCtxcoldstoragearea.kt</a> del progetto ColdStorage</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint2/Codice/Alarm/src/it/unibo/ctxalarm/MainCtxalarm.kt" data-href="Sprint2/Codice/Alarm/src/it/unibo/ctxalarm/MainCtxalarm.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Sprint2\Codice\Alarm\src\it\unibo\ctxalarm\MainCtxalarm.kt" class="internal-link" target="_blank" rel="noopener">MainCtxalarm.kt</a> del progetto Alarm</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java" data-href="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint2\Doc\Sprint1.1\Codice\serviceaccessgui\src\main\java\unibo\serviceaccessgui\ServiceaccessguiApplication.java" class="internal-link" target="_blank" rel="noopener">ServiceaccessguiApplication.java</a> del progetto serviceaccessgui. Aprire il client all'indirizzo http://localhost:8085/</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="MainCtxbasicrobot.kt" data-href="MainCtxbasicrobot.kt" href="../../../Sprint1.1/Codice/BasicRobotSprint2/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" class="internal-link" target="_blank" rel="noopener">MainCtxbasicrobot.kt</a> del progetto BasicRobot</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="MainCtxcoldstoragearea.kt" data-href="MainCtxcoldstoragearea.kt" href="../ColdStorage/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt" class="internal-link" target="_blank" rel="noopener">MainCtxcoldstoragearea.kt</a> del progetto ColdStorage</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="MainCtxalarm.kt" data-href="MainCtxalarm.kt" href="../Alarm/src/it/unibo/ctxalarm/MainCtxalarm.kt" class="internal-link" target="_blank" rel="noopener">MainCtxalarm.kt</a> del progetto Alarm</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="ServiceaccessguiApplication.java" data-href="ServiceaccessguiApplication.java" href="../../../Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java" class="internal-link" target="_blank" rel="noopener">ServiceaccessguiApplication.java</a> del progetto serviceaccessgui. Aprire il client all'indirizzo http://localhost:8085/</li>
 			</ol>
 			<hr>
 			<p><a data-tooltip-position="top" aria-label="https://github.com/Lombax99/ColdStorageService-XMas23" rel="noopener" class="external-link" href="https://github.com/Lombax99/ColdStorageService-XMas23" target="_blank">Repo Github</a></p>
 			<table>
-			<thead>
-			<tr>
-			<th>Lisa Innocenti Uccini</th>
-			<th>Luca Lombardi</th>
-			<th>Giacomo Romanini</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-			<td><img width="180" alt="LisaUccini.png" src="LisaUccini.png" class="internal-embed"></td>
-			<td><img width="245" alt="LucaLombardi.jpg" src="LucaLombardi.jpg" class="internal-embed"></td>
-			<td><img width="180" alt="GiacomoRomanini.jpg" src="GiacomoRomanini.jpg" class="internal-embed"></td>
-			</tr>
-			<tr>
-			<td><a data-tooltip-position="top" aria-label="https://github.com/LisaIU00" rel="noopener" class="external-link" href="https://github.com/LisaIU00" target="_blank">github: LisaIU00</a></td>
-			<td><a data-tooltip-position="top" aria-label="https://github.com/Lombax99" rel="noopener" class="external-link" href="https://github.com/Lombax99" target="_blank">github: Lombax99</a></td>
-			<td><a data-tooltip-position="top" aria-label="https://github.com/RedDuality" rel="noopener" class="external-link" href="https://github.com/RedDuality" target="_blank">github: RedDuality</a></td>
-			</tr>
-			</tbody>
-			</table>
+				<thead>
+				<tr>
+				<th>Lisa Innocenti Uccini</th>
+				<th>Luca Lombardi</th>
+				<th>Giacomo Romanini</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td><img width="180" alt="LisaUccini.png" src="../../../LisaUccini.png" class="internal-embed"></td>
+				<td><img width="245" alt="LucaLombardi.jpg" src="../../../LucaLombardi.jpg" class="internal-embed"></td>
+				<td><img width="180" alt="GiacomoRomanini.jpg" src="../../../GiacomoRomanini.jpg" class="internal-embed"></td>
+				</tr>
+				<tr>
+				<td><a data-tooltip-position="top" aria-label="https://github.com/LisaIU00" rel="noopener" class="external-link" href="https://github.com/LisaIU00" target="_blank">github: LisaIU00</a></td>
+				<td><a data-tooltip-position="top" aria-label="https://github.com/Lombax99" rel="noopener" class="external-link" href="https://github.com/Lombax99" target="_blank">github: Lombax99</a></td>
+				<td><a data-tooltip-position="top" aria-label="https://github.com/RedDuality" rel="noopener" class="external-link" href="https://github.com/RedDuality" target="_blank">github: RedDuality</a></td>
+				</tr>
+				</tbody>
+				</table>
 		</div>
     </body>
 </html>

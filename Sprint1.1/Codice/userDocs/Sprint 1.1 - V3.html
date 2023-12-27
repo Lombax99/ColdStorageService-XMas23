@@ -45,13 +45,13 @@
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg> Descrizione <br/> 
 				<p>In questa seconda parte del primo sprint verrà trattata la logica dei ticket, i componenti e la sicurezza associati.</p>
 			</div>
-			<p>Modello dello <a data-tooltip-position="top" aria-label="Sprint 1.0 - V3" data-href="Sprint 1.0 - V3" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint%201.0%20-%20V3" class="internal-link" target="_blank" rel="noopener">sprint precedente</a>.<br>
-			<img alt="ArchitetturaLogica_Sprint1.0-V2.png" src="ArchitetturaLogica_Sprint1.0-V2.png" class="internal-embed"></p>
+			<p>Modello dello <a data-tooltip-position="top" aria-label="Sprint 1.0 - V3" data-href="Sprint 1.0 - V3" href="../../../Sprint1.0/Codice/userDocs/Sprint%201.0%20-%20V3.html" class="internal-link" target="_blank" rel="noopener">sprint precedente</a>.<br>
+			<img alt="ArchitetturaLogica_Sprint1.0-V2.png" src="../../../Sprint1.0/Doc/ArchitetturaLogica_Sprint1.0-V2.png" class="internal-embed"></p>
 			<h3 id="Requisiti">Requisiti</h3>
-			<p><img alt="ColdStorageServiceRoomAnnoted.png" src="ColdStorageServiceRoomAnnoted.png" class="internal-embed"><br>
-			<a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Requisiti" data-href="Cold Storage Service - Natali V3#Requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Requisiti" class="internal-link" target="_blank" rel="noopener">Requisiti</a></p>
+			<p><img alt="ColdStorageServiceRoomAnnoted.png" src="../../../Other/ColdStorageServiceRoomAnnoted.png" class="internal-embed"><br>
+			<a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Requisiti" data-href="Cold Storage Service - Natali V3#Requisiti" href="../../../Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html#Requisiti" class="internal-link" target="_blank" rel="noopener">Requisiti</a></p>			
 			<h3 id="Analisi dei Requisiti">Analisi dei Requisiti</h3>
-			<p><a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Analisi preliminare dei requisiti" data-href="Cold Storage Service - Natali V3#Analisi preliminare dei requisiti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Cold%20Storage%20Service%20-%20Natali%20V3.html#Analisi%20preliminare%20dei%20requisiti" class="internal-link" target="_blank" rel="noopener">requisiti sprint 0</a></p>
+			<p><a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Analisi preliminare dei requisiti" data-href="Cold Storage Service - Natali V3#Analisi preliminare dei requisiti" href="../../../Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html#Analisi%20preliminare%20dei%20requisiti" class="internal-link" target="_blank" rel="noopener">analisi requisiti sprint 0</a></p>
 			<h3 id="Analisi del Problema">Analisi del Problema</h3>
 			<h5 data-heading="Compiti di TicketHandler">Compiti di TicketHandler</h5>
 			<p>TicketHandler si occuperà di:</p>
@@ -68,11 +68,11 @@
 			</div>
 			</li>
 			</ol>
-			<p>La separazione di TicketHandler e Controller porta l'utente a dover potenzialmente interagire con due entità diverse del sistema. Decidiamo di introdurre un componente intermedio per nascondere questa complessità dal lato dell'utente secondo il modello del <strong>pattern facade</strong>.</p>
-			<p>Il sistema sarà dunque ampliato secondo la seguente <strong>Architettura logica</strong>:<br>
-			<img alt="ArchitetturaLogica_Sprint1.1.png" src="ArchitetturaLogica_Sprint1.1.png" class="internal-embed"></p>
+			<p>La separazione di TicketHandler e Controller porta l'utente a dover potenzialmente interagire con due entità diverse del sistema. Decidiamo di introdurre un componente intermedio per nascondere questa complessità dal lato dell'utente secondo il modello del <strong style="color:#ef7089">pattern facade</strong>.</p>
+			<p>Il sistema sarà dunque ampliato secondo la seguente <strong style="color:#ef7089">Architettura logica</strong>:<br>
+			<img alt="ArchitetturaLogica_Sprint1.1.png" src="../../Doc/ArchitetturaLogica_Sprint1.1.png" class="internal-embed"></p>
 			<h5 data-heading="Protocollo di richiesta e generazione del ticket">Protocollo di richiesta e generazione del ticket</h5>
-			<p><img alt="Sprint1.1/Doc/cicloVitaMessaggi.png" src="Sprint1.1/Doc/cicloVitaMessaggi.png" class="internal-embed"></p>
+			<p><img alt="Sprint1.1/Doc/cicloVitaMessaggi.png" src="../../Doc/cicloVitaMessaggi.png" class="internal-embed"></p>
 			<ol>
 			<li>Inizia con una request/response dal driver verso TicketHandler</li>
 			</ol>
@@ -90,7 +90,7 @@
 			<ol start="3">
 			<li>Se c'è abbastanza spazio, ColdRoom aggiorna i propri attributi;</li>
 			<li>Se TicketHandler riceve True genera il ticket e lo invia a ServiceAccessGui, altrimenti rejected;</li>
-			<li>Arrivato in INDOOR, il driver, invia il Ticket a TicketHandler. Il TicketHandler verifica il <strong>TICKETTIME</strong> e restituisce Ok / Rejected;</li>
+			<li>Arrivato in INDOOR, il driver, invia il Ticket a TicketHandler. Il TicketHandler verifica il <strong style="color:#ef7089">TICKETTIME</strong> e restituisce Ok / Rejected;</li>
 			</ol>
 			<pre><code>Request checkmyticket : checkmyticket(TICKET)
 			Reply	ticketchecked : ticketchecked(BOOL)
@@ -111,7 +111,7 @@
 				</ol>
 			</div>
 			<p>Ricevuta la "chargetaken" il driver può uscire dal sistema considerando la transizione conclusa con successo.</p>
-			<h5 data-heading="Problema del peso ipotetico">Problema del peso ipotetico</h5>
+			<h5 data-heading="Problema del peso ipotetico" id="Problema del peso ipotetico">Problema del peso ipotetico</h5>
 			<p>Un driver potrebbe inviare la richiesta di un Ticket prima che un secondo driver, a cui è stato generato un Ticket in precedenza, abbiano scaricato.<br>
 			Rischio di emettere un ticket per un peso non realmente disponibile nel momento di scarico.</p>
 			<p>Per risolvere il problema definiamo due pesi diversi: </p>
@@ -149,20 +149,21 @@
 				}
 			}
 			</code><button class="copy-code-button">Copy</button></pre>
-			<h5 data-heading="Problema del peso fantasma">Problema del peso fantasma</h5>
+			<br/>
+			<h5 data-heading="Problema del peso fantasma" id="Problema del peso fantasma">Problema del peso fantasma</h5>
 			<p>A seguito della scadenza di un Ticket, il Transport Trolley non si farà carico della richiesta e il peso promesso del ticket rimarrà considerato in Cold Room.</p>
-			<h5 data-heading="Gestione dei Ticket scaduti">Gestione dei Ticket scaduti</h5>
+			<h5 data-heading="Gestione dei Ticket scaduti" id="Gestione dei Ticket scaduti">Gestione dei Ticket scaduti</h5>
 			<p>L'eliminazione dei ticket scaduti viene fatta per necessità.</p>
 			<p>All'arrivo di una richiesta di emissione del Ticket, se lo spazio calcolato non fosse sufficiente si verifica il TICKETTIME associato ai Ticket generati e non ancora scaricati.</p>
 			<p>In presenza di Ticket scaduti allora il TicketHandler procederà ad aggiornare il peso promesso tramite dispatch "updateWeight".<br>
-			In questo modo risolviamo anche il <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3 > Problema del peso fantasma" data-href="Sprint 1.1 - V3#Problema del peso fantasma" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint%201.1%20-%20V3#Problema%20del%20peso%20fantasma" class="internal-link" target="_blank" rel="noopener">problema del peso fantasma</a>.</p>
+			In questo modo risolviamo anche il <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3 > Problema del peso fantasma" data-href="Sprint 1.1 - V3#Problema del peso fantasma" href="Sprint%201.1%20-%20V3.html#Problema%20del%20peso%20fantasma" class="internal-link" target="_blank" rel="noopener">problema del peso fantasma</a>.</p>
 			<h5 data-heading="Quando e da chi vengono aggiornati i pesi in ColdRoom?">Quando e da chi vengono aggiornati i pesi in ColdRoom?</h5>
 			<ol>
 			<li>
 			<p>Terminata l'azione del Transport Trolley, Controller aggiorna i due pesi tramite dispatch. Viene passata la quantità da decrementare dal peso promesso e la quantità da incrementare al peso effettivo.</p>
 			</li>
 			<li>
-			<p>Caso particolare: i pesi sono aggiornati da TicketHandler tramite dispatch "updateWeight" nella <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3 > Gestione dei Ticket scaduti" data-href="Sprint 1.1 - V3#Gestione dei Ticket scaduti" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint%201.1%20-%20V3#Gestione%20dei%20Ticket%20scaduti" class="internal-link" target="_blank" rel="noopener">gestione dei ticket scaduti</a>.</p>
+			<p>Caso particolare: i pesi sono aggiornati da TicketHandler tramite dispatch "updateWeight" nella <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3 > Gestione dei Ticket scaduti" data-href="Sprint 1.1 - V3#Gestione dei Ticket scaduti" href="Sprint%201.1%20-%20V3.html#Gestione%20dei%20Ticket%20scaduti" class="internal-link" target="_blank" rel="noopener">gestione dei ticket scaduti</a>.</p>
 			</li>
 			</ol>
 			<h5 data-heading="Sicurezza dei Ticket">Sicurezza dei Ticket</h5>
@@ -192,24 +193,26 @@
 			 <span class="token property">"TicketTime"</span><span class="token operator">:</span> <span class="token string">"600"</span>  
 			<span class="token punctuation">}</span>
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<pre><code>QActor tickethandler context ctxcoldstoragearea {
 				[# var TICKETTIME = GetTicketTimeFromConfigFile(); #]
 				...
 			}
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<h5 data-heading="ServiceAccessGUI">ServiceAccessGUI</h5>
 			<p>Progettare le GUI come attori non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfacci con esso.<br>
 			Per fare ciò ci appoggiamo alla tecnologia di SPRING che permette l'interazione tramite web e la gestione di molti utenti collegati contemporaneamente.</p>
 			<p>Nello schema iniziale il server Spring prenderà quindi il posto dell'attore ServiceAccessGUI, l'interazione con l'utente avverrà tramite pagine html statiche fornite dal server ad ogni utente che si collega.</p>
-			<p><img alt="SpringStructure.png" src="SpringStructure.png" class="internal-embed"></p>
+			<p><img alt="SpringStructure.png" src="../../Doc/SpringStructure.png" class="internal-embed"></p>
 			<h5 data-heading="Aggiornamento peso in ServiceAccessGUI">Aggiornamento peso in ServiceAccessGUI</h5>
 			<p>La soluzione migliore sarebbe metterlo in ascolto dei cambiamenti a ColdRoom, ColdRoom diventa observable come da analisi preliminari.<br>
 			In alternativa Req/Resp di deposit weigth fa una richiesta per sapere il peso in coldRoom.<br>
 			In entrambi i casi usiamo la somma tra peso effettivo e peso promesso.</p>
-			<p><strong>PROBLEMA:</strong> Usando pagine html statiche, anche mantenendo aggiornato il peso corrente nel server spring l'utente deve ricaricare la pagina per visualizzare il nuovo peso.<br>
+			<p><strong style="color:#ef7089">PROBLEMA:</strong> Usando pagine html statiche, anche mantenendo aggiornato il peso corrente nel server spring l'utente deve ricaricare la pagina per visualizzare il nuovo peso.<br>
 			Motivo per il quale abbiamo deciso di cambiare verso pagine html dinamiche.</p>
 			<h5 data-heading="Architettura logica dopo l'analisi del problema">Architettura logica dopo l'analisi del problema</h5>
-			<p><img alt="coldstorage11arch.png" src="coldstorage11arch.png" class="internal-embed"></p>
+			<p><img alt="coldstorage11arch.png" src="../ColdStorageSprint2/coldstorage11arch.png" class="internal-embed"></p>
 			<h3 id="Test Plan">Test Plan</h3>
 			<p>Durante la fase di testing dovranno essere verificati i seguenti casi:</p>
 			<ol>
@@ -220,9 +223,9 @@
 			<li>Controllare che quando il controller aggiorna la ColdRoom il cambiamento di peso risulti nella service access gui.<br>
 			Ciascuno dei test deve essere superato con più utenti collegati contemporaneamente da uno stesso browser o da browser diversi.</li>
 			</ol>
-			<p>Codice secondo test: <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/ColdStorageSprint2/test/TestService.java" data-href="Sprint1.1/Codice/ColdStorageSprint2/test/TestService.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint1.1\Codice\ColdStorageSprint2\test\TestService.java" class="internal-link" target="_blank" rel="noopener">TestService</a></p>
+			<p>Codice secondo test: <a data-tooltip-position="top" aria-label="TestService.java" data-href="TestService.java" href="../ColdStorageSprint2/test/TestService.java" class="internal-link" target="_blank" rel="noopener">TestService</a></p>
 			<h3 id="Progettazione">Progettazione</h3>
-			<p><a data-tooltip-position="top" aria-label="Sprint1.1/Codice/ColdStorageSprint2/src/coldstorage.qak" data-href="Sprint1.1/Codice/ColdStorageSprint2/src/coldstorage.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint1.1\Codice\ColdStorageSprint2\src\coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage qak</a></p>
+			<p><a data-tooltip-position="top" aria-label="coldstorage.qak" data-href="coldstorage.qak" href="../ColdStorageSprint2/src/coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage qak</a></p>
 			<h5 data-heading="Ticket">Ticket</h5>
 			<p>Ticket conterrà TIME, PESO e SEQ. La stringa sarà composta da questi 3 valori separati da "_" ed inizierà con "T":</p>
 			<pre class="language-java" tabindex="0"><code class="language-java is-loaded"><span class="token keyword">int</span> TIME
@@ -231,6 +234,7 @@
 
 			<span class="token class-name">Ticket</span> <span class="token operator">=</span> <span class="token string">"T"</span><span class="token operator">+</span><span class="token string">"_"</span><span class="token operator">+</span>TIME<span class="token operator">+</span><span class="token string">"_"</span><span class="token operator">+</span>PESO<span class="token operator">+</span><span class="token string">"_"</span><span class="token operator">+</span>SEQ           #esempio di ticket<span class="token operator">:</span> T_1697643071_15_0
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<h5 data-heading="Definizione messaggi e contesti">Definizione messaggi e contesti</h5>
 			<pre><code>System coldstorage2
 
@@ -265,8 +269,9 @@
 
 			//-----------------------------------------------------------------------
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<h5 data-heading="Controller">Controller</h5>
-			<p>Rispetto allo sprint 1 non abbiamo più bisogno della mockRequest e gestiamo il <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3 > Problema del peso ipotetico" data-href="Sprint 1.1 - V3#Problema del peso ipotetico" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint%201.1%20-%20V3#Problema%20del%20peso%20ipotetico" class="internal-link" target="_blank" rel="noopener">problema del peso ipotetico</a>.</p>
+			<p>Rispetto allo sprint 1 non abbiamo più bisogno della mockRequest e gestiamo il <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3 > Problema del peso ipotetico" data-href="Sprint 1.1 - V3#Problema del peso ipotetico" href="Sprint%201.1%20-%20V3.html#Problema%20del%20peso%20ipotetico" class="internal-link" target="_blank" rel="noopener">problema del peso ipotetico</a>.</p>
 			<pre><code>QActor controller context ctxcoldstoragearea {
 
 				[# var P_EFF = 0
@@ -292,10 +297,11 @@
 					forward coldroom -m updateWeight : updateWeight($P_EFF, $P_PROM)
 				} Transition repeat -&gt; work
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<h5 data-heading="ColdRoom">ColdRoom</h5>
 			<p>Rispetto allo sprint precedente ColdRoom deve verificare se è presente abbastanza spazio e rispondere di conseguenza.<br>
-			UpdateWeight inoltre deve essere aggiornato per gestire il <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3 > Problema del peso ipotetico" data-href="Sprint 1.1 - V3#Problema del peso ipotetico" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint%201.1%20-%20V3#Problema%20del%20peso%20ipotetico" class="internal-link" target="_blank" rel="noopener">problema del peso ipotetico</a>.<br>
-			Il peso promesso viene sottratto, se va aumentato fornire <strong>P_PRO negativo</strong>.</p>
+			UpdateWeight inoltre deve essere aggiornato per gestire il <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3 > Problema del peso ipotetico" data-href="Sprint 1.1 - V3#Problema del peso ipotetico" href="Sprint%201.1%20-%20V3.html#Problema%20del%20peso%20ipotetico" class="internal-link" target="_blank" rel="noopener">problema del peso ipotetico</a>.<br>
+			Il peso promesso viene sottratto, se va aumentato fornire <strong style="color:#ef7089">P_PRO negativo</strong>.</p>
 			<pre><code>QActor coldroom context ctxcoldstoragearea {
 				...
 				
@@ -326,49 +332,50 @@
 				} Goto work
 			}
 			</code><button class="copy-code-button">Copy</button></pre>
+			<br/>
 			<h5 data-heading="TicketHandler">TicketHandler</h5>
-			<p><a data-tooltip-position="top" aria-label="Sprint1.1/Codice/ColdStorageSprint2/src/coldstorage.qak" data-href="Sprint1.1/Codice/ColdStorageSprint2/src/coldstorage.qak" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint1.1\Codice\ColdStorageSprint2\src\coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage qak</a> </p>
+			<p><a data-tooltip-position="top" aria-label="coldstorage.qak" data-href="coldstorage.qak" href="../ColdStorageSprint2/src/coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage qak</a> </p>
 			<h5 data-heading="Parametrizzazione valori">Parametrizzazione valori</h5>
-			<p><a data-tooltip-position="top" aria-label="Sprint1.1/Codice/ColdStorageSprint2/resources/DomainSystemConfig.kt" data-href="Sprint1.1/Codice/ColdStorageSprint2/resources/DomainSystemConfig.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint1.1\Codice\ColdStorageSprint2\resources\DomainSystemConfig.kt" class="internal-link" target="_blank" rel="noopener">DomainSystemConfig.kt</a> </p>
+			<p><a data-tooltip-position="top" aria-label="DomainSystemConfig.kt" data-href="DomainSystemConfig.kt" href="../ColdStorageSprint2/resources/DomainSystemConfig.kt" class="internal-link" target="_blank" rel="noopener">DomainSystemConfig.kt</a> </p>
 			<h5 data-heading="Spring Server: socket e observer">Spring Server: socket e observer</h5>
 			<p>Il server si collegherà agli attori tramite socket o come coapObserver.<br>
 			Le richieste ajax provenienti dai client verranno inoltrate tramite socket.</p>
-			<p>Il server è composto di un <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ApiController.java" data-href="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ApiController.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint1.1\Codice\serviceaccessgui\src\main\java\unibo\serviceaccessgui\ApiController.java" class="internal-link" target="_blank" rel="noopener">ApiController.java</a> che sfrutta la classe <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/MessageSender.java" data-href="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/MessageSender.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint1.1\Codice\serviceaccessgui\src\main\java\unibo\serviceaccessgui\MessageSender.java" class="internal-link" target="_blank" rel="noopener">MessageSender</a> per inviare messaggi.<br>
-			Lato client rendiamo le pagine dinamiche tramite <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ApiController.java" data-href="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ApiController.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint1.1\Codice\serviceaccessgui\src\main\java\unibo\serviceaccessgui\ApiController.java" class="internal-link" target="_blank" rel="noopener">ApiController.java</a> </p>
-			<p>Gli eventi degli attori osservati tramite observer verranno inoltrati ai client tramite websocket, create all'inizio di ogni sessione. Vedi <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/serviceaccessgui/src/main/resources/static/js/dinamic.js" data-href="Sprint1.1/Codice/serviceaccessgui/src/main/resources/static/js/dinamic.js" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint1.1\Codice\serviceaccessgui\src\main\resources\static\js\dinamic.js" class="internal-link" target="_blank" rel="noopener">dinamic.js</a>.</p>
+			<p>Il server è composto di un <a data-tooltip-position="top" aria-label="ApiController.java" data-href="ApiController.java" href="../serviceaccessgui/src/main/java/unibo/serviceaccessgui/ApiController.java" class="internal-link" target="_blank" rel="noopener">ApiController.java</a> che sfrutta la classe <a data-tooltip-position="top" aria-label="MessageSender.java" data-href="MessageSender.java" href="../serviceaccessgui/src/main/java/unibo/serviceaccessgui/MessageSender.java" class="internal-link" target="_blank" rel="noopener">MessageSender</a> per inviare messaggi.<br>
+			Lato client rendiamo le pagine dinamiche tramite <a data-tooltip-position="top" aria-label="ApiController.java" data-href="ApiController.java" href="../serviceaccessgui/src/main/java/unibo/serviceaccessgui/ApiController.java" class="internal-link" target="_blank" rel="noopener">ApiController.java</a> </p>
+			<p>Gli eventi degli attori osservati tramite observer verranno inoltrati ai client tramite websocket, create all'inizio di ogni sessione. Vedi <a data-tooltip-position="top" aria-label="dinamic.js" data-href="dinamic.js" href="../serviceaccessgui/src/main/resources/static/js/dinamic.js" class="internal-link" target="_blank" rel="noopener">dinamic.js</a>.</p>
 			<h5 data-heading="HTML page">HTML page</h5>
-			<p><a data-tooltip-position="top" aria-label="Sprint1.1/ServiceAccessGuiWebPage.html" data-href="Sprint1.1/ServiceAccessGuiWebPage.html" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint1.1\ServiceAccessGuiWebPage.html" class="internal-link" target="_blank" rel="noopener">ServiceAccessGuiWebPage.html</a></p>
+			<p><a data-tooltip-position="top" aria-label="ServiceAccessGuiWebPage.html" data-href="ServiceAccessGuiWebPage.html" href="../../ServiceAccessGuiWebPage.html" class="internal-link" target="_blank" rel="noopener">ServiceAccessGuiWebPage.html</a></p>
 			<h3 id="Deployment">Deployment</h3>
 			<ol>
 			<li>Avviare il container itunibovirtualrobot23 su docker<br>
 			Viene lanciato l'ambiente virtuale con il robot all'indirizzo http://localhost:8090/</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/BasicRobotSprint2/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" data-href="Sprint1.1/Codice/BasicRobotSprint2/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint1.1\Codice\BasicRobotSprint2\src\it\unibo\ctxbasicrobot\MainCtxbasicrobot.kt" class="internal-link" target="_blank" rel="noopener">MainCtxbasicrobot.kt</a> del progetto BasicRobot</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/ColdStorageSprint2/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt" data-href="Sprint1.1/Codice/ColdStorageSprint2/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint1.1\Codice\ColdStorageSprint2\src\it\unibo\ctxcoldstoragearea\MainCtxcoldstoragearea.kt" class="internal-link" target="_blank" rel="noopener">MainCtxcoldstoragearea.kt</a> del progetto ColdStorage</li>
-			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java" data-href="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint1.1\Doc\Sprint1.1\Codice\serviceaccessgui\src\main\java\unibo\serviceaccessgui\ServiceaccessguiApplication.java" class="internal-link" target="_blank" rel="noopener">ServiceaccessguiApplication.java</a> del progetto serviceaccessgui. Aprire il client all'indirizzo http://localhost:8085/</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="MainCtxbasicrobot.kt" data-href="MainCtxbasicrobot.kt" href="../BasicRobotSprint2/src/it/unibo/ctxbasicrobot/MainCtxbasicrobot.kt" class="internal-link" target="_blank" rel="noopener">MainCtxbasicrobot.kt</a> del progetto BasicRobot</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="MainCtxcoldstoragearea.kt" data-href="MainCtxcoldstoragearea.kt" href="../ColdStorageSprint2/src/it/unibo/ctxcoldstoragearea/MainCtxcoldstoragearea.kt" class="internal-link" target="_blank" rel="noopener">MainCtxcoldstoragearea.kt</a> del progetto ColdStorage</li>
+			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="ServiceaccessguiApplication.java" data-href="ServiceaccessguiApplication.java" href="../serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java" class="internal-link" target="_blank" rel="noopener">ServiceaccessguiApplication.java</a> del progetto serviceaccessgui. Aprire il client all'indirizzo http://localhost:8085/</li>
 			</ol>
 			<hr>
 			<p><a data-tooltip-position="top" aria-label="https://github.com/Lombax99/ColdStorageService-XMas23" rel="noopener" class="external-link" href="https://github.com/Lombax99/ColdStorageService-XMas23" target="_blank">Repo Github</a></p>
 			<table>
-			<thead>
-			<tr>
-			<th>Lisa Innocenti Uccini</th>
-			<th>Luca Lombardi</th>
-			<th>Giacomo Romanini</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-			<td><img width="180" alt="LisaUccini.png" src="LisaUccini.png" class="internal-embed"></td>
-			<td><img width="245" alt="LucaLombardi.jpg" src="LucaLombardi.jpg" class="internal-embed"></td>
-			<td><img width="180" alt="GiacomoRomanini.jpg" src="GiacomoRomanini.jpg" class="internal-embed"></td>
-			</tr>
-			<tr>
-			<td><a data-tooltip-position="top" aria-label="https://github.com/LisaIU00" rel="noopener" class="external-link" href="https://github.com/LisaIU00" target="_blank">github: LisaIU00</a></td>
-			<td><a data-tooltip-position="top" aria-label="https://github.com/Lombax99" rel="noopener" class="external-link" href="https://github.com/Lombax99" target="_blank">github: Lombax99</a></td>
-			<td><a data-tooltip-position="top" aria-label="https://github.com/RedDuality" rel="noopener" class="external-link" href="https://github.com/RedDuality" target="_blank">github: RedDuality</a></td>
-			</tr>
-			</tbody>
-			</table>
+				<thead>
+				<tr>
+				<th>Lisa Innocenti Uccini</th>
+				<th>Luca Lombardi</th>
+				<th>Giacomo Romanini</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td><img width="180" alt="LisaUccini.png" src="../../../LisaUccini.png" class="internal-embed"></td>
+				<td><img width="245" alt="LucaLombardi.jpg" src="../../../LucaLombardi.jpg" class="internal-embed"></td>
+				<td><img width="180" alt="GiacomoRomanini.jpg" src="../../../GiacomoRomanini.jpg" class="internal-embed"></td>
+				</tr>
+				<tr>
+				<td><a data-tooltip-position="top" aria-label="https://github.com/LisaIU00" rel="noopener" class="external-link" href="https://github.com/LisaIU00" target="_blank">github: LisaIU00</a></td>
+				<td><a data-tooltip-position="top" aria-label="https://github.com/Lombax99" rel="noopener" class="external-link" href="https://github.com/Lombax99" target="_blank">github: Lombax99</a></td>
+				<td><a data-tooltip-position="top" aria-label="https://github.com/RedDuality" rel="noopener" class="external-link" href="https://github.com/RedDuality" target="_blank">github: RedDuality</a></td>
+				</tr>
+				</tbody>
+				</table>
 		</div>
     </body>
 </html>
