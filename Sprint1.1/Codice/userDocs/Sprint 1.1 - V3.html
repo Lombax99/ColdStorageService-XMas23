@@ -79,14 +79,14 @@
 			<pre><code>Request depositRequest : depositRequest(PESO)
 			Reply accept : accept(TICKET)
 			Reply reject : reject(NO_PARAM)
-			</code><button class="copy-code-button">Copy</button></pre>
+			</code></pre>
 			<ol start="2">
 			<li>TicketHandler chiede a ColdRoom se c'è abbastanza spazio;</li>
 			</ol>
 			<pre><code>Request weightrequest : weightrequest(PESO)
 			Reply weightOK : weightOK( NO_PARAM )
 			Reply weightKO : weightKO( NO_PARAM )
-			</code><button class="copy-code-button">Copy</button></pre>
+			</code></pre>
 			<ol start="3">
 			<li>Se c'è abbastanza spazio, ColdRoom aggiorna i propri attributi;</li>
 			<li>Se TicketHandler riceve True genera il ticket e lo invia a ServiceAccessGui, altrimenti rejected;</li>
@@ -94,13 +94,13 @@
 			</ol>
 			<pre><code>Request checkmyticket : checkmyticket(TICKET)
 			Reply	ticketchecked : ticketchecked(BOOL)
-			</code><button class="copy-code-button">Copy</button></pre>
+			</code></pre>
 			<ol start="6">
 			<li>Se la richiesta viene approvata ServiceAccessGUI invia "loaddone" al Controller per notificare che il FridgeTruck è pronto, col peso da scaricare. Il Controller risponderà con "chargetaken".</li>
 			</ol>
 			<pre><code>Request loaddone : loaddone(PESO)
 			Reply 	chargetaken : chargetaken(NO_PARAM)
-			</code><button class="copy-code-button">Copy</button></pre>
+			</code></pre>
 			<h5 data-heading="Quando viene inviato il &quot;charge taken&quot;?">Quando viene inviato il "charge taken"?</h5>
 			<p>"chargetaken" viene inviato dal Controller subito dopo la "doJob" associata alla richiesta.</p>
 			<div class="callout primary"> 
@@ -148,7 +148,7 @@
 					}
 				}
 			}
-			</code><button class="copy-code-button">Copy</button></pre>
+			</code></pre>
 			<br/>
 			<h5 data-heading="Problema del peso fantasma" id="Problema del peso fantasma">Problema del peso fantasma</h5>
 			<p>A seguito della scadenza di un Ticket, il Transport Trolley non si farà carico della richiesta e il peso promesso del ticket rimarrà considerato in Cold Room.</p>
@@ -192,13 +192,13 @@
 			<pre class="language-json" tabindex="0"><code class="language-json is-loaded"><span class="token punctuation">{</span>  
 			 <span class="token property">"TicketTime"</span><span class="token operator">:</span> <span class="token string">"600"</span>  
 			<span class="token punctuation">}</span>
-			</code><button class="copy-code-button">Copy</button></pre>
+			</code></pre>
 			<br/>
 			<pre><code>QActor tickethandler context ctxcoldstoragearea {
 				[# var TICKETTIME = GetTicketTimeFromConfigFile(); #]
 				...
 			}
-			</code><button class="copy-code-button">Copy</button></pre>
+			</code></pre>
 			<br/>
 			<h5 data-heading="ServiceAccessGUI">ServiceAccessGUI</h5>
 			<p>Progettare le GUI come attori non è ottimale, dobbiamo progettarla come un componente alieno al sistema che si interfacci con esso.<br>
@@ -233,7 +233,7 @@
 			<span class="token keyword">int</span> SEQ
 
 			<span class="token class-name">Ticket</span> <span class="token operator">=</span> <span class="token string">"T"</span><span class="token operator">+</span><span class="token string">"_"</span><span class="token operator">+</span>TIME<span class="token operator">+</span><span class="token string">"_"</span><span class="token operator">+</span>PESO<span class="token operator">+</span><span class="token string">"_"</span><span class="token operator">+</span>SEQ           #esempio di ticket<span class="token operator">:</span> T_1697643071_15_0
-			</code><button class="copy-code-button">Copy</button></pre>
+			</code></pre>
 			<br/>
 			<h5 data-heading="Definizione messaggi e contesti">Definizione messaggi e contesti</h5>
 			<pre><code>System coldstorage2
@@ -268,7 +268,7 @@
 			Context ctxcoldstoragearea ip [host="localhost" port=8040]
 
 			//-----------------------------------------------------------------------
-			</code><button class="copy-code-button">Copy</button></pre>
+			</code></pre>
 			<br/>
 			<h5 data-heading="Controller">Controller</h5>
 			<p>Rispetto allo sprint 1 non abbiamo più bisogno della mockRequest e gestiamo il <a data-tooltip-position="top" aria-label="Sprint 1.1 - V3 > Problema del peso ipotetico" data-href="Sprint 1.1 - V3#Problema del peso ipotetico" href="Sprint%201.1%20-%20V3.html#Problema%20del%20peso%20ipotetico" class="internal-link" target="_blank" rel="noopener">problema del peso ipotetico</a>.</p>
@@ -296,7 +296,7 @@
 				State jobdone{
 					forward coldroom -m updateWeight : updateWeight($P_EFF, $P_PROM)
 				} Transition repeat -&gt; work
-			</code><button class="copy-code-button">Copy</button></pre>
+			</code></pre>
 			<br/>
 			<h5 data-heading="ColdRoom">ColdRoom</h5>
 			<p>Rispetto allo sprint precedente ColdRoom deve verificare se è presente abbastanza spazio e rispondere di conseguenza.<br>
@@ -331,7 +331,7 @@
 					}
 				} Goto work
 			}
-			</code><button class="copy-code-button">Copy</button></pre>
+			</code></pre>
 			<br/>
 			<h5 data-heading="TicketHandler">TicketHandler</h5>
 			<p><a data-tooltip-position="top" aria-label="coldstorage.qak" data-href="coldstorage.qak" href="../ColdStorageSprint2/src/coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage qak</a> </p>
