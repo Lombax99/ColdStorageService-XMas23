@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class TestService{
+public class TestServiceSprint11{
 
     @Test
     public void mainUseCaseTest(){
