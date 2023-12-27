@@ -68,9 +68,9 @@
 			<h3 id="Analisi del Problema">Analisi del Problema</h3>
 			<h5 data-heading="Sistema distribuito - Come implementiamo la comunicazione?">Sistema distribuito - Come implementiamo la comunicazione?</h5>
 			<pre><code>Context ctxalarm ip [host="localhost" port=8300]
-			Context ctxcoldstoragearea ip [host="127.0.0.1" port=8040]
+			&nbsp;Context ctxcoldstoragearea ip [host="127.0.0.1" port=8040]
 
-			ExternalQActor controller context ctxcoldstoragearea
+			&nbsp;ExternalQActor controller context ctxcoldstoragearea
 			</code></pre>
 			<p>Rispetto al resto del sistema Sonar e Led si trovano da requisiti su un RaspberryPi esterno.<br>
 			I due nodi di elaborazione devono potersi&nbsp;scambiare informazione via rete.<br>
@@ -130,34 +130,34 @@
 			<h5 data-heading="Controller">Controller</h5>
 			<p>Aggiungiamo al controller la nuova logica: <a data-tooltip-position="top" aria-label="coldstorage.qak" data-href="coldstorage.qak" href="../ColdStorage/src/coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage.qak</a></p>
 			<pre><code>QActor controller context ctxcoldstoragearea {
-				...
+				&emsp;&emsp;...
 				
-				State stopped{
-					forward led -m stopped : stopped(1)
-					forward planexec -m stopplan : stopplan(1)
-				}Transition t0 whenMsg stop -&gt; stopped
-							   whenMsg continue -&gt; continueworking
+				&emsp;&emsp;State stopped{
+					&emsp;&emsp;&emsp;&emsp;forward led -m stopped : stopped(1)
+					&emsp;&emsp;&emsp;&emsp;forward planexec -m stopplan : stopplan(1)
+				&emsp;&emsp;}Transition t0 whenMsg stop -&gt; stopped
+							   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;whenMsg continue -&gt; continueworking
 				
-				State continueworking{
-					forward led -m arrivedhome : arrivedhome(1)
-					forward planexec -m continueplan : continueplan(1)
-				}Goto work
+				&emsp;&emsp;State continueworking{
+					&emsp;&emsp;&emsp;&emsp;forward led -m arrivedhome : arrivedhome(1)
+					&emsp;&emsp;&emsp;&emsp;forward planexec -m continueplan : continueplan(1)
+				&emsp;&emsp;}Goto work
 				
-				...
+				&emsp;&emsp;...
 				
-				State stoppedwhileworking {
-					forward planexec -m stopplan : stopplan(1)
-					forward led -m stopped : stopped(1)
-				}Transition t0 whenMsg continue -&gt; waitingforreply
+				&emsp;&emsp;State stoppedwhileworking {
+					&emsp;&emsp;&emsp;&emsp;forward planexec -m stopplan : stopplan(1)
+					&emsp;&emsp;&emsp;&emsp;forward led -m stopped : stopped(1)
+				&emsp;&emsp;}Transition t0 whenMsg continue -&gt; waitingforreply
 				
-				State waitingforreply{
-					forward planexec -m continueplan : continueplan(1)
-					forward led -m moving : moving(1)
-				}Transition endjob whenMsg stop -&gt; stoppedwhileworking
-									whenReply robotDead -&gt; handlerobotdead
-									whenReply jobdone -&gt; jobdone
+				&emsp;&emsp;State waitingforreply{
+					&emsp;&emsp;&emsp;&emsp;forward planexec -m continueplan : continueplan(1)
+					&emsp;&emsp;&emsp;&emsp;forward led -m moving : moving(1)
+				&emsp;&emsp;}Transition endjob whenMsg stop -&gt; stoppedwhileworking
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;whenReply robotDead -&gt; handlerobotdead
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;whenReply jobdone -&gt; jobdone
 				
-				...
+				&emsp;&emsp;...
 			}
 			</code></pre>
 			<br/>
