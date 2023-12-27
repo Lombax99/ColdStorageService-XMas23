@@ -34,7 +34,7 @@ Distributed software system for an _**autonomous forklift robot**_. The project
     <td>
 			Component that can run on a Raspberry Pi. It implements an <b>alarm/warning device</b>: when a ultrasonic sonar detects a distance that is lower/greater than a threshold, it sends a signal to the system, that will stop/resume the Transport Trolley activity; ColdStorage RaspPi also shows information about the system current state through a led.
 	</td>
-    <td><img src="./commons/resources/imgs/gifs/Demo_WasteServiceCore.gif"/></td>
+    <td><img src="commons/resources/Images/RaspImage.jpeg"/></td>
   </tr>
   <tr align="center">
     <td><b>Service&nbsp;Access&nbsp;GUI</b></td>
