@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>Cold Storage Service - Natali V3</title>
+ 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/js/foundation.min.js"crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="../../../commons/resources/styles/templateISS.css">
         <link rel="stylesheet" type="text/css" href="../../../commons/resources/styles/main.css">
@@ -251,38 +253,15 @@
 			</tr>
 			</tbody>
 			</table>
-			<div data-callout-metadata="" data-callout-fold="-" data-callout="note" class="callout is-collapsible is-collapsed"><div class="callout-title"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path><style>
-			:root {
-			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
-			  --font-monospace: 'Source Code Pro', monospace;
-			  --background-primary: #ffffff;
-			  --background-modifier-border: #ddd;
-			  --text-accent: #705dcf;
-			  --text-accent-hover: #7a6ae6;
-			  --text-normal: #2e3338;
-			  --background-secondary: #f2f3f5;
-			  --background-secondary-alt: #e3e5e8;
-			  --text-muted: #888888;
-			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div><div class="callout-title-inner">Tipi di messaggi</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path><style>
-			:root {
-			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
-			  --font-monospace: 'Source Code Pro', monospace;
-			  --background-primary: #ffffff;
-			  --background-modifier-border: #ddd;
-			  --text-accent: #705dcf;
-			  --text-accent-hover: #7a6ae6;
-			  --text-normal: #2e3338;
-			  --background-secondary: #f2f3f5;
-			  --background-secondary-alt: #e3e5e8;
-			  --text-muted: #888888;
-			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div></div><div class="callout-content" style="display: none;">
-			<p>in generale le ragioni per i vari tipi di messaggio sono:</p>
-			<ul>
-			<li>req/resp se ho bisogno di ricevere una risposta</li>
-			<li>dispatch se è un messaggio per un componente specifico che conosco e non mi interessa la risposta</li>
-			<li>event se è per uno o più componenti che non conosco direttamente (io emetto e chi è interessato riceve)</li>
-			</ul>
-			</div></div>
+			<div class="callout primary"> 
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg> Tipi di messaggi <br/> 
+				<p>in generale le ragioni per i vari tipi di messaggio sono:</p>
+				<ul>
+				<li>req/resp se ho bisogno di ricevere una risposta</li>
+				<li>dispatch se è un messaggio per un componente specifico che conosco e non mi interessa la risposta</li>
+				<li>event se è per uno o più componenti che non conosco direttamente (io emetto e chi è interessato riceve)</li>
+				</ul>
+			</div>
 			<h5 data-heading="Contesti">Contesti</h5>
 			<pre><code>Context ctxcoldstoragearea ip [host="localhost" port=8040]
 			Context ctxLedSonar ip [host="127.0.0.1" port=8088]
@@ -303,11 +282,8 @@
 			<p>Sarà necessario per il sistema riuscire ad identificare la posizione corrente del robot in ogni istante per pianificare il percorso da intraprendere.<br>
 			Per risolvere il problema assoceremo alla <strong>Service Area</strong> un sistema di coordinate da definire in seguito.</p>
 			<h3 id="Discussioni col committente">Discussioni col committente</h3>
-			<blockquote>
 			<p>Richiesta al committente:<br>
 			Dimensione della Service Area: 7m * 5m.</p>
-			</blockquote>
-			<blockquote>
 			<p>Richiesta al committente:</p>
 			<ul>
 			<li>Capienza massima (MAXW) corrisponde a 50 kg</li>
@@ -315,13 +291,10 @@
 			<li>Posizione in Service Area come da figura iniziale</li>
 			<li>Sarà possibile per il robot muoversi attorno alla ColdRoom</li>
 			</ul>
-			</blockquote>
-			<blockquote>
 			<p>Richiesta al committente:</p>
 			<ul>
 			<li>dimensione del transport trolley corrisponde ad un quadrato di lunghezza RD = 1 m.</li>
 			</ul>
-			</blockquote>
 			<h3 id="Test Plan">Test Plan</h3>
 			<p>Durante la face di testing dovranno essere verificati i seguenti casi:</p>
 			<ul>
@@ -336,94 +309,25 @@
 			<ol>
 			<li>
 			<p>Transport Trolley + ColdStorageService <a data-href="Sprint 1.0 - V3" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\Sprint%201.0%20-%20V3" class="internal-link" target="_blank" rel="noopener">Sprint 1.0 - V3</a></p>
-			<div data-callout-metadata="" data-callout-fold="-" data-callout="note" class="callout is-collapsible is-collapsed"><div class="callout-title"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path><style>
-			:root {
-			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
-			  --font-monospace: 'Source Code Pro', monospace;
-			  --background-primary: #ffffff;
-			  --background-modifier-border: #ddd;
-			  --text-accent: #705dcf;
-			  --text-accent-hover: #7a6ae6;
-			  --text-normal: #2e3338;
-			  --background-secondary: #f2f3f5;
-			  --background-secondary-alt: #e3e5e8;
-			  --text-muted: #888888;
-			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div><div class="callout-title-inner">Descrizione</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path><style>
-			:root {
-			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
-			  --font-monospace: 'Source Code Pro', monospace;
-			  --background-primary: #ffffff;
-			  --background-modifier-border: #ddd;
-			  --text-accent: #705dcf;
-			  --text-accent-hover: #7a6ae6;
-			  --text-normal: #2e3338;
-			  --background-secondary: #f2f3f5;
-			  --background-secondary-alt: #e3e5e8;
-			  --text-muted: #888888;
-			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div></div><div class="callout-content" style="display: none;">
-			<p>Lo scopo del primo sprint è produrre una prima versione funzionante del core dell'applicazione. Questo comprende ColdStorageService con la logica di gestione dei Ticket e il TransportTrolley funzionante.<br>
-			A questa parte deve essere affiancata una mock version della ServiceAccessGUI per la fase di testing.</p>
-			</div></div>
+			<div class="callout primary"> 
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg> Descrizione <br/> 
+				<p>Lo scopo del primo sprint è produrre una prima versione funzionante del core dell'applicazione. Questo comprende ColdStorageService con la logica di gestione dei Ticket e il TransportTrolley funzionante.<br>
+				A questa parte deve essere affiancata una mock version della ServiceAccessGUI per la fase di testing.</p>
+			</div>
 			</li>
 			<li>
 			<p>Led e Sonar <a data-href="Sprint 2" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\Sprint%202.html" class="internal-link" target="_blank" rel="noopener">Sprint 2</a></p>
-			<div data-callout-metadata="" data-callout-fold="-" data-callout="note" class="callout is-collapsible is-collapsed"><div class="callout-title"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path><style>
-			:root {
-			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
-			  --font-monospace: 'Source Code Pro', monospace;
-			  --background-primary: #ffffff;
-			  --background-modifier-border: #ddd;
-			  --text-accent: #705dcf;
-			  --text-accent-hover: #7a6ae6;
-			  --text-normal: #2e3338;
-			  --background-secondary: #f2f3f5;
-			  --background-secondary-alt: #e3e5e8;
-			  --text-muted: #888888;
-			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div><div class="callout-title-inner">Descrizione</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path><style>
-			:root {
-			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
-			  --font-monospace: 'Source Code Pro', monospace;
-			  --background-primary: #ffffff;
-			  --background-modifier-border: #ddd;
-			  --text-accent: #705dcf;
-			  --text-accent-hover: #7a6ae6;
-			  --text-normal: #2e3338;
-			  --background-secondary: #f2f3f5;
-			  --background-secondary-alt: #e3e5e8;
-			  --text-muted: #888888;
-			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div></div><div class="callout-content" style="display: none;">
-			<p>Nel secondo sprint verranno implementati il sistema di led e sonar con la logica ad essi associata.</p>
-			</div></div>
+			<div class="callout primary"> 
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg> Descrizione <br/> 
+				<p>Nel secondo sprint verranno implementati il sistema di led e sonar con la logica ad essi associata.</p>
+			</div>
 			</li>
 			<li>
 			<p>ServiceStatusGui e grafiche migliorate <a data-href="Sprint 3" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint0\Sprint%203.html" class="internal-link" target="_blank" rel="noopener">Sprint 3</a></p>
-			<div data-callout-metadata="" data-callout-fold="-" data-callout="note" class="callout is-collapsible is-collapsed"><div class="callout-title"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path><style>
-			:root {
-			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
-			  --font-monospace: 'Source Code Pro', monospace;
-			  --background-primary: #ffffff;
-			  --background-modifier-border: #ddd;
-			  --text-accent: #705dcf;
-			  --text-accent-hover: #7a6ae6;
-			  --text-normal: #2e3338;
-			  --background-secondary: #f2f3f5;
-			  --background-secondary-alt: #e3e5e8;
-			  --text-muted: #888888;
-			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div><div class="callout-title-inner">Descrizione</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path><style>
-			:root {
-			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
-			  --font-monospace: 'Source Code Pro', monospace;
-			  --background-primary: #ffffff;
-			  --background-modifier-border: #ddd;
-			  --text-accent: #705dcf;
-			  --text-accent-hover: #7a6ae6;
-			  --text-normal: #2e3338;
-			  --background-secondary: #f2f3f5;
-			  --background-secondary-alt: #e3e5e8;
-			  --text-muted: #888888;
-			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div></div><div class="callout-content" style="display: none;">
-			<p>Nel terzo sprint ci occuperemo della ServiceStatusGUI e delle interfacce grafiche finali.</p>
-			</div></div>
+			<div class="callout primary"> 
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg> Descrizione <br/> 
+				<p>Nel terzo sprint ci occuperemo della ServiceStatusGUI e delle interfacce grafiche finali.</p>
+			</div>
 			</li>
 			</ol>
 			<h3 id="Divisione dei compiti">Divisione dei compiti</h3>
@@ -519,7 +423,6 @@
 			</tr>
 			</tbody>
 			</table>
-			<h1 data-heading=""></h1>
 			<hr>
 			<p><a data-tooltip-position="top" aria-label="https://github.com/Lombax99/ColdStorageService-XMas23" rel="noopener" class="external-link" href="https://github.com/Lombax99/ColdStorageService-XMas23" target="_blank">Repo Github</a></p>
 			<table>

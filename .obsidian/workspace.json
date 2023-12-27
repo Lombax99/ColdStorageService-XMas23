@@ -116,7 +116,7 @@
             }
           }
         ],
-        "currentTab": 8
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -166,7 +166,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 426.5
+    "width": 426.5,
+    "collapsed": true
   },
   "right": {
     "id": "b7d0927a7144a728",
@@ -182,7 +183,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "Sprint3/Doc/Sprint 3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -199,7 +200,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "Sprint3/Doc/Sprint 3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -234,7 +235,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "Sprint3/Doc/Sprint 3.md"
               }
             }
           },
@@ -265,12 +266,12 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "3cbb87e3cf673c7d",
+  "active": "bff1e7c8cc749e95",
   "lastOpenFiles": [
+    "README.md",
     "README.html",
     "Sprint2/Doc/Sprint 2.md",
     "commons/resources/Images/RaspImage.jpeg",
-    "README.md",
     "Sprint0/Cold Storage Service - Natali V3.md",
     "ToDo EXAM (entro 27-12).md",
     "Sprint1.0/Doc/Sprint 1.0 - V3.md",
@@ -289,7 +290,6 @@
     "Sprint0/Codice/userDocs/Cold Storage Service - Natali V3.html",
     "commons/temaFinale/_static/pygments.css",
     "commons/temaFinale/_static/custom.css",
-    "commons/temaFinale/_static/basic.css",
     "commons/temaFinale/_images/WasteServiceRoom.PNG",
     "commons/resources/imgs/team/Raffaele_Battipaglia.jpg",
     "commons/resources/imgs/team/Michele_Righi.png",

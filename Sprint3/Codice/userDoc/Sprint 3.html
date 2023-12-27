@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>Sprint 3</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/js/foundation.min.js"crossorigin="anonymous"></script> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="../../../commons/resources/styles/templateISS.css">
         <link rel="stylesheet" type="text/css" href="../../../commons/resources/styles/main.css">
@@ -9,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="../../../commons/resources/styles/table.css">
         <link rel="stylesheet" type="text/css" href="../../../commons/resources/styles/code.css">
         <script type="text/javascript" src="../../../commons/resources/scripts/myScripts.js"></script>
-    </head>
+	</head>
 	
 	<body onload="loadNav();">
 		<div id="openButton" class="openButton" onclick="openNav(true)">&#9776; Menu</div>
@@ -39,33 +41,10 @@
 			
 			<h3 id="Goal Sprint 3">Goal Sprint 3</h3>
 			<p>ServiceStatusGui e grafiche migliorate.</p>
-			<div data-callout-metadata="" data-callout-fold="-" data-callout="note" class="callout is-collapsible is-collapsed"><div class="callout-title"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path><style>
-			:root {
-			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
-			  --font-monospace: 'Source Code Pro', monospace;
-			  --background-primary: #ffffff;
-			  --background-modifier-border: #ddd;
-			  --text-accent: #705dcf;
-			  --text-accent-hover: #7a6ae6;
-			  --text-normal: #2e3338;
-			  --background-secondary: #f2f3f5;
-			  --background-secondary-alt: #e3e5e8;
-			  --text-muted: #888888;
-			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div><div class="callout-title-inner">Descrizione</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path><style>
-			:root {
-			  --default-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
-			  --font-monospace: 'Source Code Pro', monospace;
-			  --background-primary: #ffffff;
-			  --background-modifier-border: #ddd;
-			  --text-accent: #705dcf;
-			  --text-accent-hover: #7a6ae6;
-			  --text-normal: #2e3338;
-			  --background-secondary: #f2f3f5;
-			  --background-secondary-alt: #e3e5e8;
-			  --text-muted: #888888;
-			}</style>"<marker id="mermaid_arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>"</svg></div></div><div class="callout-content" style="display: none;">
-			<p>Nel terzo sprint ci occuperemo della ServiceStatusGUI e delle interfacce grafiche finali.</p>
-			</div></div>
+			<div class="callout primary"> 
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg> Descrizione <br/> 
+				Nel terzo sprint ci occuperemo della ServiceStatusGUI e delle interfacce grafiche finali. 
+			</div>
 			<p>Modello dello <a data-tooltip-position="top" aria-label="Sprint 2" data-href="Sprint 2" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint%202.html" class="internal-link" target="_blank" rel="noopener">sprint precedente</a>.<br>
 			<img alt="Sprint2/Codice/ColdStorage/coldstorage2arch.png" src="Sprint2/Codice/ColdStorage/coldstorage2arch.png" class="internal-embed"></p>
 			<h3 id="Requisiti">Requisiti</h3>
@@ -222,7 +201,6 @@
 			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java" data-href="Sprint1.1/Codice/serviceaccessgui/src/main/java/unibo/serviceaccessgui/ServiceaccessguiApplication.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint1.1\Codice\serviceaccessgui\src\main\java\unibo\serviceaccessgui\ServiceaccessguiApplication.java" class="internal-link" target="_blank" rel="noopener">ServiceaccessguiApplication.java</a> del progetto serviceaccessgui. Aprire il client all'indirizzo http://localhost:8085/</li>
 			<li>In intellij avviare il file <a data-tooltip-position="top" aria-label="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/StatusguiApplication.java" data-href="Sprint3/Codice/statusgui/src/main/java/unibo/statusgui/StatusguiApplication.java" href="C:\Users\Proprietario\Desktop\ColdStorageService-XMas23\Sprint3\Doc\Sprint3\Codice\statusgui\src\main\java\unibo\statusgui\StatusguiApplication.java" class="internal-link" target="_blank" rel="noopener">ServiceaccessguiApplication.java</a> del progetto statusgui. Aprire il client all'indirizzo http://localhost:8075/</li>
 			</ol>
-			<h1 data-heading=""></h1>
 			<hr>
 			<p><a data-tooltip-position="top" aria-label="https://github.com/Lombax99/ColdStorageService-XMas23" rel="noopener" class="external-link" href="https://github.com/Lombax99/ColdStorageService-XMas23" target="_blank">Repo Github</a></p>
 			<table>
