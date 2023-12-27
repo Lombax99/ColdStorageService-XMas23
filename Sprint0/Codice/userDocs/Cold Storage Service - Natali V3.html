@@ -125,22 +125,22 @@
 			<p><img alt="Architettura_Sprint0_V2.png" src="../../Architettura_Sprint0_V2.png" class="internal-embed"></p>
 			<h5 data-heading="Service Area" id="Service Area">Service Area</h5>
 			<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">val</span> ServiceArea <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
-				&emsp;int LatoLungo             # valore maggiore di <span class="token number">0</span>
-				&emsp;int LatoCorto             # valore maggiore di <span class="token number">0</span>
+				&emsp;&emsp;int LatoLungo             # valore maggiore di <span class="token number">0</span>
+				&emsp;&emsp;int LatoCorto             # valore maggiore di <span class="token number">0</span>
 			<span class="token punctuation">}</span>
 			</code></pre>
 			<br/>
 			<h5 data-heading="HOME" id="HOME">HOME</h5>
 			<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">val</span> Home <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
-				&emsp;int x <span class="token operator">=</span> <span class="token number">0</span>
-				&emsp;int y <span class="token operator">=</span> <span class="token number">0</span>
+				&emsp;&emsp;int x <span class="token operator">=</span> <span class="token number">0</span>
+				&emsp;&emsp;int y <span class="token operator">=</span> <span class="token number">0</span>
 			<span class="token punctuation">}</span>
 			</code></pre>
 			<br/>
 			<h5 data-heading="INDOOR port">INDOOR port</h5>
 			<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">val</span> IndoorPort <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
-				&emsp;int x <span class="token operator">=</span> <span class="token number">0</span>
-				&emsp;int y <span class="token operator">=</span> MAX_Y
+				&emsp;&emsp;int x <span class="token operator">=</span> <span class="token number">0</span>
+				&emsp;&emsp;int y <span class="token operator">=</span> MAX_Y
 			<span class="token punctuation">}</span>
 			</code></pre>
 			<br/>
@@ -149,10 +149,10 @@
 			<h5 data-heading="ColdRoom Container">ColdRoom Container</h5>
 			<p>Contenitore in posizione fissa in Service Area, il cui punto di accesso è la <a data-tooltip-position="top" aria-label="Cold Storage Service - Natali V3 > Porta della ColdRoom" data-href="Cold Storage Service - Natali V3#Porta della ColdRoom" href="Cold%20Storage%20Service%20-%20Natali%20V3.html#Porta%20della%20ColdRoom" class="internal-link" target="_blank" rel="noopener">Porta della ColdRoom</a>, in grado di ricevere e contenere cibo da un lato specifico. Ha una capienza pari a MAXW kg.</p>
 			<pre class="language-kotlin" tabindex="0"><code class="language-kotlin is-loaded"><span class="token keyword">var</span> ColdRoom <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
-				&emsp;int MAXW                  # valore maggiore di <span class="token number">0</span>
-				&emsp;int CurrentWeight <span class="token operator">=</span> <span class="token number">0</span>
-				&emsp;int x                     # valore non negativo
-				&emsp;int y                     # valore non negativo
+				&emsp;&emsp;int MAXW                  # valore maggiore di <span class="token number">0</span>
+				&emsp;&emsp;int CurrentWeight <span class="token operator">=</span> <span class="token number">0</span>
+				&emsp;&emsp;int x                     # valore non negativo
+				&emsp;&emsp;int y                     # valore non negativo
 			<span class="token punctuation">}</span>
 			</code></pre>
 			<h5 data-heading="DDR robot">DDR robot</h5>
