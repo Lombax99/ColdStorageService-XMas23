@@ -6,37 +6,55 @@
 </head>
 <body style="text-align:center;" onload="connect()">
 <h1 style="color:white; font-size:400%; background-color:#008CBA">Status GUI</h1>
-<table>
-<th style="background-color: #d2ebf1;">
-<p style="font-size:150%; "/>Cold room Effective Weight: <!--
-, current weight:
-<label style="font-size:120%;" id="cw" th:text="${cw}"></label>
-expected weight:-->
-<label style="font-size:120%;" id="ew" th:text="${ew}"></label>
 
-<p style="font-size:150%;"/>Cold room Promised Weight: <!--
-, current weight:
-<label style="font-size:120%;" id="cw" th:text="${cw}"></label>
-expected weight:-->
-<label style="font-size:120%;" id="pw" th:text="${pw}"></label>
+<div class="row" >
+    <div class="column" style="background-color: #d2ebf1;">
+        <table>
+            <th>
+            <tr>
+                <br/>
+                <p style="font-size:150%; "/>ColdRoom Effective Weight: <!--
+            , current weight:
+            <label style="font-size:120%;" id="cw" th:text="${cw}"></label>
+            expected weight:-->
+                <label style="font-size:120%;" id="ew" th:text="${ew}"></label>
+                <br/>
+                <br/>
+            </tr>
+            <tr>
+                <p style="font-size:150%;"/>ColdRoom Promised Weight:
 
-<p style="font-size:150%;"/>Rejected Tickets: <!--
-, current weight:
-<label style="font-size:120%;" id="cw" th:text="${cw}"></label>
-expected weight:-->
-<label style="font-size:120%;" id="rt" th:text="${rt}"></label>
-    <p style="font-size:150%;"/>Robot Status :
-    <label style="font-size:120%;" id="rs" th:text="Working"></label>
-</th>
-    <th style="background-color: white;">
-<p style="font-size:150%;"/>Robot Position: </br><!--
-, current weight:
-<label style="font-size:120%;" id="cw" th:text="${cw}"></label>
-expected weight:-->
-<!--<label style="font-size:120%; " id="maintext" th:text="${maintext}" cols="30" rows="10"></label>-->
+                <label style="font-size:120%;" id="pw" th:text="${pw}"></label>
+                <br/>
+                <br/>
+            </tr>
+            <tr>
+                <p style="font-size:150%;"/>Rejected Tickets:
+                <label style="font-size:120%;" id="rt" th:text="${rt}"></label>
+                <br/>
+                <br/>
+            </tr>
+            <tr>
+                <p style="font-size:150%;"/>Robot Status :
+                <label style="font-size:120%;" id="rs" th:text="Working"></label>
+
+            </tr>
+            </th>
+        </table>
+
+    </div>
+    <div class="column" >
+
+        <p style="font-size:150%;"/>Robot Position: </br><!--
+        , current weight:
+        <label style="font-size:120%;" id="cw" th:text="${cw}"></label>
+        expected weight:-->
+        <!--<label style="font-size:120%; " id="maintext" th:text="${maintext}" cols="30" rows="10"></label>-->
         <textarea style="font-size:120%; text-align:left" id="maintext" th:text="${maintext}" cols="30" rows="10" disabled></textarea>
-    </th>
-</table>
+
+    </div>
+</div>
+
     <!--<textarea style="font-size:150%;" id="outputText" rows=10 cols=40 wrap=on readonly>Welcome to Christmas's service.</textarea>-->
 
 
