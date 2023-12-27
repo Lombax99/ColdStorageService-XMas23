@@ -65,12 +65,12 @@
 			<h5 data-heading="Numero di richieste negate">Numero di richieste negate</h5>
 			<p>Aggiorniamo il ticket handler per tener traccia delle richieste negate</p>
 			<pre><code>QActor tickethandler context ctxcoldstoragearea {
-				[# var Rejected = 0	#]
-				...
+				&emsp;&emsp;[# var Rejected = 0	#]
+				&emsp;&emsp;...
 				
-				State reject {
-					[# Rejected++ #]
-					...
+				&emsp;&emsp;State reject {
+					&emsp;&emsp;&emsp;&emsp;[# Rejected++ #]
+					&emsp;&emsp;...
 			}
 			</code></pre>
 			<br/>
@@ -110,29 +110,26 @@
 			<p><a data-tooltip-position="top" aria-label="coldstorage.qak" data-href="coldstorage.qak" href="../ColdStorage3/src/coldstorage.qak" class="internal-link" target="_blank" rel="noopener">coldstorage.qak</a></p>
 			<h5 data-heading="Facade aggiornato">Facade aggiornato</h5>
 			<pre><code>QActor facade context ctxcoldstoragearea {
-				[#
-					var Ticket = ""
-					var PesoEff = 0
-					var PesoProm = 0
-					var Valid = true
-				#]
+				&emsp;&emsp;[#
+					&emsp;&emsp;&emsp;&emsp;var Ticket = ""
+					&emsp;&emsp;&emsp;&emsp;var PesoEff = 0
+					&emsp;&emsp;&emsp;&emsp;var PesoProm = 0
+					&emsp;&emsp;&emsp;&emsp;var Valid = true
+				&emsp;&emsp;#]
 				
-				State s0 initial{
-					delegate "getrejectedtickets" to tickethandler
-					delegate "getrobotstate" to robotpos
-					delegate "getweight" to coldroom
-					
-					println("ColdStorageFacade - in attesa") color blue
-					printCurrentMessage
-				} Goto work
+				&emsp;&emsp;State s0 initial{
+					&emsp;&emsp;&emsp;&emsp;delegate "getrejectedtickets" to tickethandler
+					&emsp;&emsp;&emsp;&emsp;delegate "getrobotstate" to robotpos
+					&emsp;&emsp;&emsp;&emsp;delegate "getweight" to coldroom
+				&emsp;&emsp;} Goto work
 				
-				State work {
-				}Transition t0  whenRequest depositRequestF-&gt; depositreqhandler
-							whenRequest loaddoneF -&gt; loadcontroller
-							whenRequest checkmyticketF -&gt; checktickethandler
-							whenRequest getweightF -&gt; getweightcoldroom
+				&emsp;&emsp;State work {
+				&emsp;&emsp;}Transition t0  whenRequest depositRequestF-&gt; depositreqhandler
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;whenRequest loaddoneF -&gt; loadcontroller
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;whenRequest checkmyticketF -&gt; checktickethandler
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;whenRequest getweightF -&gt; getweightcoldroom
 				
-				...
+				&emsp;&emsp;...
 			}
 			</code></pre>
 			<br/>
@@ -147,31 +144,31 @@
 			<h5 data-heading="Ticket Handler si aggiorna per contare quanti ticket vengono rifiutati">Ticket Handler si aggiorna per contare quanti ticket vengono rifiutati</h5>
 			<pre><code>QActor tickethandler context ctxcoldstoragearea {
 				
-				[#	
-					...		
-					var Rejected = 0
-				#]
+				&emsp;&emsp;[#	
+					&emsp;&emsp;&emsp;&emsp;...		
+					&emsp;&emsp;&emsp;&emsp;var Rejected = 0
+				&emsp;&emsp;#]
 					
-				State s0 initial{
-					...
-					updateResource [# "" + Rejected #]
-				} Goto work
+				&emsp;&emsp;State s0 initial{
+					&emsp;&emsp;&emsp;&emsp;...
+					&emsp;&emsp;&emsp;&emsp;updateResource [# "" + Rejected #]
+				&emsp;&emsp;} Goto work
 				
-				...
+				&emsp;&emsp;...
 				
-				State reject {
-					[# Rejected++ #]
-					updateResource [# "" + Rejected #]
-					replyTo depositRequest with reject : reject( reject )
-				} Goto work
+				&emsp;&emsp;State reject {
+					&emsp;&emsp;&emsp;&emsp;[# Rejected++ #]
+					&emsp;&emsp;&emsp;&emsp;updateResource [# "" + Rejected #]
+					&emsp;&emsp;&emsp;&emsp;replyTo depositRequest with reject : reject( reject )
+				&emsp;&emsp;} Goto work
 				
-				...
+				&emsp;&emsp;...
 				
-				State sendrejectedticketnumber{
-					onMsg(getrejectedtickets : getrejectedtickets(NO_PARAM)){
-						replyTo getrejectedtickets with rejectedtickets : rejectedtickets($Rejected)
-					}
-				}Goto work
+				&emsp;&emsp;State sendrejectedticketnumber{
+					&emsp;&emsp;&emsp;&emsp;onMsg(getrejectedtickets : getrejectedtickets(NO_PARAM)){
+						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;replyTo getrejectedtickets with rejectedtickets : rejectedtickets($Rejected)
+					&emsp;&emsp;&emsp;&emsp;}
+				&emsp;&emsp;}Goto work
 			}
 			</code></pre>
 			<br/>
