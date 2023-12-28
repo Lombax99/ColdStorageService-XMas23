@@ -20,7 +20,12 @@ object SonarService {
     }
 
     fun getDistance() : Double {
-        var distance = reader!!.readLine().toDouble()
+        var distance = 100.0;
+        try{
+            distance = reader!!.readLine().toDouble()
+        } catch( e : Exception){
+            println(e.message)
+        }
         println(distance)
         return distance
     }
